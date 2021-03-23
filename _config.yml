@@ -39,8 +39,8 @@ baseurl: "/arjunsriva.com" # the subpath of your site, e.g. "/blog".
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: fastdotai
-    github: fastai
+    twitter: arjunsriv
+    github: arjunbazinga
 
 # Set this to true to get LaTeX math equation support
 use_math: 
@@ -58,7 +58,7 @@ annotations: false
 show_tags: true
 
 # Add your Google Analytics ID here if you have one and want to use it
-google_analytics: 
+google_analytics: 'UA-101184475-1'
 
 exclude:
   - docker-compose.yml
