@@ -2,9 +2,20 @@
   
     
         "post0": {
+            "title": "Experimentation Platforms",
+            "content": "Books . Trustworthy Online Controlled Experiments | . Resources . Top Challenges from the first Practical Online Controlled Experiments Summit . | A/B Testing Pitfalls: Getting Numbers You Can Trust is Hard . | USF Business Analytics Forum - Ron Kohavi . | A/B Testing at Scale: Accelerating Software Innovation . | Trustworthy Online Controlled Experiments at Large Scale . | Always Valid Inference: Continuous Monitoring of A/B Tests . | . Companies . Netflix . Netflix Articles tagged Experimentation | It’s All A/Bout Testing: The Netflix Experimentation Platform | Reimagining Experimentation Analysis at Netflix | Success stories from a democratized experimentation platform | Key Challenges with Quasi Experiments at Netflix | Data Compression for Large-Scale Streaming Experimentation | Page Simulation for Better Offline Metrics at Netflix . | Streaming Video Experimentation at Netflix: Visualizing Practical and Statistical Significance | Innovating Faster on Personalization Algorithms at Netflix Using Interleaving | . Microsoft . ExP Experimentation Platform Accelerating software innovation through trustworthy experimentation | Online Experimentation at Microsoft | Experimentation Platform | A/B Testing and Covid-19: Data-Driven Decisions in Times of Uncertainty | Patterns of Trustworthy Experimentation: Pre-Experiment Stage | . Twitter . Twitter experimentation: technical overview | . Google . Overlapping Experiment Infrastructure: More, Better, Faster Experimentation | . Facebook . PlanOut is a library and interpreter for designing online experiments. | Adaptive Experimentation Platform | . Spotify . Spotify’s New Experimentation Platform part 1 | Spotify’s New Experimentation Platform part 2 | Large Scale Experimentation at Spotify | . Tinder . Phoenix — Tinder’s Testing Platform, Part — I | Phoenix — Tinder’s Testing Platform — Part II | Phoenix — Tinder’s Testing Platform — Part III | . LinkedIn . Our evolution towards T-REX: The prehistory of experimentation infrastructure at LinkedIn | Making the LinkedIn experimentation engine 20x faster | . Uber . Under the Hood of Uber’s Experimentation Platform | A/B testing at Uber: How we built a BYOM (bring your own metrics) platform | Building an Intelligent Experimentation Platform with Uber Engineering | . AirBnB . 4 Principles for Making Experimentation Count | Scaling Airbnb’s Experimentation Platform | Experiment Reporting Framework | . Instagram . Lessons Learned at Instagram Stories and Feed Machine Learning | . Go-Jek . Introducing Litmus: GOJEK’s Own Experimentation Platform | . InstaCart . Randomized, controlled experiments and multivariate regression are used to continuously improve the grocery delivery engine | . Pintrest . Building Pinterest’s A/B testing platform | . Conferences . Experimentation Culture Awards | . SASS solutions . Split.io | Optimizely | . When you can’t run A/B Tests . Quasi Experimentation at Netflix | Key Challenges with Quasi Experiments at Netflix | Mostly Harmless Econometrics: An Empiricist’s Companion | . Notes . 2020 CODE@MIT Experimentation platforms . Gaussian processes | Multi touch attributions | Heterogenous treatment effect | Interaction effects | Overlapping experiments | What are potential over evaluation criteria ? | What are good guardrail metrics ? | run A/A tests. | . Canary Deploys by using Experimentation platform to tell when you break guard rail metrics .",
+            "url": "https://arjunsriva.com/experimentation/2021/03/21/exerimentations-platforms.html",
+            "relUrl": "/experimentation/2021/03/21/exerimentations-platforms.html",
+            "date": " • Mar 21, 2021"
+        }
+        
+    
+  
+    
+        ,"post1": {
             "title": "Fastpages Notebook Blog Post",
             "content": "About . This notebook is a demonstration of some of capabilities of fastpages with notebooks. . With fastpages you can save your jupyter notebooks into the _notebooks folder at the root of your repository, and they will be automatically be converted to Jekyll compliant blog posts! . Front Matter . The first cell in your Jupyter Notebook or markdown blog post contains front matter. Front matter is metadata that can turn on/off options in your Notebook. It is formatted like this: . # &quot;My Title&quot; &gt; &quot;Awesome summary&quot; - toc:true- branch: master - badges: true - comments: true - author: Hamel Husain &amp; Jeremy Howard - categories: [fastpages, jupyter] . Setting toc: true will automatically generate a table of contents | Setting badges: true will automatically include GitHub and Google Colab links to your notebook. | Setting comments: true will enable commenting on your blog post, powered by utterances. | . The title and description need to be enclosed in double quotes only if they include special characters such as a colon. More details and options for front matter can be viewed on the front matter section of the README. . Markdown Shortcuts . A #hide comment at the top of any code cell will hide both the input and output of that cell in your blog post. . A #hide_input comment at the top of any code cell will only hide the input of that cell. . The comment #hide_input was used to hide the code that produced this. . put a #collapse-hide flag at the top of any cell if you want to hide that cell by default, but give the reader the option to show it: . import pandas as pd import altair as alt . . put a #collapse-show flag at the top of any cell if you want to show that cell by default, but give the reader the option to hide it: . cars = &#39;https://vega.github.io/vega-datasets/data/cars.json&#39; movies = &#39;https://vega.github.io/vega-datasets/data/movies.json&#39; sp500 = &#39;https://vega.github.io/vega-datasets/data/sp500.csv&#39; stocks = &#39;https://vega.github.io/vega-datasets/data/stocks.csv&#39; flights = &#39;https://vega.github.io/vega-datasets/data/flights-5k.json&#39; . . place a #collapse-output flag at the top of any cell if you want to put the output under a collapsable element that is closed by default, but give the reader the option to open it: . print(&#39;The comment #collapse-output was used to collapse the output of this cell by default but you can expand it.&#39;) . The comment #collapse-output was used to collapse the output of this cell by default but you can expand it. . . Interactive Charts With Altair . Charts made with Altair remain interactive. Example charts taken from this repo, specifically this notebook. . Example 1: DropDown . # use specific hard-wired values as the initial selected values selection = alt.selection_single( name=&#39;Select&#39;, fields=[&#39;Major_Genre&#39;, &#39;MPAA_Rating&#39;], init={&#39;Major_Genre&#39;: &#39;Drama&#39;, &#39;MPAA_Rating&#39;: &#39;R&#39;}, bind={&#39;Major_Genre&#39;: alt.binding_select(options=genres), &#39;MPAA_Rating&#39;: alt.binding_radio(options=mpaa)} ) # scatter plot, modify opacity based on selection alt.Chart(df).mark_circle().add_selection( selection ).encode( x=&#39;Rotten_Tomatoes_Rating:Q&#39;, y=&#39;IMDB_Rating:Q&#39;, tooltip=&#39;Title:N&#39;, opacity=alt.condition(selection, alt.value(0.75), alt.value(0.05)) ) . Example 2: Tooltips . alt.Chart(df).mark_circle().add_selection( alt.selection_interval(bind=&#39;scales&#39;, encodings=[&#39;x&#39;]) ).encode( alt.X(&#39;Rotten_Tomatoes_Rating&#39;, type=&#39;quantitative&#39;), alt.Y(&#39;IMDB_Rating&#39;, type=&#39;quantitative&#39;, axis=alt.Axis(minExtent=30)), # y=alt.Y(&#39;IMDB_Rating:Q&#39;, ), # use min extent to stabilize axis title placement tooltip=[&#39;Title:N&#39;, &#39;Release_Date:N&#39;, &#39;IMDB_Rating:Q&#39;, &#39;Rotten_Tomatoes_Rating:Q&#39;] ).properties( width=500, height=400 ) . Example 3: More Tooltips . label = alt.selection_single( encodings=[&#39;x&#39;], # limit selection to x-axis value on=&#39;mouseover&#39;, # select on mouseover events nearest=True, # select data point nearest the cursor empty=&#39;none&#39; # empty selection includes no data points ) # define our base line chart of stock prices base = alt.Chart().mark_line().encode( alt.X(&#39;date:T&#39;), alt.Y(&#39;price:Q&#39;, scale=alt.Scale(type=&#39;log&#39;)), alt.Color(&#39;symbol:N&#39;) ) alt.layer( base, # base line chart # add a rule mark to serve as a guide line alt.Chart().mark_rule(color=&#39;#aaa&#39;).encode( x=&#39;date:T&#39; ).transform_filter(label), # add circle marks for selected time points, hide unselected points base.mark_circle().encode( opacity=alt.condition(label, alt.value(1), alt.value(0)) ).add_selection(label), # add white stroked text to provide a legible background for labels base.mark_text(align=&#39;left&#39;, dx=5, dy=-5, stroke=&#39;white&#39;, strokeWidth=2).encode( text=&#39;price:Q&#39; ).transform_filter(label), # add text labels for stock prices base.mark_text(align=&#39;left&#39;, dx=5, dy=-5).encode( text=&#39;price:Q&#39; ).transform_filter(label), data=stocks ).properties( width=500, height=400 ) . Data Tables . You can display tables per the usual way in your blog: . df[[&#39;Title&#39;, &#39;Worldwide_Gross&#39;, &#39;Production_Budget&#39;, &#39;Distributor&#39;, &#39;MPAA_Rating&#39;, &#39;IMDB_Rating&#39;, &#39;Rotten_Tomatoes_Rating&#39;]].head() . Title Worldwide_Gross Production_Budget Distributor MPAA_Rating IMDB_Rating Rotten_Tomatoes_Rating . 0 The Land Girls | 146083.0 | 8000000.0 | Gramercy | R | 6.1 | NaN | . 1 First Love, Last Rites | 10876.0 | 300000.0 | Strand | R | 6.9 | NaN | . 2 I Married a Strange Person | 203134.0 | 250000.0 | Lionsgate | None | 6.8 | NaN | . 3 Let&#39;s Talk About Sex | 373615.0 | 300000.0 | Fine Line | None | NaN | 13.0 | . 4 Slam | 1087521.0 | 1000000.0 | Trimark | R | 3.4 | 62.0 | . Images . Local Images . You can reference local images and they will be copied and rendered on your blog automatically. You can include these with the following markdown syntax: . ![](my_icons/fastai_logo.png) . . Remote Images . Remote images can be included with the following markdown syntax: . ![](https://image.flaticon.com/icons/svg/36/36686.svg) . . Animated Gifs . Animated Gifs work, too! . ![](https://upload.wikimedia.org/wikipedia/commons/7/71/ChessPawnSpecialMoves.gif) . . Captions . You can include captions with markdown images like this: . ![](https://www.fast.ai/images/fastai_paper/show_batch.png &quot;Credit: https://www.fast.ai/2020/02/13/fastai-A-Layered-API-for-Deep-Learning/&quot;) . . Other Elements . GitHub Flavored Emojis . Typing I give this post two :+1:! will render this: . I give this post two :+1:! . Tweetcards . Typing &gt; twitter: https://twitter.com/jakevdp/status/1204765621767901185?s=20 will render this: Altair 4.0 is released! https://t.co/PCyrIOTcvvTry it with: pip install -U altairThe full list of changes is at https://t.co/roXmzcsT58 ...read on for some highlights. pic.twitter.com/vWJ0ZveKbZ . &mdash; Jake VanderPlas (@jakevdp) December 11, 2019 . Youtube Videos . Typing &gt; youtube: https://youtu.be/XfoYk_Z5AkI will render this: . Boxes / Callouts . Typing &gt; Warning: There will be no second warning! will render this: . Warning: There will be no second warning! . Typing &gt; Important: Pay attention! It&#39;s important. will render this: . Important: Pay attention! It&#8217;s important. . Typing &gt; Tip: This is my tip. will render this: . Tip: This is my tip. . Typing &gt; Note: Take note of this. will render this: . Note: Take note of this. . Typing &gt; Note: A doc link to [an example website: fast.ai](https://www.fast.ai/) should also work fine. will render in the docs: . Note: A doc link to an example website: fast.ai should also work fine. . Footnotes . You can have footnotes in notebooks, however the syntax is different compared to markdown documents. This guide provides more detail about this syntax, which looks like this: . For example, here is a footnote {% fn 1 %}. And another {% fn 2 %} {{ &#39;This is the footnote.&#39; | fndetail: 1 }} {{ &#39;This is the other footnote. You can even have a [link](www.github.com)!&#39; | fndetail: 2 }} . For example, here is a footnote 1. . And another 2 . 1. This is the footnote.↩ . 2. This is the other footnote. You can even have a link!↩ .",
-            "url": "https://arjunbazinga.github.io/arjunsriva.com/jupyter/2020/02/20/test.html",
+            "url": "https://arjunsriva.com/jupyter/2020/02/20/test.html",
             "relUrl": "/jupyter/2020/02/20/test.html",
             "date": " • Feb 20, 2020"
         }
@@ -12,12 +23,122 @@
     
   
     
-        ,"post1": {
+        ,"post2": {
             "title": "An Example Markdown Post",
             "content": "Example Markdown Post . Basic setup . Jekyll requires blog post files to be named according to the following format: . YEAR-MONTH-DAY-filename.md . Where YEAR is a four-digit number, MONTH and DAY are both two-digit numbers, and filename is whatever file name you choose, to remind yourself what this post is about. .md is the file extension for markdown files. . The first line of the file should start with a single hash character, then a space, then your title. This is how you create a “level 1 heading” in markdown. Then you can create level 2, 3, etc headings as you wish but repeating the hash character, such as you see in the line ## File names above. . Basic formatting . You can use italics, bold, code font text, and create links. Here’s a footnote 1. Here’s a horizontal rule: . . Lists . Here’s a list: . item 1 | item 2 | . And a numbered list: . item 1 | item 2 | Boxes and stuff . This is a quotation . . You can include alert boxes …and… . . You can include info boxes Images . . Code . You can format text and code per usual . General preformatted text: . # Do a thing do_thing() . Python code and output: . # Prints &#39;2&#39; print(1+1) . 2 . Formatting text as shell commands: . echo &quot;hello world&quot; ./some_script.sh --option &quot;value&quot; wget https://example.com/cat_photo1.png . Formatting text as YAML: . key: value - another_key: &quot;another value&quot; . Tables . Column 1 Column 2 . A thing | Another thing | . Tweetcards . Altair 4.0 is released! https://t.co/PCyrIOTcvvTry it with: pip install -U altairThe full list of changes is at https://t.co/roXmzcsT58 ...read on for some highlights. pic.twitter.com/vWJ0ZveKbZ . &mdash; Jake VanderPlas (@jakevdp) December 11, 2019 Footnotes . This is the footnote. &#8617; . |",
-            "url": "https://arjunbazinga.github.io/arjunsriva.com/markdown/2020/01/14/test-markdown-post.html",
+            "url": "https://arjunsriva.com/markdown/2020/01/14/test-markdown-post.html",
             "relUrl": "/markdown/2020/01/14/test-markdown-post.html",
             "date": " • Jan 14, 2020"
+        }
+        
+    
+  
+    
+        ,"post3": {
+            "title": "Course Schedule Generator",
+            "content": "A website which allows students of IIT Indore to add courses they are interested in to their calendar. I was tired of doing this manually every time. Use it here .",
+            "url": "https://arjunsriva.com/iit%20indore/2020/01/08/course-schedule-generator.html",
+            "relUrl": "/iit%20indore/2020/01/08/course-schedule-generator.html",
+            "date": " • Jan 8, 2020"
+        }
+        
+    
+  
+    
+        ,"post4": {
+            "title": "Harry Potter quiz",
+            "content": "Questions . Get the questions. . Get the video for question number 14 . Get the Music for question number 20 . Answers . Get the answers. .",
+            "url": "https://arjunsriva.com/iit%20indore/quiz/2018/08/26/harry-potter-quiz.html",
+            "relUrl": "/iit%20indore/quiz/2018/08/26/harry-potter-quiz.html",
+            "date": " • Aug 26, 2018"
+        }
+        
+    
+  
+    
+        ,"post5": {
+            "title": "The state of reading in 2018 and beyond.",
+            "content": "Audio books are seeing a resurgence, because of companies like Audible. Text to speech is good, and is getting better . Wireless Bluetooth earphones are becoming common place, the increase in convenience and battery life allows people to have them on longer. Unlike content that you have to watch/read, you can work on other stuff while you listen. I see a time where we can listen to most of the things we read. Creates a whole new kind of medium. News, blog posts and Stories most affected. Most of the speech generated by machines. Most of the classic texts available for free on the internet. .",
+            "url": "https://arjunsriva.com/future/2018/08/05/state-of-reading.html",
+            "relUrl": "/future/2018/08/05/state-of-reading.html",
+            "date": " • Aug 5, 2018"
+        }
+        
+    
+  
+    
+        ,"post6": {
+            "title": "Infant Mortality In India",
+            "content": "read the analysis here. .",
+            "url": "https://arjunsriva.com/analysis/2018/06/15/infant-mortality.html",
+            "relUrl": "/analysis/2018/06/15/infant-mortality.html",
+            "date": " • Jun 15, 2018"
+        }
+        
+    
+  
+    
+        ,"post7": {
+            "title": "Jargonizer",
+            "content": "This was a fun project, the goal was to create a website which lets you complicate your sentences, there are plenty of websites online trying to simplify but none that go the other way. . play with it here .",
+            "url": "https://arjunsriva.com/jargonizer-website",
+            "relUrl": "/jargonizer-website",
+            "date": " • Jun 12, 2018"
+        }
+        
+    
+  
+    
+        ,"post8": {
+            "title": "Multi Armed Bandit Problem",
+            "content": "Problem Description . Imagine you are at a casino, and you have N slot machines to play, each slot machine gives rewards according to a fixed probability distribution. What strategy should you play with to maximise your total reward ? . This problem is known as Multi Armed Bandit problem. . import matplotlib.pyplot as plt import numpy as np %matplotlib inline . Arms . An arm when pulled, gives a random number from a normal distribution with fixed mean(mu) and deviation(sigma). When pulled many times the frequency of the rewards look like this: . X axis is the magnitude of reward Y axis is it&#39;s frequency. . The Arm class provides an arm with these properties. . class Arm: def __init__(self, mu=None, sigma=None): if mu is None: self.mu = np.absolute(np.random.uniform()) else: self.mu = mu if sigma is None: self.sigma=np.absolute(np.random.uniform()) else: self.sigma = sigma def pull(self): reward = np.random.normal(self.mu, self.sigma, 1) return reward def get_arms(k): # returns a list of arms arms = [] for i in range(k): arms.append(Arm()) return arms . Agents . An agent here is a player who pulls arms to play. It has a policy, which is a list of probabilities associated with each arm. . The agent class makes designing agents fast. The object is initialised with arms and whether it should play all arms once as part of the initialisation. . Features provided by this class: Attributes: . expectations[i]: gives the expected reward on playing arm[i] | times_played[i]: gives the number of times the agent has played arm[i] | N = Total number of times agent has played | reward_history : list of rewards earned by the agent | choice_history : list of choices made by the agent | . Methods: . gamble(i): Plays for i iterations while updating it&#39;s policy. | play(i): Pulls arm[i] and updates reward_history, N , times_played | select_arm(): returns index of an arm by sampling probability distribution given by the policy | . class agent: def __init__(self, arms, play_once=1): self.expectations = np.zeros(len(arms)) self.times_played = np.zeros(len(arms)) self.arms = arms self.number_of_arms = len(arms) self.N = 0 self.reward_history = [] self.choice_history = [] if play_once == 1: for i in range(self.number_of_arms): self.expectations[i] = self.play(i) def play(self, index): reward = self.arms[index].pull() self.times_played[index] += 1 self.N += 1 self.choice_history.append(index) self.reward_history.append(reward) return reward def policy(self): pass def update_expectations(self, reward, index): self.expectations[index] += (reward - self.expectations[index])/self.N def select_arm(self): options = range(self.number_of_arms) i = np.random.choice(options, p=self.policy(), replace=False) return i def gamble(self, iterations): for i in range(iterations): index = self.select_arm() reward = self.play(index) self.update_expectations(reward, index) . Example agents . To make a new agent we inherit the agent class. . Time to make some agents! . First up: epsilon-greedy . This agent plays the arm with the highest expected reward with 1 - epsilon probability, and plays a random arm with epsilon probability . So epsilon = 1 =&gt; random choices epsilon = 0 =&gt; greedy choices . class epsilon_greedy(agent): def __init__(self, arms, play_once=1, epsilon=0.1): super().__init__(arms, play_once) self.epsilon = epsilon def __str__(self): return &quot;Epsilon-Greedy Agent, epsilon= &quot;+str(self.epsilon) def policy(self): temp = np.zeros_like(self.expectations) temp[np.argmax(self.expectations)] = 1-self.epsilon ans = temp + self.epsilon/self.number_of_arms return ans . Beta-Softmax . This agent plays an arm[i] with probability proportional to: e^(expected_reward(arm[i])/beta) We normalise the whole thing by the sum over all the arms. . class softmax(agent): def __init__(self, arms, play_once=1, beta=1): super().__init__(arms, play_once) self.beta = beta def __str__(self): return &quot;Softmax agent, beta= &quot;+ str(self.beta) def policy(self): temp = np.exp(self.expectations/self.beta) ans = temp / np.sum(temp, axis=0) return ans . Upper Confidence Bound (UCB1) . UCB1 agent plays the arm with the highest metric, where metric of arm i is : metric[i] = expected_reward[i] + sqrt(2*log(N)/times_played[i]) . Note Best peformance when rewards are between 0 and 1 . class ucb(agent): def __init__(self, arms, play_once=1): super().__init__(arms, play_once) def __str__(self): return &quot;UCB1 agent&quot; def policy(self): temp = self.expectations + np.sqrt(2*np.log(self.N)/self.times_played) ans = np.zeros_like(temp) ans[np.argmax(temp)] = 1 return ans . Metrics . Metric : A scalar number, makes comparison easier. To compare the performance of our agents we can use these metrics . avg_reward[i] : this gives the average reward till i+1 iteration. | max_reward : this tells us the maximum expected reward . | euclid_distance : we can think of as learnt policy and optimal policy as vectors and compute the distance between them , smaller is better . | cosine_simmilarity : compute the cos(q) between the policies. larger is better | . def maxreward(arms): #Max rewards a= [arm.mu for arm in arms] return max(a) def avg_reward(rewards): ans = [] ans.append(rewards[0]) for i in range(1,len(rewards)): ans.append(ans[i-1]+rewards[i]) for i in range(len(ans)): ans[i]/=i+1 return ans def cosine_similarity(a,b): temp = a*b temp/=(euclid_distance(a)* euclid_distance(b)) return np.sum(temp, axis=0) def euclid_distance(a): return np.sqrt(np.sum(a*a, axis=0)) . Test . This function takes a list of agents and the number of iterations. Makes each agent play, and prints its metrics. . def test(agents, iterations): for agent in agents: agent.gamble(iterations) temp = [ arm.mu for arm in levers] optimal_policy = np.zeros_like(agent.expectations) optimal_policy[temp.index(max(temp))] = 1 avg_rewards_earned = avg_reward(agent.reward_history) print(agent) print(&quot;maximum possible reward:&quot;, maxreward(levers)) print(&quot;average reward:&quot;, avg_rewards_earned[-1]) print(&quot;cosine similarity&quot; ,cosine_similarity(agent.policy(), optimal_policy)) euclid_norm = euclid_distance(agent.policy()-optimal_policy)/len(optimal_policy) print(&quot;euclidian norm &quot;,euclid_norm) plt.plot(avg_rewards_earned) plt.ylabel(&#39;Average Reward&#39;) plt.xlabel(&#39;Iteration&#39;) plt.show() print(&quot; n&quot;) # print(&quot;optimal policy:&quot; , optimal) # print(&quot;learnt policy:&quot; ,agent.policy()) # plt.scatter(range(len(agent.choice_history)),y=agent.choice_history) # plt.title(&quot;Choices&quot;) # plt.xlabel(&quot;time&quot;) # plt.ylabel(&quot;arm&quot;) # plt.show() # print(&quot; n&quot;) . levers = get_arms(10) agents = [ epsilon_greedy(levers, epsilon=1), epsilon_greedy(levers, epsilon=0), softmax(levers, beta=0.1), ucb(levers) ] . plt.plot([ arm.mu for arm in levers] ) plt.title(&quot;distribution of expected value of arms&quot;) . Text(0.5, 1.0, &#39;distribution of expected value of arms&#39;) . test(agents, 5000) . Epsilon-Greedy Agent, epsilon= 1 maximum possible reward: 0.9851042878107023 average reward: [0.47962497] cosine similarity 0.3162277660168379 euclidian norm 0.09486832980505139 . Epsilon-Greedy Agent, epsilon= 0 maximum possible reward: 0.9851042878107023 average reward: [0.98686237] cosine similarity 1.0 euclidian norm 0.0 . Softmax agent, beta= 0.1 maximum possible reward: 0.9851042878107023 average reward: [0.91348264] cosine similarity 0.9992727823574249 euclidian norm 0.008915931500017809 . UCB1 agent maximum possible reward: 0.9851042878107023 average reward: [0.89258379] cosine similarity 0.0 euclidian norm 0.1414213562373095 . . Experimental stuff: . Below are a few agents I wrote for fun. . class softmax_with_exponentiation(agent): def __init__(self, arms, play_once=1, beta=1, exp=1): super().__init__(arms, play_once) self.beta = beta self.exp = exp def policy(self): temp = np.exp(self.expectations/self.beta) ans = temp / np.sum(temp, axis=0) ans = ans**self.exp ans /= np.sum(ans, axis=0) return ans class softmax_with_reccurence(agent): def __init__(self, arms, play_once=1, beta=1): super().__init__(arms, play_once) self.old_policy = np.ones_like(self.expectations)/self.l self.beta = beta def policy(self): temp = np.exp(self.expectations/self.beta) new_policy = temp / np.sum(temp, axis=0) result = np.multiply(new_policy, self.old_policy) result /= np.sum(result, axis=0) self.old_policy = result return result class greedy_with_reccurence(agent): # alpha = number &lt; 1; will sum over a number of observations and will keep # osiclating. # alpha = N will allow the algo to converge to an arm, greedy doesn&#39;t # really need this, kind of always give one answer. def __init__(self, arms, play_once=1, alpha=1): super().__init__(arms, play_once) self.old_policy = np.ones_like(self.expectations) self.alpha = alpha def policy(self): new_policy = np.zeros_like(self.expectations) new_policy[np.argmax(self.expectations)] = 1 new_policy = (1-self.alpha)*new_policy + self.alpha*self.old_policy new_policy /= np.sum(new_policy, axis=0) self.old_policy = new_policy return new_policy # class magic(agent): # def __init__(self, arms, play_once=1, exp=1): # super().__init__(arms, play_once) # self.old_policy = np.ones_like(self.expectations)/self.l # self.exp = exp # # def policy(self): # new_policy = f(old_policy, g(expectations)) .",
+            "url": "https://arjunsriva.com/ai/2017/11/12/multi-armed-bandits.html",
+            "relUrl": "/ai/2017/11/12/multi-armed-bandits.html",
+            "date": " • Nov 12, 2017"
+        }
+        
+    
+  
+    
+        ,"post9": {
+            "title": "Learning Machine Learning",
+            "content": "This post will talk about how I’m going about learning machine learning. . Mostly online content. . Podcasts . These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts: . Partially Derivative | Linear Digressions | Data Skeptic | . Some that are supposed to be good but never tried: . Not so standard deviations | Data science at home | Talking machines | . Online Courses . A few awesome courses. . Andrew Ng Coursera A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave. . | Fast.ai A course which aims to teach by coding, and takes a top down approach. . | .",
+            "url": "https://arjunsriva.com/ai/machine%20learning/2017/11/12/learning-machine-learning.html",
+            "relUrl": "/ai/machine%20learning/2017/11/12/learning-machine-learning.html",
+            "date": " • Nov 12, 2017"
+        }
+        
+    
+  
+    
+        ,"post10": {
+            "title": "Game Of Thrones quiz",
+            "content": "Consists of three rounds, first round acts as elimination, followed by two rounds of interactive play. . First round . Questions Answers . Second round . Slides . video for question 1 music for question 2 video for question 3 . Third round . Connect .",
+            "url": "https://arjunsriva.com/iit%20indore/quiz/2017/09/04/game-of-thrones-quiz.html",
+            "relUrl": "/iit%20indore/quiz/2017/09/04/game-of-thrones-quiz.html",
+            "date": " • Sep 4, 2017"
+        }
+        
+    
+  
+    
+        ,"post11": {
+            "title": "Newbie quiz",
+            "content": "This was the first quiz conducted by the quiz club this year. . Indraneel and I had prepared this quiz as a way of introducting quizzing to new people and narrowing down potential recruits. Lots of fun! . Questions . Get the questions. . Answers . Get the answers. .",
+            "url": "https://arjunsriva.com/iit%20indore/quiz/2017/08/20/newbie-quiz.html",
+            "relUrl": "/iit%20indore/quiz/2017/08/20/newbie-quiz.html",
+            "date": " • Aug 20, 2017"
+        }
+        
+    
+  
+    
+        ,"post12": {
+            "title": "Mental Health Checklists",
+            "content": "Some quizes I made so it’s easy to keep track of mental health. . Burn’s depression Checklist use it here | Novaco’s Anger Scale use it here | .",
+            "url": "https://arjunsriva.com/website/2017/01/08/mental-health-checklist.html",
+            "relUrl": "/website/2017/01/08/mental-health-checklist.html",
+            "date": " • Jan 8, 2017"
         }
         
     
@@ -29,8 +150,8 @@
   
       ,"page1": {
           "title": "About Me",
-          "content": "This website is powered by fastpages 1. . a blogging platform that natively supports Jupyter notebooks in addition to other formats. &#8617; . |",
-          "url": "https://arjunbazinga.github.io/arjunsriva.com/about/",
+          "content": "Hi! I’m Arjun, . I currently work at BookMyShow on Discovery. Previously I built Proof of Stake blockchains at Zebi. I got my bachelors in Computer Science from IIT Indore. . I’m interested in Experimentation platforms, Reccomendation Systems, and Market Design. I love to read, and three books that I reccomend most often are Dataclysm, 7 Powers, and Model Thinker. I also love Biryani and Skateboarding. Some of my other interests are: . Computer Science Machine learning | Reinforcement learning | Distributed Systems CRDTS | Local First Software | . | Program Synthesis | Language Design | Software Engineering | . | Startups SAAS | Fundamental Investing | . | Finance Market design | Options | . | Mental Models | . If any of these interest you too, I would love to talk to you about it, please use the links in the footer to get in touch. .",
+          "url": "https://arjunsriva.com/about/",
           "relUrl": "/about/",
           "date": ""
       }
@@ -62,7 +183,7 @@
       ,"page10": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
-          "url": "https://arjunbazinga.github.io/arjunsriva.com/robots.txt",
+          "url": "https://arjunsriva.com/robots.txt",
           "relUrl": "/robots.txt",
           "date": ""
       }
