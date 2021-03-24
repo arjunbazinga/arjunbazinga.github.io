@@ -1,0 +1,10 @@
+---
+title: Course Schedule Generator
+layout: post
+description: A website which adds courses to your personal calendar, for students of IIT Indore.
+categories: [ IIT Indore ]
+---
+
+A website which allows students of IIT Indore to add courses they are interested in to their calendar.  
+I was tired of doing this manually every time.  
+Use it [here](https://arjunbazinga.github.io/course-schedule-generator/)
