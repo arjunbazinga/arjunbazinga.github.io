@@ -2,7 +2,7 @@
 title: Mental Health Checklists
 description: A website which allows quick tracking of mental health.
 layout: post
-categories: [website]
+categories: [Website]
 
 ---
 
