@@ -1,7 +1,7 @@
 ---
 title:  Learning Machine Learning
 layout : post
-categories: [AI,Machine Learning]
+categories: [AI]
 comments : true
 ---
 

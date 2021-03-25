@@ -1,7 +1,7 @@
 ---
 title:  Jargonizer
 layout: post
-categories: [ Projects , Website ]
+categories: [ Projects ]
 permalink: jargonizer-website
 description: Generate sentences that nobody can read.
 ---

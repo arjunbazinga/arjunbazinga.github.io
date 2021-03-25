@@ -1,7 +1,7 @@
 ---
 title: Friend Or Foe
 layout: post
-categories: [AI]
+categories: [AI, Projects]
 description : An interactive game inspired by the paper "AI Safety Grid Worlds"
 ---
 
