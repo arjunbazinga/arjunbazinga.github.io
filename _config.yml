@@ -65,6 +65,9 @@ show_tags: true
 # Add your Google Analytics ID here if you have one and want to use it
 google_analytics: UA-101184475-1
 
+# Add your  Segment API key here if you have one and want to use it
+segment_api_key: D3GmPSmSePIwlYrBs7qL7EC4whOgGDO3
+
 exclude:
   - docker-compose.yml
   - action.yml
