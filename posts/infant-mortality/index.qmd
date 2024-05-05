@@ -1,0 +1,9 @@
+---
+title: Infant Mortality In India
+layout: post
+categories: [Analysis]
+description : An analysis of infant mortality rates across India.
+date: "2018-06-15"
+---
+
+read the analysis [here](https://arjunsriva.com/infantmortality).
