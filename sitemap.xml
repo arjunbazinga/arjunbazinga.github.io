@@ -1,99 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://arjunsriva.com/projects/2017/01/08/mental-health-checklist.html</loc>
-<lastmod>2017-01-08T00:00:00-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/iit%20indore/quiz/2017/08/20/newbie-quiz.html</loc>
-<lastmod>2017-08-20T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/iit%20indore/quiz/2017/09/04/game-of-thrones-quiz.html</loc>
-<lastmod>2017-09-04T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/ai/2017/11/12/learning-machine-learning.html</loc>
-<lastmod>2017-11-12T00:00:00-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/ai/2017/11/12/multi-armed-bandits.html</loc>
-<lastmod>2017-11-12T00:00:00-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/jargonizer-website</loc>
-<lastmod>2018-06-12T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/analysis/2018/06/15/infant-mortality.html</loc>
-<lastmod>2018-06-15T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/ai/projects/2018/07/28/friend-or-foe.html</loc>
-<lastmod>2018-07-28T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/future/2018/08/05/state-of-reading.html</loc>
-<lastmod>2018-08-05T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/iit%20indore/quiz/2018/08/26/harry-potter-quiz.html</loc>
-<lastmod>2018-08-26T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/iit%20indore/2020/01/08/course-schedule-generator.html</loc>
-<lastmod>2020-01-08T00:00:00-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/experimentation/2021/03/21/exerimentations-platforms.html</loc>
-<lastmod>2021-03-21T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/about/</loc>
-</url>
-<url>
-<loc>https://arjunsriva.com/</loc>
-</url>
-<url>
-<loc>https://arjunsriva.com/search/</loc>
-</url>
-<url>
-<loc>https://arjunsriva.com/categories/</loc>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/game-of-thrones-quiz/Connect.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/game-of-thrones-quiz/prelims.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/game-of-thrones-quiz/prelims_answers.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/game-of-thrones-quiz/round2.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/harry-potter-quiz/PotterMania-Answers.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/harry-potter-quiz/Questions.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/newbie-quiz/Answers.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/newbie-quiz/Questions.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
-<url>
-<loc>https://arjunsriva.com/static/resume.pdf</loc>
-<lastmod>2022-01-06T14:24:57-06:00</lastmod>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.arjunsriva.com/about.html</loc>
+    <lastmod>2024-05-05T06:12:34.840Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/friend-or-foe/index.html</loc>
+    <lastmod>2024-05-05T07:09:43.585Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/newbie-quiz/index.html</loc>
+    <lastmod>2024-05-05T06:36:56.648Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/learning-machine-learning/index.html</loc>
+    <lastmod>2024-05-05T04:30:10.725Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/course-schedule-generator/index.html</loc>
+    <lastmod>2024-05-05T04:27:41.344Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/mental-health-checklist/index.html</loc>
+    <lastmod>2024-05-05T04:27:41.343Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/state-of-reading/index.html</loc>
+    <lastmod>2024-05-05T04:38:14.719Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</loc>
+    <lastmod>2024-05-05T06:59:15.704Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/game-of-thrones-quiz/index.html</loc>
+    <lastmod>2024-05-05T06:34:44.681Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/infant-mortality/index.html</loc>
+    <lastmod>2024-05-05T06:39:20.182Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/jargonizer/index.html</loc>
+    <lastmod>2024-05-05T04:27:41.343Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/harry-potter-quiz/index.html</loc>
+    <lastmod>2024-05-05T06:35:23.204Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/posts/exerimentations-platforms/index.html</loc>
+    <lastmod>2024-05-05T04:30:24.343Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.arjunsriva.com/index.html</loc>
+    <lastmod>2024-05-05T06:44:22.016Z</lastmod>
+  </url>
 </urlset>
