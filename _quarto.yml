@@ -9,7 +9,8 @@ website:
   site-url: https://www.arjunsriva.com
   navbar:
     right:
-      - about.qmd
+      - text: About
+        href: /about.html
       - text: Library
         href: https://arjunsriva.com/library
       - icon: twitter
