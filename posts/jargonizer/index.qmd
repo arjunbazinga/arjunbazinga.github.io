@@ -7,6 +7,15 @@ description: Generate sentences that nobody can read.
 date: "2018-06-12"
 ---
 
-This was a fun project, the goal was to create a website which lets you complicate your sentences, there are plenty of websites online trying to simplify but none that go the other way.
+What if instead of aiming for clarity and conciesness, our goal was to make our sentences as unweildy and hard to understand as possible? 
 
-play with it [here](https://arjunbazinga.github.io/jargonizer)
+A simple way to do this is to replace easy to understand phrases with harder ones. 
+Wikipedia [maintains](https://web.archive.org/web/20190622035102/https://en.wikipedia.org/wiki/List_of_plain_English_words_and_phrases)[^1] one such list for us.
+[Here is the website](https://arjunbazinga.github.io/jargonizer) I made so you can play with it online as well, it all runs in your browser, no text is sent to a server.
+
+Reading at the output generated from this, I can't help but feel like I am reading a legal document. 
+
+
+
+
+[^1]: Used to 🥲
