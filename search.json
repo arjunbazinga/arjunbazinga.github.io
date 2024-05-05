@@ -1,52 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Arjun Srivastava",
     "section": "",
-    "text": "Hi! I’m Arjun,\nI currently work at BookMyShow on Discovery. Previously I built Proof of Stake blockchains at Zebi. I got my bachelors in Computer Science from IIT Indore.\nI’m interested in Experimentation platforms, Reccomendation Systems, and Market Design. I love to read, and three books that I reccomend most often are Dataclysm, 7 Powers, and Model Thinker.\nI also love Biryani and Skateboarding. Some of my other interests are:\n\nComputer Science\n\nMachine learning\nReinforcement learning\nDistributed Systems\n\nCRDTS\nLocal First Software\n\nProgram Synthesis\nLanguage Design\nSoftware Engineering\n\nStartups\n\nSAAS\nFundamental Investing\n\nFinance\n\nMarket design\nOptions\n\nMental Models"
-  },
-  {
-    "objectID": "posts/friend-or-foe/index.html",
-    "href": "posts/friend-or-foe/index.html",
-    "title": "Friend Or Foe",
-    "section": "",
-    "text": "This is a mini interactive “game”, I made inspired by the paper AI Safety Grid Worlds, without giving too much away, I urge you to play.\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {Friend {Or} {Foe}},\n  date = {2018-07-28},\n  url = {https://www.arjunsriva.com/posts/friend-or-foe},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “Friend Or Foe.” July 28, 2018. https://www.arjunsriva.com/posts/friend-or-foe."
-  },
-  {
-    "objectID": "posts/newbie-quiz/index.html",
-    "href": "posts/newbie-quiz/index.html",
-    "title": "Newbie quiz",
-    "section": "",
-    "text": "This was the first quiz conducted by the quiz club this year.\nIndraneel and I had prepared this quiz as a way of introducting quizzing to new people and narrowing down potential recruits. Lots of fun!\n\nQuestions\nGet the questions.\n\n\nAnswers\nGet the answers.\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2017,\n  author = {Srivastava, Arjun},\n  title = {Newbie Quiz},\n  date = {2017-08-20},\n  url = {https://www.arjunsriva.com/posts/newbie-quiz},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2017. “Newbie Quiz.” August 20, 2017. https://www.arjunsriva.com/posts/newbie-quiz."
-  },
-  {
-    "objectID": "posts/learning-machine-learning/index.html",
-    "href": "posts/learning-machine-learning/index.html",
-    "title": "Learning Machine Learning",
-    "section": "",
-    "text": "This post will talk about how I’m going about learning machine learning.\nMostly online content.\n\nPodcasts\nThese podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:\n* Partially Derivative * Linear Digressions * Data Skeptic\nSome that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines\n\n\nOnline Courses\nA few awesome courses.\n\nAndrew Ng Coursera\nA good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.\nFast.ai\nA course which aims to teach by coding, and takes a top down approach.\n\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2017,\n  author = {Srivastava, Arjun},\n  title = {Learning {Machine} {Learning}},\n  date = {2017-11-12},\n  url = {https://www.arjunsriva.com/posts/learning-machine-learning},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2017. “Learning Machine Learning.”\nNovember 12, 2017. https://www.arjunsriva.com/posts/learning-machine-learning."
-  },
-  {
-    "objectID": "posts/course-schedule-generator/index.html",
-    "href": "posts/course-schedule-generator/index.html",
-    "title": "Course Schedule Generator",
-    "section": "",
-    "text": "A website which allows students of IIT Indore to add courses they are interested in to their calendar.\nI was tired of doing this manually every time.\nUse it here\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2020,\n  author = {Srivastava, Arjun},\n  title = {Course {Schedule} {Generator}},\n  date = {2020-01-08},\n  url = {https://www.arjunsriva.com/posts/course-schedule-generator},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2020. “Course Schedule Generator.”\nJanuary 8, 2020. https://www.arjunsriva.com/posts/course-schedule-generator."
-  },
-  {
-    "objectID": "posts/mental-health-checklist/index.html",
-    "href": "posts/mental-health-checklist/index.html",
-    "title": "Mental Health Checklists",
-    "section": "",
-    "text": "Some quizes I made so it’s easy to keep track of mental health.\n\nBurn’s depression Checklist use it here\nNovaco’s Anger Scale use it here\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2017,\n  author = {Srivastava, Arjun},\n  title = {Mental {Health} {Checklists}},\n  date = {2017-01-08},\n  url = {https://www.arjunsriva.com/posts/mental-health-checklist},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2017. “Mental Health Checklists.”\nJanuary 8, 2017. https://www.arjunsriva.com/posts/mental-health-checklist."
-  },
-  {
-    "objectID": "posts/state-of-reading/index.html",
-    "href": "posts/state-of-reading/index.html",
-    "title": "The state of reading in 2018 and beyond.",
-    "section": "",
-    "text": "Audio books are seeing a resurgence, because of companies like Audible.\nText to speech is good, and is getting better .\nWireless Bluetooth earphones are becoming common place, the increase in convenience and battery life allows people to have them on longer.\nUnlike content that you have to watch/read, you can work on other stuff while you listen.\nI see a time where we can listen to most of the things we read.\nCreates a whole new kind of medium.\nNews, blog posts and Stories most affected.\nMost of the speech generated by machines.\nMost of the classic texts available for free on the internet.\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {The State of Reading in 2018 and Beyond.},\n  date = {2018-08-05},\n  url = {https://www.arjunsriva.com/posts/state-of-reading},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “The State of Reading in 2018 and\nBeyond.” August 5, 2018. https://www.arjunsriva.com/posts/state-of-reading."
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nExperimentation Platforms\n\n\n\n\n\n\nExperimentation\n\n\n\nAn Overview of Experimentation Platforms.\n\n\n\n\n\nMar 21, 2021\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nCourse Schedule Generator\n\n\n\n\n\n\nIIT Indore\n\n\n\nA website which adds courses to your personal calendar, for students of IIT Indore.\n\n\n\n\n\nJan 8, 2020\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nHarry Potter quiz\n\n\n\n\n\n\nIIT Indore\n\n\nQuiz\n\n\n\nHarry Potter Quiz created by me Bitan and Keyur\n\n\n\n\n\nAug 26, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nThe state of reading in 2018 and beyond.\n\n\n\n\n\n\nFuture\n\n\n\n\n\n\n\n\n\nAug 5, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nFriend Or Foe\n\n\n\n\n\n\nAI\n\n\nProjects\n\n\n\nAn interactive game inspired by the paper “AI Safety Grid Worlds”\n\n\n\n\n\nJul 28, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nInfant Mortality In India\n\n\n\n\n\n\nAnalysis\n\n\n\nAn analysis of infant mortality rates across India.\n\n\n\n\n\nJun 15, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nJargonizer\n\n\n\n\n\n\nProjects\n\n\n\nGenerate sentences that nobody can read.\n\n\n\n\n\nJun 12, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nLearning Machine Learning\n\n\n\n\n\n\nAI\n\n\n\n\n\n\n\n\n\nNov 12, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nMulti Armed Bandits\n\n\n\n\n\n\nAI\n\n\n\nor how to balance exploration and exploitation more formally\n\n\n\n\n\nNov 12, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nGame Of Thrones quiz\n\n\n\n\n\n\nIIT Indore\n\n\nQuiz\n\n\n\nA game of thrones quiz made for cultural week.\n\n\n\n\n\nSep 4, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nNewbie quiz\n\n\n\n\n\n\nIIT Indore\n\n\nQuiz\n\n\n\nA quiz to introduce first timers to quizzing.\n\n\n\n\n\nAug 20, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nMental Health Checklists\n\n\n\n\n\n\nProjects\n\n\n\nA website which allows quick tracking of mental health.\n\n\n\n\n\nJan 8, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/multi-armed-bandits/multi-armed-bandits.html",
@@ -84,32 +42,11 @@
     "text": "Metrics\nMetric : A scalar number, makes comparison easier.\nTo compare the performance of our agents we can use these metrics\n\navg_reward[i] : this gives the average reward till i+1 iteration.\nmax_reward : this tells us the maximum expected reward\neuclid_distance : we can think of as learnt policy and optimal policy as vectors and compute the distance between them , smaller is better\ncosine_simmilarity : compute the cos(q) between the policies. larger is better\n\n\ndef maxreward(arms):\n    #Max rewards\n    a= [arm.mu for arm in arms]\n    return max(a)\n\ndef avg_reward(rewards):\n    ans = []\n    ans.append(rewards[0])\n    for i in range(1,len(rewards)):\n        ans.append(ans[i-1]+rewards[i])\n    for i in range(len(ans)):\n        ans[i]/=i+1\n    return ans\n\ndef cosine_similarity(a,b):\n    temp = a*b\n    temp/=(euclid_distance(a)* euclid_distance(b))\n    return np.sum(temp, axis=0)\n    \ndef euclid_distance(a):\n    return np.sqrt(np.sum(a*a, axis=0))\n\n\nTest\nThis function takes a list of agents and the number of iterations. Makes each agent play, and prints its metrics.\n\ndef test(agents, iterations):\n    for agent in agents:\n        \n        agent.gamble(iterations)\n        \n        temp = [ arm.mu for arm in levers] \n        optimal_policy = np.zeros_like(agent.expectations)\n        optimal_policy[temp.index(max(temp))] = 1\n        \n        avg_rewards_earned = avg_reward(agent.reward_history)\n        \n        print(agent)\n        print(\"maximum possible reward:\", maxreward(levers))\n        print(\"average reward:\", avg_rewards_earned[-1])\n        print(\"cosine similarity\" ,cosine_similarity(agent.policy(), optimal_policy))\n        euclid_norm = euclid_distance(agent.policy()-optimal_policy)/len(optimal_policy)\n        print(\"euclidian norm \",euclid_norm)\n        \n        \n        plt.plot(avg_rewards_earned)\n        plt.ylabel('Average Reward')\n        plt.xlabel('Iteration')\n        plt.show()\n        print(\"\\n\")\n    \n        # print(\"optimal policy:\" , optimal)\n        # print(\"learnt policy:\" ,agent.policy())\n        \n    \n        \n        # plt.scatter(range(len(agent.choice_history)),y=agent.choice_history)\n        # plt.title(\"Choices\")\n        # plt.xlabel(\"time\")\n        # plt.ylabel(\"arm\")\n        # plt.show()\n        # print(\"\\n\")\n    \n    \n\n\nlevers = get_arms(10)\n\nagents = [\n    epsilon_greedy(levers, epsilon=1),\n    epsilon_greedy(levers, epsilon=0),\n    softmax(levers, beta=0.1),\n    ucb(levers)\n\n]\n\n\nplt.plot([ arm.mu for arm in levers] )\nplt.title(\"distribution of expected value of arms\")\n\nText(0.5, 1.0, 'distribution of expected value of arms')\n\n\n\n\n\n\n\n\n\n\ntest(agents, 5000)\n\nEpsilon-Greedy Agent, epsilon= 1\nmaximum possible reward: 0.9851042878107023\naverage reward: [0.47962497]\ncosine similarity 0.3162277660168379\neuclidian norm  0.09486832980505139\n\n\nEpsilon-Greedy Agent, epsilon= 0\nmaximum possible reward: 0.9851042878107023\naverage reward: [0.98686237]\ncosine similarity 1.0\neuclidian norm  0.0\n\n\nSoftmax agent, beta= 0.1\nmaximum possible reward: 0.9851042878107023\naverage reward: [0.91348264]\ncosine similarity 0.9992727823574249\neuclidian norm  0.008915931500017809\n\n\nUCB1 agent\nmaximum possible reward: 0.9851042878107023\naverage reward: [0.89258379]\ncosine similarity 0.0\neuclidian norm  0.1414213562373095\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExperimental stuff:\nBelow are a few agents I wrote for fun.\n\n\nclass softmax_with_exponentiation(agent):\n\n    def __init__(self, arms, play_once=1, beta=1, exp=1):\n        super().__init__(arms, play_once)\n        self.beta = beta\n        self.exp = exp\n\n    def policy(self):\n        temp = np.exp(self.expectations/self.beta)\n        ans = temp / np.sum(temp, axis=0)\n        ans = ans**self.exp\n        ans /= np.sum(ans, axis=0)\n        return ans\n\n\nclass softmax_with_reccurence(agent):\n\n    def __init__(self, arms, play_once=1, beta=1):\n        super().__init__(arms, play_once)\n        self.old_policy = np.ones_like(self.expectations)/self.l\n        self.beta = beta\n\n    def policy(self):\n        temp = np.exp(self.expectations/self.beta)\n        new_policy = temp / np.sum(temp, axis=0)\n\n        result = np.multiply(new_policy, self.old_policy)\n        result /= np.sum(result, axis=0)\n        self.old_policy = result\n\n        return result\n\n\nclass greedy_with_reccurence(agent):\n    # alpha = number &lt; 1; will sum over a number of observations and will keep\n    # osiclating.\n    # alpha = N will allow the algo to converge to an arm, greedy doesn't\n    # really need this, kind of always give one answer.\n\n    def __init__(self, arms, play_once=1, alpha=1):\n        super().__init__(arms, play_once)\n        self.old_policy = np.ones_like(self.expectations)\n        self.alpha = alpha\n\n    def policy(self):\n        new_policy = np.zeros_like(self.expectations)\n        new_policy[np.argmax(self.expectations)] = 1\n\n        new_policy = (1-self.alpha)*new_policy + self.alpha*self.old_policy\n\n        new_policy /= np.sum(new_policy, axis=0)\n        self.old_policy = new_policy\n\n        return new_policy\n\n# class magic(agent):\n#    def __init__(self, arms, play_once=1, exp=1):\n#        super().__init__(arms, play_once)\n#        self.old_policy = np.ones_like(self.expectations)/self.l\n#        self.exp = exp\n#\n#    def policy(self):\n#        new_policy = f(old_policy, g(expectations))"
   },
   {
-    "objectID": "posts/game-of-thrones-quiz/index.html",
-    "href": "posts/game-of-thrones-quiz/index.html",
-    "title": "Game Of Thrones quiz",
+    "objectID": "posts/newbie-quiz/index.html",
+    "href": "posts/newbie-quiz/index.html",
+    "title": "Newbie quiz",
     "section": "",
-    "text": "Consists of three rounds, first round acts as elimination, followed by two rounds of interactive play."
-  },
-  {
-    "objectID": "posts/game-of-thrones-quiz/index.html#first-round",
-    "href": "posts/game-of-thrones-quiz/index.html#first-round",
-    "title": "Game Of Thrones quiz",
-    "section": "First round",
-    "text": "First round\nQuestions\nAnswers"
-  },
-  {
-    "objectID": "posts/game-of-thrones-quiz/index.html#second-round",
-    "href": "posts/game-of-thrones-quiz/index.html#second-round",
-    "title": "Game Of Thrones quiz",
-    "section": "Second round",
-    "text": "Second round\nSlides\nvideo for question 1\nmusic for question 2\nvideo for question 3"
-  },
-  {
-    "objectID": "posts/game-of-thrones-quiz/index.html#third-round",
-    "href": "posts/game-of-thrones-quiz/index.html#third-round",
-    "title": "Game Of Thrones quiz",
-    "section": "Third round",
-    "text": "Third round\nConnect"
+    "text": "This was the first quiz conducted by the quiz club this year.\nIndraneel and I had prepared this quiz as a way of introducting quizzing to new people and narrowing down potential recruits. Lots of fun!\n\nQuestions\nGet the questions.\n\n\nAnswers\nGet the answers.\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2017,\n  author = {Srivastava, Arjun},\n  title = {Newbie Quiz},\n  date = {2017-08-20},\n  url = {https://www.arjunsriva.com/posts/newbie-quiz},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2017. “Newbie Quiz.” August 20, 2017. https://www.arjunsriva.com/posts/newbie-quiz."
   },
   {
     "objectID": "posts/infant-mortality/index.html",
@@ -119,11 +56,32 @@
     "text": "read the analysis here.\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {Infant {Mortality} {In} {India}},\n  date = {2018-06-15},\n  url = {https://www.arjunsriva.com/posts/infant-mortality},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “Infant Mortality In India.” June\n15, 2018. https://www.arjunsriva.com/posts/infant-mortality."
   },
   {
-    "objectID": "posts/jargonizer/index.html",
-    "href": "posts/jargonizer/index.html",
-    "title": "Jargonizer",
+    "objectID": "posts/friend-or-foe/index.html",
+    "href": "posts/friend-or-foe/index.html",
+    "title": "Friend Or Foe",
     "section": "",
-    "text": "This was a fun project, the goal was to create a website which lets you complicate your sentences, there are plenty of websites online trying to simplify but none that go the other way.\nplay with it here\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {Jargonizer},\n  date = {2018-06-12},\n  url = {https://www.arjunsriva.com/posts/jargonizer},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “Jargonizer.” June 12, 2018. https://www.arjunsriva.com/posts/jargonizer."
+    "text": "This is a mini interactive “game”, I made inspired by the paper AI Safety Grid Worlds, without giving too much away, I urge you to play.\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {Friend {Or} {Foe}},\n  date = {2018-07-28},\n  url = {https://www.arjunsriva.com/posts/friend-or-foe},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “Friend Or Foe.” July 28, 2018. https://www.arjunsriva.com/posts/friend-or-foe."
+  },
+  {
+    "objectID": "posts/course-schedule-generator/index.html",
+    "href": "posts/course-schedule-generator/index.html",
+    "title": "Course Schedule Generator",
+    "section": "",
+    "text": "A website which allows students of IIT Indore to add courses they are interested in to their calendar.\nI was tired of doing this manually every time.\nUse it here\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2020,\n  author = {Srivastava, Arjun},\n  title = {Course {Schedule} {Generator}},\n  date = {2020-01-08},\n  url = {https://www.arjunsriva.com/posts/course-schedule-generator},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2020. “Course Schedule Generator.”\nJanuary 8, 2020. https://www.arjunsriva.com/posts/course-schedule-generator."
+  },
+  {
+    "objectID": "posts/state-of-reading/index.html",
+    "href": "posts/state-of-reading/index.html",
+    "title": "The state of reading in 2018 and beyond.",
+    "section": "",
+    "text": "Audio books are seeing a resurgence, because of companies like Audible.\nText to speech is good, and is getting better .\nWireless Bluetooth earphones are becoming common place, the increase in convenience and battery life allows people to have them on longer.\nUnlike content that you have to watch/read, you can work on other stuff while you listen.\nI see a time where we can listen to most of the things we read.\nCreates a whole new kind of medium.\nNews, blog posts and Stories most affected.\nMost of the speech generated by machines.\nMost of the classic texts available for free on the internet.\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {The State of Reading in 2018 and Beyond.},\n  date = {2018-08-05},\n  url = {https://www.arjunsriva.com/posts/state-of-reading},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “The State of Reading in 2018 and\nBeyond.” August 5, 2018. https://www.arjunsriva.com/posts/state-of-reading."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi! I’m Arjun,\nI currently work at BookMyShow on Discovery. Previously I built Proof of Stake blockchains at Zebi. I got my bachelors in Computer Science from IIT Indore.\nI’m interested in Experimentation platforms, Reccomendation Systems, and Market Design. I love to read, and three books that I reccomend most often are Dataclysm, 7 Powers, and Model Thinker.\nI also love Biryani and Skateboarding. Some of my other interests are:\n\nComputer Science\n\nMachine learning\nReinforcement learning\nDistributed Systems\n\nCRDTS\nLocal First Software\n\nProgram Synthesis\nLanguage Design\nSoftware Engineering\n\nStartups\n\nSAAS\nFundamental Investing\n\nFinance\n\nMarket design\nOptions\n\nMental Models"
   },
   {
     "objectID": "posts/harry-potter-quiz/index.html",
@@ -131,6 +89,34 @@
     "title": "Harry Potter quiz",
     "section": "",
     "text": "Questions\nGet the questions.\nGet the video for question number 14\nGet the Music for question number 20\n\n\nAnswers\nGet the answers.\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2018,\n  author = {Srivastava, Arjun},\n  title = {Harry {Potter} Quiz},\n  date = {2018-08-26},\n  url = {https://www.arjunsriva.com/posts/harry-potter-quiz},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2018. “Harry Potter Quiz.” August 26,\n2018. https://www.arjunsriva.com/posts/harry-potter-quiz."
+  },
+  {
+    "objectID": "posts/learning-machine-learning/index.html",
+    "href": "posts/learning-machine-learning/index.html",
+    "title": "Learning Machine Learning",
+    "section": "",
+    "text": "This post will talk about how I’m going about learning machine learning.\nMostly online content.\n\nPodcasts\nThese podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:\n* Partially Derivative * Linear Digressions * Data Skeptic\nSome that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines\n\n\nOnline Courses\nA few awesome courses.\n\nAndrew Ng Coursera\nA good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.\nFast.ai\nA course which aims to teach by coding, and takes a top down approach.\n\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2017,\n  author = {Srivastava, Arjun},\n  title = {Learning {Machine} {Learning}},\n  date = {2017-11-12},\n  url = {https://www.arjunsriva.com/posts/learning-machine-learning},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2017. “Learning Machine Learning.”\nNovember 12, 2017. https://www.arjunsriva.com/posts/learning-machine-learning."
+  },
+  {
+    "objectID": "posts/mental-health-checklist/index.html",
+    "href": "posts/mental-health-checklist/index.html",
+    "title": "Mental Health Checklists",
+    "section": "",
+    "text": "Some quizes I made so it’s easy to keep track of mental health.\n\nBurn’s depression Checklist use it here\nNovaco’s Anger Scale use it here\n\n\n\n\nReuseCC BY 4.0CitationBibTeX citation:@online{srivastava2017,\n  author = {Srivastava, Arjun},\n  title = {Mental {Health} {Checklists}},\n  date = {2017-01-08},\n  url = {https://www.arjunsriva.com/posts/mental-health-checklist},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nSrivastava, Arjun. 2017. “Mental Health Checklists.”\nJanuary 8, 2017. https://www.arjunsriva.com/posts/mental-health-checklist."
+  },
+  {
+    "objectID": "posts/jargonizer/index.html",
+    "href": "posts/jargonizer/index.html",
+    "title": "Jargonizer",
+    "section": "",
+    "text": "What if instead of aiming for clarity and conciesness, our goal was to make our sentences as unweildy and hard to understand as possible?\nA simple way to do this is to replace easy to understand phrases with harder ones. Wikipedia maintains1 one such list for us. Here is the website I made so you can play with it online as well, it all runs in your browser, no text is sent to a server.\nReading at the output generated from this, I can’t help but feel like I am reading a legal document."
+  },
+  {
+    "objectID": "posts/jargonizer/index.html#footnotes",
+    "href": "posts/jargonizer/index.html#footnotes",
+    "title": "Jargonizer",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nUsed to 🥲↩︎"
   },
   {
     "objectID": "posts/exerimentations-platforms/index.html",
@@ -189,10 +175,31 @@
     "text": "Notes\n\n2020 CODE@MIT Experimentation platforms\n\nGaussian processes\nMulti touch attributions\nHeterogenous treatment effect\nInteraction effects\nOverlapping experiments\nWhat are potential over evaluation criteria ?\nWhat are good guardrail metrics ?\nrun A/A tests.\n\nCanary Deploys by using Experimentation platform to tell when you break guard rail metrics"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Arjun Srivastava",
+    "objectID": "posts/game-of-thrones-quiz/index.html",
+    "href": "posts/game-of-thrones-quiz/index.html",
+    "title": "Game Of Thrones quiz",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nExperimentation Platforms\n\n\n\n\n\n\nExperimentation\n\n\n\nAn Overview of Experimentation Platforms.\n\n\n\n\n\nMar 21, 2021\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nCourse Schedule Generator\n\n\n\n\n\n\nIIT Indore\n\n\n\nA website which adds courses to your personal calendar, for students of IIT Indore.\n\n\n\n\n\nJan 8, 2020\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nHarry Potter quiz\n\n\n\n\n\n\nIIT Indore\n\n\nQuiz\n\n\n\nHarry Potter Quiz created by me Bitan and Keyur\n\n\n\n\n\nAug 26, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nThe state of reading in 2018 and beyond.\n\n\n\n\n\n\nFuture\n\n\n\n\n\n\n\n\n\nAug 5, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nFriend Or Foe\n\n\n\n\n\n\nAI\n\n\nProjects\n\n\n\nAn interactive game inspired by the paper “AI Safety Grid Worlds”\n\n\n\n\n\nJul 28, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nInfant Mortality In India\n\n\n\n\n\n\nAnalysis\n\n\n\nAn analysis of infant mortality rates across India.\n\n\n\n\n\nJun 15, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nJargonizer\n\n\n\n\n\n\nProjects\n\n\n\nGenerate sentences that nobody can read.\n\n\n\n\n\nJun 12, 2018\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nMulti Armed Bandits\n\n\n\n\n\n\nAI\n\n\n\nor how to balance exploration and exploitation more formally\n\n\n\n\n\nNov 12, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nLearning Machine Learning\n\n\n\n\n\n\nAI\n\n\n\n\n\n\n\n\n\nNov 12, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nGame Of Thrones quiz\n\n\n\n\n\n\nIIT Indore\n\n\nQuiz\n\n\n\nA game of thrones quiz made for cultural week.\n\n\n\n\n\nSep 4, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nNewbie quiz\n\n\n\n\n\n\nIIT Indore\n\n\nQuiz\n\n\n\nA quiz to introduce first timers to quizzing.\n\n\n\n\n\nAug 20, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\n\n\n\n\n\n\nMental Health Checklists\n\n\n\n\n\n\nProjects\n\n\n\nA website which allows quick tracking of mental health.\n\n\n\n\n\nJan 8, 2017\n\n\nArjun Srivastava\n\n\n\n\n\n\nNo matching items"
+    "text": "Consists of three rounds, first round acts as elimination, followed by two rounds of interactive play."
+  },
+  {
+    "objectID": "posts/game-of-thrones-quiz/index.html#first-round",
+    "href": "posts/game-of-thrones-quiz/index.html#first-round",
+    "title": "Game Of Thrones quiz",
+    "section": "First round",
+    "text": "First round\nQuestions\nAnswers"
+  },
+  {
+    "objectID": "posts/game-of-thrones-quiz/index.html#second-round",
+    "href": "posts/game-of-thrones-quiz/index.html#second-round",
+    "title": "Game Of Thrones quiz",
+    "section": "Second round",
+    "text": "Second round\nSlides\nvideo for question 1\nmusic for question 2\nvideo for question 3"
+  },
+  {
+    "objectID": "posts/game-of-thrones-quiz/index.html#third-round",
+    "href": "posts/game-of-thrones-quiz/index.html#third-round",
+    "title": "Game Of Thrones quiz",
+    "section": "Third round",
+    "text": "Third round\nConnect"
   }
 ]

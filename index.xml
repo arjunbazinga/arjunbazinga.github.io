@@ -10,7 +10,7 @@
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.554</generator>
-<lastBuildDate>Sat, 20 Mar 2021 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 21 Mar 2021 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Experimentation Platforms</title>
   <dc:creator>Arjun Srivastava</dc:creator>
@@ -201,7 +201,7 @@ Srivastava, Arjun. 2021. <span>“Experimentation Platforms.”</span> March
 </div></div></section></div> ]]></description>
   <category>Experimentation</category>
   <guid>https://www.arjunsriva.com/posts/exerimentations-platforms/</guid>
-  <pubDate>Sat, 20 Mar 2021 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 21 Mar 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Course Schedule Generator</title>
@@ -232,7 +232,7 @@ January 8, 2020. <a href="https://www.arjunsriva.com/posts/course-schedule-gener
 </div></div></section></div> ]]></description>
   <category>IIT Indore</category>
   <guid>https://www.arjunsriva.com/posts/course-schedule-generator/</guid>
-  <pubDate>Tue, 07 Jan 2020 15:00:00 GMT</pubDate>
+  <pubDate>Wed, 08 Jan 2020 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Harry Potter quiz</title>
@@ -271,7 +271,7 @@ Srivastava, Arjun. 2018. <span>“Harry Potter Quiz.”</span> August 26,
   <category>IIT Indore</category>
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/harry-potter-quiz/</guid>
-  <pubDate>Sat, 25 Aug 2018 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 26 Aug 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The state of reading in 2018 and beyond.</title>
@@ -308,7 +308,7 @@ Beyond.”</span> August 5, 2018. <a href="https://www.arjunsriva.com/posts/stat
 </div></div></section></div> ]]></description>
   <category>Future</category>
   <guid>https://www.arjunsriva.com/posts/state-of-reading/</guid>
-  <pubDate>Sat, 04 Aug 2018 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 05 Aug 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Friend Or Foe</title>
@@ -337,7 +337,7 @@ Srivastava, Arjun. 2018. <span>“Friend Or Foe.”</span> July 28, 2018. <a hre
   <category>AI</category>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/friend-or-foe/</guid>
-  <pubDate>Fri, 27 Jul 2018 15:00:00 GMT</pubDate>
+  <pubDate>Sat, 28 Jul 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Infant Mortality In India</title>
@@ -366,7 +366,7 @@ Srivastava, Arjun. 2018. <span>“Infant Mortality In India.”</span> June
 </div></div></section></div> ]]></description>
   <category>Analysis</category>
   <guid>https://www.arjunsriva.com/posts/infant-mortality/</guid>
-  <pubDate>Thu, 14 Jun 2018 15:00:00 GMT</pubDate>
+  <pubDate>Fri, 15 Jun 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Jargonizer</title>
@@ -378,12 +378,19 @@ Srivastava, Arjun. 2018. <span>“Infant Mortality In India.”</span> June
 
 
 
-<p>This was a fun project, the goal was to create a website which lets you complicate your sentences, there are plenty of websites online trying to simplify but none that go the other way.</p>
-<p>play with it <a href="https://arjunbazinga.github.io/jargonizer">here</a></p>
+<p>What if instead of aiming for clarity and conciesness, our goal was to make our sentences as unweildy and hard to understand as possible?</p>
+<p>A simple way to do this is to replace easy to understand phrases with harder ones. Wikipedia <a href="https://web.archive.org/web/20190622035102/https://en.wikipedia.org/wiki/List_of_plain_English_words_and_phrases">maintains</a><sup>1</sup> one such list for us. <a href="https://arjunbazinga.github.io/jargonizer">Here is the website</a> I made so you can play with it online as well, it all runs in your browser, no text is sent to a server.</p>
+<p>Reading at the output generated from this, I can’t help but feel like I am reading a legal document.</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Used to 🥲↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
   author = {Srivastava, Arjun},
   title = {Jargonizer},
   date = {2018-06-12},
@@ -395,7 +402,53 @@ Srivastava, Arjun. 2018. <span>“Jargonizer.”</span> June 12, 2018. <a href="
 </div></div></section></div> ]]></description>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/jargonizer/</guid>
-  <pubDate>Mon, 11 Jun 2018 15:00:00 GMT</pubDate>
+  <pubDate>Tue, 12 Jun 2018 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Learning Machine Learning</title>
+  <dc:creator>Arjun Srivastava</dc:creator>
+  <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This post will talk about how I’m going about learning machine learning.</p>
+<p>Mostly online content.</p>
+<section id="podcasts" class="level3">
+<h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
+<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:<br>
+* <a href="http://partiallyderivative.com">Partially Derivative</a> * <a href="http://lineardigressions.com/">Linear Digressions</a> * <a href="http://dataskeptic.com">Data Skeptic</a></p>
+<p>Some that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines</p>
+</section>
+<section id="online-courses" class="level3">
+<h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
+<p>A few awesome courses.</p>
+<ul>
+<li><p><a href="http://coursera.org/learn/machine-learning">Andrew Ng Coursera</a><br>
+A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
+<li><p><a href="http://fast.ai">Fast.ai</a><br>
+A course which aims to teach by coding, and takes a top down approach.</p></li>
+</ul>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
+  author = {Srivastava, Arjun},
+  title = {Learning {Machine} {Learning}},
+  date = {2017-11-12},
+  url = {https://www.arjunsriva.com/posts/learning-machine-learning},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
+Srivastava, Arjun. 2017. <span>“Learning Machine Learning.”</span>
+November 12, 2017. <a href="https://www.arjunsriva.com/posts/learning-machine-learning">https://www.arjunsriva.com/posts/learning-machine-learning</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
+  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Multi Armed Bandits</title>
@@ -1690,53 +1743,7 @@ Srivastava, Arjun. 2017. <span>“Multi Armed Bandits.”</span> November
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <guid>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</guid>
-  <pubDate>Sat, 11 Nov 2017 15:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Learning Machine Learning</title>
-  <dc:creator>Arjun Srivastava</dc:creator>
-  <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This post will talk about how I’m going about learning machine learning.</p>
-<p>Mostly online content.</p>
-<section id="podcasts" class="level3">
-<h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
-<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:<br>
-* <a href="http://partiallyderivative.com">Partially Derivative</a> * <a href="http://lineardigressions.com/">Linear Digressions</a> * <a href="http://dataskeptic.com">Data Skeptic</a></p>
-<p>Some that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines</p>
-</section>
-<section id="online-courses" class="level3">
-<h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
-<p>A few awesome courses.</p>
-<ul>
-<li><p><a href="http://coursera.org/learn/machine-learning">Andrew Ng Coursera</a><br>
-A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
-<li><p><a href="http://fast.ai">Fast.ai</a><br>
-A course which aims to teach by coding, and takes a top down approach.</p></li>
-</ul>
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
-  author = {Srivastava, Arjun},
-  title = {Learning {Machine} {Learning}},
-  date = {2017-11-12},
-  url = {https://www.arjunsriva.com/posts/learning-machine-learning},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2017. <span>“Learning Machine Learning.”</span>
-November 12, 2017. <a href="https://www.arjunsriva.com/posts/learning-machine-learning">https://www.arjunsriva.com/posts/learning-machine-learning</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
-  <pubDate>Sat, 11 Nov 2017 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Game Of Thrones quiz</title>
@@ -1782,7 +1789,7 @@ Srivastava, Arjun. 2017. <span>“Game Of Thrones Quiz.”</span> September
   <category>IIT Indore</category>
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/game-of-thrones-quiz/</guid>
-  <pubDate>Sun, 03 Sep 2017 15:00:00 GMT</pubDate>
+  <pubDate>Mon, 04 Sep 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Newbie quiz</title>
@@ -1820,7 +1827,7 @@ Srivastava, Arjun. 2017. <span>“Newbie Quiz.”</span> August 20, 2017. <a hre
   <category>IIT Indore</category>
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/newbie-quiz/</guid>
-  <pubDate>Sat, 19 Aug 2017 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 20 Aug 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Mental Health Checklists</title>
@@ -1853,7 +1860,7 @@ January 8, 2017. <a href="https://www.arjunsriva.com/posts/mental-health-checkli
 </div></div></section></div> ]]></description>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/mental-health-checklist/</guid>
-  <pubDate>Sat, 07 Jan 2017 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 08 Jan 2017 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
