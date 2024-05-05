@@ -1,0 +1,19 @@
+---
+title: Harry Potter quiz
+layout: post
+description: Harry Potter Quiz created by me Bitan and Keyur
+categories: [IIT Indore,Quiz]
+date: "2018-08-26"
+---
+
+### Questions
+
+Get the [questions.](./Questions.pdf)
+
+Get the [video for question number 14](https://youtu.be/gskB-IyGD6I)
+
+Get the [ Music for question number 20](./music.mp3)
+
+### Answers
+
+Get the [answers.](./PotterMania-Answers.pdf)

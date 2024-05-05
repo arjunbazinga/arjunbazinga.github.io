@@ -1,0 +1,11 @@
+---
+title: Friend Or Foe
+layout: post
+categories: [AI, Projects]
+description : An interactive game inspired by the paper "AI Safety Grid Worlds"
+date: "2018-07-28"
+---
+
+This is a mini interactive "game", I made inspired by the paper 
+[AI Safety Grid Worlds](https://arxiv.org/abs/1711.09883),
+without giving too much away, I urge you to [play](https://arjunsriva.com/fof).

@@ -1,0 +1,50 @@
+---
+title: "About"
+image: profile.jpeg
+
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/arjunsriv
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/arjunsriva
+    - icon: github
+      text: Github
+      href: https://github.com/arjunbazinga
+    - icon: youtube
+      text: YouTube
+      href: https://www.youtube.com/arjunbazinga
+
+
+
+---
+
+Hi! I'm Arjun,
+
+I currently work at [BookMyShow](https://bookmyshow.com) on Discovery. Previously I built Proof of Stake blockchains at Zebi. I got my bachelors in Computer Science from  IIT Indore.  
+
+
+I'm interested in Experimentation platforms, Reccomendation Systems, and Market Design.
+I love to read, and three books that I reccomend most often are [Dataclysm](https://www.arjunsriva.com/library/book_0/book_698.html), [7 Powers](https://www.arjunsriva.com/library/book_1/book_1030.html), and [Model Thinker](https://www.arjunsriva.com/library/book_0/book_699.html).  
+I also love Biryani and Skateboarding. 
+Some of my other interests are:
+
+- Computer Science
+  - Machine learning
+  - Reinforcement learning
+  - Distributed Systems
+    - CRDTS
+    - Local First Software
+  - Program Synthesis
+  - Language Design
+  - Software Engineering
+- Startups
+  - SAAS
+  - Fundamental Investing
+- Finance
+  - Market design
+  - Options
+- Mental Models

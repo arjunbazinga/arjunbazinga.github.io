@@ -1,0 +1,45 @@
+project:
+  type: website
+  preview:
+    port: 4200
+    browser: false
+
+website:
+  title: "Arjun Srivastava"
+  site-url: https://www.arjunsriva.com
+  navbar:
+    right:
+      - about.qmd
+      - text: Library
+        href: https://arjunsriva.com/library
+      - icon: twitter
+        href: https://twitter.com/arjunsriv
+      # - icon: github
+      #   href: https://github.com/arjunbazinga
+      # - icon: linkedin
+      #   href: https://www.linkedin.com/in/arjunsriva
+      - icon: rss
+        href: index.xml
+  favicon: favicon.ico
+  twitter-card: true
+  open-graph: true
+  google-analytics: "UA-101184475-1"
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    
+
+
+
+# TODO: comments https://giscus.app/
+# comments:
+#   giscus: 
+#     repo: arjunbazinga/arjunbazinga.github.io
+#     repo-id: R_kgDOIBWk3A
+#     category: Announcements
+#     category-id: DIC_kwDOIBWk3M4CSSa6
+#     mapping: pathname
+#     loading: lazy
+#     input-position: top
