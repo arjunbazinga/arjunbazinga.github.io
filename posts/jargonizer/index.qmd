@@ -5,7 +5,10 @@ categories: [ Projects ]
 permalink: jargonizer-website
 description: Generate sentences that nobody can read.
 date: "2018-06-12"
+image: jargonizer.webp
 ---
+
+![Jargonizer](jargonizer.webp)
 
 What if instead of aiming for clarity and conciesness, our goal was to make our sentences as unweildy and hard to understand as possible? 
 
