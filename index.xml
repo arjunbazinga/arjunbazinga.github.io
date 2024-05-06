@@ -192,6 +192,7 @@
   <category>Experimentation</category>
   <guid>https://www.arjunsriva.com/posts/exerimentations-platforms/</guid>
   <pubDate>Sun, 21 Mar 2021 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/exerimentations-platforms/experimentation.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Course Schedule Generator</title>
@@ -1788,6 +1789,46 @@ It is broken into 3 seperate rounds</p>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/mental-health-checklist/</guid>
   <pubDate>Sun, 08 Jan 2017 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>About this website</title>
+  <dc:creator>Arjun Srivastava</dc:creator>
+  <link>https://www.arjunsriva.com/posts/about-this-website/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This post is a bit of a meta post about arjunsriva.com</p>
+<p>A lot of my thinking on personal websites has been influenced by other great websites like Gwern’s, please <a href="https://gwern.net/about">read this</a> if you’re interested in it.</p>
+<p>My goals for this websites are:</p>
+<ul>
+<li>To share things I learned that I personally found useful</li>
+<li>To provide a playground for me to flesh out rough ideas and speculate.</li>
+<li>To help me increase the clarity of my thinking by the act of writing something out.</li>
+</ul>
+<p>on the implementation side my goals are</p>
+<ul>
+<li>Make it easy for me to never lose data
+<ul>
+<li>most writing is stored as simple text files, version controlled by git</li>
+</ul></li>
+<li>Make it easy to mix code and prose to explain certain concepts</li>
+</ul>
+<p>Some things that I plan on implementing later as I write more are:</p>
+<ul>
+<li>Automatic link archiving to prevent link rot</li>
+<li>Confidence tags to show how certain I am of different things</li>
+<li>Better sections / tagging to differentiate different kinds of posts, eg. reading list and notes</li>
+</ul>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Meta</category>
+  <guid>https://www.arjunsriva.com/posts/about-this-website/</guid>
+  <pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
