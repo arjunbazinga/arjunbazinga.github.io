@@ -188,17 +188,7 @@
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2021,
-  author = {Srivastava, Arjun},
-  title = {Experimentation {Platforms}},
-  date = {2021-03-21},
-  url = {https://www.arjunsriva.com/posts/exerimentations-platforms},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2021" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2021. <span>“Experimentation Platforms.”</span> March
-21, 2021. <a href="https://www.arjunsriva.com/posts/exerimentations-platforms">https://www.arjunsriva.com/posts/exerimentations-platforms</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Experimentation</category>
   <guid>https://www.arjunsriva.com/posts/exerimentations-platforms/</guid>
   <pubDate>Sun, 21 Mar 2021 00:00:00 GMT</pubDate>
@@ -219,17 +209,7 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2020,
-  author = {Srivastava, Arjun},
-  title = {Course {Schedule} {Generator}},
-  date = {2020-01-08},
-  url = {https://www.arjunsriva.com/posts/course-schedule-generator},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2020" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2020. <span>“Course Schedule Generator.”</span>
-January 8, 2020. <a href="https://www.arjunsriva.com/posts/course-schedule-generator">https://www.arjunsriva.com/posts/course-schedule-generator</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>IIT Indore</category>
   <guid>https://www.arjunsriva.com/posts/course-schedule-generator/</guid>
   <pubDate>Wed, 08 Jan 2020 00:00:00 GMT</pubDate>
@@ -244,6 +224,13 @@ January 8, 2020. <a href="https://www.arjunsriva.com/posts/course-schedule-gener
 
 
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" class="img-fluid figure-img"></p>
+<figcaption>Pottermania 2018</figcaption>
+</figure>
+</div>
+<p>The goal of the is to be something easy that anybody with little experience in quizzing can take part in. created with Bitan, and Keyur as part of Quiz club.</p>
 <section id="questions" class="level3">
 <h3 class="anchored" data-anchor-id="questions">Questions</h3>
 <p>Get the <a href="./Questions.pdf">questions.</a></p>
@@ -257,21 +244,12 @@ January 8, 2020. <a href="https://www.arjunsriva.com/posts/course-schedule-gener
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
-  author = {Srivastava, Arjun},
-  title = {Harry {Potter} Quiz},
-  date = {2018-08-26},
-  url = {https://www.arjunsriva.com/posts/harry-potter-quiz},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2018" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2018. <span>“Harry Potter Quiz.”</span> August 26,
-2018. <a href="https://www.arjunsriva.com/posts/harry-potter-quiz">https://www.arjunsriva.com/posts/harry-potter-quiz</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>IIT Indore</category>
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/harry-potter-quiz/</guid>
   <pubDate>Sun, 26 Aug 2018 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>The state of reading in 2018 and beyond.</title>
@@ -295,17 +273,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
-  author = {Srivastava, Arjun},
-  title = {The State of Reading in 2018 and Beyond.},
-  date = {2018-08-05},
-  url = {https://www.arjunsriva.com/posts/state-of-reading},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2018" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2018. <span>“The State of Reading in 2018 and
-Beyond.”</span> August 5, 2018. <a href="https://www.arjunsriva.com/posts/state-of-reading">https://www.arjunsriva.com/posts/state-of-reading</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Future</category>
   <guid>https://www.arjunsriva.com/posts/state-of-reading/</guid>
   <pubDate>Sun, 05 Aug 2018 00:00:00 GMT</pubDate>
@@ -320,24 +288,23 @@ Beyond.”</span> August 5, 2018. <a href="https://www.arjunsriva.com/posts/stat
 
 
 
-<p>This is a mini interactive “game”, I made inspired by the paper <a href="https://arxiv.org/abs/1711.09883">AI Safety Grid Worlds</a>, without giving too much away, I urge you to <a href="https://arjunsriva.com/fof">play</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" class="img-fluid figure-img"></p>
+<figcaption>Co-opeartive and Adversarial Environments</figcaption>
+</figure>
+</div>
+<p>This is a mini interactive “game”, I made inspired by the paper, without giving too much away, I urge you to <a href="https://arjunsriva.com/fof">play</a>.</p>
+<p><a href="https://arxiv.org/abs/1711.09883">AI Safety Grid Worlds</a>,</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
-  author = {Srivastava, Arjun},
-  title = {Friend {Or} {Foe}},
-  date = {2018-07-28},
-  url = {https://www.arjunsriva.com/posts/friend-or-foe},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2018" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2018. <span>“Friend Or Foe.”</span> July 28, 2018. <a href="https://www.arjunsriva.com/posts/friend-or-foe">https://www.arjunsriva.com/posts/friend-or-foe</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>AI</category>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/friend-or-foe/</guid>
   <pubDate>Sat, 28 Jul 2018 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Infant Mortality In India</title>
@@ -353,17 +320,7 @@ Srivastava, Arjun. 2018. <span>“Friend Or Foe.”</span> July 28, 2018. <a hre
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
-  author = {Srivastava, Arjun},
-  title = {Infant {Mortality} {In} {India}},
-  date = {2018-06-15},
-  url = {https://www.arjunsriva.com/posts/infant-mortality},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2018" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2018. <span>“Infant Mortality In India.”</span> June
-15, 2018. <a href="https://www.arjunsriva.com/posts/infant-mortality">https://www.arjunsriva.com/posts/infant-mortality</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Analysis</category>
   <guid>https://www.arjunsriva.com/posts/infant-mortality/</guid>
   <pubDate>Fri, 15 Jun 2018 00:00:00 GMT</pubDate>
@@ -378,6 +335,12 @@ Srivastava, Arjun. 2018. <span>“Infant Mortality In India.”</span> June
 
 
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" class="img-fluid figure-img"></p>
+<figcaption>Jargonizer</figcaption>
+</figure>
+</div>
 <p>What if instead of aiming for clarity and conciesness, our goal was to make our sentences as unweildy and hard to understand as possible?</p>
 <p>A simple way to do this is to replace easy to understand phrases with harder ones. Wikipedia <a href="https://web.archive.org/web/20190622035102/https://en.wikipedia.org/wiki/List_of_plain_English_words_and_phrases">maintains</a><sup>1</sup> one such list for us. <a href="https://arjunbazinga.github.io/jargonizer">Here is the website</a> I made so you can play with it online as well, it all runs in your browser, no text is sent to a server.</p>
 <p>Reading at the output generated from this, I can’t help but feel like I am reading a legal document.</p>
@@ -390,19 +353,11 @@ Srivastava, Arjun. 2018. <span>“Infant Mortality In India.”</span> June
 <ol>
 <li id="fn1"><p>Used to 🥲↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2018,
-  author = {Srivastava, Arjun},
-  title = {Jargonizer},
-  date = {2018-06-12},
-  url = {https://www.arjunsriva.com/posts/jargonizer},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2018" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2018. <span>“Jargonizer.”</span> June 12, 2018. <a href="https://www.arjunsriva.com/posts/jargonizer">https://www.arjunsriva.com/posts/jargonizer</a>.
-</div></div></section></div> ]]></description>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/jargonizer/</guid>
   <pubDate>Tue, 12 Jun 2018 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Learning Machine Learning</title>
@@ -435,17 +390,7 @@ A course which aims to teach by coding, and takes a top down approach.</p></li>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
-  author = {Srivastava, Arjun},
-  title = {Learning {Machine} {Learning}},
-  date = {2017-11-12},
-  url = {https://www.arjunsriva.com/posts/learning-machine-learning},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2017. <span>“Learning Machine Learning.”</span>
-November 12, 2017. <a href="https://www.arjunsriva.com/posts/learning-machine-learning">https://www.arjunsriva.com/posts/learning-machine-learning</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>AI</category>
   <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
   <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
@@ -1730,20 +1675,11 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
-  author = {Srivastava, Arjun},
-  title = {Multi {Armed} {Bandits}},
-  date = {2017-11-12},
-  url = {https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2017. <span>“Multi Armed Bandits.”</span> November
-12, 2017. <a href="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html">https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>AI</category>
   <guid>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</guid>
   <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/multi-armed-bandits/MultiArmedBandits.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Game Of Thrones quiz</title>
@@ -1755,7 +1691,19 @@ Srivastava, Arjun. 2017. <span>“Multi Armed Bandits.”</span> November
 
 
 
-<p>Consists of three rounds, first round acts as elimination, followed by two rounds of interactive play.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/game-of-thrones-quiz/gameofthronesquiz.jpg" class="img-fluid figure-img"></p>
+<figcaption>Game Of Thrones Quiz</figcaption>
+</figure>
+</div>
+<p>This quiz was created as part of cultural week, right as Game of Thrones season 7 ended.<br>
+It is broken into 3 seperate rounds</p>
+<ol type="1">
+<li>first round, acts as elimination to reduce the number of teams that play.</li>
+<li>second round where each team sees one question at a time and can write their answers, and the quiz master checks if they got it right and awards +1 for correct answers. the correct answer is revealed after each question.</li>
+<li>third round consists of Connect questions, where for each question a series of hints are given, with the total points awarded for correct points reducing as the number of hints increase.</li>
+</ol>
 <section id="first-round" class="level2">
 <h2 class="anchored" data-anchor-id="first-round">First round</h2>
 <p><a href="./prelims.pdf">Questions</a><br>
@@ -1775,21 +1723,12 @@ Srivastava, Arjun. 2017. <span>“Multi Armed Bandits.”</span> November
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
-  author = {Srivastava, Arjun},
-  title = {Game {Of} {Thrones} Quiz},
-  date = {2017-09-04},
-  url = {https://www.arjunsriva.com/posts/game-of-thrones-quiz},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2017. <span>“Game Of Thrones Quiz.”</span> September
-4, 2017. <a href="https://www.arjunsriva.com/posts/game-of-thrones-quiz">https://www.arjunsriva.com/posts/game-of-thrones-quiz</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>IIT Indore</category>
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/game-of-thrones-quiz/</guid>
   <pubDate>Mon, 04 Sep 2017 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/game-of-thrones-quiz/gameofthronesquiz.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Newbie quiz</title>
@@ -1801,8 +1740,14 @@ Srivastava, Arjun. 2017. <span>“Game Of Thrones Quiz.”</span> September
 
 
 
-<p>This was the first quiz conducted by the quiz club this year.</p>
-<p>Indraneel and I had prepared this quiz as a way of introducting quizzing to new people and narrowing down potential recruits. Lots of fun!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/newbie-quiz/newbiequiz.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Newbie Quiz</figcaption>
+</figure>
+</div>
+<p>Indraneel and I had prepared this quiz as a way of introducting quizzing to new people and narrowing down potential recruits. The quiz covers a broad range of topics, from pop culture, sports, technology, politics</p>
+<p>Lots of fun!</p>
 <section id="questions" class="level3">
 <h3 class="anchored" data-anchor-id="questions">Questions</h3>
 <p>Get the <a href="./Questions.pdf">questions.</a></p>
@@ -1814,20 +1759,12 @@ Srivastava, Arjun. 2017. <span>“Game Of Thrones Quiz.”</span> September
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
-  author = {Srivastava, Arjun},
-  title = {Newbie Quiz},
-  date = {2017-08-20},
-  url = {https://www.arjunsriva.com/posts/newbie-quiz},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2017. <span>“Newbie Quiz.”</span> August 20, 2017. <a href="https://www.arjunsriva.com/posts/newbie-quiz">https://www.arjunsriva.com/posts/newbie-quiz</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>IIT Indore</category>
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/newbie-quiz/</guid>
   <pubDate>Sun, 20 Aug 2017 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/newbie-quiz/newbiequiz.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Mental Health Checklists</title>
@@ -1847,17 +1784,7 @@ Srivastava, Arjun. 2017. <span>“Newbie Quiz.”</span> August 20, 2017. <a hre
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{srivastava2017,
-  author = {Srivastava, Arjun},
-  title = {Mental {Health} {Checklists}},
-  date = {2017-01-08},
-  url = {https://www.arjunsriva.com/posts/mental-health-checklist},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-srivastava2017" class="csl-entry quarto-appendix-citeas">
-Srivastava, Arjun. 2017. <span>“Mental Health Checklists.”</span>
-January 8, 2017. <a href="https://www.arjunsriva.com/posts/mental-health-checklist">https://www.arjunsriva.com/posts/mental-health-checklist</a>.
-</div></div></section></div> ]]></description>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/mental-health-checklist/</guid>
   <pubDate>Sun, 08 Jan 2017 00:00:00 GMT</pubDate>
