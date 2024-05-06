@@ -1,10 +1,17 @@
 ---
 title: Harry Potter quiz
 layout: post
-description: Harry Potter Quiz created by me Bitan and Keyur
+description: A beginner friendly quiz on the wizarding world
 categories: [IIT Indore,Quiz]
 date: "2018-08-26"
+image: pottermania.jpg
 ---
+
+![Pottermania 2018](./pottermania.jpg)
+
+
+The goal of the is to be something easy that anybody with little experience in quizzing can take part in. 
+created with Bitan, and Keyur as part of Quiz club.
 
 ### Questions
 
