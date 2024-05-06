@@ -1,13 +1,20 @@
 ---
 title: Game Of Thrones quiz
 layout: post
-description: A game of thrones quiz made for cultural week.
+description: A quiz made for cultural week
 categories: [ IIT Indore, Quiz]
 date: "2017-09-04"
+image: gameofthronesquiz.jpg
 ---
 
+![Game Of Thrones Quiz](./gameofthronesquiz.jpg)
 
-Consists of three rounds, first round acts as elimination, followed by two rounds of interactive play.  
+This quiz was created as part of cultural week, right as Game of Thrones season 7 ended.  
+It is broken into 3 seperate rounds
+
+1. first round, acts as elimination to reduce the number of teams that play. 
+2. second round where each team sees one question at a time and can write their answers, and the quiz master checks if they got it right and awards +1 for correct answers. the correct answer is revealed after each question.
+3. third round consists of Connect questions, where for each question a series of hints are given, with the total points awarded for correct points reducing as the number of hints increase.
 
 
 ## First round
