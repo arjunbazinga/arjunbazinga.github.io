@@ -79,21 +79,21 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "Hi! I’m Arjun,",
+    "title": "About",
     "section": "",
-    "text": "An engineer and researcher currently working at Woven By Toyota. My key focus areas are machine learning, data infrastructure, and personalization systems."
+    "text": "An engineer and researcher currently working at Woven By Toyota. My key focus areas are personalization systems, data infrastructure, and machine learning."
   },
   {
     "objectID": "about.html#woven-by-toyota",
     "href": "about.html#woven-by-toyota",
-    "title": "Hi! I’m Arjun,",
+    "title": "About",
     "section": "Woven By Toyota",
-    "text": "Woven By Toyota\nAt Woven, I lead multiple projects in data infrastructure, for storage (operational stores, datawarehouse) and processing (ETL pipelines, scheduling, collaborative workspaces). I also developed machine learning systems for things like adaptive assessments, course recommendation systems as one of the founding engineers of MS1, a startup(ish) focused on talent management."
+    "text": "Woven By Toyota\nAt Woven, I lead multiple projects in data infrastructure, for storage (operational stores, data warehouse) and processing (ETL pipelines, scheduling, collaborative workspaces). I also developed machine learning systems for things like adaptive assessments, and course recommendation systems as one of the founding engineers of MS1, a startup(ish) focused on talent management."
   },
   {
     "objectID": "about.html#bookmyshow",
     "href": "about.html#bookmyshow",
-    "title": "Hi! I’m Arjun,",
+    "title": "About",
     "section": "BookMyShow",
     "text": "BookMyShow\nPreviously, at BookMyShow, I worked on the development of real-time data pipelines for discovery and personalization systems, helping millions of users find entertainment experiences."
   },
