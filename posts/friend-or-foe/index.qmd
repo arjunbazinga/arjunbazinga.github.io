@@ -4,8 +4,15 @@ layout: post
 categories: [AI, Projects]
 description : An interactive game inspired by the paper "AI Safety Grid Worlds"
 date: "2018-07-28"
+image: environment.jpg
 ---
 
-This is a mini interactive "game", I made inspired by the paper 
+![Co-opeartive and Adversarial Environments](environment.jpg)
+
+This is a mini interactive "game", I made inspired by the paper, without giving too much away, I urge you to [play](https://arjunsriva.com/fof).
+
+
+
 [AI Safety Grid Worlds](https://arxiv.org/abs/1711.09883),
-without giving too much away, I urge you to [play](https://arjunsriva.com/fof).
+
+
