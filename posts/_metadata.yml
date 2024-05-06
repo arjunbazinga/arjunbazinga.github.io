@@ -8,8 +8,6 @@ freeze: true
 title-block-banner: true
 
 
-# Enable CC licence appendix
-license: "CC BY"
 
 # Default for table of contents
 toc: true
@@ -28,5 +26,10 @@ author:
     url: https://arjunsriva.com
     orcid: 0000-0003-4303-9098
 
+
+
+# Enable CC licence appendix
+license: "CC BY"
+
 # Default fields for citation
-citation: true
+citation: false

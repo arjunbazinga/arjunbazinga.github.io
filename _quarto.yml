@@ -2,7 +2,7 @@ project:
   type: website
   preview:
     port: 4200
-    browser: false
+    browser: true
 
 website:
   title: "Arjun Srivastava"
