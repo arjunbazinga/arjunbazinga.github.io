@@ -1,6 +1,7 @@
 ---
-title: "Hi! I'm Arjun,"
+title: "About"
 image: profile.jpeg
+
 
 about:
   template: marquee
@@ -22,15 +23,16 @@ about:
 
 ---
 
+# Hi! I'm Arjun,
 
-An engineer and researcher currently working at [Woven By Toyota](https://woven.toyota/en/). My key focus areas are machine learning, data infrastructure, and personalization systems.
+An engineer and researcher currently working at [Woven By Toyota](https://woven.toyota/en/). My key focus areas are personalization systems, data infrastructure, and machine learning.
 
 
-# Professional Experience
+# Experience
 
 ## Woven By Toyota
-At [Woven](https://woven.toyota/en/), I lead multiple projects in data infrastructure, for storage (operational stores, datawarehouse) and processing (ETL pipelines, scheduling, collaborative workspaces). 
-I also developed machine learning systems for things like [adaptive assessments](https://en.wikipedia.org/wiki/Item_response_theory), course recommendation systems as one of the founding engineers of [MS1](www.ms1.com), a startup(ish) focused on talent management.
+At [Woven](https://woven.toyota/en/), I lead multiple projects in data infrastructure, for storage (operational stores, data warehouse) and processing (ETL pipelines, scheduling, collaborative workspaces). 
+I also developed machine learning systems for things like [adaptive assessments](https://en.wikipedia.org/wiki/Item_response_theory), and course recommendation systems as one of the founding engineers of MS1, a startup(ish) focused on talent management.
 
 ## BookMyShow
 Previously, at [BookMyShow](https://bookmyshow.com), I worked on the development of real-time data pipelines for discovery and personalization systems, helping millions of users find entertainment experiences.
@@ -40,29 +42,32 @@ Previously, at [BookMyShow](https://bookmyshow.com), I worked on the development
 
 I did my undergrad in Computer Science from IIT Indore, which gave me a long-lasting curiosity in areas like:
 
-*  algorithms (that learn from their data)
-*  distributed systems (byzantine fault tolerant consensus algorithms, CRDTs) 
+*  algorithms (that [learn](https://learned.di.unipi.it/publication/learned-data-structures/learned-data-structures.pdf) from their data)
+*  distributed systems ([byzantine fault tolerant](https://pmg.csail.mit.edu/papers/osdi99.pdf) consensus algorithms, CRDTs) 
 *  language design (automatic performance optimization, program generation)
 
 
-# Influences and Beliefs
-Growing up, I discovered websites like MIT OpenCourseWare and the Linux Documentation Project, which opened up a world of knowledge and opportunity for me. This experience shaped my belief in the power of open access to knowledge and technology to transform lives.
+# Influences
+Growing up, I discovered websites like MIT OpenCourseWare and the Linux Documentation Project, which opened up a world of knowledge and opportunity. This experience shaped my belief in the power of open access to knowledge and technology to transform lives.
 
-I am a big fan of companies and people that are able to take a long term approach and deliver results.  Like [Toyota](https://en.wikipedia.org/wiki/The_Toyota_Way), with their focus on quality and respect for people, [Zerodha](https://zerodha.tech/blog/scaling-with-common-sense/), with their no-nonsense approach to building a longterm focused business, and [Charlie Munger](https://www.poorcharliesalmanack.com/)'s interdisciplinary thinking and his ability to draw on diverse mental models to make better decisions.
+I am a big fan of companies and people that have taken a long-term approach and delivered results. Companies like [Toyota](https://en.wikipedia.org/wiki/The_Toyota_Way), with their focus on quality and respect for people, [Zerodha](https://zerodha.tech/blog/scaling-with-common-sense/), with their no-nonsense approach to building a longterm focused business, and [Charlie Munger](https://www.poorcharliesalmanack.com/)'s interdisciplinary thinking and his ability to draw on diverse mental models to make better decisions.
 
 
-# Interests and Expertise
+# Interests
 
-I believe we are still in the early stages of algorithmic progress in deep learning systems and while we have been able to make useful models by scaling up, we are yet to discover far more compute and data-efficient algorithms.
-My current interests lie in the inference and training of large language models on smaller machines, interpretability, and in-context learning.
+I believe we are still in the early stages of algorithmic progress in deep learning systems.
+We have been able to make useful models by scaling up, we are yet to discover far more compute and data-efficient approaches.
+We are in the early phase of "[Simplicity does not precede complexity, but follows it](https://gwern.net/language#:~:text=Batuman2005-,Simplicity%20does%20not%20precede%20complexity%2C%20but%20follows%20it.,-Alan%20Perlis%2C%201982)" cycle, and we will soon see a wave of simpler more cost-effective and performant models.
 
-I'm also fascinated by marketplaces and mechanism design, influenced by books like "[Dataclysm](https://www.arjunsriva.com/library/book_0/book_698.html)" by Christian Rudder and "[Who Gets What--And Why](https://www.arjunsriva.com/library/book_1/book_1000.html)" by Alvin E. Roth I am interested in how we can leverage ML to create better marketplaces. (reputation systems, matching algorithms, spam detection, pricing algorithms, etc.)
+My current interests lie in the inference and training of large language models on smaller machines, mechanisitic-interpretability, and in-context learning.
 
-# Personal Interests
+I'm also fascinated by marketplaces and mechanism design, influenced by books like "[Dataclysm](https://www.arjunsriva.com/library/book_0/book_698.html)" by Christian Rudder and "[Who Gets What--And Why](https://www.arjunsriva.com/library/book_1/book_1000.html)" by Alvin E. Roth I am interested in how we can leverage ML to create better marketplaces (reputation systems, matching algorithms, spam detection, pricing algorithms).
 
-I love to read books to better understand our world, some books that I reccomend are  "[7 Powers](https://www.arjunsriva.com/library/book_1/book_1030.html)" by Hamilton Helmer and "[Model Thinker](https://www.arjunsriva.com/library/book_0/book_699.html)" by Scott E. Page.
+# Hobbies
 
-I'm also a big fan of biryani and enjoy skating and swimming.
+I love to read books, to better understand our world. Some books that I recommend are  "[7 Powers](https://www.arjunsriva.com/library/book_1/book_1030.html)" by Hamilton Helmer and "[Model Thinker](https://www.arjunsriva.com/library/book_0/book_699.html)" by Scott E. Page.
+
+I also love biryani, mexican food, and BBQ. and enjoy skating and swimming.
 
 
 # Let's Connect
