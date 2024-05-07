@@ -4,6 +4,23 @@ layout: post
 categories: [Analysis]
 description : An analysis of infant mortality rates across India.
 date: "2018-06-15"
+image: infantmortality.png
 ---
 
-read the analysis [here](https://arjunsriva.com/infantmortality).
+I thought about this after reading [Doing good better](https://www.amazon.com/Doing-Good-Better-Effective-Altruism/dp/1592409660) (highly recommend). 
+ 
+Soon after I found out about kepler.gl which made this the perfect project to test it out.
+
+I extracted the data I needed for my analysis from a PDF of an annual summary report by the Government of India, available [here](https://nrhm-mis.nic.in/Pages/RHS2017.aspx), as I couldn't find a comprehensive and user-friendly source.
+
+
+Read the analysis [here](https://arjunsriva.com/infantmortality).
+
+Here is the kepler.gl map I created for this analysis. You can interact with it [here](https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json).
+
+
+```{=html}
+<iframe src="https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="70%" width="100%" allowfullscreen></iframe>
+```
+
+
