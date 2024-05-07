@@ -7,17 +7,28 @@ date: "2018-06-15"
 image: infantmortality.png
 ---
 
-I thought about this after reading [Doing good better](https://www.amazon.com/Doing-Good-Better-Effective-Altruism/dp/1592409660) (highly recommend). 
+I thought about this after reading [Doing good better](https://www.arjunsriva.com/library/book_0/book_8.html). 
  
 Soon after I found out about kepler.gl which made this the perfect project to test it out.
 
 I extracted the data I needed for my analysis from a PDF of an annual summary report by the Government of India, available [here](https://nrhm-mis.nic.in/Pages/RHS2017.aspx), as I couldn't find a comprehensive and user-friendly source.
 
 
-Read the analysis [here](https://arjunsriva.com/infantmortality).
+You can read the analysis [here](https://arjunsriva.com/infantmortality).
 
-Here is the kepler.gl map I created for this analysis. You can interact with it [here](https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json).
 
+[Here](https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json) is the kepler.gl map I created for this analysis.
+
+It contains the following layers:
+
+* Total Lives Lost: The number of infants who died in each state. The height of each region is proportional to the number of lives lost, with redder regions having a higher infant mortality rate.
+* Total Population : The population of each state. The height of each region is proportional to the population, with bluer regions having a higher birth rate.
+* Total Lives Lost Rural: The same as Total Lives Lost, but only for rural areas in each state.
+* Total Lives Lost Urban: The same as Total Lives Lost, but only for urban areas in each state.
+
+Once the map loads you can click on the layers on the right to toggle them on and off. You can also click on the layers to see the data for each region.
+
+The json file for the map is available [here](kepler.gl.json).
 
 ```{=html}
 <iframe src="https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="70%" width="100%" allowfullscreen></iframe>
