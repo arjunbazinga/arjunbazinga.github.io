@@ -179,7 +179,7 @@
     "href": "posts/infant-mortality/index.html",
     "title": "Infant Mortality In India",
     "section": "",
-    "text": "read the analysis here.\n\n\n\nReuseCC BY 4.0"
+    "text": "I thought about this after reading Doing good better (highly recommend).\nSoon after I found out about kepler.gl which made this the perfect project to test it out.\nI extracted the data I needed for my analysis from a PDF of an annual summary report by the Government of India, available here, as I couldn’t find a comprehensive and user-friendly source.\nRead the analysis here.\nHere is the kepler.gl map I created for this analysis. You can interact with it here.\n\n\n\n\nReuseCC BY 4.0"
   },
   {
     "objectID": "posts/newbie-quiz/index.html",

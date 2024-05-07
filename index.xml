@@ -317,7 +317,12 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 
 
 
-<p>read the analysis <a href="https://arjunsriva.com/infantmortality">here</a>.</p>
+<p>I thought about this after reading <a href="https://www.amazon.com/Doing-Good-Better-Effective-Altruism/dp/1592409660">Doing good better</a> (highly recommend).</p>
+<p>Soon after I found out about kepler.gl which made this the perfect project to test it out.</p>
+<p>I extracted the data I needed for my analysis from a PDF of an annual summary report by the Government of India, available <a href="https://nrhm-mis.nic.in/Pages/RHS2017.aspx">here</a>, as I couldn’t find a comprehensive and user-friendly source.</p>
+<p>Read the analysis <a href="https://arjunsriva.com/infantmortality">here</a>.</p>
+<p>Here is the kepler.gl map I created for this analysis. You can interact with it <a href="https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json">here</a>.</p>
+<iframe src="https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="70%" width="100%" allowfullscreen=""></iframe>
 
 
 
@@ -325,6 +330,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <category>Analysis</category>
   <guid>https://www.arjunsriva.com/posts/infant-mortality/</guid>
   <pubDate>Fri, 15 Jun 2018 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/infant-mortality/infantmortality.png" medium="image" type="image/png" height="81" width="144"/>
 </item>
 <item>
   <title>Jargonizer</title>
