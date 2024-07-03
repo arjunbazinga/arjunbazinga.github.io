@@ -9,7 +9,7 @@
 <link>https://www.arjunsriva.com/</link>
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.554</generator>
+<generator>quarto-1.5.53</generator>
 <lastBuildDate>Sun, 21 Mar 2021 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Experimentation Platforms</title>
@@ -453,10 +453,12 @@ Y axis is it’s frequency.</p>
 <div id="cell-4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> Arm:</span>
 <span id="cb2-2"></span>
 <span id="cb2-3">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -472,8 +474,10 @@ background-color: null;
 font-style: inherit;">None</span>):</span>
 <span id="cb2-4">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> mu <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">is</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>:</span>
@@ -484,6 +488,7 @@ background-color: null;
 font-style: inherit;">=</span> np.absolute(np.random.uniform())</span>
 <span id="cb2-6">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>:</span>
 <span id="cb2-7">            <span class="va" style="color: #111111;
 background-color: null;
@@ -494,8 +499,10 @@ font-style: inherit;">=</span> mu</span>
 <span id="cb2-9">        </span>
 <span id="cb2-10">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> sigma <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">is</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>:</span>
@@ -506,6 +513,7 @@ background-color: null;
 font-style: inherit;">=</span>np.absolute(np.random.uniform())</span>
 <span id="cb2-12">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>:</span>
 <span id="cb2-13">            <span class="va" style="color: #111111;
 background-color: null;
@@ -516,6 +524,7 @@ font-style: inherit;">=</span> sigma</span>
 <span id="cb2-15"></span>
 <span id="cb2-16">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> pull(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
@@ -530,11 +539,13 @@ background-color: null;
 font-style: inherit;">1</span>)</span>
 <span id="cb2-18">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> reward</span>
 <span id="cb2-19"></span>
 <span id="cb2-20"></span>
 <span id="cb2-21"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> get_arms(k):</span>
 <span id="cb2-22">    <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -544,14 +555,17 @@ background-color: null;
 font-style: inherit;">=</span> []</span>
 <span id="cb2-24">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(k):</span>
 <span id="cb2-25">        arms.append(Arm())</span>
 <span id="cb2-26">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> arms</span></code></pre></div>
 </div>
 </section>
@@ -565,9 +579,11 @@ Attributes: * expectations[i]: gives the expected reward on playing arm[i] * tim
 <div id="cell-6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> agent:</span>
 <span id="cb3-2">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -625,6 +641,7 @@ font-style: inherit;">=</span> []</span>
 <span id="cb3-12"></span>
 <span id="cb3-13">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> play_once <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
@@ -632,8 +649,10 @@ background-color: null;
 font-style: inherit;">1</span>:</span>
 <span id="cb3-14">            <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="va" style="color: #111111;
@@ -649,6 +668,7 @@ font-style: inherit;">self</span>.play(i)</span>
 <span id="cb3-16"></span>
 <span id="cb3-17">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> play(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>, index):</span>
@@ -682,19 +702,23 @@ font-style: inherit;">self</span>.reward_history.append(reward)</span>
 <span id="cb3-25"></span>
 <span id="cb3-26">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> reward</span>
 <span id="cb3-27"></span>
 <span id="cb3-28">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
 <span id="cb3-29">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">pass</span></span>
 <span id="cb3-30"></span>
 <span id="cb3-31">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> update_expectations(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>, reward, index):</span>
@@ -714,6 +738,7 @@ font-style: inherit;">self</span>.N</span>
 <span id="cb3-33"></span>
 <span id="cb3-34">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> select_arm(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
@@ -737,17 +762,21 @@ background-color: null;
 font-style: inherit;">False</span>)</span>
 <span id="cb3-37">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> i</span>
 <span id="cb3-38"></span>
 <span id="cb3-39">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> gamble(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>, iterations):</span>
 <span id="cb3-40">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(iterations):</span>
@@ -779,10 +808,12 @@ epsilon = 0 =&gt; greedy choices</p>
 <div id="cell-9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> epsilon_greedy(agent):</span>
 <span id="cb4-2"></span>
 <span id="cb4-3">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -809,6 +840,7 @@ font-style: inherit;">=</span> epsilon</span>
 <span id="cb4-6">        </span>
 <span id="cb4-7">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__str__</span>(<span class="va" style="color: #111111;
@@ -816,6 +848,7 @@ background-color: null;
 font-style: inherit;">self</span>):</span>
 <span id="cb4-8">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Epsilon-Greedy Agent, epsilon= "</span><span class="op" style="color: #5E5E5E;
@@ -828,6 +861,7 @@ font-style: inherit;">self</span>.epsilon)</span>
 <span id="cb4-9">    </span>
 <span id="cb4-10">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
@@ -860,6 +894,7 @@ background-color: null;
 font-style: inherit;">self</span>.number_of_arms</span>
 <span id="cb4-14">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> ans</span></code></pre></div>
 </div>
 </section>
@@ -870,10 +905,12 @@ We normalise the whole thing by the sum over all the arms.</p>
 <div id="cell-11" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> softmax(agent):</span>
 <span id="cb5-2"></span>
 <span id="cb5-3">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -900,6 +937,7 @@ font-style: inherit;">=</span> beta</span>
 <span id="cb5-6">        </span>
 <span id="cb5-7">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__str__</span>(<span class="va" style="color: #111111;
@@ -907,6 +945,7 @@ background-color: null;
 font-style: inherit;">self</span>):</span>
 <span id="cb5-8">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Softmax agent, beta= "</span><span class="op" style="color: #5E5E5E;
@@ -919,6 +958,7 @@ font-style: inherit;">self</span>.beta)</span>
 <span id="cb5-9"></span>
 <span id="cb5-10">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
@@ -944,6 +984,7 @@ background-color: null;
 font-style: inherit;">0</span>)</span>
 <span id="cb5-13">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> ans</span></code></pre></div>
 </div>
 </section>
@@ -954,10 +995,12 @@ font-style: inherit;">return</span> ans</span></code></pre></div>
 <div id="cell-13" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> ucb(agent):</span>
 <span id="cb6-2"></span>
 <span id="cb6-3">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -975,6 +1018,7 @@ font-style: inherit;">__init__</span>(arms, play_once)</span>
 <span id="cb6-5"></span>
 <span id="cb6-6">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__str__</span>(<span class="va" style="color: #111111;
@@ -982,12 +1026,14 @@ background-color: null;
 font-style: inherit;">self</span>):</span>
 <span id="cb6-7">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"UCB1 agent"</span></span>
 <span id="cb6-8">    </span>
 <span id="cb6-9">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
@@ -1018,6 +1064,7 @@ background-color: null;
 font-style: inherit;">1</span></span>
 <span id="cb6-13">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> ans</span></code></pre></div>
 </div>
 </section>
@@ -1035,6 +1082,7 @@ To compare the performance of our agents we can use these metrics</p>
 <div id="cell-15" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> maxreward(arms):</span>
 <span id="cb7-2">    <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1043,17 +1091,21 @@ font-style: inherit;">#Max rewards</span></span>
 background-color: null;
 font-style: inherit;">=</span> [arm.mu <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> arm <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> arms]</span>
 <span id="cb7-4">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">max</span>(a)</span>
 <span id="cb7-5"></span>
 <span id="cb7-6"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> avg_reward(rewards):</span>
 <span id="cb7-7">    ans <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1063,8 +1115,10 @@ background-color: null;
 font-style: inherit;">0</span>])</span>
 <span id="cb7-9">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
@@ -1081,8 +1135,10 @@ background-color: null;
 font-style: inherit;">+</span>rewards[i])</span>
 <span id="cb7-11">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(<span class="bu" style="color: null;
@@ -1097,10 +1153,12 @@ background-color: null;
 font-style: inherit;">1</span></span>
 <span id="cb7-13">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> ans</span>
 <span id="cb7-14"></span>
 <span id="cb7-15"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> cosine_similarity(a,b):</span>
 <span id="cb7-16">    temp <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1114,6 +1172,7 @@ background-color: null;
 font-style: inherit;">*</span> euclid_distance(b))</span>
 <span id="cb7-18">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> np.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>(temp, axis<span class="op" style="color: #5E5E5E;
@@ -1124,9 +1183,11 @@ font-style: inherit;">0</span>)</span>
 <span id="cb7-19">    </span>
 <span id="cb7-20"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> euclid_distance(a):</span>
 <span id="cb7-21">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> np.sqrt(np.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>(a<span class="op" style="color: #5E5E5E;
@@ -1143,11 +1204,14 @@ font-style: inherit;">0</span>))</span></code></pre></div>
 <div id="cell-17" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> test(agents, iterations):</span>
 <span id="cb8-2">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> agent <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> agents:</span>
 <span id="cb8-3">        </span>
 <span id="cb8-4">        agent.gamble(iterations)</span>
@@ -1156,8 +1220,10 @@ font-style: inherit;">in</span> agents:</span>
 background-color: null;
 font-style: inherit;">=</span> [ arm.mu <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> arm <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> levers] </span>
 <span id="cb8-7">        optimal_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1292,8 +1358,10 @@ font-style: inherit;">0.1</span>),</span>
 <div id="cell-19" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">plt.plot([ arm.mu <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> arm <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> levers] )</span>
 <span id="cb10-2">plt.title(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1318,30 +1386,7 @@ font-style: inherit;">5000</span>)</span></code></pre></div>
 maximum possible reward: 0.9851042878107023
 average reward: [0.47962497]
 cosine similarity 0.3162277660168379
-euclidian norm  0.09486832980505139
-
-
-Epsilon-Greedy Agent, epsilon= 0
-maximum possible reward: 0.9851042878107023
-average reward: [0.98686237]
-cosine similarity 1.0
-euclidian norm  0.0
-
-
-Softmax agent, beta= 0.1
-maximum possible reward: 0.9851042878107023
-average reward: [0.91348264]
-cosine similarity 0.9992727823574249
-euclidian norm  0.008915931500017809
-
-
-UCB1 agent
-maximum possible reward: 0.9851042878107023
-average reward: [0.89258379]
-cosine similarity 0.0
-euclidian norm  0.1414213562373095
-
-</code></pre>
+euclidian norm  0.09486832980505139</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1350,12 +1395,14 @@ euclidian norm  0.1414213562373095
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-3.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Epsilon-Greedy Agent, epsilon= 0
+maximum possible reward: 0.9851042878107023
+average reward: [0.98686237]
+cosine similarity 1.0
+euclidian norm  0.0</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1364,12 +1411,41 @@ euclidian norm  0.1414213562373095
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Softmax agent, beta= 0.1
+maximum possible reward: 0.9851042878107023
+average reward: [0.91348264]
+cosine similarity 0.9992727823574249
+euclidian norm  0.008915931500017809</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-5.png" class="img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-6.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+UCB1 agent
+maximum possible reward: 0.9851042878107023
+average reward: [0.89258379]
+cosine similarity 0.0
+euclidian norm  0.1414213562373095</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-8.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+</code></pre>
 </div>
 </div>
 </section>
@@ -1377,13 +1453,15 @@ euclidian norm  0.1414213562373095
 <h3 class="anchored" data-anchor-id="experimental-stuff">Experimental stuff:</h3>
 <p>Below are a few agents I wrote for fun.</p>
 <div id="cell-22" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"></span>
-<span id="cb14-2"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"></span>
+<span id="cb18-2"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> softmax_with_exponentiation(agent):</span>
-<span id="cb14-3"></span>
-<span id="cb14-4">    <span class="kw" style="color: #003B4F;
+<span id="cb18-3"></span>
+<span id="cb18-4">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -1401,28 +1479,29 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>):</span>
-<span id="cb14-5">        <span class="bu" style="color: null;
+<span id="cb18-5">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb14-6">        <span class="va" style="color: #111111;
+<span id="cb18-6">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.beta <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> beta</span>
-<span id="cb14-7">        <span class="va" style="color: #111111;
+<span id="cb18-7">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.exp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> exp</span>
-<span id="cb14-8"></span>
-<span id="cb14-9">    <span class="kw" style="color: #003B4F;
+<span id="cb18-8"></span>
+<span id="cb18-9">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
-<span id="cb14-10">        temp <span class="op" style="color: #5E5E5E;
+<span id="cb18-10">        temp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.exp(<span class="va" style="color: #111111;
 background-color: null;
@@ -1431,7 +1510,7 @@ background-color: null;
 font-style: inherit;">/</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.beta)</span>
-<span id="cb14-11">        ans <span class="op" style="color: #5E5E5E;
+<span id="cb18-11">        ans <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> temp <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1442,14 +1521,14 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb14-12">        ans <span class="op" style="color: #5E5E5E;
+<span id="cb18-12">        ans <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.exp</span>
-<span id="cb14-13">        ans <span class="op" style="color: #5E5E5E;
+<span id="cb18-13">        ans <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/=</span> np.<span class="bu" style="color: null;
 background-color: null;
@@ -1458,17 +1537,20 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb14-14">        <span class="cf" style="color: #003B4F;
+<span id="cb18-14">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> ans</span>
-<span id="cb14-15"></span>
-<span id="cb14-16"></span>
-<span id="cb14-17"><span class="kw" style="color: #003B4F;
+<span id="cb18-15"></span>
+<span id="cb18-16"></span>
+<span id="cb18-17"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> softmax_with_reccurence(agent):</span>
-<span id="cb14-18"></span>
-<span id="cb14-19">    <span class="kw" style="color: #003B4F;
+<span id="cb18-18"></span>
+<span id="cb18-19">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -1482,12 +1564,12 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>):</span>
-<span id="cb14-20">        <span class="bu" style="color: null;
+<span id="cb18-20">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb14-21">        <span class="va" style="color: #111111;
+<span id="cb18-21">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1498,18 +1580,19 @@ background-color: null;
 font-style: inherit;">/</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.l</span>
-<span id="cb14-22">        <span class="va" style="color: #111111;
+<span id="cb18-22">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.beta <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> beta</span>
-<span id="cb14-23"></span>
-<span id="cb14-24">    <span class="kw" style="color: #003B4F;
+<span id="cb18-23"></span>
+<span id="cb18-24">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
-<span id="cb14-25">        temp <span class="op" style="color: #5E5E5E;
+<span id="cb18-25">        temp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.exp(<span class="va" style="color: #111111;
 background-color: null;
@@ -1518,7 +1601,7 @@ background-color: null;
 font-style: inherit;">/</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.beta)</span>
-<span id="cb14-26">        new_policy <span class="op" style="color: #5E5E5E;
+<span id="cb18-26">        new_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> temp <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1529,13 +1612,13 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb14-27"></span>
-<span id="cb14-28">        result <span class="op" style="color: #5E5E5E;
+<span id="cb18-27"></span>
+<span id="cb18-28">        result <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.multiply(new_policy, <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.old_policy)</span>
-<span id="cb14-29">        result <span class="op" style="color: #5E5E5E;
+<span id="cb18-29">        result <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/=</span> np.<span class="bu" style="color: null;
 background-color: null;
@@ -1544,35 +1627,38 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb14-30">        <span class="va" style="color: #111111;
+<span id="cb18-30">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> result</span>
-<span id="cb14-31"></span>
-<span id="cb14-32">        <span class="cf" style="color: #003B4F;
+<span id="cb18-31"></span>
+<span id="cb18-32">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> result</span>
-<span id="cb14-33"></span>
-<span id="cb14-34"></span>
-<span id="cb14-35"><span class="kw" style="color: #003B4F;
+<span id="cb18-33"></span>
+<span id="cb18-34"></span>
+<span id="cb18-35"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">class</span> greedy_with_reccurence(agent):</span>
-<span id="cb14-36">    <span class="co" style="color: #5E5E5E;
+<span id="cb18-36">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># alpha = number &lt; 1; will sum over a number of observations and will keep</span></span>
-<span id="cb14-37">    <span class="co" style="color: #5E5E5E;
+<span id="cb18-37">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># osiclating.</span></span>
-<span id="cb14-38">    <span class="co" style="color: #5E5E5E;
+<span id="cb18-38">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># alpha = N will allow the algo to converge to an arm, greedy doesn't</span></span>
-<span id="cb14-39">    <span class="co" style="color: #5E5E5E;
+<span id="cb18-39">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># really need this, kind of always give one answer.</span></span>
-<span id="cb14-40"></span>
-<span id="cb14-41">    <span class="kw" style="color: #003B4F;
+<span id="cb18-40"></span>
+<span id="cb18-41">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
@@ -1586,43 +1672,44 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>):</span>
-<span id="cb14-42">        <span class="bu" style="color: null;
+<span id="cb18-42">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb14-43">        <span class="va" style="color: #111111;
+<span id="cb18-43">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.ones_like(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.expectations)</span>
-<span id="cb14-44">        <span class="va" style="color: #111111;
+<span id="cb18-44">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.alpha <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> alpha</span>
-<span id="cb14-45"></span>
-<span id="cb14-46">    <span class="kw" style="color: #003B4F;
+<span id="cb18-45"></span>
+<span id="cb18-46">    <span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>):</span>
-<span id="cb14-47">        new_policy <span class="op" style="color: #5E5E5E;
+<span id="cb18-47">        new_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros_like(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.expectations)</span>
-<span id="cb14-48">        new_policy[np.argmax(<span class="va" style="color: #111111;
+<span id="cb18-48">        new_policy[np.argmax(<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.expectations)] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb14-49"></span>
-<span id="cb14-50">        new_policy <span class="op" style="color: #5E5E5E;
+<span id="cb18-49"></span>
+<span id="cb18-50">        new_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> (<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1641,8 +1728,8 @@ background-color: null;
 font-style: inherit;">*</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.old_policy</span>
-<span id="cb14-51"></span>
-<span id="cb14-52">        new_policy <span class="op" style="color: #5E5E5E;
+<span id="cb18-51"></span>
+<span id="cb18-52">        new_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/=</span> np.<span class="bu" style="color: null;
 background-color: null;
@@ -1651,38 +1738,39 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb14-53">        <span class="va" style="color: #111111;
+<span id="cb18-53">        <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> new_policy</span>
-<span id="cb14-54"></span>
-<span id="cb14-55">        <span class="cf" style="color: #003B4F;
+<span id="cb18-54"></span>
+<span id="cb18-55">        <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">return</span> new_policy</span>
-<span id="cb14-56"></span>
-<span id="cb14-57"><span class="co" style="color: #5E5E5E;
+<span id="cb18-56"></span>
+<span id="cb18-57"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># class magic(agent):</span></span>
-<span id="cb14-58"><span class="co" style="color: #5E5E5E;
+<span id="cb18-58"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#    def __init__(self, arms, play_once=1, exp=1):</span></span>
-<span id="cb14-59"><span class="co" style="color: #5E5E5E;
+<span id="cb18-59"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#        super().__init__(arms, play_once)</span></span>
-<span id="cb14-60"><span class="co" style="color: #5E5E5E;
+<span id="cb18-60"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#        self.old_policy = np.ones_like(self.expectations)/self.l</span></span>
-<span id="cb14-61"><span class="co" style="color: #5E5E5E;
+<span id="cb18-61"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#        self.exp = exp</span></span>
-<span id="cb14-62"><span class="co" style="color: #5E5E5E;
+<span id="cb18-62"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#</span></span>
-<span id="cb14-63"><span class="co" style="color: #5E5E5E;
+<span id="cb18-63"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#    def policy(self):</span></span>
-<span id="cb14-64"><span class="co" style="color: #5E5E5E;
+<span id="cb18-64"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span></span></code></pre></div>
 </div>
