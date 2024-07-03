@@ -5,3 +5,8 @@ title: "Today I Learned"
 # Today I Learned
 
 Welcome to the "Today I Learned" section where I share small bits of knowledge and insights I've gained.
+
+::: {#til-listing}
+:::
+
+Welcome to the "Today I Learned" section where I share small bits of knowledge and insights I've gained.
