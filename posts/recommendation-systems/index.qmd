@@ -1,0 +1,49 @@
+---
+title: Recommendation Systems
+description: An in-depth look at recommendation systems, their design, approaches, and open problems.
+layout: post
+categories: [Recommendation Systems]
+comments: false
+
+
+date: "2024-07-07"
+image: recommendation-systems.webp
+---
+
+## Why
+
+Explanation of the importance and impact of recommendation systems.
+
+## How
+
+Discussion on how recommendation systems are typically implemented.
+
+## Different variables that influence the design
+
+Overview of the factors that affect the design of recommendation systems.
+
+## Long term perspective
+
+Insights into the long-term considerations and strategies for recommendation systems.
+
+## Different approaches
+
+Comparison of various approaches to building recommendation systems.
+
+## Open Problems
+
+Identification of current challenges and unsolved problems in the field of recommendation systems.
+
+## Companies good at it
+
+Examples of companies that excel in the use of recommendation systems.
+
+## Systems / Tooling
+
+Information about the systems and tools commonly used to create and manage recommendation systems.
+
+## Important Resources
+
+A curated list of important resources for further reading and learning about recommendation systems.
+
+Canary Deploys by using Experimentation platform to tell when you break guard rail metrics
