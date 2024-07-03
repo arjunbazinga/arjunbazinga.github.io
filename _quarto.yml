@@ -18,6 +18,8 @@ website:
       #   href: https://github.com/arjunbazinga
       # - icon: linkedin
       #   href: https://www.linkedin.com/in/arjunsriva
+      - text: TIL
+        href: /til
       - icon: rss
         href: index.xml
   favicon: favicon.ico
