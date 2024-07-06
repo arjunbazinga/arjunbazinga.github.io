@@ -12,6 +12,63 @@ image: recommendation-systems.webp
 
 ## Why
 
+The core problem a recommendation system tries to solve is that for a given user, there are far more options available than the user has time or resources to explore. The goal is to determine what the user would most want to see.
+
+## How
+
+Recommendation systems are typically implemented using a variety of algorithms and data sources to predict user preferences and suggest relevant items.
+
+## Different variables that influence the design
+
+The design of recommendation systems is influenced by factors such as the number of items to consider, the number of users, the rate of change in the item pool, and user behavior.
+
+## Long term perspective
+
+Long-term considerations include the sustainability of the system, adaptability to changing user preferences, and the ethical implications of recommendation algorithms.
+
+## Different approaches
+
+Various approaches to building recommendation systems include collaborative filtering, content-based filtering, and hybrid methods.
+
+## Open Problems
+
+Current challenges in the field include addressing data bias, ensuring fairness, and understanding the impact of recommendations on user behavior.
+
+## Companies good at it
+
+Companies like LinkedIn, Netflix, and Spotify are known for their sophisticated recommendation systems.
+
+## Systems / Tooling
+
+Tools and systems used in recommendation systems include machine learning frameworks, data processing pipelines, and evaluation platforms like DeepGNN and NVIDIA Merlin.
+
+## Important Resources
+
+For further reading and learning about recommendation systems, resources include academic papers, blogs like RecSys, and repositories like Microsoft's recommenders.
+
+## Notes
+
+Where we are and where we’re going: Understanding the evolution of recommendation systems and their impact on user experience.
+
+Autoemb: A technique for representing embeddings using less memory for unpopular items.
+
+The effect of recommendations on user behavior: How recommendations can lead to changes such as increased polarization or loss of impulse control.
+
+---
+
+### References
+
+- [RecSys](https://recsys.acm.org/recsys24/call/)
+- [LinkedIn Engineering Blog](https://www.linkedin.com/blog/engineering/recommendations/building-a-large-scale-recommendation-system-people-you-may-know)
+- [DeepGNN on GitHub](https://github.com/microsoft/DeepGNN/tree/main)
+- [NVIDIA Merlin on GitHub](https://github.com/NVIDIA-Merlin/Merlin)
+- [Neural Graph Collaborative Filtering](https://arxiv.org/abs/1905.08108)
+- [Self-Attentive Sequential Recommendation](https://cseweb.ucsd.edu/~jmcauley/pdfs/icdm18.pdf)
+- [A Survey on Reinforcement Learning for Recommender Systems](https://arxiv.org/abs/2109.10665)
+- [BERT4Rec](https://arxiv.org/abs/1904.06690)
+- [Recommendation Systems Microsoft](https://github.com/recommenders-team/recommenders)
+## Why
+
 Explanation of the importance and impact of recommendation systems.
 
 ## How
