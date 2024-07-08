@@ -1,0 +1,15 @@
+---
+title: "Podcast"
+description: "AI-generated podcasts discussing the latest in scientific research."
+---
+
+<div class="podcast-intro">
+  <p>
+    Welcome to our Podcast section where we delve into fascinating topics with the help of AI-generated content. Each episode is based on a scientific paper and includes an audio discussion, a transcript, and the original paper for reference.
+  </p>
+  <p>
+    Note: The podcasts are generated using AI technology, which may not perfectly reflect the nuances of the original research.
+  </p>
+</div>
+
+<!-- List of podcast episodes will be generated here -->

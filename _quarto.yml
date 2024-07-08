@@ -12,6 +12,8 @@ website:
       - about.qmd
       - text: Library
         href: https://arjunsriva.com/library
+      - text: Podcast
+        href: /podcast
       - icon: twitter
         href: https://twitter.com/arjunsriv
       # - icon: github
