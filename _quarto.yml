@@ -45,3 +45,12 @@ format:
 #     mapping: pathname
 #     loading: lazy
 #     input-position: top
+comments:
+  giscus: 
+    repo: arjunbazinga/arjunbazinga.github.io
+    repo-id: R_kgDOIBWk3A
+    category: Announcements
+    category-id: DIC_kwDOIBWk3M4CSSa6
+    mapping: pathname
+    loading: lazy
+    input-position: top
