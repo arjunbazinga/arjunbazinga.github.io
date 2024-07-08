@@ -1,1 +1,6 @@
 /* css styles */
+
+/* Podcast link styles */
+.navbar .nav-item a[href="/podcast"] {
+  font-weight: bold;
+}
