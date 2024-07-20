@@ -14,14 +14,14 @@ website:
         href: https://arjunsriva.com/library
       - text: Podcast
         href: /podcast
+      - text: TIL
+        href: /til
       - icon: twitter
         href: https://twitter.com/arjunsriv
       # - icon: github
       #   href: https://github.com/arjunbazinga
       # - icon: linkedin
       #   href: https://www.linkedin.com/in/arjunsriva
-      - text: TIL
-        href: /til
       - icon: rss
         href: index.xml
   favicon: favicon.ico
@@ -33,40 +33,4 @@ format:
     theme:
       light: flatly
       dark: darkly
-website:
-  collections:
-    til:
-      title: "Today I Learned"
-      output-dir: til
-      contents-dir: til
-      listing:
-        contents: til
-        sort: "date desc"
-        type: default
-        categories: true
-        sort-ui: true
-        filter-ui: true
-        feed: true
-    
-
-
-
-# TODO: comments https://giscus.app/
-# comments:
-#   giscus: 
-#     repo: arjunbazinga/arjunbazinga.github.io
-#     repo-id: R_kgDOIBWk3A
-#     category: Announcements
-#     category-id: DIC_kwDOIBWk3M4CSSa6
-#     mapping: pathname
-#     loading: lazy
-#     input-position: top
-comments:
-  giscus: 
-    repo: arjunbazinga/arjunbazinga.github.io
-    repo-id: R_kgDOIBWk3A
-    category: Announcements
-    category-id: DIC_kwDOIBWk3M4CSSa6
-    mapping: pathname
-    loading: lazy
-    input-position: top
+    code-overflow: wrap

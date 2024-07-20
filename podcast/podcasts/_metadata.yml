@@ -1,0 +1,9 @@
+format:
+  html:
+    template: podcast_template.html
+
+layout: post
+title-block-banner: true
+
+resources:
+  - "static/podcast_data/*"
