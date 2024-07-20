@@ -9,7 +9,7 @@
 <link>https://www.arjunsriva.com/</link>
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.53</generator>
+<generator>quarto-1.5.55</generator>
 <lastBuildDate>Sun, 21 Mar 2021 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Experimentation Platforms</title>
@@ -374,42 +374,6 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <guid>https://www.arjunsriva.com/posts/jargonizer/</guid>
   <pubDate>Tue, 12 Jun 2018 00:00:00 GMT</pubDate>
   <media:content url="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Learning Machine Learning</title>
-  <dc:creator>Arjun Srivastava</dc:creator>
-  <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This post will talk about how I’m going about learning machine learning.</p>
-<p>Mostly online content.</p>
-<section id="podcasts" class="level3">
-<h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
-<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:<br>
-* <a href="http://partiallyderivative.com">Partially Derivative</a> * <a href="http://lineardigressions.com/">Linear Digressions</a> * <a href="http://dataskeptic.com">Data Skeptic</a></p>
-<p>Some that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines</p>
-</section>
-<section id="online-courses" class="level3">
-<h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
-<p>A few awesome courses.</p>
-<ul>
-<li><p><a href="http://coursera.org/learn/machine-learning">Andrew Ng Coursera</a><br>
-A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
-<li><p><a href="http://fast.ai">Fast.ai</a><br>
-A course which aims to teach by coding, and takes a top down approach.</p></li>
-</ul>
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
-  <category>AI</category>
-  <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
-  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Multi Armed Bandits</title>
@@ -1784,6 +1748,42 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
   <guid>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</guid>
   <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
   <media:content url="https://www.arjunsriva.com/posts/multi-armed-bandits/MultiArmedBandits.jpeg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Learning Machine Learning</title>
+  <dc:creator>Arjun Srivastava</dc:creator>
+  <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This post will talk about how I’m going about learning machine learning.</p>
+<p>Mostly online content.</p>
+<section id="podcasts" class="level3">
+<h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
+<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:<br>
+* <a href="http://partiallyderivative.com">Partially Derivative</a> * <a href="http://lineardigressions.com/">Linear Digressions</a> * <a href="http://dataskeptic.com">Data Skeptic</a></p>
+<p>Some that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines</p>
+</section>
+<section id="online-courses" class="level3">
+<h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
+<p>A few awesome courses.</p>
+<ul>
+<li><p><a href="http://coursera.org/learn/machine-learning">Andrew Ng Coursera</a><br>
+A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
+<li><p><a href="http://fast.ai">Fast.ai</a><br>
+A course which aims to teach by coding, and takes a top down approach.</p></li>
+</ul>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>AI</category>
+  <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
+  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Game Of Thrones quiz</title>
