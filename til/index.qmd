@@ -1,12 +1,12 @@
 ---
-title: "Today I Learned"
+title: "TIL: Today I Learned"
+listing:
+  contents: .
+  sort: "date desc"
+  type: default
+  categories: true
+  feed: true
 ---
 
-# Today I Learned
+A collection of links, notes, snippets on things I am reading, watching.
 
-Welcome to the "Today I Learned" section where I share small bits of knowledge and insights I've gained.
-
-::: {#til-listing}
-:::
-
-Welcome to the "Today I Learned" section where I share small bits of knowledge and insights I've gained.
