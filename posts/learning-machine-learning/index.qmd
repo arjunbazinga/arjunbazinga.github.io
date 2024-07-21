@@ -6,20 +6,33 @@ comments : false
 date: "2017-11-12"
 ---
 
-This post will talk about how I'm going about learning machine learning.  
+This post will talk about resources for how I'm going about learning machine learning.
 
-Mostly online content.
 
+### Books
+
+- "Hands-On Machine Learning with Scikit-Learn and TensorFlow" by Aurélien Géron
+- "Deep Learning" by Ian Goodfellow, Yoshua Bengio, and Aaron Courville
+- "The Elements of Statistical Learning" by Trevor Hastie, Robert Tibshirani, and Jerome Friedman
+
+
+### Blogs
+
+- [Distill.pub](https://distill.pub/): Clear, interactive explanations of machine learning concepts
+- [Sebastian Ruder's blog](https://ruder.io/): In-depth articles on NLP and deep learning
+- [Andrej Karpathy's blog](http://karpathy.github.io/): Excellent posts on deep learning
 
 ### Podcasts
 
 These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android).
 Some awesome podcasts:  
+
 * [Partially Derivative](http://partiallyderivative.com)
 * [Linear Digressions](http://lineardigressions.com/)
 * [Data Skeptic](http://dataskeptic.com)
 
 Some that are supposed to be good but never tried:
+
 * Not so standard deviations
 * Data science at home
 * Talking machines
@@ -33,3 +46,18 @@ A few awesome courses.
 
 * [Fast.ai](http://fast.ai)  
     A course which aims to teach by coding, and takes a top down approach.
+
+* [CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu/)
+    While focused on computer vision, this Stanford course provides an excellent introduction to deep learning concepts.
+
+
+### Staying Up-to-Date
+One of the best things about the machine learning field is how much work happens in the open. 
+
+Many researchers publish their work on arXiv months or even years before it appears in journals or at conferences. 
+Following key researchers and institutions on Twitter is an excellent way to stay informed about the latest developments as they happen.
+
+Some great accounts to follow: @goodfellow_ian, @ylecun, @karpathy, @gwern.
+
+Don't be afraid of reading arXiv papers, they might seem intimidating in the beginning but they get easier over time.
+
