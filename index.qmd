@@ -5,6 +5,7 @@ listing:
   sort: "date desc"
   type: default
   categories: true
+  authors: false
   sort-ui: true
   filter-ui: true
   feed: true
