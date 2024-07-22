@@ -11,98 +11,98 @@
     "href": "podcast/podcasts/2205.14135/index.html",
     "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
     "section": "",
-    "text": "FlashAttention is a novel algorithm that addresses the efficiency of Transformer models by improving speed and memory efficiency through IO-awareness. It reduces the number of memory accesses by dividing data into smaller blocks and loading them into fast memory, achieving practical speedups and enabling training on longer sequences. The algorithm also incorporates recomputation during the backward pass to minimize memory usage, delivering significant improvements in training large models like BERT and GPT-2.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "FlashAttention is a novel algorithm that addresses the efficiency of Transformer models by improving speed and memory efficiency through IO-awareness. It reduces the number of memory accesses by dividing data into smaller blocks and loading them into fast memory, achieving practical speedups and enabling training on longer sequences. The algorithm also incorporates recomputation during the backward pass to minimize memory usage, delivering significant improvements in training large models like BERT and GPT-2.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2402.12289/index.html",
     "href": "podcast/podcasts/2402.12289/index.html",
     "title": "DriveVLM: Vision-Language Models for Autonomous Driving in Urban Environments",
     "section": "",
-    "text": "The paper introduces DriveVLM, a system that leverages Vision-Language Models for scene understanding in autonomous driving. It comprises modules for Scene Description, Scene Analysis, and Hierarchical Planning to handle complex driving scenarios. DriveVLM outperformed other models in handling uncommon objects and unexpected events, while DriveVLM-Dual achieved state-of-the-art performance in planning tasks, showing promise for future improvements in autonomous driving.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper introduces DriveVLM, a system that leverages Vision-Language Models for scene understanding in autonomous driving. It comprises modules for Scene Description, Scene Analysis, and Hierarchical Planning to handle complex driving scenarios. DriveVLM outperformed other models in handling uncommon objects and unexpected events, while DriveVLM-Dual achieved state-of-the-art performance in planning tasks, showing promise for future improvements in autonomous driving.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2406.12214/index.html",
     "href": "podcast/podcasts/2406.12214/index.html",
     "title": "Robustness Evaluation of HD Map Constructors under Sensor Corruptions for Autonomous Driving",
     "section": "",
-    "text": "The paper focuses on evaluating the robustness of HD map constructors under various sensor corruptions using a comprehensive benchmark called MapBench. It highlights the vulnerability of existing methods to real-world challenges and suggests the importance of advanced data augmentation techniques and new network architectures to enhance robustness for autonomous driving applications.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper focuses on evaluating the robustness of HD map constructors under various sensor corruptions using a comprehensive benchmark called MapBench. It highlights the vulnerability of existing methods to real-world challenges and suggests the importance of advanced data augmentation techniques and new network architectures to enhance robustness for autonomous driving applications.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2111.15397/index.html",
     "href": "podcast/podcasts/2111.15397/index.html",
     "title": "NeuralProphet Explainable Forecasting at Scale",
     "section": "",
-    "text": "‘Successor’ of Prophet (by facebook) for time series modelling.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "‘Successor’ of Prophet (by facebook) for time series modelling.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2303.04129/index.html",
     "href": "podcast/podcasts/2303.04129/index.html",
     "title": "Foundation Models in Decision Making: Roles, Challenges, and Opportunities",
     "section": "",
-    "text": "The paper proposes a framework for understanding the various roles of foundation models in decision making, including conditional generative models, representation learners, and interactive agents. Key takeaways include the use of foundation models for behavioral priors, world modeling, and generalization of knowledge across tasks and environments.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper proposes a framework for understanding the various roles of foundation models in decision making, including conditional generative models, representation learners, and interactive agents. Key takeaways include the use of foundation models for behavioral priors, world modeling, and generalization of knowledge across tasks and environments.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2406.17345/index.html",
     "href": "podcast/podcasts/2406.17345/index.html",
     "title": "NerfBaselines: A Framework for Standardized Evaluation of Novel View Synthesis Methods in Computer Vision",
     "section": "",
-    "text": "NerfBaselines addresses the inconsistent evaluation protocols in comparing novel view synthesis methods by providing a unified interface, ensuring reproducibility through containerization, and standardizing the evaluation protocol. By enabling the sharing of pre-trained checkpoints, it reduces computational costs and environmental impact. However, it relies on methods exposing the same interface and future directions involve exploring advanced evaluation metrics and addressing the computational cost of training.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "NerfBaselines addresses the inconsistent evaluation protocols in comparing novel view synthesis methods by providing a unified interface, ensuring reproducibility through containerization, and standardizing the evaluation protocol. By enabling the sharing of pre-trained checkpoints, it reduces computational costs and environmental impact. However, it relies on methods exposing the same interface and future directions involve exploring advanced evaluation metrics and addressing the computational cost of training.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2006.06373/index.html",
     "href": "podcast/podcasts/2006.06373/index.html",
     "title": "The limits to learning a diffusion model",
     "section": "",
-    "text": "Don’t be confused by the title, diffusion here is not referring to diffusion as we use it today in context of image generation process, but more about modelling diffusive processes (like virus spread)\n  This paper answers the question about ‘how much data do we need, before we can figure out the final affected value’ turns out this is a lot more thant people expect.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Don’t be confused by the title, diffusion here is not referring to diffusion as we use it today in context of image generation process, but more about modelling diffusive processes (like virus spread)\n  This paper answers the question about ‘how much data do we need, before we can figure out the final affected value’ turns out this is a lot more thant people expect.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2109.10665/index.html",
     "href": "podcast/podcasts/2109.10665/index.html",
     "title": "Survey on reinforcement learning in reccomender systems",
     "section": "",
-    "text": "Goes over some of the different places RL can be used in RecSys.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Goes over some of the different places RL can be used in RecSys.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2212.10156/index.html",
     "href": "podcast/podcasts/2212.10156/index.html",
     "title": "Planning-Oriented Autonomous Driving",
     "section": "",
-    "text": "The paper introduces UniAD, a planning-oriented framework for autonomous driving that focuses on integrating perception, prediction, and planning tasks to optimize for safe and efficient driving. UniAD outperforms existing state-of-the-art methods in motion forecasting, occupancy prediction, and planning, showcasing the benefits of joint optimization and query-based communication between modules. Key challenges for future research include addressing computational complexity, handling long-tail scenarios, and exploring additional tasks like depth estimation and behavior prediction.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper introduces UniAD, a planning-oriented framework for autonomous driving that focuses on integrating perception, prediction, and planning tasks to optimize for safe and efficient driving. UniAD outperforms existing state-of-the-art methods in motion forecasting, occupancy prediction, and planning, showcasing the benefits of joint optimization and query-based communication between modules. Key challenges for future research include addressing computational complexity, handling long-tail scenarios, and exploring additional tasks like depth estimation and behavior prediction.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2406.08691/index.html",
     "href": "podcast/podcasts/2406.08691/index.html",
     "title": "Unsupervised Occupancy Fields for Perception and Forecasting",
     "section": "",
-    "text": "The paper ‘UnO: Unsupervised Occupancy Fields for Perception and Forecasting’ introduces a novel approach to perception and forecasting in self-driving vehicles using unsupervised learning from raw LiDAR data. By leveraging occupancy fields and deformable attention mechanisms, the UnO model outperformed existing methods on point cloud forecasting and semantic occupancy tasks, showing promise for enhancing the robustness and safety of autonomous systems especially in scenarios where labeled data is limited or rare events occur.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper ‘UnO: Unsupervised Occupancy Fields for Perception and Forecasting’ introduces a novel approach to perception and forecasting in self-driving vehicles using unsupervised learning from raw LiDAR data. By leveraging occupancy fields and deformable attention mechanisms, the UnO model outperformed existing methods on point cloud forecasting and semantic occupancy tasks, showing promise for enhancing the robustness and safety of autonomous systems especially in scenarios where labeled data is limited or rare events occur.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/1609.09106/index.html",
     "href": "podcast/podcasts/1609.09106/index.html",
     "title": "Hyper Networks: A Novel Approach to Learning Weights in Deep Neural Networks",
     "section": "",
-    "text": "The key takeaways for engineers/specialists are: Hyper Networks introduce a meta-network (hypernetwork) that learns to generate weight structures for deep neural networks, providing flexibility and efficiency. Dynamic hypernetworks allow weights to adapt to input sequences, improving performance on sequential tasks. End-to-end training of hypernetworks with the main network leads to collaborative optimization and comparable or better performance with fewer parameters.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The key takeaways for engineers/specialists are: Hyper Networks introduce a meta-network (hypernetwork) that learns to generate weight structures for deep neural networks, providing flexibility and efficiency. Dynamic hypernetworks allow weights to adapt to input sequences, improving performance on sequential tasks. End-to-end training of hypernetworks with the main network leads to collaborative optimization and comparable or better performance with fewer parameters.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2103.01775/index.html",
     "href": "podcast/podcasts/2103.01775/index.html",
     "title": "No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging",
     "section": "",
-    "text": "Placeholder paper description\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Placeholder paper description\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2306.00248v1/index.html",
     "href": "podcast/podcasts/2306.00248v1/index.html",
     "title": "TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest",
     "section": "",
-    "text": "Pinterest home feed reccomendation system. Needs to react to both long term interests + short term (even single session only) interests.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Pinterest home feed reccomendation system. Needs to react to both long term interests + short term (even single session only) interests.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/1806.09055/index.html",
     "href": "podcast/podcasts/1806.09055/index.html",
     "title": "DARTS: Differentiable Architecture Search",
     "section": "",
-    "text": "Key takeaways for engineers/specialists: DARTS introduces a continuous relaxation approach to architecture search, leveraging gradient descent for efficient optimization. It achieves state-of-the-art results on image classification and language modeling tasks with significantly less computational cost. Challenges include the gap between continuous and discrete architecture representation, computational cost of second-order approximation, and sensitivity to hyperparameters.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Key takeaways for engineers/specialists: DARTS introduces a continuous relaxation approach to architecture search, leveraging gradient descent for efficient optimization. It achieves state-of-the-art results on image classification and language modeling tasks with significantly less computational cost. Challenges include the gap between continuous and discrete architecture representation, computational cost of second-order approximation, and sensitivity to hyperparameters.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "posts/about-this-website/index.html",
@@ -233,9 +233,9 @@
   {
     "objectID": "til/index.html",
     "href": "til/index.html",
-    "title": "Today I Learned",
+    "title": "TIL: Today I Learned",
     "section": "",
-    "text": "Today I Learned\nWelcome to the “Today I Learned” section where I share small bits of knowledge and insights I’ve gained.\n\n\n\nWelcome to the “Today I Learned” section where I share small bits of knowledge and insights I’ve gained."
+    "text": "A collection of links, notes, snippets on things I am reading, watching.\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -312,7 +312,7 @@
     "href": "posts/learning-machine-learning/index.html",
     "title": "Learning Machine Learning",
     "section": "",
-    "text": "This post will talk about how I’m going about learning machine learning.\nMostly online content.\n\nPodcasts\nThese podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:\n* Partially Derivative * Linear Digressions * Data Skeptic\nSome that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines\n\n\nOnline Courses\nA few awesome courses.\n\nAndrew Ng Coursera\nA good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.\nFast.ai\nA course which aims to teach by coding, and takes a top down approach.\n\n\n\n\n\nReuseCC BY 4.0"
+    "text": "This post will talk about resources for how I’m going about learning machine learning.\n\nBooks\n\n“Hands-On Machine Learning with Scikit-Learn and TensorFlow” by Aurélien Géron\n“Deep Learning” by Ian Goodfellow, Yoshua Bengio, and Aaron Courville\n“The Elements of Statistical Learning” by Trevor Hastie, Robert Tibshirani, and Jerome Friedman\n\n\n\nBlogs\n\nDistill.pub: Clear, interactive explanations of machine learning concepts\nSebastian Ruder’s blog: In-depth articles on NLP and deep learning\nAndrej Karpathy’s blog: Excellent posts on deep learning\n\n\n\nPodcasts\nThese podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:\n\nPartially Derivative\nLinear Digressions\nData Skeptic\n\nSome that are supposed to be good but never tried:\n\nNot so standard deviations\nData science at home\nTalking machines\n\n\n\nOnline Courses\nA few awesome courses.\n\nAndrew Ng Coursera\nA good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.\nFast.ai\nA course which aims to teach by coding, and takes a top down approach.\nCS231n: Convolutional Neural Networks for Visual Recognition While focused on computer vision, this Stanford course provides an excellent introduction to deep learning concepts.\n\n\n\nStaying Up-to-Date\nOne of the best things about the machine learning field is how much work happens in the open.\nMany researchers publish their work on arXiv months or even years before it appears in journals or at conferences. Following key researchers and institutions on Twitter is an excellent way to stay informed about the latest developments as they happen.\nSome great accounts to follow: @goodfellow_ian, @ylecun, @karpathy, @gwern.\nDon’t be afraid of reading arXiv papers, they might seem intimidating in the beginning but they get easier over time.\n\n\n\n\nReuseCC BY 4.0"
   },
   {
     "objectID": "posts/course-schedule-generator/index.html",
@@ -333,98 +333,98 @@
     "href": "podcast/podcasts/2407.02524/index.html",
     "title": "Training Large Language Models for Compiler Optimization",
     "section": "",
-    "text": "The research paper discusses the development of LLM Compiler, a model specifically trained on compiler IRs and assembly code for optimizing code efficiently. This approach outperforms traditional techniques and existing LLMs in tasks like flag tuning and disassembly, showing potential for automating and improving the optimization process in software engineering.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The research paper discusses the development of LLM Compiler, a model specifically trained on compiler IRs and assembly code for optimizing code efficiently. This approach outperforms traditional techniques and existing LLMs in tasks like flag tuning and disassembly, showing potential for automating and improving the optimization process in software engineering.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2406.11066/index.html",
     "href": "podcast/podcasts/2406.11066/index.html",
     "title": "Metadata-based Color Harmonization for Multi-camera Surround View Systems",
     "section": "",
-    "text": "The paper introduces a metadata-based approach to address color inconsistencies in multi-camera surround view systems, crucial for accurate perception in autonomous driving. The method significantly outperforms traditional techniques in visual quality and runtime, making it more efficient and robust for real-time applications.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper introduces a metadata-based approach to address color inconsistencies in multi-camera surround view systems, crucial for accurate perception in autonomous driving. The method significantly outperforms traditional techniques in visual quality and runtime, making it more efficient and robust for real-time applications.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2407.02945/index.html",
     "href": "podcast/podcasts/2407.02945/index.html",
     "title": "Extrapolated View Synthesis for Urban Scene Reconstruction",
     "section": "",
-    "text": "The paper introduces Extrapolated View Synthesis (EVS) for urban scene reconstruction, addressing limitations in current methods by using 3D Gaussian Splatting for scene representation. By incorporating surface normal information and leveraging diffusion models, the proposed method, VEGS, outperforms existing approaches in generating visually realistic and accurate renderings for urban environments.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper introduces Extrapolated View Synthesis (EVS) for urban scene reconstruction, addressing limitations in current methods by using 3D Gaussian Splatting for scene representation. By incorporating surface normal information and leveraging diffusion models, the proposed method, VEGS, outperforms existing approaches in generating visually realistic and accurate renderings for urban environments.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2310.01801/index.html",
     "href": "podcast/podcasts/2310.01801/index.html",
     "title": "Models tell you what to discard",
     "section": "",
-    "text": "This paper introduces FastGen, a novel method that uses lightweight model profiling and adaptive key-value caching to significantly reduce memory footprint without noticeable quality loss.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "This paper introduces FastGen, a novel method that uses lightweight model profiling and adaptive key-value caching to significantly reduce memory footprint without noticeable quality loss.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2406.07550/index.html",
     "href": "podcast/podcasts/2406.07550/index.html",
     "title": "TiTok: A Transformer-based 1D Tokenization Approach for Image Generation",
     "section": "",
-    "text": "TiTok introduces a novel 1D tokenization method for image generation, enabling the representation of images with significantly fewer tokens while maintaining or surpassing the performance of existing 2D grid-based methods. The approach leverages a Vision Transformer architecture, two-stage training with proxy codes, and achieves remarkable speedup in training and inference. The research opens up new possibilities for efficient and high-quality image generation, with implications for various applications in computer vision and beyond.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "TiTok introduces a novel 1D tokenization method for image generation, enabling the representation of images with significantly fewer tokens while maintaining or surpassing the performance of existing 2D grid-based methods. The approach leverages a Vision Transformer architecture, two-stage training with proxy codes, and achieves remarkable speedup in training and inference. The research opens up new possibilities for efficient and high-quality image generation, with implications for various applications in computer vision and beyond.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2304.08069/index.html",
     "href": "podcast/podcasts/2304.08069/index.html",
     "title": "RT-DETR: Real-Time Object Detection with Transformer",
     "section": "",
-    "text": "RT-DETR is a groundbreaking end-to-end real-time object detector based on Transformers that combines the speed of YOLO with the accuracy of DETR. Key takeaways for engineers include the efficient hybrid encoder approach, which improves multi-scale feature interactions, and the uncertainty-minimal query selection scheme, enhancing accuracy in both classification and localization. Despite outperforming traditional CNN-based methods, RT-DETR faces challenges in detecting small objects, prompting future research directions like knowledge distillation.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "RT-DETR is a groundbreaking end-to-end real-time object detector based on Transformers that combines the speed of YOLO with the accuracy of DETR. Key takeaways for engineers include the efficient hybrid encoder approach, which improves multi-scale feature interactions, and the uncertainty-minimal query selection scheme, enhancing accuracy in both classification and localization. Despite outperforming traditional CNN-based methods, RT-DETR faces challenges in detecting small objects, prompting future research directions like knowledge distillation.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2112.04426/index.html",
     "href": "podcast/podcasts/2112.04426/index.html",
     "title": "Retrieval-Enhanced Transformers (RETRO): A Semi-Parametric Approach to Enhance Performance of Large Language Models",
     "section": "",
-    "text": "The paper introduces the RETRO model, which leverages retrieval from a massive text database to enhance large language model performance without increasing model size. Key takeaways include the benefits of linear time complexity for retrieval, the use of frozen BERT for efficient retrieval, and the importance of addressing test set leakage in evaluation.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper introduces the RETRO model, which leverages retrieval from a massive text database to enhance large language model performance without increasing model size. Key takeaways include the benefits of linear time complexity for retrieval, the use of frozen BERT for efficient retrieval, and the importance of addressing test set leakage in evaluation.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2002.11252/index.html",
     "href": "podcast/podcasts/2002.11252/index.html",
     "title": "AutoEmb Automated Embedding Dimensionality Searchg in Streaming Recommendations",
     "section": "",
-    "text": "AutoEmb is about using different lenghts of embedding vectors for different items, use less memory + potentially learn more robust stuff for items with less data, and learn more nuanced stuff for popular items.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "AutoEmb is about using different lenghts of embedding vectors for different items, use less memory + potentially learn more robust stuff for items with less data, and learn more nuanced stuff for popular items.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2211.02131/index.html",
     "href": "podcast/podcasts/2211.02131/index.html",
     "title": "SafePathNet: Learning a Distribution of Trajectories for Safe and Comfortable Autonomous Driving",
     "section": "",
-    "text": "SafePathNet introduces a novel approach that models the distribution of future trajectories for both the self-driving vehicle and other road agents using a unified neural network architecture. By incorporating a ‘Mixture of Experts’ framework, the model can learn diverse driving strategies and prioritize safety in real-time decision-making. The use of Transformer networks and imitation learning further enhances the model’s ability to handle complex and unpredictable driving scenarios.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "SafePathNet introduces a novel approach that models the distribution of future trajectories for both the self-driving vehicle and other road agents using a unified neural network architecture. By incorporating a ‘Mixture of Experts’ framework, the model can learn diverse driving strategies and prioritize safety in real-time decision-making. The use of Transformer networks and imitation learning further enhances the model’s ability to handle complex and unpredictable driving scenarios.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2401.10241/index.html",
     "href": "podcast/podcasts/2401.10241/index.html",
     "title": "Zero Bubble Pipeline Parallelism",
     "section": "",
-    "text": "Core idea is think about backward pass into two flows, one to compute grad wrt to parameters, and one to compute grad wrt to output of last layer, schedule so that you are always working instead of waiting (bubble).\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Core idea is think about backward pass into two flows, one to compute grad wrt to parameters, and one to compute grad wrt to output of last layer, schedule so that you are always working instead of waiting (bubble).\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2304.11277/index.html",
     "href": "podcast/podcasts/2304.11277/index.html",
     "title": "PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel",
     "section": "",
-    "text": "FSDP addresses memory capacity challenges by sharding parameters across devices, employs communication optimizations to enhance efficiency, includes a rate limiter feature to control memory impact, offers user-friendly APIs for easy integration, achieved promising results on large models, enables broader applications in various domains, faces challenges in mathematical equivalence and handling shared parameters, and has potential research directions in adaptive sharding strategies, new communication primitives, and combining with other parallelism paradigms.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "FSDP addresses memory capacity challenges by sharding parameters across devices, employs communication optimizations to enhance efficiency, includes a rate limiter feature to control memory impact, offers user-friendly APIs for easy integration, achieved promising results on large models, enables broader applications in various domains, faces challenges in mathematical equivalence and handling shared parameters, and has potential research directions in adaptive sharding strategies, new communication primitives, and combining with other parallelism paradigms.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2310.08370/index.html",
     "href": "podcast/podcasts/2310.08370/index.html",
     "title": "UniPAD: A Universal Pre-training Paradigm for Autonomous Driving",
     "section": "",
-    "text": "UniPAD is a novel self-supervised learning framework designed for autonomous driving, focusing on learning effective representations from 3D data such as LiDAR point clouds and multi-view images. The framework consists of a modality-specific encoder, a mask generator for challenging training, a unified 3D volumetric representation, and a neural rendering decoder. UniPAD showed promising results in improving performance on tasks like 3D object detection and semantic segmentation, outperforming other pre-training methods and offering potential for broader applications beyond autonomous driving.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "UniPAD is a novel self-supervised learning framework designed for autonomous driving, focusing on learning effective representations from 3D data such as LiDAR point clouds and multi-view images. The framework consists of a modality-specific encoder, a mask generator for challenging training, a unified 3D volumetric representation, and a neural rendering decoder. UniPAD showed promising results in improving performance on tasks like 3D object detection and semantic segmentation, outperforming other pre-training methods and offering potential for broader applications beyond autonomous driving.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2310.13810/index.html",
     "href": "podcast/podcasts/2310.13810/index.html",
     "title": "A Better Match for Drivers and Riders Reinforcement Learning at Lyft",
     "section": "",
-    "text": "Placeholder paper description\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "Placeholder paper description\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/1910.02054/index.html",
     "href": "podcast/podcasts/1910.02054/index.html",
     "title": "ZeRO Memory Optimizations: Toward Training Trillion Parameter Models",
     "section": "",
-    "text": "The paper introduces ZeRO, a novel approach to optimize memory usage when training massive language models. ZeRO-DP and ZeRO-R components effectively reduce memory redundancy and allow for training models with up to 170 billion parameters efficiently. The technique shows superlinear scalability, user-friendly implementation, and has the potential to democratize large model training in AI research.\n  \n  \n\n\n\n  \n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n    Download audio\n  \n\n  \n  \n    Podcast Transcript\n    Download transcript\n  \n\n\n  \n  \n    Paper\n    Original paper"
+    "text": "The paper introduces ZeRO, a novel approach to optimize memory usage when training massive language models. ZeRO-DP and ZeRO-R components effectively reduce memory redundancy and allow for training models with up to 170 billion parameters efficiently. The technique shows superlinear scalability, user-friendly implementation, and has the potential to democratize large model training in AI research.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n      Your browser does not support the audio element.\n    \n\n    \n      Related Links\n      \n        Download audio\n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/index.html",

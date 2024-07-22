@@ -321,7 +321,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 <p>Soon after I found out about kepler.gl which made this the perfect project to test it out.</p>
 <p>I extracted the data I needed for my analysis from a PDF of an annual summary report by the Government of India, available <a href="https://nrhm-mis.nic.in/Pages/RHS2017.aspx">here</a>, as I couldn’t find a comprehensive and user-friendly source.</p>
 <p>You can read the analysis <a href="https://arjunsriva.com/infantmortality">here</a>.</p>
-<p><a href="https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json">Here</a> is the kepler.gl map I created for this analysis.</p>
+<p><a href="https://kepler.gl/#/demo?mapUrl=https://www.arjunsriva.com/posts/infant-mortality/kepler.gl.json">Here</a> is the kepler.gl map I created for this analysis.</p>
 <p>It contains the following layers:</p>
 <ul>
 <li>Total Lives Lost: The number of infants who died in each state. The height of each region is proportional to the number of lives lost, with redder regions having a higher infant mortality rate.</li>
@@ -331,7 +331,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 </ul>
 <p>Once the map loads you can click on the layers on the right to toggle them on and off. You can also click on the layers to see the data for each region.</p>
 <p>The json file for the map is available <a href="kepler.gl.json">here</a>.</p>
-<iframe src="https://kepler.gl/#/demo?mapUrl=https://raw.githubusercontent.com/arjunbazinga/arjunbazinga.github.io/gh-pages/posts/infant-mortality/kepler.gl.json" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="70%" width="100%" allowfullscreen=""></iframe>
+<iframe src="https://kepler.gl/#/demo?mapUrl=https://www.arjunsriva.com/posts/infant-mortality/kepler.gl.json" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="70%" width="100%" allowfullscreen=""></iframe>
 
 
 
@@ -1759,13 +1759,37 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
 
 
 
-<p>This post will talk about how I’m going about learning machine learning.</p>
-<p>Mostly online content.</p>
+<p>This post will talk about resources for how I’m going about learning machine learning.</p>
+<section id="books" class="level3">
+<h3 class="anchored" data-anchor-id="books">Books</h3>
+<ul>
+<li>“Hands-On Machine Learning with Scikit-Learn and TensorFlow” by Aurélien Géron</li>
+<li>“Deep Learning” by Ian Goodfellow, Yoshua Bengio, and Aaron Courville</li>
+<li>“The Elements of Statistical Learning” by Trevor Hastie, Robert Tibshirani, and Jerome Friedman</li>
+</ul>
+</section>
+<section id="blogs" class="level3">
+<h3 class="anchored" data-anchor-id="blogs">Blogs</h3>
+<ul>
+<li><a href="https://distill.pub/">Distill.pub</a>: Clear, interactive explanations of machine learning concepts</li>
+<li><a href="https://ruder.io/">Sebastian Ruder’s blog</a>: In-depth articles on NLP and deep learning</li>
+<li><a href="http://karpathy.github.io/">Andrej Karpathy’s blog</a>: Excellent posts on deep learning</li>
+</ul>
+</section>
 <section id="podcasts" class="level3">
 <h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
-<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:<br>
-* <a href="http://partiallyderivative.com">Partially Derivative</a> * <a href="http://lineardigressions.com/">Linear Digressions</a> * <a href="http://dataskeptic.com">Data Skeptic</a></p>
-<p>Some that are supposed to be good but never tried: * Not so standard deviations * Data science at home * Talking machines</p>
+<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:</p>
+<ul>
+<li><a href="http://partiallyderivative.com">Partially Derivative</a></li>
+<li><a href="http://lineardigressions.com/">Linear Digressions</a></li>
+<li><a href="http://dataskeptic.com">Data Skeptic</a></li>
+</ul>
+<p>Some that are supposed to be good but never tried:</p>
+<ul>
+<li>Not so standard deviations</li>
+<li>Data science at home</li>
+<li>Talking machines</li>
+</ul>
 </section>
 <section id="online-courses" class="level3">
 <h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
@@ -1775,7 +1799,15 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
 A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
 <li><p><a href="http://fast.ai">Fast.ai</a><br>
 A course which aims to teach by coding, and takes a top down approach.</p></li>
+<li><p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a> While focused on computer vision, this Stanford course provides an excellent introduction to deep learning concepts.</p></li>
 </ul>
+</section>
+<section id="staying-up-to-date" class="level3">
+<h3 class="anchored" data-anchor-id="staying-up-to-date">Staying Up-to-Date</h3>
+<p>One of the best things about the machine learning field is how much work happens in the open.</p>
+<p>Many researchers publish their work on arXiv months or even years before it appears in journals or at conferences. Following key researchers and institutions on Twitter is an excellent way to stay informed about the latest developments as they happen.</p>
+<p>Some great accounts to follow: <span class="citation" data-cites="goodfellow_ian">@goodfellow_ian</span>, <span class="citation" data-cites="ylecun">@ylecun</span>, <span class="citation" data-cites="karpathy">@karpathy</span>, <span class="citation" data-cites="gwern">@gwern</span>.</p>
+<p>Don’t be afraid of reading arXiv papers, they might seem intimidating in the beginning but they get easier over time.</p>
 
 
 </section>

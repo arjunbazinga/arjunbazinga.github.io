@@ -26,27 +26,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2112.04426.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2112.04426.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2112.04426.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2112.04426.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2112.04426.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2112.04426.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2112.04426">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -71,27 +65,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2303.04129.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2303.04129.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2303.04129.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2303.04129">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -115,27 +103,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2304.11277.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2304.11277.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2304.11277.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2304.11277.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2304.11277.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2304.11277.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2304.11277">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -162,27 +144,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2205.14135.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2205.14135.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2205.14135.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2205.14135.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2205.14135.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2205.14135.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2205.14135">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -207,27 +183,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/1806.09055.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/1806.09055.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/1806.09055.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/1806.09055.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/1806.09055.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/1806.09055.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/1806.09055">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -253,27 +223,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/1609.09106.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/1609.09106.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/1609.09106.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/1609.09106.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/1609.09106.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/1609.09106.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/1609.09106">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -297,27 +261,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2406.07550.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2406.07550.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.07550.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.07550">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -345,27 +303,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2407.02524.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2407.02524.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.02524.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2407.02524">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -391,27 +343,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2406.11066.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2406.11066.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.11066.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.11066">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -437,27 +383,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2407.02945.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2407.02945.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2407.02945.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2407.02945.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2407.02945.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.02945.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2407.02945">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -485,27 +425,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2406.08691.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2406.08691.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2406.08691.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2406.08691.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2406.08691.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.08691.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.08691">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -532,27 +466,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2304.08069.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2304.08069.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2304.08069.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2304.08069.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2304.08069.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2304.08069.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2304.08069">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -578,27 +506,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2212.10156.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2212.10156.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2212.10156.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2212.10156">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -623,27 +545,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2211.02131.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2211.02131.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2211.02131.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2211.02131">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -670,27 +586,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2406.17345.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2406.17345.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2406.17345.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2406.17345.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2406.17345.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.17345.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.17345">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -718,27 +628,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2310.08370.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2310.08370.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2310.08370.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2310.08370">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -764,27 +668,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2406.12214.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2406.12214.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.12214.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.12214">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -810,27 +708,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2402.12289.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2402.12289.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2402.12289.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2402.12289">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -855,27 +747,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2306.00248v1.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2306.00248v1.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2306.00248v1.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2306.00248v1">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -901,27 +787,21 @@
 
 
 
-  <!-- Podcast Audio Player -->
-  <div class="podcast-player">
+  <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
     <audio controls="">
       <source src="../../../static/podcast_data/arxiv/audio/2103.01775.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <p><a href="../../../static/podcast_data/arxiv/audio/2103.01775.mp3" download="">Download audio</a></p>
-  </div>
 
-  <!-- Podcast Transcript -->
-  <div class="podcast-transcript">
-    <h3 class="anchored">Podcast Transcript</h3>
-    <p><a href="../../../static/podcast_data/arxiv/transcripts/2103.01775.txt" download="">Download transcript</a></p>
-  </div>
-
-
-  <!-- Podcast Source -->
-  <div class="podcast-source">
-    <h3 class="anchored">Paper</h3>
-    <p><a href="../../../static/podcast_data/arxiv/pdfs/2103.01775.pdf" download="">Original paper</a></p>
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <li><a href="../../../static/podcast_data/arxiv/audio/2103.01775.mp3" download="">Download audio</a></li>
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2103.01775.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2103.01775">Read original paper</a></li>
+      </ul>
+    </div>
   </div>
 
 
