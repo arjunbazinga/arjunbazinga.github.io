@@ -8,6 +8,7 @@ listing:
   contents: podcasts
   sort: "date desc"
   type: table
+  fields: [ date, title]
   categories: true
   feed: true
   sort-ui: true
