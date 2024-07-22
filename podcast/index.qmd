@@ -15,7 +15,9 @@ listing:
   filter-ui: true
 ---
 
-**Arxiv Papers**
+**Byte-Sized Breakthroughs**
+
+![Byte-sized Breakthroughs Podcast](/static/podcast_data/coverart.png){ width=600px }
 
 I love Arxiv, but often find myself with pockets of time when I can't sit down and read. 
 This podcast bridges that gap, offering bite-sized explorations of individual papers.
@@ -30,3 +32,5 @@ A few things to note:
 This podcast aims to spark curiosity and make cutting-edge research more accessible. It's perfect for those moments when you want to learn but can't dive into a full paper.
 
 Enjoy the exploration of ideas, and let it fuel your interest in further reading!
+
+To keep up to date you can subscribe via [RSS](/static/podcast_data/feed.xml) in your [podcast player](https://support.spotify.com/us/podcasters/article/podcast-subscriptions-using-your-private-rss-feed/).
