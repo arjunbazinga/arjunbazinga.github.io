@@ -28,10 +28,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2112.04426.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2112.04426.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -43,6 +45,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Retrieval-Based Models</category>
@@ -67,10 +83,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -82,6 +100,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Decision Making</category>
@@ -105,10 +137,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2304.11277.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2304.11277.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -120,6 +154,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Large-scale model training</category>
@@ -146,10 +194,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2205.14135.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2205.14135.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -161,6 +211,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Deep Learning</category>
@@ -185,10 +249,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/1806.09055.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/1806.09055.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -200,6 +266,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Neural Architecture Search</category>
@@ -225,10 +305,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/1609.09106.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/1609.09106.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -240,6 +322,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Deep Learning</category>
@@ -263,10 +359,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -278,6 +376,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Image Generation</category>
@@ -305,10 +417,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -320,6 +434,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>LLM</category>
@@ -345,10 +473,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -360,6 +490,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Autonomous Driving</category>
@@ -385,10 +529,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2407.02945.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2407.02945.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -400,6 +546,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Computer Vision</category>
@@ -427,10 +587,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2406.08691.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.08691.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -442,6 +604,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Computer Vision</category>
@@ -468,10 +644,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2304.08069.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2304.08069.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -483,6 +661,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Computer Vision</category>
@@ -508,10 +700,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -523,6 +717,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Autonomous Driving</category>
@@ -547,10 +755,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -562,6 +772,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Autonomous Driving</category>
@@ -588,10 +812,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2406.17345.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.17345.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -603,6 +829,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Computer Vision</category>
@@ -630,10 +870,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -645,6 +887,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Autonomous Driving</category>
@@ -670,10 +926,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -685,6 +943,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Autonomous Driving</category>
@@ -710,10 +982,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -725,6 +999,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Autonomous Driving</category>
@@ -749,10 +1037,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -764,6 +1054,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Reccomender Systems</category>
@@ -789,10 +1093,12 @@
 
   <div class="podcast-section">
     <h3 class="anchored">Listen to the Podcast</h3>
-    <audio controls="">
-      <source src="../../../static/podcast_data/arxiv/audio/2103.01775.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2103.01775.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
 
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
@@ -804,6 +1110,20 @@
     </div>
   </div>
 
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'download'
+        ]
+      });
+    });
+  </script>
 
      ]]></description>
   <category>Transformer</category>
