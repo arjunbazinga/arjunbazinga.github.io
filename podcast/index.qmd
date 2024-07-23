@@ -17,7 +17,7 @@ listing:
 
 **Byte-Sized Breakthroughs Podcast**
 
-![](/static/podcast_data/coverart.png){ width=600px }
+![](/static/podcast_data/website-coverart.webp){ width=600px }
 
 I love Arxiv, but often find myself with pockets of time when I can't sit down and read. 
 This podcast bridges that gap, offering bite-sized explorations of individual papers.
