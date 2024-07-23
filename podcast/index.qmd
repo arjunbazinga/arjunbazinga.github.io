@@ -15,9 +15,9 @@ listing:
   filter-ui: true
 ---
 
-**Byte-Sized Breakthroughs**
+**Byte-Sized Breakthroughs Podcast**
 
-![Byte-sized Breakthroughs Podcast](/static/podcast_data/coverart.png){ width=600px }
+![](/static/podcast_data/coverart.png){ width=600px }
 
 I love Arxiv, but often find myself with pockets of time when I can't sit down and read. 
 This podcast bridges that gap, offering bite-sized explorations of individual papers.
@@ -33,4 +33,6 @@ This podcast aims to spark curiosity and make cutting-edge research more accessi
 
 Enjoy the exploration of ideas, and let it fuel your interest in further reading!
 
-To keep up to date you can subscribe via [RSS](/static/podcast_data/feed.xml) in your [podcast player](https://support.spotify.com/us/podcasters/article/podcast-subscriptions-using-your-private-rss-feed/).
+## Listen everywhere
+
+[![](/static/podcast_data/pocastapps/spotify.svg){ width=150px }](https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0) [![](/static/podcast_data/pocastapps/apple.svg){ width=120px }](https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141) [![](/static/podcast_data/pocastapps/youtube.svg){ width=120px }](https://podcastaddict.com/podcast/byte-sized-breakthroughs/5229305)  [![](/static/podcast_data/pocastapps/rss.svg){ width=40px }](/static/podcast_data/feed.xml) or your podcast app of choice.
