@@ -12,6 +12,60 @@
 <generator>quarto-1.5.55</generator>
 <lastBuildDate>Sat, 20 Jul 2024 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>Foundation Models in Decision Making: Roles, Challenges, and Opportunities</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2303.04129/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>The paper proposes a framework for understanding the various roles of foundation models in decision making, including conditional generative models, representation learners, and interactive agents. Key takeaways include the use of foundation models for behavioral priors, world modeling, and generalization of knowledge across tasks and environments.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2303.04129.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2303.04129.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2303.04129">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Decision Making</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2303.04129/</guid>
+  <pubDate>Sat, 20 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Retrieval-Enhanced Transformers (RETRO): A Semi-Parametric Approach to Enhance Performance of Large Language Models</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2112.04426/</link>
   <description><![CDATA[ 
@@ -64,60 +118,6 @@
   <category>Retrieval-Based Models</category>
   <category>Deep Learning</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2112.04426/</guid>
-  <pubDate>Sat, 20 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Foundation Models in Decision Making: Roles, Challenges, and Opportunities</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2303.04129/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The paper proposes a framework for understanding the various roles of foundation models in decision making, including conditional generative models, representation learners, and interactive agents. Key takeaways include the use of foundation models for behavioral priors, world modeling, and generalization of knowledge across tasks and environments.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2303.04129.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2303.04129.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2303.04129.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2303.04129">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Decision Making</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2303.04129/</guid>
   <pubDate>Sat, 20 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -233,6 +233,64 @@
   <pubDate>Sat, 20 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>TiTok: A Transformer-based 1D Tokenization Approach for Image Generation</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2406.07550/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>TiTok introduces a novel 1D tokenization method for image generation, enabling the representation of images with significantly fewer tokens while maintaining or surpassing the performance of existing 2D grid-based methods. The approach leverages a Vision Transformer architecture, two-stage training with proxy codes, and achieves remarkable speedup in training and inference. The research opens up new possibilities for efficient and high-quality image generation, with implications for various applications in computer vision and beyond.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2406.07550.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.07550.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.07550">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Image Generation</category>
+  <category>Computer Vision</category>
+  <category>Transformer</category>
+  <category>Generative Models</category>
+  <category>Machine Learning</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2406.07550/</guid>
+  <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>DARTS: Differentiable Architecture Search</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1806.09055/</link>
   <description><![CDATA[ 
@@ -343,15 +401,15 @@
   <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>TiTok: A Transformer-based 1D Tokenization Approach for Image Generation</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2406.07550/</link>
+  <title>DriveVLM: Vision-Language Models for Autonomous Driving in Urban Environments</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2402.12289/</link>
   <description><![CDATA[ 
   
     
       
 
   
-  <p>TiTok introduces a novel 1D tokenization method for image generation, enabling the representation of images with significantly fewer tokens while maintaining or surpassing the performance of existing 2D grid-based methods. The approach leverages a Vision Transformer architecture, two-stage training with proxy codes, and achieves remarkable speedup in training and inference. The research opens up new possibilities for efficient and high-quality image generation, with implications for various applications in computer vision and beyond.</p>
+  <p>The paper introduces DriveVLM, a system that leverages Vision-Language Models for scene understanding in autonomous driving. It comprises modules for Scene Description, Scene Analysis, and Hierarchical Planning to handle complex driving scenarios. DriveVLM outperformed other models in handling uncommon objects and unexpected events, while DriveVLM-Dual achieved state-of-the-art performance in planning tasks, showing promise for future improvements in autonomous driving.</p>
   
   
 
@@ -361,7 +419,7 @@
     <h3 class="anchored">Listen to the Podcast</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2406.07550.mp3" type="audio/mpeg">
+        <source src="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -369,123 +427,9 @@
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
       <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2406.07550.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.07550.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2406.07550">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Image Generation</category>
-  <category>Computer Vision</category>
-  <category>Transformer</category>
-  <category>Generative Models</category>
-  <category>Machine Learning</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2406.07550/</guid>
-  <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Training Large Language Models for Compiler Optimization</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2407.02524/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The research paper discusses the development of LLM Compiler, a model specifically trained on compiler IRs and assembly code for optimizing code efficiently. This approach outperforms traditional techniques and existing LLMs in tasks like flag tuning and disassembly, showing potential for automating and improving the optimization process in software engineering.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2407.02524.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.02524.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2407.02524">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>LLM</category>
-  <category>Compiler Optimization</category>
-  <category>Software Engineering</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2407.02524/</guid>
-  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Metadata-based Color Harmonization for Multi-camera Surround View Systems</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2406.11066/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The paper introduces a metadata-based approach to address color inconsistencies in multi-camera surround view systems, crucial for accurate perception in autonomous driving. The method significantly outperforms traditional techniques in visual quality and runtime, making it more efficient and robust for real-time applications.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2406.11066.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.11066.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2406.11066">Read original paper</a></li>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2402.12289.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2402.12289.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2402.12289">Read original paper</a></li>
       </ul>
     </div>
   </div>
@@ -507,9 +451,8 @@
 
      ]]></description>
   <category>Autonomous Driving</category>
-  <category>Color Harmonization</category>
-  <category>Computer Vision</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2406.11066/</guid>
+  <category>Vision-Language Models</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2402.12289/</guid>
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -571,6 +514,62 @@
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Robustness Evaluation of HD Map Constructors under Sensor Corruptions for Autonomous Driving</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2406.12214/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>The paper focuses on evaluating the robustness of HD map constructors under various sensor corruptions using a comprehensive benchmark called MapBench. It highlights the vulnerability of existing methods to real-world challenges and suggests the importance of advanced data augmentation techniques and new network architectures to enhance robustness for autonomous driving applications.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2406.12214.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.12214.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.12214">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Autonomous Driving</category>
+  <category>Robustness</category>
+  <category>Evaluation</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2406.12214/</guid>
+  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Unsupervised Occupancy Fields for Perception and Forecasting</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2406.08691/</link>
   <description><![CDATA[ 
@@ -625,6 +624,174 @@
   <category>Unsupervised learning</category>
   <category>LiDAR</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2406.08691/</guid>
+  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>SafePathNet: Learning a Distribution of Trajectories for Safe and Comfortable Autonomous Driving</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2211.02131/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>SafePathNet introduces a novel approach that models the distribution of future trajectories for both the self-driving vehicle and other road agents using a unified neural network architecture. By incorporating a ‘Mixture of Experts’ framework, the model can learn diverse driving strategies and prioritize safety in real-time decision-making. The use of Transformer networks and imitation learning further enhances the model’s ability to handle complex and unpredictable driving scenarios.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2211.02131.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2211.02131.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2211.02131">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Autonomous Driving</category>
+  <category>Forecasting</category>
+  <category>Transformer</category>
+  <category>Imitation Learning</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2211.02131/</guid>
+  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Training Large Language Models for Compiler Optimization</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2407.02524/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>The research paper discusses the development of LLM Compiler, a model specifically trained on compiler IRs and assembly code for optimizing code efficiently. This approach outperforms traditional techniques and existing LLMs in tasks like flag tuning and disassembly, showing potential for automating and improving the optimization process in software engineering.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2407.02524.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2407.02524.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.02524.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2407.02524">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>LLM</category>
+  <category>Compiler Optimization</category>
+  <category>Software Engineering</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2407.02524/</guid>
+  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Planning-Oriented Autonomous Driving</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2212.10156/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>The paper introduces UniAD, a planning-oriented framework for autonomous driving that focuses on integrating perception, prediction, and planning tasks to optimize for safe and efficient driving. UniAD outperforms existing state-of-the-art methods in motion forecasting, occupancy prediction, and planning, showcasing the benefits of joint optimization and query-based communication between modules. Key challenges for future research include addressing computational complexity, handling long-tail scenarios, and exploring additional tasks like depth estimation and behavior prediction.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2212.10156.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2212.10156.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2212.10156">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Autonomous Driving</category>
+  <category>Computer Vision</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2212.10156/</guid>
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -684,15 +851,15 @@
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Planning-Oriented Autonomous Driving</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2212.10156/</link>
+  <title>UniPAD: A Universal Pre-training Paradigm for Autonomous Driving</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2310.08370/</link>
   <description><![CDATA[ 
   
     
       
 
   
-  <p>The paper introduces UniAD, a planning-oriented framework for autonomous driving that focuses on integrating perception, prediction, and planning tasks to optimize for safe and efficient driving. UniAD outperforms existing state-of-the-art methods in motion forecasting, occupancy prediction, and planning, showcasing the benefits of joint optimization and query-based communication between modules. Key challenges for future research include addressing computational complexity, handling long-tail scenarios, and exploring additional tasks like depth estimation and behavior prediction.</p>
+  <p>UniPAD is a novel self-supervised learning framework designed for autonomous driving, focusing on learning effective representations from 3D data such as LiDAR point clouds and multi-view images. The framework consists of a modality-specific encoder, a mask generator for challenging training, a unified 3D volumetric representation, and a neural rendering decoder. UniPAD showed promising results in improving performance on tasks like 3D object detection and semantic segmentation, outperforming other pre-training methods and offering potential for broader applications beyond autonomous driving.</p>
   
   
 
@@ -702,7 +869,7 @@
     <h3 class="anchored">Listen to the Podcast</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2212.10156.mp3" type="audio/mpeg">
+        <source src="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -710,9 +877,9 @@
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
       <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2212.10156.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2212.10156.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2212.10156">Read original paper</a></li>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2310.08370.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2310.08370.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2310.08370">Read original paper</a></li>
       </ul>
     </div>
   </div>
@@ -734,20 +901,21 @@
 
      ]]></description>
   <category>Autonomous Driving</category>
-  <category>Computer Vision</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2212.10156/</guid>
+  <category>Self-supervised Learning</category>
+  <category>3D Data Processing</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2310.08370/</guid>
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>SafePathNet: Learning a Distribution of Trajectories for Safe and Comfortable Autonomous Driving</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2211.02131/</link>
+  <title>Metadata-based Color Harmonization for Multi-camera Surround View Systems</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2406.11066/</link>
   <description><![CDATA[ 
   
     
       
 
   
-  <p>SafePathNet introduces a novel approach that models the distribution of future trajectories for both the self-driving vehicle and other road agents using a unified neural network architecture. By incorporating a ‘Mixture of Experts’ framework, the model can learn diverse driving strategies and prioritize safety in real-time decision-making. The use of Transformer networks and imitation learning further enhances the model’s ability to handle complex and unpredictable driving scenarios.</p>
+  <p>The paper introduces a metadata-based approach to address color inconsistencies in multi-camera surround view systems, crucial for accurate perception in autonomous driving. The method significantly outperforms traditional techniques in visual quality and runtime, making it more efficient and robust for real-time applications.</p>
   
   
 
@@ -757,7 +925,7 @@
     <h3 class="anchored">Listen to the Podcast</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2211.02131.mp3" type="audio/mpeg">
+        <source src="../../../static/podcast_data/arxiv/audio/2406.11066.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -765,9 +933,9 @@
     <div class="podcast-links">
       <h4 class="anchored">Related Links</h4>
       <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2211.02131.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2211.02131.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2211.02131">Read original paper</a></li>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2406.11066.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.11066.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2406.11066">Read original paper</a></li>
       </ul>
     </div>
   </div>
@@ -789,10 +957,9 @@
 
      ]]></description>
   <category>Autonomous Driving</category>
-  <category>Forecasting</category>
-  <category>Transformer</category>
-  <category>Imitation Learning</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2211.02131/</guid>
+  <category>Color Harmonization</category>
+  <category>Computer Vision</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2406.11066/</guid>
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -854,229 +1021,6 @@
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>UniPAD: A Universal Pre-training Paradigm for Autonomous Driving</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2310.08370/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>UniPAD is a novel self-supervised learning framework designed for autonomous driving, focusing on learning effective representations from 3D data such as LiDAR point clouds and multi-view images. The framework consists of a modality-specific encoder, a mask generator for challenging training, a unified 3D volumetric representation, and a neural rendering decoder. UniPAD showed promising results in improving performance on tasks like 3D object detection and semantic segmentation, outperforming other pre-training methods and offering potential for broader applications beyond autonomous driving.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2310.08370.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2310.08370.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2310.08370.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2310.08370">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Autonomous Driving</category>
-  <category>Self-supervised Learning</category>
-  <category>3D Data Processing</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2310.08370/</guid>
-  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Robustness Evaluation of HD Map Constructors under Sensor Corruptions for Autonomous Driving</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2406.12214/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The paper focuses on evaluating the robustness of HD map constructors under various sensor corruptions using a comprehensive benchmark called MapBench. It highlights the vulnerability of existing methods to real-world challenges and suggests the importance of advanced data augmentation techniques and new network architectures to enhance robustness for autonomous driving applications.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2406.12214.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2406.12214.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2406.12214.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2406.12214">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Autonomous Driving</category>
-  <category>Robustness</category>
-  <category>Evaluation</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2406.12214/</guid>
-  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>DriveVLM: Vision-Language Models for Autonomous Driving in Urban Environments</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2402.12289/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The paper introduces DriveVLM, a system that leverages Vision-Language Models for scene understanding in autonomous driving. It comprises modules for Scene Description, Scene Analysis, and Hierarchical Planning to handle complex driving scenarios. DriveVLM outperformed other models in handling uncommon objects and unexpected events, while DriveVLM-Dual achieved state-of-the-art performance in planning tasks, showing promise for future improvements in autonomous driving.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2402.12289.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2402.12289.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2402.12289.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2402.12289">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Autonomous Driving</category>
-  <category>Vision-Language Models</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2402.12289/</guid>
-  <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2306.00248v1/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>Pinterest home feed reccomendation system. Needs to react to both long term interests + short term (even single session only) interests.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2306.00248v1.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2306.00248v1.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2306.00248v1">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Reccomender Systems</category>
-  <category>Transformer</category>
-  <category>Systems</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2306.00248v1/</guid>
-  <pubDate>Mon, 08 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2103.01775/</link>
   <description><![CDATA[ 
@@ -1130,6 +1074,62 @@
   <category>Finance</category>
   <category>Deep Learning</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2103.01775/</guid>
+  <pubDate>Mon, 08 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Models tell you what to discard</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2310.01801/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>This paper introduces FastGen, a novel method that uses lightweight model profiling and adaptive key-value caching to significantly reduce memory footprint without noticeable quality loss.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2310.01801.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2310.01801.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2310.01801.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2310.01801">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Performance</category>
+  <category>Systems</category>
+  <category>Memory</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2310.01801/</guid>
   <pubDate>Mon, 08 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>

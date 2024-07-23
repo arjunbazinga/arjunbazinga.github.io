@@ -1,5 +1,9 @@
 [
   {
+    "listing": "/til/index.html",
+    "items": []
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/posts/exerimentations-platforms/index.html",
@@ -18,40 +22,36 @@
     ]
   },
   {
-    "listing": "/til/index.html",
-    "items": []
-  },
-  {
     "listing": "/podcast/index.html",
     "items": [
-      "/podcast/podcasts/2112.04426/index.html",
       "/podcast/podcasts/2303.04129/index.html",
+      "/podcast/podcasts/2112.04426/index.html",
       "/podcast/podcasts/2304.11277/index.html",
       "/podcast/podcasts/2205.14135/index.html",
+      "/podcast/podcasts/2406.07550/index.html",
       "/podcast/podcasts/1806.09055/index.html",
       "/podcast/podcasts/1609.09106/index.html",
-      "/podcast/podcasts/2406.07550/index.html",
-      "/podcast/podcasts/2407.02524/index.html",
-      "/podcast/podcasts/2406.11066/index.html",
-      "/podcast/podcasts/2407.02945/index.html",
-      "/podcast/podcasts/2406.08691/index.html",
-      "/podcast/podcasts/2304.08069/index.html",
-      "/podcast/podcasts/2212.10156/index.html",
-      "/podcast/podcasts/2211.02131/index.html",
-      "/podcast/podcasts/2406.17345/index.html",
-      "/podcast/podcasts/2310.08370/index.html",
-      "/podcast/podcasts/2406.12214/index.html",
       "/podcast/podcasts/2402.12289/index.html",
-      "/podcast/podcasts/2306.00248v1/index.html",
+      "/podcast/podcasts/2407.02945/index.html",
+      "/podcast/podcasts/2406.12214/index.html",
+      "/podcast/podcasts/2406.08691/index.html",
+      "/podcast/podcasts/2211.02131/index.html",
+      "/podcast/podcasts/2407.02524/index.html",
+      "/podcast/podcasts/2212.10156/index.html",
+      "/podcast/podcasts/2304.08069/index.html",
+      "/podcast/podcasts/2310.08370/index.html",
+      "/podcast/podcasts/2406.11066/index.html",
+      "/podcast/podcasts/2406.17345/index.html",
       "/podcast/podcasts/2103.01775/index.html",
       "/podcast/podcasts/2310.01801/index.html",
-      "/podcast/podcasts/2109.10665/index.html",
-      "/podcast/podcasts/2002.11252/index.html",
       "/podcast/podcasts/2006.06373/index.html",
-      "/podcast/podcasts/2401.10241/index.html",
+      "/podcast/podcasts/1910.02054/index.html",
       "/podcast/podcasts/2111.15397/index.html",
+      "/podcast/podcasts/2002.11252/index.html",
       "/podcast/podcasts/2310.13810/index.html",
-      "/podcast/podcasts/1910.02054/index.html"
+      "/podcast/podcasts/2401.10241/index.html",
+      "/podcast/podcasts/2109.10665/index.html",
+      "/podcast/podcasts/2306.00248v1/index.html"
     ]
   }
 ]
