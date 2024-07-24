@@ -69,6 +69,63 @@
   <pubDate>Wed, 24 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Unraveling the Connection between In-Context Learning and Gradient Descent in Transformers</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2212.07677/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>On how Transformers leverage in-context learning mechanisms through gradient descent, enabling them to adapt to new tasks efficiently. Understanding this connection can help improve model generalization, enhance few-shot learning capabilities, and potentially lead to the development of more intelligent and adaptable AI systems.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+    <h3 class="anchored">Listen to the Podcast</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2212.07677.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2212.07677.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2212.07677.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2212.07677">Read original paper</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Transformers</category>
+  <category>In context Learning</category>
+  <category>Neural Networks</category>
+  <category>Meta-Learning</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2212.07677/</guid>
+  <pubDate>Wed, 24 Jul 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Retrieval-Enhanced Transformers (RETRO): A Semi-Parametric Approach to Enhance Performance of Large Language Models</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2112.04426/</link>
   <description><![CDATA[ 
@@ -1076,62 +1133,6 @@
   <category>Vision-Language Models</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2402.12289/</guid>
   <pubDate>Thu, 18 Jul 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2306.00248v1/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>Pinterest home feed reccomendation system. Needs to react to both long term interests + short term (even single session only) interests.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-    <h3 class="anchored">Listen to the Podcast</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2306.00248v1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2306.00248v1.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2306.00248v1.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2306.00248v1">Read original paper</a></li>
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Reccomender Systems</category>
-  <category>Transformer</category>
-  <category>Systems</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2306.00248v1/</guid>
-  <pubDate>Mon, 08 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
