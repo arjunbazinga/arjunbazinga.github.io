@@ -33,16 +33,14 @@ This podcast aims to spark curiosity and make cutting-edge research more accessi
 
 Enjoy the exploration of ideas, and let it fuel your interest in further reading!
 
-## The Team
+## Listen everywhere
 
-Our hosts bring each paper to life:
+[![](/static/podcast_data/pocastapps/spotify.svg){ width=150px }](https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0) [![](/static/podcast_data/pocastapps/apple.svg){ width=120px }](https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141) [![](/static/podcast_data/pocastapps/youtube.svg){ width=120px }](https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak)  [![](/static/podcast_data/pocastapps/rss.svg){ width=40px }](/static/podcast_data/feed.xml)
+
+## The Team
 
 - **Alex Askwell**: Our curious and knowledgeable moderator, always ready with the right questions to guide our exploration.
 - **Dr. Paige Turner**: Our lead researcher and paper expert, diving deep into the methods and results.
 - **Prof. Wyd Spectrum**: Our field expert, providing broader context and critical insights.
 
 Join them as they break down complex research into byte-sized breakthroughs!
-
-## Listen everywhere
-
-[![](/static/podcast_data/pocastapps/spotify.svg){ width=150px }](https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0) [![](/static/podcast_data/pocastapps/apple.svg){ width=120px }](https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141) [![](/static/podcast_data/pocastapps/youtube.svg){ width=120px }](https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak)  [![](/static/podcast_data/pocastapps/rss.svg){ width=40px }](/static/podcast_data/feed.xml)
