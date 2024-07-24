@@ -15,7 +15,7 @@ listing:
   filter-ui: true
 ---
 
-**Byte-Sized Breakthroughs Podcast**
+## **Byte-Sized Breakthroughs Podcast**
 
 ![](/static/podcast_data/website-coverart.webp){ width=600px }
 
@@ -32,6 +32,16 @@ A few things to note:
 This podcast aims to spark curiosity and make cutting-edge research more accessible. It's perfect for those moments when you want to learn but can't dive into a full paper.
 
 Enjoy the exploration of ideas, and let it fuel your interest in further reading!
+
+## The Team
+
+Our hosts bring each paper to life:
+
+- **Alex Askwell**: Our curious and knowledgeable moderator, always ready with the right questions to guide our exploration.
+- **Dr. Paige Turner**: Our lead researcher and paper expert, diving deep into the methods and results.
+- **Prof. Wyd Spectrum**: Our field expert, providing broader context and critical insights.
+
+Join them as they break down complex research into byte-sized breakthroughs!
 
 ## Listen everywhere
 
