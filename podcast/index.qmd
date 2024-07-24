@@ -45,4 +45,4 @@ Join them as they break down complex research into byte-sized breakthroughs!
 
 ## Listen everywhere
 
-[![](/static/podcast_data/pocastapps/spotify.svg){ width=150px }](https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0) [![](/static/podcast_data/pocastapps/apple.svg){ width=120px }](https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141) [![](/static/podcast_data/pocastapps/youtube.svg){ width=120px }](https://podcastaddict.com/podcast/byte-sized-breakthroughs/5229305)  [![](/static/podcast_data/pocastapps/rss.svg){ width=40px }](/static/podcast_data/feed.xml)
+[![](/static/podcast_data/pocastapps/spotify.svg){ width=150px }](https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0) [![](/static/podcast_data/pocastapps/apple.svg){ width=120px }](https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141) [![](/static/podcast_data/pocastapps/youtube.svg){ width=120px }](https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak)  [![](/static/podcast_data/pocastapps/rss.svg){ width=40px }](/static/podcast_data/feed.xml)
