@@ -1,6 +1,6 @@
 ---
 title: Robustness Evaluation of HD Map Constructors under Sensor Corruptions for Autonomous Driving
-categories: [ Autonomous Driving, Robustness, Evaluation ]
+categories: ['Autonomous Driving', 'Computer Vision', 'AI Safety']
 date: "2024-07-18"
 arxiv-paper-id: 2406.12214
 ---

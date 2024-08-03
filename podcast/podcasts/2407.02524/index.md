@@ -1,6 +1,6 @@
 ---
 title: Training Large Language Models for Compiler Optimization
-categories: [ LLM, Compiler Optimization, Software Engineering ]
+categories: ['Natural Language Processing', 'Systems and Performance', 'AI for Science']
 date: "2024-07-18"
 arxiv-paper-id: 2407.02524
 ---

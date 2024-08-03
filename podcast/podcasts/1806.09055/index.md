@@ -1,6 +1,6 @@
 ---
 title: "DARTS: Differentiable Architecture Search"
-categories: [ Neural Architecture Search, Deep Learning, Gradient-Based Optimization ]
+categories: ['Deep Learning', 'Optimization', 'Machine Learning']
 date: "2024-07-19"
 arxiv-paper-id: "1806.09055"
 ---

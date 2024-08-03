@@ -1,6 +1,6 @@
 ---
 title: "ZeRO Memory Optimizations: Toward Training Trillion Parameter Models"
-categories: [Performance, Systems, Memory, Large Scale Model Training, Deep Learning]
+categories: ['Systems and Performance', 'Deep Learning', 'Natural Language Processing']
 date: "2024-07-08"
 arxiv-paper-id: "1910.02054"
 ---

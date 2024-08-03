@@ -1,6 +1,6 @@
 ---
 title: Survey on reinforcement learning in reccomender systems
-categories: [ Reccomender Systems, Reinforcement Learning ]
+categories: ['Reinforcement Learning', 'Recommender Systems', 'Machine Learning']
 date: "2024-07-08"
 arxiv-paper-id: "2109.10665"
 ---

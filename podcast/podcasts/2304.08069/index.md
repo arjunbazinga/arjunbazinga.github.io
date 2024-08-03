@@ -1,6 +1,6 @@
 ---
 title: "RT-DETR: Real-Time Object Detection with Transformer"
-categories: [ Computer Vision, Object Detection, Transformer ]
+categories: ['Computer Vision', 'Transformers', 'Deep Learning']
 date: "2024-07-18"
 arxiv-paper-id: 2304.08069
 ---

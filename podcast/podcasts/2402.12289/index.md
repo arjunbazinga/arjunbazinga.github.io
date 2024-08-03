@@ -1,6 +1,6 @@
 ---
 title: "DriveVLM: Vision-Language Models for Autonomous Driving in Urban Environments"
-categories: [ Autonomous Driving, Vision-Language Models]
+categories: ['Autonomous Driving', 'Computer Vision', 'Multimodal AI']
 date: "2024-07-18"
 arxiv-paper-id: "2402.12289"
 ---

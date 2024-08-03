@@ -1,6 +1,6 @@
 ---
 title: "Foundation Models in Decision Making: Roles, Challenges, and Opportunities"
-categories: [ Decision Making ]
+categories: ['Artificial Intelligence', 'Machine Learning', 'Explainable AI']
 date: "2024-07-20"
 arxiv-paper-id: "2303.04129"
 ---

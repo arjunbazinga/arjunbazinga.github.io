@@ -1,6 +1,6 @@
 ---
 title: Unsupervised Occupancy Fields for Perception and Forecasting
-categories: [ Computer Vision, Forecasting, Unsupervised learning, LiDAR ]
+categories: ['Computer Vision', 'Machine Learning', 'Autonomous Driving']
 date: "2024-07-18"
 arxiv-paper-id: 2406.08691
 ---

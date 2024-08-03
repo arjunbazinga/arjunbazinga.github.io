@@ -1,6 +1,6 @@
 ---
 title: "Retrieval-Enhanced Transformers (RETRO): A Semi-Parametric Approach to Enhance Performance of Large Language Models"
-categories: [ Retrieval-Based Models, Deep Learning ]
+categories: ['Natural Language Processing', 'Deep Learning', 'Systems and Performance']
 date: "2024-07-20"
 arxiv-paper-id: 2112.04426
 ---

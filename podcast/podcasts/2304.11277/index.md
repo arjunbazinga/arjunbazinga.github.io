@@ -1,6 +1,6 @@
 ---
 title: "PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel"
-categories: [ Large-scale model training, Deep Learning, Distributed computing, PyTorch ]
+categories: ['Systems and Performance', 'Deep Learning', 'Machine Learning']
 date: "2024-07-20"
 arxiv-paper-id: 2304.11277
 ---

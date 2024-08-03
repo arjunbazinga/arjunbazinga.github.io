@@ -1,6 +1,6 @@
 ---
 title: Extrapolated View Synthesis for Urban Scene Reconstruction
-categories: [ Computer Vision, Urban Scene Reconstruction, 3D Reconstruction, Gaussian Splatting, Diffusion Models ]
+categories: ['3D Vision', 'Computer Vision', 'Generative Models']
 date: "2024-07-18"
 arxiv-paper-id: 2407.02945
 ---

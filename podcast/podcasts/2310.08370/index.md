@@ -1,6 +1,6 @@
 ---
 title: "UniPAD: A Universal Pre-training Paradigm for Autonomous Driving"
-categories: [ Autonomous Driving, Self-supervised Learning, 3D Data Processing ]
+categories: ['Autonomous Driving', 'Deep Learning', 'Computer Vision']
 date: "2024-07-18"
 arxiv-paper-id: "2310.08370"
 ---

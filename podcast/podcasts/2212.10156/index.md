@@ -1,6 +1,6 @@
 ---
 title: Planning-Oriented Autonomous Driving
-categories: [ Autonomous Driving,   Computer Vision ]
+categories: ['Autonomous Driving', 'Artificial Intelligence', 'Machine Learning']
 date: "2024-07-18"
 arxiv-paper-id: 2212.10156
 ---

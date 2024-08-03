@@ -1,6 +1,6 @@
 ---
 title: NeuralProphet Explainable Forecasting at Scale
-categories: [ Deep Learning, Forecasting ]
+categories: ['Deep Learning', 'Machine Learning', 'Explainable AI']
 date: "2024-07-08"
 arxiv-paper-id: "2111.15397"
 ---

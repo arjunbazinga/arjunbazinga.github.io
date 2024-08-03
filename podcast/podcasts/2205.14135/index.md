@@ -1,6 +1,6 @@
 ---
 title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
-categories: [ Deep Learning, Transformer ]
+categories: ['Deep Learning', 'Transformers', 'Systems and Performance']
 date: "2024-07-20"
 arxiv-paper-id: 2205.14135
 ---

@@ -1,6 +1,6 @@
 ---
 title: Zero Bubble Pipeline Parallelism
-categories: [  Deep Learning, Performance, Systems, Throughput ]
+categories: ['Systems and Performance', 'Deep Learning', 'Machine Learning']
 date: "2024-07-08"
 arxiv-paper-id: "2401.10241"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "TiTok: A Transformer-based 1D Tokenization Approach for Image Generation"
-categories: [ Image Generation, Computer Vision, Transformer, Generative Models, Machine Learning ]
+categories: ['Generative Models', 'Computer Vision', 'Transformers']
 date: "2024-07-19"
 arxiv-paper-id: "2406.07550"
 ---

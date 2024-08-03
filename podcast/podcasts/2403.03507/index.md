@@ -1,6 +1,6 @@
 ---
 title: "Gradient Low-Rank Projection (GaLore): Revolutionizing Memory-Efficient LLM Training"
-categories: [ Machine Learning, Large Language Models (LLMs), Memory Efficiency, Gradient Low-Rank Methods ]
+categories: ['Natural Language Processing', 'Optimization', 'Systems and Performance']
 description: "The paper introduces a new approach named Gradient Low-Rank Projection (GaLore) to train large language models (LLMs) with full parameter learning while being significantly more memory-efficient than existing techniques. GaLore dynamically switches between multiple low-rank subspaces to represent the gradient during training, enabling the exploration of different directions while maintaining memory savings."
 date: "2024-07-24"
 arxiv-paper-id: "2403.03507"

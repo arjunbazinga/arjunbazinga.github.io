@@ -1,6 +1,6 @@
 ---
 title: Models tell you what to discard
-categories: [  Performance, Systems, Memory  ]
+categories: ['Systems and Performance', 'Machine Learning', 'Optimization']
 date: "2024-07-08"
 arxiv-paper-id: "2310.01801"
 ---

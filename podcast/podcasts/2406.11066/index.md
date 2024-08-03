@@ -1,6 +1,6 @@
 ---
 title: Metadata-based Color Harmonization for Multi-camera Surround View Systems
-categories: [ Autonomous Driving, Color Harmonization, Computer Vision  ]
+categories: ['Computer Vision', 'Autonomous Driving']
 date: "2024-07-18"
 arxiv-paper-id: "2406.11066"
 ---

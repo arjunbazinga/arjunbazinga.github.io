@@ -7,7 +7,7 @@ title-block-banner: true
 listing:
   contents: podcasts
   sort: "date desc"
-  type: table
+  type: grid
   fields: [ date, title]
   categories: true
   feed: true

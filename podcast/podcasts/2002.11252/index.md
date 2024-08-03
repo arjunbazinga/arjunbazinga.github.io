@@ -1,6 +1,6 @@
 ---
 title: AutoEmb Automated Embedding Dimensionality Searchg in Streaming Recommendations
-categories: [ Deep Learning, Reccomender Systems ]
+categories: ['Deep Learning', 'Recommender Systems', 'Optimization']
 date: "2024-07-08"
 arxiv-paper-id: "2002.11252"
 ---

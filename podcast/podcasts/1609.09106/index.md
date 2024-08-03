@@ -1,6 +1,6 @@
 ---
 title: "Hyper Networks: A Novel Approach to Learning Weights in Deep Neural Networks"
-categories: [ Deep Learning ]
+categories: ['Deep Learning', 'Machine Learning', 'Neural Networks']
 date: "2024-07-19"
 arxiv-paper-id: 1609.09106
 ---

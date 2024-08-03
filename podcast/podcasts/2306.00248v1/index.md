@@ -1,6 +1,6 @@
 ---
 title: TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest
-categories: [ Reccomender Systems, Transformer, Systems ]
+categories: ['Recommender Systems', 'Transformers', 'Systems and Performance']
 date: "2024-07-08"
 arxiv-paper-id: "2306.00248v1"
 ---

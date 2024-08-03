@@ -1,6 +1,6 @@
 ---
 title: "SafePathNet: Learning a Distribution of Trajectories for Safe and Comfortable Autonomous Driving"
-categories: [ Autonomous Driving, Forecasting, Transformer, Imitation Learning ]
+categories: ['Autonomous Driving', 'AI Safety', 'Machine Learning']
 date: "2024-07-18"
 arxiv-paper-id: 2211.02131
 ---
