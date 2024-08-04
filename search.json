@@ -210,6 +210,13 @@
     "text": "The paper introduces DriveVLM, a system that leverages Vision-Language Models for scene understanding in autonomous driving. It comprises modules for Scene Description, Scene Analysis, and Hierarchical Planning to handle complex driving scenarios. DriveVLM outperformed other models in handling uncommon objects and unexpected events, while DriveVLM-Dual achieved state-of-the-art performance in planning tasks, showing promise for future improvements in autonomous driving.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper"
   },
   {
+    "objectID": "podcast/podcasts/2103.01775/index.html",
+    "href": "podcast/podcasts/2103.01775/index.html",
+    "title": "No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging",
+    "section": "",
+    "text": "The paper introduces a deep hedging approach using neural networks to optimize hedging strategies for derivatives in imperfect markets. The key takeaway is the development of the ‘no-transaction band network’ to address action dependence and improve efficiency in hedging, showcasing superior performance compared to traditional methods in terms of expected utility and price efficiency, and faster training. Future research focuses on addressing limitations such as non-linear transaction costs and discontinuous payoffs, as well as challenges in data availability and model explainability for real-world applications.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper"
+  },
+  {
     "objectID": "til/index.html",
     "href": "til/index.html",
     "title": "TIL: Today I Learned",
@@ -217,11 +224,11 @@
     "text": "A collection of links, notes, snippets on things I am reading, watching.\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "podcast/podcasts/2103.01775/index.html",
-    "href": "podcast/podcasts/2103.01775/index.html",
-    "title": "No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging",
+    "objectID": "podcast/podcasts/2407.01781/index.html",
+    "href": "podcast/podcasts/2407.01781/index.html",
+    "title": "𝑓VDB: A Deep-Learning Framework for Sparse, Large-Scale, and High-Performance Spatial Intelligence",
     "section": "",
-    "text": "The paper introduces a deep hedging approach using neural networks to optimize hedging strategies for derivatives in imperfect markets. The key takeaway is the development of the ‘no-transaction band network’ to address action dependence and improve efficiency in hedging, showcasing superior performance compared to traditional methods in terms of expected utility and price efficiency, and faster training. Future research focuses on addressing limitations such as non-linear transaction costs and discontinuous payoffs, as well as challenges in data availability and model explainability for real-world applications.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper"
+    "text": "Engineers and specialists can benefit from 𝑓VDB by leveraging its memory-efficient IndexGrid structure and specialized convolution kernels optimized for different sparsity patterns. The framework provides significant speed and memory efficiency improvements over existing frameworks, enabling more effective handling of large-scale, sparse 3D datasets in deep learning applications.\n  \n  \n\n\n\n  \n    Listen to the Podcast\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper"
   },
   {
     "objectID": "podcast/podcasts/2406.07550/index.html",
