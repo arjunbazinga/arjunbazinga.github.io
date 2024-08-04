@@ -1,7 +1,7 @@
 ---
 title: Models tell you what to discard
 categories: ['Systems and Performance', 'Machine Learning', 'Optimization']
-date: "2024-07-08"
+date: 2024-07-18T20:05:09+0530
 arxiv-paper-id: "2310.01801"
 ---
 

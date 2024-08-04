@@ -1,7 +1,7 @@
 ---
 title: The limits to learning a diffusion model
 categories: ['Generative Models', 'Machine Learning', 'Deep Learning']
-date: "2024-07-08"
+date: 2024-07-08T19:18:11+0530
 arxiv-paper-id: "2006.06373"
 ---
 

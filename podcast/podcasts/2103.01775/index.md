@@ -1,7 +1,7 @@
 ---
 title: No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging
 categories: ['Deep Learning', 'AI for Science', 'Machine Learning']
-date: "2024-07-08"
+date: 2024-07-08T19:18:11+0530
 arxiv-paper-id: "2103.01775"
 ---
 

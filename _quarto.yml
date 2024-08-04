@@ -14,8 +14,10 @@ website:
         href: https://arjunsriva.com/library
       - text: Podcast
         href: /podcast
-      - text: TIL
-        href: /til
+      - text: Posts
+        href: /posts
+      # - text: TIL
+      #   href: /til
       - icon: twitter
         href: https://twitter.com/arjunsriv
       # - icon: github

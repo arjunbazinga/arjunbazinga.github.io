@@ -1,7 +1,7 @@
 ---
 title: A Better Match for Drivers and Riders Reinforcement Learning at Lyft 
 categories: ['Reinforcement Learning', 'Recommender Systems', 'Machine Learning']
-date: "2024-07-08"
+date: 2024-07-08T19:18:11+0530
 arxiv-paper-id: "2310.13810"
 ---
 
