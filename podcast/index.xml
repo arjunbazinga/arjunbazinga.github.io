@@ -10,7 +10,84 @@
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
 <description>AI-generated podcasts discussing the latest research.</description>
 <generator>quarto-1.5.56</generator>
-<lastBuildDate>Mon, 05 Aug 2024 10:26:45 GMT</lastBuildDate>
+<lastBuildDate>Tue, 06 Aug 2024 06:08:13 GMT</lastBuildDate>
+<item>
+  <title>SAM 2: Segment Anything in Images and Videos</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2408.00714/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>SAM 2 outperformed previous approaches in video segmentation by achieving higher accuracy with fewer user interactions, making it faster and more accurate. The model shows promise in tasks like interactive video object segmentation and long-term video object segmentation, demonstrating its efficiency and ability to handle diverse objects and scenarios.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+
+    <h3 class="anchored">Listen to the Episode</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2408.00714.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2408.00714.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2408.00714.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2408.00714">Read original paper</a></li>
+      </ul>
+    </div>
+
+    <h4 class="anchored">The (AI) Team</h4>
+    <ul>
+      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
+        questions
+        to guide our exploration.</li>
+      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
+        results.</li>
+      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
+    </ul>
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Computer Vision</category>
+  <category>Deep Learning</category>
+  <category>Video Segmentation</category>
+  <category>SAM 2</category>
+  <category>Visual Perception</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2408.00714/</guid>
+  <pubDate>Tue, 06 Aug 2024 06:08:13 GMT</pubDate>
+</item>
 <item>
   <title>RL^2: Fast Reinforcement Learning via Slow Reinforcement Learning</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1611.02779/</link>
@@ -1437,81 +1514,6 @@
   <category>Multimodal AI</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2103.00020/</guid>
   <pubDate>Fri, 02 Aug 2024 16:50:49 GMT</pubDate>
-</item>
-<item>
-  <title>Language Models are Few-Shot Learners</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2005.14165/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>Key takeaways include the model’s ability to generalize from a few examples (few-shot learning), the comprehensive evaluation of GPT-3’s performance across various NLP tasks, and the importance of responsible research and development to address ethical challenges and risks associated with advanced language models.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen to the Episode</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2005.14165.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2005.14165.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2005.14165.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2005.14165">Read original paper</a></li>
-      </ul>
-    </div>
-
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Natural Language Processing</category>
-  <category>Few-Shot/Meta-Learning</category>
-  <category>Deep Learning</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2005.14165/</guid>
-  <pubDate>Fri, 02 Aug 2024 16:41:16 GMT</pubDate>
 </item>
 </channel>
 </rss>
