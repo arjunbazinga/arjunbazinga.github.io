@@ -6,16 +6,17 @@ project:
 
 website:
   title: "Arjun Srivastava"
-  site-url: https://www.arjunsriva.com
+  site-url: "https://www.arjunsriva.com"
+  site-path: '/'
   navbar:
     right:
-      - about.qmd
-      - text: Library
-        href: https://arjunsriva.com/library
       - text: Podcast
         href: /podcast
       - text: Posts
         href: /posts
+      - text: Library
+        href: https://arjunsriva.com/library
+      - about.qmd
       # - text: TIL
       #   href: /til
       - icon: twitter
@@ -35,4 +36,3 @@ format:
     theme:
       light: flatly
       dark: darkly
-    code-overflow: wrap

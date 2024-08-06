@@ -1,6 +1,6 @@
 ---
-title: "Podcast"
-description: "AI-generated podcasts discussing the latest research."
+title: "Byte-Sized Breakthroughs Podcast"
+description: "Podcasts discussing the latest AI research."
 
 page-layout: full
 title-block-banner: true
@@ -14,8 +14,6 @@ listing:
   sort-ui: true
   filter-ui: true
 ---
-
-## **Byte-Sized Breakthroughs Podcast**
 
 ![](/static/podcast_data/coverart.jpg){ width=600px }
 
