@@ -376,6 +376,74 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <media:content url="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" medium="image" type="image/webp"/>
 </item>
 <item>
+  <title>Learning Machine Learning</title>
+  <dc:creator>Arjun Srivastava</dc:creator>
+  <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This post will talk about resources for how I’m going about learning machine learning.</p>
+<section id="books" class="level3">
+<h3 class="anchored" data-anchor-id="books">Books</h3>
+<ul>
+<li>“Hands-On Machine Learning with Scikit-Learn and TensorFlow” by Aurélien Géron</li>
+<li>“Deep Learning” by Ian Goodfellow, Yoshua Bengio, and Aaron Courville</li>
+<li>“The Elements of Statistical Learning” by Trevor Hastie, Robert Tibshirani, and Jerome Friedman</li>
+</ul>
+</section>
+<section id="blogs" class="level3">
+<h3 class="anchored" data-anchor-id="blogs">Blogs</h3>
+<ul>
+<li><a href="https://distill.pub/">Distill.pub</a>: Clear, interactive explanations of machine learning concepts</li>
+<li><a href="https://ruder.io/">Sebastian Ruder’s blog</a>: In-depth articles on NLP and deep learning</li>
+<li><a href="http://karpathy.github.io/">Andrej Karpathy’s blog</a>: Excellent posts on deep learning</li>
+</ul>
+</section>
+<section id="podcasts" class="level3">
+<h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
+<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:</p>
+<ul>
+<li><a href="http://partiallyderivative.com">Partially Derivative</a></li>
+<li><a href="http://lineardigressions.com/">Linear Digressions</a></li>
+<li><a href="http://dataskeptic.com">Data Skeptic</a></li>
+</ul>
+<p>Some that are supposed to be good but never tried:</p>
+<ul>
+<li>Not so standard deviations</li>
+<li>Data science at home</li>
+<li>Talking machines</li>
+</ul>
+</section>
+<section id="online-courses" class="level3">
+<h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
+<p>A few awesome courses.</p>
+<ul>
+<li><p><a href="http://coursera.org/learn/machine-learning">Andrew Ng Coursera</a><br>
+A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
+<li><p><a href="http://fast.ai">Fast.ai</a><br>
+A course which aims to teach by coding, and takes a top down approach.</p></li>
+<li><p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a> While focused on computer vision, this Stanford course provides an excellent introduction to deep learning concepts.</p></li>
+</ul>
+</section>
+<section id="staying-up-to-date" class="level3">
+<h3 class="anchored" data-anchor-id="staying-up-to-date">Staying Up-to-Date</h3>
+<p>One of the best things about the machine learning field is how much work happens in the open.</p>
+<p>Many researchers publish their work on arXiv months or even years before it appears in journals or at conferences. Following key researchers and institutions on Twitter is an excellent way to stay informed about the latest developments as they happen.</p>
+<p>Some great accounts to follow: <span class="citation" data-cites="goodfellow_ian">@goodfellow_ian</span>, <span class="citation" data-cites="ylecun">@ylecun</span>, <span class="citation" data-cites="karpathy">@karpathy</span>, <span class="citation" data-cites="gwern">@gwern</span>.</p>
+<p>Don’t be afraid of reading arXiv papers, they might seem intimidating in the beginning but they get easier over time.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>AI</category>
+  <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
+  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Multi Armed Bandits</title>
   <dc:creator>Arjun Srivastava</dc:creator>
   <link>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</link>
@@ -1748,74 +1816,6 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
   <guid>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</guid>
   <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
   <media:content url="https://www.arjunsriva.com/posts/multi-armed-bandits/MultiArmedBandits.jpeg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Learning Machine Learning</title>
-  <dc:creator>Arjun Srivastava</dc:creator>
-  <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This post will talk about resources for how I’m going about learning machine learning.</p>
-<section id="books" class="level3">
-<h3 class="anchored" data-anchor-id="books">Books</h3>
-<ul>
-<li>“Hands-On Machine Learning with Scikit-Learn and TensorFlow” by Aurélien Géron</li>
-<li>“Deep Learning” by Ian Goodfellow, Yoshua Bengio, and Aaron Courville</li>
-<li>“The Elements of Statistical Learning” by Trevor Hastie, Robert Tibshirani, and Jerome Friedman</li>
-</ul>
-</section>
-<section id="blogs" class="level3">
-<h3 class="anchored" data-anchor-id="blogs">Blogs</h3>
-<ul>
-<li><a href="https://distill.pub/">Distill.pub</a>: Clear, interactive explanations of machine learning concepts</li>
-<li><a href="https://ruder.io/">Sebastian Ruder’s blog</a>: In-depth articles on NLP and deep learning</li>
-<li><a href="http://karpathy.github.io/">Andrej Karpathy’s blog</a>: Excellent posts on deep learning</li>
-</ul>
-</section>
-<section id="podcasts" class="level3">
-<h3 class="anchored" data-anchor-id="podcasts">Podcasts</h3>
-<p>These podcasts are amazing,and what got me interested in the first place. Get a podcast app, I love podcast addict (android). Some awesome podcasts:</p>
-<ul>
-<li><a href="http://partiallyderivative.com">Partially Derivative</a></li>
-<li><a href="http://lineardigressions.com/">Linear Digressions</a></li>
-<li><a href="http://dataskeptic.com">Data Skeptic</a></li>
-</ul>
-<p>Some that are supposed to be good but never tried:</p>
-<ul>
-<li>Not so standard deviations</li>
-<li>Data science at home</li>
-<li>Talking machines</li>
-</ul>
-</section>
-<section id="online-courses" class="level3">
-<h3 class="anchored" data-anchor-id="online-courses">Online Courses</h3>
-<p>A few awesome courses.</p>
-<ul>
-<li><p><a href="http://coursera.org/learn/machine-learning">Andrew Ng Coursera</a><br>
-A good first course, which teaches you bottom up, from basics to advanced techniques. Matlab/Octave.</p></li>
-<li><p><a href="http://fast.ai">Fast.ai</a><br>
-A course which aims to teach by coding, and takes a top down approach.</p></li>
-<li><p><a href="http://cs231n.stanford.edu/">CS231n: Convolutional Neural Networks for Visual Recognition</a> While focused on computer vision, this Stanford course provides an excellent introduction to deep learning concepts.</p></li>
-</ul>
-</section>
-<section id="staying-up-to-date" class="level3">
-<h3 class="anchored" data-anchor-id="staying-up-to-date">Staying Up-to-Date</h3>
-<p>One of the best things about the machine learning field is how much work happens in the open.</p>
-<p>Many researchers publish their work on arXiv months or even years before it appears in journals or at conferences. Following key researchers and institutions on Twitter is an excellent way to stay informed about the latest developments as they happen.</p>
-<p>Some great accounts to follow: <span class="citation" data-cites="goodfellow_ian">@goodfellow_ian</span>, <span class="citation" data-cites="ylecun">@ylecun</span>, <span class="citation" data-cites="karpathy">@karpathy</span>, <span class="citation" data-cites="gwern">@gwern</span>.</p>
-<p>Don’t be afraid of reading arXiv papers, they might seem intimidating in the beginning but they get easier over time.</p>
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
-  <category>AI</category>
-  <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
-  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Game Of Thrones quiz</title>
