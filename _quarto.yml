@@ -16,7 +16,8 @@ website:
         href: /posts
       - text: Library
         href: https://arjunsriva.com/library
-      - about.qmd
+      - text: About
+        href: /about.html
       # - text: TIL
       #   href: /til
       - icon: twitter
