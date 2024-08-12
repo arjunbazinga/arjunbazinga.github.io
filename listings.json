@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/posts/index.html",
     "items": [
       "/posts/saas-and-swimming/index.html",
       "/posts/exerimentations-platforms/index.html",
@@ -17,10 +17,6 @@
       "/posts/mental-health-checklist/index.html",
       "/posts/about-this-website/index.html"
     ]
-  },
-  {
-    "listing": "/til/index.html",
-    "items": []
   },
   {
     "listing": "/podcast/index.html",
@@ -96,6 +92,30 @@
       "/podcast/podcasts/2002.11252/index.html",
       "/podcast/podcasts/1910.02054/index.html",
       "/podcast/podcasts/2401.10241/index.html"
+    ]
+  },
+  {
+    "listing": "/til/index.html",
+    "items": []
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/index.html",
+      "/posts/saas-and-swimming/index.html",
+      "/posts/exerimentations-platforms/index.html",
+      "/posts/course-schedule-generator/index.html",
+      "/posts/harry-potter-quiz/index.html",
+      "/posts/state-of-reading/index.html",
+      "/posts/friend-or-foe/index.html",
+      "/posts/infant-mortality/index.html",
+      "/posts/jargonizer/index.html",
+      "/posts/learning-machine-learning/index.html",
+      "/posts/multi-armed-bandits/multi-armed-bandits.html",
+      "/posts/game-of-thrones-quiz/index.html",
+      "/posts/newbie-quiz/index.html",
+      "/posts/mental-health-checklist/index.html",
+      "/posts/about-this-website/index.html"
     ]
   }
 ]
