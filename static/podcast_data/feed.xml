@@ -7,7 +7,7 @@ The podcast covers topics such as large language models, mechanistic interpretab
 Ideal for researchers, engineers, and AI enthusiasts with limited time, Byte-Sized Breakthroughs provides a starting point for exploring cutting-edge AI research. While offering overviews, listeners are encouraged to refer to original papers for comprehensive understanding.
 
 Curated by Arjun Srivastava, an engineer in the field, this podcast transforms spare moments into opportunities for learning about the latest in AI. Note: The voices you hear are not real people, but the content is carefully curated and reviewed.
-</description><atom:link href="https://arjunsriva.com/static/podcast_data/feed.xml" rel="self"/><copyright>© 2024 Arjun Srivastava</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://arjunsriva.com/static/podcast_data/coverart.jpg</url><title>Byte Sized Breakthroughs</title><link>https://arjunsriva.com/static/podcast_data/feed.xml</link></image><language>en</language><lastBuildDate>Tue, 06 Aug 2024 06:47:22 +0000</lastBuildDate><itunes:author>Arjun Srivastava</itunes:author><itunes:category text="Science &amp; Medicine"><itunes:category text="Natural Sciences"/></itunes:category><itunes:image href="https://arjunsriva.com/static/podcast_data/coverart.jpg"/><itunes:explicit>no</itunes:explicit><itunes:owner><itunes:name>Arjun Srivastava</itunes:name><itunes:email>arjunsriva@gmail.com</itunes:email></itunes:owner><item><title>TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest</title><link>https://arjunsriva.com/podcast/podcasts/2306.00248v1/</link><description>
+</description><atom:link href="https://arjunsriva.com/static/podcast_data/feed.xml" rel="self"/><copyright>© 2024 Arjun Srivastava</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://arjunsriva.com/static/podcast_data/coverart.jpg</url><title>Byte Sized Breakthroughs</title><link>https://arjunsriva.com/static/podcast_data/feed.xml</link></image><language>en</language><lastBuildDate>Mon, 12 Aug 2024 11:55:28 +0000</lastBuildDate><itunes:author>Arjun Srivastava</itunes:author><itunes:category text="Science &amp; Medicine"><itunes:category text="Natural Sciences"/></itunes:category><itunes:image href="https://arjunsriva.com/static/podcast_data/coverart.jpg"/><itunes:explicit>no</itunes:explicit><itunes:owner><itunes:name>Arjun Srivastava</itunes:name><itunes:email>arjunsriva@gmail.com</itunes:email></itunes:owner><item><title>TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest</title><link>https://arjunsriva.com/podcast/podcasts/2306.00248v1/</link><description>
 
 
 Pinterest home feed reccomendation system.
@@ -463,4 +463,124 @@ SAM 2 outperformed previous approaches in video segmentation by achieving higher
 Read full paper: https://arxiv.org/abs/2408.00714
 
 Tags: Computer Vision, Deep Learning, Video Segmentation, SAM 2, Visual Perception
-</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2408.00714/</guid><category>Computer Vision</category><category>Deep Learning</category><category>Video Segmentation</category><category>SAM 2</category><category>Visual Perception</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2408.00714.mp3" length="18187680" type="audio/mpeg"/><pubDate>Tue, 06 Aug 2024 11:38:13 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item></channel></rss>
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2408.00714/</guid><category>Computer Vision</category><category>Deep Learning</category><category>Video Segmentation</category><category>SAM 2</category><category>Visual Perception</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2408.00714.mp3" length="18187680" type="audio/mpeg"/><pubDate>Tue, 06 Aug 2024 11:38:13 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Grounded SAM: A Novel Approach to Open-Set Segmentation</title><link>https://arjunsriva.com/podcast/podcasts/2401.14159/</link><description>
+The paper introduces Grounded SAM, a new approach that combines Grounding DINO and the Segment Anything Model to address open-set segmentation, a crucial aspect of open-world visual perception. The model can accurately segment objects based on textual prompts, even if they have never been seen before.
+
+The key takeaways for engineers/specialists from the paper are: 1. Grounded SAM combines the strengths of Grounding DINO for object detection and SAM for zero-shot segmentation, outperforming existing models. 2. The model's potential extends beyond segmentation, enabling integration with other models for tasks like image annotation, image editing, and human motion analysis.
+
+Read full paper: https://arxiv.org/abs/2401.14159
+
+Tags: Computer Vision, Open-World Visual Perception, Segmentation Models
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2401.14159/</guid><category>Computer Vision</category><category>Open-World Visual Perception</category><category>Segmentation Models</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2401.14159.mp3" length="11488800" type="audio/mpeg"/><pubDate>Thu, 08 Aug 2024 16:16:01 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Ferret-UI: Multimodal Large Language Model for Mobile User Interface Understanding</title><link>https://arjunsriva.com/podcast/podcasts/2404.05719/</link><description>
+The paper explores Ferret-UI, a multimodal large language model specifically designed for understanding mobile UI screens. It introduces innovations like referring, grounding, and reasoning tasks, along with a comprehensive dataset of UI tasks and a benchmark for evaluation.
+
+Ferret-UI is the first UI-centric MLLM capable of executing referring, grounding, and reasoning tasks, making it adept at identifying specific UI elements, understanding relationships, and deducing overall screen function. It breaks down screens into sub-images using the 'any resolution' approach, providing detailed understanding of UI elements and interactions.
+
+Read full paper: https://arxiv.org/abs/2404.05719
+
+Tags: Artificial Intelligence, Artificial GUI Interaction, Mobile Applications
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2404.05719/</guid><category>Artificial Intelligence</category><category>Artificial GUI Interaction</category><category>Mobile Applications</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2404.05719.mp3" length="13061760" type="audio/mpeg"/><pubDate>Thu, 08 Aug 2024 17:27:58 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Rethinking Scale for In-Context Learning in Large Language Models</title><link>https://arjunsriva.com/podcast/podcasts/2212.09095/</link><description>
+The paper investigates the necessity of all components in massive language models for in-context learning, aiming to determine if the sheer scale of the model is essential for performance. By conducting structured pruning and analyzing task-specific importance scores, the researchers found that a significant portion of the components in large language models might be redundant for in-context learning, suggesting potential efficiency improvements.
+
+Engineers and specialists can consider the findings of this research to explore the efficiency of large language models. By identifying key components like 'induction heads' critical for in-context learning, there is potential to optimize model design for better performance. The study indicates that a focus on enhancing these crucial components could lead to more resource-friendly and effective language models.
+
+Read full paper: https://arxiv.org/abs/2212.09095
+
+Tags: Natural Language Processing, Large Language Models, Transformer Architecture, In-Context Learning, Model Pruning
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2212.09095/</guid><category>Natural Language Processing</category><category>Large Language Models</category><category>Transformer Architecture</category><category>In-Context Learning</category><category>Model Pruning</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2212.09095.mp3" length="13361760" type="audio/mpeg"/><pubDate>Fri, 09 Aug 2024 17:06:13 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Unmasking the Lottery Ticket Hypothesis</title><link>https://arjunsriva.com/podcast/podcasts/2210.03044/</link><description>
+The research paper delves into the detailed workings of Iterative Magnitude Pruning (IMP) in deep learning, exploring the 'why' and 'how' of its success in finding sparse subnetworks within larger neural networks.
+
+The key takeaways for engineers/specialists include understanding the role of the pruning mask in guiding training, the importance of SGD robustness in navigating the error landscape, and the relationship between the Hessian eigenspectrum and the maximum pruning ratio for efficient network pruning.
+
+Read full paper: https://arxiv.org/abs/2210.03044
+
+Tags: Deep Learning, Neural Networks, Network Pruning, Machine Learning
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2210.03044/</guid><category>Deep Learning</category><category>Neural Networks</category><category>Network Pruning</category><category>Machine Learning</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2210.03044.mp3" length="10942560" type="audio/mpeg"/><pubDate>Fri, 09 Aug 2024 19:35:59 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Generalization Patterns of Transformers in In-Weights Learning and In-Context Learning</title><link>https://arjunsriva.com/podcast/podcasts/2210.05675/</link><description>
+The paper explores how transformers generalize from in-weights learning versus in-context learning, highlighting the distinction between rule-based and exemplar-based generalization. It investigates how the structure of language influences rule-based generalization in large language models.
+
+The key takeaways for engineers/specialists from the paper are: 1. In-context learning in large language models tends to be rule-based, suggesting the influence of language structure. 2. Model size and training data structure play crucial roles in shaping the inductive biases of transformers. 3. Pretraining strategies can be used to induce rule-based generalization from context.
+
+Read full paper: https://arxiv.org/abs/2210.05675
+
+Tags: Artificial Intelligence, Deep Learning, Machine Learning
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2210.05675/</guid><category>Artificial Intelligence</category><category>Deep Learning</category><category>Machine Learning</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2210.05675.mp3" length="14580960" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 10:02:05 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Spider2-V: Automated Multimodal Agents for Data Science Workflows</title><link>https://arjunsriva.com/podcast/podcasts/2407.10956/</link><description>
+The podcast discusses a paper titled 'Spider2-V: How Far Are Multimodal Agents From Automating Data Science and Engineering Workflows?' which introduces a new benchmark, Spider2-V, to evaluate the ability of AI agents to automate complete data science and engineering workflows. The research focuses on bridging the gap in existing benchmarks by including extensive GUI controls for real-world tasks in enterprise applications.
+
+The paper highlights that even advanced VLMs struggle to automate full data workflows, especially in GUI-intensive tasks, with a low success rate of 14%. The study emphasizes the need for improvements in action grounding and training data quality to enhance the performance of AI agents in complex data tasks.
+
+Read full paper: https://arxiv.org/abs/2407.10956
+
+Tags: Artificial Intelligence, Artificial GUI Interaction, Data Science
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2407.10956/</guid><category>Artificial Intelligence</category><category>Artificial GUI Interaction</category><category>Data Science</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2407.10956.mp3" length="13874880" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 10:23:32 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>In-Context Learning Capabilities of Transformers</title><link>https://arjunsriva.com/podcast/podcasts/2208.01066/</link><description>
+The research paper titled 'What Can Transformers Learn In-Context? A Case Study of Simple Function Classes' explores the ability of Transformer models to learn new tasks or functions at inference time without parameter updates, focusing on linear functions, sparse linear functions, decision trees, and two-layer neural networks.
+
+The key takeaways for engineers/specialists are that Transformers demonstrate robust in-context learning capabilities for various function classes, showing flexibility and adaptability without the need for fine-tuning. The study emphasizes the importance of model capacity and the potential benefits of curriculum learning for training efficiency.
+
+Read full paper: https://arxiv.org/abs/2208.01066
+
+Tags: Machine Learning, Deep Learning, Transformer Models, In-Context Learning
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2208.01066/</guid><category>Machine Learning</category><category>Deep Learning</category><category>Transformer Models</category><category>In-Context Learning</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2208.01066.mp3" length="17036160" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 10:50:59 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>How Transformers Learn In-Context Beyond Simple Functions</title><link>https://arjunsriva.com/podcast/podcasts/2310.10616/</link><description>
+The podcast discusses a paper on how transformers handle in-context learning beyond simple functions, focusing on learning with representations. The research explores theoretical constructions and experiments to understand how transformers can efficiently implement in-context learning tasks and adapt to new scenarios.
+
+The key takeaways for engineers/specialists from the paper include the development of theoretical constructions for transformers to implement in-context ridge regression on representations efficiently. This research showcases the modularity of transformers in decomposing complex tasks into distinct learnable modules, providing strong evidence for their adaptability in handling complex learning scenarios.
+
+Read full paper: https://arxiv.org/abs/2310.10616
+
+Tags: Artificial Intelligence, Deep Learning, Transformers, In-Context Learning, Representation Learning
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2310.10616/</guid><category>Artificial Intelligence</category><category>Deep Learning</category><category>Transformers</category><category>In-Context Learning</category><category>Representation Learning</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2310.10616.mp3" length="18305760" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 10:54:18 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Decision-Pretrained Transformer: Bridging Supervised Learning and Reinforcement Learning</title><link>https://arjunsriva.com/podcast/podcasts/2306.14892/</link><description>
+The paper focuses on introducing a new method called Decision-Pretrained Transformer (DPT) that utilizes supervised pretraining to equip transformer models with the ability to make decisions in new reinforcement learning environments based on a small set of examples. It showcases how DPT can efficiently learn decision-making strategies without the need for explicit training for exploration or exploitation.
+
+Engineers and specialists can leverage the DPT methodology to design more versatile and efficient RL agents. By learning a decision-making strategy through supervised pretraining, DPT demonstrates adaptability to new environments, ability to explore and exploit, and strong generalization capabilities. This approach offers a promising path towards practical and efficient Bayesian RL methods.
+
+Read full paper: https://arxiv.org/abs/2306.14892
+
+Tags: Reinforcement Learning, Transformer Models, Decision-Making
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2306.14892/</guid><category>Reinforcement Learning</category><category>Transformer Models</category><category>Decision-Making</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2306.14892.mp3" length="17926080" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 11:21:49 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Supervised Pretraining for In-Context Reinforcement Learning with Transformers</title><link>https://arjunsriva.com/podcast/podcasts/2310.08566/</link><description>
+The podcast discusses a recent paper on supervised pretraining for in-context reinforcement learning using transformers. The paper explores how transformers can efficiently implement various reinforcement learning algorithms and the implications for decision-making in AI systems.
+
+The key takeaways for engineers/specialists from the paper are: Supervised pretraining with transformers can efficiently approximate prevalent RL algorithms, transformers demonstrate the potential for near-optimal regret bounds, and the research highlights the importance of model capacity and distribution divergence in in-context reinforcement learning.
+
+Read full paper: https://arxiv.org/abs/2310.08566
+
+Tags: Reinforcement Learning, Transformers, Meta-Learning, Deep Neural Networks
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2310.08566/</guid><category>Reinforcement Learning</category><category>Transformers</category><category>Meta-Learning</category><category>Deep Neural Networks</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2310.08566.mp3" length="15542880" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 12:07:41 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>ScreenAgent: A Vision Language Model-driven Computer Control Agent</title><link>https://arjunsriva.com/podcast/podcasts/2402.07945/</link><description>
+The paper discusses a novel approach called ScreenAgent that enables vision language models (VLMs) to control a real computer screen by generating plans, translating them into low-level commands, and adapting based on screen feedback. It introduces the ScreenAgent Dataset for training and evaluating computer control agents in everyday tasks.
+
+The key takeaways for engineers/specialists are: 1. ScreenAgent enables VLMs to control real computer screens by generating plans and translating them into low-level commands. 2. ScreenAgent outperforms other models in precise UI positioning, showing promise for more accurate interaction with computer interfaces. 3. Future research directions include enhancing visual localization capabilities, improving planning mechanisms, and expanding capabilities to handle videos and multi-frame images.
+
+Read full paper: https://arxiv.org/abs/2402.07945
+
+Tags: Artificial Intelligence, Computer Vision, Natural Language Processing, Artificial GUI Interaction
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2402.07945/</guid><category>Artificial Intelligence</category><category>Computer Vision</category><category>Natural Language Processing</category><category>Artificial GUI Interaction</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2402.07945.mp3" length="10984800" type="audio/mpeg"/><pubDate>Sat, 10 Aug 2024 12:10:26 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Efficient Compression of Large Language Models using LLM-Pruner</title><link>https://arjunsriva.com/podcast/podcasts/2305.11627/</link><description>
+The podcast discusses a paper that introduces LLM-Pruner, a task-agnostic framework for compressing Large Language Models (LLMs) through structural pruning. The framework consists of three stages: Discovery, Estimation, and Recovery, enabling efficient compression without sacrificing model performance.
+
+LLM-Pruner utilizes structural pruning and a post-training method called LoRA to compress LLMs without task-specific retraining. The framework demonstrates promising results in maintaining model performance even with pruning up to 20% of parameters.
+
+Read full paper: https://arxiv.org/abs/2305.11627
+
+Tags: Artificial Intelligence, Natural Language Processing, Model Compression
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2305.11627/</guid><category>Artificial Intelligence</category><category>Natural Language Processing</category><category>Model Compression</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2305.11627.mp3" length="10344000" type="audio/mpeg"/><pubDate>Sun, 11 Aug 2024 12:32:19 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>SparseGPT: One-shot Pruning of Large Language Models</title><link>https://arjunsriva.com/podcast/podcasts/2301.00774/</link><description>
+SparseGPT is a novel one-shot pruning technique designed to compress large language models, particularly those from the Generative Pre-trained Transformer (GPT) family. The method efficiently reduces model size without sacrificing accuracy, offering a practical way to deploy massive models in resource-constrained environments.
+
+SparseGPT offers a one-shot pruning approach that avoids costly retraining, making it significantly more efficient for compressing large language models like GPT variants. The method can achieve high sparsity levels while maintaining minimal accuracy loss, providing a promising solution for improving the deployment of powerful language models.
+
+Read full paper: https://arxiv.org/abs/2301.00774
+
+Tags: Artificial Intelligence, Natural Language Processing, Model Compression
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2301.00774/</guid><category>Artificial Intelligence</category><category>Natural Language Processing</category><category>Model Compression</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2301.00774.mp3" length="10594080" type="audio/mpeg"/><pubDate>Sun, 11 Aug 2024 12:51:10 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>AutoPruner: End-to-End Trainable Filter Pruning for Efficient Deep Neural Networks</title><link>https://arjunsriva.com/podcast/podcasts/1805.08941/</link><description>
+The podcast discusses the AutoPruner paper, which addresses the challenge of computational efficiency in deep neural networks through end-to-end trainable filter pruning. The paper introduces a novel methodology that integrates filter selection into the model training process, leading to both improved accuracy and compression ratio.
+
+AutoPruner presents a significant advancement in filter pruning for deep neural networks by integrating the filter selection process into model training, eliminating the need for separate pruning steps. The methodology outperformed state-of-the-art methods, showcasing superior accuracy and compression ratios on standard datasets like CUB200-2011 and ImageNet ILSVRC-12. The innovative approach of AutoPruner could lead to more efficient and accessible deep learning models across various applications.
+
+Read full paper: https://arxiv.org/abs/1805.08941
+
+Tags: Deep Learning, Neural Networks, Model Compression
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/1805.08941/</guid><category>Deep Learning</category><category>Neural Networks</category><category>Model Compression</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/1805.08941.mp3" length="16090560" type="audio/mpeg"/><pubDate>Sun, 11 Aug 2024 22:32:07 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item><item><title>Optimizing Quantization of Large Language Models for Efficiency and Accuracy</title><link>https://arjunsriva.com/podcast/podcasts/2212.09720/</link><description>
+The paper addresses the challenge of balancing accuracy and efficiency in large language models (LLMs) by exploring quantization techniques. Specifically, it focuses on reducing the precision of model parameters to smaller bit sizes while maintaining performance on zero-shot tasks. The research highlights the importance of selecting 4-bit precision, along with strategies like quantile quantization and floating-point representation, to optimize memory footprint and speed of inference in LLMs.
+
+Engineers and specialists can leverage 4-bit precision quantization with techniques such as quantile quantization and floating-point representation to significantly reduce the memory footprint and improve inference speed of large language models. Understanding the trade-off between accuracy and efficiency is crucial for deploying powerful NLP technologies in resource-constrained environments and expanding their applications to real-world scenarios.
+
+Read full paper: https://arxiv.org/abs/2212.09720
+
+Tags: Machine Learning, Natural Language Processing, Quantization, Efficiency, Model Compression
+</description><guid isPermaLink="false">https://arjunsriva.com/podcast/podcasts/2212.09720/</guid><category>Machine Learning</category><category>Natural Language Processing</category><category>Quantization</category><category>Efficiency</category><category>Model Compression</category><enclosure url="https://arjunsriva.com/static/podcast_data/arxiv/audio/2212.09720.mp3" length="11316960" type="audio/mpeg"/><pubDate>Mon, 12 Aug 2024 08:42:53 +0530</pubDate><itunes:author>Arjun Srivastava</itunes:author></item></channel></rss>
