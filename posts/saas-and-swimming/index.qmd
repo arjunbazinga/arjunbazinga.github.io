@@ -1,0 +1,107 @@
+---
+title: "On SaaS and Swimming: Hidden Factors of Success"
+layout: post
+description: "How to figure out what matters in business and sports"
+categories: [Business]
+date: "2023-08-12"
+---
+
+
+Today while swimming, I had a realization: there's a lot in common between swimming well and running a successful subscription business.
+
+
+## The Basics: Drag, Thrust, and Speed
+
+When you first start swimming, you think it's all about moving your hands and legs as powerfully as possible. More force equals more speed, right? This is partly true, but it misses a crucial element: drag.
+
+If you have too much drag, you'll return to zero velocity after each stroke.
+
+What matters is your average velocity over a distance. With low enough drag, your speed in the water will exceed the power you're putting in at each stroke.
+
+In business terms:
+
+- Drag is the opposite of your retention rate
+- Thrust is your marketing effort at any given time
+- Speed in Water is your active user base
+  
+
+While marketing is necessary, your maximum number of users (or speed in the water) is a combination of your past marketing efforts and your retention rate.
+
+
+Here's a visual comparison of efficient vs inefficient swimming:
+{{< video  https://youtu.be/miZ23qeMiR0?si=VJiHuxrN0l4kCNelE >}}
+
+
+## The Hidden Drivers
+Here's something counterintuitive: in swimming, your most crucial muscles aren't the ones you see moving. Your arms and legs create the splash, but it's your core and hips that truly drive performance. They work silently beneath the surface, maintaining your streamlined form and minimizing drag keeping your body long and horizontal in the water.  
+
+The same principle applies in business. It's easy to fixate on the visible elements - your marketing campaigns, landing pages, and ads. These are your business's arms and legs, visibly pushing through the market. But your customer support, product reliability, and user experience? They're your core and hips - less flashy, but absolutely critical.  
+
+Just as a swimmer with weak core muscles will struggle regardless of arm strength, a business with poor user experience will flounder despite a massive marketing budget. 
+
+
+## The Paradox of Effort
+Even in swimming, there are situations where you need to decide between increasing thrust and reducing drag. A prime example is the use of legs. While leg movement contributes about 15% to overall thrust, it dramatically increases drag and often worsens your form. Counterintuitively, the advice for swimming well, especially when starting out, is to use your legs less – sometimes barely moving them at all.
+
+
+This paradox has a direct parallel in business. Many companies engage in practices that seem to increase "thrust" but actually create more "drag":
+
+- Aggressive upselling and cross-selling
+- Intrusive advertising
+- User interface "dark patterns" that trick users into spending more
+  
+Yes, these tactics might bring additional revenue (power) in the short term. But in the long run, they increase your drag by driving users away from your product. It's a classic case of short-term gain leading to long-term pain.
+For a deeper dive into this concept and how to approach it, I recommend reading the insightful article on [user disengagement](https://zerodha.tech/blog/user-disengagement) by Zerodha.
+
+
+## Reducing Business Drag
+
+In business, reducing drag means focusing on retention. I've found this means:
+
+1. Understand why people leave. Talk to unhappy customers.
+2. Identify unmet needs and fix what's broken.
+3. Do the unglamorous work that's important to customers.
+4. Treat customers as you'd want to be treated, be respectful of their time and attention.
+   
+These actions might not feel as impactful as big marketing pushes, or as cool as working on bleeding-edge technology, but they're crucial for long-term success. They're the equivalent of perfecting your swimming form - less visible, more effective.
+
+## Optimizing for Success
+
+Another parallel: You can only optimize one aspect at a time. There's a limit to what your brain can focus on. In swimming, you might want to improve your arm stroke, leg kick, hip rotation, and breathing simultaneously. In business, you're juggling product improvements, customer support, marketing, and operations.
+
+Trying to fix everything at once leads to slow progress and ingrained bad habits. Instead:
+
+1. Choose one [specific area](https://www.amazon.in/Goal-Process-Ongoing-Improvement/dp/0884271951) for improvement
+2. Practice with perfect form and intense focus
+3. Repeat until the action becomes automatic
+
+This applies to both swimming and running a company, but with a key difference. In swimming, "automatic" means the movement becomes part of your neural structure, performed subconsciously. In business, it's about setting up the right culture, people, processes, and incentives so things run smoothly without constant oversight.
+
+This approach might seem slow, but it leads to sustainable, compounding improvements. You're not just doing things right when actively focusing - you're making high standards your default state.
+
+You'll notice Olympic swimmers cross the pool in minimal strokes - that's mastery in action. In business, it might look like efficient processes, strong culture, the right people, and well-set incentives.
+
+If you're learning to swim, I highly recommend "Total Immersion: The Revolutionary Way to Swim Better, Faster, and Easier".
+
+## The Long Game
+In swimming and in business, what looks like effort isn't always what moves you forward.  
+Sometimes, the key to speed is doing less. Moving your legs less in the water. Pushing your customers less.  
+Focus on reducing drag. In SaaS, that means understanding your users. Solving their problems. Respecting their time.  
+It's not as visible as marketing. But it's what separates great products from the rest.
+
+
+## Conclusions
+
+Reflecting on these parallels between swimming and business, I'm reminded of Miyamoto Musashi's quote, which could be a fitting end to this post.
+
+> "If you know the way broadly you will see it in everything."
+
+But I'm also reminded of Abraham Maslow.
+
+> "If the only tool you have is a hammer, you tend to see every problem as a nail."
+
+Because while there's wisdom in drawing parallels, there's also wisdom in knowing when to put down the metaphorical hammer.
+
+So take this post with some chlorine, maybe it'll help you cut through the drag in your business (or your breaststroke), or maybe it'll just give you a chuckle the next time you're at the pool.
+
+Either way, happy swimming - and happy entrepreneur-ing.
