@@ -1,7 +1,45 @@
 [
   {
+    "listing": "/index.html",
+    "items": [
+      "/posts/saas-and-swimming/index.html",
+      "/posts/exerimentations-platforms/index.html",
+      "/posts/course-schedule-generator/index.html",
+      "/posts/harry-potter-quiz/index.html",
+      "/posts/state-of-reading/index.html",
+      "/posts/friend-or-foe/index.html",
+      "/posts/infant-mortality/index.html",
+      "/posts/jargonizer/index.html",
+      "/posts/learning-machine-learning/index.html",
+      "/posts/multi-armed-bandits/multi-armed-bandits.html",
+      "/posts/game-of-thrones-quiz/index.html",
+      "/posts/newbie-quiz/index.html",
+      "/posts/mental-health-checklist/index.html",
+      "/posts/about-this-website/index.html"
+    ]
+  },
+  {
+    "listing": "/til/index.html",
+    "items": []
+  },
+  {
     "listing": "/podcast/index.html",
     "items": [
+      "/podcast/podcasts/2212.09720/index.html",
+      "/podcast/podcasts/1805.08941/index.html",
+      "/podcast/podcasts/2301.00774/index.html",
+      "/podcast/podcasts/2305.11627/index.html",
+      "/podcast/podcasts/2402.07945/index.html",
+      "/podcast/podcasts/2310.08566/index.html",
+      "/podcast/podcasts/2306.14892/index.html",
+      "/podcast/podcasts/2310.10616/index.html",
+      "/podcast/podcasts/2208.01066/index.html",
+      "/podcast/podcasts/2407.10956/index.html",
+      "/podcast/podcasts/2210.05675/index.html",
+      "/podcast/podcasts/2210.03044/index.html",
+      "/podcast/podcasts/2212.09095/index.html",
+      "/podcast/podcasts/2404.05719/index.html",
+      "/podcast/podcasts/2401.14159/index.html",
       "/podcast/podcasts/2408.00714/index.html",
       "/podcast/podcasts/1611.02779/index.html",
       "/podcast/podcasts/2403.13187/index.html",
@@ -58,28 +96,6 @@
       "/podcast/podcasts/2002.11252/index.html",
       "/podcast/podcasts/1910.02054/index.html",
       "/podcast/podcasts/2401.10241/index.html"
-    ]
-  },
-  {
-    "listing": "/til/index.html",
-    "items": []
-  },
-  {
-    "listing": "/index.html",
-    "items": [
-      "/posts/exerimentations-platforms/index.html",
-      "/posts/course-schedule-generator/index.html",
-      "/posts/harry-potter-quiz/index.html",
-      "/posts/state-of-reading/index.html",
-      "/posts/friend-or-foe/index.html",
-      "/posts/infant-mortality/index.html",
-      "/posts/jargonizer/index.html",
-      "/posts/learning-machine-learning/index.html",
-      "/posts/multi-armed-bandits/multi-armed-bandits.html",
-      "/posts/game-of-thrones-quiz/index.html",
-      "/posts/newbie-quiz/index.html",
-      "/posts/mental-health-checklist/index.html",
-      "/posts/about-this-website/index.html"
     ]
   }
 ]

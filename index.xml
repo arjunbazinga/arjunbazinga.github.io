@@ -10,7 +10,104 @@
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.56</generator>
-<lastBuildDate>Sun, 21 Mar 2021 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 12 Aug 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>On SaaS and Swimming: Hidden Factors of Success</title>
+  <dc:creator>Arjun Srivastava</dc:creator>
+  <link>https://www.arjunsriva.com/posts/saas-and-swimming/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Today while swimming, I had a realization: there’s a lot in common between swimming well and running a successful subscription business.</p>
+<section id="the-basics-drag-thrust-and-speed" class="level2">
+<h2 class="anchored" data-anchor-id="the-basics-drag-thrust-and-speed">The Basics: Drag, Thrust, and Speed</h2>
+<p>When you first start swimming, you think it’s all about moving your hands and legs as powerfully as possible. More force equals more speed, right? This is partly true, but it misses a crucial element: drag.</p>
+<p>If you have too much drag, you’ll return to zero velocity after each stroke.</p>
+<p>What matters is your average velocity over a distance. With low enough drag, your speed in the water will exceed the power you’re putting in at each stroke.</p>
+<p>In business terms:</p>
+<ul>
+<li>Drag is the opposite of your retention rate</li>
+<li>Thrust is your marketing effort at any given time</li>
+<li>Speed in Water is your active user base</li>
+</ul>
+<p>While marketing is necessary, your maximum number of users (or speed in the water) is a combination of your past marketing efforts and your retention rate.</p>
+<p>Here’s a visual comparison of efficient vs inefficient swimming:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/miZ23qeMiR0?si=VJiHuxrN0l4kCNelE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="the-hidden-drivers" class="level2">
+<h2 class="anchored" data-anchor-id="the-hidden-drivers">The Hidden Drivers</h2>
+<p>Here’s something counterintuitive: in swimming, your most crucial muscles aren’t the ones you see moving. Your arms and legs create the splash, but it’s your core and hips that truly drive performance. They work silently beneath the surface, maintaining your streamlined form and minimizing drag keeping your body long and horizontal in the water.</p>
+<p>The same principle applies in business. It’s easy to fixate on the visible elements - your marketing campaigns, landing pages, and ads. These are your business’s arms and legs, visibly pushing through the market. But your customer support, product reliability, and user experience? They’re your core and hips - less flashy, but absolutely critical.</p>
+<p>Just as a swimmer with weak core muscles will struggle regardless of arm strength, a business with poor user experience will flounder despite a massive marketing budget.</p>
+</section>
+<section id="the-paradox-of-effort" class="level2">
+<h2 class="anchored" data-anchor-id="the-paradox-of-effort">The Paradox of Effort</h2>
+<p>Even in swimming, there are situations where you need to decide between increasing thrust and reducing drag. A prime example is the use of legs. While leg movement contributes about 15% to overall thrust, it dramatically increases drag and often worsens your form. Counterintuitively, the advice for swimming well, especially when starting out, is to use your legs less – sometimes barely moving them at all.</p>
+<p>This paradox has a direct parallel in business. Many companies engage in practices that seem to increase “thrust” but actually create more “drag”:</p>
+<ul>
+<li>Aggressive upselling and cross-selling</li>
+<li>Intrusive advertising</li>
+<li>User interface “dark patterns” that trick users into spending more</li>
+</ul>
+<p>Yes, these tactics might bring additional revenue (power) in the short term. But in the long run, they increase your drag by driving users away from your product. It’s a classic case of short-term gain leading to long-term pain. For a deeper dive into this concept and how to approach it, I recommend reading the insightful article on <a href="https://zerodha.tech/blog/user-disengagement">user disengagement</a> by Zerodha.</p>
+</section>
+<section id="reducing-business-drag" class="level2">
+<h2 class="anchored" data-anchor-id="reducing-business-drag">Reducing Business Drag</h2>
+<p>In business, reducing drag means focusing on retention. I’ve found this means:</p>
+<ol type="1">
+<li>Understand why people leave. Talk to unhappy customers.</li>
+<li>Identify unmet needs and fix what’s broken.</li>
+<li>Do the unglamorous work that’s important to customers.</li>
+<li>Treat customers as you’d want to be treated, be respectful of their time and attention.</li>
+</ol>
+<p>These actions might not feel as impactful as big marketing pushes, or as cool as working on bleeding-edge technology, but they’re crucial for long-term success. They’re the equivalent of perfecting your swimming form - less visible, more effective.</p>
+</section>
+<section id="optimizing-for-success" class="level2">
+<h2 class="anchored" data-anchor-id="optimizing-for-success">Optimizing for Success</h2>
+<p>Another parallel: You can only optimize one aspect at a time. There’s a limit to what your brain can focus on. In swimming, you might want to improve your arm stroke, leg kick, hip rotation, and breathing simultaneously. In business, you’re juggling product improvements, customer support, marketing, and operations.</p>
+<p>Trying to fix everything at once leads to slow progress and ingrained bad habits. Instead:</p>
+<ol type="1">
+<li>Choose one <a href="https://www.amazon.in/Goal-Process-Ongoing-Improvement/dp/0884271951">specific area</a> for improvement</li>
+<li>Practice with perfect form and intense focus</li>
+<li>Repeat until the action becomes automatic</li>
+</ol>
+<p>This applies to both swimming and running a company, but with a key difference. In swimming, “automatic” means the movement becomes part of your neural structure, performed subconsciously. In business, it’s about setting up the right culture, people, processes, and incentives so things run smoothly without constant oversight.</p>
+<p>This approach might seem slow, but it leads to sustainable, compounding improvements. You’re not just doing things right when actively focusing - you’re making high standards your default state.</p>
+<p>You’ll notice Olympic swimmers cross the pool in minimal strokes - that’s mastery in action. In business, it might look like efficient processes, strong culture, the right people, and well-set incentives.</p>
+<p>If you’re learning to swim, I highly recommend “Total Immersion: The Revolutionary Way to Swim Better, Faster, and Easier”.</p>
+</section>
+<section id="the-long-game" class="level2">
+<h2 class="anchored" data-anchor-id="the-long-game">The Long Game</h2>
+<p>In swimming and in business, what looks like effort isn’t always what moves you forward.<br>
+Sometimes, the key to speed is doing less. Moving your legs less in the water. Pushing your customers less.<br>
+Focus on reducing drag. In SaaS, that means understanding your users. Solving their problems. Respecting their time.<br>
+It’s not as visible as marketing. But it’s what separates great products from the rest.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>Reflecting on these parallels between swimming and business, I’m reminded of Miyamoto Musashi’s quote, which could be a fitting end to this post.</p>
+<blockquote class="blockquote">
+<p>“If you know the way broadly you will see it in everything.”</p>
+</blockquote>
+<p>But I’m also reminded of Abraham Maslow.</p>
+<blockquote class="blockquote">
+<p>“If the only tool you have is a hammer, you tend to see every problem as a nail.”</p>
+</blockquote>
+<p>Because while there’s wisdom in drawing parallels, there’s also wisdom in knowing when to put down the metaphorical hammer.</p>
+<p>So take this post with some chlorine, maybe it’ll help you cut through the drag in your business (or your breaststroke), or maybe it’ll just give you a chuckle the next time you’re at the pool.</p>
+<p>Either way, happy swimming - and happy entrepreneur-ing.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Business</category>
+  <guid>https://www.arjunsriva.com/posts/saas-and-swimming/</guid>
+  <pubDate>Sat, 12 Aug 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Experimentation Platforms</title>
   <dc:creator>Arjun Srivastava</dc:creator>
