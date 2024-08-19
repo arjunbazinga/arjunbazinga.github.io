@@ -5,32 +5,25 @@ description: "How to figure out what matters in business and sports"
 categories: [Business]
 date: "2023-08-12"
 ---
-
-
+Sometimes, insight comes from unexpected places. Today, it came from the pool.  
 Today while swimming, I had a realization: there's a lot in common between swimming well and running a successful subscription business.
-
 
 ## The Basics: Drag, Thrust, and Speed
 
 When you first start swimming, you think it's all about moving your hands and legs as powerfully as possible. More force equals more speed, right? This is partly true, but it misses a crucial element: drag.
 
-If you have too much drag, you'll return to zero velocity after each stroke.
-
-What matters is your average velocity over a distance. With low enough drag, your speed in the water will exceed the power you're putting in at each stroke.
+What matters when swimming is your average velocity over a distance. If you have too much drag, you'll return to zero velocity after each stroke. But when your drag is low enough, you will accumulate speed with each stroke, reaching a top speed much higher than you would even with your strongest stroke.
 
 In business terms:
 
-- Drag is the opposite of your retention rate
+- Drag is your Churn rate, i.e. the opposite of retention rate
 - Thrust is your marketing effort at any given time
-- Speed in Water is your active user base
-  
+- Speed in water is your active user base
 
-While marketing is necessary, your maximum number of users (or speed in the water) is a combination of your past marketing efforts and your retention rate.
-
+While marketing is necessary, your active userbase (or speed in the water) is a combination of your past marketing efforts and your retention rate.
 
 Here's a visual comparison of efficient vs inefficient swimming:
 {{< video  https://youtu.be/miZ23qeMiR0?si=VJiHuxrN0l4kCNelE >}}
-
 
 ## The Hidden Drivers
 Here's something counterintuitive: in swimming, your most crucial muscles aren't the ones you see moving. Your arms and legs create the splash, but it's your core and hips that truly drive performance. They work silently beneath the surface, maintaining your streamlined form and minimizing drag keeping your body long and horizontal in the water.  
@@ -39,10 +32,8 @@ The same principle applies in business. It's easy to fixate on the visible eleme
 
 Just as a swimmer with weak core muscles will struggle regardless of arm strength, a business with poor user experience will flounder despite a massive marketing budget. 
 
-
 ## The Paradox of Effort
 Even in swimming, there are situations where you need to decide between increasing thrust and reducing drag. A prime example is the use of legs. While leg movement contributes about 15% to overall thrust, it dramatically increases drag and often worsens your form. Counterintuitively, the advice for swimming well, especially when starting out, is to use your legs less – sometimes barely moving them at all.
-
 
 This paradox has a direct parallel in business. Many companies engage in practices that seem to increase "thrust" but actually create more "drag":
 
@@ -50,9 +41,8 @@ This paradox has a direct parallel in business. Many companies engage in practic
 - Intrusive advertising
 - User interface "dark patterns" that trick users into spending more
   
-Yes, these tactics might bring additional revenue (power) in the short term. But in the long run, they increase your drag by driving users away from your product. It's a classic case of short-term gain leading to long-term pain.
+Yes, these tactics might bring in additional revenue (power) in the short term. But in the long run, they increase your drag by driving users away from your product. It's a classic case of short-term gain leading to long-term pain.
 For a deeper dive into this concept and how to approach it, I recommend reading the insightful article on [user disengagement](https://zerodha.tech/blog/user-disengagement) by Zerodha.
-
 
 ## Reducing Business Drag
 
@@ -81,8 +71,6 @@ This approach might seem slow, but it leads to sustainable, compounding improvem
 
 You'll notice Olympic swimmers cross the pool in minimal strokes - that's mastery in action. In business, it might look like efficient processes, strong culture, the right people, and well-set incentives.
 
-If you're learning to swim, I highly recommend "Total Immersion: The Revolutionary Way to Swim Better, Faster, and Easier".
-
 ## The Long Game
 In swimming and in business, what looks like effort isn't always what moves you forward.  
 Sometimes, the key to speed is doing less. Moving your legs less in the water. Pushing your customers less.  
@@ -100,8 +88,18 @@ But I'm also reminded of Abraham Maslow.
 
 > "If the only tool you have is a hammer, you tend to see every problem as a nail."
 
-Because while there's wisdom in drawing parallels, there's also wisdom in knowing when to put down the metaphorical hammer.
+Because while there's wisdom in drawing parallels, there's also wisdom in knowing when to put down the metaphorical hammer. 
 
-So take this post with some chlorine, maybe it'll help you cut through the drag in your business (or your breaststroke), or maybe it'll just give you a chuckle the next time you're at the pool.
+Here are three important ways where the analogy breaks down which you should keep in mind. 
 
-Either way, happy swimming - and happy entrepreneur-ing.
+1. Environmental Consistency: Water provides a consistent environment for swimmers. In contrast, the business landscape is constantly changing, more akin to swimming in a dynamic, unpredictable ocean. your drag (churn) could suddenly rapidly increase because of competitors, regulation, effectiveness of your channels etc.
+
+2. Feedback Loops: In swimming, improvements in technique have a relatively linear effect on performance. In business, positive feedback loops (like network effects) can lead to exponential growth, a phenomenon not typically seen in swimming.
+
+3. Nature of the End Goal: In swimming, the objective is typically to minimize time over a fixed distance. This is a well-defined, closed-ended goal. In business, particularly for SaaS, the goal is often open-ended growth. There's no fixed "finish line" - the objective is continuous expansion and improvement, potentially without limit.
+
+So take this post with a pinch of chlorine, maybe it'll help you cut through the drag in your business (or your breaststroke), or maybe it'll just give you a chuckle the next time you're at the pool.
+
+Either way, happy swimming - and happy entrepreneur-ing!
+
+PS: If you're learning to swim, I highly recommend "Total Immersion: The Revolutionary Way to Swim Better, Faster, and Easier".
