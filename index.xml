@@ -21,19 +21,19 @@
 
 
 
-<p>Today while swimming, I had a realization: there’s a lot in common between swimming well and running a successful subscription business.</p>
+<p>Sometimes, insight comes from unexpected places. Today, it came from the pool.<br>
+Today while swimming, I had a realization: there’s a lot in common between swimming well and running a successful subscription business.</p>
 <section id="the-basics-drag-thrust-and-speed" class="level2">
 <h2 class="anchored" data-anchor-id="the-basics-drag-thrust-and-speed">The Basics: Drag, Thrust, and Speed</h2>
 <p>When you first start swimming, you think it’s all about moving your hands and legs as powerfully as possible. More force equals more speed, right? This is partly true, but it misses a crucial element: drag.</p>
-<p>If you have too much drag, you’ll return to zero velocity after each stroke.</p>
-<p>What matters is your average velocity over a distance. With low enough drag, your speed in the water will exceed the power you’re putting in at each stroke.</p>
+<p>What matters when swimming is your average velocity over a distance. If you have too much drag, you’ll return to zero velocity after each stroke. But when your drag is low enough, you will accumulate speed with each stroke, reaching a top speed much higher than you would even with your strongest stroke.</p>
 <p>In business terms:</p>
 <ul>
-<li>Drag is the opposite of your retention rate</li>
+<li>Drag is your Churn rate, i.e.&nbsp;the opposite of retention rate</li>
 <li>Thrust is your marketing effort at any given time</li>
-<li>Speed in Water is your active user base</li>
+<li>Speed in water is your active user base</li>
 </ul>
-<p>While marketing is necessary, your maximum number of users (or speed in the water) is a combination of your past marketing efforts and your retention rate.</p>
+<p>While marketing is necessary, your active userbase (or speed in the water) is a combination of your past marketing efforts and your retention rate.</p>
 <p>Here’s a visual comparison of efficient vs inefficient swimming:</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/miZ23qeMiR0?si=VJiHuxrN0l4kCNelE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
@@ -52,7 +52,7 @@
 <li>Intrusive advertising</li>
 <li>User interface “dark patterns” that trick users into spending more</li>
 </ul>
-<p>Yes, these tactics might bring additional revenue (power) in the short term. But in the long run, they increase your drag by driving users away from your product. It’s a classic case of short-term gain leading to long-term pain. For a deeper dive into this concept and how to approach it, I recommend reading the insightful article on <a href="https://zerodha.tech/blog/user-disengagement">user disengagement</a> by Zerodha.</p>
+<p>Yes, these tactics might bring in additional revenue (power) in the short term. But in the long run, they increase your drag by driving users away from your product. It’s a classic case of short-term gain leading to long-term pain. For a deeper dive into this concept and how to approach it, I recommend reading the insightful article on <a href="https://zerodha.tech/blog/user-disengagement">user disengagement</a> by Zerodha.</p>
 </section>
 <section id="reducing-business-drag" class="level2">
 <h2 class="anchored" data-anchor-id="reducing-business-drag">Reducing Business Drag</h2>
@@ -77,7 +77,6 @@
 <p>This applies to both swimming and running a company, but with a key difference. In swimming, “automatic” means the movement becomes part of your neural structure, performed subconsciously. In business, it’s about setting up the right culture, people, processes, and incentives so things run smoothly without constant oversight.</p>
 <p>This approach might seem slow, but it leads to sustainable, compounding improvements. You’re not just doing things right when actively focusing - you’re making high standards your default state.</p>
 <p>You’ll notice Olympic swimmers cross the pool in minimal strokes - that’s mastery in action. In business, it might look like efficient processes, strong culture, the right people, and well-set incentives.</p>
-<p>If you’re learning to swim, I highly recommend “Total Immersion: The Revolutionary Way to Swim Better, Faster, and Easier”.</p>
 </section>
 <section id="the-long-game" class="level2">
 <h2 class="anchored" data-anchor-id="the-long-game">The Long Game</h2>
@@ -97,8 +96,15 @@ It’s not as visible as marketing. But it’s what separates great products fro
 <p>“If the only tool you have is a hammer, you tend to see every problem as a nail.”</p>
 </blockquote>
 <p>Because while there’s wisdom in drawing parallels, there’s also wisdom in knowing when to put down the metaphorical hammer.</p>
-<p>So take this post with some chlorine, maybe it’ll help you cut through the drag in your business (or your breaststroke), or maybe it’ll just give you a chuckle the next time you’re at the pool.</p>
-<p>Either way, happy swimming - and happy entrepreneur-ing.</p>
+<p>Here are three important ways where the analogy breaks down which you should keep in mind.</p>
+<ol type="1">
+<li><p>Environmental Consistency: Water provides a consistent environment for swimmers. In contrast, the business landscape is constantly changing, more akin to swimming in a dynamic, unpredictable ocean. your drag (churn) could suddenly rapidly increase because of competitors, regulation, effectiveness of your channels etc.</p></li>
+<li><p>Feedback Loops: In swimming, improvements in technique have a relatively linear effect on performance. In business, positive feedback loops (like network effects) can lead to exponential growth, a phenomenon not typically seen in swimming.</p></li>
+<li><p>Nature of the End Goal: In swimming, the objective is typically to minimize time over a fixed distance. This is a well-defined, closed-ended goal. In business, particularly for SaaS, the goal is often open-ended growth. There’s no fixed “finish line” - the objective is continuous expansion and improvement, potentially without limit.</p></li>
+</ol>
+<p>So take this post with a pinch of chlorine, maybe it’ll help you cut through the drag in your business (or your breaststroke), or maybe it’ll just give you a chuckle the next time you’re at the pool.</p>
+<p>Either way, happy swimming - and happy entrepreneur-ing!</p>
+<p>PS: If you’re learning to swim, I highly recommend “Total Immersion: The Revolutionary Way to Swim Better, Faster, and Easier”.</p>
 
 
 </section>
@@ -2103,7 +2109,7 @@ It is broken into 3 seperate rounds</p>
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Business" data-listing-date-sort="1691798400000" data-listing-file-modified-sort="1723464145019" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="960">
+<div class="quarto-post image-right" data-index="0" data-categories="Business" data-listing-date-sort="1691798400000" data-listing-file-modified-sort="1724089071282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1132">
 <div class="thumbnail">
 <p><a href="../posts/saas-and-swimming/index.html" class="no-external"></a></p><a href="../posts/saas-and-swimming/index.html" class="no-external">
 <!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/saas-and-swimming/index.html -->
@@ -2136,7 +2142,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Experimentation" data-listing-date-sort="1616284800000" data-listing-file-modified-sort="1723464144715" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="405">
+<div class="quarto-post image-right" data-index="1" data-categories="Experimentation" data-listing-date-sort="1616284800000" data-listing-file-modified-sort="1724089070978" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="405">
 <div class="thumbnail">
 <p><a href="../posts/exerimentations-platforms/index.html" class="no-external"></a></p><a href="../posts/exerimentations-platforms/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/exerimentations-platforms/experimentation.webp" class="thumbnail-image"></p>
@@ -2169,7 +2175,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="IIT Indore" data-listing-date-sort="1578441600000" data-listing-file-modified-sort="1723464144715" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
+<div class="quarto-post image-right" data-index="2" data-categories="IIT Indore" data-listing-date-sort="1578441600000" data-listing-file-modified-sort="1724089070974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
 <div class="thumbnail">
 <p><a href="../posts/course-schedule-generator/index.html" class="no-external"></a></p><a href="../posts/course-schedule-generator/index.html" class="no-external">
 <!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/course-schedule-generator/index.html -->
@@ -2202,7 +2208,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="IIT Indore,Quiz" data-listing-date-sort="1535241600000" data-listing-file-modified-sort="1723464144935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="49">
+<div class="quarto-post image-right" data-index="3" data-categories="IIT Indore,Quiz" data-listing-date-sort="1535241600000" data-listing-file-modified-sort="1724089071198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="49">
 <div class="thumbnail">
 <p><a href="../posts/harry-potter-quiz/index.html" class="no-external"></a></p><a href="../posts/harry-potter-quiz/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" class="thumbnail-image"></p>
@@ -2238,7 +2244,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Future" data-listing-date-sort="1533427200000" data-listing-file-modified-sort="1723464145019" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="113">
+<div class="quarto-post image-right" data-index="4" data-categories="Future" data-listing-date-sort="1533427200000" data-listing-file-modified-sort="1724089071282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="113">
 <div class="thumbnail">
 <p><a href="../posts/state-of-reading/index.html" class="no-external"></a></p><a href="../posts/state-of-reading/index.html" class="no-external">
 <!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/state-of-reading/index.html -->
@@ -2271,7 +2277,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="AI,Projects" data-listing-date-sort="1532736000000" data-listing-file-modified-sort="1723464144715" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28">
+<div class="quarto-post image-right" data-index="5" data-categories="AI,Projects" data-listing-date-sort="1532736000000" data-listing-file-modified-sort="1724089070978" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28">
 <div class="thumbnail">
 <p><a href="../posts/friend-or-foe/index.html" class="no-external"></a></p><a href="../posts/friend-or-foe/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" class="thumbnail-image"></p>
@@ -2307,7 +2313,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="Analysis" data-listing-date-sort="1529020800000" data-listing-file-modified-sort="1723464144971" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="225">
+<div class="quarto-post image-right" data-index="6" data-categories="Analysis" data-listing-date-sort="1529020800000" data-listing-file-modified-sort="1724089071234" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="225">
 <div class="thumbnail">
 <p><a href="../posts/infant-mortality/index.html" class="no-external"></a></p><a href="../posts/infant-mortality/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/infant-mortality/infantmortality.png" class="thumbnail-image"></p>
@@ -2340,7 +2346,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="Projects" data-listing-date-sort="1528761600000" data-listing-file-modified-sort="1723464145003" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="96">
+<div class="quarto-post image-right" data-index="7" data-categories="Projects" data-listing-date-sort="1528761600000" data-listing-file-modified-sort="1724089071266" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="96">
 <div class="thumbnail">
 <p><a href="../posts/jargonizer/index.html" class="no-external"></a></p><a href="../posts/jargonizer/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" class="thumbnail-image"></p>
@@ -2373,7 +2379,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="AI" data-listing-date-sort="1510444800000" data-listing-file-modified-sort="1723464145003" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="284">
+<div class="quarto-post image-right" data-index="8" data-categories="AI" data-listing-date-sort="1510444800000" data-listing-file-modified-sort="1724089071266" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="284">
 <div class="thumbnail">
 <p><a href="../posts/learning-machine-learning/index.html" class="no-external"></a></p><a href="../posts/learning-machine-learning/index.html" class="no-external">
 <!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/learning-machine-learning/index.html -->
@@ -2406,7 +2412,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="AI" data-listing-date-sort="1510444800000" data-listing-file-modified-sort="1723464145007" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
+<div class="quarto-post image-right" data-index="9" data-categories="AI" data-listing-date-sort="1510444800000" data-listing-file-modified-sort="1724089071270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
 <div class="thumbnail">
 <p><a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external"></a></p><a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/multi-armed-bandits/MultiArmedBandits.jpeg" class="thumbnail-image"></p>
@@ -2439,7 +2445,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="IIT Indore,Quiz" data-listing-date-sort="1504483200000" data-listing-file-modified-sort="1723464144807" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140">
+<div class="quarto-post image-right" data-index="10" data-categories="IIT Indore,Quiz" data-listing-date-sort="1504483200000" data-listing-file-modified-sort="1724089071070" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140">
 <div class="thumbnail">
 <p><a href="../posts/game-of-thrones-quiz/index.html" class="no-external"></a></p><a href="../posts/game-of-thrones-quiz/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/game-of-thrones-quiz/gameofthronesquiz.jpg" class="thumbnail-image"></p>
@@ -2475,7 +2481,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="IIT Indore,Quiz" data-listing-date-sort="1503187200000" data-listing-file-modified-sort="1723464145019" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="43">
+<div class="quarto-post image-right" data-index="11" data-categories="IIT Indore,Quiz" data-listing-date-sort="1503187200000" data-listing-file-modified-sort="1724089071282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="43">
 <div class="thumbnail">
 <p><a href="../posts/newbie-quiz/index.html" class="no-external"></a></p><a href="../posts/newbie-quiz/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.arjunsriva.com/posts/newbie-quiz/newbiequiz.jpeg" class="thumbnail-image"></p>
@@ -2511,7 +2517,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="Projects" data-listing-date-sort="1483833600000" data-listing-file-modified-sort="1723464145003" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
+<div class="quarto-post image-right" data-index="12" data-categories="Projects" data-listing-date-sort="1483833600000" data-listing-file-modified-sort="1724089071266" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
 <div class="thumbnail">
 <p><a href="../posts/mental-health-checklist/index.html" class="no-external"></a></p><a href="../posts/mental-health-checklist/index.html" class="no-external">
 <!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/mental-health-checklist/index.html -->
@@ -2544,7 +2550,7 @@ Arjun Srivastava
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="Meta" data-listing-date-sort="1451606400000" data-listing-file-modified-sort="1723464144715" data-listing-date-modified-sort="1715040000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="166">
+<div class="quarto-post image-right" data-index="13" data-categories="Meta" data-listing-date-sort="1451606400000" data-listing-file-modified-sort="1724089070974" data-listing-date-modified-sort="1715040000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="166">
 <div class="thumbnail">
 <p><a href="../posts/about-this-website/index.html" class="no-external"></a></p><a href="../posts/about-this-website/index.html" class="no-external">
 <!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:posts/about-this-website/index.html -->
@@ -2583,7 +2589,7 @@ No matching items
 </div>
 </div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <guid>https://www.arjunsriva.com/posts/</guid>
-  <pubDate>Mon, 12 Aug 2024 12:03:14 GMT</pubDate>
+  <pubDate>Mon, 19 Aug 2024 17:38:53 GMT</pubDate>
 </item>
 </channel>
 </rss>
