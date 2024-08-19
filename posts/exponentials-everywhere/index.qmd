@@ -1,0 +1,291 @@
+---
+title: "Exponentials Everywhere: The Slippery Slope of Predicting the Future"
+format: 
+  html:
+    code-fold: true
+draft: true
+---
+
+## A Quick Intro to S-curves
+
+If you're already familiar with S-curves, sigmoids, or exponentials, feel
+free to skip this intro. For everyone else, let's break it down.
+
+An S-curve is a mathematical tool that helps us understand systems showing
+exponential growth, which eventually stabilize. This concept can be applied to
+various areas of life, including:
+
+It pops up in life more often than that one friend who only calls when they need help moving:
+
+* Product adoption (from "What's a smartphone?" to "I can't live without it!")
+* Epidemics (yeah, we're all experts now, aren't we?)
+* The spread of juicy gossip in your office (admit it, we've all been there)
+* Bacteria growth (think of that forgotten sandwich in the back of your fridge)
+* Technological progress (from "The internet will never catch on" to... well, look at us now)
+
+The S-curve starts low, then grows rapidly before leveling off. It's like your motivation during a project: starts slow, panic-fueled middle, and then plateaus just before the deadline.
+
+Now, let's dissect this curve. We're interested in:
+
+1. **What's the endgame? (L - final level)**: In pandemic terms, how many people will ultimately catch the sniffles? For your startup, what's the total market size for your AI-powered nose hair trimmer?
+
+2. **When does it get wild? (t0 - inflection point)**: This is the "hold my beer" moment of the curve. It's when you go from "It's just a flu" to "WHERE'S ALL THE TOILET PAPER?!"
+
+3. **How insane is this ride? (k - slope)**: A high k means your growth is so fast it'll give you whiplash. A low k? Well, let's just say you might want to pack a sandwich for this journey.
+
+4. **Are we there yet? (time to reach L)**: How long until we can stop holding our breath? For a pandemic, it's about knowing when it's safe to emerge from your toilet paper fort. For your business, it's knowing how long before you can trade in your ramen noodles for caviar.
+
+For a startup, it's the difference between being the next Apple and being, well, an actual apple.
+
+
+## The Day I Tried to Outsmart an S-curve
+
+You know those days when you think you've got it all figured out? Yeah, I had one of those recently. I was staring at a beautiful S-curve, thinking, "I've got this. I can predict where this bad boy is going." Spoiler alert: I couldn't. And neither can most of us, apparently. 
+
+## The Sigmoid Saga: A Tale of Overconfidence
+
+This whole adventure started when I stumbled upon [an experiment](https://constancecrozier.com/2020/04/16/forecasting-s-curves-is-hard/) . It's like one of those magic tricks that leaves you scratching your head, except instead of pulling rabbits out of hats, it's pulling wildly inaccurate predictions out of seemingly innocent data.
+
+The punchline? Even with just a smidgen of noise, trying to predict a sigmoid model by fitting past values is about as reliable as using a Magic 8-Ball to plan your retirement. And here's the kicker: that maximum value, L? It can be off by orders of magnitude. It's like guessing someone's age and being off by centuries.
+
+## Let's Play: "Guess the Curve" (Spoiler: You'll Probably Lose)
+
+Alright, folks. Time to put on your fortune-teller hats. Below is a little interactive playground where you can mess around with a sigmoid curve. Go ahead, tweak those knobs. Feel the power. Embrace your inner oracle.
+
+```{ojs}
+//| echo: false
+//| panel: sidebar
+viewof noise = Inputs.range(
+  [0, 1],
+  {step: 0.01, value: 0.1, label: "noise level"}
+)
+viewof t0 = Inputs.range(
+  [0, 1],
+  {step: 0.01, value: 0.3, label: "t0 (inflection point)"}
+)
+viewof k = Inputs.range(
+  [0, 40],
+  {step: 0.1, value: 20, label: "k (slope)"}
+)
+viewof L = Inputs.range(
+  [0, 10],
+  {step: 0.1, value: 8, label: "L (plateau)"}
+)
+viewof replay = html`<button>Replay</button>`
+```
+
+```{ojs}
+//| echo: false
+d3 = require('d3@7')
+
+sigmoid = (L, t0, k) => t => L / (1 + Math.exp(-k * (t - t0)))
+
+objective = n => ([L, t0, k]) => {
+  const S = sigmoid(L, t0, k);
+  return d3.sum(data.slice(0, n).map(([t, v]) => (S(t) - v) ** 2));
+}
+
+
+fmin = require("fmin")
+
+solution = n => fmin.nelderMead(objective(n), [10, 1, 1])
+
+data = {
+  replay;
+  const S = sigmoid(L, t0, k);
+  const length = 100;
+  return Array.from({ length }, (_, i) => [
+    i / length,
+    S(i / length) + noise * (Math.random() - 0.5)
+  ]);
+}
+
+width = 800
+
+function curvePoints(radius = 0.5) {
+  const tau = 2 * Math.PI;
+  return function(context) {
+    return {
+      lineStart: () => {},
+      lineEnd: () => {},
+      point: (x, y) => {
+        context.moveTo(x + radius, y);
+        context.arc(x, y, radius, 0, tau);
+      }
+    };
+  };
+}
+
+{
+  const height = 360,
+    context = DOM.context2d(width, height);
+
+  const x = d3
+      .scaleLinear()
+      .domain([0, 1])
+      .range([20, width - 20]),
+    y = d3
+      .scaleLinear()
+      .domain([0, 10])
+      .range([height - 20, 20])
+      .nice(),
+    line = d3
+      .line()
+      .context(context)
+      .x(d => x(d[0]))
+      .y(d => y(d[1]));
+
+  let maxL = 0;
+
+  const starti = 10;
+  const solutions = [];
+
+  function draw(n) {
+    context.clearRect(0, 0, width, height);
+    context.beginPath();
+    line.curve(curvePoints(.5))(data);
+    line.curve(curvePoints(2))(data.slice(0, n));
+    context.fillStyle = "#000";
+    context.fill();
+
+    const { x } = solution(n);
+    if (n) solutions.push(x);
+
+    // text
+    context.fillStyle = "#000";
+    if (x[0] > maxL) maxL = x[0];
+
+    context.fillText(
+      `L = ${L.toFixed(2)}; est. ${x[0].toFixed(2)} (max ${maxL.toFixed(2)})`,
+      10,
+      10
+    );
+    context.fillText(`t0 = ${t0.toFixed(2)}; est. ${x[1].toFixed(2)}`, 10, 24);
+    context.fillText(`k = ${k.toFixed(2)}; est. ${x[2].toFixed(2)}`, 10, 38);
+
+    if (!n) return;
+
+    context.globalAlpha = 0.2;
+    let i = starti;
+    for (const x of solutions) {
+      const S = sigmoid(...x),
+        points = data.slice(i, ++i + 30).map(([t]) => [t, S(t)]);
+      context.beginPath();
+      line.curve(d3.curveLinear)(points);
+      context.strokeStyle = "steelblue";
+      context.stroke();
+    }
+    context.globalAlpha = 1;
+    context.stroke();
+
+    context.beginPath();
+    line.curve(curvePoints(2))([data[n]]);
+    context.fillStyle = "steelblue";
+    context.fill();
+  }
+
+  yield context.canvas;
+
+  let stop = false;
+  invalidation.then(() => (stop = true));
+
+  draw(0);
+  await Promises.delay(1200);
+
+  for (let i = starti; i < data.length; i++) {
+    if (stop) break;
+    draw(i);
+    await Promises.delay(15000 / data.length);
+  }
+}
+```
+
+
+So, what's the deal with this finicky curve? Let's break it down:
+
+- **Noise level**: This is like the static on an old TV. A little bit, and you're squinting. Too much, and you're watching snow.
+- **t0 (inflection point)**: The curve's midlife crisis. Where it decides to flip from "growing like crazy" to "slowing down."
+- **k (slope)**: How steep is this rollercoaster? Adjust this, and you go from kiddie ride to "I want my mommy!"
+- **L (plateau)**: The VIP section. How high can this party go?
+
+Play around with these, hit that "Replay" button, and watch chaos ensue. Each faint line represents what our best guess was at that time on how the world will go. 
+
+## The Plot Thickens: When Noise Isn't the Culprit
+
+Now, here's where things get really interesting. Set that noise level to zero. Go ahead, I'll wait. What do you see?
+
+You might expect a perfect, smooth curve with spot-on predictions, right? But nope! Even with zero noise, you'll notice something curious:
+
+1. The black dots form a perfect, smooth S-curve. No surprises there.
+2. The estimated parameters (L, t0, k) match the true values exactly. So far, so good.
+3. But wait, what's with those light blue curves shooting off into the stratosphere?
+
+That last point is the kicker. Even in our perfect, noise-free world, we're seeing wildly different predictions for where the curve might end up. And that max L value? It's through the roof!
+
+This isn't some glitch in the Matrix or a quirk of computer arithmetic. It's a glimpse into a fundamental truth about these curves that's got mathematicians scratching their heads.
+
+
+## Diving Deeper: The Math on Why We're So Bad at This
+
+Now, if you thought I was just making this up as I go along (which, let's be honest, is sometimes true), hold onto your hats. There's some serious math backing up our struggles with these slippery S-curves.
+
+Enter the research paper "The Limits to Learning a Diffusion Model" by Jackie Baek and friends. It's like the academic version of "Why Predicting the Future is a Fool's Errand, But We Keep Trying Anyway."
+
+### The Gist for the Rest of Us
+
+Here's the lowdown on what these math wizards discovered:
+
+1. **Size Matters, A Lot**: Remember that 'L' parameter in our little game above? The one that kept running away from us? Well, it turns out that estimating the total population size (N) is the real troublemaker here. It's like trying to guess how many jelly beans are in a jar, except the jar keeps changing size when you're not looking.
+
+2. **The Two-Thirds Rule**: Here's where it gets wild. To get a decent estimate of N, you need to observe about N^(2/3) events. In English? If you're dealing with a population of 1 million, you need to see about 10,000 events before your guess is even in the ballpark. It's like needing to eat two-thirds of a cake to guess its flavor. By that point, why even guess?
+
+3. **Early Bird Doesn't Get the Worm**: All those early predictions? Basically fancy guesswork. The paper shows that you can't reliably predict the eventual number of infections (or product adoptions, for you business folks) until you're about two-thirds of the way to peak infection rate. It's like trying to guess the ending of a movie when you're only 20 minutes in.
+
+4. **Some Things Are Easier Than Others**: Not all is lost! The paper found that other parameters, like the rate of spread, are easier to estimate. It's like being able to guess the speed of the car, but not how far it'll go before running out of gas.
+
+### What This Means for Our Little Experiment
+
+Remember our interactive playground above, especially with the noise set to zero? Now you know why those light blue curves are going bananas. When you're adjusting that 'L' parameter, you're not just fighting noise – you're up against the laws of mathematics themselves. Those diverging curves are showing us all the possible futures that fit our data so far. It's not you, it's not the noise, it's not even a computer glitch. It's the fundamental nature of these curves conspiring to keep us guessing.
+
+## Why Should You Care? (Besides Impressing People at Parties)
+
+Now, you might be thinking, "Cool trick, but so what?" Well, my friend, this little experiment has some big implications:
+
+1. **Epidemic Modeling**: Remember when everyone became an armchair epidemiologist in 2020? This is why even the pros were struggling. Early predictions in disease spread are about as reliable as a weather forecast for next year. Next time you see an early prediction about how bad a disease outbreak will be, take it with a grain of salt. Actually, make that a whole salt shaker.
+
+2. **Product Adoption**: If you're in business, dreaming of that hockey stick growth, remember this curve. Your early numbers might be lying to you. Don't count your exponential chickens before they hatch.
+
+3. **Data Addiction**: In a world obsessed with data, this is a humbling reminder. Sometimes, more data is just more confusion. Quality over quantity, folks.
+
+3. **Policy Making**: For the folks in charge, this is a reminder that early interventions are tricky. You're often working with less information than you think you have.
+
+4. **Model Complexity**: Simple models are great... until they're not. This shows why sometimes you need to break out the big guns (and the supercomputers). It's like the difference between a tricycle and a mountain bike – both have their place, but you wouldn't take a tricycle off-roading.
+
+5. **Uncertainty is Certain**: Next time you see a prediction with pinpoint accuracy, remember this curve. The only thing certain about the future is uncertainty. The question should always be How uncertain?
+
+
+## The Take-Home Message
+
+Here's the deal: predicting the future is hard. Like, really hard. Even with fancy math, shiny tools, and zero noise, we're often just sophisticated guessers. So what do we do?
+
+1. Stay humble. Your model might be wrong. Heck, it's probably wrong.
+2. Collect data like it's going out of style. But remember, even a mountain of perfect data can mislead you.
+3. Be flexible. The future has a nasty habit of not conforming to our expectations.
+4. Communicate uncertainty. Don't just give a number. Give a range, a confidence interval, a 🤷 emoji – whatever conveys "This is our best guess, but..."
+5. Remember the two-thirds rule. If you're not at least that far into your S-curve journey, take your predictions with a hefty dose of skepticism.
+
+
+## In Conclusion: The Beauty of Unpredictable S-Curves
+
+So there you have it, folks. S-curves are trickier than a magician's rabbit. The next time someone hands you a long-term prediction with pinpoint accuracy, feel free to raise an eyebrow (or two, and tilt your head a little).
+
+As Yogi Berra wisely said, "It's tough to make predictions, especially about the future." Turns out, even our fancy math agrees with baseball wisdom.
+
+But here's the kicker: there's beauty in this unpredictability. These slippery sigmoids keep scientists on their toes and entrepreneurs on the edge of their seats.
+
+So whether you're modeling pandemics or predicting startup growth, embrace the challenge. As statistician George Box put it, "All models are wrong, but some are useful." Our S-curves, quirks and all, showcase our relentless quest to understand an uncooperative universe.
+
+Here's to the curves that humble us, the data that surprises us, and the inflection points we're all trying to pinpoint. May your predictions be insightful, your error bars honest, and your sense of wonder endless.
+
+In the grand sigmoid of life, we're all still climbing.
+
