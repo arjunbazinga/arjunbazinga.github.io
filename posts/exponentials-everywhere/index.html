@@ -1,2 +1,1202 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Arjun Srivastava">
+<meta name="dcterms.date" content="2022-06-01">
+<meta name="description" content="S-curves are way trickier than you’d think. Here’s why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us.">
+
+<title>Exponentials Everywhere: The S-Curve Challenge in Predicting the Future – Arjun Srivastava</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<meta name="quarto:status" content="draft">
+
+
+<meta property="og:title" content="Exponentials Everywhere: The S-Curve Challenge in Predicting the Future – Arjun Srivastava">
+<meta property="og:description" content="S-curves are way trickier than you’d think. Here’s why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us.">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/exponentials-everywhere/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="Exponentials Everywhere: The S-Curve Challenge in Predicting the Future – Arjun Srivastava">
+<meta name="twitter:description" content="S-curves are way trickier than you’d think. Here’s why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us.">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/exponentials-everywhere/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.com/library"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Exponentials Everywhere: The S-Curve Challenge in Predicting the Future</h1>
+                  <div>
+        <div class="description">
+          S-curves are way trickier than you’d think. Here’s why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Forecasting</div>
+                <div class="quarto-category">Math</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://arjunsriva.com">Arjun Srivastava</a> <a href="https://orcid.org/0000-0003-4303-9098" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 1, 2022</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-quick-intro-to-s-curves" id="toc-a-quick-intro-to-s-curves" class="nav-link active" data-scroll-target="#a-quick-intro-to-s-curves">A Quick Intro to S-curves</a></li>
+  <li><a href="#the-day-i-tried-to-outsmart-an-s-curve" id="toc-the-day-i-tried-to-outsmart-an-s-curve" class="nav-link" data-scroll-target="#the-day-i-tried-to-outsmart-an-s-curve">The Day I Tried to Outsmart an S-curve</a></li>
+  <li><a href="#the-sigmoid-saga-a-tale-of-overconfidence" id="toc-the-sigmoid-saga-a-tale-of-overconfidence" class="nav-link" data-scroll-target="#the-sigmoid-saga-a-tale-of-overconfidence">The Sigmoid Saga: A Tale of Overconfidence</a></li>
+  <li><a href="#lets-play-guess-the-curve-spoiler-youll-probably-lose" id="toc-lets-play-guess-the-curve-spoiler-youll-probably-lose" class="nav-link" data-scroll-target="#lets-play-guess-the-curve-spoiler-youll-probably-lose">Let’s Play: “Guess the Curve” (Spoiler: You’ll Probably Lose)</a></li>
+  <li><a href="#the-plot-thickens-when-noise-isnt-the-culprit" id="toc-the-plot-thickens-when-noise-isnt-the-culprit" class="nav-link" data-scroll-target="#the-plot-thickens-when-noise-isnt-the-culprit">The Plot Thickens: When Noise Isn’t the Culprit</a></li>
+  <li><a href="#diving-deeper-the-math-on-why-were-so-bad-at-this" id="toc-diving-deeper-the-math-on-why-were-so-bad-at-this" class="nav-link" data-scroll-target="#diving-deeper-the-math-on-why-were-so-bad-at-this">Diving Deeper: The Math on Why We’re So Bad at This</a>
+  <ul class="collapse">
+  <li><a href="#the-gist-for-the-rest-of-us" id="toc-the-gist-for-the-rest-of-us" class="nav-link" data-scroll-target="#the-gist-for-the-rest-of-us">The Gist for the Rest of Us</a></li>
+  <li><a href="#what-this-means-for-our-little-experiment" id="toc-what-this-means-for-our-little-experiment" class="nav-link" data-scroll-target="#what-this-means-for-our-little-experiment">What This Means for Our Little Experiment</a></li>
+  </ul></li>
+  <li><a href="#why-should-you-care-besides-impressing-people-at-parties" id="toc-why-should-you-care-besides-impressing-people-at-parties" class="nav-link" data-scroll-target="#why-should-you-care-besides-impressing-people-at-parties">Why Should You Care? (Besides Impressing People at Parties)</a></li>
+  <li><a href="#the-take-home-message" id="toc-the-take-home-message" class="nav-link" data-scroll-target="#the-take-home-message">The Take-Home Message</a></li>
+  <li><a href="#in-conclusion-the-beauty-of-unpredictable-s-curves" id="toc-in-conclusion-the-beauty-of-unpredictable-s-curves" class="nav-link" data-scroll-target="#in-conclusion-the-beauty-of-unpredictable-s-curves">In Conclusion: The Beauty of Unpredictable S-Curves</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="a-quick-intro-to-s-curves" class="level2">
+<h2 class="anchored" data-anchor-id="a-quick-intro-to-s-curves">A Quick Intro to S-curves</h2>
+<p>If you’re already familiar with S-curves, sigmoids, or exponentials, feel free to skip this intro. For everyone else, let’s break it down.</p>
+<p>An S-curve is a mathematical tool that helps us understand systems showing exponential growth, which eventually stabilize. This concept can be applied to various areas of life, including:</p>
+<p>It pops up in life more often than that one friend who only calls when they need help moving:</p>
+<ul>
+<li>Product adoption (from “What’s a smartphone?” to “I can’t live without it!”)</li>
+<li>Epidemics (yeah, we’re all experts now, aren’t we?)</li>
+<li>The spread of juicy gossip in your office (admit it, we’ve all been there)</li>
+<li>Bacteria growth (think of that forgotten sandwich in the back of your fridge)</li>
+<li>Technological progress (from “The internet will never catch on” to… well, look at us now)</li>
+</ul>
+<p>The S-curve starts low, then grows rapidly before leveling off. It’s like your motivation during a project: starts slow, panic-fueled middle, and then plateaus just before the deadline.</p>
+<p>Now, let’s dissect this curve. We’re interested in:</p>
+<ol type="1">
+<li><p><strong>What’s the endgame? (L - final level)</strong>: In pandemic terms, how many people will ultimately catch the sniffles? For your startup, what’s the total market size for your AI-powered nose hair trimmer?</p></li>
+<li><p><strong>When does it get wild? (t0 - inflection point)</strong>: This is the “hold my beer” moment of the curve. It’s when you go from “It’s just a flu” to “WHERE’S ALL THE TOILET PAPER?!”</p></li>
+<li><p><strong>How insane is this ride? (k - slope)</strong>: A high k means your growth is so fast it’ll give you whiplash. A low k? Well, let’s just say you might want to pack a sandwich for this journey.</p></li>
+<li><p><strong>Are we there yet? (time to reach L)</strong>: How long until we can stop holding our breath? For a pandemic, it’s about knowing when it’s safe to emerge from your toilet paper fort. For your business, it’s knowing how long before you can trade in your ramen noodles for caviar.</p></li>
+</ol>
+<p>For a startup, it’s the difference between being the next Apple and being, well, an actual apple.</p>
+</section>
+<section id="the-day-i-tried-to-outsmart-an-s-curve" class="level2">
+<h2 class="anchored" data-anchor-id="the-day-i-tried-to-outsmart-an-s-curve">The Day I Tried to Outsmart an S-curve</h2>
+<p>You know those days when you think you’ve got it all figured out? Yeah, I had one of those recently. I was staring at a beautiful S-curve, thinking, “I’ve got this. I can predict where this bad boy is going.” Spoiler alert: I couldn’t. And neither can most of us, apparently.</p>
+</section>
+<section id="the-sigmoid-saga-a-tale-of-overconfidence" class="level2">
+<h2 class="anchored" data-anchor-id="the-sigmoid-saga-a-tale-of-overconfidence">The Sigmoid Saga: A Tale of Overconfidence</h2>
+<p>This whole adventure started when I stumbled upon an experiment demonstrating the difficulty of fitting an S-curve on noisy data. It’s like one of those magic tricks that leaves you scratching your head, except instead of pulling rabbits out of hats, it’s pulling wildly inaccurate predictions out of seemingly innocent data.</p>
+<p>The punchline? Even with just a smidgen of noise, trying to predict a sigmoid model by fitting past values is about as reliable as using a Magic 8-Ball to plan your retirement. And here’s the kicker: that maximum value, L? It can be off by orders of magnitude. It’s like guessing someone’s age and being off by centuries.</p>
+</section>
+<section id="lets-play-guess-the-curve-spoiler-youll-probably-lose" class="level2">
+<h2 class="anchored" data-anchor-id="lets-play-guess-the-curve-spoiler-youll-probably-lose">Let’s Play: “Guess the Curve” (Spoiler: You’ll Probably Lose)</h2>
+<p>Alright, folks. Time to put on your fortune-teller hats. Below is a little interactive playground where you can mess around with a sigmoid curve. Go ahead, tweak those knobs. Feel the power. Embrace your inner oracle.</p>
+<div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
+<div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="59" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 58;"><span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>viewof noise <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"noise level"</span>}</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>viewof t0 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.01</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"t0 (inflection point)"</span>}</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>viewof k <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">40</span>]<span class="op">,</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"k (slope)"</span>}</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>viewof L <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"L (plateau)"</span>}</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>viewof replay <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;button&gt;Replay&lt;/button&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="panel-fill g-col-24 g-col-lg-17 pt-3 pt-lg-0">
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="80" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 79;"><span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">'d3@7'</span>)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>sigmoid <span class="op">=</span> (L<span class="op">,</span> t0<span class="op">,</span> k) <span class="kw">=&gt;</span> t <span class="kw">=&gt;</span> L <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span>k <span class="op">*</span> (t <span class="op">-</span> t0)))</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>objective <span class="op">=</span> n <span class="kw">=&gt;</span> ([L<span class="op">,</span> t0<span class="op">,</span> k]) <span class="kw">=&gt;</span> {</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> S <span class="op">=</span> <span class="fu">sigmoid</span>(L<span class="op">,</span> t0<span class="op">,</span> k)<span class="op">;</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> d3<span class="op">.</span><span class="fu">sum</span>(data<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> n)<span class="op">.</span><span class="fu">map</span>(([t<span class="op">,</span> v]) <span class="kw">=&gt;</span> (<span class="fu">S</span>(t) <span class="op">-</span> v) <span class="op">**</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>fmin <span class="op">=</span> <span class="pp">require</span>(<span class="st">"fmin"</span>)</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> n <span class="kw">=&gt;</span> fmin<span class="op">.</span><span class="fu">nelderMead</span>(<span class="fu">objective</span>(n)<span class="op">,</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span>])</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  replay<span class="op">;</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> S <span class="op">=</span> <span class="fu">sigmoid</span>(L<span class="op">,</span> t0<span class="op">,</span> k)<span class="op">;</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> length <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ length }<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> [</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    i <span class="op">/</span> length<span class="op">,</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    <span class="fu">S</span>(i <span class="op">/</span> length) <span class="op">+</span> noise <span class="op">*</span> (<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">-</span> <span class="fl">0.5</span>)</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  ])<span class="op">;</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="dv">800</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">curvePoints</span>(radius <span class="op">=</span> <span class="fl">0.5</span>) {</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> tau <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span><span class="op">;</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">function</span>(context) {</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>      <span class="dt">lineStart</span><span class="op">:</span> () <span class="kw">=&gt;</span> {}<span class="op">,</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>      <span class="dt">lineEnd</span><span class="op">:</span> () <span class="kw">=&gt;</span> {}<span class="op">,</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>      <span class="dt">point</span><span class="op">:</span> (x<span class="op">,</span> y) <span class="kw">=&gt;</span> {</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        context<span class="op">.</span><span class="fu">moveTo</span>(x <span class="op">+</span> radius<span class="op">,</span> y)<span class="op">;</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>        context<span class="op">.</span><span class="fu">arc</span>(x<span class="op">,</span> y<span class="op">,</span> radius<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> tau)<span class="op">;</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> height <span class="op">=</span> <span class="dv">360</span><span class="op">,</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>    context <span class="op">=</span> DOM<span class="op">.</span><span class="fu">context2d</span>(width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> x <span class="op">=</span> d3</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">scaleLinear</span>()</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">domain</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>])</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">range</span>([<span class="dv">20</span><span class="op">,</span> width <span class="op">-</span> <span class="dv">20</span>])<span class="op">,</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> d3</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">scaleLinear</span>()</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">domain</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>])</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">range</span>([height <span class="op">-</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">20</span>])</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">nice</span>()<span class="op">,</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> d3</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">line</span>()</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">context</span>(context)</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">x</span>(d <span class="kw">=&gt;</span> <span class="fu">x</span>(d[<span class="dv">0</span>]))</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">y</span>(d <span class="kw">=&gt;</span> <span class="fu">y</span>(d[<span class="dv">1</span>]))<span class="op">;</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> maxL <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> starti <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> solutions <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">draw</span>(n) {</span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">beginPath</span>()<span class="op">;</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>    line<span class="op">.</span><span class="fu">curve</span>(<span class="fu">curvePoints</span>(<span class="op">.</span><span class="dv">5</span>))(data)<span class="op">;</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>    line<span class="op">.</span><span class="fu">curve</span>(<span class="fu">curvePoints</span>(<span class="dv">2</span>))(data<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> n))<span class="op">;</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="at">fillStyle</span> <span class="op">=</span> <span class="st">"#000"</span><span class="op">;</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">fill</span>()<span class="op">;</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> { x } <span class="op">=</span> <span class="fu">solution</span>(n)<span class="op">;</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (n) solutions<span class="op">.</span><span class="fu">push</span>(x)<span class="op">;</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>    <span class="co">// text</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="at">fillStyle</span> <span class="op">=</span> <span class="st">"#000"</span><span class="op">;</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x[<span class="dv">0</span>] <span class="op">&gt;</span> maxL) maxL <span class="op">=</span> x[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">fillText</span>(</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>      <span class="vs">`L = </span><span class="sc">${</span>L<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">; est. </span><span class="sc">${</span>x[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs"> (max </span><span class="sc">${</span>maxL<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>      <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>      <span class="dv">10</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">fillText</span>(<span class="vs">`t0 = </span><span class="sc">${</span>t0<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">; est. </span><span class="sc">${</span>x[<span class="dv">1</span>]<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">24</span>)<span class="op">;</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">fillText</span>(<span class="vs">`k = </span><span class="sc">${</span>k<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">; est. </span><span class="sc">${</span>x[<span class="dv">2</span>]<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">38</span>)<span class="op">;</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>n) <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="at">globalAlpha</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">;</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> i <span class="op">=</span> starti<span class="op">;</span></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> x <span class="kw">of</span> solutions) {</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> S <span class="op">=</span> <span class="fu">sigmoid</span>(<span class="op">...</span>x)<span class="op">,</span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>        points <span class="op">=</span> data<span class="op">.</span><span class="fu">slice</span>(i<span class="op">,</span> <span class="op">++</span>i <span class="op">+</span> <span class="dv">30</span>)<span class="op">.</span><span class="fu">map</span>(([t]) <span class="kw">=&gt;</span> [t<span class="op">,</span> <span class="fu">S</span>(t)])<span class="op">;</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>      context<span class="op">.</span><span class="fu">beginPath</span>()<span class="op">;</span></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>      line<span class="op">.</span><span class="fu">curve</span>(d3<span class="op">.</span><span class="at">curveLinear</span>)(points)<span class="op">;</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>      context<span class="op">.</span><span class="at">strokeStyle</span> <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">;</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>      context<span class="op">.</span><span class="fu">stroke</span>()<span class="op">;</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="at">globalAlpha</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">stroke</span>()<span class="op">;</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">beginPath</span>()<span class="op">;</span></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>    line<span class="op">.</span><span class="fu">curve</span>(<span class="fu">curvePoints</span>(<span class="dv">2</span>))([data[n]])<span class="op">;</span></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="at">fillStyle</span> <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">;</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>    context<span class="op">.</span><span class="fu">fill</span>()<span class="op">;</span></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>  <span class="kw">yield</span> context<span class="op">.</span><span class="at">canvas</span><span class="op">;</span></span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> stop <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>  invalidation<span class="op">.</span><span class="fu">then</span>(() <span class="kw">=&gt;</span> (stop <span class="op">=</span> <span class="kw">true</span>))<span class="op">;</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(<span class="dv">1200</span>)<span class="op">;</span></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> starti<span class="op">;</span> i <span class="op">&lt;</span> data<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (stop) <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(i)<span class="op">;</span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(<span class="dv">15000</span> <span class="op">/</span> data<span class="op">.</span><span class="at">length</span>)<span class="op">;</span></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-9" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<p>So, what’s the deal with this finicky curve? Let’s break it down:</p>
+<ul>
+<li><strong>Noise level</strong>: This is like the static on an old TV. A little bit, and you’re squinting. Too much, and you’re watching snow.</li>
+<li><strong>t0 (inflection point)</strong>: The curve’s midlife crisis. Where it decides to flip from “growing like crazy” to “slowing down.”</li>
+<li><strong>k (slope)</strong>: How steep is this rollercoaster? Adjust this, and you go from kiddie ride to “I want my mommy!”</li>
+<li><strong>L (plateau)</strong>: The VIP section. How high can this party go?</li>
+</ul>
+<p>Play around with these, hit that “Replay” button, and watch chaos ensue. Each faint line represents what our best guess was at that time on how the world will go. On the top left you can see the maximum L it thought over time.</p>
+</div>
+</div>
+</section>
+<section id="the-plot-thickens-when-noise-isnt-the-culprit" class="level2">
+<h2 class="anchored" data-anchor-id="the-plot-thickens-when-noise-isnt-the-culprit">The Plot Thickens: When Noise Isn’t the Culprit</h2>
+<p>Now, here’s where things get really interesting. Set that noise level to zero. Go ahead, I’ll wait. What do you see?</p>
+<p>You might expect a perfect, smooth curve with spot-on predictions, right? But nope! Even with zero noise, you’ll notice something curious:</p>
+<ol type="1">
+<li>The black dots form a perfect, smooth S-curve. No surprises there.</li>
+<li>The estimated parameters (L, t0, k) match the true values exactly. So far, so good.</li>
+<li>But wait, what’s with those light blue curves shooting off into the stratosphere?</li>
+</ol>
+<p>That last point is the kicker. Even in our perfect, noise-free world, we’re seeing wildly different predictions for where the curve might end up. And that max L value? It’s through the roof!</p>
+<p>This isn’t some glitch in the Matrix or a quirk of computer arithmetic. It’s a glimpse into a fundamental truth about these curves that’s got mathematicians scratching their heads.</p>
+</section>
+<section id="diving-deeper-the-math-on-why-were-so-bad-at-this" class="level2">
+<h2 class="anchored" data-anchor-id="diving-deeper-the-math-on-why-were-so-bad-at-this">Diving Deeper: The Math on Why We’re So Bad at This</h2>
+<p>Now, if you thought I was just making this up as I go along (which, let’s be honest, is sometimes true), hold onto your hats. There’s some serious math backing up our struggles with these slippery S-curves.</p>
+<p>Enter the research paper “The Limits to Learning a Diffusion Model” <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> by Jackie Baek and friends. It’s like the academic version of “Why Predicting the Future is a Fool’s Errand, But We Keep Trying Anyway.”</p>
+<section id="the-gist-for-the-rest-of-us" class="level3">
+<h3 class="anchored" data-anchor-id="the-gist-for-the-rest-of-us">The Gist for the Rest of Us</h3>
+<p>Here’s the lowdown on what these math wizards discovered:</p>
+<ol type="1">
+<li><p><strong>Size Matters, A Lot</strong>: Remember that ‘L’ parameter in our little game above? The one that kept running away from us? Well, it turns out that estimating the total population size (N) is the real troublemaker here. It’s like trying to guess how many jelly beans are in a jar, except the jar keeps changing size when you’re not looking.</p></li>
+<li><p><strong>The Two-Thirds Rule</strong>: Here’s where it gets wild. To get a decent estimate of N, you need to observe about N^(2/3) events. In English? If you’re dealing with a population of 1 million, you need to see about 10,000 events before your guess is even in the ballpark. It’s like needing to eat two-thirds of a cake to guess its flavor. By that point, why even guess?</p></li>
+<li><p><strong>Early Bird Doesn’t Get the Worm</strong>: All those early predictions? Basically fancy guesswork. The paper shows that you can’t reliably predict the eventual number of infections (or product adoptions, for you business folks) until you’re about two-thirds of the way to peak infection rate. It’s like trying to guess the ending of a movie when you’re only 20 minutes in.</p></li>
+<li><p><strong>Some Things Are Easier Than Others</strong>: Not all is lost! The paper found that other parameters, like the rate of spread, are easier to estimate. It’s like being able to guess the speed of the car, but not how far it’ll go before running out of gas.</p></li>
+</ol>
+</section>
+<section id="what-this-means-for-our-little-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-means-for-our-little-experiment">What This Means for Our Little Experiment</h3>
+<p>Remember our interactive playground above, especially with the noise set to zero? Now you know why those light blue curves are going bananas. When you’re adjusting that ‘L’ parameter, you’re not just fighting noise – you’re up against the laws of mathematics themselves. Those diverging curves are showing us all the possible futures that fit our data so far. It’s not you, it’s not the noise, it’s not even a computer glitch. It’s the fundamental nature of these curves conspiring to keep us guessing.</p>
+</section>
+</section>
+<section id="why-should-you-care-besides-impressing-people-at-parties" class="level2">
+<h2 class="anchored" data-anchor-id="why-should-you-care-besides-impressing-people-at-parties">Why Should You Care? (Besides Impressing People at Parties)</h2>
+<p>Now, you might be thinking, “Cool trick, but so what?” Well, my friend, this little experiment has some big implications:</p>
+<ol type="1">
+<li><p><strong>Epidemic Modeling</strong>: Remember when everyone became an armchair epidemiologist in 2020? This is why even the pros were struggling. Early predictions in disease spread are about as reliable as a weather forecast for next year. Next time you see an early prediction about how bad a disease outbreak will be, take it with a grain of salt. Actually, make that a whole salt shaker.</p></li>
+<li><p><strong>Product Adoption</strong>: If you’re in business, dreaming of that hockey stick growth, remember this curve. Your early numbers might be lying to you. Don’t count your exponential chickens before they hatch.</p></li>
+<li><p><strong>Data Addiction</strong>: In a world obsessed with data, this is a humbling reminder. Sometimes, more data is just more confusion. Quality over quantity, folks.</p></li>
+<li><p><strong>Policy Making</strong>: For the folks in charge, this is a reminder that early interventions are tricky. You’re often working with less information than you think you have.</p></li>
+<li><p><strong>Model Complexity</strong>: Simple models are great… until they’re not. This shows why sometimes you need to break out the big guns (and the supercomputers). It’s like the difference between a tricycle and a mountain bike – both have their place, but you wouldn’t take a tricycle off-roading.</p></li>
+<li><p><strong>Uncertainty is Certain</strong>: Next time you see a prediction with pinpoint accuracy, remember this curve. The only thing certain about the future is uncertainty. The question should always be How uncertain?</p></li>
+</ol>
+</section>
+<section id="the-take-home-message" class="level2">
+<h2 class="anchored" data-anchor-id="the-take-home-message">The Take-Home Message</h2>
+<p>Here’s the deal: predicting the future is hard. Like, really hard. Even with fancy math, shiny tools, and zero noise, we’re often just sophisticated guessers. So what do we do?</p>
+<ol type="1">
+<li>Stay humble. Your model might be wrong. Heck, it’s probably wrong.</li>
+<li>Collect data like it’s going out of style. But remember, even a mountain of perfect data can mislead you.</li>
+<li>Be flexible. The future has a nasty habit of not conforming to our expectations.</li>
+<li>Communicate uncertainty. Don’t just give a number. Give a range, a confidence interval, a <code>¯\_(ツ)_/¯</code> – whatever conveys “This is our best guess, but…”</li>
+<li>Remember the two-thirds rule. If you’re not at least that far into your S-curve journey, take your predictions with a hefty dose of skepticism.</li>
+</ol>
+</section>
+<section id="in-conclusion-the-beauty-of-unpredictable-s-curves" class="level2">
+<h2 class="anchored" data-anchor-id="in-conclusion-the-beauty-of-unpredictable-s-curves">In Conclusion: The Beauty of Unpredictable S-Curves</h2>
+<p>So there you have it, folks. S-curves are trickier than a magician’s rabbit. The next time someone hands you a long-term prediction with pinpoint accuracy, feel free to raise an eyebrow (or two, and tilt your head a little).</p>
+<p>As Yogi Berra wisely said, “It’s tough to make predictions, especially about the future.” Turns out, even our fancy math agrees with baseball wisdom.</p>
+<p>But here’s the kicker: there’s beauty in this unpredictability. These slippery sigmoids keep scientists on their toes and entrepreneurs on the edge of their seats.</p>
+<p>So whether you’re modeling pandemics or predicting startup growth, embrace the challenge. As statistician George Box put it, “All models are wrong, but some are useful.” Our S-curves, quirks and all, showcase our relentless quest to understand an uncooperative universe.</p>
+<p>Here’s to the curves that humble us, the data that surprises us, and the inflection points we’re all trying to pinpoint. May your predictions be insightful, your error bars honest, and your sense of wonder endless.</p>
+<p>In the grand sigmoid of life, we’re all still climbing.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Read the <a href="https://arxiv.org/abs/2006.06373">paper</a> or listen to the <a href="https://www.youtube.com/watch?v=4IAspdrpNw0">podcast</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBub2lzZSA9IElucHV0cy5yYW5nZShcbiAgWzAsIDFdLFxuICB7c3RlcDogMC4wMSwgdmFsdWU6IDAuMSwgbGFiZWw6IFwibm9pc2UgbGV2ZWxcIn1cbilcbnZpZXdvZiB0MCA9IElucHV0cy5yYW5nZShcbiAgWzAsIDFdLFxuICB7c3RlcDogMC4wMSwgdmFsdWU6IDAuMywgbGFiZWw6IFwidDAgKGluZmxlY3Rpb24gcG9pbnQpXCJ9XG4pXG52aWV3b2YgayA9IElucHV0cy5yYW5nZShcbiAgWzAsIDQwXSxcbiAge3N0ZXA6IDAuMSwgdmFsdWU6IDIwLCBsYWJlbDogXCJrIChzbG9wZSlcIn1cbilcbnZpZXdvZiBMID0gSW5wdXRzLnJhbmdlKFxuICBbMCwgMTBdLFxuICB7c3RlcDogMC4xLCB2YWx1ZTogOCwgbGFiZWw6IFwiTCAocGxhdGVhdSlcIn1cbilcbnZpZXdvZiByZXBsYXkgPSBodG1sYDxidXR0b24+UmVwbGF5PC9idXR0b24+YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZDMgPSByZXF1aXJlKCdkM0A3Jylcblxuc2lnbW9pZCA9IChMLCB0MCwgaykgPT4gdCA9PiBMIC8gKDEgKyBNYXRoLmV4cCgtayAqICh0IC0gdDApKSlcblxub2JqZWN0aXZlID0gbiA9PiAoW0wsIHQwLCBrXSkgPT4ge1xuICBjb25zdCBTID0gc2lnbW9pZChMLCB0MCwgayk7XG4gIHJldHVybiBkMy5zdW0oZGF0YS5zbGljZSgwLCBuKS5tYXAoKFt0LCB2XSkgPT4gKFModCkgLSB2KSAqKiAyKSk7XG59XG5cblxuZm1pbiA9IHJlcXVpcmUoXCJmbWluXCIpXG5cbnNvbHV0aW9uID0gbiA9PiBmbWluLm5lbGRlck1lYWQob2JqZWN0aXZlKG4pLCBbMTAsIDEsIDFdKVxuXG5kYXRhID0ge1xuICByZXBsYXk7XG4gIGNvbnN0IFMgPSBzaWdtb2lkKEwsIHQwLCBrKTtcbiAgY29uc3QgbGVuZ3RoID0gMTAwO1xuICByZXR1cm4gQXJyYXkuZnJvbSh7IGxlbmd0aCB9LCAoXywgaSkgPT4gW1xuICAgIGkgLyBsZW5ndGgsXG4gICAgUyhpIC8gbGVuZ3RoKSArIG5vaXNlICogKE1hdGgucmFuZG9tKCkgLSAwLjUpXG4gIF0pO1xufVxuXG53aWR0aCA9IDgwMFxuXG5mdW5jdGlvbiBjdXJ2ZVBvaW50cyhyYWRpdXMgPSAwLjUpIHtcbiAgY29uc3QgdGF1ID0gMiAqIE1hdGguUEk7XG4gIHJldHVybiBmdW5jdGlvbihjb250ZXh0KSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIGxpbmVTdGFydDogKCkgPT4ge30sXG4gICAgICBsaW5lRW5kOiAoKSA9PiB7fSxcbiAgICAgIHBvaW50OiAoeCwgeSkgPT4ge1xuICAgICAgICBjb250ZXh0Lm1vdmVUbyh4ICsgcmFkaXVzLCB5KTtcbiAgICAgICAgY29udGV4dC5hcmMoeCwgeSwgcmFkaXVzLCAwLCB0YXUpO1xuICAgICAgfVxuICAgIH07XG4gIH07XG59XG5cbntcbiAgY29uc3QgaGVpZ2h0ID0gMzYwLFxuICAgIGNvbnRleHQgPSBET00uY29udGV4dDJkKHdpZHRoLCBoZWlnaHQpO1xuXG4gIGNvbnN0IHggPSBkM1xuICAgICAgLnNjYWxlTGluZWFyKClcbiAgICAgIC5kb21haW4oWzAsIDFdKVxuICAgICAgLnJhbmdlKFsyMCwgd2lkdGggLSAyMF0pLFxuICAgIHkgPSBkM1xuICAgICAgLnNjYWxlTGluZWFyKClcbiAgICAgIC5kb21haW4oWzAsIDEwXSlcbiAgICAgIC5yYW5nZShbaGVpZ2h0IC0gMjAsIDIwXSlcbiAgICAgIC5uaWNlKCksXG4gICAgbGluZSA9IGQzXG4gICAgICAubGluZSgpXG4gICAgICAuY29udGV4dChjb250ZXh0KVxuICAgICAgLngoZCA9PiB4KGRbMF0pKVxuICAgICAgLnkoZCA9PiB5KGRbMV0pKTtcblxuICBsZXQgbWF4TCA9IDA7XG5cbiAgY29uc3Qgc3RhcnRpID0gMTA7XG4gIGNvbnN0IHNvbHV0aW9ucyA9IFtdO1xuXG4gIGZ1bmN0aW9uIGRyYXcobikge1xuICAgIGNvbnRleHQuY2xlYXJSZWN0KDAsIDAsIHdpZHRoLCBoZWlnaHQpO1xuICAgIGNvbnRleHQuYmVnaW5QYXRoKCk7XG4gICAgbGluZS5jdXJ2ZShjdXJ2ZVBvaW50cyguNSkpKGRhdGEpO1xuICAgIGxpbmUuY3VydmUoY3VydmVQb2ludHMoMikpKGRhdGEuc2xpY2UoMCwgbikpO1xuICAgIGNvbnRleHQuZmlsbFN0eWxlID0gXCIjMDAwXCI7XG4gICAgY29udGV4dC5maWxsKCk7XG5cbiAgICBjb25zdCB7IHggfSA9IHNvbHV0aW9uKG4pO1xuICAgIGlmIChuKSBzb2x1dGlvbnMucHVzaCh4KTtcblxuICAgIC8vIHRleHRcbiAgICBjb250ZXh0LmZpbGxTdHlsZSA9IFwiIzAwMFwiO1xuICAgIGlmICh4WzBdID4gbWF4TCkgbWF4TCA9IHhbMF07XG5cbiAgICBjb250ZXh0LmZpbGxUZXh0KFxuICAgICAgYEwgPSAke0wudG9GaXhlZCgyKX07IGVzdC4gJHt4WzBdLnRvRml4ZWQoMil9IChtYXggJHttYXhMLnRvRml4ZWQoMil9KWAsXG4gICAgICAxMCxcbiAgICAgIDEwXG4gICAgKTtcbiAgICBjb250ZXh0LmZpbGxUZXh0KGB0MCA9ICR7dDAudG9GaXhlZCgyKX07IGVzdC4gJHt4WzFdLnRvRml4ZWQoMil9YCwgMTAsIDI0KTtcbiAgICBjb250ZXh0LmZpbGxUZXh0KGBrID0gJHtrLnRvRml4ZWQoMil9OyBlc3QuICR7eFsyXS50b0ZpeGVkKDIpfWAsIDEwLCAzOCk7XG5cbiAgICBpZiAoIW4pIHJldHVybjtcblxuICAgIGNvbnRleHQuZ2xvYmFsQWxwaGEgPSAwLjI7XG4gICAgbGV0IGkgPSBzdGFydGk7XG4gICAgZm9yIChjb25zdCB4IG9mIHNvbHV0aW9ucykge1xuICAgICAgY29uc3QgUyA9IHNpZ21vaWQoLi4ueCksXG4gICAgICAgIHBvaW50cyA9IGRhdGEuc2xpY2UoaSwgKytpICsgMzApLm1hcCgoW3RdKSA9PiBbdCwgUyh0KV0pO1xuICAgICAgY29udGV4dC5iZWdpblBhdGgoKTtcbiAgICAgIGxpbmUuY3VydmUoZDMuY3VydmVMaW5lYXIpKHBvaW50cyk7XG4gICAgICBjb250ZXh0LnN0cm9rZVN0eWxlID0gXCJzdGVlbGJsdWVcIjtcbiAgICAgIGNvbnRleHQuc3Ryb2tlKCk7XG4gICAgfVxuICAgIGNvbnRleHQuZ2xvYmFsQWxwaGEgPSAxO1xuICAgIGNvbnRleHQuc3Ryb2tlKCk7XG5cbiAgICBjb250ZXh0LmJlZ2luUGF0aCgpO1xuICAgIGxpbmUuY3VydmUoY3VydmVQb2ludHMoMikpKFtkYXRhW25dXSk7XG4gICAgY29udGV4dC5maWxsU3R5bGUgPSBcInN0ZWVsYmx1ZVwiO1xuICAgIGNvbnRleHQuZmlsbCgpO1xuICB9XG5cbiAgeWllbGQgY29udGV4dC5jYW52YXM7XG5cbiAgbGV0IHN0b3AgPSBmYWxzZTtcbiAgaW52YWxpZGF0aW9uLnRoZW4oKCkgPT4gKHN0b3AgPSB0cnVlKSk7XG5cbiAgZHJhdygwKTtcbiAgYXdhaXQgUHJvbWlzZXMuZGVsYXkoMTIwMCk7XG5cbiAgZm9yIChsZXQgaSA9IHN0YXJ0aTsgaSA8IGRhdGEubGVuZ3RoOyBpKyspIHtcbiAgICBpZiAoc3RvcCkgYnJlYWs7XG4gICAgZHJhdyhpKTtcbiAgICBhd2FpdCBQcm9taXNlcy5kZWxheSgxNTAwMCAvIGRhdGEubGVuZ3RoKTtcbiAgfVxufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdub2lzZScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCd0MCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdrJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ0wnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncmVwbGF5JykifV19
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../posts/exponentials-everywhere";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
