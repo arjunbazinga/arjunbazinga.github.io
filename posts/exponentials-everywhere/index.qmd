@@ -1,9 +1,10 @@
 ---
-title: "Exponentials Everywhere: The Slippery Slope of Predicting the Future"
-format: 
-  html:
-    code-fold: true
+title: "Exponentials Everywhere: The S-Curve Challenge in Predicting the Future"
 draft: true
+layout: post
+description: "S-curves are way trickier than you'd think. Here's why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us."
+categories: ["Forecasting", "Math"]
+date: "2022-06-01"
 ---
 
 ## A Quick Intro to S-curves
@@ -44,7 +45,7 @@ You know those days when you think you've got it all figured out? Yeah, I had on
 
 ## The Sigmoid Saga: A Tale of Overconfidence
 
-This whole adventure started when I stumbled upon [an experiment](https://constancecrozier.com/2020/04/16/forecasting-s-curves-is-hard/) . It's like one of those magic tricks that leaves you scratching your head, except instead of pulling rabbits out of hats, it's pulling wildly inaccurate predictions out of seemingly innocent data.
+This whole adventure started when I stumbled upon an experiment demonstrating the difficulty of fitting an S-curve on noisy data. It's like one of those magic tricks that leaves you scratching your head, except instead of pulling rabbits out of hats, it's pulling wildly inaccurate predictions out of seemingly innocent data.
 
 The punchline? Even with just a smidgen of noise, trying to predict a sigmoid model by fitting past values is about as reliable as using a Magic 8-Ball to plan your retirement. And here's the kicker: that maximum value, L? It can be off by orders of magnitude. It's like guessing someone's age and being off by centuries.
 
@@ -208,7 +209,7 @@ So, what's the deal with this finicky curve? Let's break it down:
 - **k (slope)**: How steep is this rollercoaster? Adjust this, and you go from kiddie ride to "I want my mommy!"
 - **L (plateau)**: The VIP section. How high can this party go?
 
-Play around with these, hit that "Replay" button, and watch chaos ensue. Each faint line represents what our best guess was at that time on how the world will go. 
+Play around with these, hit that "Replay" button, and watch chaos ensue. Each faint line represents what our best guess was at that time on how the world will go. On the top left you can see the maximum L it thought over time.
 
 ## The Plot Thickens: When Noise Isn't the Culprit
 
@@ -229,7 +230,7 @@ This isn't some glitch in the Matrix or a quirk of computer arithmetic. It's a g
 
 Now, if you thought I was just making this up as I go along (which, let's be honest, is sometimes true), hold onto your hats. There's some serious math backing up our struggles with these slippery S-curves.
 
-Enter the research paper "The Limits to Learning a Diffusion Model" by Jackie Baek and friends. It's like the academic version of "Why Predicting the Future is a Fool's Errand, But We Keep Trying Anyway."
+Enter the research paper "The Limits to Learning a Diffusion Model"  [^1] by Jackie Baek and friends. It's like the academic version of "Why Predicting the Future is a Fool's Errand, But We Keep Trying Anyway."
 
 ### The Gist for the Rest of Us
 
@@ -271,7 +272,7 @@ Here's the deal: predicting the future is hard. Like, really hard. Even with fan
 1. Stay humble. Your model might be wrong. Heck, it's probably wrong.
 2. Collect data like it's going out of style. But remember, even a mountain of perfect data can mislead you.
 3. Be flexible. The future has a nasty habit of not conforming to our expectations.
-4. Communicate uncertainty. Don't just give a number. Give a range, a confidence interval, a 🤷 emoji – whatever conveys "This is our best guess, but..."
+4. Communicate uncertainty. Don't just give a number. Give a range, a confidence interval, a `¯\_(ツ)_/¯`  – whatever conveys "This is our best guess, but..."
 5. Remember the two-thirds rule. If you're not at least that far into your S-curve journey, take your predictions with a hefty dose of skepticism.
 
 
@@ -289,3 +290,4 @@ Here's to the curves that humble us, the data that surprises us, and the inflect
 
 In the grand sigmoid of life, we're all still climbing.
 
+[^1]: Read the [paper](https://arxiv.org/abs/2006.06373) or listen to the [podcast](https://www.youtube.com/watch?v=4IAspdrpNw0)

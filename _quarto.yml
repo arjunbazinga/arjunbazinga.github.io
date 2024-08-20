@@ -8,6 +8,7 @@ website:
   title: "Arjun Srivastava"
   site-url: "https://www.arjunsriva.com"
   site-path: '/'
+  draft-mode: "unlinked"
   navbar:
     right:
       - text: Podcast
@@ -32,6 +33,7 @@ website:
   twitter-card: true
   open-graph: true
   google-analytics: "UA-101184475-1"
+
 format:
   html:
     theme:
