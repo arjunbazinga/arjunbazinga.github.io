@@ -1,6 +1,5 @@
 ---
 title: "Exponentials Everywhere: The S-Curve Challenge in Predicting the Future"
-draft: true
 layout: post
 description: "S-curves are way trickier than you'd think. Here's why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us."
 categories: ["Forecasting", "Math"]
@@ -9,12 +8,12 @@ date: "2022-06-01"
 
 ## A Quick Intro to S-curves
 
-If you're already familiar with S-curves, sigmoids, or exponentials, feel
-free to skip this intro. For everyone else, let's break it down.
+Today, we're diving headfirst into the wacky world of S-curves – the Kardashians of the math world. They're everywhere, they're unpredictable, and they've got more curves than a bag of curly fries.
 
 An S-curve is a mathematical tool that helps us understand systems showing
-exponential growth, which eventually stabilize. This concept can be applied to
+exponential growth, which eventually stabilize at a fixed level. This concept can be applied to
 various areas of life, including:
+
 * Product adoption (from "What's a smartphone?" to "I can't live without it!")
 * Epidemics (yeah, we're all experts now, aren't we?)
 * The spread of juicy gossip in your office (admit it, we've all been there)
@@ -25,13 +24,13 @@ The S-curve starts low, then grows rapidly before leveling off. It's like your m
 
 Now, there are a couple of different questions we're interested in:
 
-1. **What's the endgame? (L - final level)**: In pandemic terms, how many people will ultimately catch the sniffles? For your startup, what's the total market size for your AI-powered nose hair trimmer?
+1. **What's the endgame? (N - final level)**: In pandemic terms, how many people will ultimately catch the sniffles? For your startup, what's the total market size for your AI-powered nose hair trimmer?
 
 2. **When does it get wild? (t0 - inflection point)**: This is the "hold my beer" moment of the curve. It's when you go from "It's just a flu" to "WHERE'S ALL THE TOILET PAPER?!"
 
 3. **How insane is this ride? (k - slope)**: A high k means your growth is so fast it'll give you whiplash. A low k? Well, let's just say you might want to pack a sandwich for this journey.
 
-4. **Are we there yet? (time to reach L)**: How long until we can stop holding our breath? For a pandemic, it's about knowing when it's safe to emerge from your toilet paper fort. For your business, it's knowing how long before you can trade in your ramen noodles for caviar.
+4. **Are we there yet? (time to reach N)**: How long until we can stop holding our breath? For a pandemic, it's about knowing when it's safe to emerge from your toilet paper fort. For your business, it's knowing how long before you can trade in your ramen noodles for caviar.
 
 ## The Day I Tried to Outsmart an S-curve
 
@@ -41,9 +40,9 @@ You know those days when you think you've got it all figured out? Yeah, I had on
 
 This whole adventure started when I stumbled upon an experiment demonstrating the difficulty of fitting an S-curve on noisy data. It's like one of those magic tricks that leaves you scratching your head, except instead of pulling rabbits out of hats, it's pulling wildly inaccurate predictions out of seemingly innocent data.
 
-The punchline? Even with just a smidgen of noise, trying to predict a sigmoid model by fitting past values is about as reliable as using a Magic 8-Ball to plan your retirement. And here's the kicker: that maximum value, L? It can be off by orders of magnitude. It's like guessing someone's age and being off by centuries.
+The punchline? Even with just a smidgen of noise, trying to predict a sigmoid model by fitting past values is about as reliable as using a Magic 8-Ball to plan your retirement. And here's the kicker: that maximum value, N? It can be off by orders of magnitude. It's like guessing someone's age and being off by centuries.
 
-## Let's Play: "Guess the Curve" (Spoiler: You'll Probably Lose)
+## Let's Play: "Guess the Curve"
 
 Alright, folks. Time to put on your fortune-teller hats. Below is a little interactive playground where you can mess around with a sigmoid curve. Go ahead, tweak those knobs. Feel the power. Embrace your inner oracle.
 
@@ -64,7 +63,7 @@ viewof k = Inputs.range(
 )
 viewof L = Inputs.range(
   [0, 10],
-  {step: 0.1, value: 8, label: "L (plateau)"}
+  {step: 0.1, value: 8, label: "N (plateau)"}
 )
 viewof replay = html`<button>Replay</button>`
 ```
@@ -151,7 +150,7 @@ function curvePoints(radius = 0.5) {
     if (x[0] > maxL) maxL = x[0];
 
     context.fillText(
-      `L = ${L.toFixed(2)}; est. ${x[0].toFixed(2)} (max ${maxL.toFixed(2)})`,
+      `N = ${L.toFixed(2)}; est. ${x[0].toFixed(2)} (max ${maxL.toFixed(2)})`,
       10,
       10
     );
@@ -201,7 +200,7 @@ So, what's the deal with this finicky curve? Let's break it down:
 - **Noise level**: This is like the static on an old TV. A little bit, and you're squinting. Too much, and you're watching snow.
 - **t0 (inflection point)**: The curve's midlife crisis. Where it decides to flip from "growing like crazy" to "slowing down."
 - **k (slope)**: How steep is this rollercoaster? Adjust this, and you go from kiddie ride to "I want my mommy!"
-- **L (plateau)**: The VIP section. How high can this party go?
+- **N (plateau)**: The VIP section. How high can this party go?
 
 Play around with these, hit that "Replay" button, and watch chaos ensue. Each faint line represents what our best guess was at that time on how the world will go. On the top left you can see the maximum L it thought over time.
 
@@ -224,13 +223,9 @@ This isn't some glitch in the Matrix or a quirk of computer arithmetic. It's a g
 
 Now, if you thought I was just making this up as I go along (which, let's be honest, is sometimes true), hold onto your hats. There's some serious math backing up our struggles with these slippery S-curves.
 
-Enter the research paper "The Limits to Learning a Diffusion Model"  [^1] by Jackie Baek and friends. It's like the academic version of "Why Predicting the Future is a Fool's Errand, But We Keep Trying Anyway."
+The research paper "The Limits to Learning a Diffusion Model"  [^1] by Jackie Baek and friends goes deep on this, I won't talk about the nitty gritty details here, but here is what these math wizards discovered:
 
-### The Gist for the Rest of Us
-
-Here's the lowdown on what these math wizards discovered:
-
-1. **Size Matters, A Lot**: Remember that 'L' parameter in our little game above? The one that kept running away from us? Well, it turns out that estimating the total population size (N) is the real troublemaker here. It's like trying to guess how many jelly beans are in a jar, except the jar keeps changing size when you're not looking.
+1. **Size Matters, A Lot**: Remember that 'N' parameter in our little game above? The one that kept running away from us? Well, it turns out that estimating the total population size (N) is the real troublemaker here. It's like trying to guess how many jelly beans are in a jar, except the jar keeps changing size when you're not looking.
 
 2. **The Two-Thirds Rule**: Here's where it gets wild. To get a decent estimate of N, you need to observe about N^(2/3) events. In English? If you're dealing with a population of 1 million, you need to see about 10,000 events before your guess is even in the ballpark. It's like needing to eat two-thirds of a cake to guess its flavor. By that point, why even guess?
 
