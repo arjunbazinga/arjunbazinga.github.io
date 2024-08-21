@@ -21,15 +21,17 @@ execute:
   warning: true
 
 # Default author
-author:
-  - name: Arjun Srivastava
-    url: https://arjunsriva.com
-    orcid: 0000-0003-4303-9098
+# author:
+#   - name: Arjun Srivastava
+#     url: https://arjunsriva.com
+#     orcid: 0000-0003-4303-9098
 
 
 
 # Enable CC licence appendix
-license: "CC BY"
+# license: "CC BY"
 
 # Default fields for citation
-citation: false
+# citation: false
+
+
