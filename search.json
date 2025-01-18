@@ -434,11 +434,18 @@
     "text": "Engineers and specialists can utilize CLIP’s contrastive learning approach to create more efficient and scalable computer vision systems. The paper highlights the importance of ethical considerations and bias mitigation strategies in developing AI technologies.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
-    "objectID": "podcast/podcasts/1712.01208/index.html",
-    "href": "podcast/podcasts/1712.01208/index.html",
-    "title": "The Case for Learned Index Structures",
+    "objectID": "podcast/podcasts/1502.05477/index.html",
+    "href": "podcast/podcasts/1502.05477/index.html",
+    "title": "Trust Region Policy Optimization",
     "section": "",
-    "text": "Learned indexes offer significant performance gains and memory savings compared to traditional structures across various datasets. The Recursive Model Index (RMI) architecture helps improve prediction accuracy, and the potential for hybrid indexing combining neural networks and traditional techniques showcases a promising future for enhancing database systems’ efficiency and scalability.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+    "text": "Key takeaways: TRPO offers monotonic policy improvements by using a trust region constraint controlled by KL divergence, which leads to more robust and reliable learning. The paper demonstrated the algorithm’s success in complex tasks like robotic locomotion and Atari games, highlighting its flexibility and effectiveness.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1911.01547/index.html",
+    "href": "podcast/podcasts/1911.01547/index.html",
+    "title": "On the Measure of Intelligence",
+    "section": "",
+    "text": "Key takeaways for engineers/specialists include the importance of skill-acquisition efficiency in measuring intelligence, the emphasis on building systems with adaptability and generalization capabilities, and the potential impact of such research on areas like education, healthcare, and robotics.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
     "objectID": "til/index.html",
@@ -448,11 +455,11 @@
     "text": "A collection of links, notes, snippets on things I am reading, watching.\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "podcast/podcasts/1911.01547/index.html",
-    "href": "podcast/podcasts/1911.01547/index.html",
-    "title": "On the Measure of Intelligence",
+    "objectID": "podcast/podcasts/1712.01208/index.html",
+    "href": "podcast/podcasts/1712.01208/index.html",
+    "title": "The Case for Learned Index Structures",
     "section": "",
-    "text": "Key takeaways for engineers/specialists include the importance of skill-acquisition efficiency in measuring intelligence, the emphasis on building systems with adaptability and generalization capabilities, and the potential impact of such research on areas like education, healthcare, and robotics.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+    "text": "Learned indexes offer significant performance gains and memory savings compared to traditional structures across various datasets. The Recursive Model Index (RMI) architecture helps improve prediction accuracy, and the potential for hybrid indexing combining neural networks and traditional techniques showcases a promising future for enhancing database systems’ efficiency and scalability.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
     "objectID": "podcast/podcasts/2205.14135/index.html",
