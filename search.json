@@ -287,312 +287,18 @@
     "text": "Long-CLIP significantly extends the text length without disrupting existing representations, improving recall rates on long and short caption retrieval tasks. Its plug-and-play nature enables integration into various downstream applications, showing promise in enhancing image generation models and opening up possibilities for realistic and detailed content creation.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
-    "objectID": "podcast/podcasts/2406.11066/index.html",
-    "href": "podcast/podcasts/2406.11066/index.html",
-    "title": "Metadata-based Color Harmonization for Multi-camera Surround View Systems",
+    "objectID": "podcast/podcasts/1606.04474/index.html",
+    "href": "podcast/podcasts/1606.04474/index.html",
+    "title": "Learning to Learn Optimization Algorithms with LSTM Networks",
     "section": "",
-    "text": "The paper introduces a metadata-based approach to address color inconsistencies in multi-camera surround view systems, crucial for accurate perception in autonomous driving. The method significantly outperforms traditional techniques in visual quality and runtime, making it more efficient and robust for real-time applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+    "text": "Engineers and specialists can learn from this paper that training an LSTM-based optimizer can outperform traditional hand-crafted optimization algorithms across various tasks. The use of coordinatewise LSTMs and backpropagation through time for training provides scalability, efficiency, and generalizability. The approach shows promise for automating hyperparameter tuning, developing specialized optimizers, and enhancing the robustness of neural networks.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
-    "objectID": "podcast/podcasts/1806.09055/index.html",
-    "href": "podcast/podcasts/1806.09055/index.html",
-    "title": "DARTS: Differentiable Architecture Search",
+    "objectID": "podcast/podcasts/2401.10241/index.html",
+    "href": "podcast/podcasts/2401.10241/index.html",
+    "title": "Zero Bubble Pipeline Parallelism",
     "section": "",
-    "text": "Key takeaways for engineers/specialists: DARTS introduces a continuous relaxation approach to architecture search, leveraging gradient descent for efficient optimization. It achieves state-of-the-art results on image classification and language modeling tasks with significantly less computational cost. Challenges include the gap between continuous and discrete architecture representation, computational cost of second-order approximation, and sensitivity to hyperparameters.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2112.04426/index.html",
-    "href": "podcast/podcasts/2112.04426/index.html",
-    "title": "Retrieval-Enhanced Transformers (RETRO): A Semi-Parametric Approach to Enhance Performance of Large Language Models",
-    "section": "",
-    "text": "The paper introduces the RETRO model, which leverages retrieval from a massive text database to enhance large language model performance without increasing model size. Key takeaways include the benefits of linear time complexity for retrieval, the use of frozen BERT for efficient retrieval, and the importance of addressing test set leakage in evaluation.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2210.03044/index.html",
-    "href": "podcast/podcasts/2210.03044/index.html",
-    "title": "Unmasking the Lottery Ticket Hypothesis",
-    "section": "",
-    "text": "The key takeaways for engineers/specialists include understanding the role of the pruning mask in guiding training, the importance of SGD robustness in navigating the error landscape, and the relationship between the Hessian eigenspectrum and the maximum pruning ratio for efficient network pruning.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2109.10665/index.html",
-    "href": "podcast/podcasts/2109.10665/index.html",
-    "title": "Survey on reinforcement learning in reccomender systems",
-    "section": "",
-    "text": "Goes over some of the different places RL can be used in RecSys.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2208.07339/index.html",
-    "href": "podcast/podcasts/2208.07339/index.html",
-    "title": "Efficient Inference for Large Language Models with LLM.int8()",
-    "section": "",
-    "text": "Engineers can leverage LLM.int8() to reduce memory requirements and efficiently run large language models without performance degradation, even at scales exceeding billions of parameters. The method incorporates vector-wise quantization and mixed-precision decomposition to maintain full 16-bit performance in perplexity and zeroshot accuracy across large models, demonstrating significant memory savings and modest speedups for inference.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2407.02945/index.html",
-    "href": "podcast/podcasts/2407.02945/index.html",
-    "title": "Extrapolated View Synthesis for Urban Scene Reconstruction",
-    "section": "",
-    "text": "The paper introduces Extrapolated View Synthesis (EVS) for urban scene reconstruction, addressing limitations in current methods by using 3D Gaussian Splatting for scene representation. By incorporating surface normal information and leveraging diffusion models, the proposed method, VEGS, outperforms existing approaches in generating visually realistic and accurate renderings for urban environments.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2310.13810/index.html",
-    "href": "podcast/podcasts/2310.13810/index.html",
-    "title": "A Better Match for Drivers and Riders Reinforcement Learning at Lyft",
-    "section": "",
-    "text": "The paper demonstrates the successful application of reinforcement learning to improve the efficiency of driver-rider matching in ride-sharing platforms. The use of online RL allows for real-time adaptation, resulting in decreased wait times for riders, increased earnings for drivers, and overall higher user satisfaction. The research paves the way for more intelligent systems in the ride-sharing industry, with potential for further optimization and expansion into various other aspects of the ecosystem.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2306.14892/index.html",
-    "href": "podcast/podcasts/2306.14892/index.html",
-    "title": "Decision-Pretrained Transformer: Bridging Supervised Learning and Reinforcement Learning",
-    "section": "",
-    "text": "Engineers and specialists can leverage the DPT methodology to design more versatile and efficient RL agents. By learning a decision-making strategy through supervised pretraining, DPT demonstrates adaptability to new environments, ability to explore and exploit, and strong generalization capabilities. This approach offers a promising path towards practical and efficient Bayesian RL methods.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2301.00774/index.html",
-    "href": "podcast/podcasts/2301.00774/index.html",
-    "title": "SparseGPT: One-shot Pruning of Large Language Models",
-    "section": "",
-    "text": "SparseGPT offers a one-shot pruning approach that avoids costly retraining, making it significantly more efficient for compressing large language models like GPT variants. The method can achieve high sparsity levels while maintaining minimal accuracy loss, providing a promising solution for improving the deployment of powerful language models.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1611.02779/index.html",
-    "href": "podcast/podcasts/1611.02779/index.html",
-    "title": "RL^2: Fast Reinforcement Learning via Slow Reinforcement Learning",
-    "section": "",
-    "text": "Engineers and specialists can benefit from RL2 by understanding how meta-learning can bridge the gap between slow deep reinforcement learning and fast human learning speeds. This approach offers a way to encode prior knowledge in an RNN to make RL algorithms more efficient, adaptable, and scalable to complex real-world scenarios.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1910.02054/index.html",
-    "href": "podcast/podcasts/1910.02054/index.html",
-    "title": "ZeRO Memory Optimizations: Toward Training Trillion Parameter Models",
-    "section": "",
-    "text": "The paper introduces ZeRO, a novel approach to optimize memory usage when training massive language models. ZeRO-DP and ZeRO-R components effectively reduce memory redundancy and allow for training models with up to 170 billion parameters efficiently. The technique shows superlinear scalability, user-friendly implementation, and has the potential to democratize large model training in AI research.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1805.08941/index.html",
-    "href": "podcast/podcasts/1805.08941/index.html",
-    "title": "AutoPruner: End-to-End Trainable Filter Pruning for Efficient Deep Neural Networks",
-    "section": "",
-    "text": "AutoPruner presents a significant advancement in filter pruning for deep neural networks by integrating the filter selection process into model training, eliminating the need for separate pruning steps. The methodology outperformed state-of-the-art methods, showcasing superior accuracy and compression ratios on standard datasets like CUB200-2011 and ImageNet ILSVRC-12. The innovative approach of AutoPruner could lead to more efficient and accessible deep learning models across various applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2003.08934/index.html",
-    "href": "podcast/podcasts/2003.08934/index.html",
-    "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
-    "section": "",
-    "text": "Key takeaways for engineers and specialists from the paper include the efficiency of using a continuous 5D representation instead of discrete meshes or voxel grids, the importance of differentiable volume rendering in training neural networks for scene representation, and the potential of NeRF to revolutionize how 3D content is created and experienced.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1609.09106/index.html",
-    "href": "podcast/podcasts/1609.09106/index.html",
-    "title": "Hyper Networks: A Novel Approach to Learning Weights in Deep Neural Networks",
-    "section": "",
-    "text": "The key takeaways for engineers/specialists are: Hyper Networks introduce a meta-network (hypernetwork) that learns to generate weight structures for deep neural networks, providing flexibility and efficiency. Dynamic hypernetworks allow weights to adapt to input sequences, improving performance on sequential tasks. End-to-end training of hypernetworks with the main network leads to collaborative optimization and comparable or better performance with fewer parameters.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2212.09720/index.html",
-    "href": "podcast/podcasts/2212.09720/index.html",
-    "title": "Optimizing Quantization of Large Language Models for Efficiency and Accuracy",
-    "section": "",
-    "text": "Engineers and specialists can leverage 4-bit precision quantization with techniques such as quantile quantization and floating-point representation to significantly reduce the memory footprint and improve inference speed of large language models. Understanding the trade-off between accuracy and efficiency is crucial for deploying powerful NLP technologies in resource-constrained environments and expanding their applications to real-world scenarios.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2303.04129/index.html",
-    "href": "podcast/podcasts/2303.04129/index.html",
-    "title": "Foundation Models in Decision Making: Roles, Challenges, and Opportunities",
-    "section": "",
-    "text": "The paper proposes a framework for understanding the various roles of foundation models in decision making, including conditional generative models, representation learners, and interactive agents. Key takeaways include the use of foundation models for behavioral priors, world modeling, and generalization of knowledge across tasks and environments.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2006.11239/index.html",
-    "href": "podcast/podcasts/2006.11239/index.html",
-    "title": "Denoising Diffusion Probabilistic Models",
-    "section": "",
-    "text": "The paper leverages denoising score matching to simplify the training objective for diffusion models, leading to faster and more stable training processes and higher-quality image generation results. Additionally, the paper highlights the potential of diffusion models as efficient lossy compressors, opening up possibilities in data compression applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2403.13187/index.html",
-    "href": "podcast/podcasts/2403.13187/index.html",
-    "title": "Evolutionary Optimization of Model Merging Recipes",
-    "section": "",
-    "text": "Engineers and specialists can leverage the Evolutionary Model Merge method to automate the process of combining pre-trained models, eliminating the need for human intuition and expanding the search space for potential model combinations. This approach opens up possibilities for developing more efficient, cost-effective, and powerful AI systems with emergent capabilities.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2406.17345/index.html",
-    "href": "podcast/podcasts/2406.17345/index.html",
-    "title": "NerfBaselines: A Framework for Standardized Evaluation of Novel View Synthesis Methods in Computer Vision",
-    "section": "",
-    "text": "NerfBaselines addresses the inconsistent evaluation protocols in comparing novel view synthesis methods by providing a unified interface, ensuring reproducibility through containerization, and standardizing the evaluation protocol. By enabling the sharing of pre-trained checkpoints, it reduces computational costs and environmental impact. However, it relies on methods exposing the same interface and future directions involve exploring advanced evaluation metrics and addressing the computational cost of training.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2103.00020/index.html",
-    "href": "podcast/podcasts/2103.00020/index.html",
-    "title": "Learning Transferable Visual Models From Natural Language Supervision",
-    "section": "",
-    "text": "Engineers and specialists can utilize CLIP’s contrastive learning approach to create more efficient and scalable computer vision systems. The paper highlights the importance of ethical considerations and bias mitigation strategies in developing AI technologies.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1502.05477/index.html",
-    "href": "podcast/podcasts/1502.05477/index.html",
-    "title": "Trust Region Policy Optimization",
-    "section": "",
-    "text": "Key takeaways: TRPO offers monotonic policy improvements by using a trust region constraint controlled by KL divergence, which leads to more robust and reliable learning. The paper demonstrated the algorithm’s success in complex tasks like robotic locomotion and Atari games, highlighting its flexibility and effectiveness.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1911.01547/index.html",
-    "href": "podcast/podcasts/1911.01547/index.html",
-    "title": "On the Measure of Intelligence",
-    "section": "",
-    "text": "Key takeaways for engineers/specialists include the importance of skill-acquisition efficiency in measuring intelligence, the emphasis on building systems with adaptability and generalization capabilities, and the potential impact of such research on areas like education, healthcare, and robotics.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "til/index.html",
-    "href": "til/index.html",
-    "title": "TIL: Today I Learned",
-    "section": "",
-    "text": "A collection of links, notes, snippets on things I am reading, watching.\n\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "podcast/podcasts/1712.01208/index.html",
-    "href": "podcast/podcasts/1712.01208/index.html",
-    "title": "The Case for Learned Index Structures",
-    "section": "",
-    "text": "Learned indexes offer significant performance gains and memory savings compared to traditional structures across various datasets. The Recursive Model Index (RMI) architecture helps improve prediction accuracy, and the potential for hybrid indexing combining neural networks and traditional techniques showcases a promising future for enhancing database systems’ efficiency and scalability.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2205.14135/index.html",
-    "href": "podcast/podcasts/2205.14135/index.html",
-    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
-    "section": "",
-    "text": "FlashAttention is a novel algorithm that addresses the efficiency of Transformer models by improving speed and memory efficiency through IO-awareness. It reduces the number of memory accesses by dividing data into smaller blocks and loading them into fast memory, achieving practical speedups and enabling training on longer sequences. The algorithm also incorporates recomputation during the backward pass to minimize memory usage, delivering significant improvements in training large models like BERT and GPT-2.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2311.09544/index.html",
-    "href": "podcast/podcasts/2311.09544/index.html",
-    "title": "Scaling User Modeling for Personalized Advertising at Meta",
-    "section": "",
-    "text": "Key takeaways for engineers/specialists include the importance of efficient sharing of user representations in personalized advertising systems, the benefits of utilizing upstream models for downstream tasks, and the significance of handling dynamic user features and maintaining embedding freshness for improved performance.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2210.05675/index.html",
-    "href": "podcast/podcasts/2210.05675/index.html",
-    "title": "Generalization Patterns of Transformers in In-Weights Learning and In-Context Learning",
-    "section": "",
-    "text": "The key takeaways for engineers/specialists from the paper are: 1. In-context learning in large language models tends to be rule-based, suggesting the influence of language structure. 2. Model size and training data structure play crucial roles in shaping the inductive biases of transformers. 3. Pretraining strategies can be used to induce rule-based generalization from context.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1803.03635/index.html",
-    "href": "podcast/podcasts/1803.03635/index.html",
-    "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
-    "section": "",
-    "text": "Engineers and specialists can explore the potential of training more efficient, smaller neural networks by identifying and utilizing winning tickets. The iterative pruning with resetting technique can help in finding these winning tickets, showcasing the importance of proper initialization in network efficiency. Additionally, the use of dropout in conjunction with pruning can enhance the effectiveness of the process, leading to more resource-friendly and faster AI models.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2306.00248v1/index.html",
-    "href": "podcast/podcasts/2306.00248v1/index.html",
-    "title": "TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest",
-    "section": "",
-    "text": "Pinterest home feed reccomendation system. Needs to react to both long term interests + short term (even single session only) interests.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2304.08069/index.html",
-    "href": "podcast/podcasts/2304.08069/index.html",
-    "title": "RT-DETR: Real-Time Object Detection with Transformer",
-    "section": "",
-    "text": "RT-DETR is a groundbreaking end-to-end real-time object detector based on Transformers that combines the speed of YOLO with the accuracy of DETR. Key takeaways for engineers include the efficient hybrid encoder approach, which improves multi-scale feature interactions, and the uncertainty-minimal query selection scheme, enhancing accuracy in both classification and localization. Despite outperforming traditional CNN-based methods, RT-DETR faces challenges in detecting small objects, prompting future research directions like knowledge distillation.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2407.12854/index.html",
-    "href": "podcast/podcasts/2407.12854/index.html",
-    "title": "Enhancing Language Models with a Massive Datastore",
-    "section": "",
-    "text": "Key takeaways include the importance of diverse, large datastores for enhancing language model performance, the cost efficiency of constructing datastores compared to training models, and the potential for smaller models with access to large datastores to outperform larger models with limited data access.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1706.03741/index.html",
-    "href": "podcast/podcasts/1706.03741/index.html",
-    "title": "Training Deep Reinforcement Learning Systems with Human Preferences",
-    "section": "",
-    "text": "The paper introduces a method that significantly reduces the need for human oversight in training deep RL agents, allowing them to learn complex behaviors with minimal human input. This approach has shown promising results in both simulated robotics and Atari games, achieving human-level performance with a fraction of the human effort required by traditional RL methods.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1610.03013/index.html",
-    "href": "podcast/podcasts/1610.03013/index.html",
-    "title": "Comprehensive Guide to Real-Time Bidding (RTB): Challenges and Opportunities",
-    "section": "",
-    "text": "The key takeaways for engineers/specialists from the paper are the importance of accurate user response prediction for targeted advertising, the need for advanced bidding strategies based on estimated utility, and the significance of dynamic pricing optimization and ad fraud detection techniques to ensure a fair and efficient advertising ecosystem.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2407.01781/index.html",
-    "href": "podcast/podcasts/2407.01781/index.html",
-    "title": "𝑓VDB: A Deep-Learning Framework for Sparse, Large-Scale, and High-Performance Spatial Intelligence",
-    "section": "",
-    "text": "Engineers and specialists can benefit from 𝑓VDB by leveraging its memory-efficient IndexGrid structure and specialized convolution kernels optimized for different sparsity patterns. The framework provides significant speed and memory efficiency improvements over existing frameworks, enabling more effective handling of large-scale, sparse 3D datasets in deep learning applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2407.02524/index.html",
-    "href": "podcast/podcasts/2407.02524/index.html",
-    "title": "Training Large Language Models for Compiler Optimization",
-    "section": "",
-    "text": "The research paper discusses the development of LLM Compiler, a model specifically trained on compiler IRs and assembly code for optimizing code efficiently. This approach outperforms traditional techniques and existing LLMs in tasks like flag tuning and disassembly, showing potential for automating and improving the optimization process in software engineering.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1810.00826/index.html",
-    "href": "podcast/podcasts/1810.00826/index.html",
-    "title": "Graph Isomorphism Networks: A Theoretical Framework and Architecture",
-    "section": "",
-    "text": "Engineers and specialists should take note of the importance of designing GNN architectures with highly expressive aggregation schemes like the injective multiset functions used in GIN. Understanding the theoretical underpinnings of GNNs and their limitations is crucial for developing more powerful and sophisticated models in the future.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2304.02643/index.html",
-    "href": "podcast/podcasts/2304.02643/index.html",
-    "title": "Segment Anything: A Paradigm Shift in Image Segmentation",
-    "section": "",
-    "text": "The key takeaways for engineers/specialists include the innovative concept of promptable segmentation, the development of SAM with components like Image Encoder, Prompt Encoder, and Mask Decoder, and the significant results showcasing SAM’s impressive zero-shot transfer capabilities in various image segmentation tasks. It highlights the potential impact of SAM on generalizing to new tasks and datasets efficiently while providing insights into addressing limitations through future research areas.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2408.00714/index.html",
-    "href": "podcast/podcasts/2408.00714/index.html",
-    "title": "SAM 2: Segment Anything in Images and Videos",
-    "section": "",
-    "text": "SAM 2 outperformed previous approaches in video segmentation by achieving higher accuracy with fewer user interactions, making it faster and more accurate. The model shows promise in tasks like interactive video object segmentation and long-term video object segmentation, demonstrating its efficiency and ability to handle diverse objects and scenarios.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/1904.00420/index.html",
-    "href": "podcast/podcasts/1904.00420/index.html",
-    "title": "Single Path One-Shot (SPOS): Efficient Neural Architecture Search with Simplified Supernet",
-    "section": "",
-    "text": "SPOS addresses limitations of existing NAS methods by simplifying the supernet structure, utilizing an evolutionary algorithm, and incorporating channel search and mixed-precision quantization. The approach outperforms previous methods in accuracy, complexity, and resource efficiency. It demonstrates strong correlation between supernet and individual architecture performance, enhancing the search process efficiency.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2103.01775/index.html",
-    "href": "podcast/podcasts/2103.01775/index.html",
-    "title": "No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging",
-    "section": "",
-    "text": "The paper introduces a deep hedging approach using neural networks to optimize hedging strategies for derivatives in imperfect markets. The key takeaway is the development of the ‘no-transaction band network’ to address action dependence and improve efficiency in hedging, showcasing superior performance compared to traditional methods in terms of expected utility and price efficiency, and faster training. Future research focuses on addressing limitations such as non-linear transaction costs and discontinuous payoffs, as well as challenges in data availability and model explainability for real-world applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2002.11252/index.html",
-    "href": "podcast/podcasts/2002.11252/index.html",
-    "title": "AutoEmb Automated Embedding Dimensionality Searchg in Streaming Recommendations",
-    "section": "",
-    "text": "AutoEmb is about using different lenghts of embedding vectors for different items, use less memory + potentially learn more robust stuff for items with less data, and learn more nuanced stuff for popular items.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2007.07203/index.html",
-    "href": "podcast/podcasts/2007.07203/index.html",
-    "title": "Deep Retrieval: Learning Efficient Structures for Large-Scale Recommendation Systems",
-    "section": "",
-    "text": "Engineers and specialists can benefit from the paper by understanding how DR revolutionizes large-scale recommendation systems through its innovative approach of learning efficient structures directly from user-item interactions. By adopting a path-based mechanism and utilizing multi-path designs, DR can provide accurate recommendations comparable to computationally expensive methods while remaining more efficient. The ability of DR to handle diverse preferences, promote less popular content, and improve user engagement highlights its potential to reshape recommendation systems for better performance and inclusivity.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
-  },
-  {
-    "objectID": "podcast/podcasts/2406.07550/index.html",
-    "href": "podcast/podcasts/2406.07550/index.html",
-    "title": "TiTok: A Transformer-based 1D Tokenization Approach for Image Generation",
-    "section": "",
-    "text": "TiTok introduces a novel 1D tokenization method for image generation, enabling the representation of images with significantly fewer tokens while maintaining or surpassing the performance of existing 2D grid-based methods. The approach leverages a Vision Transformer architecture, two-stage training with proxy codes, and achieves remarkable speedup in training and inference. The research opens up new possibilities for efficient and high-quality image generation, with implications for various applications in computer vision and beyond.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+    "text": "Core idea is think about backward pass into two flows, one to compute grad wrt to parameters, and one to compute grad wrt to output of last layer, schedule so that you are always working instead of waiting (bubble).\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
     "objectID": "podcast/podcasts/2305.11627/index.html",
@@ -602,11 +308,312 @@
     "text": "LLM-Pruner utilizes structural pruning and a post-training method called LoRA to compress LLMs without task-specific retraining. The framework demonstrates promising results in maintaining model performance even with pruning up to 20% of parameters.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
-    "objectID": "podcast/podcasts/2401.10241/index.html",
-    "href": "podcast/podcasts/2401.10241/index.html",
-    "title": "Zero Bubble Pipeline Parallelism",
+    "objectID": "podcast/podcasts/2406.07550/index.html",
+    "href": "podcast/podcasts/2406.07550/index.html",
+    "title": "TiTok: A Transformer-based 1D Tokenization Approach for Image Generation",
     "section": "",
-    "text": "Core idea is think about backward pass into two flows, one to compute grad wrt to parameters, and one to compute grad wrt to output of last layer, schedule so that you are always working instead of waiting (bubble).\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+    "text": "TiTok introduces a novel 1D tokenization method for image generation, enabling the representation of images with significantly fewer tokens while maintaining or surpassing the performance of existing 2D grid-based methods. The approach leverages a Vision Transformer architecture, two-stage training with proxy codes, and achieves remarkable speedup in training and inference. The research opens up new possibilities for efficient and high-quality image generation, with implications for various applications in computer vision and beyond.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2007.07203/index.html",
+    "href": "podcast/podcasts/2007.07203/index.html",
+    "title": "Deep Retrieval: Learning Efficient Structures for Large-Scale Recommendation Systems",
+    "section": "",
+    "text": "Engineers and specialists can benefit from the paper by understanding how DR revolutionizes large-scale recommendation systems through its innovative approach of learning efficient structures directly from user-item interactions. By adopting a path-based mechanism and utilizing multi-path designs, DR can provide accurate recommendations comparable to computationally expensive methods while remaining more efficient. The ability of DR to handle diverse preferences, promote less popular content, and improve user engagement highlights its potential to reshape recommendation systems for better performance and inclusivity.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2002.11252/index.html",
+    "href": "podcast/podcasts/2002.11252/index.html",
+    "title": "AutoEmb Automated Embedding Dimensionality Searchg in Streaming Recommendations",
+    "section": "",
+    "text": "AutoEmb is about using different lenghts of embedding vectors for different items, use less memory + potentially learn more robust stuff for items with less data, and learn more nuanced stuff for popular items.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2103.01775/index.html",
+    "href": "podcast/podcasts/2103.01775/index.html",
+    "title": "No-Transaction Band Network A Neural Network Architecture for Efficient Deep Hedging",
+    "section": "",
+    "text": "The paper introduces a deep hedging approach using neural networks to optimize hedging strategies for derivatives in imperfect markets. The key takeaway is the development of the ‘no-transaction band network’ to address action dependence and improve efficiency in hedging, showcasing superior performance compared to traditional methods in terms of expected utility and price efficiency, and faster training. Future research focuses on addressing limitations such as non-linear transaction costs and discontinuous payoffs, as well as challenges in data availability and model explainability for real-world applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1904.00420/index.html",
+    "href": "podcast/podcasts/1904.00420/index.html",
+    "title": "Single Path One-Shot (SPOS): Efficient Neural Architecture Search with Simplified Supernet",
+    "section": "",
+    "text": "SPOS addresses limitations of existing NAS methods by simplifying the supernet structure, utilizing an evolutionary algorithm, and incorporating channel search and mixed-precision quantization. The approach outperforms previous methods in accuracy, complexity, and resource efficiency. It demonstrates strong correlation between supernet and individual architecture performance, enhancing the search process efficiency.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2408.00714/index.html",
+    "href": "podcast/podcasts/2408.00714/index.html",
+    "title": "SAM 2: Segment Anything in Images and Videos",
+    "section": "",
+    "text": "SAM 2 outperformed previous approaches in video segmentation by achieving higher accuracy with fewer user interactions, making it faster and more accurate. The model shows promise in tasks like interactive video object segmentation and long-term video object segmentation, demonstrating its efficiency and ability to handle diverse objects and scenarios.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2304.02643/index.html",
+    "href": "podcast/podcasts/2304.02643/index.html",
+    "title": "Segment Anything: A Paradigm Shift in Image Segmentation",
+    "section": "",
+    "text": "The key takeaways for engineers/specialists include the innovative concept of promptable segmentation, the development of SAM with components like Image Encoder, Prompt Encoder, and Mask Decoder, and the significant results showcasing SAM’s impressive zero-shot transfer capabilities in various image segmentation tasks. It highlights the potential impact of SAM on generalizing to new tasks and datasets efficiently while providing insights into addressing limitations through future research areas.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1810.00826/index.html",
+    "href": "podcast/podcasts/1810.00826/index.html",
+    "title": "Graph Isomorphism Networks: A Theoretical Framework and Architecture",
+    "section": "",
+    "text": "Engineers and specialists should take note of the importance of designing GNN architectures with highly expressive aggregation schemes like the injective multiset functions used in GIN. Understanding the theoretical underpinnings of GNNs and their limitations is crucial for developing more powerful and sophisticated models in the future.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2407.02524/index.html",
+    "href": "podcast/podcasts/2407.02524/index.html",
+    "title": "Training Large Language Models for Compiler Optimization",
+    "section": "",
+    "text": "The research paper discusses the development of LLM Compiler, a model specifically trained on compiler IRs and assembly code for optimizing code efficiently. This approach outperforms traditional techniques and existing LLMs in tasks like flag tuning and disassembly, showing potential for automating and improving the optimization process in software engineering.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2407.01781/index.html",
+    "href": "podcast/podcasts/2407.01781/index.html",
+    "title": "𝑓VDB: A Deep-Learning Framework for Sparse, Large-Scale, and High-Performance Spatial Intelligence",
+    "section": "",
+    "text": "Engineers and specialists can benefit from 𝑓VDB by leveraging its memory-efficient IndexGrid structure and specialized convolution kernels optimized for different sparsity patterns. The framework provides significant speed and memory efficiency improvements over existing frameworks, enabling more effective handling of large-scale, sparse 3D datasets in deep learning applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1610.03013/index.html",
+    "href": "podcast/podcasts/1610.03013/index.html",
+    "title": "Comprehensive Guide to Real-Time Bidding (RTB): Challenges and Opportunities",
+    "section": "",
+    "text": "The key takeaways for engineers/specialists from the paper are the importance of accurate user response prediction for targeted advertising, the need for advanced bidding strategies based on estimated utility, and the significance of dynamic pricing optimization and ad fraud detection techniques to ensure a fair and efficient advertising ecosystem.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1706.03741/index.html",
+    "href": "podcast/podcasts/1706.03741/index.html",
+    "title": "Training Deep Reinforcement Learning Systems with Human Preferences",
+    "section": "",
+    "text": "The paper introduces a method that significantly reduces the need for human oversight in training deep RL agents, allowing them to learn complex behaviors with minimal human input. This approach has shown promising results in both simulated robotics and Atari games, achieving human-level performance with a fraction of the human effort required by traditional RL methods.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2407.12854/index.html",
+    "href": "podcast/podcasts/2407.12854/index.html",
+    "title": "Enhancing Language Models with a Massive Datastore",
+    "section": "",
+    "text": "Key takeaways include the importance of diverse, large datastores for enhancing language model performance, the cost efficiency of constructing datastores compared to training models, and the potential for smaller models with access to large datastores to outperform larger models with limited data access.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2304.08069/index.html",
+    "href": "podcast/podcasts/2304.08069/index.html",
+    "title": "RT-DETR: Real-Time Object Detection with Transformer",
+    "section": "",
+    "text": "RT-DETR is a groundbreaking end-to-end real-time object detector based on Transformers that combines the speed of YOLO with the accuracy of DETR. Key takeaways for engineers include the efficient hybrid encoder approach, which improves multi-scale feature interactions, and the uncertainty-minimal query selection scheme, enhancing accuracy in both classification and localization. Despite outperforming traditional CNN-based methods, RT-DETR faces challenges in detecting small objects, prompting future research directions like knowledge distillation.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2306.00248v1/index.html",
+    "href": "podcast/podcasts/2306.00248v1/index.html",
+    "title": "TransAct Transformer-based Realtime User Action Model for Recommendation at Pinterest",
+    "section": "",
+    "text": "Pinterest home feed reccomendation system. Needs to react to both long term interests + short term (even single session only) interests.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1803.03635/index.html",
+    "href": "podcast/podcasts/1803.03635/index.html",
+    "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+    "section": "",
+    "text": "Engineers and specialists can explore the potential of training more efficient, smaller neural networks by identifying and utilizing winning tickets. The iterative pruning with resetting technique can help in finding these winning tickets, showcasing the importance of proper initialization in network efficiency. Additionally, the use of dropout in conjunction with pruning can enhance the effectiveness of the process, leading to more resource-friendly and faster AI models.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2210.05675/index.html",
+    "href": "podcast/podcasts/2210.05675/index.html",
+    "title": "Generalization Patterns of Transformers in In-Weights Learning and In-Context Learning",
+    "section": "",
+    "text": "The key takeaways for engineers/specialists from the paper are: 1. In-context learning in large language models tends to be rule-based, suggesting the influence of language structure. 2. Model size and training data structure play crucial roles in shaping the inductive biases of transformers. 3. Pretraining strategies can be used to induce rule-based generalization from context.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2311.09544/index.html",
+    "href": "podcast/podcasts/2311.09544/index.html",
+    "title": "Scaling User Modeling for Personalized Advertising at Meta",
+    "section": "",
+    "text": "Key takeaways for engineers/specialists include the importance of efficient sharing of user representations in personalized advertising systems, the benefits of utilizing upstream models for downstream tasks, and the significance of handling dynamic user features and maintaining embedding freshness for improved performance.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2205.14135/index.html",
+    "href": "podcast/podcasts/2205.14135/index.html",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "section": "",
+    "text": "FlashAttention is a novel algorithm that addresses the efficiency of Transformer models by improving speed and memory efficiency through IO-awareness. It reduces the number of memory accesses by dividing data into smaller blocks and loading them into fast memory, achieving practical speedups and enabling training on longer sequences. The algorithm also incorporates recomputation during the backward pass to minimize memory usage, delivering significant improvements in training large models like BERT and GPT-2.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1712.01208/index.html",
+    "href": "podcast/podcasts/1712.01208/index.html",
+    "title": "The Case for Learned Index Structures",
+    "section": "",
+    "text": "Learned indexes offer significant performance gains and memory savings compared to traditional structures across various datasets. The Recursive Model Index (RMI) architecture helps improve prediction accuracy, and the potential for hybrid indexing combining neural networks and traditional techniques showcases a promising future for enhancing database systems’ efficiency and scalability.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "til/index.html",
+    "href": "til/index.html",
+    "title": "TIL: Today I Learned",
+    "section": "",
+    "text": "A collection of links, notes, snippets on things I am reading, watching.\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "podcast/podcasts/1911.01547/index.html",
+    "href": "podcast/podcasts/1911.01547/index.html",
+    "title": "On the Measure of Intelligence",
+    "section": "",
+    "text": "Key takeaways for engineers/specialists include the importance of skill-acquisition efficiency in measuring intelligence, the emphasis on building systems with adaptability and generalization capabilities, and the potential impact of such research on areas like education, healthcare, and robotics.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1502.05477/index.html",
+    "href": "podcast/podcasts/1502.05477/index.html",
+    "title": "Trust Region Policy Optimization",
+    "section": "",
+    "text": "Key takeaways: TRPO offers monotonic policy improvements by using a trust region constraint controlled by KL divergence, which leads to more robust and reliable learning. The paper demonstrated the algorithm’s success in complex tasks like robotic locomotion and Atari games, highlighting its flexibility and effectiveness.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2103.00020/index.html",
+    "href": "podcast/podcasts/2103.00020/index.html",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "section": "",
+    "text": "Engineers and specialists can utilize CLIP’s contrastive learning approach to create more efficient and scalable computer vision systems. The paper highlights the importance of ethical considerations and bias mitigation strategies in developing AI technologies.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2406.17345/index.html",
+    "href": "podcast/podcasts/2406.17345/index.html",
+    "title": "NerfBaselines: A Framework for Standardized Evaluation of Novel View Synthesis Methods in Computer Vision",
+    "section": "",
+    "text": "NerfBaselines addresses the inconsistent evaluation protocols in comparing novel view synthesis methods by providing a unified interface, ensuring reproducibility through containerization, and standardizing the evaluation protocol. By enabling the sharing of pre-trained checkpoints, it reduces computational costs and environmental impact. However, it relies on methods exposing the same interface and future directions involve exploring advanced evaluation metrics and addressing the computational cost of training.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2403.13187/index.html",
+    "href": "podcast/podcasts/2403.13187/index.html",
+    "title": "Evolutionary Optimization of Model Merging Recipes",
+    "section": "",
+    "text": "Engineers and specialists can leverage the Evolutionary Model Merge method to automate the process of combining pre-trained models, eliminating the need for human intuition and expanding the search space for potential model combinations. This approach opens up possibilities for developing more efficient, cost-effective, and powerful AI systems with emergent capabilities.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2006.11239/index.html",
+    "href": "podcast/podcasts/2006.11239/index.html",
+    "title": "Denoising Diffusion Probabilistic Models",
+    "section": "",
+    "text": "The paper leverages denoising score matching to simplify the training objective for diffusion models, leading to faster and more stable training processes and higher-quality image generation results. Additionally, the paper highlights the potential of diffusion models as efficient lossy compressors, opening up possibilities in data compression applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2303.04129/index.html",
+    "href": "podcast/podcasts/2303.04129/index.html",
+    "title": "Foundation Models in Decision Making: Roles, Challenges, and Opportunities",
+    "section": "",
+    "text": "The paper proposes a framework for understanding the various roles of foundation models in decision making, including conditional generative models, representation learners, and interactive agents. Key takeaways include the use of foundation models for behavioral priors, world modeling, and generalization of knowledge across tasks and environments.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2212.09720/index.html",
+    "href": "podcast/podcasts/2212.09720/index.html",
+    "title": "Optimizing Quantization of Large Language Models for Efficiency and Accuracy",
+    "section": "",
+    "text": "Engineers and specialists can leverage 4-bit precision quantization with techniques such as quantile quantization and floating-point representation to significantly reduce the memory footprint and improve inference speed of large language models. Understanding the trade-off between accuracy and efficiency is crucial for deploying powerful NLP technologies in resource-constrained environments and expanding their applications to real-world scenarios.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1609.09106/index.html",
+    "href": "podcast/podcasts/1609.09106/index.html",
+    "title": "Hyper Networks: A Novel Approach to Learning Weights in Deep Neural Networks",
+    "section": "",
+    "text": "The key takeaways for engineers/specialists are: Hyper Networks introduce a meta-network (hypernetwork) that learns to generate weight structures for deep neural networks, providing flexibility and efficiency. Dynamic hypernetworks allow weights to adapt to input sequences, improving performance on sequential tasks. End-to-end training of hypernetworks with the main network leads to collaborative optimization and comparable or better performance with fewer parameters.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2003.08934/index.html",
+    "href": "podcast/podcasts/2003.08934/index.html",
+    "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+    "section": "",
+    "text": "Key takeaways for engineers and specialists from the paper include the efficiency of using a continuous 5D representation instead of discrete meshes or voxel grids, the importance of differentiable volume rendering in training neural networks for scene representation, and the potential of NeRF to revolutionize how 3D content is created and experienced.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1805.08941/index.html",
+    "href": "podcast/podcasts/1805.08941/index.html",
+    "title": "AutoPruner: End-to-End Trainable Filter Pruning for Efficient Deep Neural Networks",
+    "section": "",
+    "text": "AutoPruner presents a significant advancement in filter pruning for deep neural networks by integrating the filter selection process into model training, eliminating the need for separate pruning steps. The methodology outperformed state-of-the-art methods, showcasing superior accuracy and compression ratios on standard datasets like CUB200-2011 and ImageNet ILSVRC-12. The innovative approach of AutoPruner could lead to more efficient and accessible deep learning models across various applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1910.02054/index.html",
+    "href": "podcast/podcasts/1910.02054/index.html",
+    "title": "ZeRO Memory Optimizations: Toward Training Trillion Parameter Models",
+    "section": "",
+    "text": "The paper introduces ZeRO, a novel approach to optimize memory usage when training massive language models. ZeRO-DP and ZeRO-R components effectively reduce memory redundancy and allow for training models with up to 170 billion parameters efficiently. The technique shows superlinear scalability, user-friendly implementation, and has the potential to democratize large model training in AI research.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1611.02779/index.html",
+    "href": "podcast/podcasts/1611.02779/index.html",
+    "title": "RL^2: Fast Reinforcement Learning via Slow Reinforcement Learning",
+    "section": "",
+    "text": "Engineers and specialists can benefit from RL2 by understanding how meta-learning can bridge the gap between slow deep reinforcement learning and fast human learning speeds. This approach offers a way to encode prior knowledge in an RNN to make RL algorithms more efficient, adaptable, and scalable to complex real-world scenarios.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2301.00774/index.html",
+    "href": "podcast/podcasts/2301.00774/index.html",
+    "title": "SparseGPT: One-shot Pruning of Large Language Models",
+    "section": "",
+    "text": "SparseGPT offers a one-shot pruning approach that avoids costly retraining, making it significantly more efficient for compressing large language models like GPT variants. The method can achieve high sparsity levels while maintaining minimal accuracy loss, providing a promising solution for improving the deployment of powerful language models.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2306.14892/index.html",
+    "href": "podcast/podcasts/2306.14892/index.html",
+    "title": "Decision-Pretrained Transformer: Bridging Supervised Learning and Reinforcement Learning",
+    "section": "",
+    "text": "Engineers and specialists can leverage the DPT methodology to design more versatile and efficient RL agents. By learning a decision-making strategy through supervised pretraining, DPT demonstrates adaptability to new environments, ability to explore and exploit, and strong generalization capabilities. This approach offers a promising path towards practical and efficient Bayesian RL methods.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2310.13810/index.html",
+    "href": "podcast/podcasts/2310.13810/index.html",
+    "title": "A Better Match for Drivers and Riders Reinforcement Learning at Lyft",
+    "section": "",
+    "text": "The paper demonstrates the successful application of reinforcement learning to improve the efficiency of driver-rider matching in ride-sharing platforms. The use of online RL allows for real-time adaptation, resulting in decreased wait times for riders, increased earnings for drivers, and overall higher user satisfaction. The research paves the way for more intelligent systems in the ride-sharing industry, with potential for further optimization and expansion into various other aspects of the ecosystem.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2407.02945/index.html",
+    "href": "podcast/podcasts/2407.02945/index.html",
+    "title": "Extrapolated View Synthesis for Urban Scene Reconstruction",
+    "section": "",
+    "text": "The paper introduces Extrapolated View Synthesis (EVS) for urban scene reconstruction, addressing limitations in current methods by using 3D Gaussian Splatting for scene representation. By incorporating surface normal information and leveraging diffusion models, the proposed method, VEGS, outperforms existing approaches in generating visually realistic and accurate renderings for urban environments.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2208.07339/index.html",
+    "href": "podcast/podcasts/2208.07339/index.html",
+    "title": "Efficient Inference for Large Language Models with LLM.int8()",
+    "section": "",
+    "text": "Engineers can leverage LLM.int8() to reduce memory requirements and efficiently run large language models without performance degradation, even at scales exceeding billions of parameters. The method incorporates vector-wise quantization and mixed-precision decomposition to maintain full 16-bit performance in perplexity and zeroshot accuracy across large models, demonstrating significant memory savings and modest speedups for inference.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2109.10665/index.html",
+    "href": "podcast/podcasts/2109.10665/index.html",
+    "title": "Survey on reinforcement learning in reccomender systems",
+    "section": "",
+    "text": "Goes over some of the different places RL can be used in RecSys.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2210.03044/index.html",
+    "href": "podcast/podcasts/2210.03044/index.html",
+    "title": "Unmasking the Lottery Ticket Hypothesis",
+    "section": "",
+    "text": "The key takeaways for engineers/specialists include understanding the role of the pruning mask in guiding training, the importance of SGD robustness in navigating the error landscape, and the relationship between the Hessian eigenspectrum and the maximum pruning ratio for efficient network pruning.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2112.04426/index.html",
+    "href": "podcast/podcasts/2112.04426/index.html",
+    "title": "Retrieval-Enhanced Transformers (RETRO): A Semi-Parametric Approach to Enhance Performance of Large Language Models",
+    "section": "",
+    "text": "The paper introduces the RETRO model, which leverages retrieval from a massive text database to enhance large language model performance without increasing model size. Key takeaways include the benefits of linear time complexity for retrieval, the use of frozen BERT for efficient retrieval, and the importance of addressing test set leakage in evaluation.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/1806.09055/index.html",
+    "href": "podcast/podcasts/1806.09055/index.html",
+    "title": "DARTS: Differentiable Architecture Search",
+    "section": "",
+    "text": "Key takeaways for engineers/specialists: DARTS introduces a continuous relaxation approach to architecture search, leveraging gradient descent for efficient optimization. It achieves state-of-the-art results on image classification and language modeling tasks with significantly less computational cost. Challenges include the gap between continuous and discrete architecture representation, computational cost of second-order approximation, and sensitivity to hyperparameters.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
+  },
+  {
+    "objectID": "podcast/podcasts/2406.11066/index.html",
+    "href": "podcast/podcasts/2406.11066/index.html",
+    "title": "Metadata-based Color Harmonization for Multi-camera Surround View Systems",
+    "section": "",
+    "text": "The paper introduces a metadata-based approach to address color inconsistencies in multi-camera surround view systems, crucial for accurate perception in autonomous driving. The method significantly outperforms traditional techniques in visual quality and runtime, making it more efficient and robust for real-time applications.\n  \n  \n\n\n\n  \n\n    Listen to the Episode\n    \n      \n        \n        Your browser does not support the audio element.\n      \n    \n\n    \n      Related Links\n      \n        \n        Read transcript\n        Read original paper\n      \n    \n\n    The (AI) Team\n    \n      Alex Askwell: Our curious and knowledgeable moderator, always ready with the right\n        questions\n        to guide our exploration.\n      Dr. Paige Turner: Our lead researcher and paper expert, diving deep into the methods and\n        results.\n      Prof. Wyd Spectrum: Our field expert, providing broader context and critical insights.\n    \n\n    Listen on your favorite platforms"
   },
   {
     "objectID": "podcast/podcasts/1810.05270/index.html",
