@@ -4,6 +4,7 @@ layout: post
 description: "S-curves are way trickier than you'd think. Here's why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us."
 categories: ["Forecasting", "Math"]
 date: "2022-06-01"
+image: sigmoid.jpg
 ---
 
 ## A Quick Intro to S-curves
@@ -130,52 +131,58 @@ function curvePoints(radius = 0.5) {
       .y(d => y(d[1]));
 
   let maxL = 0;
-
   const starti = 10;
   const solutions = [];
 
-  function draw(n) {
+  function draw(currentIndex) {
     context.clearRect(0, 0, width, height);
+    
+    // Draw all data points
     context.beginPath();
     line.curve(curvePoints(.5))(data);
-    line.curve(curvePoints(2))(data.slice(0, n));
+    
+    // Draw points up to current index
+    line.curve(curvePoints(2))(data.slice(0, currentIndex));
     context.fillStyle = "#000";
     context.fill();
 
-    const { x } = solution(n);
-    if (n) solutions.push(x);
+    if (currentIndex > 0) {
+      const { x: solutionX } = solution(currentIndex);
+      solutions.push(solutionX);
 
-    // text
-    context.fillStyle = "#000";
-    if (x[0] > maxL) maxL = x[0];
+      // Update maxL if necessary
+      if (solutionX[0] > maxL) maxL = solutionX[0];
 
-    context.fillText(
-      `N = ${L.toFixed(2)}; est. ${x[0].toFixed(2)} (max ${maxL.toFixed(2)})`,
-      10,
-      10
-    );
-    context.fillText(`t0 = ${t0.toFixed(2)}; est. ${x[1].toFixed(2)}`, 10, 24);
-    context.fillText(`k = ${k.toFixed(2)}; est. ${x[2].toFixed(2)}`, 10, 38);
+      // Draw text information
+      context.fillStyle = "#000";
+      context.fillText(
+        `N = ${L.toFixed(2)}; est. ${solutionX[0].toFixed(2)} (max ${maxL.toFixed(2)})`,
+        10,
+        10
+      );
+      context.fillText(`t0 = ${t0.toFixed(2)}; est. ${solutionX[1].toFixed(2)}`, 10, 24);
+      context.fillText(`k = ${k.toFixed(2)}; est. ${solutionX[2].toFixed(2)}`, 10, 38);
 
-    if (!n) return;
-
-    context.globalAlpha = 0.2;
-    let i = starti;
-    for (const x of solutions) {
-      const S = sigmoid(...x),
-        points = data.slice(i, ++i + 30).map(([t]) => [t, S(t)]);
-      context.beginPath();
-      line.curve(d3.curveLinear)(points);
-      context.strokeStyle = "steelblue";
+      // Draw solution curves
+      context.globalAlpha = 0.2;
+      let solutionIndex = starti;
+      for (const x of solutions) {
+        const S = sigmoid(...x),
+          points = data.slice(solutionIndex, ++solutionIndex + 30).map(([t]) => [t, S(t)]);
+        context.beginPath();
+        line.curve(d3.curveLinear)(points);
+        context.strokeStyle = "steelblue";
+        context.stroke();
+      }
+      context.globalAlpha = 1;
       context.stroke();
-    }
-    context.globalAlpha = 1;
-    context.stroke();
 
-    context.beginPath();
-    line.curve(curvePoints(2))([data[n]]);
-    context.fillStyle = "steelblue";
-    context.fill();
+      // Draw current point
+      context.beginPath();
+      line.curve(curvePoints(2))([data[currentIndex]]);
+      context.fillStyle = "steelblue";
+      context.fill();
+    }
   }
 
   yield context.canvas;
@@ -186,9 +193,9 @@ function curvePoints(radius = 0.5) {
   draw(0);
   await Promises.delay(1200);
 
-  for (let i = starti; i < data.length; i++) {
+  for (let currentIndex = starti; currentIndex < data.length; currentIndex++) {
     if (stop) break;
-    draw(i);
+    draw(currentIndex);
     await Promises.delay(15000 / data.length);
   }
 }
