@@ -10,7 +10,160 @@
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
 <description>Podcasts discussing the latest AI research.</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sat, 18 Jan 2025 05:59:19 GMT</lastBuildDate>
+<lastBuildDate>Sat, 18 Jan 2025 15:09:25 GMT</lastBuildDate>
+<item>
+  <title>Titans: Learning to Memorize at Test Time</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2501.00663v1/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>The key takeaways for engineers/specialists are that effective memory models need to be dynamic, surprise-driven, and have mechanisms to forget the past. The research showcases how incorporating a neural long term memory module that continuously learns at test time can lead to higher performance in language modeling, common-sense reasoning, needle-in-a-haystack tasks, DNA modeling, and time-series forecasting. By introducing the Titans architecture, the paper provides a framework for effectively integrating such memory modules into various tasks.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+
+    <h3 class="anchored">Listen to the Episode</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2501.00663v1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2501.00663v1.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2501.00663v1.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2501.00663v1">Read original paper</a></li>
+      </ul>
+    </div>
+
+    <h4 class="anchored">The (AI) Team</h4>
+    <ul>
+      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
+        questions
+        to guide our exploration.</li>
+      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
+        results.</li>
+      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
+    </ul>
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Machine Learning</category>
+  <category>Artificial Intelligence</category>
+  <category>Neural Networks</category>
+  <category>Memory Modules</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2501.00663v1/</guid>
+  <pubDate>Sat, 18 Jan 2025 15:09:25 GMT</pubDate>
+</item>
+<item>
+  <title>Transformer2: Self-Adaptive Large Language Models</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2501.06252/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>Key takeaways are that SVF outperforms traditional fine-tuning methods like LoRA in efficiency, flexibility, and robustness. The paper also introduces innovative adaptation strategies like Few-Shot Adaptation using the Cross-Entropy Method, showcasing the effectiveness of the Transformer2 framework in adaptive AI systems.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+
+    <h3 class="anchored">Listen to the Episode</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2501.06252.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2501.06252.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2501.06252.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2501.06252">Read original paper</a></li>
+      </ul>
+    </div>
+
+    <h4 class="anchored">The (AI) Team</h4>
+    <ul>
+      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
+        questions
+        to guide our exploration.</li>
+      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
+        results.</li>
+      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
+    </ul>
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Artificial Intelligence</category>
+  <category>Natural Language Processing</category>
+  <category>Deep Learning</category>
+  <category>Machine Learning</category>
+  <category>Adaptive Systems</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2501.06252/</guid>
+  <pubDate>Sat, 18 Jan 2025 14:13:10 GMT</pubDate>
+</item>
 <item>
   <title>Learning to Learn Optimization Algorithms with LSTM Networks</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1606.04474/</link>
@@ -1381,157 +1534,6 @@
   <category>Representation Learning</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2310.10616/</guid>
   <pubDate>Sat, 10 Aug 2024 05:24:18 GMT</pubDate>
-</item>
-<item>
-  <title>In-Context Learning Capabilities of Transformers</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2208.01066/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The key takeaways for engineers/specialists are that Transformers demonstrate robust in-context learning capabilities for various function classes, showing flexibility and adaptability without the need for fine-tuning. The study emphasizes the importance of model capacity and the potential benefits of curriculum learning for training efficiency.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen to the Episode</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2208.01066.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2208.01066.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2208.01066.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2208.01066">Read original paper</a></li>
-      </ul>
-    </div>
-
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Machine Learning</category>
-  <category>Deep Learning</category>
-  <category>Transformer Models</category>
-  <category>In-Context Learning</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2208.01066/</guid>
-  <pubDate>Sat, 10 Aug 2024 05:20:59 GMT</pubDate>
-</item>
-<item>
-  <title>Spider2-V: Automated Multimodal Agents for Data Science Workflows</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2407.10956/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The paper highlights that even advanced VLMs struggle to automate full data workflows, especially in GUI-intensive tasks, with a low success rate of 14%. The study emphasizes the need for improvements in action grounding and training data quality to enhance the performance of AI agents in complex data tasks.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen to the Episode</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2407.10956.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2407.10956.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.10956.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2407.10956">Read original paper</a></li>
-      </ul>
-    </div>
-
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Artificial Intelligence</category>
-  <category>Artificial GUI Interaction</category>
-  <category>Data Science</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2407.10956/</guid>
-  <pubDate>Sat, 10 Aug 2024 04:53:32 GMT</pubDate>
 </item>
 </channel>
 </rss>
