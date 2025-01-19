@@ -8,9 +8,89 @@
 <title>Arjun Srivastava</title>
 <link>https://www.arjunsriva.com/podcast/</link>
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
-<description>Podcasts discussing the latest AI research.</description>
+<description>Curated AI papers, clearly explained.</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sat, 18 Jan 2025 15:09:25 GMT</lastBuildDate>
+<lastBuildDate>Sun, 19 Jan 2025 07:04:36 GMT</lastBuildDate>
+<item>
+  <title>DeepSeek-V3: Advancements in Open-Source Large Language Models</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2412.19437/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>Key takeaways include the introduction of innovative techniques such as the auxiliary-loss-free load balancing method for Mixture-of-Experts models, the multi-token prediction training objective for densified training and faster inference, FP8 mixed-precision training for reduced memory usage, and the optimized DualPipe algorithm for efficient distributed training. The performance of DeepSeek-V3 on coding and math tasks surpasses leading closed-source models at a lower training cost, making it a significant contribution to the open-source community.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
+    <h3 class="anchored">Listen to the Episode</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2412.19437.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2412.19437.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2412.19437.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2412.19437">Read original paper</a></li>
+      </ul>
+    </div>
+
+    <h4 class="anchored">The (AI) Team</h4>
+    <ul>
+      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
+        questions
+        to guide our exploration.</li>
+      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
+        results.</li>
+      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
+    </ul>
+
+
+
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Deep Learning</category>
+  <category>Natural Language Processing</category>
+  <category>Neural Networks</category>
+  <category>Machine Learning</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2412.19437/</guid>
+  <pubDate>Sun, 19 Jan 2025 07:04:36 GMT</pubDate>
+</item>
 <item>
   <title>Titans: Learning to Memorize at Test Time</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2501.00663v1/</link>
@@ -27,6 +107,15 @@
 
 
   <div class="podcast-section">
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
 
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
@@ -55,12 +144,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -104,6 +188,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -131,12 +224,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -181,6 +269,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -208,12 +305,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -257,6 +349,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -284,12 +385,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -333,6 +429,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -360,12 +465,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -410,6 +510,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -437,12 +546,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -486,6 +590,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -513,12 +626,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -562,6 +670,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -589,12 +706,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -639,6 +751,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -666,12 +787,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -718,6 +834,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -745,12 +870,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -794,6 +914,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -821,12 +950,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -870,6 +994,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -897,12 +1030,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -946,6 +1074,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -973,12 +1110,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1023,6 +1155,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -1050,12 +1191,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1098,6 +1234,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -1125,12 +1270,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1173,6 +1313,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -1200,12 +1349,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1248,6 +1392,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -1275,12 +1428,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1324,6 +1472,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -1351,12 +1508,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1400,6 +1552,15 @@
 
   <div class="podcast-section">
 
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
     <h3 class="anchored">Listen to the Episode</h3>
     <div class="plyr-audio-player">
       <audio id="player" controls="">
@@ -1427,12 +1588,7 @@
       <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
     </ul>
 
-    <h3 class="anchored">Listen on your favorite platforms</h3>
 
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
 
   </div>
 
@@ -1457,83 +1613,6 @@
   <category>Decision-Making</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2306.14892/</guid>
   <pubDate>Sat, 10 Aug 2024 05:51:49 GMT</pubDate>
-</item>
-<item>
-  <title>How Transformers Learn In-Context Beyond Simple Functions</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2310.10616/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>The key takeaways for engineers/specialists from the paper include the development of theoretical constructions for transformers to implement in-context ridge regression on representations efficiently. This research showcases the modularity of transformers in decomposing complex tasks into distinct learnable modules, providing strong evidence for their adaptability in handling complex learning scenarios.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen to the Episode</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2310.10616.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2310.10616.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2310.10616.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2310.10616">Read original paper</a></li>
-      </ul>
-    </div>
-
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Artificial Intelligence</category>
-  <category>Deep Learning</category>
-  <category>Transformers</category>
-  <category>In-Context Learning</category>
-  <category>Representation Learning</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2310.10616/</guid>
-  <pubDate>Sat, 10 Aug 2024 05:24:18 GMT</pubDate>
 </item>
 </channel>
 </rss>
