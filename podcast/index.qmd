@@ -1,32 +1,55 @@
 ---
 title: "Byte-Sized Breakthroughs Podcast"
-description: "Podcasts discussing the latest AI research."
+description: "Curated AI papers, clearly explained."
 
 page-layout: full
 title-block-banner: true
 listing:
+  id: episodes
   contents: podcasts
   sort: "date desc"
-  type: grid
-  fields: [ date, title]
+  type: default
+  fields: [ date, title, categories]
   categories: true
   feed: true
   sort-ui: true
   filter-ui: true
 ---
 
-## Listen everywhere
+
+::: {.grid}
+
+::: {.g-col-4}
+![](/static/podcast_data/coverart.jpg){ width=200px }
+:::
+
+::: {.g-col-8}
+I love reading research papers, but often find myself with pockets of time when I can't sit down and read. 
+This podcast bridges that gap, offering bite-sized explorations of individual papers.
+:::
+
+:::
+
+
+::: {.callout-note}
+The voices are AI-generated. Think of this as your research reading assistant - quick, consistent, and focused on the key points.
+:::
 
 [![](/static/podcast_data/pocastapps/spotify.svg){ width=150px }](https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0) [![](/static/podcast_data/pocastapps/apple.svg){ width=120px }](https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141) [![](/static/podcast_data/pocastapps/youtube.svg){ width=120px }](https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak)  [![](/static/podcast_data/pocastapps/rss.svg){ width=40px }](/static/podcast_data/feed.xml)
 
 
 
-![](/static/podcast_data/coverart.jpg){ width=600px }
 
-I love Arxiv, but often find myself with pockets of time when I can't sit down and read. 
-This podcast bridges that gap, offering bite-sized explorations of individual papers.
 
-A few things to note:
+## Latest Episodes
+::: {#episodes}
+:::
+
+
+
+
+
+## About
 
 1. The voices you'll hear are AI-generated, not real people (though names from papers might appear).
 2. While we strive for accuracy, these are complex topics. Our current AI systems aren't perfect, so approach with a critical mind.
@@ -38,7 +61,7 @@ This podcast aims to spark curiosity and make cutting-edge research more accessi
 Enjoy the exploration of ideas, and let it fuel your interest in further reading!
 
 
-## The Team
+## The (AI) Team
 
 - **Alex Askwell**: Our curious and knowledgeable moderator, always ready with the right questions to guide our exploration.
 - **Dr. Paige Turner**: Our lead researcher and paper expert, diving deep into the methods and results.
@@ -47,3 +70,6 @@ Enjoy the exploration of ideas, and let it fuel your interest in further reading
 Join them as they break down complex research into byte-sized breakthroughs!
 
 
+## Request a paper
+
+If you have a paper you'd like to see discussed, please [fill this form](https://forms.gle/rGByf81DyPNCA9gYA)
