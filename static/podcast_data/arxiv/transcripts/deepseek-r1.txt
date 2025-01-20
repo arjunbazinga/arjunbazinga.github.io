@@ -1,0 +1,88 @@
+male-1: Welcome back to Byte-Sized Breakthroughs, the podcast where we dissect cutting-edge research in artificial intelligence. I'm your host, Alex Askwell, and today we’re diving deep into a fascinating paper: “DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.” With us, we have Dr. Paige Turner, the lead researcher behind this work, and Professor Wyd Spectrum, a renowned expert in the field of AI. Welcome, both!
+
+female-1: Thanks, Alex, it's great to be here.
+
+female-2: Pleasure to join you.
+
+male-1: Paige, let's start with some background. What inspired you to tackle this problem of improving reasoning in large language models (LLMs)?
+
+female-1: Well, Alex, the field of LLMs has been progressing at an incredible pace. We’ve seen models get better at generating text and answering questions, but complex reasoning – the kind needed for math, coding, and scientific problems – has remained a challenge. Previous approaches often relied on a lot of labeled data for supervised fine-tuning (SFT), which is time-consuming and expensive. We wanted to explore whether we could use reinforcement learning (RL) as a primary tool, instead of relying on a large amount of labeled data and whether RL was viable without any SFT step as a starting point.
+
+male-1: And Wyd, how does this fit into the larger picture of LLM research?
+
+female-2: This work is very significant, Alex. We've seen a trend towards post-training methods for LLMs that are proving to be incredibly effective in enhancing reasoning capabilities. Methods like Chain-of-Thought (CoT) reasoning, have shown how important it is for models to learn a step-by-step reasoning process. The challenge, as Paige mentioned, is that these approaches often need significant human effort. The DeepSeek-AI team are tackling this issue by exploring how much can be achieved through RL which is more automatic, requiring less manual data collection.
+
+male-1: Let's talk about the core contribution of your work, Paige. You’ve introduced two main models: DeepSeek-R1-Zero and DeepSeek-R1. Can you start with DeepSeek-R1-Zero?
+
+female-1: Certainly. DeepSeek-R1-Zero is the first open research project that demonstrates that LLM reasoning capabilities can be incentivized purely through RL, without any initial SFT. We took a base LLM, called DeepSeek-V3-Base, and directly applied RL. This means that unlike other methods, we didn't give the model any pre-existing reasoning training data. We just provided the base model with a prompt template and told it to reason in the `<think>` tags, and answer in the `<answer>` tags and then we started the RL training process.
+
+male-1: That’s a bold move, Paige. What was the algorithm used for this?
+
+female-1: We used an algorithm called Group Relative Policy Optimization, or GRPO. In traditional RL, you often have a critic model which is another neural network of similar size as the main policy network that evaluates whether the output from the main network is good or bad, and the model is then trained to improve its scores from this critic. The GRPO algorithm has the key difference of not requiring this separate critic. Instead, for each question, we sample a group of outputs and use those outputs to calculate an advantage, which is like an estimate of how good the answer is and where that answer is in terms of good vs bad relative to the group of answers.  We then optimize the main model to produce answers that have a better advantage compared to previous answers. So instead of having an absolute score from a critic, we use relative scores to determine improvement. This reduces the computational costs, as we don’t need a critic model and can perform this relative comparison within the same model.
+
+male-1: And what kind of rewards did you use to incentivize the model?
+
+female-1: We kept the rewards simple. For problems where we had a clear right or wrong answer, like in math or coding, we used an accuracy reward. This reward told the model whether it had solved the problem correctly. Additionally, we implemented a format reward that incentivized the model to put its reasoning inside the `<think>` tags and the answer within the `<answer>` tags. We avoided more complex neural reward models, because we observed that they can often lead to 'reward hacking' where the model exploits the reward model, and they also add a lot of computational cost.
+
+male-1: So, no SFT pretraining and purely rule based rewards, that's quite novel. What was the result?
+
+female-1: The results were quite remarkable! On the AIME 2024 benchmark – which is a high-school level math competition – DeepSeek-R1-Zero's pass@1 score increased from an initial 15.6% to 71.0% through the RL training process.  This demonstrates that just the simple method we created can be very effective. And, what's even more impressive, when we used majority voting on 16 samples, it achieved a pass@1 score of 86.7%, which matches the performance of OpenAI's o1-0912. That's a really exciting result, since it shows the power of RL and it's ability to self-improve.
+
+male-1: Wyd, what do you think about these results given the context of previously published work?
+
+female-2: It's a significant result, Alex. The fact that the team was able to achieve such performance using pure RL, without any supervised fine-tuning, really challenges the conventional wisdom that SFT is a necessity before applying RL.  Most previous RL work starts with a foundation that has a good reasoning ability, but this work shows that it's possible to start from the base LLM and have the model develop the reasoning abilities.
+
+male-1: Paige, DeepSeek-R1-Zero sounds impressive. But I understand it also had some limitations. That's where DeepSeek-R1 comes in, correct?
+
+female-1: Exactly. While DeepSeek-R1-Zero demonstrated a lot of potential, we observed issues with readability and language mixing. The reasoning process was not always clear and easy to follow, sometimes mixing different languages, and the model often wouldn't format its answers for humans. So, DeepSeek-R1 was designed to address this by using a multi-stage training pipeline. It begins by using a small amount of human readable Chain of Thought (CoT) data, a few thousand examples, for Supervised Fine Tuning, which we call the cold-start phase. Then we apply reasoning-oriented RL. And then after that we do a second stage of Supervised Fine Tuning and finally a second stage of RL that includes considerations of general usage.
+
+male-1: What is the *cold start* phase? What kind of data was used?
+
+female-1: The cold-start data is essentially high-quality examples of long Chain-of-Thought reasoning. We gathered them using a combination of techniques like few-shot prompting, direct prompting, and by refining the outputs of DeepSeek-R1-Zero. The crucial element is the formatting. We made sure that the model put the reasoning process in a very readable and human friendly way, and it included a final summary. The goal here was to make the output from the models better and more suitable for consumption, and in addition it was shown to be better as the starting point for RL.
+
+male-1: So, after the cold start phase, what was the next step in training DeepSeek-R1?
+
+female-1: Next, we performed reasoning-oriented RL, just like DeepSeek-R1-Zero, but now it started from a better starting point due to the cold-start. This phase was designed to enhance the model's performance on reasoning tasks with clear answers, like code and math. We also added a new reward at this stage, which penalized language mixing. It would reward the model if it was consistent in the target language. While we did see that it can result in slight performance degradation in terms of accuracy, it did help in aligning the model to be more user friendly.
+
+male-1: And after the reasoning-oriented RL?
+
+female-1: Once the reasoning-oriented RL converged, we collected new Supervised Fine Tuning (SFT) data through rejection sampling. We made sure to include both reasoning-related and non-reasoning related data in this dataset to ensure the model had a wider breadth of ability.  For reasoning data, we sampled multiple responses from the model and retained only the correct ones that met our readability and formatting criteria.  And for the non-reasoning data, we used a dataset similar to what was used in DeepSeek-V3 which included tasks such as writing, factual QA, and self-cognition. Then after training with this new SFT data, we performed a second stage of RL to refine the model further.
+
+male-1: Can you tell us more about this second stage of RL?
+
+female-1: Sure, the goal of this final RL stage was to further improve the model's helpfulness and harmlessness, while also improving its reasoning capabilities. So, for the reasoning data, we continued to use the rule based rewards as in the previous stage. But for general usage, we used a neural reward model which were trained on human feedback, similar to DeepSeek-V3. This allowed us to improve the model's capabilities in complex scenarios where accuracy is not the only consideration. We focused our helpfulness reward on the final summary only, while for the harmlessness reward we evaluated the entire response, both the reasoning process and summary.
+
+male-1: This multi-stage pipeline sounds complex, but very comprehensive. What were the results of DeepSeek-R1?
+
+female-1: DeepSeek-R1 achieved impressive results. On the AIME 2024 benchmark, it got a score of 79.8% pass@1, slightly surpassing OpenAI’s o1-1217. On MATH-500, it reached 97.3%, performing on par with o1-1217 and significantly outperforming other models. It also did really well on coding related tasks, achieving a 2029 Elo rating on Codeforces, which means it's better than 96.3% of human participants. So, it performed extremely well across a range of challenging benchmarks. And we are hopeful that its capabilities in real world settings would be impressive as well, such as in coding and math problem solving.
+
+male-1: Wyd, from your perspective, how do these results compare to other state-of-the-art models?
+
+female-2: These results are very competitive and certainly match up with some of the best models out there. The DeepSeek team has shown a clear methodology in their work, which includes not only the innovations mentioned earlier, but also the work they did in curating their training data. I think that the fact they were able to achieve this level of performance using a combination of both rule-based and neural-based rewards, especially the rule based for reasoning is a key achievement and a good sign that we can progress with RL without having to rely solely on human feedback.
+
+male-1: You also explored distilling the reasoning capabilities of DeepSeek-R1 into smaller models. How did that work, and what were the outcomes?
+
+female-1: Yes, we wanted to see if we could transfer the reasoning patterns from DeepSeek-R1 to smaller, more efficient models. We used the 800,000 samples we had from DeepSeek-R1’s SFT data to fine-tune a number of smaller open-source models from the Qwen and Llama families. This means that we directly fine-tuned the smaller models using the reasoning data we obtained from DeepSeek-R1. The findings were really exciting. Our distilled 14B parameter model outperformed the open-source QwQ-32B model on a number of reasoning benchmarks. The 32B and 70B distilled models also set new records on the reasoning tasks among dense models. This really does show how effective distillation is, and how well the reasoning knowledge of a larger model can be transferred.
+
+male-1: What does this imply for practical use of these models?
+
+female-2: It has huge implications. The fact that we can distill these strong reasoning capabilities into smaller models makes them more accessible. This means we can run these powerful models on hardware with less memory.  The smaller, distilled models can also be deployed in more applications such as on mobile devices, edge computing and embedded systems. So, distillation is a very important step in practical AI.
+
+male-1: Paige, you briefly touched on some of the challenges you faced. Can we delve a little bit deeper into the limitations of this work?
+
+female-1: Certainly. While DeepSeek-R1 excels in reasoning, it's not perfect. It currently falls short of DeepSeek-V3 in tasks like function calling, multi-turn dialogue, and generating complex JSON outputs. Also, DeepSeek-R1 is optimized primarily for Chinese and English, which can lead to language mixing issues when handling queries in other languages. Also, in our evaluation we found that DeepSeek-R1 is a little sensitive to the prompt that is used. Few-shot prompting actually degraded its performance. This is probably because our models were trained heavily on zero-shot training data. So, users are better off using zero-shot settings with DeepSeek-R1. Finally, we didn't apply large scale RL to software engineering tasks as much as we did other reasoning related tasks, so we found that there wasn't much improvement for software engineering benchmarks between DeepSeek-R1 and DeepSeek-V3.
+
+male-1: And what is the plan to address some of these limitations?
+
+female-1: For DeepSeek-R1, we want to explore using long CoT reasoning chains to enhance the model's function calling and multi-turn dialogue abilities. For the language issue, we are going to make sure that it can handle multiple languages instead of just Chinese and English. And for prompt sensitivity, we need to find ways to make the model more robust. Lastly for software engineering tasks, we want to focus on applying large scale RL on related data and implement methods that can increase the efficiency of software engineering training such as reject sampling. In addition, it would also be interesting to see if applying RL to the distilled models leads to further improvements.
+
+male-1: Wyd, looking at this work as a whole, what do you think is its biggest long term impact?
+
+female-2: I think the long-term impact is substantial, Alex. This research provides concrete evidence that RL can be the driving force behind developing reasoning capabilities in LLMs, reducing the need for extensive supervised fine-tuning. This moves us closer to having AI systems that can learn and reason more autonomously. And with the demonstration of effective distillation techniques, the prospect of deploying highly capable AI models on more resource-constrained environments is much more feasible.  I also believe this work may also inspire future research into self-improving AI. As an example the 'aha moment' of DeepSeek-R1-Zero where it reevaluated its approach on a problem mid-reasoning provides further evidence that RL is capable of producing emergent behaviors that may not be directly programmed.
+
+male-1: Paige, before we wrap up, what are the key take-aways for our listeners?
+
+female-1: In essence, our work has demonstrated that powerful reasoning can emerge from pure reinforcement learning, and that supervised fine tuning is not a strict requirement. We've developed a multi-stage pipeline that uses cold-start data to get much better results than a pure RL approach on its own, and the result is a model comparable with the best ones in terms of math and reasoning ability. And lastly, we have shown how effective distillation is in making these reasoning capabilities more widely available. By using a simply SFT method and some high quality reasoning data from a powerful model, smaller models were able to achieve incredible results, beating previously published open-source models by a large margin. We hope that these findings can contribute to building more advanced AI systems.
+
+male-1: Thank you both for this incredibly insightful discussion. It’s clear this research is paving the way for a new era of AI development. And thank you, listeners, for tuning into another episode of Byte-Sized Breakthroughs. Join us next time as we dissect another groundbreaking paper.
+

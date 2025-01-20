@@ -10,7 +10,89 @@
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
 <description>Curated AI papers, clearly explained.</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sun, 19 Jan 2025 07:04:36 GMT</lastBuildDate>
+<lastBuildDate>Mon, 20 Jan 2025 13:16:08 GMT</lastBuildDate>
+<item>
+  <title>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/deepseek-r1/</link>
+  <description><![CDATA[ 
+  
+    
+      
+
+  
+  <p>The key takeaways for engineers/specialists are: 1. Powerful reasoning can emerge from pure reinforcement learning without strict supervised fine-tuning. 2. A multi-stage pipeline using cold-start data can significantly improve the results of RL training. 3. Effective distillation techniques allow transferring reasoning knowledge from larger models to smaller, more efficient models for practical deployment.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
+    <h3 class="anchored">Listen to the Episode</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/deepseek-r1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/deepseek-r1.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/deepseek-r1.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/deepseek-r1">Read original paper</a></li>
+      </ul>
+    </div>
+
+    <h4 class="anchored">The (AI) Team</h4>
+    <ul>
+      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
+        questions
+        to guide our exploration.</li>
+      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
+        results.</li>
+      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
+    </ul>
+
+
+
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Artificial Intelligence</category>
+  <category>Reinforcement Learning</category>
+  <category>Language Models</category>
+  <category>Reasoning</category>
+  <category>Supervised Fine-Tuning</category>
+  <category>Distillation</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/deepseek-r1/</guid>
+  <pubDate>Mon, 20 Jan 2025 13:16:08 GMT</pubDate>
+</item>
 <item>
   <title>DeepSeek-V3: Advancements in Open-Source Large Language Models</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2412.19437/</link>
@@ -1534,85 +1616,6 @@
   <category>Deep Neural Networks</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2310.08566/</guid>
   <pubDate>Sat, 10 Aug 2024 06:37:41 GMT</pubDate>
-</item>
-<item>
-  <title>Decision-Pretrained Transformer: Bridging Supervised Learning and Reinforcement Learning</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2306.14892/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>Engineers and specialists can leverage the DPT methodology to design more versatile and efficient RL agents. By learning a decision-making strategy through supervised pretraining, DPT demonstrates adaptability to new environments, ability to explore and exploit, and strong generalization capabilities. This approach offers a promising path towards practical and efficient Bayesian RL methods.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2306.14892.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2306.14892.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2306.14892.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2306.14892">Read original paper</a></li>
-      </ul>
-    </div>
-
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Reinforcement Learning</category>
-  <category>Transformer Models</category>
-  <category>Decision-Making</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2306.14892/</guid>
-  <pubDate>Sat, 10 Aug 2024 05:51:49 GMT</pubDate>
 </item>
 </channel>
 </rss>
