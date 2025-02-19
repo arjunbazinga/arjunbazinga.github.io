@@ -1,0 +1,92 @@
+male-1: Welcome to Byte-Sized Breakthroughs, the podcast that unpacks the latest and greatest in AI research. I'm your host, Alex Askwell. Today, we're diving deep into a fascinating new paper titled 'Tülu 3: Pushing Frontiers in OpenLanguageModelPost-Training.' The paper tackles a really important issue: how to make state-of-the-art language models fully open and accessible, not just locked away in proprietary systems. We're extremely fortunate to have Dr. Paige Turner, the lead researcher on this paper, with us today. Welcome, Paige!
+
+female-1: Thanks for having me, Alex. It's great to be here.
+
+female-2: And joining us to provide some broader context is Professor Wyd Spectrum, a leading expert in language model training and alignment. Welcome, Professor!
+
+female-2: It's a pleasure to be here. I'm excited to discuss this work.
+
+male-1: So, Paige, set the stage for us. Why is this research needed? What problem are you really trying to solve?
+
+female-1: The big issue is the increasing gap between the capabilities of proprietary language models and what's available in the open-source world. Models like GPT-4o and Claude 3.5 Haiku are incredibly powerful, but their training data, code, and techniques are largely secret. This lack of transparency hinders research, limits accessibility, and creates a potential for biased or unsafe AI systems that are difficult to audit. The open-source community is often stuck relying on older, simpler methods. We wanted to create a fully open recipe for post-training language models, including everything needed to reproduce our results and build upon them.
+
+female-2: Absolutely. And from a historical perspective, this push for open-source models echoes the broader evolution of AI research. Early AI systems were often closed and proprietary. It was the rise of open datasets like ImageNet and open frameworks like TensorFlow and PyTorch that really accelerated progress in areas like computer vision and deep learning. The work of Paige and her team aims to do something similar for large language models.
+
+male-1: Okay, so you're aiming to democratize access to state-of-the-art language models. What exactly did you contribute? What are the key innovations in Tülu 3?
+
+female-1: We've got a few major contributions. First, we're releasing everything: the trained models (Tülu 3 itself), all the training data we used, our training code, the infrastructure details, and even our evaluation framework. This is a fully transparent recipe.
+
+Second, we've incorporated a novel reinforcement learning method called Reinforcement Learning with Verifiable Rewards, or RLVR. This is a new way of aligning LMs to certain tasks by only giving the model a reward if it's able to verify that the answer that it has created is correct. The results show that this works very well for solving mathematical and code related problems, as well as instruction following.
+
+Third, there is also a strong emphasis in this research on data quality and on ensuring there is not cross-contamination between the testing and training data by aggressive decontamination measures. It's critical if the models are to generalize.
+
+Finally, it has some advanced infrastructure for building and training large models, including specific code.
+
+female-2: The idea of using verifiable rewards in reinforcement learning is quite interesting. It connects with a broader trend in reward modeling. The team uses the ground truth and constraints for feedback signal, instead of learning a reward function. Do you see this as an advancement in that respect?
+
+female-1: You're right, Professor. Existing reinforcement learning methods train language models against a reward model, which can lead to instability and additional overhead, or rely on human preferences, which can be hard to collect at scale and be subjective. Our approach side-steps the issue by only applying PPO training to verifiable tasks. We have designed a custom loss function, which rewards verifiably correct responses with a specific value, while all other samples receive nothing.
+
+female-1: And can lower resource barriers, yes? What tasks exactly lend themselves well to that verifiable training, and what kind of performance lift did you see from it?
+
+female-1: Exactly! Tasks such as mathematical problem solving, code generation, and following precise instructions. It really pushes the state of the art for verifiable domains. In GSM8K (grade school math word problems), we saw the accuracy of our 8 billion parameter model jump from 84.3% after Direct Preference Optimization to 87.6% with RLVR. It is a big jump that shows a targeted focus on improving mathematical accuracy works.
+
+male-1: Very impressive! Now, let's get into the nitty-gritty. Can you walk us through the different stages of your methodology, starting with data curation?
+
+female-1: Sure. It all begins with the right data. We targeted 7 core skills: knowledge recall, reasoning, mathematics, coding, instruction following, general chat, and safety. We built datasets for each by collecting existing public sources like Open Assistant, No Robots, and FLAN v2, and curating prompts targeting particular capabilities, mainly by generating synthetic data with personas using GPT-4o. We used the personas from PersonaHub, and generated prompts targeting specific skills such as precise instruction following, math, and coding. To address the need of noncompliance, we had Brahman et al., Han et al., and Jiang et al., to generate noncompliance and safety data.
+
+male-1: Those synthetic datasets are interesting. How did you balance the proportions of these mixed training datasets, considering the diverse skills?
+
+female-1: That's a great question. It was an iterative process. We trained multiple models on different mixes. First we created mixtures targeting individual skills, keeping the mixtures that led to the best performance even if they degraded performance in other evaluations. This was our initial step. From that step, we determined what prompts worked. So after our initial SFT model trained on Tülu 2 showed that the performance on Llama 3.1 was lacking, we added high quality publicly available datasets and synthetic datasets, and we removed the ones that seemed of lower quality. We eventually were able to find a proper distribution by adding or removing certain sets. We also decontaminated against evaluations and downsampled large datasets.
+
+male-1: You mentioned decontamination. How did you address the problem of potential overlap between training prompts and evaluation sets?
+
+female-1: Contamination is a serious problem, and we took it very seriously. We experimented with full-string matching, n-gram matching, and embedding-based matching. We found that 8-gram matching worked best for identifying contamination. We used this 8-gram matching for our contamination checks, following previous work like Dubey et al., 2024. For each token in a test instance, we consider it to match a token in a train instance if the two instances share an 8-gram containing that token. Training sets that overlap more than 2% with our dev or test evals were considered contaminated and removed.
+
+male-1: I see. What came after data curation?
+
+female-1: Then we went to Supervised Finetuning or SFT. We used prompts with existing high-quality, human-written or frontier model-generated responses where available. For prompts with no existing responses, we generated new responses with GPT-4o. To improve, we emphasized adding diverse chat data from WildChat. We see that there is a small but noticeable degradation on most skills, highlighting the importance of diverse real-world data. This fixes safety issues with the model in the long run.
+
+male-1: That makes sense. And what about the preference tuning stage?
+
+female-1: For Preference Tuning, we used Direct Preference Optimization, or DPO. DPO is an offline approach. Our dataset contains a prompt and two responses, one we consider is 'preferred', and another considered 'rejected'. We create on-policy preference data given our prompts by adapting and advancing the UltraFeedback pipeline. Our data pipeline is prompt selection, then response generation (for a given prompt, we sampled from a model pool to generate different responses), then preference annotation with LLM-as-a-judge, in this case GPT-4o. We extend the on-policy pipeline by sampling completions from Tülu SFT model and other models to improve performance. It improves aggregated downstream DPO performance compared to a completely off-policy dataset where prompt completions were sampled from other models.
+
+male-1: And then the reinforcement learning with verifiable rewards, the RLVR. Could you explain in more detail how that novel method worked?
+
+female-1: Absolutely. We use PPO for training. The verifiable reward function gives a reward of α = 10 if a completion is successful, and 0 otherwise. We combine all prompts together, which results in a mixture of roughly 30,000 prompts with ground truth labels. We train for roughly 100, 000, and shuffle the prompts in between epochs. Then we examine the model checkpoints every 40-100 steps and choose the best checkpoint on our evaluation set.
+
+male-1: How were these answers extracted and verified? What functions did it use to verify correctness?
+
+female-1: That really depended on the task. For GSM8k, for example, we used the training set for this. We augmented each sample with the 8-shot prompt to encourage the model to use chain-of-thought, and then extracted the final number produced and compared to the ground-truth label to determine correctness. Similarly, we augmented each sample from the MATH training set with the 3-shot CoT prompt used to encourage the model to generate chains of thought. We also use the 'flex' MATH evaluation logic, that attempts to extract the answer in three different ways. For IFEval we sampled instructions, and created a function for each template that verified whether a completion satisfies a constraint.
+
+female-2: That's very thorough, and it goes to show how important verifiability and safety are. If I were a researcher, what would be some of the first aspects of this work that you would have me focus on to improve it?
+
+female-1: Well, one key area for future work would be to develop more truthful and reliable reward functions. While RLVR is a step in the right direction, the verifiable nature is limited to a few tasks. I would encourage researchers to look to creating more robust signals to make RLVR to be more general.
+
+male-1: That's a good point, the verifiability of rewards really is limited to specific domains. So, let's talk results. Can you share some concrete examples of how Tülu 3 performs compared to other models? Any specific data points you want to highlight?
+
+female-1: Absolutely. At the 70B parameter scale, Tülu 3 consistently outperforms Llama 3.1 70B Instruct, Qwen 2.5 72B Instruct, and Nous Hermes 3 70B on the evaluations we ran. For example, on BigBenchHard, a challenging reasoning benchmark, Tülu 3 70B scores 85.0% compared to 83.0% for Llama 3.1 70B Instruct and 80.4% for Qwen 2.5 72B Instruct. We see similar outperformance across most tasks, including knowledge recall, math, and coding. The code is quite interesting because it showcases a major improvement. The human evaluation pass rate jumped 9% from 83% to 92.4%. This shows just how much more powerful it became to other models.
+
+male-1: Those are some solid numbers! Did you encounter any unexpected results or limitations during your experiments?
+
+female-1: Yes, a couple of interesting things. First, we experimented with online DPO, sampling new data during training rather than relying solely on an offline dataset. But our initial results showed limited gains. We suspect this might be because generating better reward functions is a complex and delicate art, and we hope to explore the approach more later. Second, we used and tested various techniques for DPO data, such as Rejection Sampling where we try to select good LLM responses and filter out the noise.
+
+female-1: Rejection Sampling can be especially compute-intensive, is that what held you back?
+
+female-1: It absolutely is the compute requirements that held us back. With our setup, the performance gains were not worth the overhead, but it is very possible that other setups see significantly more gains than we did.
+
+male-1: Interesting that both of these are in the training data, rather than inference stage, a typical challenge for LLMs. So, what's next for Tülu? Where do you see this research heading in the future?
+
+female-1: We're excited about a few key directions. First, we want to extend the models to handle longer contexts and multi-turn conversations. Real-world user interactions often involve lengthy dialogues, and we want Tülu to be capable of handling those situations effectively. Second, we want to investigate multilingual capabilities. Our current focus is primarily on English, but we recognize the importance of supporting a wider range of languages. Finally, we're interested in exploring tool use and agent frameworks, where language models can interact with external tools to solve more complex tasks.
+
+female-2: Those are some ambitious goals! What do you see as the biggest challenges in those areas?
+
+female-1: Scaling to longer contexts requires significant memory and computational resources, as well as careful attention to how information is encoded and retrieved. Multilingual training involves dealing with diverse datasets, cultural nuances, and potential biases. And tool use requires developing robust mechanisms for language models to interact with and reason about external tools.
+
+male-1: Finally, what are some of the broader impacts and potential applications of this work?
+
+female-1: Ultimately, we believe that Tülu 3 can have a significant impact on the AI landscape. By providing a fully open and transparent recipe for post-training language models, we hope to foster innovation, democratize access to state-of-the-art technology, and promote responsible AI development. We are looking for people to try it and improve on our work. The possibilities for societal impacts are huge: it enables more capable language model creation and usage, as well as better science.
+
+female-2: That's an important and crucial point. For example, we might see more open AI tools that empower educators to create personalized learning experiences, assist scientists in their research, and enable artists and writers to explore new creative avenues. It opens the gates for so much more interesting and innovative work in the field. This is something to be appreciated.
+
+male-1: So, to summarize, Tülu 3 represents a major step forward in open-source language modeling, offering a fully transparent and reproducible recipe for achieving state-of-the-art performance. The project's key contributions include the introduction of RLVR, the emphasis on data quality and decontamination, and the release of comprehensive training resources. While challenges remain in areas like long-context handling and multilingual support, Tülu 3 paves the way for further innovation and democratization of access to advanced language model technology. Dr. Turner and Professor Spectrum, I thank you both for the discussion!
+
