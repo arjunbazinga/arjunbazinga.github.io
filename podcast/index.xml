@@ -9,7 +9,7 @@
 <link>https://www.arjunsriva.com/podcast/</link>
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
 <description>Curated AI papers, clearly explained.</description>
-<generator>quarto-1.6.40</generator>
+<generator>quarto-1.6.42</generator>
 <lastBuildDate>Wed, 19 Feb 2025 14:15:45 GMT</lastBuildDate>
 <item>
   <title>Distillation Scaling Laws</title>
