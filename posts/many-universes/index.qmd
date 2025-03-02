@@ -116,7 +116,7 @@ I've seen how innovations in business models and monetization strategies frequen
 
 Similar expansions have occurred through novel market mechanisms. For instance, matching markets for kidney exchanges (as described in Alvin Roth's "Who Gets What and Why") created economic feasibility where traditional markets failed due to ethical and legal constraints on direct organ sales. These exchange systems allow donors and recipients to be matched across multiple pairs, dramatically increasing the number of successful transplants without requiring direct monetary transactions for organs.
 
-### Example: Quadratic Funding
+### Example: New approaches to fund public goods.
 
 Another frontier I'm excited about is the development of funding models for public goods that traditional markets undervalue. Quadratic funding, where individual contributions to a project are matched by a central pool according to a formula that rewards broad support, creates economic viability for projects that benefit many people but wouldn't be funded through conventional means. This approach has been successfully deployed in funding open-source software and other digital public goods that previously relied solely on volunteer efforts or corporate sponsorship.
 
@@ -136,14 +136,14 @@ Conversely, what is built and commonly used affects what becomes legal. Cannabis
 
 ## The Risk of Convergence
 
-
 As we invent new technologies, I've noticed how different layers interact in novel ways. Easier and cheaper enforcement mechanisms (surveillance, AI, fewer competing system/standards) might completely eliminate practices that could be valuable but are defined as illegal at this moment in time.
 
 I worry that as the world becomes more connected and the decisions of the few can be enforced at scale, we risk losing opportunities to discover better ways of doing things. The correlations caused by global interconnectivity not only increase data exchange but also make it harder for non-consensus approaches to emerge.
 
 It becomes increasingly difficult for individuals to deviate from group norms, potentially stifling the discovery of superior approaches.
 
-There are many advantages to connect everyone and everything, but I believe we will inevitably close off pathways to innovation that we have seen arise across geographies and eras. (more on how to think about managing this in an upcoming post : The father, the mother, NBA, MMA and why I love/hate google)
+There are many advantages to connect everyone and everything, but I believe we will inevitably close off pathways to innovation that we have seen arise across geographies and eras. 
+There is more to be said here both on the problems and potential solutions for managing this challenge, which I will cover in an upcoming post: featuring The father, the mother, NBA, MMA and why I simultaneously love and hate Google.
 
 ## A Malleable World
 
@@ -155,12 +155,10 @@ The universe of possibility is much bigger than one defaults to believing, and y
 
 I'd like to end with a series of quotes that hint towards this idea:
 
-- Everyone knew it was impossible until a fool who didn’t know comes along and does it.
-- [The world is a museum of passion projects.](https://x.com/collision/status/1529452415346302976)
+- Everyone knew it was impossible until a fool who didn't know comes along and does it.
 - "The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man." — George Bernard Shaw
 - "The future is already here – it's just not evenly distributed." — William Gibson
-- "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it." — Max Planck 
-  — One must learn before death comes.
-- "Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you" - Steve Jobs
+- "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it." — Max Planck, ( I hope the reader agrees that it's better if one learns before death comes. )
+- "Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you" — Steve Jobs
 - "The true voyage of discovery consists not in seeking new landscapes, but in having new eyes." — Marcel Proust
 - [All you see is what is, but not what it could have been or what it could be.](https://x.com/waitbutwhy/status/1367871165319049221)
