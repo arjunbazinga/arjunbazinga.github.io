@@ -3,18 +3,24 @@ title: The Many Universes That Exist
 layout: post
 description: "The constraints that determine what exists"
 categories: [Business, Future, Thoughts]
-date: "2024-05-09"
+date: "2025-03-01"
 ---
 
 # The Many Universes That Exist
+
+
+I want to share a way of thinking that I found personally useful.
+It helps me reason about what exists today, and make predictions. 
+
+I hope that by the end of this post, you'll see some problems differently—recognizing that when something seems impossible, we're often blind to which constraint is actually limiting us and how that constraint might be shifted.
 
 I've been thinking about the different "universes" that define what can exist in our world. I see them as layers of constraints, each limiting what's possible in its own way:
 
 1. **The universe of absolute physical possibility**: Things that can actually exist according to the fundamental laws of physics (whether we fully understand these laws or not).
 
-2. **The universe of theoretical possibility**: Things that can exist according to our current understanding of physics.
+2. **The universe of theoretical possibility**: Things that can exist according to our current understanding of physics, like space elevators, flying cars, and other technological concepts.
 
-3. **The universe of engineering possibility**: Things that we know how to build given our current ability to manipulate our environment.
+3. **The universe of engineering possibility**: Things that we know how to build given our current ability to manipulate our environment. This can be mechanical processes, electrical systems, programming, all kinds of fabrication.
 
 4. **The universe of economic feasibility**: Things that can exist because it's economically viable for creators to benefit from their creation.
 
@@ -52,9 +58,13 @@ One of the most striking examples is human flight. In the late 19th century, man
 
 I find it interesting how many practices that are now illegal might seem as though they've always been prohibited, yet their history tells a different story.
 
-### Example: Copyright Evolution
+### Example: Copy[right?] Evolution: For Thee But Not For Me
 
 Copyright is a prime example. From 1790 until 1891, the United States explicitly refused to recognize foreign copyrights. This allowed American publishers to freely reprint British works by Charles Dickens, Lord Byron, and others without paying royalties. Only after the U.S. became a significant producer of intellectual property did it pass the International Copyright Act of 1891, and later lead efforts to establish global copyright standards through agreements like TRIPS in 1994.
+
+This pattern continues today with AI training data. Countries like Japan and Singapore have created explicit copyright exceptions for AI training, allowing companies to use copyrighted materials to train models without permission or payment. Japan's 2019 copyright amendment permits exploiting works "to the extent considered necessary" when it's not for "personally enjoying" the content. Singapore similarly amended its laws in 2021 for "computational data analysis." Both countries have explicitly prioritized AI development over creator rights in this domain.
+
+(I will not speak of napster...)
 
 ### Example: Interest-Based Banking
 
@@ -78,13 +88,25 @@ By 1694, when the Bank of England was founded with interest-bearing government b
 
 Similarly, I've observed how moral standards evolve dramatically. The legal treatment of homosexuality demonstrates this evolution starkly. In the United States, sodomy laws criminalized homosexual relationships in most states until Lawrence v. Texas in 2003. Just twelve years later, in 2015, Obergefell v. Hodges established same-sex marriage as a constitutional right—a change that would have been unimaginable to most Americans just a generation earlier.
 
-### Example: Cannabis Regulation
+### Example: Cannabis Regulation - What's in a Name?
 
-Cannabis regulation provides another fascinating example of legal divergence and convergence across geographies. In the 1970s, the United States implemented strict prohibitions through the Controlled Substances Act and pressured other countries, including India, to adopt similar restrictions. India, with its long tradition of cannabis use in religious contexts, created a complex legal framework that banned many forms of cannabis while preserving exceptions for traditional preparations like bhang. Now, in an ironic reversal, many U.S. states have legalized recreational cannabis while it remains formally illegal in India, despite its cultural and religious significance there.
+Cannabis regulation provides another fascinating example of legal divergence and convergence across geographies. In the 1970s, the United States implemented strict prohibitions through the Controlled Substances Act and pressured other countries, including India, to adopt similar restrictions. India, with its long tradition of cannabis use in religious contexts, created a complex legal framework that banned many forms of cannabis while preserving exceptions for traditional preparations like bhang.
+
+What makes this particularly revealing is that India's legal system treats different parts of the same plant containing identical THC compounds as completely different substances. Bhang (made from leaves and seeds) remains legal for religious use, while charas (resin) and ganja (flowers) are criminalized—creating an arbitrary distinction with no basis in chemistry or pharmacology. This separation originated during the 1961 UN Single Convention on Narcotic Drugs when India negotiated to exclude bhang from the definition of "cannabis" to protect religious traditions.
+
+Now, in an ironic reversal, many U.S. states have legalized recreational cannabis while it remains formally illegal in India, despite its cultural and religious significance there.
+
+### Example: Iran and Spain, Two Trains Passing in the Night
+
+Iran's revolution demonstrates how legal systems can transform in opposite directions across different regions simultaneously. From 1925 to 1979, Iran developed a largely secular legal system, with the 1975 Family Protection Law establishing family courts, raising the marriage age, and granting women equal rights in divorce and child custody.
+
+The 1979 Islamic Revolution rapidly reorganized this framework. The Family Protection Law was suspended, religious courts replaced secular ones, and various practices previously legal became criminalized. These changes occurred over months, not decades.
+
+During this same period (1975-1985), Spain was moving in the opposite direction. Following Franco's death in 1975, Spain legalized divorce (1981), decriminalized contraception (1978), and established equality between spouses in marriage (1981). While Iran was centralizing religious authority in governance, Spain was explicitly separating church and state in its 1978 Constitution.
 
 ## Economic Constraints and Potential
 
-I believe the universe with the most room for expansion is the economic one—things people can make and want to have, but for which we lack effective pricing mechanisms. These sets represent somewhat fixed constraints at any given point in time, but as we learn more and invent new techniques, the boundaries shift.
+I believe the universe with the most room for expansion is the economic one—things people can make and want to have, but for which we lack effective pricing mechanisms. These represent somewhat fixed constraints at any given point in time, but as we learn more and invent new techniques, the boundaries shift.
 
 ### Example: Digital Advertising
 
@@ -101,6 +123,8 @@ Another frontier I'm excited about is the development of funding models for publ
 ## The Dynamic Interaction of Universes
 
 An interesting question I keep coming back to concerns the dynamics between these universes. Innovations in one area can accelerate development in others—once we build technology X, we might be able to develop technology Y at a much faster rate.
+
+Sometimes things feel like hard or impossible problems in one universe, with experts in that field declaring them 'really hard' or downright 'impossible,' making it seem like we'll just have to live with them. But these same problems become much easier with improvements in other universes. The momentum and improvements in other universes open up new approaches to solve existing problems, often exposing hidden assumptions made when thinking about the problem in just one universe. The recent example of AlphaFold and protein folding illustrates this perfectly - what biochemists struggled with for decades was transformed by advances in computational approaches. I will be writing another post about this idea more generally, please stay tuned.
 
 ### Example: Legal Status and Scientific Research
 
@@ -125,3 +149,15 @@ I hope the key takeaway from this post is that much of the world we live in toda
 When we encounter ideas that don't quite work in our current framework, we shouldn't immediately dismiss them as failures or bad concepts. Often, they're just a few small tweaks away from becoming something transformative.
 
 The universe of possibility is much bigger than one defaults to believing, and yesterday's impossibility frequently becomes the reality we live today.
+
+I'd like to end with a series of quotes that hint towards this idea:
+
+- Everyone knew it was impossible until a fool who didn’t know comes along and does it.
+- [The world is a museum of passion projects.](https://x.com/collision/status/1529452415346302976)
+- "The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man." — George Bernard Shaw
+- "The future is already here – it's just not evenly distributed." — William Gibson
+- "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it." — Max Planck 
+  — One must learn before death comes.
+- "Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you" - Steve Jobs
+- "The true voyage of discovery consists not in seeking new landscapes, but in having new eyes." — Marcel Proust
+- [All you see is what is, but not what it could have been or what it could be.](https://x.com/waitbutwhy/status/1367871165319049221)
