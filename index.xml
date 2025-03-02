@@ -108,8 +108,8 @@
 <h3 class="anchored" data-anchor-id="example-kidney-exchange-markets">Example: Kidney Exchange Markets</h3>
 <p>Similar expansions have occurred through novel market mechanisms. For instance, matching markets for kidney exchanges (as described in Alvin Roth’s “Who Gets What and Why”) created economic feasibility where traditional markets failed due to ethical and legal constraints on direct organ sales. These exchange systems allow donors and recipients to be matched across multiple pairs, dramatically increasing the number of successful transplants without requiring direct monetary transactions for organs.</p>
 </section>
-<section id="example-quadratic-funding" class="level3">
-<h3 class="anchored" data-anchor-id="example-quadratic-funding">Example: Quadratic Funding</h3>
+<section id="example-new-approaches-to-fund-public-goods." class="level3">
+<h3 class="anchored" data-anchor-id="example-new-approaches-to-fund-public-goods.">Example: New approaches to fund public goods.</h3>
 <p>Another frontier I’m excited about is the development of funding models for public goods that traditional markets undervalue. Quadratic funding, where individual contributions to a project are matched by a central pool according to a formula that rewards broad support, creates economic viability for projects that benefit many people but wouldn’t be funded through conventional means. This approach has been successfully deployed in funding open-source software and other digital public goods that previously relied solely on volunteer efforts or corporate sponsorship.</p>
 </section>
 </section>
@@ -131,7 +131,7 @@
 <p>As we invent new technologies, I’ve noticed how different layers interact in novel ways. Easier and cheaper enforcement mechanisms (surveillance, AI, fewer competing system/standards) might completely eliminate practices that could be valuable but are defined as illegal at this moment in time.</p>
 <p>I worry that as the world becomes more connected and the decisions of the few can be enforced at scale, we risk losing opportunities to discover better ways of doing things. The correlations caused by global interconnectivity not only increase data exchange but also make it harder for non-consensus approaches to emerge.</p>
 <p>It becomes increasingly difficult for individuals to deviate from group norms, potentially stifling the discovery of superior approaches.</p>
-<p>There are many advantages to connect everyone and everything, but I believe we will inevitably close off pathways to innovation that we have seen arise across geographies and eras. (more on how to think about managing this in an upcoming post : The father, the mother, NBA, MMA and why I love/hate google)</p>
+<p>There are many advantages to connect everyone and everything, but I believe we will inevitably close off pathways to innovation that we have seen arise across geographies and eras. There is more to be said here both on the problems and potential solutions for managing this challenge, which I will cover in an upcoming post: featuring The father, the mother, NBA, MMA and why I simultaneously love and hate Google.</p>
 </section>
 <section id="a-malleable-world" class="level2">
 <h2 class="anchored" data-anchor-id="a-malleable-world">A Malleable World</h2>
@@ -141,11 +141,10 @@
 <p>I’d like to end with a series of quotes that hint towards this idea:</p>
 <ul>
 <li>Everyone knew it was impossible until a fool who didn’t know comes along and does it.</li>
-<li><a href="https://x.com/collision/status/1529452415346302976">The world is a museum of passion projects.</a></li>
 <li>“The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.” — George Bernard Shaw</li>
 <li>“The future is already here – it’s just not evenly distributed.” — William Gibson</li>
-<li>“A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it.” — Max Planck — One must learn before death comes.</li>
-<li>“Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you” - Steve Jobs</li>
+<li>“A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it.” — Max Planck, ( I hope the reader agrees that it’s better if one learns before death comes. )</li>
+<li>“Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you” — Steve Jobs</li>
 <li>“The true voyage of discovery consists not in seeking new landscapes, but in having new eyes.” — Marcel Proust</li>
 <li><a href="https://x.com/waitbutwhy/status/1367871165319049221">All you see is what is, but not what it could have been or what it could be.</a></li>
 </ul>
