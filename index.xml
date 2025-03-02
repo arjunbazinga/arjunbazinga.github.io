@@ -10,7 +10,7 @@
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Thu, 09 May 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 01 Mar 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>The Many Universes That Exist</title>
   <link>https://www.arjunsriva.com/posts/many-universes/</link>
@@ -22,11 +22,13 @@
 
 <section id="the-many-universes-that-exist" class="level1">
 <h1>The Many Universes That Exist</h1>
+<p>I want to share a way of thinking that I found personally useful. It helps me reason about what exists today, and make predictions.</p>
+<p>I hope that by the end of this post, you’ll see some problems differently—recognizing that when something seems impossible, we’re often blind to which constraint is actually limiting us and how that constraint might be shifted.</p>
 <p>I’ve been thinking about the different “universes” that define what can exist in our world. I see them as layers of constraints, each limiting what’s possible in its own way:</p>
 <ol type="1">
 <li><p><strong>The universe of absolute physical possibility</strong>: Things that can actually exist according to the fundamental laws of physics (whether we fully understand these laws or not).</p></li>
-<li><p><strong>The universe of theoretical possibility</strong>: Things that can exist according to our current understanding of physics.</p></li>
-<li><p><strong>The universe of engineering possibility</strong>: Things that we know how to build given our current ability to manipulate our environment.</p></li>
+<li><p><strong>The universe of theoretical possibility</strong>: Things that can exist according to our current understanding of physics, like space elevators, flying cars, and other technological concepts.</p></li>
+<li><p><strong>The universe of engineering possibility</strong>: Things that we know how to build given our current ability to manipulate our environment. This can be mechanical processes, electrical systems, programming, all kinds of fabrication.</p></li>
 <li><p><strong>The universe of economic feasibility</strong>: Things that can exist because it’s economically viable for creators to benefit from their creation.</p></li>
 <li><p><strong>The universe of legal permissibility</strong>: Things that can exist that are also legal for producers to produce and consumers to consume.</p></li>
 <li><p><strong>The universe of moral acceptability</strong>: Things that are morally permissible according to cultural standards.</p></li>
@@ -59,9 +61,11 @@
 <section id="legal-and-moral-evolution" class="level2">
 <h2 class="anchored" data-anchor-id="legal-and-moral-evolution">Legal and Moral Evolution</h2>
 <p>I find it interesting how many practices that are now illegal might seem as though they’ve always been prohibited, yet their history tells a different story.</p>
-<section id="example-copyright-evolution" class="level3">
-<h3 class="anchored" data-anchor-id="example-copyright-evolution">Example: Copyright Evolution</h3>
+<section id="example-copyright-evolution-for-thee-but-not-for-me" class="level3">
+<h3 class="anchored" data-anchor-id="example-copyright-evolution-for-thee-but-not-for-me">Example: Copy[right?] Evolution: For Thee But Not For Me</h3>
 <p>Copyright is a prime example. From 1790 until 1891, the United States explicitly refused to recognize foreign copyrights. This allowed American publishers to freely reprint British works by Charles Dickens, Lord Byron, and others without paying royalties. Only after the U.S. became a significant producer of intellectual property did it pass the International Copyright Act of 1891, and later lead efforts to establish global copyright standards through agreements like TRIPS in 1994.</p>
+<p>This pattern continues today with AI training data. Countries like Japan and Singapore have created explicit copyright exceptions for AI training, allowing companies to use copyrighted materials to train models without permission or payment. Japan’s 2019 copyright amendment permits exploiting works “to the extent considered necessary” when it’s not for “personally enjoying” the content. Singapore similarly amended its laws in 2021 for “computational data analysis.” Both countries have explicitly prioritized AI development over creator rights in this domain.</p>
+<p>(I will not speak of napster…)</p>
 </section>
 <section id="example-interest-based-banking" class="level3">
 <h3 class="anchored" data-anchor-id="example-interest-based-banking">Example: Interest-Based Banking</h3>
@@ -80,14 +84,22 @@
 <h3 class="anchored" data-anchor-id="example-lgbtq-rights">Example: LGBTQ+ Rights</h3>
 <p>Similarly, I’ve observed how moral standards evolve dramatically. The legal treatment of homosexuality demonstrates this evolution starkly. In the United States, sodomy laws criminalized homosexual relationships in most states until Lawrence v. Texas in 2003. Just twelve years later, in 2015, Obergefell v. Hodges established same-sex marriage as a constitutional right—a change that would have been unimaginable to most Americans just a generation earlier.</p>
 </section>
-<section id="example-cannabis-regulation" class="level3">
-<h3 class="anchored" data-anchor-id="example-cannabis-regulation">Example: Cannabis Regulation</h3>
-<p>Cannabis regulation provides another fascinating example of legal divergence and convergence across geographies. In the 1970s, the United States implemented strict prohibitions through the Controlled Substances Act and pressured other countries, including India, to adopt similar restrictions. India, with its long tradition of cannabis use in religious contexts, created a complex legal framework that banned many forms of cannabis while preserving exceptions for traditional preparations like bhang. Now, in an ironic reversal, many U.S. states have legalized recreational cannabis while it remains formally illegal in India, despite its cultural and religious significance there.</p>
+<section id="example-cannabis-regulation---whats-in-a-name" class="level3">
+<h3 class="anchored" data-anchor-id="example-cannabis-regulation---whats-in-a-name">Example: Cannabis Regulation - What’s in a Name?</h3>
+<p>Cannabis regulation provides another fascinating example of legal divergence and convergence across geographies. In the 1970s, the United States implemented strict prohibitions through the Controlled Substances Act and pressured other countries, including India, to adopt similar restrictions. India, with its long tradition of cannabis use in religious contexts, created a complex legal framework that banned many forms of cannabis while preserving exceptions for traditional preparations like bhang.</p>
+<p>What makes this particularly revealing is that India’s legal system treats different parts of the same plant containing identical THC compounds as completely different substances. Bhang (made from leaves and seeds) remains legal for religious use, while charas (resin) and ganja (flowers) are criminalized—creating an arbitrary distinction with no basis in chemistry or pharmacology. This separation originated during the 1961 UN Single Convention on Narcotic Drugs when India negotiated to exclude bhang from the definition of “cannabis” to protect religious traditions.</p>
+<p>Now, in an ironic reversal, many U.S. states have legalized recreational cannabis while it remains formally illegal in India, despite its cultural and religious significance there.</p>
+</section>
+<section id="example-iran-and-spain-two-trains-passing-in-the-night" class="level3">
+<h3 class="anchored" data-anchor-id="example-iran-and-spain-two-trains-passing-in-the-night">Example: Iran and Spain, Two Trains Passing in the Night</h3>
+<p>Iran’s revolution demonstrates how legal systems can transform in opposite directions across different regions simultaneously. From 1925 to 1979, Iran developed a largely secular legal system, with the 1975 Family Protection Law establishing family courts, raising the marriage age, and granting women equal rights in divorce and child custody.</p>
+<p>The 1979 Islamic Revolution rapidly reorganized this framework. The Family Protection Law was suspended, religious courts replaced secular ones, and various practices previously legal became criminalized. These changes occurred over months, not decades.</p>
+<p>During this same period (1975-1985), Spain was moving in the opposite direction. Following Franco’s death in 1975, Spain legalized divorce (1981), decriminalized contraception (1978), and established equality between spouses in marriage (1981). While Iran was centralizing religious authority in governance, Spain was explicitly separating church and state in its 1978 Constitution.</p>
 </section>
 </section>
 <section id="economic-constraints-and-potential" class="level2">
 <h2 class="anchored" data-anchor-id="economic-constraints-and-potential">Economic Constraints and Potential</h2>
-<p>I believe the universe with the most room for expansion is the economic one—things people can make and want to have, but for which we lack effective pricing mechanisms. These sets represent somewhat fixed constraints at any given point in time, but as we learn more and invent new techniques, the boundaries shift.</p>
+<p>I believe the universe with the most room for expansion is the economic one—things people can make and want to have, but for which we lack effective pricing mechanisms. These represent somewhat fixed constraints at any given point in time, but as we learn more and invent new techniques, the boundaries shift.</p>
 <section id="example-digital-advertising" class="level3">
 <h3 class="anchored" data-anchor-id="example-digital-advertising">Example: Digital Advertising</h3>
 <p>I’ve seen how innovations in business models and monetization strategies frequently expand this economic universe. Consider how Google’s creation of programmatic ad networks transformed search engines from money-losing ventures into highly profitable businesses. Before this innovation, search engines struggled to monetize their service effectively despite its clear value to users.</p>
@@ -104,6 +116,7 @@
 <section id="the-dynamic-interaction-of-universes" class="level2">
 <h2 class="anchored" data-anchor-id="the-dynamic-interaction-of-universes">The Dynamic Interaction of Universes</h2>
 <p>An interesting question I keep coming back to concerns the dynamics between these universes. Innovations in one area can accelerate development in others—once we build technology X, we might be able to develop technology Y at a much faster rate.</p>
+<p>Sometimes things feel like hard or impossible problems in one universe, with experts in that field declaring them ‘really hard’ or downright ‘impossible,’ making it seem like we’ll just have to live with them. But these same problems become much easier with improvements in other universes. The momentum and improvements in other universes open up new approaches to solve existing problems, often exposing hidden assumptions made when thinking about the problem in just one universe. The recent example of AlphaFold and protein folding illustrates this perfectly - what biochemists struggled with for decades was transformed by advances in computational approaches. I will be writing another post about this idea more generally, please stay tuned.</p>
 <section id="example-legal-status-and-scientific-research" class="level3">
 <h3 class="anchored" data-anchor-id="example-legal-status-and-scientific-research">Example: Legal Status and Scientific Research</h3>
 <p>These layers also influence each other in complex ways. What is legal affects what is studied and built, and vice versa. Because psilocybin was criminalized, research on its potential benefits for PTSD and other mental illnesses was stalled for decades.</p>
@@ -124,6 +137,17 @@
 <p>I hope the key takeaway from this post is that much of the world we live in today is neither static nor predetermined. We should be careful about assuming what isn’t true today won’t be true tomorrow.</p>
 <p>When we encounter ideas that don’t quite work in our current framework, we shouldn’t immediately dismiss them as failures or bad concepts. Often, they’re just a few small tweaks away from becoming something transformative.</p>
 <p>The universe of possibility is much bigger than one defaults to believing, and yesterday’s impossibility frequently becomes the reality we live today.</p>
+<p>I’d like to end with a series of quotes that hint towards this idea:</p>
+<ul>
+<li>Everyone knew it was impossible until a fool who didn’t know comes along and does it.</li>
+<li><a href="https://x.com/collision/status/1529452415346302976">The world is a museum of passion projects.</a></li>
+<li>“The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.” — George Bernard Shaw</li>
+<li>“The future is already here – it’s just not evenly distributed.” — William Gibson</li>
+<li>“A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it.” — Max Planck — One must learn before death comes.</li>
+<li>“Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you” - Steve Jobs</li>
+<li>“The true voyage of discovery consists not in seeking new landscapes, but in having new eyes.” — Marcel Proust</li>
+<li><a href="https://x.com/waitbutwhy/status/1367871165319049221">All you see is what is, but not what it could have been or what it could be.</a></li>
+</ul>
 
 
 </section>
@@ -134,7 +158,7 @@
   <category>Future</category>
   <category>Thoughts</category>
   <guid>https://www.arjunsriva.com/posts/many-universes/</guid>
-  <pubDate>Thu, 09 May 2024 00:00:00 GMT</pubDate>
+  <pubDate>Sat, 01 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>On SaaS and Swimming: Hidden Factors of Success</title>
