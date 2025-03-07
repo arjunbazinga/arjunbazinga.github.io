@@ -8,7 +8,6 @@ date: "2025-03-01"
 
 # The Many Universes That Exist
 
-
 I want to share a way of thinking that I found personally useful.
 It helps me reason about what exists today, and make predictions. 
 
@@ -30,11 +29,13 @@ I've been thinking about the different "universes" that define what can exist in
 
 ## Key Insights About These Universes
 
+Before diving into specific examples, it's worth noting some important characteristics of how these universes interact.
+
 What fascinates me is that nothing apart from the absolute physical universe is fixed—these boundaries vary widely across regions of the world and across different eras. We tend to perceive these constraints as constants during our individual lifetimes, severely underestimating how malleable they actually are.
 
-Importantly, these universes don't operate as simple subsets. You don't need to move sequentially down the chain of constraints, and there are plenty of examples of things that exist in later universes but not in earlier ones. This nuance is often missed in mainstream thought, narrowing our perspective on how the world can evolve.
+Importantly, these universes don't operate as simple subsets. For instance, engineering solutions sometimes precede theoretical understanding, and legal frameworks often evolve independently of moral consensus. You don't need to move sequentially down the chain of constraints, and there are plenty of examples of things that exist in later universes but not in earlier ones. This nuance is often missed in mainstream thought, narrowing our perspective on how the world can evolve.
 
-The simplest but most misguided story we tell ourselves is that all these universes are aligned and strongly imply one another—that all that is morally right is legal, and all that is legally permitted is moral; or that what can be done according to our current understanding of physics represents all that can ever be done. I find this perspective flawed/incomplete, as the following examples illustrate.
+As we examine these universes, we often encounter a common misconception: the simplest but most misguided story we tell ourselves is that all these universes are aligned and strongly imply one another—that all that is morally right is legal, and all that is legally permitted is moral; or that what can be done according to our current understanding of physics represents all that can ever be done. I find this perspective flawed/incomplete, as the following examples illustrate.
 
 ## Physics vs. Our Understanding
 
@@ -46,9 +47,13 @@ I think it's crucial to consider the gap between "things that can actually exist
 
 Throughout history, we've continually expanded and restricted what we believed possible as our understanding of the world increased. We once attributed lightning to divine wrath before recognizing it as an atmospheric phenomenon. This fundamentally changed our understanding of what clouds could do—from enforcing divine judgment to producing natural electrical discharges.
 
+This gap between theory and reality becomes even more pronounced when we look at how human innovation has sometimes outpaced scientific explanation.
+
 ### Example: Engineering Ahead of Theory
 
 Even more fascinating to me is the relationship between theoretical physics and practical engineering. There have been numerous examples where engineers created systems that defied contemporary theoretical understanding—like double-slit experiments before quantum theory was developed, or the photoelectric effect before Einstein's explanations.
+
+Perhaps the most dramatic illustration of engineering preceding theory comes from early aviation.
 
 ### Example: Human Flight
 
@@ -56,15 +61,13 @@ One of the most striking examples is human flight. In the late 19th century, man
 
 ## Legal and Moral Evolution
 
-I find it interesting how many practices that are now illegal might seem as though they've always been prohibited, yet their history tells a different story.
+While the examples above show how physical and theoretical universes interact, equally fascinating shifts occur in the realms of legal permissibility and moral acceptance. I find it interesting how many practices that are now illegal might seem as though they've always been prohibited, yet their history tells a different story.
 
 ### Example: Copy[right?] Evolution: For Thee But Not For Me
 
 Copyright is a prime example. From 1790 until 1891, the United States explicitly refused to recognize foreign copyrights. This allowed American publishers to freely reprint British works by Charles Dickens, Lord Byron, and others without paying royalties. Only after the U.S. became a significant producer of intellectual property did it pass the International Copyright Act of 1891, and later lead efforts to establish global copyright standards through agreements like TRIPS in 1994.
 
-This pattern continues today with AI training data. Countries like Japan and Singapore have created explicit copyright exceptions for AI training, allowing companies to use copyrighted materials to train models without permission or payment. Japan's 2019 copyright amendment permits exploiting works "to the extent considered necessary" when it's not for "personally enjoying" the content. Singapore similarly amended its laws in 2021 for "computational data analysis." Both countries have explicitly prioritized AI development over creator rights in this domain.
-
-(I will not speak of napster...)
+This pattern continues today with AI training data. Countries like Japan and Singapore have created explicit copyright exceptions for AI training, allowing companies to use copyrighted materials to train models without permission or payment. Japan's 2019 copyright amendment permits exploiting works "to the extent considered necessary" when it's not for "personally enjoying" the content. Singapore similarly amended its laws in 2021 for "computational data analysis." Both countries have explicitly prioritized AI development over creator rights in this domain.[^1]
 
 ### Example: Interest-Based Banking
 
@@ -88,6 +91,10 @@ By 1694, when the Bank of England was founded with interest-bearing government b
 
 Similarly, I've observed how moral standards evolve dramatically. The legal treatment of homosexuality demonstrates this evolution starkly. In the United States, sodomy laws criminalized homosexual relationships in most states until Lawrence v. Texas in 2003. Just twelve years later, in 2015, Obergefell v. Hodges established same-sex marriage as a constitutional right—a change that would have been unimaginable to most Americans just a generation earlier.
 
+## Geographical Divergence in Legal Systems
+
+Legal frameworks not only evolve over time but can simultaneously develop in opposite directions across different regions.
+
 ### Example: Cannabis Regulation - What's in a Name?
 
 Cannabis regulation provides another fascinating example of legal divergence and convergence across geographies. In the 1970s, the United States implemented strict prohibitions through the Controlled Substances Act and pressured other countries, including India, to adopt similar restrictions. India, with its long tradition of cannabis use in religious contexts, created a complex legal framework that banned many forms of cannabis while preserving exceptions for traditional preparations like bhang.
@@ -106,7 +113,7 @@ During this same period (1975-1985), Spain was moving in the opposite direction.
 
 ## Economic Constraints and Potential
 
-I believe the universe with the most room for expansion is the economic one—things people can make and want to have, but for which we lack effective pricing mechanisms. These represent somewhat fixed constraints at any given point in time, but as we learn more and invent new techniques, the boundaries shift.
+Economic feasibility represents perhaps the most dynamic boundary because it responds most quickly to innovation in business models and market mechanisms. I believe the universe with the most room for expansion is the economic one—things people can make and want to have, but for which we lack effective pricing mechanisms. These represent somewhat fixed constraints at any given point in time, but as we learn more and invent new techniques, the boundaries shift.
 
 ### Example: Digital Advertising
 
@@ -116,15 +123,17 @@ I've seen how innovations in business models and monetization strategies frequen
 
 Similar expansions have occurred through novel market mechanisms. For instance, matching markets for kidney exchanges (as described in Alvin Roth's "Who Gets What and Why") created economic feasibility where traditional markets failed due to ethical and legal constraints on direct organ sales. These exchange systems allow donors and recipients to be matched across multiple pairs, dramatically increasing the number of successful transplants without requiring direct monetary transactions for organs.
 
+These innovations in market design illustrate how economic constraints can be overcome without requiring changes in the underlying legal or moral frameworks.
+
 ### Example: New approaches to fund public goods.
 
 Another frontier I'm excited about is the development of funding models for public goods that traditional markets undervalue. Quadratic funding, where individual contributions to a project are matched by a central pool according to a formula that rewards broad support, creates economic viability for projects that benefit many people but wouldn't be funded through conventional means. This approach has been successfully deployed in funding open-source software and other digital public goods that previously relied solely on volunteer efforts or corporate sponsorship.
 
 ## The Dynamic Interaction of Universes
 
-An interesting question I keep coming back to concerns the dynamics between these universes. Innovations in one area can accelerate development in others—once we build technology X, we might be able to develop technology Y at a much faster rate.
+Looking across these examples, we can observe patterns in how these universes influence each other. An interesting question I keep coming back to concerns the dynamics between these universes. Innovations in one area can accelerate development in others—once we build technology X, we might be able to develop technology Y at a much faster rate.
 
-Sometimes things feel like hard or impossible problems in one universe, with experts in that field declaring them 'really hard' or downright 'impossible,' making it seem like we'll just have to live with them. But these same problems become much easier with improvements in other universes. The momentum and improvements in other universes open up new approaches to solve existing problems, often exposing hidden assumptions made when thinking about the problem in just one universe. The recent example of AlphaFold and protein folding illustrates this perfectly - what biochemists struggled with for decades was transformed by advances in computational approaches. I will be writing another post about this idea more generally, please stay tuned.
+Sometimes things feel like hard or impossible problems in one universe, with experts in that field declaring them 'really hard' or downright 'impossible,' making it seem like we'll just have to live with them. But these same problems become much easier with improvements in other universes. The momentum and improvements in other universes open up new approaches to solve existing problems, often exposing hidden assumptions made when thinking about the problem in just one universe. AlphaFold exemplifies how advances in one universe (computational methods) can suddenly overcome barriers in another (biochemistry) that had challenged scientists for decades.[^2]
 
 ### Example: Legal Status and Scientific Research
 
@@ -142,8 +151,7 @@ I worry that as the world becomes more connected and the decisions of the few ca
 
 It becomes increasingly difficult for individuals to deviate from group norms, potentially stifling the discovery of superior approaches.
 
-There are many advantages to connect everyone and everything, but I believe we will inevitably close off pathways to innovation that we have seen arise across geographies and eras. 
-There is more to be said here both on the problems and potential solutions for managing this challenge, which I will cover in an upcoming post: featuring The father, the mother, NBA, MMA and why I simultaneously love and hate Google.
+There are many advantages to connect everyone and everything, but I believe we will inevitably close off pathways to innovation that we have seen arise across geographies and eras.[^3]
 
 ## A Malleable World
 
@@ -153,7 +161,7 @@ When we encounter ideas that don't quite work in our current framework, we shoul
 
 The universe of possibility is much bigger than one defaults to believing, and yesterday's impossibility frequently becomes the reality we live today.
 
-I'd like to end with a series of quotes that hint towards this idea:
+Throughout history, thinkers have recognized this fluidity of possibility in different ways:
 
 - Everyone knew it was impossible until a fool who didn't know comes along and does it.
 - "The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man." — George Bernard Shaw
@@ -162,3 +170,9 @@ I'd like to end with a series of quotes that hint towards this idea:
 - "Life can be much broader once you discover one simple fact: Everything around you that you call life was made up by people that were (like) you" — Steve Jobs
 - "The true voyage of discovery consists not in seeking new landscapes, but in having new eyes." — Marcel Proust
 - [All you see is what is, but not what it could have been or what it could be.](https://x.com/waitbutwhy/status/1367871165319049221)
+
+[^1]: I will not speak of napster...
+
+[^2]: I will be writing another post about this idea more generally, please stay tuned.
+
+[^3]: There is more to be said here both on the problems and potential solutions for managing this challenge, which I will cover in an upcoming post: featuring The father, the mother, NBA, MMA and why I simultaneously love and hate Google.
