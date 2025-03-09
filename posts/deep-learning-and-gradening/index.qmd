@@ -1,0 +1,253 @@
+---
+title: "On Deep Learning and Gardening: We're still early. "
+layout: post
+description: "Can't wait for some good old McDonalds."
+categories: [Ananlogy, Future]
+date: "2025-03-05"
+---
+
+Hello again, 
+
+This has been brewing in my mind for a bit, so I thought I'd write it out [^1].
+
+This is going to be one of those posts where I go "X is just Y" and if that is the case what does it tell us about 
+X from what we know about Y? 
+
+What I hope to do as part of this essay is give a frame that deep learning is a lot like gardening (or its larger scale brother: agriculture). 
+
+With this frame in mind, I'll explain how your ideas and intuitions you have about about gardening/agriculture, transfer to deep learning. 
+
+We will do some fun specultion and point out areas that we can be excited about and things we can learn. 
+
+Let's go!
+
+
+# Part I: Establishing the Framework
+
+
+## Building vs Growing: Two Ways to Create
+
+There are (at least) two fundamentally different ways to make things in this world.
+
+The first is (let's call it) 'engineering': you understand how plywood works, how screws function, and how to connect them to form a joint. 
+You keep composing these subsystems to build a table. 
+This scales up to combustion engines and rockets - all assembled through deliberate composition of understood components.
+
+The second is 'cultivation': if I ask you to build a sunflower, you wouldn't know where to start (how do you arrange all the little parts to make one ?). 
+But you do know how to grow one. You prepare soil, plant a seed, provide water and sunlight, and the flower emerges through processes you facilitate but don't directly control.
+
+Deep learning (creating models) is a lot like this second type. We prepare environments, and plant architectures, and nurture them to grow capabilities. 
+
+And this perspective reveals something critical: we're still in the early stages of understanding what truly feeds these learning systems.
+
+## The Gardening Analogy Unpacked
+
+When I look at the technical details of modern deep learning, I see gardening principles everywhere:
+
+**Hyperparameters are growing conditions.** Your learning rate is your watering schedule - too much or too little and growth is impaired. 
+Batch size is like pot size - it constrains or enables how quickly a model can absorb information.
+
+**Optimization methods are cultivation techniques.** SGD is like traditional farming - reliable but sometimes inefficient. 
+Adam is like modern drip irrigation - precisely delivering resources where needed.
+Second-order methods are like hydroponics - expensive and complex to set up, but capable of growing certain plants in conditions where traditional methods would fail. 
+Just as hydroponic systems can produce crops in environments where soil cultivation is impossible, second-order optimization methods can sometimes train models that would never converge with first-order methods alone.
+
+**Compute clusters are greenhouses.** They create controlled environments optimized for growth, with TPUs being industrial-grade setups and consumer GPUs more like home gardens.
+
+**Regularization is pruning.** Just as gardeners prune plants to promote healthier growth, techniques like dropout trim excessive complexity to improve generalization.
+
+The parallels run deep. But the most revealing aspect? What we do with the soil.
+
+
+
+## Growth Ceilings and Saturation: The Genetic Limits of Architectures
+
+While our gardening metaphor touches on how different architectures grow at different rates, there's a deeper pattern worth exploring: inherent saturation limits.
+
+Consider bamboo - one of nature's fastest-growing plants. Some species can grow up to 3 feet in a single day under ideal conditions, 
+reaching their full height in just a few months. But despite this explosive growth, even the tallest bamboo species plateau at around 100 feet, 
+while redwoods continue growing for centuries to heights exceeding 350 feet.
+
+This pattern is strikingly similar to what we observe with neural architectures:
+
+**CNNs (Convolutional Neural Networks) are our bamboo.** They train quickly, show impressive early results with relatively modest data requirements, 
+And excel in their specialized domain of spatial pattern recognition. A well-designed CNN can reach strong performance on image classification tasks with just weeks of training. 
+But they ultimately plateau at lower performance ceilings, particularly for tasks requiring higher-level reasoning or cross-domain generalization.
+
+**RNNs (Recurrent Neural Networks) are more like fast-growing but height-limited trees such as birches or aspens.** They have a fundamentally sound structure, but their genetic makeup limits their ultimate height. 
+Their sequential processing nature creates inherent limitations - as they "grow taller" (process longer sequences), the information flow from roots to crown becomes increasingly restricted (the vanishing gradient problem). 
+Even with innovations like LSTM and GRU cells acting as "growth hormones" that improve this flow, they eventually hit capability ceilings determined by their architectural "DNA." 
+The issue isn't that they grow in only one dimension, but rather that their internal transport system becomes inefficient at scale, similar to how some tree species cannot effectively transport water and nutrients beyond certain heights.
+
+**Transformers are indeed like redwoods**, with higher ultimate potential but slower initial growth. 
+Their attention mechanisms allow them to overcome sequential bottlenecks, supporting growth to much greater "heights" of capability.
+Yet even they demonstrate classic sigmoid growth curves - rapid capability gains during middle scaling phases followed by diminishing returns as they approach their architectural ceiling.
+
+*[Figure: Performance scaling curves for different neural architectures plotted against compute/data, showing different saturation points]*
+
+This pattern suggests two critical insights:
+
+1. **Environmental optimization has natural limits.** Just as no amount of perfect soil, water or fertilizer will make a shrub grow into a sequoia, 
+architectural limitations eventually constrain what even the best-trained models can accomplish. Data quality improvements and training techniques 
+can help architectures reach their potential but not exceed their inherent limits.
+
+2. **Architectural innovation represents evolutionary jumps.** The progression from RNNs to LSTMs to Transformers isn't merely better cultivation - 
+it's akin to evolutionary jumps that increase maximum potential height. Each architectural breakthrough raises the ceiling of what's possible.
+
+Understanding these inherent limits helps explain why both scaling efforts AND architectural innovation remain crucial. 
+While we work to develop better "fertilizers" for our current architectures, we must simultaneously seek new architectural.
+"species" with different genetic potential - perhaps ones that can reach heights our current designs cannot even approach.
+
+
+# Part II: Insights from the Gardening Frame
+
+## Different Plants for Different Soils
+
+Another critical dimension to this gardening analogy is environmental specialization. Different plant species thrive in different environments. 
+Just as certain plants can only grow in specific soils or climates, our current architectures are specialized for particular data types.
+
+We've developed excellent "plants" (architectures) for text data "soil," progressing from RNNs to LSTMs to Transformers - each more capable of utilizing this medium effectively. 
+But we're still lacking equally powerful specialized architectures for other rich "soils" like video, audio, and multimodal data.
+We're trying to grow the same plants in these different soils rather than developing native species optimized for these environments.
+
+The next breakthrough might come from developing fundamentally new architectures that can efficiently utilize these untapped data resources. 
+- the equivalent of plants that evolved symbiotic relationships with soil bacteria to fix their own nitrogen. 
+These would be architectures specifically evolved for video or audio that can scale as effectively as Transformers do for text, 
+but with fundamental innovations that make them native to these different data environments. 
+(most of a plant that does fix nitrogen still looks like a regular plant just its roots are  a little different), 
+we then shouldn't be surprised if it turns out that most of the architecture that works well,
+mostly looks like a transformer with smaller parts being different (the tokenizer, output layer, losses etc)
+
+Just as certain crop varieties revolutionized agriculture by thriving in previously underutilized soil types, 
+new architectural "species" designed specifically for non-textual data would unlock vast potential data (soil) we've barely tapped.
+
+
+## The Pre-Fertilizer Era: Where We Are
+
+Despite our impressive results, we're still in what could be called a "pre-fertilizer" era of AI. 
+
+Just like pre-industrial agriculture, we've been working primarily with what nature provides:
+- We collect datasets "as they come" (raw soil)
+- We filter them to remove obvious problems (removing stones from fields)
+- We scale up quantity rather than transforming quality (using more land)
+
+And this works pretty well, but the agricultural revolution didn't happen by simply using more land or working harder (sike [Malthus](https://en.wikipedia.org/wiki/Malthusianism)). 
+
+It came from understanding the specific nutrients crops needed and enriching soil accordingly (read: fertilizers)
+
+## Entering the Manure Stage
+(I hope you're not constipated)
+
+Recently, I've noticed we're entering an intermediate phase comparable to the discovery of manure and early organic fertilizers:
+
+1. **Distillation techniques** - Processing knowledge from larger models into smaller ones
+2. **Active learning** - Being selective about which examples we "feed" models
+3. **Model-generated synthetic data** - Using powerful models to create training examples
+
+Look at some recent examples:
+
+- [Prime Intellect's SYNTHETIC-1](https://huggingface.co/datasets/PrimeIntellect/SYNTHETIC-1-SFT-Data) dataset uses DeepSeek R1 to generate 1.4 million reasoning examples
+- Stanford's [S1 reasoning model](https://arxiv.org/html/2501.19393v1) achieves strong performance with just 1,000 carefully curated samples
+
+These approaches take existing "natural" data and enhance it - like manure is organic material that's been processed to concentrate nutrients. It's a big step forward, but still far from what's possible.
+
+## The Key Insight: Fertilizer Isn't Soil
+
+Here's the key point: synthetic examples don't need to be "realistic" to be effective. 
+Fertilizer looks nothing like soil (straight-up chemical), yet delivers precisely what plants need to thrive.
+
+The implications are profound. Rather than focusing on creating synthetic data that mimics reality, 
+we should create concentrated learning signals that efficiently deliver the patterns models need to integrate.
+
+This shift in thinking could lead to:
+
+- Training signals that isolate specific features without natural noise
+- Examples designed to highlight decision boundaries
+- Informationally dense rather than naturally distributed data
+- Learning substrates that optimize for neural network learning dynamics rather than human recognizability
+
+
+## Part III: Implications and Future Directions
+(more fun speculation)
+
+## Lessons from Agricultural History
+
+If this analogy holds, agricultural history offers fascinating predictions about AI's future:
+
+**The Fertilizer Revolution.** Just as synthetic fertilizers transformed crop yields,
+we'll likely see  "engineered data"  approaches that dramatically improve model performance with less raw material.
+
+**Monoculture Risks.** Agriculture taught us that overreliance on single crops creates vulnerabilities. 
+Similarly, the AI ecosystem needs architectural diversity for resilience against unexpected failures. 
+(I'm looking at your adversarial examples ;) ) , if you think Iphone Zero days are big (and scary) imagine Transformer Zero days.
+
+**Industrialization Patterns.** Just as agriculture evolved from family farms to industrial operations (while still preserving community gardens),
+ AI will see both large industrial players and smaller, specialized practitioners using efficient methods on limited resources.
+
+**Seasonal Cycles.** Agricultural progress comes through yearly growing seasons. 
+We may similarly standardize on "growing seasons" for model development rather than continuous training, I think this will be a bit weird.
+Because tbh a model trains just as well in the summer as in the winter. 
+But i assume what we might see is that because you're already growing one big thing already you can't grow other big things. so almost like a phase-based system. 
+
+**Hybridization Breakthroughs.** Many agricultural advances came from cross-breeding. 
+The most significant AI breakthroughs might similarly come from hybrid architectures and cross-domain fertilization.
+
+
+## Where Will Value Accrue?
+(or the alternate title "Let's talk moneeyy")
+
+Looking at how the food business evolved gives us clues about where economic value in AI will concentrate:
+
+**Seed Companies vs. Farmers.** In agriculture, seed companies eventually captured more value than farmers through enforceable patents and intellectual property rights on genetically modified seeds. 
+The AI landscape differs here - techniques are rarely patented effectively or enforceable once published. 
+This explains the growing secrecy around breakthrough methods, with many companies opting to keep their "seeds" as trade secrets rather than publishing them. 
+Unlike agriculture where legal protections secure value for seed developers, in AI the value may flow more to those who can operationalize techniques quickly and at scale before competitors can reverse-engineer them.
+
+**Fertilizer Producers.** These became essential to the agricultural value chain. Companies developing novel data generation and curation techniques could become equally crucial in AI.
+
+It's admittedly difficult to fully envision what these "AI fertilizer companies" will look like - much like how pre-industrial farmers would struggle to imagine modern chemical fertilizer plants or the Haber-Bosch process. 
+We're seeing early examples emerging - companies like Scale AI specialized in data labeling and synthetic data generation, or startups focused on creating specialized training datasets. 
+But these might be more like early manure traders than the eventual nitrogen fertilizer giants.
+
+The true "Haber-Bosch moment" for AI data is likely still ahead - when someone discovers how to systematically produce high-quality training signals in ways that look nothing like our current approaches. 
+When that happens, these specialized data companies may suddenly become some of the most valuable players in the AI ecosystem, just as fertilizer companies became essential to modern agriculture.
+
+**Value-Added Processing.** Most profit in food comes from processing, not raw ingredients. Raw beef has slim margins; 
+McDonald's turns it into a high-margin global business through standardization, distribution, and brand consistency. 
+Similarly, the biggest AI returns may not come from base models (the "raw ingredients") but from the specialized applications and interfaces built on top of them. 
+
+What many dismiss as "ChatGPT wrappers" today might actually be the McDonald's of AI - the businesses that take powerful but generic capabilities and package them into consistent, accessible experiences that solve specific user problems. 
+The companies that figure out how to turn raw model outputs into reliable, specialized products with strong user experiences could capture significantly more value than those providing the underlying capabilities.
+
+**Distribution Networks.** Food distribution captures significant value. Similarly, AI deployment infrastructure and "last mile" integration could become major value centres. 
+Sike! I'm kidding, here's the nice thing about the model or any software really, 
+it's so cheap to duplicate and store, the big bois call it marginal incremental costs. But the weird thing is it still takes a bunch of infra to run these things. 
+So it's like you need land to grow the thing, but you can replicate it easily (this is not true for regular plants, I hope this is obvious), 
+but you again need land to keep the thing alive (in deep learning terms the boys call this "inference") as you can imagine growing the thing and keeping it alive and giving fruit might require different kind of day-to-day operations
+
+**Brand Premium.** Consumers pay premiums for trusted food brands. Models with proven reliability will likely command similar premiums.
+
+## Where the Analogy Breaks Down
+
+Of course, no analogy is perfect. Here are important limitations to keep in mind:
+
+
+**Reproduction Mechanisms.** Plants reproduce through well-understood biological processes. AI models "reproduce" through code copying, weight transfer, and distillation - mechanisms with different constraints and possibilities.
+
+
+## Final Thoughts
+
+Looking at deep learning through the lens of gardening reveals something profound: we're still in the early stages of understanding what truly nourishes these systems. 
+The next breakthrough won't come from bigger models or more computing, but from fundamentally reimagining what constitutes effective training data.
+
+When we truly understand the "nutrients" that feed neural network learning, we may create training approaches that seem almost incomprehensible by today's standards but drive exponential improvements in capability.
+
+Until then, I'll be thinking about how to create better "fertilizer" for my models. And maybe spending a bit more time in my actual garden too - you never know where the next insight might grow.
+
+
+
+[^1]: I know, I know, what you're thinking, "Arjun wasn't one of your previous posts 'On Saas and swimming' where you talked about how saas and swimming share a lot in common? 
+And now you are you really going to now tell me that deep learning and gardening have a lot in common? 
+Is this what you do?", and you're right! It does seem like a pattern, unfortunately, but let's hope it's a useful one. Take a read let me know what you think, tell me what I missed!
+
+
