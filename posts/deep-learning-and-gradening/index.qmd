@@ -75,9 +75,9 @@ Recent results from the AI community provide striking evidence of this approach 
 Similarly, [Phi-4](https://arxiv.org/pdf/2412.08905) (14B parameters) outperforms GPT-4o on GPQA (56.1 vs 50.6) and MATH (80.4 vs 74.6) benchmarks by making synthetic data "the bulk of training data." Microsoft's experiments show models with 12 epochs of synthetic data consistently outperform those with more unique web tokens—concentrated learning fertilizer works better than more raw soil.
 
 Other examples:
-* Stanford's [s1K dataset](https://github.com/simplescaling/s1) of just 1,000 carefully selected reasoning examples producing models that outperform others trained on 800× more data
-* [Chain-of-thought prompting](https://arxiv.org/abs/2201.11903) creating "deliberate thinking paths" unlike natural human text
-* [Synthetic Prompts for In-Context Learning](https://arxiv.org/abs/2305.08298) showing how artificially constructed examples improve performance without resembling natural data
+- Stanford's [s1K dataset](https://github.com/simplescaling/s1) of just 1,000 carefully selected reasoning examples producing models that outperform others trained on 800× more data
+- [Chain-of-thought prompting](https://arxiv.org/abs/2201.11903) creating "deliberate thinking paths" unlike natural human text
+- [Synthetic Prompts for In-Context Learning](https://arxiv.org/abs/2305.08298) showing how artificially constructed examples improve performance without resembling natural data
 
 
 The future isn't more realistic synthetic data - it's more effective synthetic data optimized for neural learning dynamics, not human recognizability.
