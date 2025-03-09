@@ -1,30 +1,8 @@
 [
   {
-    "listing": "/til/index.html",
-    "items": []
-  },
-  {
-    "listing": "/index.html",
-    "items": [
-      "/posts/many-universes/index.html",
-      "/posts/saas-and-swimming/index.html",
-      "/posts/exponentials-everywhere/index.html",
-      "/posts/exerimentations-platforms/index.html",
-      "/posts/course-schedule-generator/index.html",
-      "/posts/harry-potter-quiz/index.html",
-      "/posts/state-of-reading/index.html",
-      "/posts/friend-or-foe/index.html",
-      "/posts/infant-mortality/index.html",
-      "/posts/jargonizer/index.html",
-      "/posts/learning-machine-learning/index.html",
-      "/posts/game-of-thrones-quiz/index.html",
-      "/posts/newbie-quiz/index.html",
-      "/posts/mental-health-checklist/index.html"
-    ]
-  },
-  {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/deep-learning-and-gradening/index.html",
       "/posts/many-universes/index.html",
       "/posts/saas-and-swimming/index.html",
       "/posts/exponentials-everywhere/index.html",
@@ -42,6 +20,30 @@
       "/posts/mental-health-checklist/index.html",
       "/posts/about-this-website/index.html"
     ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/deep-learning-and-gradening/index.html",
+      "/posts/many-universes/index.html",
+      "/posts/saas-and-swimming/index.html",
+      "/posts/exponentials-everywhere/index.html",
+      "/posts/exerimentations-platforms/index.html",
+      "/posts/course-schedule-generator/index.html",
+      "/posts/harry-potter-quiz/index.html",
+      "/posts/state-of-reading/index.html",
+      "/posts/friend-or-foe/index.html",
+      "/posts/infant-mortality/index.html",
+      "/posts/jargonizer/index.html",
+      "/posts/learning-machine-learning/index.html",
+      "/posts/game-of-thrones-quiz/index.html",
+      "/posts/newbie-quiz/index.html",
+      "/posts/mental-health-checklist/index.html"
+    ]
+  },
+  {
+    "listing": "/til/index.html",
+    "items": []
   },
   {
     "listing": "/podcast/index.html",
