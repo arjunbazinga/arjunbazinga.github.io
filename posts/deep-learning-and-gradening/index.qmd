@@ -6,8 +6,6 @@ categories: [Analogy, Future]
 date: "2025-03-05"
 ---
 
-# On Deep Learning and Gardening: We're Still Early
-
 This is one of those posts where I explore what happens when we map concepts from one field to another. Today's question: What if deep learning is fundamentally like gardening?
 
 ## Building vs Growing: Two Ways to Create
