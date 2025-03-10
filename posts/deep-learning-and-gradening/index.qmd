@@ -4,9 +4,13 @@ layout: post
 description: "What agriculture can teach us about AI development"
 categories: [Analogy, Future]
 date: "2025-03-05"
+image: fertilizer.jpeg
 ---
 
-This is one of those posts where I explore what happens when we map concepts from one field to another. Today's question: What if deep learning is fundamentally like gardening?
+![](fertilizer.jpeg)
+
+
+This is one of those posts where I explore what happens when we map concepts from one field to another. Today's question: What if deep learning is fundamentally like farming?
 
 ## Building vs Growing: Two Ways to Create
 
@@ -18,14 +22,17 @@ There are two fundamentally different ways to make things:
 
 Deep learning is like cultivation. We prepare environments, plant architectures, and nurture them to grow capabilities. We're still early in understanding what truly feeds these systems.
 
-## The Gardening Analogy Unpacked
+
+## The Farming Analogy Unpacked
 
 The parallels run deep:
 
-- **Hyperparameters are growing conditions** - Learning rates are watering schedules, batch sizes are pot sizes
+- **Neural architectures are seeds** - They contain the genetic potential that determines what capabilities can emerge. We go deeper on this in the following sections.
+- **Hyperparameters are growing conditions** - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season
 - **Optimization methods are cultivation techniques** - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn't otherwise converge)
-- **Compute clusters are greenhouses** - TPUs are industrial setups, consumer GPUs are home gardens
-- **Regularization is pruning** - Techniques like dropout trim complexity to improve generalization
+- **Compute clusters are fields and greenhouses** - TPUs are industrial farms, consumer GPUs are backyard gardens
+- **Regularization is pruning** - Techniques like dropout trim complexity to improve generalization, just as farmers remove unwanted growth to strengthen desired traits
+- **Data is soil** - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI "plants" can develop.
 
 ## Architectural Limits: Neural Growing Patterns
 
@@ -75,6 +82,7 @@ Recent results from the AI community provide striking evidence of this approach 
 Similarly, [Phi-4](https://arxiv.org/pdf/2412.08905) (14B parameters) outperforms GPT-4o on GPQA (56.1 vs 50.6) and MATH (80.4 vs 74.6) benchmarks by making synthetic data "the bulk of training data." Microsoft's experiments show models with 12 epochs of synthetic data consistently outperform those with more unique web tokens—concentrated learning fertilizer works better than more raw soil.
 
 Other examples:
+
 - Stanford's [s1K dataset](https://github.com/simplescaling/s1) of just 1,000 carefully selected reasoning examples producing models that outperform others trained on 800× more data
 - [Chain-of-thought prompting](https://arxiv.org/abs/2201.11903) creating "deliberate thinking paths" unlike natural human text
 - [Synthetic Prompts for In-Context Learning](https://arxiv.org/abs/2305.08298) showing how artificially constructed examples improve performance without resembling natural data
