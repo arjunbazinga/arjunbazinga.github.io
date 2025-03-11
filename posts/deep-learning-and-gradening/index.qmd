@@ -33,7 +33,6 @@ The parallels run deep:
 - **Optimization methods are cultivation techniques** - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn't otherwise converge)
 ![Optimization methods are like different irrigation systems](optimizers.jpeg)
 - **Hyperparameters are growing conditions** - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season
-- **Compute clusters are fields and greenhouses** - TPUs are industrial farms, consumer GPUs are backyard gardens
 - **Regularization is pruning** - Techniques like dropout trim complexity to improve generalization, just as farmers remove unwanted growth to strengthen desired traits
 
 
