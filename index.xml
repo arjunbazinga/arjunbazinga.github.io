@@ -42,7 +42,6 @@
 <li><strong>Data is soil</strong> - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI “plants” can develop.</li>
 <li><strong>Optimization methods are cultivation techniques</strong> - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn’t otherwise converge) <img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/optimizers.jpeg" class="img-fluid" alt="Optimization methods are like different irrigation systems"></li>
 <li><strong>Hyperparameters are growing conditions</strong> - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season</li>
-<li><strong>Compute clusters are fields and greenhouses</strong> - TPUs are industrial farms, consumer GPUs are backyard gardens</li>
 <li><strong>Regularization is pruning</strong> - Techniques like dropout trim complexity to improve generalization, just as farmers remove unwanted growth to strengthen desired traits</li>
 </ul>
 </section>
