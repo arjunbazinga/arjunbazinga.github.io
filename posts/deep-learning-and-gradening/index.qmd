@@ -7,12 +7,13 @@ date: "2025-03-05"
 image: fertilizer.jpeg
 ---
 
-![](fertilizer.jpeg)
-
 
 This is one of those posts where I explore what happens when we map concepts from one field to another. Today's question: What if deep learning is fundamentally like farming?
 
 ## Building vs Growing: Two Ways to Create
+
+
+![Two ways to make things](two-ways-to-create.webp)
 
 There are two fundamentally different ways to make things:
 
@@ -28,15 +29,20 @@ Deep learning is like cultivation. We prepare environments, plant architectures,
 The parallels run deep:
 
 - **Neural architectures are seeds** - They contain the genetic potential that determines what capabilities can emerge. We go deeper on this in the following sections.
-- **Hyperparameters are growing conditions** - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season
+- **Data is soil** - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI "plants" can develop.
 - **Optimization methods are cultivation techniques** - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn't otherwise converge)
+![Optimization methods are like different irrigation systems](optimizers.jpeg)
+- **Hyperparameters are growing conditions** - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season
 - **Compute clusters are fields and greenhouses** - TPUs are industrial farms, consumer GPUs are backyard gardens
 - **Regularization is pruning** - Techniques like dropout trim complexity to improve generalization, just as farmers remove unwanted growth to strengthen desired traits
-- **Data is soil** - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI "plants" can develop.
+
 
 ## Architectural Limits: Neural Growing Patterns
 
-Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits:
+
+![Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits](heights.jpeg)
+
+
 
 CNNs resemble bamboo – quick initial progress but plateau with inherent height limitations due to their fixed receptive fields
 RNNs function like height-limited trees – solid structure but face gradient challenges that constrain their ultimate potential
@@ -45,6 +51,8 @@ Transformers are more like redwoods – capable of greater heights through their
 This shows why both scaling AND architecture matter. Just as perfect soil won't make a shrub grow into a sequoia, architectural limitations determine what capabilities models can ultimately achieve, regardless of training resources.
 
 ## Different Plants for Different Soils
+
+![New models for other modes of data might look very similar to existing models, with just the roots changed.](nitrogen%20fixing.jpeg)
 
 Architectures, like plant species, specialize for specific environments. We've mastered text "soil" (RNNs→Transformers) but lack equally effective architectures for video and audio data - we're growing text-optimized plants in non-text soils.
 
@@ -66,6 +74,8 @@ The agricultural revolution didn't happen by using more land or working harder. 
 Modern agriculture still needs industrial-scale operations that multiply output. But fertilizer created the real transformation - small fertilized plots outproducing vast traditional farms. Similarly for AI, while scaling matters, synthetic data creates breakthroughs that scaling alone cannot. The future will combine both: massive compute leveraging concentrated learning techniques to achieve otherwise impossible capabilities.
 
 ## Breaking the Malthusian Barrier
+
+![](world-population.svg)
 
 Pre-fertilizer wheat yields remained at ~1.2 tons/hectare for centuries. No farming technique broke this ceiling. Malthus seemed right.
 
@@ -89,6 +99,9 @@ Other examples:
 
 
 The future isn't more realistic synthetic data - it's more effective synthetic data optimized for neural learning dynamics, not human recognizability.
+
+
+![We will see better capability growth with smaller pots with added “fertilizer”](fertilizer.jpeg)
 
 ## Implications and Future Directions
 
