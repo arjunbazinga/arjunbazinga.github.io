@@ -149,7 +149,7 @@ Analogies are mental models with necessary simplifications. Key differences incl
 
 * **Distribution economics** - Digital distribution has near-zero cost vs. physical agriculture
 * **No decay** - unlike food, AI models don't rot
-* **Expandable "land" (temporary)** - We can build compute clusters rapidly, resembling early frontier expansion, before eventual physical/regulatory constraints
+* **Expandable "land" (temporary)** -We can gather datasets rapidly, resembling early frontier expansion, before eventual physical/regulatory constraints
 * **Rapid improvements (temporary)** - Models dramatically outperform predecessors, like early selective breeding before improvements became incremental
 
 These differences mainly affect short-term dynamics. Long-term, parallels strengthen as AI faces agriculture-like constraints: limited resources, regulation, and incremental improvements.
