@@ -20,10 +20,15 @@
 
 
 
-<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/fertilizer.jpeg" class="img-fluid"></p>
 <p>This is one of those posts where I explore what happens when we map concepts from one field to another. Today’s question: What if deep learning is fundamentally like farming?</p>
 <section id="building-vs-growing-two-ways-to-create" class="level2">
 <h2 class="anchored" data-anchor-id="building-vs-growing-two-ways-to-create">Building vs Growing: Two Ways to Create</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/two-ways-to-create.webp" class="img-fluid figure-img"></p>
+<figcaption>Two ways to make things</figcaption>
+</figure>
+</div>
 <p>There are two fundamentally different ways to make things:</p>
 <p><strong>Engineering:</strong> You understand how components work and compose them deliberately - like building a table from wood and screws, or scaling up to rockets and engines.</p>
 <p><strong>Cultivation:</strong> You can’t directly build a sunflower by assembling parts, but you can grow one by preparing soil, planting a seed, and providing water and sunlight.</p>
@@ -34,21 +39,32 @@
 <p>The parallels run deep:</p>
 <ul>
 <li><strong>Neural architectures are seeds</strong> - They contain the genetic potential that determines what capabilities can emerge. We go deeper on this in the following sections.</li>
+<li><strong>Data is soil</strong> - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI “plants” can develop.</li>
+<li><strong>Optimization methods are cultivation techniques</strong> - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn’t otherwise converge) <img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/optimizers.jpeg" class="img-fluid" alt="Optimization methods are like different irrigation systems"></li>
 <li><strong>Hyperparameters are growing conditions</strong> - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season</li>
-<li><strong>Optimization methods are cultivation techniques</strong> - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn’t otherwise converge)</li>
 <li><strong>Compute clusters are fields and greenhouses</strong> - TPUs are industrial farms, consumer GPUs are backyard gardens</li>
 <li><strong>Regularization is pruning</strong> - Techniques like dropout trim complexity to improve generalization, just as farmers remove unwanted growth to strengthen desired traits</li>
-<li><strong>Data is soil</strong> - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI “plants” can develop.</li>
 </ul>
 </section>
 <section id="architectural-limits-neural-growing-patterns" class="level2">
 <h2 class="anchored" data-anchor-id="architectural-limits-neural-growing-patterns">Architectural Limits: Neural Growing Patterns</h2>
-<p>Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/heights.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits</figcaption>
+</figure>
+</div>
 <p>CNNs resemble bamboo – quick initial progress but plateau with inherent height limitations due to their fixed receptive fields RNNs function like height-limited trees – solid structure but face gradient challenges that constrain their ultimate potential Transformers are more like redwoods – capable of greater heights through their attention mechanisms, though still bound by architectural constraints</p>
 <p>This shows why both scaling AND architecture matter. Just as perfect soil won’t make a shrub grow into a sequoia, architectural limitations determine what capabilities models can ultimately achieve, regardless of training resources.</p>
 </section>
 <section id="different-plants-for-different-soils" class="level2">
 <h2 class="anchored" data-anchor-id="different-plants-for-different-soils">Different Plants for Different Soils</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/nitrogen fixing.jpeg" class="img-fluid figure-img"></p>
+<figcaption>New models for other modes of data might look very similar to existing models, with just the roots changed.</figcaption>
+</figure>
+</div>
 <p>Architectures, like plant species, specialize for specific environments. We’ve mastered text “soil” (RNNs→Transformers) but lack equally effective architectures for video and audio data - we’re growing text-optimized plants in non-text soils.</p>
 <p>Breakthroughs may come from specialized architectures for these untapped resources, like nitrogen-fixing plants evolved symbiotic relationships with soil bacteria. These video/audio architectures would scale as effectively as Transformers do for text.</p>
 <p>Nitrogen-fixing plants mostly resemble regular plants with specialized roots. Similarly, effective non-text architectures likely resemble Transformers with modified components (tokenizers, output layers).</p>
@@ -62,6 +78,7 @@
 </section>
 <section id="breaking-the-malthusian-barrier" class="level2">
 <h2 class="anchored" data-anchor-id="breaking-the-malthusian-barrier">Breaking the Malthusian Barrier</h2>
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/world-population.svg" class="img-fluid"></p>
 <p>Pre-fertilizer wheat yields remained at ~1.2 tons/hectare for centuries. No farming technique broke this ceiling. Malthus seemed right.</p>
 <p>After Haber-Bosch (1913), yields hit 2.5 tons by 1950 and exceed 8 tons today - a 7× increase impossible under natural constraints.</p>
 <p>Similarly, AI training faces efficiency barriers. Traditional approaches need ~1 trillion tokens for GPT-4 performance. Synthetic data can potentially reduce this by 10-100×, fundamentally changing what’s possible with limited compute - just as fertilizer transformed what could be grown on limited land.</p>
@@ -78,6 +95,12 @@
 <li><a href="https://arxiv.org/abs/2305.08298">Synthetic Prompts for In-Context Learning</a> showing how artificially constructed examples improve performance without resembling natural data</li>
 </ul>
 <p>The future isn’t more realistic synthetic data - it’s more effective synthetic data optimized for neural learning dynamics, not human recognizability.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/fertilizer.jpeg" class="img-fluid figure-img"></p>
+<figcaption>We will see better capability growth with smaller pots with added “fertilizer”</figcaption>
+</figure>
+</div>
 </section>
 <section id="implications-and-future-directions" class="level2">
 <h2 class="anchored" data-anchor-id="implications-and-future-directions">Implications and Future Directions</h2>
