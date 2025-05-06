@@ -4,27 +4,6 @@
     "items": []
   },
   {
-    "listing": "/index.html",
-    "items": [
-      "/posts/programmng-language/index.html",
-      "/posts/deep-learning-and-gradening/index.html",
-      "/posts/many-universes/index.html",
-      "/posts/saas-and-swimming/index.html",
-      "/posts/exponentials-everywhere/index.html",
-      "/posts/exerimentations-platforms/index.html",
-      "/posts/course-schedule-generator/index.html",
-      "/posts/harry-potter-quiz/index.html",
-      "/posts/state-of-reading/index.html",
-      "/posts/friend-or-foe/index.html",
-      "/posts/infant-mortality/index.html",
-      "/posts/jargonizer/index.html",
-      "/posts/learning-machine-learning/index.html",
-      "/posts/game-of-thrones-quiz/index.html",
-      "/posts/newbie-quiz/index.html",
-      "/posts/mental-health-checklist/index.html"
-    ]
-  },
-  {
     "listing": "/posts/index.html",
     "items": [
       "/posts/programmng-language/index.html",
@@ -50,6 +29,7 @@
   {
     "listing": "/podcast/index.html",
     "items": [
+      "/podcast/podcasts/2503.20523/index.html",
       "/podcast/podcasts/2502.08606/index.html",
       "/podcast/podcasts/2502.11089/index.html",
       "/podcast/podcasts/2501.18512v1/index.html",
@@ -135,12 +115,33 @@
       "/podcast/podcasts/2402.12289/index.html",
       "/podcast/podcasts/2111.15397/index.html",
       "/podcast/podcasts/2103.01775/index.html",
-      "/podcast/podcasts/2306.00248v1/index.html",
-      "/podcast/podcasts/2310.13810/index.html",
       "/podcast/podcasts/2002.11252/index.html",
+      "/podcast/podcasts/2310.13810/index.html",
       "/podcast/podcasts/2401.10241/index.html",
       "/podcast/podcasts/2006.06373/index.html",
+      "/podcast/podcasts/2306.00248v1/index.html",
       "/podcast/podcasts/1910.02054/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/programmng-language/index.html",
+      "/posts/deep-learning-and-gradening/index.html",
+      "/posts/many-universes/index.html",
+      "/posts/saas-and-swimming/index.html",
+      "/posts/exponentials-everywhere/index.html",
+      "/posts/exerimentations-platforms/index.html",
+      "/posts/course-schedule-generator/index.html",
+      "/posts/harry-potter-quiz/index.html",
+      "/posts/state-of-reading/index.html",
+      "/posts/friend-or-foe/index.html",
+      "/posts/infant-mortality/index.html",
+      "/posts/jargonizer/index.html",
+      "/posts/learning-machine-learning/index.html",
+      "/posts/game-of-thrones-quiz/index.html",
+      "/posts/newbie-quiz/index.html",
+      "/posts/mental-health-checklist/index.html"
     ]
   }
 ]

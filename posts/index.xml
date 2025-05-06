@@ -9,12 +9,13 @@
 <link>https://www.arjunsriva.com/posts/</link>
 <atom:link href="https://www.arjunsriva.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.42</generator>
+<generator>quarto-1.7.30</generator>
 <lastBuildDate>Mon, 31 Mar 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation</title>
   <link>https://www.arjunsriva.com/posts/programmng-language/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -139,6 +140,7 @@ interface speculative_executable_func {
   <title>On Deep Learning and Farming: It’s still 1915</title>
   <link>https://www.arjunsriva.com/posts/deep-learning-and-gradening/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -288,6 +290,7 @@ interface speculative_executable_func {
   <title>The Many Universes That Exist</title>
   <link>https://www.arjunsriva.com/posts/many-universes/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -457,6 +460,7 @@ interface speculative_executable_func {
 
 
 
+
 <p>Sometimes, insight comes from unexpected places. Today, it came from the pool.<br>
 Today while swimming, I had a realization: there’s a lot in common between swimming well and running a successful subscription business.</p>
 <section id="the-basics-drag-thrust-and-speed" class="level2">
@@ -470,8 +474,7 @@ Today while swimming, I had a realization: there’s a lot in common between swi
 <li>Speed in water is your active user base</li>
 </ul>
 <p>While marketing is necessary, your active userbase (or speed in the water) is a combination of your past marketing efforts and your retention rate.</p>
-<p>Here’s a visual comparison of efficient vs inefficient swimming:</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/miZ23qeMiR0?si=VJiHuxrN0l4kCNelE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Here’s a visual comparison of efficient vs inefficient swimming: </p><div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/miZ23qeMiR0?si=VJiHuxrN0l4kCNelE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 </section>
 <section id="the-hidden-drivers" class="level2">
 <h2 class="anchored" data-anchor-id="the-hidden-drivers">The Hidden Drivers</h2>
@@ -554,6 +557,7 @@ It’s not as visible as marketing. But it’s what separates great products fro
   <title>Exponentials Everywhere: The S-Curve Challenge in Predicting the Future</title>
   <link>https://www.arjunsriva.com/posts/exponentials-everywhere/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2031,6 +2035,7 @@ font-style: inherit;">;</span></span>
 
 
 
+
 <section id="books" class="level2">
 <h2 class="anchored" data-anchor-id="books">Books</h2>
 <ul>
@@ -2213,6 +2218,7 @@ font-style: inherit;">;</span></span>
 
 
 
+
 <p>A website which allows students of IIT Indore to add courses they are interested in to their calendar.<br>
 I was tired of doing this manually every time.<br>
 Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here</a></p>
@@ -2228,6 +2234,7 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
   <title>Harry Potter quiz</title>
   <link>https://www.arjunsriva.com/posts/harry-potter-quiz/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2269,6 +2276,7 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
 
 
 
+
 <p>Audio books are seeing a resurgence, because of companies like Audible.<br>
 Text to speech is good, and is getting <a href="https://deepmind.com/blog/article/wavenet-generative-model-raw-audio">better</a> .<br>
 Wireless Bluetooth <a href="https://www.apple.com/airpods/">earphones</a> are becoming common place, the increase in convenience and battery life allows people to have them on longer.<br>
@@ -2290,6 +2298,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <title>Friend Or Foe</title>
   <link>https://www.arjunsriva.com/posts/friend-or-foe/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2317,6 +2326,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <title>Infant Mortality In India</title>
   <link>https://www.arjunsriva.com/posts/infant-mortality/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2355,6 +2365,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 
 
 
+
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" class="img-fluid figure-img"></p>
@@ -2383,6 +2394,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <title>Multi Armed Bandits</title>
   <link>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3761,6 +3773,7 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
 
 
 
+
 <p>This post will talk about resources for how I’m going about learning machine learning.</p>
 <section id="books" class="level3">
 <h3 class="anchored" data-anchor-id="books">Books</h3>
@@ -3828,6 +3841,7 @@ A course which aims to teach by coding, and takes a top down approach.</p></li>
 
 
 
+
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.arjunsriva.com/posts/game-of-thrones-quiz/gameofthronesquiz.jpg" class="img-fluid figure-img"></p>
@@ -3876,6 +3890,7 @@ It is broken into 3 seperate rounds</p>
 
 
 
+
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.arjunsriva.com/posts/newbie-quiz/newbiequiz.jpeg" class="img-fluid figure-img"></p>
@@ -3911,6 +3926,7 @@ It is broken into 3 seperate rounds</p>
 
 
 
+
 <p>Some quizes I made so it’s easy to keep track of mental health.</p>
 <ul>
 <li>Burn’s depression Checklist use it <a href="https://arjunsriva.com/bdc/">here</a></li>
@@ -3928,6 +3944,7 @@ It is broken into 3 seperate rounds</p>
   <title>About this website</title>
   <link>https://www.arjunsriva.com/posts/about-this-website/</link>
   <description><![CDATA[ 
+
 
 
 

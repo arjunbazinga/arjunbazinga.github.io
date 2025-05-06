@@ -9,12 +9,95 @@
 <link>https://www.arjunsriva.com/podcast/</link>
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
 <description>Curated AI papers, clearly explained.</description>
-<generator>quarto-1.6.42</generator>
-<lastBuildDate>Wed, 19 Feb 2025 14:15:45 GMT</lastBuildDate>
+<generator>quarto-1.7.30</generator>
+<lastBuildDate>Tue, 06 May 2025 08:50:05 GMT</lastBuildDate>
+<item>
+  <title>GAIA-2 Controllable Multi-View Generative World Model for Autonomous Driving</title>
+  <link>https://www.arjunsriva.com/podcast/podcasts/2503.20523/</link>
+  <description><![CDATA[ 
+    
+  
+    
+      
+
+  
+  <p>GAIA-2 introduces key innovations like multi-camera generation, structured conditioning inputs, and employs continuous latent space for better temporal coherence. Its applicability extends to potentially transforming testing and validation processes within autonomous driving development.</p>
+  
+  
+
+
+
+  <div class="podcast-section">
+
+    <h3 class="anchored">Listen on your favorite platforms</h3>
+
+    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
+    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
+    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
+    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
+
+
+
+    <h3 class="anchored">Listen to the Episode</h3>
+    <div class="plyr-audio-player">
+      <audio id="player" controls="">
+        <source src="../../../static/podcast_data/arxiv/audio/2503.20523.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="podcast-links">
+      <h4 class="anchored">Related Links</h4>
+      <ul>
+        <!-- <li><a href="/static/podcast_data/arxiv/audio/2503.20523.mp3" download>Download audio</a></li> -->
+        <li><a href="../../../static/podcast_data/arxiv/transcripts/2503.20523.txt">Read transcript</a></li>
+        <li><a href="https://arxiv.org/pdf/2503.20523">Read original paper</a></li>
+      </ul>
+    </div>
+
+    <h4 class="anchored">The (AI) Team</h4>
+    <ul>
+      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
+        questions
+        to guide our exploration.</li>
+      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
+        results.</li>
+      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
+    </ul>
+
+
+
+  </div>
+
+
+  <!-- Add Plyr JS -->
+  <!-- TODO : remove this network dependency embed script directly as part of build -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const player = new Plyr('#player', {
+        controls: [
+          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
+        ],
+      });
+    });
+  </script>
+
+     ]]></description>
+  <category>Artificial Intelligence</category>
+  <category>Machine Learning</category>
+  <category>Computer Vision</category>
+  <category>Autonomous Vehicles</category>
+  <category>Simulation</category>
+  <guid>https://www.arjunsriva.com/podcast/podcasts/2503.20523/</guid>
+  <pubDate>Tue, 06 May 2025 08:50:05 GMT</pubDate>
+</item>
 <item>
   <title>Distillation Scaling Laws</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2502.08606/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -94,6 +177,7 @@
   <title>Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2502.11089/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -175,6 +259,7 @@
   <title>Streaming DiLoCo: Efficient Distributed Training of Large Language Models</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2501.18512v1/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -256,6 +341,7 @@
   <title>Efficiently Scaling Transformer Inference</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2211.05102/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -336,6 +422,7 @@
   <title>Tülu 3: Pushing Frontiers in Open Language Model Post-Training</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2411.15124/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -416,6 +503,7 @@
   <title>Bytedance: UI-TARS: End-to-End Model for Automated GUI Interaction</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2501.12326/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -495,6 +583,7 @@
   <title>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/deepseek-r1/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -577,6 +666,7 @@
   <title>DeepSeek-V3: Advancements in Open-Source Large Language Models</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2412.19437/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -657,6 +747,7 @@
   <title>Titans: Learning to Memorize at Test Time</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2501.00663v1/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -737,6 +828,7 @@
   <title>Transformer2: Self-Adaptive Large Language Models</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2501.06252/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -818,6 +910,7 @@
   <title>Learning to Learn Optimization Algorithms with LSTM Networks</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1606.04474/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -898,6 +991,7 @@
   <title>Trust Region Policy Optimization</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1502.05477/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -978,6 +1072,7 @@
   <title>Efficient Deep Learning Parallelization using SOAP Search Space and FlexFlow Framework</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1807.05358/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1059,6 +1154,7 @@
   <title>Deep Retrieval: Learning Efficient Structures for Large-Scale Recommendation Systems</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2007.07203/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1139,6 +1235,7 @@
   <title>Scaling User Modeling for Personalized Advertising at Meta</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2311.09544/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1219,6 +1316,7 @@
   <title>LiNR: Revolutionizing Large-Scale Retrieval for Recommendation Systems</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2407.13218/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1300,6 +1398,7 @@
   <title>Comprehensive Guide to Real-Time Bidding (RTB): Challenges and Opportunities</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/1610.03013/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1383,6 +1482,7 @@
   <title>Efficient Inference for Large Language Models with LLM.int8()</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2208.07339/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1463,6 +1563,7 @@
   <title>Enhancing Language Models with a Massive Datastore</title>
   <link>https://www.arjunsriva.com/podcast/podcasts/2407.12854/</link>
   <description><![CDATA[ 
+    
   
     
       
@@ -1538,86 +1639,6 @@
   <category>Natural Language Processing</category>
   <guid>https://www.arjunsriva.com/podcast/podcasts/2407.12854/</guid>
   <pubDate>Wed, 14 Aug 2024 04:22:09 GMT</pubDate>
-</item>
-<item>
-  <title>In-Context Policy Iteration: Enhancing Reinforcement Learning with Large Language Models</title>
-  <link>https://www.arjunsriva.com/podcast/podcasts/2210.03821/</link>
-  <description><![CDATA[ 
-  
-    
-      
-
-  
-  <p>Engineers and specialists can benefit from the paper’s insights by understanding how ICPI outperforms traditional RL methods through prompt-based learning, the role of rollout policy and world model in guiding the LLM’s decision-making, and the impact of model size on ICPI’s performance in handling complex RL tasks.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
-    <div class="plyr-audio-player">
-      <audio id="player" controls="">
-        <source src="../../../static/podcast_data/arxiv/audio/2210.03821.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2210.03821.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2210.03821.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2210.03821">Read original paper</a></li>
-      </ul>
-    </div>
-
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
-
-  <!-- Add Plyr JS -->
-  <!-- TODO : remove this network dependency embed script directly as part of build -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const player = new Plyr('#player', {
-        controls: [
-          'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
-        ],
-      });
-    });
-  </script>
-
-     ]]></description>
-  <category>Reinforcement Learning</category>
-  <category>Large Language Models</category>
-  <category>AI</category>
-  <category>Policy Iteration</category>
-  <guid>https://www.arjunsriva.com/podcast/podcasts/2210.03821/</guid>
-  <pubDate>Wed, 14 Aug 2024 04:17:43 GMT</pubDate>
 </item>
 </channel>
 </rss>
