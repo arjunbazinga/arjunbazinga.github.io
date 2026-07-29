@@ -99,6 +99,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/golden-datasets/index.html",
       "/posts/llms-for-backend-engineers/index.html",
       "/posts/programmng-language/index.html",
       "/posts/deep-learning-and-gradening/index.html",
@@ -121,6 +122,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/golden-datasets/index.html",
       "/posts/llms-for-backend-engineers/index.html",
       "/posts/programmng-language/index.html",
       "/posts/deep-learning-and-gradening/index.html",

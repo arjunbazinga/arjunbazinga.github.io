@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-08-25">
+<meta name="description" content="How to decide what must pass before a new model, instruction, or workflow ships">
+
+<title>Golden Datasets: Launch Criteria for LLM Systems – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-189549ecd294ed9837df383a4b42e31c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8a591ff59271d21f6a5d1e80b3747fb5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-189549ecd294ed9837df383a4b42e31c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Golden Datasets: Launch Criteria for LLM Systems – Arjun Srivastava">
+<meta property="og:description" content="How to decide what must pass before a new model, instruction, or workflow ships">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="Golden Datasets: Launch Criteria for LLM Systems – Arjun Srivastava">
+<meta name="twitter:description" content="How to decide what must pass before a new model, instruction, or workflow ships">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.com/library"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Golden Datasets: Launch Criteria for LLM Systems</h1>
+                  <div>
+        <div class="description">
+          How to decide what must pass before a new model, instruction, or workflow ships
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">Evaluation</div>
+                <div class="quarto-category">Systems</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 25, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#build-one-test-case" id="toc-build-one-test-case" class="nav-link active" data-scroll-target="#build-one-test-case">Build one test case</a></li>
+  <li><a href="#choose-the-cases-that-can-block-a-launch" id="toc-choose-the-cases-that-can-block-a-launch" class="nav-link" data-scroll-target="#choose-the-cases-that-can-block-a-launch">Choose the cases that can block a launch</a></li>
+  <li><a href="#decide-how-each-case-will-be-checked" id="toc-decide-how-each-case-will-be-checked" class="nav-link" data-scroll-target="#decide-how-each-case-will-be-checked">Decide how each case will be checked</a></li>
+  <li><a href="#separate-launch-checks-from-product-measurement" id="toc-separate-launch-checks-from-product-measurement" class="nav-link" data-scroll-target="#separate-launch-checks-from-product-measurement">Separate launch checks from product measurement</a></li>
+  <li><a href="#give-each-person-a-clear-job" id="toc-give-each-person-a-clear-job" class="nav-link" data-scroll-target="#give-each-person-a-clear-job">Give each person a clear job</a></li>
+  <li><a href="#improve-the-launch-criteria-after-release" id="toc-improve-the-launch-criteria-after-release" class="nav-link" data-scroll-target="#improve-the-launch-criteria-after-release">Improve the launch criteria after release</a></li>
+  <li><a href="#record-what-produced-each-result" id="toc-record-what-produced-each-result" class="nav-link" data-scroll-target="#record-what-produced-each-result">Record what produced each result</a></li>
+  <li><a href="#a-release-checklist" id="toc-a-release-checklist" class="nav-link" data-scroll-target="#a-release-checklist">A release checklist</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>Imagine that your team runs a customer-support assistant built with a large language model, or LLM. A vendor releases a model that costs less and answers faster. You change one setting and the assistant still works.</p>
+<p>Ten trial questions produce sensible answers. The team still lacks enough evidence to ship the change.</p>
+<p>The team needs to check more than whether the new answers sound good. The assistant must follow the refund policy, protect account data, and give customers a useful next step. A cheaper model is a bad trade if it starts promising refunds that the company cannot provide.</p>
+<p>A <strong>golden dataset</strong> is a saved collection of examples that your team uses as launch criteria. It records the situations a new version must handle before the team will ship it. The name sounds grander than the artifact. The first version may be a spreadsheet with three parts:</p>
+<ol type="1">
+<li>an input that the system might receive;</li>
+<li>a description of acceptable behavior;</li>
+<li>instructions for deciding whether the output passes.</li>
+</ol>
+<p>Teams also call these collections evaluation sets or test sets. “Golden” means that someone has reviewed the cases and agreed on the expected behavior. It does not mean that each case has one perfect written answer.</p>
+<p>The team keeps these examples for testing rather than using them as training material. You can change the model, its instructions, or the outside services it can call, such as an order lookup, while keeping the launch criteria fixed. You then compare the old and new systems against the same expectations.</p>
+<section id="build-one-test-case" class="level2">
+<h2 class="anchored" data-anchor-id="build-one-test-case">Build one test case</h2>
+<p>Start with a request that the assistant needs to handle:</p>
+<blockquote class="blockquote">
+<p>I bought these headphones 45 days ago. Your site says returns close after 30 days, but they stopped working. Can you make an exception?</p>
+</blockquote>
+<p>Several answers could help this customer. The wording can change, but a good answer should:</p>
+<ul>
+<li>acknowledge the problem without promising an exception;</li>
+<li>state the published return policy;</li>
+<li>offer the warranty or escalation path;</li>
+<li>avoid inventing an order status or company policy.</li>
+</ul>
+<p>Write those expectations beside the input. Add the reason for each one so a reviewer can understand the policy behind the test.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part of the test</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Customer input</td>
+<td>The message above</td>
+</tr>
+<tr class="even">
+<td>Relevant information</td>
+<td>The return window is 30 days; faulty products may qualify for a warranty claim</td>
+</tr>
+<tr class="odd">
+<td>Expected behavior</td>
+<td>Explain the return limit and offer the warranty path</td>
+</tr>
+<tr class="even">
+<td>Serious failure</td>
+<td>Promise a refund or invent an exception</td>
+</tr>
+<tr class="odd">
+<td>Reason</td>
+<td>Support agents cannot approve refunds outside the policy</td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td>A made-up edge case based on a reviewed support scenario</td>
+</tr>
+</tbody>
+</table>
+<p>Now run the new system. Suppose it replies:</p>
+<blockquote class="blockquote">
+<p>I am sorry the headphones stopped working. I can approve a one-time refund even though the return window has closed.</p>
+</blockquote>
+<p>The reply sounds kind, but it fails the test because the assistant invented a power it does not have. The test turns a vague reaction such as “this answer feels helpful” into a decision that another reviewer can reproduce.</p>
+<p>Save the system’s reply and the result with the test run. Keep them separate from the original test case. The same case should test the old model, the new model, and later changes.</p>
+<p>Test the action as well as the words. An assistant might tell the customer that it cannot issue a refund while still calling the refund service behind the scenes. Record which services it called, the information it retrieved, and any data it changed. The launch case passes only when the complete path through the product is safe.</p>
+</section>
+<section id="choose-the-cases-that-can-block-a-launch" class="level2">
+<h2 class="anchored" data-anchor-id="choose-the-cases-that-can-block-a-launch">Choose the cases that can block a launch</h2>
+<p>One case tests one situation. Start with five to ten <strong>critical paths</strong>: tasks the product must perform and failures the team refuses to release.</p>
+<p>List the situations that matter before deciding how many examples to create. For the support assistant, the first list might include:</p>
+<ul>
+<li>an ordinary return inside the allowed window;</li>
+<li>a damaged product outside the window;</li>
+<li>a request involving account details;</li>
+<li>a user asking the assistant to reveal another customer’s order;</li>
+<li>a vague request that requires a follow-up question.</li>
+</ul>
+<p>Mark the harm each mistake could cause. A clumsy greeting may annoy a customer. Revealing account details harms the customer and creates a security incident. Account privacy deserves more coverage even if few users try to break it.</p>
+<p>The resulting collection does not need to look like a typical day of traffic. You are building a test of the promises the product makes. A driving test includes emergency stops because the driver must know how to perform one, not because drivers make emergency stops on most trips.</p>
+<p>Add several versions of each important situation. Change the product, the user’s tone, the wording of the policy, and the remedy available. If the assistant passes one phrasing and fails five paraphrases, it has learned a narrow response pattern rather than the behavior you wanted.</p>
+<p>Software teams call a set like this a <strong>regression test suite</strong>. A regression is an old behavior that breaks after a change. The suite checks that a new model or set of instructions does not bring old failures back.</p>
+<p>Keep the set small enough that the team trusts every case. Add a case when it protects a critical path or represents a type of failure that could return. A large collection of weak examples slows each release and teaches the team to ignore failures.</p>
+</section>
+<section id="decide-how-each-case-will-be-checked" class="level2">
+<h2 class="anchored" data-anchor-id="decide-how-each-case-will-be-checked">Decide how each case will be checked</h2>
+<p>You now have an input and a description of acceptable behavior. Someone or something needs to compare the system’s answer with that description.</p>
+<p>Use ordinary code when the requirement has a precise answer. Code can check whether the assistant returned the required fields, exposed private account data, or called an outside service that it should not use. These checks produce a clear pass or fail.</p>
+<p>Some requirements need judgment. “Offer a useful next step” permits many valid answers. Ask the reviewer for two things:</p>
+<ul>
+<li>a pass or fail decision;</li>
+<li>a written explanation of the decision.</li>
+</ul>
+<p>The explanation keeps the detail that a numbered score would hide. A reviewer might write: “Fail. The reply states the return limit but ends the conversation. It should offer the warranty process.”</p>
+<p>The written rule and examples form a <strong>rubric</strong>. A human can apply it. Another LLM can also apply it if you provide the customer’s request, the assistant’s answer, the policy, and examples of prior decisions. Teams often call an LLM used this way a <strong>model judge</strong>.</p>
+<p>Begin with human review. A model judge becomes useful when the same decision appears across enough cases to justify automation. Test the judge before placing it in the release process. Ask two people to review a sample without seeing each other’s work. Resolve their disagreements, improve the rubric, and then check where the judge passes an answer that a human fails or fails an answer that a human passes.</p>
+<p>Decide the release rules before testing the new model. For example:</p>
+<ul>
+<li>no test may expose account data;</li>
+<li>all refund-policy cases must avoid unauthorized promises;</li>
+<li>the new system must match or beat the old system on useful next steps;</li>
+<li>response time and cost must stay within the product’s limits.</li>
+</ul>
+<p>These rules are <strong>release gates</strong>. A system passes through the gate when it meets the agreed conditions. Separate gates prevent an improvement in friendly tone from hiding a new privacy failure.</p>
+<p>The release report should make the decision visible:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Launch criterion</th>
+<th>Required result</th>
+<th style="text-align: right;">Current system</th>
+<th style="text-align: right;">Candidate</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Protect account data</td>
+<td>All cases pass</td>
+<td style="text-align: right;">Pass</td>
+<td style="text-align: right;">Pass</td>
+<td>Continue</td>
+</tr>
+<tr class="even">
+<td>Follow refund authority</td>
+<td>All cases pass</td>
+<td style="text-align: right;">Pass</td>
+<td style="text-align: right;"><strong>Fail</strong></td>
+<td><strong>Block</strong></td>
+</tr>
+<tr class="odd">
+<td>Offer a useful next step</td>
+<td>No worse than current</td>
+<td style="text-align: right;">18/20</td>
+<td style="text-align: right;">19/20</td>
+<td>Continue</td>
+</tr>
+<tr class="even">
+<td>Response time</td>
+<td>Under 3 seconds</td>
+<td style="text-align: right;">2.8 s</td>
+<td style="text-align: right;">1.9 s</td>
+<td>Continue</td>
+</tr>
+</tbody>
+</table>
+<p>The candidate in this example does not ship. Its lower cost and faster response cannot compensate for a blocking failure.</p>
+</section>
+<section id="separate-launch-checks-from-product-measurement" class="level2">
+<h2 class="anchored" data-anchor-id="separate-launch-checks-from-product-measurement">Separate launch checks from product measurement</h2>
+<p>Use the golden cases to decide whether a candidate meets the launch criteria. A passing result supports release into a monitored rollout.</p>
+<p>The team chose those cases to cover risks. It included more privacy attacks and unusual refund requests than users send on a normal day. A score of 95 percent on this hand-picked set does not mean the assistant succeeds on 95 percent of real requests.</p>
+<p>Use a different group of examples to estimate how often the assistant fails across all customer conversations. Take a random sample from a stated group and time period. For example: 500 English-language support conversations received during June. Review those conversations with the same rules. Report the estimate with a range that shows the uncertainty caused by using a sample.</p>
+<p>Give the two collections distinct jobs:</p>
+<ul>
+<li>The <strong>regression set</strong> contains chosen cases that protect known product behavior.</li>
+<li>The <strong>measurement sample</strong> contains a random selection of cases from a defined group of real requests.</li>
+</ul>
+<p>Use the regression set to decide whether a change is safe against known risks. Use the measurement sample or a controlled product experiment to learn how the deployed system affects real users. Keep those results separate.</p>
+<p>Choose the number of examples after you choose the question. Add regression cases until each important behavior has enough variation to expose a weak implementation. Ask a statistician or data scientist to size the measurement sample based on the expected failure rate and how narrow the uncertainty range needs to be. A sample count carries no meaning without its selection method.</p>
+</section>
+<section id="give-each-person-a-clear-job" class="level2">
+<h2 class="anchored" data-anchor-id="give-each-person-a-clear-job">Give each person a clear job</h2>
+<p>The product manager knows which mistakes the business can accept. A support expert knows what a good answer should say. An engineer knows how to run the tests each time the system changes. Together, they cover the product rule, the user experience, and the implementation.</p>
+<p>A practical division of work looks like this:</p>
+<ul>
+<li><strong>Product</strong> lists the situations to cover, ranks the harm from each failure, and sets the release rules.</li>
+<li><strong>Domain or user-experience experts</strong> write the expected behavior and explain difficult scores. Name one of them as the owner of the quality standard.</li>
+<li><strong>Engineering and data teams</strong> build a program that sends each saved input to the system, runs the checks, and records the results.</li>
+<li><strong>The feature owner</strong> reads the report and makes the final ship decision.</li>
+</ul>
+<p>The team should review the first cases together. If two reviewers disagree, the owner of the quality standard makes the rule clearer. The feature owner then decides whether to ship based on that judgment, the release report, and the business tradeoffs. Do not settle a policy question by averaging scores.</p>
+<p>Assign one person to maintain each published version of the dataset. This owner collects proposed cases, makes sure the right expert reviews them, and records why the team changed the set. Other people can author cases without leaving ownership vague.</p>
+</section>
+<section id="improve-the-launch-criteria-after-release" class="level2">
+<h2 class="anchored" data-anchor-id="improve-the-launch-criteria-after-release">Improve the launch criteria after release</h2>
+<p>After release, the team asks a new question: which failures should we fix next? Hamel Husain’s <a href="https://hamel.dev/blog/posts/evals-faq/why-is-error-analysis-so-important-in-llm-evals-and-how-is-it-performed.html">error-analysis workflow</a> starts with reading real interactions, describing the failures, and grouping failures that share a cause.</p>
+<p>Your first dataset contains the situations the team thought of before launch. Real users will supply new languages, conflicting requests, strange formatting, and attacks that the team missed.</p>
+<p>Keep records for a sample of live requests. A useful record includes the user’s input, the information sent to the model, any tools the model called, and the final output. Engineers often call this record a <strong>trace</strong> because it lets them follow one request through the system.</p>
+<p>Protect these records as user data. Limit access, remove personal details where possible, and set a retention period before reviewers inspect them.</p>
+<p>Review a batch of traces and mark the failures. Keep some requests chosen at random so the team can discover problems it does not know to search for. Add requests flagged by user feedback or unusual behavior to increase the chance of finding serious problems.</p>
+<p>Group failures that share a cause. You may find that the assistant mishandles many requests that combine an expired return window with a valid warranty claim.</p>
+<p>Add a few examples that represent this group. Vary the details that may affect the answer. Twenty copies of the same conversation add review work without testing a broader behavior.</p>
+<p>Fix the system and run the full regression set again. The new cases show whether the fix handles the failure users found. The old cases show whether the fix broke something that worked before.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    A["Change the model,&lt;br/&gt;instructions, or tools"] --&gt; B["Run the saved tests"]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C{"Pass the release rules?"}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    C -- "No" --&gt; D["Inspect the failed cases"]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    D --&gt; A</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    C -- "Yes" --&gt; E["Ship the change"]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    E --&gt; F["Review a sample of&lt;br/&gt;real requests"]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    F --&gt; G["Group similar failures"]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    G --&gt; H["Add a few cases that&lt;br/&gt;represent each new problem"]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    H --&gt; B</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Change the model,&lt;br/&gt;instructions, or tools"] --&gt; B["Run the saved tests"]
+    B --&gt; C{"Pass the release rules?"}
+    C -- "No" --&gt; D["Inspect the failed cases"]
+    D --&gt; A
+    C -- "Yes" --&gt; E["Ship the change"]
+    E --&gt; F["Review a sample of&lt;br/&gt;real requests"]
+    F --&gt; G["Group similar failures"]
+    G --&gt; H["Add a few cases that&lt;br/&gt;represent each new problem"]
+    H --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add a launch case when the failure threatens a critical path or represents a type of serious failure that could return. Other problems can remain in the product improvement backlog without becoming permanent release blockers. Fix or remove a case when reviewers cannot agree on its expected behavior.</p>
+<p>Hamel’s work focuses on this improvement loop. The golden dataset records the subset of lessons that future releases must preserve. I explore the related idea of feedback-guided data selection at the level of model training in <a href="https://www.novusopus.org/research/bend-not-shift">Bend, Not Shift</a>.</p>
+</section>
+<section id="record-what-produced-each-result" class="level2">
+<h2 class="anchored" data-anchor-id="record-what-produced-each-result">Record what produced each result</h2>
+<p>A score such as 92 percent means little if you cannot reproduce the system that earned it.</p>
+<p>Save these details with every test run:</p>
+<ul>
+<li>the dataset version;</li>
+<li>the model and the instructions sent to it;</li>
+<li>the documents and tools the model could use;</li>
+<li>the code or rubric that scored each answer.</li>
+</ul>
+<p>Reviewing outputs will expose expectations that nobody wrote down at the start. A support expert may decide that mentioning a warranty is insufficient unless the reply gives the customer a way to begin the claim. Update the written rule and record when its meaning changed.</p>
+<p>Give the dataset a version number and keep a short list of changes. A simple policy works:</p>
+<ul>
+<li><code>1.0</code> marks the first agreed set;</li>
+<li><code>1.1</code> adds cases without changing the meaning of a pass;</li>
+<li><code>2.0</code> changes the rules, fields, or meaning of success.</li>
+</ul>
+<p>Rerun the old system after a <code>2.0</code> change. Its old score used a different definition of success, so it cannot serve as the comparison point.</p>
+<p>A team that rewrites instructions against the same visible cases can learn those cases too well. Keep a small group of reviewed cases hidden from the people making changes. Run this <strong>holdout set</strong> before release to check whether the improvement also works on examples the developers did not study.</p>
+</section>
+<section id="a-release-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="a-release-checklist">A release checklist</h2>
+<p>Before using a golden dataset to approve a change, check that:</p>
+<ul>
+<li>each serious failure has reviewed examples and a release rule;</li>
+<li>each case explains the behavior it expects and the reason;</li>
+<li>the scoring guide allows more than one valid answer when the product does;</li>
+<li>human reviewers have checked any model judge or automated scoring rule;</li>
+<li>the team reports hand-picked test scores apart from estimates of real-world performance;</li>
+<li>the test run records the model, instructions, tools, data sources, and scoring method;</li>
+<li>each new case comes from a product requirement or a group of observed failures;</li>
+<li>the team has a safe way to review problems after release.</li>
+</ul>
+<p>The <a href="../../posts/llms-for-backend-engineers/">evaluation section in my guide for backend engineers</a> places these tests inside the rest of an LLM application. You can start the golden dataset as a spreadsheet. The work lies in agreeing on good behavior, checking it the same way after each change, and adding the failures that your users reveal.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

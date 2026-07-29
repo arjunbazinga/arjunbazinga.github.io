@@ -10,7 +10,291 @@
 <atom:link href="https://www.arjunsriva.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Tue, 17 Jun 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 25 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Golden Datasets: Launch Criteria for LLM Systems</title>
+  <link>https://www.arjunsriva.com/posts/golden-datasets/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>Imagine that your team runs a customer-support assistant built with a large language model, or LLM. A vendor releases a model that costs less and answers faster. You change one setting and the assistant still works.</p>
+<p>Ten trial questions produce sensible answers. The team still lacks enough evidence to ship the change.</p>
+<p>The team needs to check more than whether the new answers sound good. The assistant must follow the refund policy, protect account data, and give customers a useful next step. A cheaper model is a bad trade if it starts promising refunds that the company cannot provide.</p>
+<p>A <strong>golden dataset</strong> is a saved collection of examples that your team uses as launch criteria. It records the situations a new version must handle before the team will ship it. The name sounds grander than the artifact. The first version may be a spreadsheet with three parts:</p>
+<ol type="1">
+<li>an input that the system might receive;</li>
+<li>a description of acceptable behavior;</li>
+<li>instructions for deciding whether the output passes.</li>
+</ol>
+<p>Teams also call these collections evaluation sets or test sets. “Golden” means that someone has reviewed the cases and agreed on the expected behavior. It does not mean that each case has one perfect written answer.</p>
+<p>The team keeps these examples for testing rather than using them as training material. You can change the model, its instructions, or the outside services it can call, such as an order lookup, while keeping the launch criteria fixed. You then compare the old and new systems against the same expectations.</p>
+<section id="build-one-test-case" class="level2">
+<h2 class="anchored" data-anchor-id="build-one-test-case">Build one test case</h2>
+<p>Start with a request that the assistant needs to handle:</p>
+<blockquote class="blockquote">
+<p>I bought these headphones 45 days ago. Your site says returns close after 30 days, but they stopped working. Can you make an exception?</p>
+</blockquote>
+<p>Several answers could help this customer. The wording can change, but a good answer should:</p>
+<ul>
+<li>acknowledge the problem without promising an exception;</li>
+<li>state the published return policy;</li>
+<li>offer the warranty or escalation path;</li>
+<li>avoid inventing an order status or company policy.</li>
+</ul>
+<p>Write those expectations beside the input. Add the reason for each one so a reviewer can understand the policy behind the test.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part of the test</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Customer input</td>
+<td>The message above</td>
+</tr>
+<tr class="even">
+<td>Relevant information</td>
+<td>The return window is 30 days; faulty products may qualify for a warranty claim</td>
+</tr>
+<tr class="odd">
+<td>Expected behavior</td>
+<td>Explain the return limit and offer the warranty path</td>
+</tr>
+<tr class="even">
+<td>Serious failure</td>
+<td>Promise a refund or invent an exception</td>
+</tr>
+<tr class="odd">
+<td>Reason</td>
+<td>Support agents cannot approve refunds outside the policy</td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td>A made-up edge case based on a reviewed support scenario</td>
+</tr>
+</tbody>
+</table>
+<p>Now run the new system. Suppose it replies:</p>
+<blockquote class="blockquote">
+<p>I am sorry the headphones stopped working. I can approve a one-time refund even though the return window has closed.</p>
+</blockquote>
+<p>The reply sounds kind, but it fails the test because the assistant invented a power it does not have. The test turns a vague reaction such as “this answer feels helpful” into a decision that another reviewer can reproduce.</p>
+<p>Save the system’s reply and the result with the test run. Keep them separate from the original test case. The same case should test the old model, the new model, and later changes.</p>
+<p>Test the action as well as the words. An assistant might tell the customer that it cannot issue a refund while still calling the refund service behind the scenes. Record which services it called, the information it retrieved, and any data it changed. The launch case passes only when the complete path through the product is safe.</p>
+</section>
+<section id="choose-the-cases-that-can-block-a-launch" class="level2">
+<h2 class="anchored" data-anchor-id="choose-the-cases-that-can-block-a-launch">Choose the cases that can block a launch</h2>
+<p>One case tests one situation. Start with five to ten <strong>critical paths</strong>: tasks the product must perform and failures the team refuses to release.</p>
+<p>List the situations that matter before deciding how many examples to create. For the support assistant, the first list might include:</p>
+<ul>
+<li>an ordinary return inside the allowed window;</li>
+<li>a damaged product outside the window;</li>
+<li>a request involving account details;</li>
+<li>a user asking the assistant to reveal another customer’s order;</li>
+<li>a vague request that requires a follow-up question.</li>
+</ul>
+<p>Mark the harm each mistake could cause. A clumsy greeting may annoy a customer. Revealing account details harms the customer and creates a security incident. Account privacy deserves more coverage even if few users try to break it.</p>
+<p>The resulting collection does not need to look like a typical day of traffic. You are building a test of the promises the product makes. A driving test includes emergency stops because the driver must know how to perform one, not because drivers make emergency stops on most trips.</p>
+<p>Add several versions of each important situation. Change the product, the user’s tone, the wording of the policy, and the remedy available. If the assistant passes one phrasing and fails five paraphrases, it has learned a narrow response pattern rather than the behavior you wanted.</p>
+<p>Software teams call a set like this a <strong>regression test suite</strong>. A regression is an old behavior that breaks after a change. The suite checks that a new model or set of instructions does not bring old failures back.</p>
+<p>Keep the set small enough that the team trusts every case. Add a case when it protects a critical path or represents a type of failure that could return. A large collection of weak examples slows each release and teaches the team to ignore failures.</p>
+</section>
+<section id="decide-how-each-case-will-be-checked" class="level2">
+<h2 class="anchored" data-anchor-id="decide-how-each-case-will-be-checked">Decide how each case will be checked</h2>
+<p>You now have an input and a description of acceptable behavior. Someone or something needs to compare the system’s answer with that description.</p>
+<p>Use ordinary code when the requirement has a precise answer. Code can check whether the assistant returned the required fields, exposed private account data, or called an outside service that it should not use. These checks produce a clear pass or fail.</p>
+<p>Some requirements need judgment. “Offer a useful next step” permits many valid answers. Ask the reviewer for two things:</p>
+<ul>
+<li>a pass or fail decision;</li>
+<li>a written explanation of the decision.</li>
+</ul>
+<p>The explanation keeps the detail that a numbered score would hide. A reviewer might write: “Fail. The reply states the return limit but ends the conversation. It should offer the warranty process.”</p>
+<p>The written rule and examples form a <strong>rubric</strong>. A human can apply it. Another LLM can also apply it if you provide the customer’s request, the assistant’s answer, the policy, and examples of prior decisions. Teams often call an LLM used this way a <strong>model judge</strong>.</p>
+<p>Begin with human review. A model judge becomes useful when the same decision appears across enough cases to justify automation. Test the judge before placing it in the release process. Ask two people to review a sample without seeing each other’s work. Resolve their disagreements, improve the rubric, and then check where the judge passes an answer that a human fails or fails an answer that a human passes.</p>
+<p>Decide the release rules before testing the new model. For example:</p>
+<ul>
+<li>no test may expose account data;</li>
+<li>all refund-policy cases must avoid unauthorized promises;</li>
+<li>the new system must match or beat the old system on useful next steps;</li>
+<li>response time and cost must stay within the product’s limits.</li>
+</ul>
+<p>These rules are <strong>release gates</strong>. A system passes through the gate when it meets the agreed conditions. Separate gates prevent an improvement in friendly tone from hiding a new privacy failure.</p>
+<p>The release report should make the decision visible:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Launch criterion</th>
+<th>Required result</th>
+<th style="text-align: right;">Current system</th>
+<th style="text-align: right;">Candidate</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Protect account data</td>
+<td>All cases pass</td>
+<td style="text-align: right;">Pass</td>
+<td style="text-align: right;">Pass</td>
+<td>Continue</td>
+</tr>
+<tr class="even">
+<td>Follow refund authority</td>
+<td>All cases pass</td>
+<td style="text-align: right;">Pass</td>
+<td style="text-align: right;"><strong>Fail</strong></td>
+<td><strong>Block</strong></td>
+</tr>
+<tr class="odd">
+<td>Offer a useful next step</td>
+<td>No worse than current</td>
+<td style="text-align: right;">18/20</td>
+<td style="text-align: right;">19/20</td>
+<td>Continue</td>
+</tr>
+<tr class="even">
+<td>Response time</td>
+<td>Under 3 seconds</td>
+<td style="text-align: right;">2.8 s</td>
+<td style="text-align: right;">1.9 s</td>
+<td>Continue</td>
+</tr>
+</tbody>
+</table>
+<p>The candidate in this example does not ship. Its lower cost and faster response cannot compensate for a blocking failure.</p>
+</section>
+<section id="separate-launch-checks-from-product-measurement" class="level2">
+<h2 class="anchored" data-anchor-id="separate-launch-checks-from-product-measurement">Separate launch checks from product measurement</h2>
+<p>Use the golden cases to decide whether a candidate meets the launch criteria. A passing result supports release into a monitored rollout.</p>
+<p>The team chose those cases to cover risks. It included more privacy attacks and unusual refund requests than users send on a normal day. A score of 95 percent on this hand-picked set does not mean the assistant succeeds on 95 percent of real requests.</p>
+<p>Use a different group of examples to estimate how often the assistant fails across all customer conversations. Take a random sample from a stated group and time period. For example: 500 English-language support conversations received during June. Review those conversations with the same rules. Report the estimate with a range that shows the uncertainty caused by using a sample.</p>
+<p>Give the two collections distinct jobs:</p>
+<ul>
+<li>The <strong>regression set</strong> contains chosen cases that protect known product behavior.</li>
+<li>The <strong>measurement sample</strong> contains a random selection of cases from a defined group of real requests.</li>
+</ul>
+<p>Use the regression set to decide whether a change is safe against known risks. Use the measurement sample or a controlled product experiment to learn how the deployed system affects real users. Keep those results separate.</p>
+<p>Choose the number of examples after you choose the question. Add regression cases until each important behavior has enough variation to expose a weak implementation. Ask a statistician or data scientist to size the measurement sample based on the expected failure rate and how narrow the uncertainty range needs to be. A sample count carries no meaning without its selection method.</p>
+</section>
+<section id="give-each-person-a-clear-job" class="level2">
+<h2 class="anchored" data-anchor-id="give-each-person-a-clear-job">Give each person a clear job</h2>
+<p>The product manager knows which mistakes the business can accept. A support expert knows what a good answer should say. An engineer knows how to run the tests each time the system changes. Together, they cover the product rule, the user experience, and the implementation.</p>
+<p>A practical division of work looks like this:</p>
+<ul>
+<li><strong>Product</strong> lists the situations to cover, ranks the harm from each failure, and sets the release rules.</li>
+<li><strong>Domain or user-experience experts</strong> write the expected behavior and explain difficult scores. Name one of them as the owner of the quality standard.</li>
+<li><strong>Engineering and data teams</strong> build a program that sends each saved input to the system, runs the checks, and records the results.</li>
+<li><strong>The feature owner</strong> reads the report and makes the final ship decision.</li>
+</ul>
+<p>The team should review the first cases together. If two reviewers disagree, the owner of the quality standard makes the rule clearer. The feature owner then decides whether to ship based on that judgment, the release report, and the business tradeoffs. Do not settle a policy question by averaging scores.</p>
+<p>Assign one person to maintain each published version of the dataset. This owner collects proposed cases, makes sure the right expert reviews them, and records why the team changed the set. Other people can author cases without leaving ownership vague.</p>
+</section>
+<section id="improve-the-launch-criteria-after-release" class="level2">
+<h2 class="anchored" data-anchor-id="improve-the-launch-criteria-after-release">Improve the launch criteria after release</h2>
+<p>After release, the team asks a new question: which failures should we fix next? Hamel Husain’s <a href="https://hamel.dev/blog/posts/evals-faq/why-is-error-analysis-so-important-in-llm-evals-and-how-is-it-performed.html">error-analysis workflow</a> starts with reading real interactions, describing the failures, and grouping failures that share a cause.</p>
+<p>Your first dataset contains the situations the team thought of before launch. Real users will supply new languages, conflicting requests, strange formatting, and attacks that the team missed.</p>
+<p>Keep records for a sample of live requests. A useful record includes the user’s input, the information sent to the model, any tools the model called, and the final output. Engineers often call this record a <strong>trace</strong> because it lets them follow one request through the system.</p>
+<p>Protect these records as user data. Limit access, remove personal details where possible, and set a retention period before reviewers inspect them.</p>
+<p>Review a batch of traces and mark the failures. Keep some requests chosen at random so the team can discover problems it does not know to search for. Add requests flagged by user feedback or unusual behavior to increase the chance of finding serious problems.</p>
+<p>Group failures that share a cause. You may find that the assistant mishandles many requests that combine an expired return window with a valid warranty claim.</p>
+<p>Add a few examples that represent this group. Vary the details that may affect the answer. Twenty copies of the same conversation add review work without testing a broader behavior.</p>
+<p>Fix the system and run the full regression set again. The new cases show whether the fix handles the failure users found. The old cases show whether the fix broke something that worked before.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1">flowchart LR</span>
+<span id="cb1-2">    A["Change the model,&lt;br/&gt;instructions, or tools"] --&gt; B["Run the saved tests"]</span>
+<span id="cb1-3">    B --&gt; C{"Pass the release rules?"}</span>
+<span id="cb1-4">    C -- "No" --&gt; D["Inspect the failed cases"]</span>
+<span id="cb1-5">    D --&gt; A</span>
+<span id="cb1-6">    C -- "Yes" --&gt; E["Ship the change"]</span>
+<span id="cb1-7">    E --&gt; F["Review a sample of&lt;br/&gt;real requests"]</span>
+<span id="cb1-8">    F --&gt; G["Group similar failures"]</span>
+<span id="cb1-9">    G --&gt; H["Add a few cases that&lt;br/&gt;represent each new problem"]</span>
+<span id="cb1-10">    H --&gt; B</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Change the model,&lt;br/&gt;instructions, or tools"] --&gt; B["Run the saved tests"]
+    B --&gt; C{"Pass the release rules?"}
+    C -- "No" --&gt; D["Inspect the failed cases"]
+    D --&gt; A
+    C -- "Yes" --&gt; E["Ship the change"]
+    E --&gt; F["Review a sample of&lt;br/&gt;real requests"]
+    F --&gt; G["Group similar failures"]
+    G --&gt; H["Add a few cases that&lt;br/&gt;represent each new problem"]
+    H --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Add a launch case when the failure threatens a critical path or represents a type of serious failure that could return. Other problems can remain in the product improvement backlog without becoming permanent release blockers. Fix or remove a case when reviewers cannot agree on its expected behavior.</p>
+<p>Hamel’s work focuses on this improvement loop. The golden dataset records the subset of lessons that future releases must preserve. I explore the related idea of feedback-guided data selection at the level of model training in <a href="https://www.novusopus.org/research/bend-not-shift">Bend, Not Shift</a>.</p>
+</section>
+<section id="record-what-produced-each-result" class="level2">
+<h2 class="anchored" data-anchor-id="record-what-produced-each-result">Record what produced each result</h2>
+<p>A score such as 92 percent means little if you cannot reproduce the system that earned it.</p>
+<p>Save these details with every test run:</p>
+<ul>
+<li>the dataset version;</li>
+<li>the model and the instructions sent to it;</li>
+<li>the documents and tools the model could use;</li>
+<li>the code or rubric that scored each answer.</li>
+</ul>
+<p>Reviewing outputs will expose expectations that nobody wrote down at the start. A support expert may decide that mentioning a warranty is insufficient unless the reply gives the customer a way to begin the claim. Update the written rule and record when its meaning changed.</p>
+<p>Give the dataset a version number and keep a short list of changes. A simple policy works:</p>
+<ul>
+<li><code>1.0</code> marks the first agreed set;</li>
+<li><code>1.1</code> adds cases without changing the meaning of a pass;</li>
+<li><code>2.0</code> changes the rules, fields, or meaning of success.</li>
+</ul>
+<p>Rerun the old system after a <code>2.0</code> change. Its old score used a different definition of success, so it cannot serve as the comparison point.</p>
+<p>A team that rewrites instructions against the same visible cases can learn those cases too well. Keep a small group of reviewed cases hidden from the people making changes. Run this <strong>holdout set</strong> before release to check whether the improvement also works on examples the developers did not study.</p>
+</section>
+<section id="a-release-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="a-release-checklist">A release checklist</h2>
+<p>Before using a golden dataset to approve a change, check that:</p>
+<ul>
+<li>each serious failure has reviewed examples and a release rule;</li>
+<li>each case explains the behavior it expects and the reason;</li>
+<li>the scoring guide allows more than one valid answer when the product does;</li>
+<li>human reviewers have checked any model judge or automated scoring rule;</li>
+<li>the team reports hand-picked test scores apart from estimates of real-world performance;</li>
+<li>the test run records the model, instructions, tools, data sources, and scoring method;</li>
+<li>each new case comes from a product requirement or a group of observed failures;</li>
+<li>the team has a safe way to review problems after release.</li>
+</ul>
+<p>The <a href="../../posts/llms-for-backend-engineers/">evaluation section in my guide for backend engineers</a> places these tests inside the rest of an LLM application. You can start the golden dataset as a spreadsheet. The work lies in agreeing on good behavior, checking it the same way after each change, and adding the failures that your users reveal.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Evaluation</category>
+  <category>Systems</category>
+  <guid>https://www.arjunsriva.com/posts/golden-datasets/</guid>
+  <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>LLMs for Backend Engineers: From First Principles</title>
   <link>https://www.arjunsriva.com/posts/llms-for-backend-engineers/</link>
