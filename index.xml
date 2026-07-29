@@ -9,8 +9,326 @@
 <link>https://www.arjunsriva.com/</link>
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.7.30</generator>
-<lastBuildDate>Mon, 31 Mar 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Tue, 17 Jun 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>LLMs for Backend Engineers: From First Principles</title>
+  <link>https://www.arjunsriva.com/posts/llms-for-backend-engineers/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>I wrote the first version of this guide for a room of backend engineers. Most of them had called an LLM API. They could ship a prompt, parse the response, and add retries. The API still felt arbitrary.</p>
+<p>Why does the provider charge different prices for input and output tokens? Why does caching help so much? Why can a batch job cost less than the same synchronous request? Why do reasoning requests fit an asynchronous API?</p>
+<p>The answers sit below the HTTP layer.</p>
+<p>This guide uses two views:</p>
+<ul>
+<li>The <strong>systems view</strong> explains latency and cost through inference.</li>
+<li>The <strong>ML view</strong> explains reliability through evaluation.</li>
+</ul>
+<section id="the-api-hides-an-unusual-computer" class="level2">
+<h2 class="anchored" data-anchor-id="the-api-hides-an-unusual-computer">The API hides an unusual computer</h2>
+<p>An LLM endpoint looks harmless:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">type</span> LLM <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">interface</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span></span>
+<span id="cb1-2">    Generate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>input <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">string</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">string</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">error</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span></span>
+<span id="cb1-3"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div></div>
+<p>A regular backend service might map an input to an output with a bounded amount of work. An LLM generates its output one token at a time. Each new token depends on the prompt and on the tokens generated before it.</p>
+<p>A transformer receives a sequence of tokens and returns a probability distribution for the next token. The serving system samples or selects one token, appends it to the sequence, and runs the model again.</p>
+<p>If the server recomputed the full sequence at each step, generation would waste most of its work. Production systems keep the intermediate attention state in a <strong>KV cache</strong>.</p>
+</section>
+<section id="one-request-two-phases" class="level2">
+<h2 class="anchored" data-anchor-id="one-request-two-phases">One request, two phases</h2>
+<p>The KV cache splits an inference request into two phases.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1">flowchart LR</span>
+<span id="cb2-2">    A["Prompt tokens"] --&gt; B["Prefill&lt;br/&gt;Process the prompt in parallel"]</span>
+<span id="cb2-3">    B --&gt; C["KV cache&lt;br/&gt;Attention state for prior tokens"]</span>
+<span id="cb2-4">    C --&gt; D["Decode one token"]</span>
+<span id="cb2-5">    D --&gt; E["Append token"]</span>
+<span id="cb2-6">    E --&gt; C</span>
+<span id="cb2-7">    D --&gt; F["Stream token to client"]</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Prompt tokens"] --&gt; B["Prefill&lt;br/&gt;Process the prompt in parallel"]
+    B --&gt; C["KV cache&lt;br/&gt;Attention state for prior tokens"]
+    C --&gt; D["Decode one token"]
+    D --&gt; E["Append token"]
+    E --&gt; C
+    D --&gt; F["Stream token to client"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="prefill" class="level3">
+<h3 class="anchored" data-anchor-id="prefill">Prefill</h3>
+<p>During prefill, the model processes the input prompt and builds the KV cache. GPUs can process prompt tokens in parallel, so this phase tends to use their compute capacity well.</p>
+<p>Prefill contributes much of the <strong>time to first token</strong>. A longer prompt creates more work before the user sees any output.</p>
+</section>
+<section id="decode" class="level3">
+<h3 class="anchored" data-anchor-id="decode">Decode</h3>
+<p>During decode, the model generates one token per step and reads the KV cache for the tokens that came before it. On common accelerator setups, decode tends to hit memory-bandwidth limits before compute limits.</p>
+<p>Decode determines <strong>time per output token</strong>. A model can return its first token fast and still take a long time to finish a large response.</p>
+<p>You should track at least two latency measurements:</p>
+<ul>
+<li><strong>Time to first token (TTFT):</strong> queueing plus prefill plus the first decode step.</li>
+<li><strong>Inter-token latency or tokens per second:</strong> the speed of the decode loop.</li>
+</ul>
+<p>End-to-end latency combines both. TTFT alone can make a slow response look healthy.</p>
+</section>
+</section>
+<section id="reading-a-pricing-page-from-the-hardware-up" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-pricing-page-from-the-hardware-up">Reading a pricing page from the hardware up</h2>
+<p>Provider pricing changes. The mechanics behind its shape change more slowly.</p>
+<section id="cached-input" class="level3">
+<h3 class="anchored" data-anchor-id="cached-input">Cached input</h3>
+<p>Many applications send the same long prefix on each request: a system prompt, tool definitions, examples, or the earlier turns in a conversation.</p>
+<p>The provider can reuse cached attention state for a matching prefix. That cuts repeated prefill work. Providers pass some of the savings to customers through a lower cached-input price.</p>
+<p>Cache behavior depends on the model and provider. Prefix length, exact token order, routing, and retention time can affect whether a request hits the cache. Put stable content first and user-specific content later. Then inspect the cached-token counts in the API response instead of assuming the cache worked.</p>
+<p>OpenAI, for example, <a href="https://developers.openai.com/api/docs/models/compare">prices cached input by model</a> and exposes cached-token usage in its API.</p>
+</section>
+<section id="batch-processing" class="level3">
+<h3 class="anchored" data-anchor-id="batch-processing">Batch processing</h3>
+<p>A synchronous endpoint keeps spare capacity so it can serve traffic with low queueing delay. That spare capacity costs money.</p>
+<p>A batch endpoint lets the provider queue work, combine compatible requests, and fill accelerator capacity. The customer gives up response time and gets a lower price. OpenAI’s <a href="https://platform.openai.com/docs/api-reference/batch/object?api-mode=responses">Batch API</a> currently uses a 24-hour completion window and offers a 50% discount.</p>
+<p>The backend analogy is familiar: an online request serves latency; an offline job serves throughput.</p>
+</section>
+<section id="small-models" class="level3">
+<h3 class="anchored" data-anchor-id="small-models">Small models</h3>
+<p>A smaller model moves fewer weights and performs fewer operations per token. It also needs less memory for its weights and often for its cache. Providers may build small models through distillation, separate training, pruning, or a mixture of techniques.</p>
+<p>The model name tells you little about fitness for your task. A small model can beat a large model on a narrow workload, and fail on an edge case that matters to your product. Evaluate models on your own traffic before choosing one.</p>
+</section>
+<section id="background-and-asynchronous-requests" class="level3">
+<h3 class="anchored" data-anchor-id="background-and-asynchronous-requests">Background and asynchronous requests</h3>
+<p>Reasoning models can generate hidden reasoning tokens, call tools, inspect results, and continue. A single user request may trigger several model passes and network calls. The work can outlive a normal HTTP timeout.</p>
+<p>Treat long-running model work like any other backend job:</p>
+<ol type="1">
+<li>Submit the request.</li>
+<li>Receive a job or response ID.</li>
+<li>Poll, subscribe, or accept a webhook.</li>
+<li>Store enough state to retry or resume.</li>
+</ol>
+<p>An asynchronous API reflects the duration and shape of the computation. It also forces you to decide how cancellation, idempotency, and partial tool effects should work.</p>
+</section>
+</section>
+<section id="the-prompt-is-part-of-a-probabilistic-program" class="level2">
+<h2 class="anchored" data-anchor-id="the-prompt-is-part-of-a-probabilistic-program">The prompt is part of a probabilistic program</h2>
+<p>Backend engineers often treat a prompt as source code. It looks like a specification:</p>
+<pre class="text"><code>Translate the phrase into professional Japanese:
+"Cloud Computing"</code></pre>
+<p>The model can still return an awkward literal translation, wrap the answer in commentary, or change behavior after you switch model versions.</p>
+<p>Reading the prompt cannot tell you how the system will behave across all inputs. The prompt interacts with:</p>
+<ul>
+<li>the model and its snapshot;</li>
+<li>decoding parameters;</li>
+<li>tool definitions and retrieved context;</li>
+<li>provider-side changes;</li>
+<li>the distribution of production inputs.</li>
+</ul>
+<p>A prompt review helps. A dataset tells you whether the system works.</p>
+<p>Real system prompts reveal this development process. Teams add instructions after they observe failures: copyright rules, tool-use constraints, refusal behavior, formatting rules, and exceptions to earlier rules. Simon Willison’s notes on the <a href="https://simonwillison.net/2025/May/25/claude-4-system-prompt/">Claude 4 system prompt</a> show the accumulated patches.</p>
+</section>
+<section id="build-an-evaluation-loop" class="level2">
+<h2 class="anchored" data-anchor-id="build-an-evaluation-loop">Build an evaluation loop</h2>
+<p>Unit tests still belong around deterministic code: parsing, authorization, tool execution, state transitions, and API contracts. Model behavior needs a second test system.</p>
+<p>Start with a <strong>golden dataset</strong>. Each row should contain a representative input and enough information to judge a good output.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>input</th>
+<th>expected behavior</th>
+<th>tags</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"Cloud Computing"</code></td>
+<td>Uses the accepted Japanese loanword</td>
+<td>common, terminology</td>
+</tr>
+<tr class="even">
+<td>An ambiguous skill name</td>
+<td>Requests context or uses the approved mapping</td>
+<td>ambiguous</td>
+</tr>
+<tr class="odd">
+<td>Instructions embedded in source text</td>
+<td>Treats the instructions as data</td>
+<td>injection</td>
+</tr>
+</tbody>
+</table>
+<p>Include common traffic, expensive mistakes, and failures you have already seen. Twenty useful examples beat a thousand rows that nobody has reviewed.</p>
+<p>Then choose scoring methods that match the task:</p>
+<ul>
+<li><strong>Exact or lexical checks</strong> work for schemas, required terms, and bounded extraction.</li>
+<li><strong>Semantic or judge-based checks</strong> work for meaning, tone, and criteria with several valid answers.</li>
+<li><strong>Human review</strong> calibrates both and catches errors in the evaluation itself.</li>
+</ul>
+<p>Track more than quality. A candidate can produce a good answer while missing your latency or cost budget. Record input tokens, output tokens, cached tokens, TTFT, total latency, and estimated cost beside the quality score.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1">flowchart LR</span>
+<span id="cb4-2">    A["Versioned prompt,&lt;br/&gt;model, tools, parameters"] --&gt; B["Run golden dataset"]</span>
+<span id="cb4-3">    B --&gt; C["Score quality,&lt;br/&gt;latency, and cost"]</span>
+<span id="cb4-4">    C --&gt; D{"Meets release gates?"}</span>
+<span id="cb4-5">    D -- "Yes" --&gt; E["Deploy"]</span>
+<span id="cb4-6">    D -- "No" --&gt; F["Inspect failures"]</span>
+<span id="cb4-7">    F --&gt; A</span>
+<span id="cb4-8">    E --&gt; G["Sample production traces"]</span>
+<span id="cb4-9">    G --&gt; H["Review new failures"]</span>
+<span id="cb4-10">    H --&gt; A</span>
+<span id="cb4-11">    H --&gt; I["Add cases to golden dataset"]</span>
+<span id="cb4-12">    I --&gt; B</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Versioned prompt,&lt;br/&gt;model, tools, parameters"] --&gt; B["Run golden dataset"]
+    B --&gt; C["Score quality,&lt;br/&gt;latency, and cost"]
+    C --&gt; D{"Meets release gates?"}
+    D -- "Yes" --&gt; E["Deploy"]
+    D -- "No" --&gt; F["Inspect failures"]
+    F --&gt; A
+    E --&gt; G["Sample production traces"]
+    G --&gt; H["Review new failures"]
+    H --&gt; A
+    H --&gt; I["Add cases to golden dataset"]
+    I --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Run this loop for each prompt, model, retrieval, or tool change. Version the complete configuration. A prompt hash without the model snapshot and tool schema cannot reproduce a result.</p>
+</section>
+<section id="put-deterministic-boundaries-around-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="put-deterministic-boundaries-around-the-model">Put deterministic boundaries around the model</h2>
+<p>Suppose you are adding a translation feature to a Go service. Keep the public API, authentication, retries, and durable state in the service that already owns them. Put model-specific code behind a narrow boundary.</p>
+<pre class="text"><code>Client
+  -&gt; Go API
+       -&gt; validate request
+       -&gt; authorize caller
+       -&gt; create idempotent job
+       -&gt; call model adapter
+            -&gt; build prompt
+            -&gt; call provider
+            -&gt; validate structured output
+       -&gt; persist result</code></pre>
+<p>The model adapter may live in Go, Python, or another service. The language choice matters less than the boundary:</p>
+<ul>
+<li>Give the model the minimum context and authority it needs.</li>
+<li>Validate its output before another system acts on it.</li>
+<li>Keep side effects in deterministic code.</li>
+<li>Log the model configuration and trace IDs.</li>
+</ul>
+<p>LLM output should not become a SQL statement, payment, email, or permission change without a policy check. Once a model can call tools, prompt injection becomes an authorization problem as much as a model-quality problem.</p>
+</section>
+<section id="production-completes-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="production-completes-the-dataset">Production completes the dataset</h2>
+<p>Your golden dataset describes yesterday’s understanding of the product. Production traffic will find missing languages, strange formatting, new attacks, and user goals that the initial dataset did not cover.</p>
+<p>Sample traces with privacy controls. Ask reviewers to label failures. Add useful cases to the golden set, then rerun old cases before release. This creates a regression suite from the mistakes your users encounter.</p>
+<p>Monitor the deterministic shell and the probabilistic core:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Useful signals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>API</td>
+<td>error rate, retries, queue time, timeouts</td>
+</tr>
+<tr class="even">
+<td>Inference</td>
+<td>TTFT, tokens/second, token counts, cache-hit rate</td>
+</tr>
+<tr class="odd">
+<td>Product quality</td>
+<td>task success, judge score, human rating, correction rate</td>
+</tr>
+<tr class="even">
+<td>Safety</td>
+<td>blocked actions, injection attempts, policy violations</td>
+</tr>
+<tr class="odd">
+<td>Cost</td>
+<td>cost/request, cost/successful task, spend by feature</td>
+</tr>
+</tbody>
+</table>
+<p>Provider uptime cannot tell you whether the model translated the right phrase. A quality dashboard cannot tell you that retry storms doubled the bill. You need both views.</p>
+</section>
+<section id="a-backend-engineers-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="a-backend-engineers-checklist">A backend engineer’s checklist</h2>
+<p>Before you ship an LLM-backed feature:</p>
+<ul>
+<li>Separate TTFT from decode speed and total latency.</li>
+<li>Measure tokens and cache hits on real requests.</li>
+<li>Use batch processing when the product can accept delayed results.</li>
+<li>Compare models on your dataset, not on the provider’s adjectives.</li>
+<li>Version prompts, model snapshots, tools, retrieval settings, and parameters.</li>
+<li>Gate releases with a reviewed golden dataset.</li>
+<li>Keep authorization and side effects outside the model.</li>
+<li>Feed reviewed production failures back into evaluation.</li>
+</ul>
+<p>The API becomes easier to reason about once you connect its behavior to inference and evaluation. Prefill and decode explain much of the latency and cost. A versioned dataset explains whether a change made the product better.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Backend</category>
+  <category>Systems</category>
+  <guid>https://www.arjunsriva.com/posts/llms-for-backend-engineers/</guid>
+  <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation</title>
   <link>https://www.arjunsriva.com/posts/programmng-language/</link>
@@ -597,7 +915,7 @@ It’s not as visible as marketing. But it’s what separates great products fro
 <p>Alright, folks. Time to put on your fortune-teller hats. Below is a little interactive playground where you can mess around with a sigmoid curve. Go ahead, tweak those knobs. Feel the power. Embrace your inner oracle.</p>
 <div class="panel-grid layout-sidebar ms-md-0 layout-sidebar-left">
 <div class="cell panel-sidebar card bg-light p-2 g-col-24 g-col-lg-7">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="53" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 52;"><span id="cb1-53">viewof noise <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="53" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 52;"><span id="cb1-53">viewof noise <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Inputs<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -763,7 +1081,7 @@ font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">html</span><span class="vs" style="color: #20794D;
 background-color: null;
-font-style: inherit;">`&lt;button&gt;Replay&lt;/button&gt;`</span></span></code></pre></div>
+font-style: inherit;">`&lt;button&gt;Replay&lt;/button&gt;`</span></span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -802,7 +1120,7 @@ font-style: inherit;">`&lt;button&gt;Replay&lt;/button&gt;`</span></span></code>
 </div>
 <div class="panel-fill g-col-24 g-col-lg-17 pt-3 pt-lg-0">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="74" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb2-74">d3 <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="74" data-source-offset="-0" style="background: #f1f3f5;"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb2-74">d3 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="pp" style="color: #AD0000;
 background-color: null;
@@ -1875,7 +2193,7 @@ font-style: inherit;">length</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb2-200">  }</span>
-<span id="cb2-201">}</span></code></pre></div>
+<span id="cb2-201">}</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">

@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-06-17">
+<meta name="description" content="A systems view of LLM latency, cost, reliability, and evaluation">
+
+<title>LLMs for Backend Engineers: From First Principles – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-189549ecd294ed9837df383a4b42e31c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8a591ff59271d21f6a5d1e80b3747fb5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-189549ecd294ed9837df383a4b42e31c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<meta property="og:title" content="LLMs for Backend Engineers: From First Principles – Arjun Srivastava">
+<meta property="og:description" content="A systems view of LLM latency, cost, reliability, and evaluation">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="LLMs for Backend Engineers: From First Principles – Arjun Srivastava">
+<meta name="twitter:description" content="A systems view of LLM latency, cost, reliability, and evaluation">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.com/library"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">LLMs for Backend Engineers: From First Principles</h1>
+                  <div>
+        <div class="description">
+          A systems view of LLM latency, cost, reliability, and evaluation
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">Backend</div>
+                <div class="quarto-category">Systems</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 17, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-api-hides-an-unusual-computer" id="toc-the-api-hides-an-unusual-computer" class="nav-link active" data-scroll-target="#the-api-hides-an-unusual-computer">The API hides an unusual computer</a></li>
+  <li><a href="#one-request-two-phases" id="toc-one-request-two-phases" class="nav-link" data-scroll-target="#one-request-two-phases">One request, two phases</a>
+  <ul class="collapse">
+  <li><a href="#prefill" id="toc-prefill" class="nav-link" data-scroll-target="#prefill">Prefill</a></li>
+  <li><a href="#decode" id="toc-decode" class="nav-link" data-scroll-target="#decode">Decode</a></li>
+  </ul></li>
+  <li><a href="#reading-a-pricing-page-from-the-hardware-up" id="toc-reading-a-pricing-page-from-the-hardware-up" class="nav-link" data-scroll-target="#reading-a-pricing-page-from-the-hardware-up">Reading a pricing page from the hardware up</a>
+  <ul class="collapse">
+  <li><a href="#cached-input" id="toc-cached-input" class="nav-link" data-scroll-target="#cached-input">Cached input</a></li>
+  <li><a href="#batch-processing" id="toc-batch-processing" class="nav-link" data-scroll-target="#batch-processing">Batch processing</a></li>
+  <li><a href="#small-models" id="toc-small-models" class="nav-link" data-scroll-target="#small-models">Small models</a></li>
+  <li><a href="#background-and-asynchronous-requests" id="toc-background-and-asynchronous-requests" class="nav-link" data-scroll-target="#background-and-asynchronous-requests">Background and asynchronous requests</a></li>
+  </ul></li>
+  <li><a href="#the-prompt-is-part-of-a-probabilistic-program" id="toc-the-prompt-is-part-of-a-probabilistic-program" class="nav-link" data-scroll-target="#the-prompt-is-part-of-a-probabilistic-program">The prompt is part of a probabilistic program</a></li>
+  <li><a href="#build-an-evaluation-loop" id="toc-build-an-evaluation-loop" class="nav-link" data-scroll-target="#build-an-evaluation-loop">Build an evaluation loop</a></li>
+  <li><a href="#put-deterministic-boundaries-around-the-model" id="toc-put-deterministic-boundaries-around-the-model" class="nav-link" data-scroll-target="#put-deterministic-boundaries-around-the-model">Put deterministic boundaries around the model</a></li>
+  <li><a href="#production-completes-the-dataset" id="toc-production-completes-the-dataset" class="nav-link" data-scroll-target="#production-completes-the-dataset">Production completes the dataset</a></li>
+  <li><a href="#a-backend-engineers-checklist" id="toc-a-backend-engineers-checklist" class="nav-link" data-scroll-target="#a-backend-engineers-checklist">A backend engineer’s checklist</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>I wrote the first version of this guide for a room of backend engineers. Most of them had called an LLM API. They could ship a prompt, parse the response, and add retries. The API still felt arbitrary.</p>
+<p>Why does the provider charge different prices for input and output tokens? Why does caching help so much? Why can a batch job cost less than the same synchronous request? Why do reasoning requests fit an asynchronous API?</p>
+<p>The answers sit below the HTTP layer.</p>
+<p>This guide uses two views:</p>
+<ul>
+<li>The <strong>systems view</strong> explains latency and cost through inference.</li>
+<li>The <strong>ML view</strong> explains reliability through evaluation.</li>
+</ul>
+<section id="the-api-hides-an-unusual-computer" class="level2">
+<h2 class="anchored" data-anchor-id="the-api-hides-an-unusual-computer">The API hides an unusual computer</h2>
+<p>An LLM endpoint looks harmless:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> LLM <span class="kw">interface</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Generate<span class="op">(</span>input <span class="dt">string</span><span class="op">)</span> <span class="op">(</span><span class="dt">string</span><span class="op">,</span> <span class="dt">error</span><span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A regular backend service might map an input to an output with a bounded amount of work. An LLM generates its output one token at a time. Each new token depends on the prompt and on the tokens generated before it.</p>
+<p>A transformer receives a sequence of tokens and returns a probability distribution for the next token. The serving system samples or selects one token, appends it to the sequence, and runs the model again.</p>
+<p>If the server recomputed the full sequence at each step, generation would waste most of its work. Production systems keep the intermediate attention state in a <strong>KV cache</strong>.</p>
+</section>
+<section id="one-request-two-phases" class="level2">
+<h2 class="anchored" data-anchor-id="one-request-two-phases">One request, two phases</h2>
+<p>The KV cache splits an inference request into two phases.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    A["Prompt tokens"] --&gt; B["Prefill&lt;br/&gt;Process the prompt in parallel"]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C["KV cache&lt;br/&gt;Attention state for prior tokens"]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    C --&gt; D["Decode one token"]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    D --&gt; E["Append token"]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    E --&gt; C</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    D --&gt; F["Stream token to client"]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Prompt tokens"] --&gt; B["Prefill&lt;br/&gt;Process the prompt in parallel"]
+    B --&gt; C["KV cache&lt;br/&gt;Attention state for prior tokens"]
+    C --&gt; D["Decode one token"]
+    D --&gt; E["Append token"]
+    E --&gt; C
+    D --&gt; F["Stream token to client"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="prefill" class="level3">
+<h3 class="anchored" data-anchor-id="prefill">Prefill</h3>
+<p>During prefill, the model processes the input prompt and builds the KV cache. GPUs can process prompt tokens in parallel, so this phase tends to use their compute capacity well.</p>
+<p>Prefill contributes much of the <strong>time to first token</strong>. A longer prompt creates more work before the user sees any output.</p>
+</section>
+<section id="decode" class="level3">
+<h3 class="anchored" data-anchor-id="decode">Decode</h3>
+<p>During decode, the model generates one token per step and reads the KV cache for the tokens that came before it. On common accelerator setups, decode tends to hit memory-bandwidth limits before compute limits.</p>
+<p>Decode determines <strong>time per output token</strong>. A model can return its first token fast and still take a long time to finish a large response.</p>
+<p>You should track at least two latency measurements:</p>
+<ul>
+<li><strong>Time to first token (TTFT):</strong> queueing plus prefill plus the first decode step.</li>
+<li><strong>Inter-token latency or tokens per second:</strong> the speed of the decode loop.</li>
+</ul>
+<p>End-to-end latency combines both. TTFT alone can make a slow response look healthy.</p>
+</section>
+</section>
+<section id="reading-a-pricing-page-from-the-hardware-up" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-pricing-page-from-the-hardware-up">Reading a pricing page from the hardware up</h2>
+<p>Provider pricing changes. The mechanics behind its shape change more slowly.</p>
+<section id="cached-input" class="level3">
+<h3 class="anchored" data-anchor-id="cached-input">Cached input</h3>
+<p>Many applications send the same long prefix on each request: a system prompt, tool definitions, examples, or the earlier turns in a conversation.</p>
+<p>The provider can reuse cached attention state for a matching prefix. That cuts repeated prefill work. Providers pass some of the savings to customers through a lower cached-input price.</p>
+<p>Cache behavior depends on the model and provider. Prefix length, exact token order, routing, and retention time can affect whether a request hits the cache. Put stable content first and user-specific content later. Then inspect the cached-token counts in the API response instead of assuming the cache worked.</p>
+<p>OpenAI, for example, <a href="https://developers.openai.com/api/docs/models/compare">prices cached input by model</a> and exposes cached-token usage in its API.</p>
+</section>
+<section id="batch-processing" class="level3">
+<h3 class="anchored" data-anchor-id="batch-processing">Batch processing</h3>
+<p>A synchronous endpoint keeps spare capacity so it can serve traffic with low queueing delay. That spare capacity costs money.</p>
+<p>A batch endpoint lets the provider queue work, combine compatible requests, and fill accelerator capacity. The customer gives up response time and gets a lower price. OpenAI’s <a href="https://platform.openai.com/docs/api-reference/batch/object?api-mode=responses">Batch API</a> currently uses a 24-hour completion window and offers a 50% discount.</p>
+<p>The backend analogy is familiar: an online request serves latency; an offline job serves throughput.</p>
+</section>
+<section id="small-models" class="level3">
+<h3 class="anchored" data-anchor-id="small-models">Small models</h3>
+<p>A smaller model moves fewer weights and performs fewer operations per token. It also needs less memory for its weights and often for its cache. Providers may build small models through distillation, separate training, pruning, or a mixture of techniques.</p>
+<p>The model name tells you little about fitness for your task. A small model can beat a large model on a narrow workload, and fail on an edge case that matters to your product. Evaluate models on your own traffic before choosing one.</p>
+</section>
+<section id="background-and-asynchronous-requests" class="level3">
+<h3 class="anchored" data-anchor-id="background-and-asynchronous-requests">Background and asynchronous requests</h3>
+<p>Reasoning models can generate hidden reasoning tokens, call tools, inspect results, and continue. A single user request may trigger several model passes and network calls. The work can outlive a normal HTTP timeout.</p>
+<p>Treat long-running model work like any other backend job:</p>
+<ol type="1">
+<li>Submit the request.</li>
+<li>Receive a job or response ID.</li>
+<li>Poll, subscribe, or accept a webhook.</li>
+<li>Store enough state to retry or resume.</li>
+</ol>
+<p>An asynchronous API reflects the duration and shape of the computation. It also forces you to decide how cancellation, idempotency, and partial tool effects should work.</p>
+</section>
+</section>
+<section id="the-prompt-is-part-of-a-probabilistic-program" class="level2">
+<h2 class="anchored" data-anchor-id="the-prompt-is-part-of-a-probabilistic-program">The prompt is part of a probabilistic program</h2>
+<p>Backend engineers often treat a prompt as source code. It looks like a specification:</p>
+<pre class="text"><code>Translate the phrase into professional Japanese:
+"Cloud Computing"</code></pre>
+<p>The model can still return an awkward literal translation, wrap the answer in commentary, or change behavior after you switch model versions.</p>
+<p>Reading the prompt cannot tell you how the system will behave across all inputs. The prompt interacts with:</p>
+<ul>
+<li>the model and its snapshot;</li>
+<li>decoding parameters;</li>
+<li>tool definitions and retrieved context;</li>
+<li>provider-side changes;</li>
+<li>the distribution of production inputs.</li>
+</ul>
+<p>A prompt review helps. A dataset tells you whether the system works.</p>
+<p>Real system prompts reveal this development process. Teams add instructions after they observe failures: copyright rules, tool-use constraints, refusal behavior, formatting rules, and exceptions to earlier rules. Simon Willison’s notes on the <a href="https://simonwillison.net/2025/May/25/claude-4-system-prompt/">Claude 4 system prompt</a> show the accumulated patches.</p>
+</section>
+<section id="build-an-evaluation-loop" class="level2">
+<h2 class="anchored" data-anchor-id="build-an-evaluation-loop">Build an evaluation loop</h2>
+<p>Unit tests still belong around deterministic code: parsing, authorization, tool execution, state transitions, and API contracts. Model behavior needs a second test system.</p>
+<p>Start with a <strong>golden dataset</strong>. Each row should contain a representative input and enough information to judge a good output.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>input</th>
+<th>expected behavior</th>
+<th>tags</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"Cloud Computing"</code></td>
+<td>Uses the accepted Japanese loanword</td>
+<td>common, terminology</td>
+</tr>
+<tr class="even">
+<td>An ambiguous skill name</td>
+<td>Requests context or uses the approved mapping</td>
+<td>ambiguous</td>
+</tr>
+<tr class="odd">
+<td>Instructions embedded in source text</td>
+<td>Treats the instructions as data</td>
+<td>injection</td>
+</tr>
+</tbody>
+</table>
+<p>Include common traffic, expensive mistakes, and failures you have already seen. Twenty useful examples beat a thousand rows that nobody has reviewed.</p>
+<p>Then choose scoring methods that match the task:</p>
+<ul>
+<li><strong>Exact or lexical checks</strong> work for schemas, required terms, and bounded extraction.</li>
+<li><strong>Semantic or judge-based checks</strong> work for meaning, tone, and criteria with several valid answers.</li>
+<li><strong>Human review</strong> calibrates both and catches errors in the evaluation itself.</li>
+</ul>
+<p>Track more than quality. A candidate can produce a good answer while missing your latency or cost budget. Record input tokens, output tokens, cached tokens, TTFT, total latency, and estimated cost beside the quality score.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    A["Versioned prompt,&lt;br/&gt;model, tools, parameters"] --&gt; B["Run golden dataset"]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C["Score quality,&lt;br/&gt;latency, and cost"]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    C --&gt; D{"Meets release gates?"}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    D -- "Yes" --&gt; E["Deploy"]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    D -- "No" --&gt; F["Inspect failures"]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    F --&gt; A</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    E --&gt; G["Sample production traces"]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    G --&gt; H["Review new failures"]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    H --&gt; A</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    H --&gt; I["Add cases to golden dataset"]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    I --&gt; B</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Versioned prompt,&lt;br/&gt;model, tools, parameters"] --&gt; B["Run golden dataset"]
+    B --&gt; C["Score quality,&lt;br/&gt;latency, and cost"]
+    C --&gt; D{"Meets release gates?"}
+    D -- "Yes" --&gt; E["Deploy"]
+    D -- "No" --&gt; F["Inspect failures"]
+    F --&gt; A
+    E --&gt; G["Sample production traces"]
+    G --&gt; H["Review new failures"]
+    H --&gt; A
+    H --&gt; I["Add cases to golden dataset"]
+    I --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Run this loop for each prompt, model, retrieval, or tool change. Version the complete configuration. A prompt hash without the model snapshot and tool schema cannot reproduce a result.</p>
+</section>
+<section id="put-deterministic-boundaries-around-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="put-deterministic-boundaries-around-the-model">Put deterministic boundaries around the model</h2>
+<p>Suppose you are adding a translation feature to a Go service. Keep the public API, authentication, retries, and durable state in the service that already owns them. Put model-specific code behind a narrow boundary.</p>
+<pre class="text"><code>Client
+  -&gt; Go API
+       -&gt; validate request
+       -&gt; authorize caller
+       -&gt; create idempotent job
+       -&gt; call model adapter
+            -&gt; build prompt
+            -&gt; call provider
+            -&gt; validate structured output
+       -&gt; persist result</code></pre>
+<p>The model adapter may live in Go, Python, or another service. The language choice matters less than the boundary:</p>
+<ul>
+<li>Give the model the minimum context and authority it needs.</li>
+<li>Validate its output before another system acts on it.</li>
+<li>Keep side effects in deterministic code.</li>
+<li>Log the model configuration and trace IDs.</li>
+</ul>
+<p>LLM output should not become a SQL statement, payment, email, or permission change without a policy check. Once a model can call tools, prompt injection becomes an authorization problem as much as a model-quality problem.</p>
+</section>
+<section id="production-completes-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="production-completes-the-dataset">Production completes the dataset</h2>
+<p>Your golden dataset describes yesterday’s understanding of the product. Production traffic will find missing languages, strange formatting, new attacks, and user goals that the initial dataset did not cover.</p>
+<p>Sample traces with privacy controls. Ask reviewers to label failures. Add useful cases to the golden set, then rerun old cases before release. This creates a regression suite from the mistakes your users encounter.</p>
+<p>Monitor the deterministic shell and the probabilistic core:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Useful signals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>API</td>
+<td>error rate, retries, queue time, timeouts</td>
+</tr>
+<tr class="even">
+<td>Inference</td>
+<td>TTFT, tokens/second, token counts, cache-hit rate</td>
+</tr>
+<tr class="odd">
+<td>Product quality</td>
+<td>task success, judge score, human rating, correction rate</td>
+</tr>
+<tr class="even">
+<td>Safety</td>
+<td>blocked actions, injection attempts, policy violations</td>
+</tr>
+<tr class="odd">
+<td>Cost</td>
+<td>cost/request, cost/successful task, spend by feature</td>
+</tr>
+</tbody>
+</table>
+<p>Provider uptime cannot tell you whether the model translated the right phrase. A quality dashboard cannot tell you that retry storms doubled the bill. You need both views.</p>
+</section>
+<section id="a-backend-engineers-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="a-backend-engineers-checklist">A backend engineer’s checklist</h2>
+<p>Before you ship an LLM-backed feature:</p>
+<ul>
+<li>Separate TTFT from decode speed and total latency.</li>
+<li>Measure tokens and cache hits on real requests.</li>
+<li>Use batch processing when the product can accept delayed results.</li>
+<li>Compare models on your dataset, not on the provider’s adjectives.</li>
+<li>Version prompts, model snapshots, tools, retrieval settings, and parameters.</li>
+<li>Gate releases with a reviewed golden dataset.</li>
+<li>Keep authorization and side effects outside the model.</li>
+<li>Feed reviewed production failures back into evaluation.</li>
+</ul>
+<p>The API becomes easier to reason about once you connect its behavior to inference and evaluation. Prefill and decode explain much of the latency and cost. A versioned dataset explains whether a change made the product better.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
