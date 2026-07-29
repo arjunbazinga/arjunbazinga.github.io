@@ -1,0 +1,269 @@
+---
+title: "How to Design Metrics That Change Decisions"
+description: "A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help"
+layout: post
+categories: [Product, Metrics, Decision Making]
+comments: false
+date: "2025-12-12"
+---
+
+## Why metrics?
+
+Suppose a team says:
+
+> We will write good documentation.
+
+The statement describes the work the team plans to do: the implementation. The team will write, review, and publish documents. Completing that work does not tell you whether the documents helped anyone.
+
+A metric gives the implementation a test. If the documents work, readers should need less help with the tasks they explain. You could count the Slack support questions about those tasks each week, establish the usual rate before publishing the documents, and measure it again afterward. If usage changes, measure questions per 100 task attempts rather than relying on the raw total.
+
+A useful metric is the simplest outcome you can express as a number and expect to change if the implementation works. You should be able to combine observations, compare the result with a starting point, and measure it again after the change.
+
+Fewer support questions would not prove that the documents worked. Usage may have fallen, readers may have given up, or the questions may have moved somewhere else. These alternative explanations are why the primary metric needs context.
+
+Like a good software test, a metric separates what should happen from how you make it happen. The team can change the document format, writing process, or publishing tool while keeping the same test. Most major initiatives should have one primary test. The team uses driver metrics to choose where to intervene and guardrails to define what it cannot sacrifice. Using all three sets the initiative’s scope and direction without prescribing its implementation.
+
+“Improve onboarding” might use the share of users who complete setup or their time to first useful result as its primary test. “Make deployments safer” might use the rollback rate or the number of customer-visible incidents.
+
+Choosing which initiative deserves attention is a separate problem. Systems thinking helps you understand the system, find its constraint, and choose where to intervene. Assume you have made that choice. How do you design the test?
+
+## A metric should change a decision
+
+Most teams have no shortage of metrics. They have dashboards full of numbers, reviewed on a schedule, that do not change what anyone does. Before collecting the data, complete this sentence:
+
+> If the metric does X, we will do Y.
+
+Without the second half, you have a number to watch rather than a tool for making a decision.
+
+```{mermaid}
+flowchart LR
+    A["What decision<br/>must we make?"] --> B["Which belief<br/>does it depend on?"]
+    B --> C["Which metric<br/>tests that belief?"]
+    C --> D["Which result<br/>changes our action?"]
+    D --> E["Who has authority<br/>to act?"]
+    E --> F["Collect and review"]
+    F --> G{"Did it inform<br/>a decision?"}
+    G -- "Yes" --> H["Act and record<br/>what happened"]
+    G -- "No" --> I["Redesign or<br/>retire the metric"]
+```
+
+## Six rules of thumb
+
+### 1. No decision or action means no metric
+
+Name the decision the metric informs. Define “if X, then Y” before the metric moves. Otherwise it is another dashboard.
+
+### 2. Measure your constraint, not your curiosity
+
+The system moves as fast as its bottleneck. Metrics outside the current constraint are often noise.
+
+### 3. Your stage dictates your metrics
+
+Searching for a viable product, scaling a proven one, and optimizing a mature business require different evidence. Using a later-stage metric during discovery can push the team toward the wrong work.
+
+### 4. Prefer actionability over precision
+
+A noisy metric you can influence may help more than a precise metric you cannot act on. Precision still matters when small changes trigger expensive or irreversible decisions.
+
+### 5. Metrics should graduate or die
+
+Some metrics begin as exploratory questions. Useful ones may become operational targets or critical guardrails. If a metric no longer changes decisions, question why it still occupies the dashboard.
+
+### 6. Keep the meaning visible
+
+A metric derived from fifteen inputs may look rigorous while hiding the cause of a change. Anyone who uses the number should understand what moved and what action remains available.
+
+## Stage 1: Decide what you need to learn
+
+### Which decision are you trying to make?
+
+Use the decision as the first filter.
+
+- **Specific:** “We need to decide whether to invest more in onboarding because users may take too long to reach their first useful result.” Measure time to first value and activation by cohort.
+- **Vague:** “We should track engagement.” No decision follows from the request, so the metric has no defined job.
+
+This avoids the streetlight effect: measuring whatever is easy to see rather than the thing that reduces uncertainty.
+
+### Who will use the metric?
+
+The same product needs different levels of information:
+
+- An operator needs a signal tied to day-to-day action.
+- A manager needs evidence for tradeoffs and prioritization.
+- An executive needs evidence for direction and investment.
+- A customer, regulator, or partner may need an auditable commitment.
+
+A metric with no clear audience tends to become dashboard noise. Name one primary user even when several groups can view it.
+
+### Which belief would the metric support or challenge?
+
+Write down the assumption behind the decision:
+
+- Users who reach Feature X are more likely to retain.
+- Reducing onboarding time will increase activation.
+- Faster model deployment improves customer trust.
+
+A metric can show that two things move together. It cannot establish that one caused the other. If the decision depends on causation, pair the metric with an experiment or another design that can rule out plausible alternatives.
+
+### Which stage are you in?
+
+Your stage changes the useful question:
+
+- **Searching for product-market fit:** Are people returning to use the product? Repeated use and retention provide central evidence. Keep the metric set small while the team still changes the product itself.
+- **Early growth:** Can we acquire and activate users through a repeatable process? Examine channels, conversion, time to value, and the cost of acquisition.
+- **Scaling:** Can the economics survive more volume? Cohort retention, contribution margin, and support cost become more useful.
+- **Mature or competitive:** Can we defend the product and create new growth? Market position, switching behavior, and revenue from newer products may matter.
+
+Teams create confusion when they adopt the metric system of a mature company while still searching for a product people want.
+
+### Which constraint limits progress?
+
+Apply constraint thinking to the path through the business:
+
+- If you cannot acquire customers, measure lead generation and conversion.
+- If customers arrive but do not activate, measure time to value and onboarding completion.
+- If activated customers leave, measure retention and reasons for churn.
+- If retained accounts do not expand, measure product depth and expansion triggers.
+- If demand exceeds the team’s capacity, measure the hiring funnel and time to productivity.
+
+The constraint can move. Review it before adding metrics rather than treating the current dashboard as permanent.
+
+## Stage 2: Test the metric design
+
+### The gaming test
+
+Ask: **If someone wanted to hit this metric without creating value, what would they do?**
+
+- **Weak:** Features shipped.
+- **Better:** Features shipped that reach more than 10% adoption within 30 days.
+- **Guarded:** Adoption within 30 days, while customer satisfaction and support volume remain within agreed limits.
+
+The first metric rewards trivial releases and encourages teams to split work into smaller labels. The second connects shipping to use. The guardrails stop the team from increasing adoption through changes that harm the rest of the experience.
+
+### The completeness test
+
+Ask: **If we optimized this metric, would we achieve the intended goal?**
+
+Use three parts:
+
+- **Primary metric:** the outcome you want to improve;
+- **Driver metrics:** inputs that may influence the outcome;
+- **Guardrails:** results that must not degrade while the primary metric improves.
+
+The team uses the three types together to define the initiative. The primary metric sets the direction. The drivers narrow the scope to inputs the team can change, and the guardrails mark the boundaries of an acceptable improvement.
+
+For an ecommerce checkout:
+
+- **Primary:** purchase conversion rate;
+- **Drivers:** page speed, checkout completion, and pricing;
+- **Guardrails:** average order value, return rate, and customer satisfaction.
+
+Guardrails reveal an incomplete optimization. They do not prove that the drivers caused the outcome, so keep the belief and the evidence separate.
+
+### The time-horizon test
+
+Ask how fast the metric can respond:
+
+- **Minutes or hours:** availability, page speed, current active users;
+- **Days or weeks:** signup conversion, feature adoption, support tickets;
+- **Months:** retention, revenue, market share;
+- **Quarters or years:** customer lifetime value, brand perception, competitive position.
+
+Long-cycle metrics cannot steer daily work. Short-cycle metrics can pull the team toward local changes that damage long-term outcomes. A useful metric system connects the two without reviewing both at the same cadence.
+
+### The attribution test
+
+Ask how much control the team has over the result.
+
+Total revenue in a seasonal business or user growth during a viral event has weak attribution. Conversion on a flow the team owns or defect rates in a service it operates have stronger attribution.
+
+External outcomes still matter. Use them to judge the business. Use metrics closer to the team’s work to decide what the team should change.
+
+### The leading and lagging chain
+
+Work backward from the outcome to find earlier signals:
+
+```text
+Revenue
+  ← sales-cycle speed
+    ← qualified pipeline
+      ← lead quality
+        ← message clarity
+```
+
+Each step is an assumption about how the system works. The chain gives the team an earlier place to intervene and a set of beliefs to test. It should not become a claim that every link is causal.
+
+## Stage 3: Make the metric operational
+
+### Establish a baseline
+
+Observe the metric long enough to understand its normal variation before setting a sensitive alert or target. The required period depends on volume, day-of-week effects, seasonality, and the cost of a false alarm.
+
+Record the baseline and the conditions under which you measured it. A sudden change in traffic mix can invalidate a comparison even when the calculation remains the same.
+
+### Define the “so what” thresholds
+
+Write the triggers before reviewing the next result:
+
+- If the metric rises above X, we will do Y.
+- If it falls below Z, we will do W.
+- If it changes by more than N, we will investigate.
+
+Precommitment reduces the temptation to invent an explanation after seeing the number. Revisit a threshold when the underlying cost, risk, or baseline changes, and record why.
+
+### Match the review cadence to the metric
+
+- Use automated alerts for real-time operational metrics.
+- Review short-cycle metrics each week.
+- Review medium-cycle metrics each month.
+- Review long-cycle metrics during strategic planning.
+
+Reviewing everything each week creates noise and false urgency. Waiting a quarter to inspect an operational failure removes the chance to respond.
+
+### Assign ownership with authority
+
+Every operational metric needs one person who can:
+
+- explain what drives a change;
+- investigate a surprising result;
+- make or escalate the action attached to the threshold.
+
+Shared contributors are useful. One accountable owner prevents the metric from becoming a number everyone watches and no one uses.
+
+## Stage 4: Maintain the metric system
+
+### Weekly: operational review
+
+- Did an unexpected change occur?
+- Does the team need to investigate?
+- Are the short-cycle indicators moving outside their expected ranges?
+
+Keep this review narrow and tied to immediate action.
+
+### Monthly: tactical review
+
+- Which key metrics changed?
+- Which experiments ran, and what did the team learn?
+- Do current tactics need adjustment?
+- Did an early warning signal appear?
+
+Use this review to examine causes and compare results with the assumptions behind the plan.
+
+### Quarterly: strategic review
+
+Ask whether the team still measures the right things. Review each metric’s lifecycle:
+
+1. **Exploratory:** used for learning, with no target;
+2. **Operational:** attached to a target and an action;
+3. **Critical:** receives leadership attention and requires guardrails;
+4. **Deprecated:** still available for continuity but no longer drives action;
+5. **Retired:** removed from dashboards and recurring reviews.
+
+Then ask:
+
+- Which metrics should change state?
+- Which decisions lack evidence?
+- Which metrics changed behavior without improving the intended outcome?
+- Which metrics should the team remove?
+
+A metric system should lose metrics as well as gain them. The goal is a smaller set of numbers that helps people make better decisions.
