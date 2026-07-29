@@ -1,0 +1,230 @@
+---
+title: "LLMs for Backend Engineers: From First Principles"
+description: "A systems view of LLM latency, cost, reliability, and evaluation"
+layout: post
+categories: [AI, Backend, Systems]
+comments: false
+date: "2025-06-17"
+---
+
+I wrote the first version of this guide for a room of backend engineers. Most of them had called an LLM API. They could ship a prompt, parse the response, and add retries. The API still felt arbitrary.
+
+Why does the provider charge different prices for input and output tokens? Why does caching help so much? Why can a batch job cost less than the same synchronous request? Why do reasoning requests fit an asynchronous API?
+
+The answers sit below the HTTP layer.
+
+This guide uses two views:
+
+- The **systems view** explains latency and cost through inference.
+- The **ML view** explains reliability through evaluation.
+
+## The API hides an unusual computer
+
+An LLM endpoint looks harmless:
+
+```go
+type LLM interface {
+    Generate(input string) (string, error)
+}
+```
+
+A regular backend service might map an input to an output with a bounded amount of work. An LLM generates its output one token at a time. Each new token depends on the prompt and on the tokens generated before it.
+
+A transformer receives a sequence of tokens and returns a probability distribution for the next token. The serving system samples or selects one token, appends it to the sequence, and runs the model again.
+
+If the server recomputed the full sequence at each step, generation would waste most of its work. Production systems keep the intermediate attention state in a **KV cache**.
+
+## One request, two phases
+
+The KV cache splits an inference request into two phases.
+
+```{mermaid}
+flowchart LR
+    A["Prompt tokens"] --> B["Prefill<br/>Process the prompt in parallel"]
+    B --> C["KV cache<br/>Attention state for prior tokens"]
+    C --> D["Decode one token"]
+    D --> E["Append token"]
+    E --> C
+    D --> F["Stream token to client"]
+```
+
+### Prefill
+
+During prefill, the model processes the input prompt and builds the KV cache. GPUs can process prompt tokens in parallel, so this phase tends to use their compute capacity well.
+
+Prefill contributes much of the **time to first token**. A longer prompt creates more work before the user sees any output.
+
+### Decode
+
+During decode, the model generates one token per step and reads the KV cache for the tokens that came before it. On common accelerator setups, decode tends to hit memory-bandwidth limits before compute limits.
+
+Decode determines **time per output token**. A model can return its first token fast and still take a long time to finish a large response.
+
+You should track at least two latency measurements:
+
+- **Time to first token (TTFT):** queueing plus prefill plus the first decode step.
+- **Inter-token latency or tokens per second:** the speed of the decode loop.
+
+End-to-end latency combines both. TTFT alone can make a slow response look healthy.
+
+## Reading a pricing page from the hardware up
+
+Provider pricing changes. The mechanics behind its shape change more slowly.
+
+### Cached input
+
+Many applications send the same long prefix on each request: a system prompt, tool definitions, examples, or the earlier turns in a conversation.
+
+The provider can reuse cached attention state for a matching prefix. That cuts repeated prefill work. Providers pass some of the savings to customers through a lower cached-input price.
+
+Cache behavior depends on the model and provider. Prefix length, exact token order, routing, and retention time can affect whether a request hits the cache. Put stable content first and user-specific content later. Then inspect the cached-token counts in the API response instead of assuming the cache worked.
+
+OpenAI, for example, [prices cached input by model](https://developers.openai.com/api/docs/models/compare) and exposes cached-token usage in its API.
+
+### Batch processing
+
+A synchronous endpoint keeps spare capacity so it can serve traffic with low queueing delay. That spare capacity costs money.
+
+A batch endpoint lets the provider queue work, combine compatible requests, and fill accelerator capacity. The customer gives up response time and gets a lower price. OpenAI's [Batch API](https://platform.openai.com/docs/api-reference/batch/object?api-mode=responses) currently uses a 24-hour completion window and offers a 50% discount.
+
+The backend analogy is familiar: an online request serves latency; an offline job serves throughput.
+
+### Small models
+
+A smaller model moves fewer weights and performs fewer operations per token. It also needs less memory for its weights and often for its cache. Providers may build small models through distillation, separate training, pruning, or a mixture of techniques.
+
+The model name tells you little about fitness for your task. A small model can beat a large model on a narrow workload, and fail on an edge case that matters to your product. Evaluate models on your own traffic before choosing one.
+
+### Background and asynchronous requests
+
+Reasoning models can generate hidden reasoning tokens, call tools, inspect results, and continue. A single user request may trigger several model passes and network calls. The work can outlive a normal HTTP timeout.
+
+Treat long-running model work like any other backend job:
+
+1. Submit the request.
+2. Receive a job or response ID.
+3. Poll, subscribe, or accept a webhook.
+4. Store enough state to retry or resume.
+
+An asynchronous API reflects the duration and shape of the computation. It also forces you to decide how cancellation, idempotency, and partial tool effects should work.
+
+## The prompt is part of a probabilistic program
+
+Backend engineers often treat a prompt as source code. It looks like a specification:
+
+```text
+Translate the phrase into professional Japanese:
+"Cloud Computing"
+```
+
+The model can still return an awkward literal translation, wrap the answer in commentary, or change behavior after you switch model versions.
+
+Reading the prompt cannot tell you how the system will behave across all inputs. The prompt interacts with:
+
+- the model and its snapshot;
+- decoding parameters;
+- tool definitions and retrieved context;
+- provider-side changes;
+- the distribution of production inputs.
+
+A prompt review helps. A dataset tells you whether the system works.
+
+Real system prompts reveal this development process. Teams add instructions after they observe failures: copyright rules, tool-use constraints, refusal behavior, formatting rules, and exceptions to earlier rules. Simon Willison's notes on the [Claude 4 system prompt](https://simonwillison.net/2025/May/25/claude-4-system-prompt/) show the accumulated patches.
+
+## Build an evaluation loop
+
+Unit tests still belong around deterministic code: parsing, authorization, tool execution, state transitions, and API contracts. Model behavior needs a second test system.
+
+Start with a **golden dataset**. Each row should contain a representative input and enough information to judge a good output.
+
+| input | expected behavior | tags |
+|---|---|---|
+| `"Cloud Computing"` | Uses the accepted Japanese loanword | common, terminology |
+| An ambiguous skill name | Requests context or uses the approved mapping | ambiguous |
+| Instructions embedded in source text | Treats the instructions as data | injection |
+
+Include common traffic, expensive mistakes, and failures you have already seen. Twenty useful examples beat a thousand rows that nobody has reviewed.
+
+Then choose scoring methods that match the task:
+
+- **Exact or lexical checks** work for schemas, required terms, and bounded extraction.
+- **Semantic or judge-based checks** work for meaning, tone, and criteria with several valid answers.
+- **Human review** calibrates both and catches errors in the evaluation itself.
+
+Track more than quality. A candidate can produce a good answer while missing your latency or cost budget. Record input tokens, output tokens, cached tokens, TTFT, total latency, and estimated cost beside the quality score.
+
+```{mermaid}
+flowchart LR
+    A["Versioned prompt,<br/>model, tools, parameters"] --> B["Run golden dataset"]
+    B --> C["Score quality,<br/>latency, and cost"]
+    C --> D{"Meets release gates?"}
+    D -- "Yes" --> E["Deploy"]
+    D -- "No" --> F["Inspect failures"]
+    F --> A
+    E --> G["Sample production traces"]
+    G --> H["Review new failures"]
+    H --> A
+    H --> I["Add cases to golden dataset"]
+    I --> B
+```
+
+Run this loop for each prompt, model, retrieval, or tool change. Version the complete configuration. A prompt hash without the model snapshot and tool schema cannot reproduce a result.
+
+## Put deterministic boundaries around the model
+
+Suppose you are adding a translation feature to a Go service. Keep the public API, authentication, retries, and durable state in the service that already owns them. Put model-specific code behind a narrow boundary.
+
+```text
+Client
+  -> Go API
+       -> validate request
+       -> authorize caller
+       -> create idempotent job
+       -> call model adapter
+            -> build prompt
+            -> call provider
+            -> validate structured output
+       -> persist result
+```
+
+The model adapter may live in Go, Python, or another service. The language choice matters less than the boundary:
+
+- Give the model the minimum context and authority it needs.
+- Validate its output before another system acts on it.
+- Keep side effects in deterministic code.
+- Log the model configuration and trace IDs.
+
+LLM output should not become a SQL statement, payment, email, or permission change without a policy check. Once a model can call tools, prompt injection becomes an authorization problem as much as a model-quality problem.
+
+## Production completes the dataset
+
+Your golden dataset describes yesterday's understanding of the product. Production traffic will find missing languages, strange formatting, new attacks, and user goals that the initial dataset did not cover.
+
+Sample traces with privacy controls. Ask reviewers to label failures. Add useful cases to the golden set, then rerun old cases before release. This creates a regression suite from the mistakes your users encounter.
+
+Monitor the deterministic shell and the probabilistic core:
+
+| Layer | Useful signals |
+|---|---|
+| API | error rate, retries, queue time, timeouts |
+| Inference | TTFT, tokens/second, token counts, cache-hit rate |
+| Product quality | task success, judge score, human rating, correction rate |
+| Safety | blocked actions, injection attempts, policy violations |
+| Cost | cost/request, cost/successful task, spend by feature |
+
+Provider uptime cannot tell you whether the model translated the right phrase. A quality dashboard cannot tell you that retry storms doubled the bill. You need both views.
+
+## A backend engineer's checklist
+
+Before you ship an LLM-backed feature:
+
+- Separate TTFT from decode speed and total latency.
+- Measure tokens and cache hits on real requests.
+- Use batch processing when the product can accept delayed results.
+- Compare models on your dataset, not on the provider's adjectives.
+- Version prompts, model snapshots, tools, retrieval settings, and parameters.
+- Gate releases with a reviewed golden dataset.
+- Keep authorization and side effects outside the model.
+- Feed reviewed production failures back into evaluation.
+
+The API becomes easier to reason about once you connect its behavior to inference and evaluation. Prefill and decode explain much of the latency and cost. A versioned dataset explains whether a change made the product better.
