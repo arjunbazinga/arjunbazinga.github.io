@@ -10,7 +10,298 @@
 <atom:link href="https://www.arjunsriva.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Mon, 25 Aug 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 12 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>How to Design Metrics That Change Decisions</title>
+  <link>https://www.arjunsriva.com/posts/metrics-that-change-decisions/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<section id="why-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="why-metrics">Why metrics?</h2>
+<p>Suppose a team says:</p>
+<blockquote class="blockquote">
+<p>We will write good documentation.</p>
+</blockquote>
+<p>The statement describes the work the team plans to do: the implementation. The team will write, review, and publish documents. Completing that work does not tell you whether the documents helped anyone.</p>
+<p>A metric gives the implementation a test. If the documents work, readers should need less help with the tasks they explain. You could count the Slack support questions about those tasks each week, establish the usual rate before publishing the documents, and measure it again afterward. If usage changes, measure questions per 100 task attempts rather than relying on the raw total.</p>
+<p>A useful metric is the simplest outcome you can express as a number and expect to change if the implementation works. You should be able to combine observations, compare the result with a starting point, and measure it again after the change.</p>
+<p>Fewer support questions would not prove that the documents worked. Usage may have fallen, readers may have given up, or the questions may have moved somewhere else. These alternative explanations are why the primary metric needs context.</p>
+<p>Like a good software test, a metric separates what should happen from how you make it happen. The team can change the document format, writing process, or publishing tool while keeping the same test. Most major initiatives should have one primary test. The team uses driver metrics to choose where to intervene and guardrails to define what it cannot sacrifice. Using all three sets the initiative’s scope and direction without prescribing its implementation.</p>
+<p>“Improve onboarding” might use the share of users who complete setup or their time to first useful result as its primary test. “Make deployments safer” might use the rollback rate or the number of customer-visible incidents.</p>
+<p>Choosing which initiative deserves attention is a separate problem. Systems thinking helps you understand the system, find its constraint, and choose where to intervene. Assume you have made that choice. How do you design the test?</p>
+</section>
+<section id="a-metric-should-change-a-decision" class="level2">
+<h2 class="anchored" data-anchor-id="a-metric-should-change-a-decision">A metric should change a decision</h2>
+<p>Most teams have no shortage of metrics. They have dashboards full of numbers, reviewed on a schedule, that do not change what anyone does. Before collecting the data, complete this sentence:</p>
+<blockquote class="blockquote">
+<p>If the metric does X, we will do Y.</p>
+</blockquote>
+<p>Without the second half, you have a number to watch rather than a tool for making a decision.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1">flowchart LR</span>
+<span id="cb1-2">    A["What decision&lt;br/&gt;must we make?"] --&gt; B["Which belief&lt;br/&gt;does it depend on?"]</span>
+<span id="cb1-3">    B --&gt; C["Which metric&lt;br/&gt;tests that belief?"]</span>
+<span id="cb1-4">    C --&gt; D["Which result&lt;br/&gt;changes our action?"]</span>
+<span id="cb1-5">    D --&gt; E["Who has authority&lt;br/&gt;to act?"]</span>
+<span id="cb1-6">    E --&gt; F["Collect and review"]</span>
+<span id="cb1-7">    F --&gt; G{"Did it inform&lt;br/&gt;a decision?"}</span>
+<span id="cb1-8">    G -- "Yes" --&gt; H["Act and record&lt;br/&gt;what happened"]</span>
+<span id="cb1-9">    G -- "No" --&gt; I["Redesign or&lt;br/&gt;retire the metric"]</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["What decision&lt;br/&gt;must we make?"] --&gt; B["Which belief&lt;br/&gt;does it depend on?"]
+    B --&gt; C["Which metric&lt;br/&gt;tests that belief?"]
+    C --&gt; D["Which result&lt;br/&gt;changes our action?"]
+    D --&gt; E["Who has authority&lt;br/&gt;to act?"]
+    E --&gt; F["Collect and review"]
+    F --&gt; G{"Did it inform&lt;br/&gt;a decision?"}
+    G -- "Yes" --&gt; H["Act and record&lt;br/&gt;what happened"]
+    G -- "No" --&gt; I["Redesign or&lt;br/&gt;retire the metric"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="six-rules-of-thumb" class="level2">
+<h2 class="anchored" data-anchor-id="six-rules-of-thumb">Six rules of thumb</h2>
+<section id="no-decision-or-action-means-no-metric" class="level3">
+<h3 class="anchored" data-anchor-id="no-decision-or-action-means-no-metric">1. No decision or action means no metric</h3>
+<p>Name the decision the metric informs. Define “if X, then Y” before the metric moves. Otherwise it is another dashboard.</p>
+</section>
+<section id="measure-your-constraint-not-your-curiosity" class="level3">
+<h3 class="anchored" data-anchor-id="measure-your-constraint-not-your-curiosity">2. Measure your constraint, not your curiosity</h3>
+<p>The system moves as fast as its bottleneck. Metrics outside the current constraint are often noise.</p>
+</section>
+<section id="your-stage-dictates-your-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="your-stage-dictates-your-metrics">3. Your stage dictates your metrics</h3>
+<p>Searching for a viable product, scaling a proven one, and optimizing a mature business require different evidence. Using a later-stage metric during discovery can push the team toward the wrong work.</p>
+</section>
+<section id="prefer-actionability-over-precision" class="level3">
+<h3 class="anchored" data-anchor-id="prefer-actionability-over-precision">4. Prefer actionability over precision</h3>
+<p>A noisy metric you can influence may help more than a precise metric you cannot act on. Precision still matters when small changes trigger expensive or irreversible decisions.</p>
+</section>
+<section id="metrics-should-graduate-or-die" class="level3">
+<h3 class="anchored" data-anchor-id="metrics-should-graduate-or-die">5. Metrics should graduate or die</h3>
+<p>Some metrics begin as exploratory questions. Useful ones may become operational targets or critical guardrails. If a metric no longer changes decisions, question why it still occupies the dashboard.</p>
+</section>
+<section id="keep-the-meaning-visible" class="level3">
+<h3 class="anchored" data-anchor-id="keep-the-meaning-visible">6. Keep the meaning visible</h3>
+<p>A metric derived from fifteen inputs may look rigorous while hiding the cause of a change. Anyone who uses the number should understand what moved and what action remains available.</p>
+</section>
+</section>
+<section id="stage-1-decide-what-you-need-to-learn" class="level2">
+<h2 class="anchored" data-anchor-id="stage-1-decide-what-you-need-to-learn">Stage 1: Decide what you need to learn</h2>
+<section id="which-decision-are-you-trying-to-make" class="level3">
+<h3 class="anchored" data-anchor-id="which-decision-are-you-trying-to-make">Which decision are you trying to make?</h3>
+<p>Use the decision as the first filter.</p>
+<ul>
+<li><strong>Specific:</strong> “We need to decide whether to invest more in onboarding because users may take too long to reach their first useful result.” Measure time to first value and activation by cohort.</li>
+<li><strong>Vague:</strong> “We should track engagement.” No decision follows from the request, so the metric has no defined job.</li>
+</ul>
+<p>This avoids the streetlight effect: measuring whatever is easy to see rather than the thing that reduces uncertainty.</p>
+</section>
+<section id="who-will-use-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="who-will-use-the-metric">Who will use the metric?</h3>
+<p>The same product needs different levels of information:</p>
+<ul>
+<li>An operator needs a signal tied to day-to-day action.</li>
+<li>A manager needs evidence for tradeoffs and prioritization.</li>
+<li>An executive needs evidence for direction and investment.</li>
+<li>A customer, regulator, or partner may need an auditable commitment.</li>
+</ul>
+<p>A metric with no clear audience tends to become dashboard noise. Name one primary user even when several groups can view it.</p>
+</section>
+<section id="which-belief-would-the-metric-support-or-challenge" class="level3">
+<h3 class="anchored" data-anchor-id="which-belief-would-the-metric-support-or-challenge">Which belief would the metric support or challenge?</h3>
+<p>Write down the assumption behind the decision:</p>
+<ul>
+<li>Users who reach Feature X are more likely to retain.</li>
+<li>Reducing onboarding time will increase activation.</li>
+<li>Faster model deployment improves customer trust.</li>
+</ul>
+<p>A metric can show that two things move together. It cannot establish that one caused the other. If the decision depends on causation, pair the metric with an experiment or another design that can rule out plausible alternatives.</p>
+</section>
+<section id="which-stage-are-you-in" class="level3">
+<h3 class="anchored" data-anchor-id="which-stage-are-you-in">Which stage are you in?</h3>
+<p>Your stage changes the useful question:</p>
+<ul>
+<li><strong>Searching for product-market fit:</strong> Are people returning to use the product? Repeated use and retention provide central evidence. Keep the metric set small while the team still changes the product itself.</li>
+<li><strong>Early growth:</strong> Can we acquire and activate users through a repeatable process? Examine channels, conversion, time to value, and the cost of acquisition.</li>
+<li><strong>Scaling:</strong> Can the economics survive more volume? Cohort retention, contribution margin, and support cost become more useful.</li>
+<li><strong>Mature or competitive:</strong> Can we defend the product and create new growth? Market position, switching behavior, and revenue from newer products may matter.</li>
+</ul>
+<p>Teams create confusion when they adopt the metric system of a mature company while still searching for a product people want.</p>
+</section>
+<section id="which-constraint-limits-progress" class="level3">
+<h3 class="anchored" data-anchor-id="which-constraint-limits-progress">Which constraint limits progress?</h3>
+<p>Apply constraint thinking to the path through the business:</p>
+<ul>
+<li>If you cannot acquire customers, measure lead generation and conversion.</li>
+<li>If customers arrive but do not activate, measure time to value and onboarding completion.</li>
+<li>If activated customers leave, measure retention and reasons for churn.</li>
+<li>If retained accounts do not expand, measure product depth and expansion triggers.</li>
+<li>If demand exceeds the team’s capacity, measure the hiring funnel and time to productivity.</li>
+</ul>
+<p>The constraint can move. Review it before adding metrics rather than treating the current dashboard as permanent.</p>
+</section>
+</section>
+<section id="stage-2-test-the-metric-design" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-test-the-metric-design">Stage 2: Test the metric design</h2>
+<section id="the-gaming-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-gaming-test">The gaming test</h3>
+<p>Ask: <strong>If someone wanted to hit this metric without creating value, what would they do?</strong></p>
+<ul>
+<li><strong>Weak:</strong> Features shipped.</li>
+<li><strong>Better:</strong> Features shipped that reach more than 10% adoption within 30 days.</li>
+<li><strong>Guarded:</strong> Adoption within 30 days, while customer satisfaction and support volume remain within agreed limits.</li>
+</ul>
+<p>The first metric rewards trivial releases and encourages teams to split work into smaller labels. The second connects shipping to use. The guardrails stop the team from increasing adoption through changes that harm the rest of the experience.</p>
+</section>
+<section id="the-completeness-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-completeness-test">The completeness test</h3>
+<p>Ask: <strong>If we optimized this metric, would we achieve the intended goal?</strong></p>
+<p>Use three parts:</p>
+<ul>
+<li><strong>Primary metric:</strong> the outcome you want to improve;</li>
+<li><strong>Driver metrics:</strong> inputs that may influence the outcome;</li>
+<li><strong>Guardrails:</strong> results that must not degrade while the primary metric improves.</li>
+</ul>
+<p>The team uses the three types together to define the initiative. The primary metric sets the direction. The drivers narrow the scope to inputs the team can change, and the guardrails mark the boundaries of an acceptable improvement.</p>
+<p>For an ecommerce checkout:</p>
+<ul>
+<li><strong>Primary:</strong> purchase conversion rate;</li>
+<li><strong>Drivers:</strong> page speed, checkout completion, and pricing;</li>
+<li><strong>Guardrails:</strong> average order value, return rate, and customer satisfaction.</li>
+</ul>
+<p>Guardrails reveal an incomplete optimization. They do not prove that the drivers caused the outcome, so keep the belief and the evidence separate.</p>
+</section>
+<section id="the-time-horizon-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-time-horizon-test">The time-horizon test</h3>
+<p>Ask how fast the metric can respond:</p>
+<ul>
+<li><strong>Minutes or hours:</strong> availability, page speed, current active users;</li>
+<li><strong>Days or weeks:</strong> signup conversion, feature adoption, support tickets;</li>
+<li><strong>Months:</strong> retention, revenue, market share;</li>
+<li><strong>Quarters or years:</strong> customer lifetime value, brand perception, competitive position.</li>
+</ul>
+<p>Long-cycle metrics cannot steer daily work. Short-cycle metrics can pull the team toward local changes that damage long-term outcomes. A useful metric system connects the two without reviewing both at the same cadence.</p>
+</section>
+<section id="the-attribution-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-attribution-test">The attribution test</h3>
+<p>Ask how much control the team has over the result.</p>
+<p>Total revenue in a seasonal business or user growth during a viral event has weak attribution. Conversion on a flow the team owns or defect rates in a service it operates have stronger attribution.</p>
+<p>External outcomes still matter. Use them to judge the business. Use metrics closer to the team’s work to decide what the team should change.</p>
+</section>
+<section id="the-leading-and-lagging-chain" class="level3">
+<h3 class="anchored" data-anchor-id="the-leading-and-lagging-chain">The leading and lagging chain</h3>
+<p>Work backward from the outcome to find earlier signals:</p>
+<pre class="text"><code>Revenue
+  ← sales-cycle speed
+    ← qualified pipeline
+      ← lead quality
+        ← message clarity</code></pre>
+<p>Each step is an assumption about how the system works. The chain gives the team an earlier place to intervene and a set of beliefs to test. It should not become a claim that every link is causal.</p>
+</section>
+</section>
+<section id="stage-3-make-the-metric-operational" class="level2">
+<h2 class="anchored" data-anchor-id="stage-3-make-the-metric-operational">Stage 3: Make the metric operational</h2>
+<section id="establish-a-baseline" class="level3">
+<h3 class="anchored" data-anchor-id="establish-a-baseline">Establish a baseline</h3>
+<p>Observe the metric long enough to understand its normal variation before setting a sensitive alert or target. The required period depends on volume, day-of-week effects, seasonality, and the cost of a false alarm.</p>
+<p>Record the baseline and the conditions under which you measured it. A sudden change in traffic mix can invalidate a comparison even when the calculation remains the same.</p>
+</section>
+<section id="define-the-so-what-thresholds" class="level3">
+<h3 class="anchored" data-anchor-id="define-the-so-what-thresholds">Define the “so what” thresholds</h3>
+<p>Write the triggers before reviewing the next result:</p>
+<ul>
+<li>If the metric rises above X, we will do Y.</li>
+<li>If it falls below Z, we will do W.</li>
+<li>If it changes by more than N, we will investigate.</li>
+</ul>
+<p>Precommitment reduces the temptation to invent an explanation after seeing the number. Revisit a threshold when the underlying cost, risk, or baseline changes, and record why.</p>
+</section>
+<section id="match-the-review-cadence-to-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="match-the-review-cadence-to-the-metric">Match the review cadence to the metric</h3>
+<ul>
+<li>Use automated alerts for real-time operational metrics.</li>
+<li>Review short-cycle metrics each week.</li>
+<li>Review medium-cycle metrics each month.</li>
+<li>Review long-cycle metrics during strategic planning.</li>
+</ul>
+<p>Reviewing everything each week creates noise and false urgency. Waiting a quarter to inspect an operational failure removes the chance to respond.</p>
+</section>
+<section id="assign-ownership-with-authority" class="level3">
+<h3 class="anchored" data-anchor-id="assign-ownership-with-authority">Assign ownership with authority</h3>
+<p>Every operational metric needs one person who can:</p>
+<ul>
+<li>explain what drives a change;</li>
+<li>investigate a surprising result;</li>
+<li>make or escalate the action attached to the threshold.</li>
+</ul>
+<p>Shared contributors are useful. One accountable owner prevents the metric from becoming a number everyone watches and no one uses.</p>
+</section>
+</section>
+<section id="stage-4-maintain-the-metric-system" class="level2">
+<h2 class="anchored" data-anchor-id="stage-4-maintain-the-metric-system">Stage 4: Maintain the metric system</h2>
+<section id="weekly-operational-review" class="level3">
+<h3 class="anchored" data-anchor-id="weekly-operational-review">Weekly: operational review</h3>
+<ul>
+<li>Did an unexpected change occur?</li>
+<li>Does the team need to investigate?</li>
+<li>Are the short-cycle indicators moving outside their expected ranges?</li>
+</ul>
+<p>Keep this review narrow and tied to immediate action.</p>
+</section>
+<section id="monthly-tactical-review" class="level3">
+<h3 class="anchored" data-anchor-id="monthly-tactical-review">Monthly: tactical review</h3>
+<ul>
+<li>Which key metrics changed?</li>
+<li>Which experiments ran, and what did the team learn?</li>
+<li>Do current tactics need adjustment?</li>
+<li>Did an early warning signal appear?</li>
+</ul>
+<p>Use this review to examine causes and compare results with the assumptions behind the plan.</p>
+</section>
+<section id="quarterly-strategic-review" class="level3">
+<h3 class="anchored" data-anchor-id="quarterly-strategic-review">Quarterly: strategic review</h3>
+<p>Ask whether the team still measures the right things. Review each metric’s lifecycle:</p>
+<ol type="1">
+<li><strong>Exploratory:</strong> used for learning, with no target;</li>
+<li><strong>Operational:</strong> attached to a target and an action;</li>
+<li><strong>Critical:</strong> receives leadership attention and requires guardrails;</li>
+<li><strong>Deprecated:</strong> still available for continuity but no longer drives action;</li>
+<li><strong>Retired:</strong> removed from dashboards and recurring reviews.</li>
+</ol>
+<p>Then ask:</p>
+<ul>
+<li>Which metrics should change state?</li>
+<li>Which decisions lack evidence?</li>
+<li>Which metrics changed behavior without improving the intended outcome?</li>
+<li>Which metrics should the team remove?</li>
+</ul>
+<p>A metric system should lose metrics as well as gain them. The goal is a smaller set of numbers that helps people make better decisions.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Product</category>
+  <category>Metrics</category>
+  <category>Decision Making</category>
+  <guid>https://www.arjunsriva.com/posts/metrics-that-change-decisions/</guid>
+  <pubDate>Fri, 12 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Golden Datasets: Launch Criteria for LLM Systems</title>
   <link>https://www.arjunsriva.com/posts/golden-datasets/</link>
@@ -4538,46 +4829,6 @@ It is broken into 3 seperate rounds</p>
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/mental-health-checklist/</guid>
   <pubDate>Sun, 08 Jan 2017 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>About this website</title>
-  <link>https://www.arjunsriva.com/posts/about-this-website/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p>This post is a bit of a meta post about arjunsriva.com</p>
-<p>A lot of my thinking on personal websites has been influenced by other great websites like Gwern’s, please <a href="https://gwern.net/about">read this</a> if you’re interested in it.</p>
-<p>My goals for this websites are:</p>
-<ul>
-<li>To share things I learned that I personally found useful</li>
-<li>To provide a playground for me to flesh out rough ideas and speculate.</li>
-<li>To help me increase the clarity of my thinking by the act of writing something out.</li>
-</ul>
-<p>on the implementation side my goals are</p>
-<ul>
-<li>Make it easy for me to never lose data
-<ul>
-<li>most writing is stored as simple text files, version controlled by git</li>
-</ul></li>
-<li>Make it easy to mix code and prose to explain certain concepts</li>
-</ul>
-<p>Some things that I plan on implementing later as I write more are:</p>
-<ul>
-<li>Automatic link archiving to prevent link rot</li>
-<li>Confidence tags to show how certain I am of different things</li>
-<li>Better sections / tagging to differentiate different kinds of posts, eg. reading list and notes</li>
-</ul>
-
-
-
- ]]></description>
-  <category>Meta</category>
-  <guid>https://www.arjunsriva.com/posts/about-this-website/</guid>
-  <pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

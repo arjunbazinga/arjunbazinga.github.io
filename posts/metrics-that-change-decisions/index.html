@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-12-12">
+<meta name="description" content="A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help">
+
+<title>How to Design Metrics That Change Decisions – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-189549ecd294ed9837df383a4b42e31c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8a591ff59271d21f6a5d1e80b3747fb5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-189549ecd294ed9837df383a4b42e31c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<meta property="og:title" content="How to Design Metrics That Change Decisions – Arjun Srivastava">
+<meta property="og:description" content="A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="How to Design Metrics That Change Decisions – Arjun Srivastava">
+<meta name="twitter:description" content="A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.com/library"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">How to Design Metrics That Change Decisions</h1>
+                  <div>
+        <div class="description">
+          A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Product</div>
+                <div class="quarto-category">Metrics</div>
+                <div class="quarto-category">Decision Making</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 12, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-metrics" id="toc-why-metrics" class="nav-link active" data-scroll-target="#why-metrics">Why metrics?</a></li>
+  <li><a href="#a-metric-should-change-a-decision" id="toc-a-metric-should-change-a-decision" class="nav-link" data-scroll-target="#a-metric-should-change-a-decision">A metric should change a decision</a></li>
+  <li><a href="#six-rules-of-thumb" id="toc-six-rules-of-thumb" class="nav-link" data-scroll-target="#six-rules-of-thumb">Six rules of thumb</a>
+  <ul class="collapse">
+  <li><a href="#no-decision-or-action-means-no-metric" id="toc-no-decision-or-action-means-no-metric" class="nav-link" data-scroll-target="#no-decision-or-action-means-no-metric">1. No decision or action means no metric</a></li>
+  <li><a href="#measure-your-constraint-not-your-curiosity" id="toc-measure-your-constraint-not-your-curiosity" class="nav-link" data-scroll-target="#measure-your-constraint-not-your-curiosity">2. Measure your constraint, not your curiosity</a></li>
+  <li><a href="#your-stage-dictates-your-metrics" id="toc-your-stage-dictates-your-metrics" class="nav-link" data-scroll-target="#your-stage-dictates-your-metrics">3. Your stage dictates your metrics</a></li>
+  <li><a href="#prefer-actionability-over-precision" id="toc-prefer-actionability-over-precision" class="nav-link" data-scroll-target="#prefer-actionability-over-precision">4. Prefer actionability over precision</a></li>
+  <li><a href="#metrics-should-graduate-or-die" id="toc-metrics-should-graduate-or-die" class="nav-link" data-scroll-target="#metrics-should-graduate-or-die">5. Metrics should graduate or die</a></li>
+  <li><a href="#keep-the-meaning-visible" id="toc-keep-the-meaning-visible" class="nav-link" data-scroll-target="#keep-the-meaning-visible">6. Keep the meaning visible</a></li>
+  </ul></li>
+  <li><a href="#stage-1-decide-what-you-need-to-learn" id="toc-stage-1-decide-what-you-need-to-learn" class="nav-link" data-scroll-target="#stage-1-decide-what-you-need-to-learn">Stage 1: Decide what you need to learn</a>
+  <ul class="collapse">
+  <li><a href="#which-decision-are-you-trying-to-make" id="toc-which-decision-are-you-trying-to-make" class="nav-link" data-scroll-target="#which-decision-are-you-trying-to-make">Which decision are you trying to make?</a></li>
+  <li><a href="#who-will-use-the-metric" id="toc-who-will-use-the-metric" class="nav-link" data-scroll-target="#who-will-use-the-metric">Who will use the metric?</a></li>
+  <li><a href="#which-belief-would-the-metric-support-or-challenge" id="toc-which-belief-would-the-metric-support-or-challenge" class="nav-link" data-scroll-target="#which-belief-would-the-metric-support-or-challenge">Which belief would the metric support or challenge?</a></li>
+  <li><a href="#which-stage-are-you-in" id="toc-which-stage-are-you-in" class="nav-link" data-scroll-target="#which-stage-are-you-in">Which stage are you in?</a></li>
+  <li><a href="#which-constraint-limits-progress" id="toc-which-constraint-limits-progress" class="nav-link" data-scroll-target="#which-constraint-limits-progress">Which constraint limits progress?</a></li>
+  </ul></li>
+  <li><a href="#stage-2-test-the-metric-design" id="toc-stage-2-test-the-metric-design" class="nav-link" data-scroll-target="#stage-2-test-the-metric-design">Stage 2: Test the metric design</a>
+  <ul class="collapse">
+  <li><a href="#the-gaming-test" id="toc-the-gaming-test" class="nav-link" data-scroll-target="#the-gaming-test">The gaming test</a></li>
+  <li><a href="#the-completeness-test" id="toc-the-completeness-test" class="nav-link" data-scroll-target="#the-completeness-test">The completeness test</a></li>
+  <li><a href="#the-time-horizon-test" id="toc-the-time-horizon-test" class="nav-link" data-scroll-target="#the-time-horizon-test">The time-horizon test</a></li>
+  <li><a href="#the-attribution-test" id="toc-the-attribution-test" class="nav-link" data-scroll-target="#the-attribution-test">The attribution test</a></li>
+  <li><a href="#the-leading-and-lagging-chain" id="toc-the-leading-and-lagging-chain" class="nav-link" data-scroll-target="#the-leading-and-lagging-chain">The leading and lagging chain</a></li>
+  </ul></li>
+  <li><a href="#stage-3-make-the-metric-operational" id="toc-stage-3-make-the-metric-operational" class="nav-link" data-scroll-target="#stage-3-make-the-metric-operational">Stage 3: Make the metric operational</a>
+  <ul class="collapse">
+  <li><a href="#establish-a-baseline" id="toc-establish-a-baseline" class="nav-link" data-scroll-target="#establish-a-baseline">Establish a baseline</a></li>
+  <li><a href="#define-the-so-what-thresholds" id="toc-define-the-so-what-thresholds" class="nav-link" data-scroll-target="#define-the-so-what-thresholds">Define the “so what” thresholds</a></li>
+  <li><a href="#match-the-review-cadence-to-the-metric" id="toc-match-the-review-cadence-to-the-metric" class="nav-link" data-scroll-target="#match-the-review-cadence-to-the-metric">Match the review cadence to the metric</a></li>
+  <li><a href="#assign-ownership-with-authority" id="toc-assign-ownership-with-authority" class="nav-link" data-scroll-target="#assign-ownership-with-authority">Assign ownership with authority</a></li>
+  </ul></li>
+  <li><a href="#stage-4-maintain-the-metric-system" id="toc-stage-4-maintain-the-metric-system" class="nav-link" data-scroll-target="#stage-4-maintain-the-metric-system">Stage 4: Maintain the metric system</a>
+  <ul class="collapse">
+  <li><a href="#weekly-operational-review" id="toc-weekly-operational-review" class="nav-link" data-scroll-target="#weekly-operational-review">Weekly: operational review</a></li>
+  <li><a href="#monthly-tactical-review" id="toc-monthly-tactical-review" class="nav-link" data-scroll-target="#monthly-tactical-review">Monthly: tactical review</a></li>
+  <li><a href="#quarterly-strategic-review" id="toc-quarterly-strategic-review" class="nav-link" data-scroll-target="#quarterly-strategic-review">Quarterly: strategic review</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<section id="why-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="why-metrics">Why metrics?</h2>
+<p>Suppose a team says:</p>
+<blockquote class="blockquote">
+<p>We will write good documentation.</p>
+</blockquote>
+<p>The statement describes the work the team plans to do: the implementation. The team will write, review, and publish documents. Completing that work does not tell you whether the documents helped anyone.</p>
+<p>A metric gives the implementation a test. If the documents work, readers should need less help with the tasks they explain. You could count the Slack support questions about those tasks each week, establish the usual rate before publishing the documents, and measure it again afterward. If usage changes, measure questions per 100 task attempts rather than relying on the raw total.</p>
+<p>A useful metric is the simplest outcome you can express as a number and expect to change if the implementation works. You should be able to combine observations, compare the result with a starting point, and measure it again after the change.</p>
+<p>Fewer support questions would not prove that the documents worked. Usage may have fallen, readers may have given up, or the questions may have moved somewhere else. These alternative explanations are why the primary metric needs context.</p>
+<p>Like a good software test, a metric separates what should happen from how you make it happen. The team can change the document format, writing process, or publishing tool while keeping the same test. Most major initiatives should have one primary test. The team uses driver metrics to choose where to intervene and guardrails to define what it cannot sacrifice. Using all three sets the initiative’s scope and direction without prescribing its implementation.</p>
+<p>“Improve onboarding” might use the share of users who complete setup or their time to first useful result as its primary test. “Make deployments safer” might use the rollback rate or the number of customer-visible incidents.</p>
+<p>Choosing which initiative deserves attention is a separate problem. Systems thinking helps you understand the system, find its constraint, and choose where to intervene. Assume you have made that choice. How do you design the test?</p>
+</section>
+<section id="a-metric-should-change-a-decision" class="level2">
+<h2 class="anchored" data-anchor-id="a-metric-should-change-a-decision">A metric should change a decision</h2>
+<p>Most teams have no shortage of metrics. They have dashboards full of numbers, reviewed on a schedule, that do not change what anyone does. Before collecting the data, complete this sentence:</p>
+<blockquote class="blockquote">
+<p>If the metric does X, we will do Y.</p>
+</blockquote>
+<p>Without the second half, you have a number to watch rather than a tool for making a decision.</p>
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    A["What decision&lt;br/&gt;must we make?"] --&gt; B["Which belief&lt;br/&gt;does it depend on?"]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C["Which metric&lt;br/&gt;tests that belief?"]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    C --&gt; D["Which result&lt;br/&gt;changes our action?"]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    D --&gt; E["Who has authority&lt;br/&gt;to act?"]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    E --&gt; F["Collect and review"]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    F --&gt; G{"Did it inform&lt;br/&gt;a decision?"}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    G -- "Yes" --&gt; H["Act and record&lt;br/&gt;what happened"]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    G -- "No" --&gt; I["Redesign or&lt;br/&gt;retire the metric"]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["What decision&lt;br/&gt;must we make?"] --&gt; B["Which belief&lt;br/&gt;does it depend on?"]
+    B --&gt; C["Which metric&lt;br/&gt;tests that belief?"]
+    C --&gt; D["Which result&lt;br/&gt;changes our action?"]
+    D --&gt; E["Who has authority&lt;br/&gt;to act?"]
+    E --&gt; F["Collect and review"]
+    F --&gt; G{"Did it inform&lt;br/&gt;a decision?"}
+    G -- "Yes" --&gt; H["Act and record&lt;br/&gt;what happened"]
+    G -- "No" --&gt; I["Redesign or&lt;br/&gt;retire the metric"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="six-rules-of-thumb" class="level2">
+<h2 class="anchored" data-anchor-id="six-rules-of-thumb">Six rules of thumb</h2>
+<section id="no-decision-or-action-means-no-metric" class="level3">
+<h3 class="anchored" data-anchor-id="no-decision-or-action-means-no-metric">1. No decision or action means no metric</h3>
+<p>Name the decision the metric informs. Define “if X, then Y” before the metric moves. Otherwise it is another dashboard.</p>
+</section>
+<section id="measure-your-constraint-not-your-curiosity" class="level3">
+<h3 class="anchored" data-anchor-id="measure-your-constraint-not-your-curiosity">2. Measure your constraint, not your curiosity</h3>
+<p>The system moves as fast as its bottleneck. Metrics outside the current constraint are often noise.</p>
+</section>
+<section id="your-stage-dictates-your-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="your-stage-dictates-your-metrics">3. Your stage dictates your metrics</h3>
+<p>Searching for a viable product, scaling a proven one, and optimizing a mature business require different evidence. Using a later-stage metric during discovery can push the team toward the wrong work.</p>
+</section>
+<section id="prefer-actionability-over-precision" class="level3">
+<h3 class="anchored" data-anchor-id="prefer-actionability-over-precision">4. Prefer actionability over precision</h3>
+<p>A noisy metric you can influence may help more than a precise metric you cannot act on. Precision still matters when small changes trigger expensive or irreversible decisions.</p>
+</section>
+<section id="metrics-should-graduate-or-die" class="level3">
+<h3 class="anchored" data-anchor-id="metrics-should-graduate-or-die">5. Metrics should graduate or die</h3>
+<p>Some metrics begin as exploratory questions. Useful ones may become operational targets or critical guardrails. If a metric no longer changes decisions, question why it still occupies the dashboard.</p>
+</section>
+<section id="keep-the-meaning-visible" class="level3">
+<h3 class="anchored" data-anchor-id="keep-the-meaning-visible">6. Keep the meaning visible</h3>
+<p>A metric derived from fifteen inputs may look rigorous while hiding the cause of a change. Anyone who uses the number should understand what moved and what action remains available.</p>
+</section>
+</section>
+<section id="stage-1-decide-what-you-need-to-learn" class="level2">
+<h2 class="anchored" data-anchor-id="stage-1-decide-what-you-need-to-learn">Stage 1: Decide what you need to learn</h2>
+<section id="which-decision-are-you-trying-to-make" class="level3">
+<h3 class="anchored" data-anchor-id="which-decision-are-you-trying-to-make">Which decision are you trying to make?</h3>
+<p>Use the decision as the first filter.</p>
+<ul>
+<li><strong>Specific:</strong> “We need to decide whether to invest more in onboarding because users may take too long to reach their first useful result.” Measure time to first value and activation by cohort.</li>
+<li><strong>Vague:</strong> “We should track engagement.” No decision follows from the request, so the metric has no defined job.</li>
+</ul>
+<p>This avoids the streetlight effect: measuring whatever is easy to see rather than the thing that reduces uncertainty.</p>
+</section>
+<section id="who-will-use-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="who-will-use-the-metric">Who will use the metric?</h3>
+<p>The same product needs different levels of information:</p>
+<ul>
+<li>An operator needs a signal tied to day-to-day action.</li>
+<li>A manager needs evidence for tradeoffs and prioritization.</li>
+<li>An executive needs evidence for direction and investment.</li>
+<li>A customer, regulator, or partner may need an auditable commitment.</li>
+</ul>
+<p>A metric with no clear audience tends to become dashboard noise. Name one primary user even when several groups can view it.</p>
+</section>
+<section id="which-belief-would-the-metric-support-or-challenge" class="level3">
+<h3 class="anchored" data-anchor-id="which-belief-would-the-metric-support-or-challenge">Which belief would the metric support or challenge?</h3>
+<p>Write down the assumption behind the decision:</p>
+<ul>
+<li>Users who reach Feature X are more likely to retain.</li>
+<li>Reducing onboarding time will increase activation.</li>
+<li>Faster model deployment improves customer trust.</li>
+</ul>
+<p>A metric can show that two things move together. It cannot establish that one caused the other. If the decision depends on causation, pair the metric with an experiment or another design that can rule out plausible alternatives.</p>
+</section>
+<section id="which-stage-are-you-in" class="level3">
+<h3 class="anchored" data-anchor-id="which-stage-are-you-in">Which stage are you in?</h3>
+<p>Your stage changes the useful question:</p>
+<ul>
+<li><strong>Searching for product-market fit:</strong> Are people returning to use the product? Repeated use and retention provide central evidence. Keep the metric set small while the team still changes the product itself.</li>
+<li><strong>Early growth:</strong> Can we acquire and activate users through a repeatable process? Examine channels, conversion, time to value, and the cost of acquisition.</li>
+<li><strong>Scaling:</strong> Can the economics survive more volume? Cohort retention, contribution margin, and support cost become more useful.</li>
+<li><strong>Mature or competitive:</strong> Can we defend the product and create new growth? Market position, switching behavior, and revenue from newer products may matter.</li>
+</ul>
+<p>Teams create confusion when they adopt the metric system of a mature company while still searching for a product people want.</p>
+</section>
+<section id="which-constraint-limits-progress" class="level3">
+<h3 class="anchored" data-anchor-id="which-constraint-limits-progress">Which constraint limits progress?</h3>
+<p>Apply constraint thinking to the path through the business:</p>
+<ul>
+<li>If you cannot acquire customers, measure lead generation and conversion.</li>
+<li>If customers arrive but do not activate, measure time to value and onboarding completion.</li>
+<li>If activated customers leave, measure retention and reasons for churn.</li>
+<li>If retained accounts do not expand, measure product depth and expansion triggers.</li>
+<li>If demand exceeds the team’s capacity, measure the hiring funnel and time to productivity.</li>
+</ul>
+<p>The constraint can move. Review it before adding metrics rather than treating the current dashboard as permanent.</p>
+</section>
+</section>
+<section id="stage-2-test-the-metric-design" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-test-the-metric-design">Stage 2: Test the metric design</h2>
+<section id="the-gaming-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-gaming-test">The gaming test</h3>
+<p>Ask: <strong>If someone wanted to hit this metric without creating value, what would they do?</strong></p>
+<ul>
+<li><strong>Weak:</strong> Features shipped.</li>
+<li><strong>Better:</strong> Features shipped that reach more than 10% adoption within 30 days.</li>
+<li><strong>Guarded:</strong> Adoption within 30 days, while customer satisfaction and support volume remain within agreed limits.</li>
+</ul>
+<p>The first metric rewards trivial releases and encourages teams to split work into smaller labels. The second connects shipping to use. The guardrails stop the team from increasing adoption through changes that harm the rest of the experience.</p>
+</section>
+<section id="the-completeness-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-completeness-test">The completeness test</h3>
+<p>Ask: <strong>If we optimized this metric, would we achieve the intended goal?</strong></p>
+<p>Use three parts:</p>
+<ul>
+<li><strong>Primary metric:</strong> the outcome you want to improve;</li>
+<li><strong>Driver metrics:</strong> inputs that may influence the outcome;</li>
+<li><strong>Guardrails:</strong> results that must not degrade while the primary metric improves.</li>
+</ul>
+<p>The team uses the three types together to define the initiative. The primary metric sets the direction. The drivers narrow the scope to inputs the team can change, and the guardrails mark the boundaries of an acceptable improvement.</p>
+<p>For an ecommerce checkout:</p>
+<ul>
+<li><strong>Primary:</strong> purchase conversion rate;</li>
+<li><strong>Drivers:</strong> page speed, checkout completion, and pricing;</li>
+<li><strong>Guardrails:</strong> average order value, return rate, and customer satisfaction.</li>
+</ul>
+<p>Guardrails reveal an incomplete optimization. They do not prove that the drivers caused the outcome, so keep the belief and the evidence separate.</p>
+</section>
+<section id="the-time-horizon-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-time-horizon-test">The time-horizon test</h3>
+<p>Ask how fast the metric can respond:</p>
+<ul>
+<li><strong>Minutes or hours:</strong> availability, page speed, current active users;</li>
+<li><strong>Days or weeks:</strong> signup conversion, feature adoption, support tickets;</li>
+<li><strong>Months:</strong> retention, revenue, market share;</li>
+<li><strong>Quarters or years:</strong> customer lifetime value, brand perception, competitive position.</li>
+</ul>
+<p>Long-cycle metrics cannot steer daily work. Short-cycle metrics can pull the team toward local changes that damage long-term outcomes. A useful metric system connects the two without reviewing both at the same cadence.</p>
+</section>
+<section id="the-attribution-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-attribution-test">The attribution test</h3>
+<p>Ask how much control the team has over the result.</p>
+<p>Total revenue in a seasonal business or user growth during a viral event has weak attribution. Conversion on a flow the team owns or defect rates in a service it operates have stronger attribution.</p>
+<p>External outcomes still matter. Use them to judge the business. Use metrics closer to the team’s work to decide what the team should change.</p>
+</section>
+<section id="the-leading-and-lagging-chain" class="level3">
+<h3 class="anchored" data-anchor-id="the-leading-and-lagging-chain">The leading and lagging chain</h3>
+<p>Work backward from the outcome to find earlier signals:</p>
+<pre class="text"><code>Revenue
+  ← sales-cycle speed
+    ← qualified pipeline
+      ← lead quality
+        ← message clarity</code></pre>
+<p>Each step is an assumption about how the system works. The chain gives the team an earlier place to intervene and a set of beliefs to test. It should not become a claim that every link is causal.</p>
+</section>
+</section>
+<section id="stage-3-make-the-metric-operational" class="level2">
+<h2 class="anchored" data-anchor-id="stage-3-make-the-metric-operational">Stage 3: Make the metric operational</h2>
+<section id="establish-a-baseline" class="level3">
+<h3 class="anchored" data-anchor-id="establish-a-baseline">Establish a baseline</h3>
+<p>Observe the metric long enough to understand its normal variation before setting a sensitive alert or target. The required period depends on volume, day-of-week effects, seasonality, and the cost of a false alarm.</p>
+<p>Record the baseline and the conditions under which you measured it. A sudden change in traffic mix can invalidate a comparison even when the calculation remains the same.</p>
+</section>
+<section id="define-the-so-what-thresholds" class="level3">
+<h3 class="anchored" data-anchor-id="define-the-so-what-thresholds">Define the “so what” thresholds</h3>
+<p>Write the triggers before reviewing the next result:</p>
+<ul>
+<li>If the metric rises above X, we will do Y.</li>
+<li>If it falls below Z, we will do W.</li>
+<li>If it changes by more than N, we will investigate.</li>
+</ul>
+<p>Precommitment reduces the temptation to invent an explanation after seeing the number. Revisit a threshold when the underlying cost, risk, or baseline changes, and record why.</p>
+</section>
+<section id="match-the-review-cadence-to-the-metric" class="level3">
+<h3 class="anchored" data-anchor-id="match-the-review-cadence-to-the-metric">Match the review cadence to the metric</h3>
+<ul>
+<li>Use automated alerts for real-time operational metrics.</li>
+<li>Review short-cycle metrics each week.</li>
+<li>Review medium-cycle metrics each month.</li>
+<li>Review long-cycle metrics during strategic planning.</li>
+</ul>
+<p>Reviewing everything each week creates noise and false urgency. Waiting a quarter to inspect an operational failure removes the chance to respond.</p>
+</section>
+<section id="assign-ownership-with-authority" class="level3">
+<h3 class="anchored" data-anchor-id="assign-ownership-with-authority">Assign ownership with authority</h3>
+<p>Every operational metric needs one person who can:</p>
+<ul>
+<li>explain what drives a change;</li>
+<li>investigate a surprising result;</li>
+<li>make or escalate the action attached to the threshold.</li>
+</ul>
+<p>Shared contributors are useful. One accountable owner prevents the metric from becoming a number everyone watches and no one uses.</p>
+</section>
+</section>
+<section id="stage-4-maintain-the-metric-system" class="level2">
+<h2 class="anchored" data-anchor-id="stage-4-maintain-the-metric-system">Stage 4: Maintain the metric system</h2>
+<section id="weekly-operational-review" class="level3">
+<h3 class="anchored" data-anchor-id="weekly-operational-review">Weekly: operational review</h3>
+<ul>
+<li>Did an unexpected change occur?</li>
+<li>Does the team need to investigate?</li>
+<li>Are the short-cycle indicators moving outside their expected ranges?</li>
+</ul>
+<p>Keep this review narrow and tied to immediate action.</p>
+</section>
+<section id="monthly-tactical-review" class="level3">
+<h3 class="anchored" data-anchor-id="monthly-tactical-review">Monthly: tactical review</h3>
+<ul>
+<li>Which key metrics changed?</li>
+<li>Which experiments ran, and what did the team learn?</li>
+<li>Do current tactics need adjustment?</li>
+<li>Did an early warning signal appear?</li>
+</ul>
+<p>Use this review to examine causes and compare results with the assumptions behind the plan.</p>
+</section>
+<section id="quarterly-strategic-review" class="level3">
+<h3 class="anchored" data-anchor-id="quarterly-strategic-review">Quarterly: strategic review</h3>
+<p>Ask whether the team still measures the right things. Review each metric’s lifecycle:</p>
+<ol type="1">
+<li><strong>Exploratory:</strong> used for learning, with no target;</li>
+<li><strong>Operational:</strong> attached to a target and an action;</li>
+<li><strong>Critical:</strong> receives leadership attention and requires guardrails;</li>
+<li><strong>Deprecated:</strong> still available for continuity but no longer drives action;</li>
+<li><strong>Retired:</strong> removed from dashboards and recurring reviews.</li>
+</ol>
+<p>Then ask:</p>
+<ul>
+<li>Which metrics should change state?</li>
+<li>Which decisions lack evidence?</li>
+<li>Which metrics changed behavior without improving the intended outcome?</li>
+<li>Which metrics should the team remove?</li>
+</ul>
+<p>A metric system should lose metrics as well as gain them. The goal is a smaller set of numbers that helps people make better decisions.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

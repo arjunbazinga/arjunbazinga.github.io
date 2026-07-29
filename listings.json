@@ -99,6 +99,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/metrics-that-change-decisions/index.html",
       "/posts/golden-datasets/index.html",
       "/posts/llms-for-backend-engineers/index.html",
       "/posts/programmng-language/index.html",
@@ -122,6 +123,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/metrics-that-change-decisions/index.html",
       "/posts/golden-datasets/index.html",
       "/posts/llms-for-backend-engineers/index.html",
       "/posts/programmng-language/index.html",
