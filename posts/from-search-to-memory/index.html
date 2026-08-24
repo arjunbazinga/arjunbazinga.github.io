@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-08-25">
+<meta name="description" content="Search retrieves candidate evidence. Memory also has to reconcile identity, authority, and time; construct different views for different tasks; and decide which reviewed results become reusable state.">
+
+<title>From Search to Memory: 35 Million Words of AI Conversations – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-3c9c489b3365030a08823a85c71cd1a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-4de2da5e8af8a56ca594d71261300eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-3c9c489b3365030a08823a85c71cd1a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<style>
+  pre.sourceCode.text, pre.text, div.sourceCode pre {
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.28;
+    font-size: 0.78rem;
+  }
+  pre.sourceCode.text code, pre.text code, div.sourceCode pre code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-variant-ligatures: none;
+    white-space: pre;
+  }
+</style>
+
+
+<meta property="og:title" content="From Search to Memory: 35 Million Words of AI Conversations – Arjun Srivastava">
+<meta property="og:description" content="Search retrieves candidate evidence. Memory also has to reconcile identity, authority, and time; construct different views for different tasks; and decide which reviewed results become reusable state.">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="From Search to Memory: 35 Million Words of AI Conversations – Arjun Srivastava">
+<meta name="twitter:description" content="Search retrieves candidate evidence. Memory also has to reconcile identity, authority, and time; construct different views for different tasks; and decide which reviewed results become reusable state.">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.com/library"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">From Search to Memory: 35 Million Words of AI Conversations</h1>
+                  <div>
+        <div class="description">
+          Search retrieves candidate evidence. Memory also has to reconcile identity, authority, and time; construct different views for different tasks; and decide which reviewed results become reusable state.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">Systems</div>
+                <div class="quarto-category">Memory</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 25, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-workload-questions-that-cross-threads" id="toc-the-workload-questions-that-cross-threads" class="nav-link active" data-scroll-target="#the-workload-questions-that-cross-threads">The workload: questions that cross threads</a></li>
+  <li><a href="#question-1-can-i-find-an-old-idea" id="toc-question-1-can-i-find-an-old-idea" class="nav-link" data-scroll-target="#question-1-can-i-find-an-old-idea">Question 1: Can I find an old idea?</a>
+  <ul class="collapse">
+  <li><a href="#normalizing-six-conversation-formats" id="toc-normalizing-six-conversation-formats" class="nav-link" data-scroll-target="#normalizing-six-conversation-formats">Normalizing six conversation formats</a></li>
+  </ul></li>
+  <li><a href="#question-2-which-conversations-belong-to-the-same-thing" id="toc-question-2-which-conversations-belong-to-the-same-thing" class="nav-link" data-scroll-target="#question-2-which-conversations-belong-to-the-same-thing">Question 2: Which conversations belong to the same thing?</a>
+  <ul class="collapse">
+  <li><a href="#canonical-entity-reconciliation" id="toc-canonical-entity-reconciliation" class="nav-link" data-scroll-target="#canonical-entity-reconciliation">Canonical entity reconciliation</a></li>
+  <li><a href="#discovering-unstated-structure-with-contrastive-clustering" id="toc-discovering-unstated-structure-with-contrastive-clustering" class="nav-link" data-scroll-target="#discovering-unstated-structure-with-contrastive-clustering">Discovering unstated structure with contrastive clustering</a></li>
+  </ul></li>
+  <li><a href="#question-3-what-did-i-build-rather-than-discuss" id="toc-question-3-what-did-i-build-rather-than-discuss" class="nav-link" data-scroll-target="#question-3-what-did-i-build-rather-than-discuss">Question 3: What did I build rather than discuss?</a>
+  <ul class="collapse">
+  <li><a href="#grounding-chat-in-external-evidence" id="toc-grounding-chat-in-external-evidence" class="nav-link" data-scroll-target="#grounding-chat-in-external-evidence">Grounding chat in external evidence</a></li>
+  <li><a href="#evidence-is-not-interpretation" id="toc-evidence-is-not-interpretation" class="nav-link" data-scroll-target="#evidence-is-not-interpretation">Evidence is not interpretation</a></li>
+  <li><a href="#evidence-has-types" id="toc-evidence-has-types" class="nav-link" data-scroll-target="#evidence-has-types">Evidence has types</a></li>
+  <li><a href="#corrections-are-evidence-too" id="toc-corrections-are-evidence-too" class="nav-link" data-scroll-target="#corrections-are-evidence-too">Corrections are evidence too</a></li>
+  </ul></li>
+  <li><a href="#question-4-which-version-is-current" id="toc-question-4-which-version-is-current" class="nav-link" data-scroll-target="#question-4-which-version-is-current">Question 4: Which version is current?</a>
+  <ul class="collapse">
+  <li><a href="#unified-batch-and-incremental-capture" id="toc-unified-batch-and-incremental-capture" class="nav-link" data-scroll-target="#unified-batch-and-incremental-capture">Unified batch and incremental capture</a></li>
+  <li><a href="#current-state-is-typed" id="toc-current-state-is-typed" class="nav-link" data-scroll-target="#current-state-is-typed">Current state is typed</a></li>
+  </ul></li>
+  <li><a href="#question-5-what-view-does-this-task-need" id="toc-question-5-what-view-does-this-task-need" class="nav-link" data-scroll-target="#question-5-what-view-does-this-task-need">Question 5: What view does this task need?</a>
+  <ul class="collapse">
+  <li><a href="#relevance-is-task-conditioned" id="toc-relevance-is-task-conditioned" class="nav-link" data-scroll-target="#relevance-is-task-conditioned">Relevance is task-conditioned</a></li>
+  <li><a href="#dynamic-semantic-lenses-with-oma" id="toc-dynamic-semantic-lenses-with-oma" class="nav-link" data-scroll-target="#dynamic-semantic-lenses-with-oma">Dynamic semantic lenses with OMA</a></li>
+  <li><a href="#composing-exact-and-semantic-queries-with-pg_llm" id="toc-composing-exact-and-semantic-queries-with-pg_llm" class="nav-link" data-scroll-target="#composing-exact-and-semantic-queries-with-pg_llm">Composing exact and semantic queries with <code>pg_llm</code></a></li>
+  <li><a href="#the-agent-as-an-adaptive-query-planner" id="toc-the-agent-as-an-adaptive-query-planner" class="nav-link" data-scroll-target="#the-agent-as-an-adaptive-query-planner">The agent as an adaptive query planner</a></li>
+  </ul></li>
+  <li><a href="#question-6-should-this-result-become-memory" id="toc-question-6-should-this-result-become-memory" class="nav-link" data-scroll-target="#question-6-should-this-result-become-memory">Question 6: Should this result become memory?</a>
+  <ul class="collapse">
+  <li><a href="#materialization-requires-provenance" id="toc-materialization-requires-provenance" class="nav-link" data-scroll-target="#materialization-requires-provenance">Materialization requires provenance</a></li>
+  <li><a href="#artifact-authority-is-not-claim-authority" id="toc-artifact-authority-is-not-claim-authority" class="nav-link" data-scroll-target="#artifact-authority-is-not-claim-authority">Artifact authority is not claim authority</a></li>
+  <li><a href="#closing-the-write-loop" id="toc-closing-the-write-loop" class="nav-link" data-scroll-target="#closing-the-write-loop">Closing the write loop</a></li>
+  </ul></li>
+  <li><a href="#the-architecture-now-with-the-boxes-explained" id="toc-the-architecture-now-with-the-boxes-explained" class="nav-link" data-scroll-target="#the-architecture-now-with-the-boxes-explained">The architecture, now with the boxes explained</a></li>
+  <li><a href="#what-this-taught-me" id="toc-what-this-taught-me" class="nav-link" data-scroll-target="#what-this-taught-me">What this taught me</a></li>
+  <li><a href="#whats-next-safe-queries-over-private-memory" id="toc-whats-next-safe-queries-over-private-memory" class="nav-link" data-scroll-target="#whats-next-safe-queries-over-private-memory">What’s next: Safe queries over private memory</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="persistence-of-memory.jpg" class="img-fluid figure-img"></p>
+<figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
+</figure>
+</div>
+<p>Between January 2023 and July 2026, my AI conversation archive accumulated 6,604 conversations: 100,694 message turns and 35.7 million words. They contain architectural designs, codebases, operational decisions, abandoned experiments, and technical trade-offs that exist nowhere else.</p>
+<p>I use chat as an exocortex. Offloading details into a conversation lets me manipulate complex constraints, pursue multiple technical tracks in parallel, and focus on whatever part of a problem is changing without holding every constraint in working memory.</p>
+<p>The interface works while thinking. It fails completely when trying to reconstruct that thinking across time. A thread title and a search box cannot tell you why an architectural decision changed, whether two project codenames refer to the same codebase, whether a design was ever built outside chat, or which unfinished thread is actually worth reviving.</p>
+<p>The historical record exists, but useful state remains scattered across thousands of conversations and several external systems.</p>
+<p>To make that history usable, the system had to evolve from a simple search pipeline into a closed loop:</p>
+<pre class="text"><code>raw history ──▶ evidence ledger ──▶ task projections ──▶ reusable state
+      ▲                                                           │
+      └──────────────── corrections / new artifacts ──────────────┘</code></pre>
+<p>Search finds old material. Memory is the machinery around that search that works out what the material refers to, what it can prove, what is current, how it should be represented for a specific task, and what is worth carrying forward.</p>
+<p>Here is why each layer broke, and what was built to replace it.</p>
+<section id="the-workload-questions-that-cross-threads" class="level2">
+<h2 class="anchored" data-anchor-id="the-workload-questions-that-cross-threads">The workload: questions that cross threads</h2>
+<p>The archive spans six sources, but the volume is heavily skewed:</p>
+<pre class="text"><code>words per source
+
+AI Studio   ║████████████████████████████████████  20.5M
+Claude      ║███████████████                       8.5M
+ChatGPT     ║█████████                             5.0M
+Cursor      ║██                                    1.1M
+Codex       ║█                                     0.5M
+Claude Code ║·                                    0.04M
+
+· below one bar cell at this scale</code></pre>
+<p><em>(Word counts are measured directly from normalized message text. Model token counts vary depending on tokenizers, chunk boundaries, and prompt overhead.)</em></p>
+<p>AI Studio accounts for roughly 57% of the total words despite representing only 20% of the conversations. Measuring corpus size purely by thread count hides where the substantive technical weight lives.</p>
+<p>Querying this corpus requires answering six progressively harder questions:</p>
+<pre class="text"><code>FIND          Where was this discussed?
+  │
+  ▼
+IDENTIFY      What durable entity does it belong to?
+  │
+  ▼
+ESTABLISH     What claims can this evidence actually support?
+  │
+  ▼
+RESOLVE TIME  Which state is current?
+  │
+  ▼
+PROJECT       What representation does this specific task need?
+  │
+  ▼
+PROMOTE       Should this result become reusable memory?
+
+search → identity → authority → time → projection → memory</code></pre>
+<p>These questions demand fundamentally different views over the same underlying history.</p>
+<p>One projection resembles a private year-in-review: activity patterns, recurring themes, and shifts in working habits. Another produces a project inventory. A third examines project histories to decide which internal artifacts warrant public release.</p>
+<p>Loop closure matters to me. Once I solve the difficult technical part of a project and prove that it works, my momentum often falls near 90% completion. Publishing, cleanup, and unresolved edges disappear when their context lives scattered across old threads.</p>
+<p>A useful memory system must recover that context without promoting every old intention into an outcome.</p>
+<p>The first iteration was far simpler: it was search.</p>
+</section>
+<section id="question-1-can-i-find-an-old-idea" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-can-i-find-an-old-idea">Question 1: Can I find an old idea?</h2>
+<p>The first version was standard search: normalize conversation exports into flat files, index full text with SQLite FTS5, and generate vector embeddings for semantic retrieval.</p>
+<p>These two retrieval modes solve distinct problems:</p>
+<ul>
+<li><strong>Exact search</strong> works when you know the handle: an internal project codename, an exact error string, a function identifier, a library, or a person.</li>
+<li><strong>Semantic retrieval</strong> works when vocabulary has drifted: finding an architecture concept discussed three years ago using different words.</li>
+</ul>
+<p>Before either could work reliably, the source formats had to become comparable.</p>
+<section id="normalizing-six-conversation-formats" class="level3">
+<h3 class="anchored" data-anchor-id="normalizing-six-conversation-formats">Normalizing six conversation formats</h3>
+<p>Each source platform exports an incompatible data model with its own edge cases:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Export failure mode &amp; Normalization fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ChatGPT</strong></td>
+<td>Conversations are tree DAGs, not linear lists. Adapters walk parent pointers backward from active leaf nodes to reconstruct the intended branch.</td>
+</tr>
+<tr class="even">
+<td><strong>Claude</strong></td>
+<td>Schemas shifted from flat message arrays to nested content blocks across platform generations; adapters route through version-specific AST decoders.</td>
+</tr>
+<tr class="odd">
+<td><strong>AI Studio</strong></td>
+<td>Batches overlap and lack message-level timestamps; adapters deduplicate by turn hashes and reconstruct dates from HTTP payload metadata and file modification times.</td>
+</tr>
+<tr class="even">
+<td><strong>Coding agents</strong></td>
+<td>Tool calls, terminal outputs, and session resumptions must be parsed into typed execution events rather than noisy raw prompt text.</td>
+</tr>
+</tbody>
+</table>
+<p>Source adapters parse raw exports, convert them into a uniform schema, and attach permanent locators (<code>source_id</code>, <code>conversation_id</code>, <code>turn_index</code>).</p>
+<p>This establishes a core invariant:</p>
+<blockquote class="blockquote">
+<p><strong>A search index should be disposable. The evidence it points to should not be.</strong></p>
+</blockquote>
+<p>The resulting system could answer:</p>
+<blockquote class="blockquote">
+<p><em>Where was this discussed?</em></p>
+</blockquote>
+<p>That is already valuable. It eliminates the need to remember which tool, thread, or wording held an old idea.</p>
+<p>But a search hit is only a candidate.</p>
+<p>When I queried for an old storage engine project, search returned 40 threads spanning six different codenames, three abandoned prototypes, and a dozen conversational side-tracks. Text similarity could not tell me which threads belonged to the same project, which one had working code, or which design was current.</p>
+<p>Search generated candidates. It had no concept of identity.</p>
+</section>
+</section>
+<section id="question-2-which-conversations-belong-to-the-same-thing" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-which-conversations-belong-to-the-same-thing">Question 2: Which conversations belong to the same thing?</h2>
+<p>A conversation makes a good transport container and a poor semantic identity.</p>
+<p>A single project often spans dozens of threads and shifting codenames. Conversely, a single long thread can wander across multiple distinct projects. A thread title generated from the opening prompt rarely describes the work done twenty turns later.</p>
+<p>If the system treats a conversation as the unit of meaning, project-level questions fail: work is split across aliases, duplicate records proliferate, and thread drift corrupts historical queries.</p>
+<section id="canonical-entity-reconciliation" class="level3">
+<h3 class="anchored" data-anchor-id="canonical-entity-reconciliation">Canonical entity reconciliation</h3>
+<p>To fix this, an offline pipeline extracted candidate aliases by analyzing co-occurrences in commit messages, repo paths, and thread titles, generating a cluster graph of potential project handles. After human review, I locked these clusters into a canonical registry, consolidating 300 raw identifiers down to 249 canonical projects.</p>
+<p>A canonical project record requires:</p>
+<ul>
+<li><strong>Aliases</strong> (historical codenames, repo names, thread handles);</li>
+<li><strong>Evidence links</strong> mapping back to specific conversation turns;</li>
+<li><strong>Maturity state</strong> (e.g., <em>concept</em>, <em>prototype</em>, <em>production</em>, <em>abandoned</em>);</li>
+<li><strong>Temporal boundaries</strong> (first active date, last active date);</li>
+<li><strong>Relationships</strong> to other projects;</li>
+<li><strong>Provenential rationale</strong> documenting <em>why</em> two aliases were merged.</li>
+</ul>
+<p>Canonicalization answers:</p>
+<blockquote class="blockquote">
+<p><em>Do these records refer to the same durable thing?</em></p>
+</blockquote>
+<p>However, entity resolution only works for things you explicitly named. It cannot identify unstated thematic patterns across the corpus.</p>
+</section>
+<section id="discovering-unstated-structure-with-contrastive-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="discovering-unstated-structure-with-contrastive-clustering">Discovering unstated structure with contrastive clustering</h3>
+<p>Hundreds of conversations across seemingly unrelated projects often share latent concerns: evaluation harnesses, long-running agent workflows, organizational structure, memory systems, or data contracts. These themes were never given formal labels while the conversations were happening.</p>
+<p>Anthropic’s Clio research provided a useful design for discovering this kind of bottom-up semantic structure. I reimplemented the hierarchy-generation idea, omitting their institutional privacy system.</p>
+<p>The pipeline extracts a model-generated facet for each conversation (such as the core user intent), embeds the facets, and clusters them.</p>
+<p>Crucially, base clusters are <strong>named contrastively</strong>: representative cluster members are shown alongside nearby non-members so the model describes what makes the cluster distinct, not merely what its members have in common.</p>
+<p>Higher levels are generated bottom-up: cluster descriptions are embedded, grouped into neighborhoods, proposed as candidate parent nodes, deduplicated, assigned children, and finally <strong>renamed only after knowing which children they actually received</strong>:</p>
+<pre class="text"><code>6,604 conversations
+        │ generate one facet each
+        ▼
+┌─ facets ─────────────────────────────────┐
+└─────────────────────┬────────────────────┘
+        │ embed, cluster
+        ▼
+┏━ base cluster ━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  named against nearby non-members,      ┃
+┃  so the name says what it excludes      ┃
+┗━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━┛
+        │ embed names, propose parents, assign children
+        ▼
+┏━ parent cluster ━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  renamed from the children it received  ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</code></pre>
+<p>Two steps prevent semantic drift: <strong>naming a cluster against what it excludes</strong>, and <strong>naming a parent node only after its children are finalized</strong>.</p>
+<p>This semantic index and the canonical entity map solve distinct problems:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Structure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Do these records refer to the same durable thing?</td>
+<td>Canonical entity</td>
+</tr>
+<tr class="even">
+<td>What recurring semantic structure exists across many records?</td>
+<td>Generated hierarchy</td>
+</tr>
+</tbody>
+</table>
+<p>The two mechanisms intersect without collapsing into each other:</p>
+<pre class="text"><code>source records             canonical identity       semantic views
+
+conversation A ─┐
+conversation B ─┼─ same thing ─▶ Project P ─┬─▶ theme: memory systems
+conversation C ─┘                           └─▶ theme: publishing
+
+conversation D ─── same thing ─▶ Project Q ───▶ theme: memory systems</code></pre>
+<p>Identity collapses aliases into one durable object. Categorization projects that object into several useful views. Identity and categorization must not collapse into the same mechanism.</p>
+<p>The entity map told me that 40 disparate threads belonged to a single project. But it still could not tell me if that project had ever shipped a single line of working code.</p>
+</section>
+</section>
+<section id="question-3-what-did-i-build-rather-than-discuss" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-what-did-i-build-rather-than-discuss">Question 3: What did I build rather than discuss?</h2>
+<p>Conversations are unusually rich evidence of thought. They are much weaker evidence of outcome.</p>
+<p>A design may never reach code. A remembered result may use the wrong denominator. An assistant can propose a compelling architecture that was immediately discarded. A plan can be discussed repeatedly and still never happen.</p>
+<p>This distinction becomes critical when moving from:</p>
+<blockquote class="blockquote">
+<p><em>What was I thinking about?</em></p>
+</blockquote>
+<p>to:</p>
+<blockquote class="blockquote">
+<p><em>What did I build?</em> <em>Which decision did we actually make?</em> <em>What evidence supports this claim?</em></p>
+</blockquote>
+<p>Chat provides candidate claims. Proving outcomes requires external systems of record.</p>
+<section id="grounding-chat-in-external-evidence" class="level3">
+<h3 class="anchored" data-anchor-id="grounding-chat-in-external-evidence">Grounding chat in external evidence</h3>
+<p>Harder operational questions required integrating additional evidence sources:</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Evidence family</th>
+<th>What it can establish</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>GitHub &amp; local repositories</strong></td>
+<td>Code execution: commits, PRs, diffs, release tags, and version lineage</td>
+</tr>
+<tr class="even">
+<td><strong>Jira &amp; Confluence</strong></td>
+<td>Delivery state: ownership, decisions, rejected alternatives, and review history</td>
+</tr>
+<tr class="odd">
+<td><strong>Slack &amp; calendar</strong></td>
+<td>Operational cadence: collaboration context, meeting decisions, and real chronology</td>
+</tr>
+<tr class="even">
+<td><strong>Finished artifacts</strong></td>
+<td>Durability: finalized RFCs, datasets, technical essays, PDFs, and releases</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These sources arrive via historical exports, scheduled API syncs, or authenticated fetches via a sandboxed browser. All sources conform to the same versioned record contract.</p>
+<p>The core architectural invariant is that <strong>every record retains sufficient provenance for downstream queries to evaluate its evidentiary weight.</strong></p>
+</section>
+<section id="evidence-is-not-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="evidence-is-not-interpretation">Evidence is not interpretation</h3>
+<p>Retrieval asks: <em>What evidence exists?</em> Authority asks: <em>What can this evidence establish?</em></p>
+<p>The state model strictly decouples three layers:</p>
+<pre class="text"><code>╔═ evidence ledger ══╗   ┌─ interpretation ─┐   ┏━ accepted state ━┓
+║ source evidence in ║──▶│ reads several    │──▶┃ reviewed current ┃
+║ a named revision   ║   │ records          │   ┃ view             ┃
+╚════════════════════╝   └──────────────────┘   ┗━━━━━━━━━┯━━━━━━━━┛
+           ▲                                              │
+           └────────── correction, as a dated record ─────┘</code></pre>
+<p>A conversation proves that text appeared in a named source revision. A model-generated summary interprets several records. A reviewed project record becomes the accepted current view. Authority never transfers automatically across these boundaries, and human corrections re-enter the system as new dated evidence rather than overwriting history.</p>
+<p>This separation prevents LLMs from flattening distinctions. A fluent summary can easily make a plan, a suggestion, a speculative idea, and a deployed production release sound equally factual unless their underlying evidence types remain distinct.</p>
+</section>
+<section id="evidence-has-types" class="level3">
+<h3 class="anchored" data-anchor-id="evidence-has-types">Evidence has types</h3>
+<p>Different records support different claims:</p>
+<ul>
+<li><strong>First-person assertions</strong> prove what someone claimed or remembered at a point in time.</li>
+<li><strong>Assistant suggestions</strong> prove a proposal was surfaced, not that it was accepted or implemented.</li>
+<li><strong>Commits and diffs</strong> prove code changed.</li>
+<li><strong>Tickets</strong> prove operational ownership and delivery status transitions.</li>
+<li><strong>Released artifacts</strong> prove durable delivery.</li>
+</ul>
+<p>Numerical claims require explicit provenance tags:</p>
+<ul>
+<li><code>measured</code> (derived directly from benchmark logs or profiling runs);</li>
+<li><code>remembered</code> (quoted from memory during conversation);</li>
+<li><code>reconstructed</code> (recalculated after the fact);</li>
+<li><code>targeted</code> (a performance goal);</li>
+<li><code>hypothetical</code> (an illustrative example).</li>
+</ul>
+<p>The same rigor applies to negative search results. <em>“I found no matching artifact in the searched sources using these parameters”</em> describes an empirical search operation. <em>“This artifact does not exist”</em> makes an absolute factual claim search alone cannot guarantee.</p>
+</section>
+<section id="corrections-are-evidence-too" class="level3">
+<h3 class="anchored" data-anchor-id="corrections-are-evidence-too">Corrections are evidence too</h3>
+<p>Model-generated interpretations will make mistakes: merging distinct projects, misattributing contributions, or promoting an intention into an outcome.</p>
+<p>When correcting these mistakes, the system must not mutate the historical records that produced the mistake. <strong>The human correction is appended as a new dated record.</strong></p>
+<p>This preserves full auditability: accepted state can change while the exact historical evidence that produced earlier interpretations remains inspectable.</p>
+<p>Now I had code, commits, and conversation records linked to canonical entities. But multiple conflicting records claimed to represent the “current” architecture. The system could not resolve temporal supersession.</p>
+</section>
+</section>
+<section id="question-4-which-version-is-current" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-which-version-is-current">Question 4: Which version is current?</h2>
+<p>The newest record is not always the most complete.</p>
+<p>During one ingestion run, a fresh ChatGPT export contained 174 conversations that were significantly shorter than the versions already stored in the archive.</p>
+<p>Whether caused by branch selection bugs, server-side data retention issues, or export format shifts, automatically overwriting existing records with the latest download would have permanently destroyed detail.</p>
+<p>The importer retained the new export, but quarantined those 174 records from promotion:</p>
+<pre class="text"><code>raw arrival
+    │ normalize
+    ▼
+╔═ evidence ledger ════╗
+║ immutable snapshot   ║
+╚══════════╤═══════════╝
+           │ compare against known revisions
+     ┌─────┴──────┐
+     ▼            ▼
+┌─ retained ─┐  ┌╌ quarantined ╌╌╌┐
+│  revision  │  ╎ 174 shorter     ╎
+└─────┬──────┘  ╎ copies          ╎
+      │ promote └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+      ▼
+┌─ current view ─┐
+│  replaceable   │
+└────────────────┘</code></pre>
+<p>This established four distinct lifecycle concepts:</p>
+<ul>
+<li><strong>Raw arrival:</strong> The exact byte payload received from an export or webhook at a specific timestamp, stored as a content-addressed JSON blob on disk.</li>
+<li><strong>Immutable snapshot:</strong> An unmutated archive entry in the evidence ledger. If normalization parsers change, they can be rerun across historical snapshots without data loss.</li>
+<li><strong>Retained revision:</strong> The specific parsed version selected as the most complete historical representation.</li>
+<li><strong>Current view:</strong> A disposable relational pointer in SQLite pointing to the currently accepted best state.</li>
+</ul>
+<section id="unified-batch-and-incremental-capture" class="level3">
+<h3 class="anchored" data-anchor-id="unified-batch-and-incremental-capture">Unified batch and incremental capture</h3>
+<p>Large batch exports handle historical backfills; webhooks and authenticated API pulls provide real-time freshness.</p>
+<p>While their transport layers differ, both converge on the same immutable record contract. In one test, capturing an evolving conversation twice appended eight new messages while retaining the previous snapshot intact, making the delta inspectable rather than implicit.</p>
+</section>
+<section id="current-state-is-typed" class="level3">
+<h3 class="anchored" data-anchor-id="current-state-is-typed">Current state is typed</h3>
+<p>Current state is an evaluation over dated evidence. Different operational entities follow distinct transition rules:</p>
+<ul>
+<li><strong>Decisions</strong> are superseded by newer records.</li>
+<li><strong>Commitments</strong> transition between <em>open</em>, <em>completed</em>, and <em>abandoned</em>.</li>
+<li><strong>Preferences</strong> decay gradually over time rather than flipping boolean states.</li>
+<li><strong>Projects</strong> advance through explicit maturity tiers.</li>
+<li><strong>Artifacts</strong> move from <em>draft</em> to <em>published</em>.</li>
+</ul>
+<p>Historical evidence remains frozen; the derived interpretation updates.</p>
+<p>At this point, the system knew what existed, what was built, and what was current. But when I tried to use this state, a new failure appeared: no single summary of this data could satisfy different tasks.</p>
+</section>
+</section>
+<section id="question-5-what-view-does-this-task-need" class="level2">
+<h2 class="anchored" data-anchor-id="question-5-what-view-does-this-task-need">Question 5: What view does this task need?</h2>
+<p>A common architecture trap is attempting to build a single “consolidated world model”—one massive summary of all projects, decisions, and knowledge intended to serve every future query.</p>
+<p>In practice, this fails in both directions:</p>
+<ol type="1">
+<li><strong>Exhaustive summaries</strong> become bloated, brittle, and prohibitively expensive to maintain.</li>
+<li><strong>Aggressively compressed summaries</strong> discard granular evidence that future operational queries end up needing.</li>
+</ol>
+<p>The fundamental issue is that <strong>different tasks require fundamentally incompatible representations of the same underlying history.</strong></p>
+<section id="relevance-is-task-conditioned" class="level3">
+<h3 class="anchored" data-anchor-id="relevance-is-task-conditioned">Relevance is task-conditioned</h3>
+<p>Consider four distinct projections derived from the same project history:</p>
+<pre class="text"><code>same project history
+        │
+        ├─ year-in-review
+        │    → temporal deltas, major shifts, recurring themes
+        │
+        ├─ unfinished-work queue
+        │    → maturity state, blockers, actionable next steps
+        │
+        ├─ technical narrative
+        │    → architectural decisions, failure modes, benchmark lineage
+        │
+        └─ publication plan
+             → novelty, claims, confidentiality, artifact completeness</code></pre>
+<p>All four projections are accurate, yet they prioritize disjoint subsets of the underlying data.</p>
+<p>Relevance cannot be evaluated as an intrinsic property of a text chunk. It is a function of context:</p>
+<pre class="text"><code>usefulness(record | task, reader, time, authority, proof obligation)</code></pre>
+<p>Vector similarity provides an initial candidate filter, but cannot evaluate audience requirements, temporal authority, or evidentiary burden on its own.</p>
+</section>
+<section id="dynamic-semantic-lenses-with-oma" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-semantic-lenses-with-oma">Dynamic semantic lenses with OMA</h3>
+<p>Often, the grouping axis required by an operational task does not exist in the precomputed index. A static topic index might partition conversations into <em>search</em>, <em>robotics</em>, or <em>writing</em>, but a task may need to partition by <em>maturity</em>, <em>execution risk</em>, or <em>claim strength</em>.</p>
+<p>A static topic index cannot become a maturity index simply by reranking clusters; the task demands an orthogonal grouping axis.</p>
+<p>I built <strong>OMA</strong> to solve this. OMA rejected the assumption that personal archives should have one permanent taxonomy. Instead, it generates transient taxonomies on the fly from user intent:</p>
+<pre class="text"><code>Input collection:
+  Project A — extensive implementation notes, no public release
+  Project B — speculative architectural brainstorming
+  Project C — completed benchmark logs, unpublished draft
+
+Intent:
+  "What should I publish next?"
+
+Generated lens:
+  [novelty, evidence_strength, public_readiness, remaining_effort]
+
+Resulting projection:
+  Project C (ready) &gt; Project A (needs writeup) &gt;&gt;&gt; Project B (speculative)</code></pre>
+<p>The objective is not to build another permanent classification tree, but to synthesize transient taxonomies on demand.</p>
+</section>
+<section id="composing-exact-and-semantic-queries-with-pg_llm" class="level3">
+<h3 class="anchored" data-anchor-id="composing-exact-and-semantic-queries-with-pg_llm">Composing exact and semantic queries with <code>pg_llm</code></h3>
+<p>While OMA proved the need for dynamic lenses, running them across large archives created a computational problem: operational queries mix exact relational mechanics with semantic language judgment.</p>
+<p>Relational engines excel at timestamps, foreign key joins, metadata filters, and set operations. Language models excel at qualitative judgment: classifying maturity, extracting action items, or identifying contradictions.</p>
+<p>I designed <strong><code>pg_llm</code></strong> to make this hybrid interface concrete inside PostgreSQL:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> canonical_project,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       llm_agg_jsonb(source_evidence, <span class="st">'extract unresolved blockers and next actions'</span>) <span class="kw">AS</span> task_state</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> evidence_ledger</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> last_active_at <span class="op">&gt;</span> NOW() <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'6 months'</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> canonical_project;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This treats language model inference as a composable database operator. SQL handles relational boundaries, filtering, and grouping; the language model handles qualitative synthesis over the grouped evidence.</p>
+</section>
+<section id="the-agent-as-an-adaptive-query-planner" class="level3">
+<h3 class="anchored" data-anchor-id="the-agent-as-an-adaptive-query-planner">The agent as an adaptive query planner</h3>
+<p>Fixed retrieval pipelines (<code>embed → retrieve → rerank → generate</code>) fail when intermediate evidence alters the direction of the inquiry.</p>
+<p>In complex investigations, the conversational agent acts as an adaptive query planner, alternating between exact relational queries, semantic searches, artifact inspections, and dynamic facet creation:</p>
+<pre class="text"><code>   hypothesis
+       │
+       ▼
+┌─ choose tool and query ─┐ ◀────────────┐
+└────────────┬────────────┘              │
+             ▼                           │ revise: new facet,
+┌─ inspect partial results ─┐            │ split by time,
+└────────────┬──────────────┘            │ switch exact/semantic,
+             ▼                           │ open primary artifacts
+┌─ check authority, time, ──┐            │
+│  contradictions           │────────────┘
+└────────────┬──────────────┘
+             │ supported
+             ▼
+   answer, or a projection worth keeping</code></pre>
+<p>The back edge is the difference. No fixed pipeline specified that sequence.</p>
+<p>The agent does not merely rewrite search strings; it alters the underlying representations: partitioning queries chronologically, switching from vector similarity to exact phrase matching for verification, opening raw source commits to verify claims, or materializing temporary tables to isolate edge cases.</p>
+<p>The result is an investigative loop rather than a static lookup.</p>
+<p>The query planner could construct custom projections on the fly. But it had no mechanism to determine which projections were one-off scratchpads and which ones deserved to survive as authoritative state.</p>
+</section>
+</section>
+<section id="question-6-should-this-result-become-memory" class="level2">
+<h2 class="anchored" data-anchor-id="question-6-should-this-result-become-memory">Question 6: Should this result become memory?</h2>
+<p>Not every generated projection warrants persistence.</p>
+<p>A novel investigation may produce a highly specific projection that is valuable once and useless afterward. Other views—such as a verified entity map or project roster—recur constantly.</p>
+<p>Recomputing those views on every read costs more than compute: it introduces variance. Two model invocations may not produce the same interpretation.</p>
+<p>The promotion boundary is operational:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ephemeral (query-time)</th>
+<th>Promoted (maintained state)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exploratory inquiry</td>
+<td>Recurring operational query</td>
+</tr>
+<tr class="even">
+<td>Schema still shifting</td>
+<td>Stable, reusable representation</td>
+</tr>
+<tr class="odd">
+<td>Inexpensive to recompute</td>
+<td>Expensive or highly variable to reconstruct</td>
+</tr>
+<tr class="even">
+<td>Unreviewed coverage</td>
+<td>Reviewed and verified coverage</td>
+</tr>
+<tr class="odd">
+<td>Narrow, single-task utility</td>
+<td>Broad cross-task reuse value</td>
+</tr>
+</tbody>
+</table>
+<p>A task-generated projection remains temporary as long as those conditions remain uncertain.</p>
+<section id="materialization-requires-provenance" class="level3">
+<h3 class="anchored" data-anchor-id="materialization-requires-provenance">Materialization requires provenance</h3>
+<p>When a generated view is promoted to reusable state, future tasks consume it as input. Without rigorous provenance, synthetic model outputs gradually contaminate ground-truth evidence.</p>
+<p>Every promoted record must bundle three metadata groups:</p>
+<ul>
+<li><strong>Provenance:</strong> Source snapshot IDs, message locators, model identifier, and execution timestamp.</li>
+<li><strong>Recipe:</strong> The query string, system prompt, facet definition, and schema version that produced the result.</li>
+<li><strong>Governance:</strong> Human review status, applied corrections, dependencies, and supersession links.</li>
+</ul>
+<p>The invariant holds: <strong>reusable semantic state must remain auditable back to the source evidence and transformation that produced it.</strong></p>
+</section>
+<section id="artifact-authority-is-not-claim-authority" class="level3">
+<h3 class="anchored" data-anchor-id="artifact-authority-is-not-claim-authority">Artifact authority is not claim authority</h3>
+<p>Finished artifacts introduce a related failure mode.</p>
+<p>A filename containing <code>Final</code> does not establish authority. A durable artifact needs a stable identity, version, hash, status, and lineage.</p>
+<p>Even then, establishing the artifact only proves that the file exists. A PDF can prove that a document was produced and sent. It does not automatically prove every statement inside the document.</p>
+<p>This leaves two distinct forms of authority:</p>
+<ul>
+<li><strong>Artifact authority:</strong> Is this the durable, finalized version of the file?</li>
+<li><strong>Claim authority:</strong> Does this artifact provide sufficient evidence to support this specific statement?</li>
+</ul>
+<p>Enforcing this distinction prevents circular citations across model-generated summaries.</p>
+</section>
+<section id="closing-the-write-loop" class="level3">
+<h3 class="anchored" data-anchor-id="closing-the-write-loop">Closing the write loop</h3>
+<p>Memory improves when later work can update state without rewriting history.</p>
+<p>When an investigation uncovers missing context, a human corrects a misattribution, or a production release supersedes a design RFC, these events are committed as new typed records in the evidence ledger:</p>
+<pre class="text"><code>╔═ evidence ledger ═╗
+╚═════════╤═════════╝
+          │ investigate
+          ▼
+ ┌╌ task projection ╌┐
+ └╌╌╌╌╌╌╌┬╌╌╌╌╌╌╌╌╌╌╌┘
+          │ review
+    ┌─────┴─────┐
+    ▼           ▼
+ discard  ┏━ reusable state ━┓
+          ┗━━━━━━━━┯━━━━━━━━━┛
+                   │ correction / released artifact
+                   ▼
+          new evidence record
+                   │
+                   └── re-enters evidence ledger</code></pre>
+<p>Review, not plausibility, is what moves a generated view into reusable state.</p>
+<p>The system is not a pipeline from history into an ever-growing summary. It is a loop between evidence, interpretation, task-specific views, and reviewed state.</p>
+</section>
+</section>
+<section id="the-architecture-now-with-the-boxes-explained" class="level2">
+<h2 class="anchored" data-anchor-id="the-architecture-now-with-the-boxes-explained">The architecture, now with the boxes explained</h2>
+<p>With every failure mode addressed, the full system architecture can now be understood:</p>
+<pre class="text"><code>     historical exports                                live capture
+             │                                               │
+             └─────────────────────────┬─────────────────────┘
+                                       ▼
+                      ╔═ evidence ledger ═══════════════╗
+┌────────────────────▶║  versioned source evidence      ║
+│                     ╚════════════════╤════════════════╝
+│                                      │
+│                                      │
+│             ┌────────────────────────┼────────────────────────┐
+│             ▼                        ▼                        ▼
+│  ┏━━━━━━━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━━━━━━━━┓
+│  ┃ batch indexes      ┃   ┃ maintained views   ┃   ┃ query tools        ┃
+│  ┗━━━━━━━━━━┯━━━━━━━━━┛   ┗━━━━━━━━━━┯━━━━━━━━━┛   ┗━━━━━━━━━━┯━━━━━━━━━┛
+│             └────────────────────────┼────────────────────────┘
+│                                      ▼
+│                              ┏━━━━━━━━━━━━━━┓
+│                              ┃ agent        ┃
+│                              ┗━━━━━━━┯━━━━━━┛
+│                                      ▼
+│                            ┌╌ task projection ╌┐
+│                            └╌╌╌╌╌╌╌╌╌┬╌╌╌╌╌╌╌╌╌┘
+│                                      │ review
+│                       ┌──────────────┴───────────────────┐
+│                       ▼                                  ▼
+│                discard                        ┏━━━━━━━━━━━━━━━━━━━━━┓
+│                                               ┃ reusable state      ┃
+│                                               ┗━━━━━━━━━━┯━━━━━━━━━━┛
+│                                                          │
+└─── promotion / correction ───────────────────────────────┘</code></pre>
+<p>The six progressive questions map directly to the system layers:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>What it forced the system to add</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Can I find an old idea?</strong></td>
+<td>Normalized records, exact FTS5 search, vector embeddings, and durable source locators</td>
+</tr>
+<tr class="even">
+<td><strong>Which conversations belong to the same thing?</strong></td>
+<td>Canonical entity registries and contrastive bottom-up clustering</td>
+</tr>
+<tr class="odd">
+<td><strong>What did I build rather than discuss?</strong></td>
+<td>External evidence connectors, typed evidence classes, and explicit claim authority</td>
+</tr>
+<tr class="even">
+<td><strong>Which version is current?</strong></td>
+<td>Immutable arrivals, retained revisions, and replaceable temporal state</td>
+</tr>
+<tr class="odd">
+<td><strong>What view does this task need?</strong></td>
+<td>Maintained views, dynamic OMA lenses, <code>pg_llm</code> hybrid queries, and adaptive query planning</td>
+</tr>
+<tr class="even">
+<td><strong>Should this result become memory?</strong></td>
+<td>Provenance bundling, review promotion, supersession rules, and an append-only write path</td>
+</tr>
+</tbody>
+</table>
+<p>The foundation is the immutable evidence ledger. Above that foundation, three read paths operate:</p>
+<ol type="1">
+<li><strong>Batch indexes</strong> expose broad structure that is useful across many tasks.</li>
+<li><strong>Maintained views</strong> keep recurring semantic state available without reconstructing it from raw history every time.</li>
+<li><strong>Composable query tools</strong> handle questions whose structure emerges only when the task arrives.</li>
+</ol>
+<p>The conversational agent orchestrates these read paths. The narrow write path ensures only reviewed, fully traceable interpretations enter reusable memory.</p>
+</section>
+<section id="what-this-taught-me" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-taught-me">What this taught me</h2>
+<p>I started with what looked like a search problem.</p>
+<p>Finding an old conversation was relatively easy. The harder work began when I wanted to know whether several conversations referred to the same project, whether something discussed ever happened, whether an old result was still current, what evidence a claim actually rested on, or which slice of history mattered to the task in front of me.</p>
+<p>Four principles survived every rewrite:</p>
+<ol type="1">
+<li><strong>Keep evidence immutable; make views disposable.</strong> Raw arrivals land in an append-only ledger. Indexes, entity maps, and current views can be rebuilt or thrown away at any time.</li>
+<li><strong>Relevance depends on the task, not the text.</strong> There is no single summary that works for every question. The task must define its own semantic lens.</li>
+<li><strong>Separate what was said from what was proven.</strong> Language models easily make a casual suggestion sound like a shipped outcome. Ground truth requires typed evidence, claim authority, and external corroboration.</li>
+<li><strong>Memory is a closed loop, not a pipeline.</strong> Generated projections only become reusable state after review. Corrections and new artifacts re-enter the ledger as fresh evidence rather than editing history.</li>
+</ol>
+<p>Search returns the raw records you asked to find.</p>
+<p>Memory constructs the representation you actually need: shaped for the task at hand, with the right meaning, authority, and traceability already resolved.</p>
+</section>
+<section id="whats-next-safe-queries-over-private-memory" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next-safe-queries-over-private-memory">What’s next: Safe queries over private memory</h2>
+<p>Everything so far assumes one reader: me.</p>
+<p>That breaks once other people or agents want to ask questions. The archive holds work under NDAs, private code, and conversations with real people.</p>
+<p>Like Google Trends, the goal is policy-conditioned projections: letting external queries learn from the patterns and lessons in the archive without leaking what was meant to stay private.</p>
+<p>Wouldn’t it be great if we could all learn from each other and yet still have our boundaries?</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
