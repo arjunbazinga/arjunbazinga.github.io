@@ -29,14 +29,16 @@
 </div>
 <p>Between January 2023 and July 2026, my AI conversation archive accumulated 6,604 conversations: 100,694 message turns and 35.7 million words. They contain architectural designs, codebases, operational decisions, abandoned experiments, and technical trade-offs that exist nowhere else.</p>
 <p>I use chat as an exocortex. Offloading details into a conversation lets me manipulate complex constraints, pursue multiple technical tracks in parallel, and focus on whatever part of a problem is changing without holding every constraint in working memory.</p>
-<p>The interface works while thinking. It fails completely when trying to reconstruct that thinking across time. A thread title and a search box cannot tell you why an architectural decision changed, whether two project codenames refer to the same codebase, whether a design was ever built outside chat, or which unfinished thread is actually worth reviving.</p>
-<p>The historical record exists, but useful state remains scattered across thousands of conversations and several external systems.</p>
-<p>To make that history usable, the system had to evolve from a simple search pipeline into a closed loop:</p>
+<p>The interface works while thinking. It fails completely when returning months later.</p>
+<p>At that point, I do not merely need to find an old passage. I need to know which fragments belong together, whether the code still exists, what actually ran, which version is current, and what I should do next.</p>
+<p>That last question is why I built this system. My recurring problem was not forgetting trivia; it was failing to close loops. I would solve the core technical challenge of a project, get it to 80% or 90% completion, stop, and leave several partial implementations scattered across repositories and chat sessions. Later, I remembered only the feeling that I had done substantial work without a durable artifact to show for it.</p>
+<p>Search recovered the scattered pieces. It did not tell me what those pieces meant.</p>
+<p>The system therefore grew from a search pipeline into a closed loop:</p>
 <pre class="text"><code>raw history ──▶ evidence ledger ──▶ task projections ──▶ reusable state
       ▲                                                           │
       └──────────────── corrections / new artifacts ──────────────┘</code></pre>
-<p>Search finds old material. Memory is the machinery around that search that works out what the material refers to, what it can prove, what is current, how it should be represented for a specific task, and what is worth carrying forward.</p>
-<p>Here is why each layer broke, and what was built to replace it.</p>
+<p>Search finds material related to a question. Memory is the machinery that works out what the material refers to, what it can prove, what is current, how it should be represented for a specific task, and what is worth carrying forward.</p>
+<p>The distinction becomes clear through six progressive questions and the output each one produces.</p>
 <section id="the-workload-questions-that-cross-threads" class="level2">
 <h2 class="anchored" data-anchor-id="the-workload-questions-that-cross-threads">The workload: questions that cross threads</h2>
 <p>The archive spans six sources, but the volume is heavily skewed:</p>
@@ -71,14 +73,10 @@ PROJECT       What representation does this specific task need?
 PROMOTE       Should this result become reusable memory?
 
 search → identity → authority → time → projection → memory</code></pre>
-<p>These questions demand fundamentally different views over the same underlying history.</p>
-<p>One projection resembles a private year-in-review: activity patterns, recurring themes, and shifts in working habits. Another produces a project inventory. A third examines project histories to decide which internal artifacts warrant public release.</p>
-<p>Loop closure matters to me. Once I solve the difficult technical part of a project and prove that it works, my momentum often falls near 90% completion. Publishing, cleanup, and unresolved edges disappear when their context lives scattered across old threads.</p>
-<p>A useful memory system must recover that context without promoting every old intention into an outcome.</p>
-<p>The first iteration was far simpler: it was search.</p>
+<p>Each stage must produce an inspectable artifact. Otherwise, “memory” remains an architectural diagram with no visible payoff.</p>
 </section>
-<section id="question-1-can-i-find-an-old-idea" class="level2">
-<h2 class="anchored" data-anchor-id="question-1-can-i-find-an-old-idea">Question 1: Can I find an old idea?</h2>
+<section id="question-1-can-i-find-the-work-again" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-can-i-find-the-work-again">Question 1: Can I find the work again?</h2>
 <p>The first version was standard search: normalize conversation exports into flat files, index full text with SQLite FTS5, and generate vector embeddings for semantic retrieval.</p>
 <p>These two retrieval modes solve distinct problems:</p>
 <ul>
@@ -124,13 +122,17 @@ search → identity → authority → time → projection → memory</code></pre
 <blockquote class="blockquote">
 <p><strong>A search index should be disposable. The evidence it points to should not be.</strong></p>
 </blockquote>
-<p>The resulting system could answer:</p>
-<blockquote class="blockquote">
-<p><em>Where was this discussed?</em></p>
-</blockquote>
-<p>That is already valuable. It eliminates the need to remember which tool, thread, or wording held an old idea.</p>
-<p>But a search hit is only a candidate.</p>
-<p>When I queried for an old storage engine project, search returned 40 threads spanning six different codenames, three abandoned prototypes, and a dozen conversational side-tracks. Text similarity could not tell me which threads belonged to the same project, which one had working code, or which design was current.</p>
+</section>
+<section id="example-output-multi-surface-retrieval" class="level3">
+<h3 class="anchored" data-anchor-id="example-output-multi-surface-retrieval">Example Output: Multi-Surface Retrieval</h3>
+<p>When I queried the archive during a loop-closure pass on LeJEPA (a joint-embedding predictive architecture experiment), search successfully recovered six distinct implementation surfaces scattered across three coding tools and repositories:</p>
+<pre class="text"><code>Query:    "LeJEPA joint-embedding predictive architecture"
+Matches:  6 distinct implementation surfaces across 3 tools
+          - C++ smoke-tested core (Cursor session)
+          - Pure-Python reproduction (AI Studio session)
+          - WebGL browser port (Claude session)
+          - Fashion-MNIST benchmark run (Local repo log)</code></pre>
+<p>Search recovered the scattered fragments across tools. But it could not tell me if those fragments belonged to the same logical project, which codebase was authoritative, or whether any of them worked.</p>
 <p>Search generated candidates. It had no concept of identity.</p>
 </section>
 </section>
@@ -142,19 +144,8 @@ search → identity → authority → time → projection → memory</code></pre
 <section id="canonical-entity-reconciliation" class="level3">
 <h3 class="anchored" data-anchor-id="canonical-entity-reconciliation">Canonical entity reconciliation</h3>
 <p>To fix this, an offline pipeline extracted candidate aliases by analyzing co-occurrences in commit messages, repo paths, and thread titles, generating a cluster graph of potential project handles. After human review, I locked these clusters into a canonical registry, consolidating 300 raw identifiers down to 249 canonical projects.</p>
-<p>A canonical project record requires:</p>
-<ul>
-<li><strong>Aliases</strong> (historical codenames, repo names, thread handles);</li>
-<li><strong>Evidence links</strong> mapping back to specific conversation turns;</li>
-<li><strong>Maturity state</strong> (e.g., <em>concept</em>, <em>prototype</em>, <em>production</em>, <em>abandoned</em>);</li>
-<li><strong>Temporal boundaries</strong> (first active date, last active date);</li>
-<li><strong>Relationships</strong> to other projects;</li>
-<li><strong>Provenential rationale</strong> documenting <em>why</em> two aliases were merged.</li>
-</ul>
-<p>Canonicalization answers:</p>
-<blockquote class="blockquote">
-<p><em>Do these records refer to the same durable thing?</em></p>
-</blockquote>
+<p>A canonical project record requires: - <strong>Aliases</strong> (historical codenames, repo names, thread handles); - <strong>Evidence links</strong> mapping back to specific conversation turns; - <strong>Maturity state</strong> (e.g., <em>concept</em>, <em>prototype</em>, <em>production</em>, <em>abandoned</em>); - <strong>Temporal boundaries</strong> (first active date, last active date); - <strong>Relationships</strong> to other projects; - <strong>Provenential rationale</strong> documenting <em>why</em> two aliases were merged.</p>
+<p>Canonicalization answers: &gt; <em>Do these records refer to the same durable thing?</em></p>
 <p>However, entity resolution only works for things you explicitly named. It cannot identify unstated thematic patterns across the corpus.</p>
 </section>
 <section id="discovering-unstated-structure-with-contrastive-clustering" class="level3">
@@ -212,22 +203,26 @@ conversation B ─┼─ same thing ─▶ Project P ─┬─▶ theme: memory 
 conversation C ─┘                           └─▶ theme: publishing
 
 conversation D ─── same thing ─▶ Project Q ───▶ theme: memory systems</code></pre>
-<p>Identity collapses aliases into one durable object. Categorization projects that object into several useful views. Identity and categorization must not collapse into the same mechanism.</p>
-<p>The entity map told me that 40 disparate threads belonged to a single project. But it still could not tell me if that project had ever shipped a single line of working code.</p>
+<p>Identity collapses aliases into one durable object. Categorization projects that object into several useful views.</p>
+</section>
+<section id="example-output-canonical-entity-relationship-discovery" class="level3">
+<h3 class="anchored" data-anchor-id="example-output-canonical-entity-relationship-discovery">Example Output: Canonical Entity &amp; Relationship Discovery</h3>
+<p>Canonicalization must avoid over-merging. Companion tools and related codebases must remain separate entities connected by explicit, typed relationships rather than being collapsed into a single alias:</p>
+<pre class="text"><code>Canonical Entity:  C065 — LeJEPA Interactive &amp; Publication Surface
+Aliases:           [lejepa-demo, webgl-jepa, opinion-dynamics-viz]
+Relationships:     [pairs_with -&gt; C234 (LeJEPA Pure-Python Reproduction)]
+                   [implements_method -&gt; JEPA Architecture]</code></pre>
+<p>The entity map resolved project boundaries and relationships. But it still could not tell me if any of those projects had shipped working code.</p>
 </section>
 </section>
 <section id="question-3-what-did-i-build-rather-than-discuss" class="level2">
 <h2 class="anchored" data-anchor-id="question-3-what-did-i-build-rather-than-discuss">Question 3: What did I build rather than discuss?</h2>
 <p>Conversations are unusually rich evidence of thought. They are much weaker evidence of outcome.</p>
 <p>A design may never reach code. A remembered result may use the wrong denominator. An assistant can propose a compelling architecture that was immediately discarded. A plan can be discussed repeatedly and still never happen.</p>
-<p>This distinction becomes critical when moving from:</p>
-<blockquote class="blockquote">
-<p><em>What was I thinking about?</em></p>
-</blockquote>
-<p>to:</p>
-<blockquote class="blockquote">
-<p><em>What did I build?</em> <em>Which decision did we actually make?</em> <em>What evidence supports this claim?</em></p>
-</blockquote>
+<p>This distinction becomes critical when moving from: &gt; <em>What was I thinking about?</em></p>
+<p>to: &gt; <em>What did I build?</em><br>
+&gt; <em>Which decision did we actually make?</em><br>
+&gt; <em>What evidence supports this claim?</em></p>
 <p>Chat provides candidate claims. Proving outcomes requires external systems of record.</p>
 <section id="grounding-chat-in-external-evidence" class="level3">
 <h3 class="anchored" data-anchor-id="grounding-chat-in-external-evidence">Grounding chat in external evidence</h3>
@@ -269,7 +264,8 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 </section>
 <section id="evidence-is-not-interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="evidence-is-not-interpretation">Evidence is not interpretation</h3>
-<p>Retrieval asks: <em>What evidence exists?</em> Authority asks: <em>What can this evidence establish?</em></p>
+<p>Retrieval asks: <em>What evidence exists?</em><br>
+Authority asks: <em>What can this evidence establish?</em></p>
 <p>The state model strictly decouples three layers:</p>
 <pre class="text"><code>╔═ evidence ledger ══╗   ┌─ interpretation ─┐   ┏━ accepted state ━┓
 ║ source evidence in ║──▶│ reads several    │──▶┃ reviewed current ┃
@@ -290,21 +286,19 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 <li><strong>Tickets</strong> prove operational ownership and delivery status transitions.</li>
 <li><strong>Released artifacts</strong> prove durable delivery.</li>
 </ul>
-<p>Numerical claims require explicit provenance tags:</p>
-<ul>
-<li><code>measured</code> (derived directly from benchmark logs or profiling runs);</li>
-<li><code>remembered</code> (quoted from memory during conversation);</li>
-<li><code>reconstructed</code> (recalculated after the fact);</li>
-<li><code>targeted</code> (a performance goal);</li>
-<li><code>hypothetical</code> (an illustrative example).</li>
-</ul>
+<p>Numerical claims require explicit provenance tags: * <code>measured</code> (derived directly from benchmark logs or profiling runs); * <code>remembered</code> (quoted from memory during conversation); * <code>reconstructed</code> (recalculated after the fact); * <code>targeted</code> (a performance goal); * <code>hypothetical</code> (an illustrative example).</p>
 <p>The same rigor applies to negative search results. <em>“I found no matching artifact in the searched sources using these parameters”</em> describes an empirical search operation. <em>“This artifact does not exist”</em> makes an absolute factual claim search alone cannot guarantee.</p>
 </section>
-<section id="corrections-are-evidence-too" class="level3">
-<h3 class="anchored" data-anchor-id="corrections-are-evidence-too">Corrections are evidence too</h3>
-<p>Model-generated interpretations will make mistakes: merging distinct projects, misattributing contributions, or promoting an intention into an outcome.</p>
-<p>When correcting these mistakes, the system must not mutate the historical records that produced the mistake. <strong>The human correction is appended as a new dated record.</strong></p>
-<p>This preserves full auditability: accepted state can change while the exact historical evidence that produced earlier interpretations remains inspectable.</p>
+<section id="example-output-the-maturity-audit" class="level3">
+<h3 class="anchored" data-anchor-id="example-output-the-maturity-audit">Example Output: The Maturity Audit</h3>
+<p>Inspecting the evidence for LeJEPA separated running code from conversational proposals:</p>
+<pre class="text"><code>Component                Inspected Evidence          Maturity Decision
+───────────────────────────────────────────────────────────────────────────
+Python / C++ Core        Repo commits, clean tests   Implemented
+WebGL Browser Port       Single-file HTML/JS canvas  Working prototype
+Fashion-MNIST Run        Training logs, loss curves  Completed experiment
+Speculative Extensions   Chat proposals only         Concept (not built)</code></pre>
+<p>This same evidentiary discipline applies across systems: <a href="https://www.novusopus.org/oma/"><strong>OMA</strong></a> has git commits, working code, and a Cloud Run deployment (<em>built prototype</em>), whereas early drafts of <a href="https://www.novusopus.org/research/quantitative-qualitativeness/"><strong><code>pg_llm</code></strong></a> contained SQL design specs and landing pages with a verified production C extension (<em>designed architecture</em>).</p>
 <p>Now I had code, commits, and conversation records linked to canonical entities. But multiple conflicting records claimed to represent the “current” architecture. The system could not resolve temporal supersession.</p>
 </section>
 </section>
@@ -338,6 +332,16 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 <li><strong>Retained revision:</strong> The specific parsed version selected as the most complete historical representation.</li>
 <li><strong>Current view:</strong> A disposable relational pointer in SQLite pointing to the currently accepted best state.</li>
 </ul>
+<section id="example-output-revision-quarantine" class="level3">
+<h3 class="anchored" data-anchor-id="example-output-revision-quarantine">Example Output: Revision Quarantine</h3>
+<p>In one verified instance, a 250-message conversation regressed to 179 messages in a subsequent export. The temporal engine preserved the fuller past:</p>
+<pre class="text"><code>Observation               Revision ID    Messages    Bytes     State Decision
+───────────────────────────────────────────────────────────────────────────
+Prior Retained Version    4e8fe683...    250         146 KB    Active Current View
+Later Exported Version    3d0bf4cf...    179          81 KB    Quarantined (Held)
+
+Corpus Quarantine Total:  965 shorter or duplicate files held from promotion</code></pre>
+</section>
 <section id="unified-batch-and-incremental-capture" class="level3">
 <h3 class="anchored" data-anchor-id="unified-batch-and-incremental-capture">Unified batch and incremental capture</h3>
 <p>Large batch exports handle historical backfills; webhooks and authenticated API pulls provide real-time freshness.</p>
@@ -360,11 +364,7 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 <section id="question-5-what-view-does-this-task-need" class="level2">
 <h2 class="anchored" data-anchor-id="question-5-what-view-does-this-task-need">Question 5: What view does this task need?</h2>
 <p>A common architecture trap is attempting to build a single “consolidated world model”—one massive summary of all projects, decisions, and knowledge intended to serve every future query.</p>
-<p>In practice, this fails in both directions:</p>
-<ol type="1">
-<li><strong>Exhaustive summaries</strong> become bloated, brittle, and prohibitively expensive to maintain.</li>
-<li><strong>Aggressively compressed summaries</strong> discard granular evidence that future operational queries end up needing.</li>
-</ol>
+<p>In practice, this fails in both directions: 1. <strong>Exhaustive summaries</strong> become bloated, brittle, and prohibitively expensive to maintain. 2. <strong>Aggressively compressed summaries</strong> discard granular evidence that future operational queries end up needing.</p>
 <p>The fundamental issue is that <strong>different tasks require fundamentally incompatible representations of the same underlying history.</strong></p>
 <section id="relevance-is-task-conditioned" class="level3">
 <h3 class="anchored" data-anchor-id="relevance-is-task-conditioned">Relevance is task-conditioned</h3>
@@ -387,11 +387,24 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 <pre class="text"><code>usefulness(record | task, reader, time, authority, proof obligation)</code></pre>
 <p>Vector similarity provides an initial candidate filter, but cannot evaluate audience requirements, temporal authority, or evidentiary burden on its own.</p>
 </section>
+<section id="example-output-dual-task-projections" class="level3">
+<h3 class="anchored" data-anchor-id="example-output-dual-task-projections">Example Output: Dual Task Projections</h3>
+<p>From the same stable baseline of 249 canonical projects, two distinct operational questions produced two completely disjoint finished outputs:</p>
+<pre class="text"><code>Stable Input:  249 Canonical Projects
+
+Projection A:  "What was my operating cadence across AI tools?"
+               -&gt; Year-in-Review: 2,255 conversations analyzed across time and themes.
+
+Projection B:  "What is the public editorial disposition of each project?"
+               -&gt; Mining Plan: 249 projects fully accounted for (62 shorts, 24 scheduled
+                  flagships, 7 existing public assets, 0 unassigned).</code></pre>
+<p>Neither projection replaces the underlying evidence base; each compiles a temporary view shaped for the reader at hand.</p>
+</section>
 <section id="dynamic-semantic-lenses-with-oma" class="level3">
 <h3 class="anchored" data-anchor-id="dynamic-semantic-lenses-with-oma">Dynamic semantic lenses with OMA</h3>
 <p>Often, the grouping axis required by an operational task does not exist in the precomputed index. A static topic index might partition conversations into <em>search</em>, <em>robotics</em>, or <em>writing</em>, but a task may need to partition by <em>maturity</em>, <em>execution risk</em>, or <em>claim strength</em>.</p>
 <p>A static topic index cannot become a maturity index simply by reranking clusters; the task demands an orthogonal grouping axis.</p>
-<p>I built <strong>OMA</strong> to solve this. OMA rejected the assumption that personal archives should have one permanent taxonomy. Instead, it generates transient taxonomies on the fly from user intent:</p>
+<p>I built <a href="https://www.novusopus.org/oma/"><strong>OMA</strong></a> in November 2025 to solve this, applying John Maeda’s <em>The Laws of Simplicity</em> and SLIP principles to Clio’s clustering. OMA rejected the assumption that personal archives should have one permanent taxonomy. Instead, it generates transient taxonomies on the fly from user intent:</p>
 <pre class="text"><code>Input collection:
   Project A — extensive implementation notes, no public release
   Project B — speculative architectural brainstorming
@@ -405,28 +418,27 @@ Generated lens:
 
 Resulting projection:
   Project C (ready) &gt; Project A (needs writeup) &gt;&gt;&gt; Project B (speculative)</code></pre>
-<p>The objective is not to build another permanent classification tree, but to synthesize transient taxonomies on demand.</p>
 </section>
 <section id="composing-exact-and-semantic-queries-with-pg_llm" class="level3">
 <h3 class="anchored" data-anchor-id="composing-exact-and-semantic-queries-with-pg_llm">Composing exact and semantic queries with <code>pg_llm</code></h3>
-<p>While OMA proved the need for dynamic lenses, running them across large archives created a computational problem: operational queries mix exact relational mechanics with semantic language judgment.</p>
+<p>While OMA solved dynamic lens generation on the intent plane, running those lenses over large archives created a computational problem on the execution plane: operational queries mix exact relational mechanics with semantic language judgment.</p>
 <p>Relational engines excel at timestamps, foreign key joins, metadata filters, and set operations. Language models excel at qualitative judgment: classifying maturity, extracting action items, or identifying contradictions.</p>
-<p>I designed <strong><code>pg_llm</code></strong> to make this hybrid interface concrete inside PostgreSQL:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><span class="kw" style="color: #003B4F;
+<p>In February 2025, inspired by Benn Stancil’s <code>AVG(text)</code> concept, I designed <strong><code>pg_llm</code></strong> (documented as <a href="https://www.novusopus.org/research/quantitative-qualitativeness/"><strong>Semantic SQL</strong></a>) to bring qualitative text analysis directly into SQL without external infrastructure overhead:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">SELECT</span> canonical_project,</span>
-<span id="cb11-2">       llm_agg_jsonb(source_evidence, <span class="st" style="color: #20794D;
+<span id="cb16-2">       llm_agg_jsonb(source_evidence, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'extract unresolved blockers and next actions'</span>) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">AS</span> task_state</span>
-<span id="cb11-3"><span class="kw" style="color: #003B4F;
+<span id="cb16-3"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">FROM</span> evidence_ledger</span>
-<span id="cb11-4"><span class="kw" style="color: #003B4F;
+<span id="cb16-4"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">WHERE</span> last_active_at <span class="op" style="color: #5E5E5E;
@@ -438,7 +450,7 @@ background-color: null;
 font-style: inherit;">INTERVAL</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'6 months'</span></span>
-<span id="cb11-5"><span class="kw" style="color: #003B4F;
+<span id="cb16-5"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">GROUP</span> <span class="kw" style="color: #003B4F;
@@ -446,6 +458,7 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></div>
 <p>This treats language model inference as a composable database operator. SQL handles relational boundaries, filtering, and grouping; the language model handles qualitative synthesis over the grouped evidence.</p>
+<p>OMA and <code>pg_llm</code> originated independently—one from human information design, the other from relational analytics. Together, they form the two halves of a task-conditioned query plane: OMA generates the semantic lens from human intent, while <code>pg_llm</code> provides the hybrid execution contract.</p>
 </section>
 <section id="the-agent-as-an-adaptive-query-planner" class="level3">
 <h3 class="anchored" data-anchor-id="the-agent-as-an-adaptive-query-planner">The agent as an adaptive query planner</h3>
@@ -516,12 +529,7 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <section id="materialization-requires-provenance" class="level3">
 <h3 class="anchored" data-anchor-id="materialization-requires-provenance">Materialization requires provenance</h3>
 <p>When a generated view is promoted to reusable state, future tasks consume it as input. Without rigorous provenance, synthetic model outputs gradually contaminate ground-truth evidence.</p>
-<p>Every promoted record must bundle three metadata groups:</p>
-<ul>
-<li><strong>Provenance:</strong> Source snapshot IDs, message locators, model identifier, and execution timestamp.</li>
-<li><strong>Recipe:</strong> The query string, system prompt, facet definition, and schema version that produced the result.</li>
-<li><strong>Governance:</strong> Human review status, applied corrections, dependencies, and supersession links.</li>
-</ul>
+<p>Every promoted record must bundle three metadata groups: * <strong>Provenance:</strong> Source snapshot IDs, message locators, model identifier, and execution timestamp. * <strong>Recipe:</strong> The query string, system prompt, facet definition, and schema version that produced the result. * <strong>Governance:</strong> Human review status, applied corrections, dependencies, and supersession links.</p>
 <p>The invariant holds: <strong>reusable semantic state must remain auditable back to the source evidence and transformation that produced it.</strong></p>
 </section>
 <section id="artifact-authority-is-not-claim-authority" class="level3">
@@ -529,11 +537,7 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <p>Finished artifacts introduce a related failure mode.</p>
 <p>A filename containing <code>Final</code> does not establish authority. A durable artifact needs a stable identity, version, hash, status, and lineage.</p>
 <p>Even then, establishing the artifact only proves that the file exists. A PDF can prove that a document was produced and sent. It does not automatically prove every statement inside the document.</p>
-<p>This leaves two distinct forms of authority:</p>
-<ul>
-<li><strong>Artifact authority:</strong> Is this the durable, finalized version of the file?</li>
-<li><strong>Claim authority:</strong> Does this artifact provide sufficient evidence to support this specific statement?</li>
-</ul>
+<p>This leaves two distinct forms of authority: * <strong>Artifact authority:</strong> Is this the durable, finalized version of the file? * <strong>Claim authority:</strong> Does this artifact provide sufficient evidence to support this specific statement?</p>
 <p>Enforcing this distinction prevents circular citations across model-generated summaries.</p>
 </section>
 <section id="closing-the-write-loop" class="level3">
@@ -556,7 +560,15 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
           new evidence record
                    │
                    └── re-enters evidence ledger</code></pre>
-<p>Review, not plausibility, is what moves a generated view into reusable state.</p>
+</section>
+<section id="example-output-promoted-public-asset" class="level3">
+<h3 class="anchored" data-anchor-id="example-output-promoted-public-asset">Example Output: Promoted Public Asset</h3>
+<p>Promotion teaches future queries that an artifact is finished, preventing downstream tasks from treating it as an open backlog item:</p>
+<pre class="text"><code>Promoted Asset:   C064 — The Geometry of Disagreement
+Status:           Existing Public Asset
+Canonical URL:    https://www.novusopus.org/research/opinion-dynamics
+Derivative State: Ready for secondary extension (do not re-announce as new work)</code></pre>
+<p>Review and explicit promotion, not mere plausibility, is what moves a generated view into reusable state.</p>
 <p>The system is not a pipeline from history into an ever-growing summary. It is a loop between evidence, interpretation, task-specific views, and reviewed state.</p>
 </section>
 </section>
@@ -644,6 +656,8 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <h2 class="anchored" data-anchor-id="what-this-taught-me">What this taught me</h2>
 <p>I started with what looked like a search problem.</p>
 <p>Finding an old conversation was relatively easy. The harder work began when I wanted to know whether several conversations referred to the same project, whether something discussed ever happened, whether an old result was still current, what evidence a claim actually rested on, or which slice of history mattered to the task in front of me.</p>
+<p>World Model (<code>C012</code>), OMA (<code>C058</code>), and <code>pg_llm</code> (<code>C021</code>) began as three separate projects with different motivations. World Model started as a way to close loops on unfinished work. <a href="https://www.novusopus.org/oma/">OMA</a> started as a study in <a href="https://lawsofsimplicity.com/">how humans orient</a> in information spaces. <code>[pg_llm](https://www.novusopus.org/research/quantitative-qualitativeness/)</code> started from a desire to do <a href="https://benn.substack.com/p/avg-text">qualitative text analysis</a> inside SQL without infrastructure overhead.</p>
+<p>None of my past conversations contained a master plan combining them. The unified architecture emerged only when I used this memory system to query, relate, and project those separate efforts into a single framework.</p>
 <p>Four principles survived every rewrite:</p>
 <ol type="1">
 <li><strong>Keep evidence immutable; make views disposable.</strong> Raw arrivals land in an append-only ledger. Indexes, entity maps, and current views can be rebuilt or thrown away at any time.</li>
@@ -660,8 +674,58 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <p>That breaks once other people or agents want to ask questions. The archive holds work under NDAs, private code, and conversations with real people.</p>
 <p>Like Google Trends, the goal is policy-conditioned projections: letting external queries learn from the patterns and lessons in the archive without leaking what was meant to stay private.</p>
 <p>Wouldn’t it be great if we could all learn from each other and yet still have our boundaries?</p>
+</section>
+<section id="appendix-project-genealogy-evidence-ledger" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-project-genealogy-evidence-ledger">Appendix: Project Genealogy &amp; Evidence Ledger</h2>
+<p>The systems described in this paper began as independent projects before converging into a unified memory architecture:</p>
+<div class="table-responsive">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>System</th>
+<th>Original Motivation</th>
+<th>Core Mechanism</th>
+<th>Earliest Verified Record</th>
+<th>Evidenced Maturity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>World Model (<code>C012</code>)</strong></td>
+<td>Closing loops on unfinished and abandoned projects</td>
+<td>Immutable evidence ledger, entity resolution, and temporal supersession</td>
+<td>April 2025 (<em>“Overcoming Unfinished Projects”</em>)</td>
+<td>Operational personal archive (6,604 conversations, 249 canonical projects)</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.novusopus.org/oma/"><strong>OMA (<code>C058</code>)</strong></a></td>
+<td>Human orientation in complex information spaces (<em>The Laws of Simplicity</em> + SLIP)</td>
+<td>Dynamic, intent-driven semantic lenses; transient taxonomies over static folders</td>
+<td>November 2025 (<em>“Explaining The Laws of Simplicity”</em>)</td>
+<td>Working React/Gemini prototype with facet discovery, lens caching, and Cloud Run deployment</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.novusopus.org/research/quantitative-qualitativeness/"><strong><code>pg_llm</code> / Semantic SQL (<code>C021</code>)</strong></a></td>
+<td>Bringing qualitative text analysis into SQL/BI without infrastructure overhead</td>
+<td>Relational grouping combined with composable LLM aggregation functions</td>
+<td>February 2025 (<em>“Enhancing PostgreSQL Text Analytics”</em>)</td>
+<td>Architectural design corpus, public specification, and query contracts</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="the-evidence-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="the-evidence-hierarchy">The Evidence Hierarchy</h3>
+<p>To prevent synthetic summaries from flattening distinctions, the system evaluates all records through four strict evidence tiers:</p>
+<ol type="1">
+<li><strong>Direct first-person records:</strong> Authored user messages establishing what was intended, remembered, or proposed at an exact timestamp.</li>
+<li><strong>Inspectable artifacts:</strong> Commit logs, repositories, deployed URLs, and verified build outputs establishing that an artifact existed in that state.</li>
+<li><strong>Derived repository views:</strong> Assistant syntheses, project rosters, and generated summaries (useful for discovery, but requiring validation against raw artifacts).</li>
+<li><strong>Assistant suggestions:</strong> Conversational proposals establishing what an LLM suggested, not what was accepted or implemented.</li>
+</ol>
 
 
+</section>
 </section>
 
  ]]></description>
