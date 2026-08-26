@@ -171,7 +171,7 @@ A canonical project record requires:
 - **Maturity state** (e.g., *concept*, *prototype*, *production*, *abandoned*);
 - **Temporal boundaries** (first active date, last active date);
 - **Relationships** to other projects;
-- **Provenential rationale** documenting *why* two aliases were merged.
+- **Provenance rationale** documenting *why* two aliases were merged.
 
 Canonicalization answers:
 > *Do these records refer to the same durable thing?*
