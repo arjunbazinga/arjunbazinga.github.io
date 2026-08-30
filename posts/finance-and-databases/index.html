@@ -106,20 +106,6 @@ ga('send', {
     font-variant-ligatures: none;
     white-space: pre;
   }
-  #quarto-document-content {
-    display: flex;
-    flex-direction: column;
-  }
-  #quarto-document-content > .quarto-figure:first-of-type {
-    order: -1;
-    margin-top: 0.25rem;
-    margin-bottom: 1.25rem;
-  }
-  #TOC {
-    margin-top: 0.25rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-  }
   .cover-art {
     display: block;
     margin: 0.25rem auto 0;
@@ -403,7 +389,24 @@ ga('send', {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#a-business-is-a-system-of-flows" id="toc-a-business-is-a-system-of-flows" class="nav-link active" data-scroll-target="#a-business-is-a-system-of-flows">A business is a system of flows</a></li>
+  <li><a href="#what-database-history-actually-teaches" id="toc-what-database-history-actually-teaches" class="nav-link" data-scroll-target="#what-database-history-actually-teaches">What database history actually teaches</a></li>
+  <li><a href="#what-becomes-financeable-next" id="toc-what-becomes-financeable-next" class="nav-link" data-scroll-target="#what-becomes-financeable-next">What becomes financeable next?</a></li>
+  <li><a href="#the-firm-may-not-be-the-right-atomic-unit-of-finance" id="toc-the-firm-may-not-be-the-right-atomic-unit-of-finance" class="nav-link" data-scroll-target="#the-firm-may-not-be-the-right-atomic-unit-of-finance">The firm may not be the right atomic unit of finance</a></li>
+  <li><a href="#better-telemetry-should-change-the-contract-not-just-the-model" id="toc-better-telemetry-should-change-the-contract-not-just-the-model" class="nav-link" data-scroll-target="#better-telemetry-should-change-the-contract-not-just-the-model">Better telemetry should change the contract, not just the model</a></li>
+  <li><a href="#a-clever-claim-is-not-enough" id="toc-a-clever-claim-is-not-enough" class="nav-link" data-scroll-target="#a-clever-claim-is-not-enough">A clever claim is not enough</a></li>
+  <li><a href="#from-payments-to-claims" id="toc-from-payments-to-claims" class="nav-link" data-scroll-target="#from-payments-to-claims">From payments to claims</a></li>
+  <li><a href="#a-claims-layer-is-a-data-platform-with-legal-consequences" id="toc-a-claims-layer-is-a-data-platform-with-legal-consequences" class="nav-link" data-scroll-target="#a-claims-layer-is-a-data-platform-with-legal-consequences">A claims layer is a data platform with legal consequences</a></li>
+  <li><a href="#the-market-is-already-converging-on-the-boundary" id="toc-the-market-is-already-converging-on-the-boundary" class="nav-link" data-scroll-target="#the-market-is-already-converging-on-the-boundary">The market is already converging on the boundary</a></li>
+  <li><a href="#what-is-durable-and-what-is-still-uncertain" id="toc-what-is-durable-and-what-is-still-uncertain" class="nav-link" data-scroll-target="#what-is-durable-and-what-is-still-uncertain">What is durable, and what is still uncertain</a></li>
+  <li><a href="#eight-conclusions" id="toc-eight-conclusions" class="nav-link" data-scroll-target="#eight-conclusions">Eight conclusions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -412,23 +415,7 @@ ga('send', {
 
 
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Contents</h2>
-   
-  <ul>
-  <li><a href="#a-business-is-a-system-of-flows" id="toc-a-business-is-a-system-of-flows">A business is a system of flows</a></li>
-  <li><a href="#what-database-history-actually-teaches" id="toc-what-database-history-actually-teaches">What database history actually teaches</a></li>
-  <li><a href="#what-becomes-financeable-next" id="toc-what-becomes-financeable-next">What becomes financeable next?</a></li>
-  <li><a href="#the-firm-may-not-be-the-right-atomic-unit-of-finance" id="toc-the-firm-may-not-be-the-right-atomic-unit-of-finance">The firm may not be the right atomic unit of finance</a></li>
-  <li><a href="#better-telemetry-should-change-the-contract-not-just-the-model" id="toc-better-telemetry-should-change-the-contract-not-just-the-model">Better telemetry should change the contract, not just the model</a></li>
-  <li><a href="#a-clever-claim-is-not-enough" id="toc-a-clever-claim-is-not-enough">A clever claim is not enough</a></li>
-  <li><a href="#from-payments-to-claims" id="toc-from-payments-to-claims">From payments to claims</a></li>
-  <li><a href="#a-claims-layer-is-a-data-platform-with-legal-consequences" id="toc-a-claims-layer-is-a-data-platform-with-legal-consequences">A claims layer is a data platform with legal consequences</a></li>
-  <li><a href="#the-market-is-already-converging-on-the-boundary" id="toc-the-market-is-already-converging-on-the-boundary">The market is already converging on the boundary</a></li>
-  <li><a href="#what-is-durable-and-what-is-still-uncertain" id="toc-what-is-durable-and-what-is-still-uncertain">What is durable, and what is still uncertain</a></li>
-  <li><a href="#eight-conclusions" id="toc-eight-conclusions">Eight conclusions</a></li>
-  </ul>
-</nav>
+
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="cover.webp" class="cover-art img-fluid figure-img"></p>
