@@ -1,5 +1,6 @@
 ---
-title: "From Search to Memory: 35 Million Words of AI Conversations"
+title: "Rocketships for the Mind"
+subtitle: "Learning and experiments in building tools to think with"
 site: arjunsriva
 collection: system-studies
 status: drafting
@@ -38,13 +39,27 @@ include-in-header:
 
 ![Salvador Dalí, *The Persistence of Memory* (1931)](persistence-of-memory.jpg)
 
+I wanted to share a few things that I have been working on.
+
+LLMs, chatbots, and agents have been a huge blessing for me. They let me learn as much as I want, pick up topics I find interesting, bounce ideas around, talk through what I think, and build things that I might once have found too tedious.
+
+They also let me leave something in a chat window without having to keep all of it in my head. I can disconnect from it for a while and come back later. They help me draft messages, think through different scenarios, and look at something through another reader's eyes. Often, I can start by saying what I want instead of describing every step, then look at the result and keep going.
+
+But I have problems.
+
+One of them is that once I feel I have made decent progress on something, I often lose the motivation to keep going. This has been true for a long time.
+
+One of my favorite classes in college was discrete mathematics. It was supposed to be difficult, and many people did not enjoy it, but I found it fascinating. The difficult questions held my attention because I had to find my own way through them. When the final exam included questions whose method already felt clear, I found myself doing the hard ones first and putting off the easy ones, even though they still had to be done.
+
+Computer-architecture labs exposed the same pattern in a different way. Each exercise introduced a few new ideas. Moving from one question to the next meant figuring out the main complication, but it could also mean copying and wiring dozens of components, followed by twenty minutes of pointing and clicking. I liked finding the core solution. Once I had it, my lab partner often helped close the loop on the manual work that remained.
+
+In many ways, this has been the boon of LLMs. They let me focus on the part I find interesting while helping hold the context and keep the execution moving.
+
+This works to an extent, especially while a conversation is active. The problem appears when I return months later.
+
 Between January 2023 and July 2026, my AI conversation archive accumulated 6,604 conversations: 100,694 message turns and 35.7 million words. They contain architectural designs, codebases, operational decisions, abandoned experiments, and technical trade-offs that exist nowhere else.
 
-I use chat as an exocortex. Offloading details into a conversation lets me manipulate complex constraints, pursue multiple technical tracks in parallel, and focus on whatever part of a problem is changing without holding every constraint in working memory.
-
-The interface works while thinking. It fails completely when returning months later.
-
-At that point, I do not merely need to find an old passage. I need to know which fragments belong together, whether the code still exists, what actually ran, which version is current, and what I should do next.
+Returning to that history requires more than finding an old passage. I need to know which fragments belong together, whether the code still exists, what actually ran, which version is current, and what I should do next.
 
 That last question is why I built this system. My recurring problem was not forgetting trivia; it was failing to close loops. I would solve the core technical challenge of a project, get it to 80% or 90% completion, stop, and leave several partial implementations scattered across repositories and chat sessions. Later, I remembered only the feeling that I had done substantial work without a durable artifact to show for it.
 
@@ -59,6 +74,8 @@ raw history ──▶ evidence ledger ──▶ task projections ──▶ reusa
 ```
 
 Search finds material related to a question. Memory is the machinery that works out what the material refers to, what it can prove, what is current, how it should be represented for a specific task, and what is worth carrying forward.
+
+Each question emerged as more of my working context accumulated in conversations. Finding the text was the first problem. Recovering the state required progressively more machinery.
 
 The distinction becomes clear through six progressive questions and the output each one produces.
 
@@ -138,15 +155,17 @@ This establishes a core invariant:
 
 ### Example Output: Multi-Surface Retrieval
 
-When I queried the archive during a loop-closure pass on LeJEPA (a joint-embedding predictive architecture experiment), search successfully recovered six distinct implementation surfaces scattered across three coding tools and repositories:
+When I queried the archive during a loop-closure pass on LeJEPA (a joint-embedding predictive architecture experiment), conversation and filesystem search recovered six distinct implementation surfaces scattered across tools and repositories:
 
 ```text
 Query:    "LeJEPA joint-embedding predictive architecture"
-Matches:  6 distinct implementation surfaces across 3 tools
-          - C++ smoke-tested core (Cursor session)
-          - Pure-Python reproduction (AI Studio session)
-          - WebGL browser port (Claude session)
-          - Fashion-MNIST benchmark run (Local repo log)
+Matches:  6 distinct implementation surfaces
+          - Python and C++ toy implementation
+          - Orphaned React browser prototype
+          - Browser-native jax-js port
+          - Fashion-MNIST multi-view experiment
+          - Novus publication integration
+          - Weight-noise experimental fork
 ```
 
 Search recovered the scattered fragments across tools. But it could not tell me if those fragments belonged to the same logical project, which codebase was authoritative, or whether any of them worked.
@@ -237,10 +256,15 @@ Identity collapses aliases into one durable object. Categorization projects that
 Canonicalization must avoid over-merging. Companion tools and related codebases must remain separate entities connected by explicit, typed relationships rather than being collapsed into a single alias:
 
 ```text
-Canonical Entity:  C065 — LeJEPA Interactive & Publication Surface
-Aliases:           [lejepa-demo, webgl-jepa, opinion-dynamics-viz]
-Relationships:     [pairs_with -> C234 (LeJEPA Pure-Python Reproduction)]
-                   [implements_method -> JEPA Architecture]
+C065 — LeJEPA Interactive Demos
+        browser experiments, visual explanation, publication surfaces
+
+                    pairs_with
+                         │
+                         ▼
+
+C234 — Pure Python LeJEPA Training
+        minimal reproduction and implementation study
 ```
 
 The entity map resolved project boundaries and relationships. But it still could not tell me if any of those projects had shipped working code.
@@ -332,7 +356,7 @@ Fashion-MNIST Run        Training logs, loss curves  Completed experiment
 Speculative Extensions   Chat proposals only         Concept (not built)
 ```
 
-This same evidentiary discipline applies across systems: [**OMA**](https://www.novusopus.org/oma/) has git commits, working code, and a Cloud Run deployment (*built prototype*), whereas early drafts of [**`pg_llm`**](https://www.novusopus.org/research/quantitative-qualitativeness/) contained SQL design specs and landing pages with a verified production C extension (*designed architecture*).
+This same evidentiary discipline applies across systems. [**OMA**](https://www.novusopus.org/oma/) has inspectable implementation, dated commits, and a working public surface, supporting *built prototype*. [**`pg_llm`**](https://www.novusopus.org/research/quantitative-qualitativeness/) has a substantial design corpus, public specification, and implementation sketches, but the inspected evidence did not establish every proposed semantic primitive as shipped, supporting *designed architecture*.
 
 Now I had code, commits, and conversation records linked to canonical entities. But multiple conflicting records claimed to represent the "current" architecture. The system could not resolve temporal supersession.
 
@@ -382,9 +406,9 @@ Observation               Revision ID    Messages    Bytes     State Decision
 ───────────────────────────────────────────────────────────────────────────
 Prior Retained Version    4e8fe683...    250         146 KB    Active Current View
 Later Exported Version    3d0bf4cf...    179          81 KB    Quarantined (Held)
-
-Corpus Quarantine Total:  965 shorter or duplicate files held from promotion
 ```
+
+The system did not decide that the shorter revision was false. It refused to let an ambiguous later arrival destroy a fuller historical record. The same ingest held 174 shorter revisions from promotion.
 
 ### Unified batch and incremental capture
 
@@ -448,20 +472,23 @@ Vector similarity provides an initial candidate filter, but cannot evaluate audi
 
 ### Example Output: Dual Task Projections
 
-From the same stable baseline of 249 canonical projects, two distinct operational questions produced two completely disjoint finished outputs:
+From the same stable baseline of 249 canonical projects, two operational questions produced materially different finished outputs:
 
 ```text
 Stable Input:  249 Canonical Projects
 
-Projection A:  "What was my operating cadence across AI tools?"
+Projection A:  "What patterns shaped my work across AI tools?"
                -> Year-in-Review: 2,255 conversations analyzed across time and themes.
+                  - pipeline archaeology as the largest theme by word mass
+                  - a recurring accumulation of nearly finished drafts
 
 Projection B:  "What is the public editorial disposition of each project?"
-               -> Mining Plan: 249 projects fully accounted for (62 shorts, 24 scheduled
-                  flagships, 7 existing public assets, 0 unassigned).
+               -> Mining Plan: 249 projects fully accounted for, including 62 backing
+                  completed shorts, 24 scheduled flagships, 7 existing public assets,
+                  and 0 still awaiting an editorial disposition.
 ```
 
-Neither projection replaces the underlying evidence base; each compiles a temporary view shaped for the reader at hand.
+The year-in-review made a recurring pattern legible. The publishing portfolio turned the same history into decisions. Neither projection replaces the underlying evidence base; each compiles a temporary view shaped for the reader at hand.
 
 ### Dynamic semantic lenses with OMA
 
@@ -469,7 +496,9 @@ Often, the grouping axis required by an operational task does not exist in the p
 
 A static topic index cannot become a maturity index simply by reranking clusters; the task demands an orthogonal grouping axis.
 
-I built [**OMA**](https://www.novusopus.org/oma/) in November 2025 to solve this, applying John Maeda’s *The Laws of Simplicity* and SLIP principles to Clio’s clustering. OMA rejected the assumption that personal archives should have one permanent taxonomy. Instead, it generates transient taxonomies on the fly from user intent:
+Clio supplied a way to discover bottom-up structure. John Maeda’s *The Laws of Simplicity* and SLIP supplied a different concern: how a person finds orientation in that structure without already possessing the organizer’s mental model. Organization should reduce apparent complexity, reveal useful waypoints, and remain responsive to the purpose that brought someone to the information.
+
+I built [**OMA**](https://www.novusopus.org/oma/) in November 2025 at the intersection of those ideas. OMA rejected the assumption that personal archives should have one permanent taxonomy. Instead, it generates transient taxonomies on the fly from user intent:
 
 ```text
 Input collection:
@@ -493,7 +522,7 @@ While OMA solved dynamic lens generation on the intent plane, running those lens
 
 Relational engines excel at timestamps, foreign key joins, metadata filters, and set operations. Language models excel at qualitative judgment: classifying maturity, extracting action items, or identifying contradictions.
 
-In February 2025, inspired by Benn Stancil’s `AVG(text)` concept, I designed **`pg_llm`** (documented as [**Semantic SQL**](https://www.novusopus.org/research/quantitative-qualitativeness/)) to bring qualitative text analysis directly into SQL without external infrastructure overhead:
+Quantitative qualitativeness began from the opposite direction. Ordinary analytical systems could count, filter, join, and group evidence precisely, but had no ordinary operator for its qualitative meaning. In February 2025, inspired by Benn Stancil’s `AVG(text)` concept, I designed **`pg_llm`** (documented as [**Semantic SQL**](https://www.novusopus.org/research/quantitative-qualitativeness/)) to put those two kinds of computation inside the same query:
 
 ```sql
 SELECT canonical_project,
@@ -690,6 +719,18 @@ World Model (`C012`), OMA (`C058`), and `pg_llm` (`C021`) began as three separat
 
 None of my past conversations contained a master plan combining them. The unified architecture emerged only when I used this memory system to query, relate, and project those separate efforts into a single framework.
 
+### Project genealogy
+
+::: {.table-responsive}
+
+| System | Original Motivation | Core Mechanism | Earliest Verified Record | Evidenced Maturity |
+|---|---|---|---|---|
+| **World Model (`C012`)** | Closing loops on unfinished and abandoned projects | Immutable evidence ledger, entity resolution, and temporal supersession | April 2025 (*"Overcoming Unfinished Projects"*) | Operational personal archive (6,604 conversations, 249 canonical projects) |
+| [**OMA (`C058`)**](https://www.novusopus.org/oma/) | Human orientation in complex information spaces (*The Laws of Simplicity* + SLIP) | Dynamic, intent-driven semantic lenses; transient taxonomies over static folders | November 2025 (*"Explaining The Laws of Simplicity"*) | Working React/Gemini prototype with facet discovery, lens caching, and Cloud Run deployment |
+| [**`pg_llm` / Semantic SQL (`C021`)**](https://www.novusopus.org/research/quantitative-qualitativeness/) | Bringing qualitative text analysis into SQL/BI without infrastructure overhead | Relational grouping combined with composable LLM aggregation functions | February 2025 (*"Enhancing PostgreSQL Text Analytics"*) | Architectural design corpus, public specification, and query contracts |
+
+:::
+
 Four principles survived every rewrite:
 
 1. **Keep evidence immutable; make views disposable.** Raw arrivals land in an append-only ledger. Indexes, entity maps, and current views can be rebuilt or thrown away at any time.
@@ -705,31 +746,10 @@ Memory constructs the representation you actually need: shaped for the task at h
 
 Everything so far assumes one reader: me.
 
-That breaks once other people or agents want to ask questions. The archive holds work under NDAs, private code, and conversations with real people.
+The system is increasingly good at remembering for me: recovering unfinished work, relating ideas across years, and constructing the view a task requires. Sharing creates a different problem. The most useful internal representation is often not the representation that should be shown to another person.
 
-Like Google Trends, the goal is policy-conditioned projections: letting external queries learn from the patterns and lessons in the archive without leaking what was meant to stay private.
+Private memory is rewarded for broad recall and retained detail. A useful shared projection must decide what can be revealed, what should be abstracted, and what belongs only to the underlying history. The archive holds work under NDAs, private code, and conversations with real people; my own sense of privacy also depends on the audience and the purpose of the question.
 
-Wouldn't it be great if we could all learn from each other and yet still have our boundaries?
+Like Google Trends, the goal is policy-conditioned projection: allowing another person or agent to learn from patterns and lessons in the archive without exposing the records that made them possible.
 
-## Appendix: Project Genealogy & Evidence Ledger
-
-The systems described in this paper began as independent projects before converging into a unified memory architecture:
-
-::: {.table-responsive}
-
-| System | Original Motivation | Core Mechanism | Earliest Verified Record | Evidenced Maturity |
-|---|---|---|---|---|
-| **World Model (`C012`)** | Closing loops on unfinished and abandoned projects | Immutable evidence ledger, entity resolution, and temporal supersession | April 2025 (*"Overcoming Unfinished Projects"*) | Operational personal archive (6,604 conversations, 249 canonical projects) |
-| [**OMA (`C058`)**](https://www.novusopus.org/oma/) | Human orientation in complex information spaces (*The Laws of Simplicity* + SLIP) | Dynamic, intent-driven semantic lenses; transient taxonomies over static folders | November 2025 (*"Explaining The Laws of Simplicity"*) | Working React/Gemini prototype with facet discovery, lens caching, and Cloud Run deployment |
-| [**`pg_llm` / Semantic SQL (`C021`)**](https://www.novusopus.org/research/quantitative-qualitativeness/) | Bringing qualitative text analysis into SQL/BI without infrastructure overhead | Relational grouping combined with composable LLM aggregation functions | February 2025 (*"Enhancing PostgreSQL Text Analytics"*) | Architectural design corpus, public specification, and query contracts |
-
-:::
-
-### The Evidence Hierarchy
-
-To prevent synthetic summaries from flattening distinctions, the system evaluates all records through four strict evidence tiers:
-
-1. **Direct first-person records:** Authored user messages establishing what was intended, remembered, or proposed at an exact timestamp.
-2. **Inspectable artifacts:** Commit logs, repositories, deployed URLs, and verified build outputs establishing that an artifact existed in that state.
-3. **Derived repository views:** Assistant syntheses, project rosters, and generated summaries (useful for discovery, but requiring validation against raw artifacts).
-4. **Assistant suggestions:** Conversational proposals establishing what an LLM suggested, not what was accepted or implemented.
+The next problem is not making private memory universally searchable. It is constructing something useful for a particular reader while preserving the boundaries that made the archive safe enough to exist. If memory decides what should be carried forward, it eventually also has to understand what should remain private.
