@@ -21,21 +21,21 @@ I tend to work where a technical capability is possible but not yet dependable. 
 
 ## Work
 
-At [Woven by Toyota](https://woven.toyota/en/), I was one of the founding engineers of MS1, a B2B product focused on talent mobility. I helped build the product from its early stages, including its data infrastructure, skill-intelligence systems, [adaptive assessments](https://en.wikipedia.org/wiki/Item_response_theory), course recommendations, talent matching, and cloud foundations.
+At [Woven by Toyota](https://woven.toyota/en/), I was one of the founding engineers of MS1, a B2B product focused on talent mobility. I helped build the product from its early stages, including its data infrastructure, skill-intelligence systems, [adaptive assessments](https://en.wikipedia.org/wiki/Item_response_theory), course recommendations, [talent matching](https://www.arjunsriva.com/library/book_1/book_1000.html), and cloud foundations.
 
 I now lead the ML and Data Platform team. Our work spans production ML and AI infrastructure, data orchestration, model evaluation and observability, developer experience, platform reliability, data contracts, privacy, and governance. My role combines hands-on architecture with technical leadership: deciding what the platform should own, building the mechanisms that make it dependable, and helping other engineers and data scientists move faster without needing to understand every layer underneath.
 
 Previously, at [BookMyShow](https://bookmyshow.com), I built real-time data and discovery infrastructure used to personalize entertainment experiences for millions of users. Earlier in my career, I worked on distributed databases, [consensus systems](https://pmg.csail.mit.edu/papers/osdi99.pdf), and education products.
 
-Across these roles, the recurring pattern has been the same: build something from zero to one, observe where repeated effort and ambiguity accumulate, and turn what we learn into a system that can scale beyond its original builders.
+Across these roles, the recurring pattern has been the same: build something from zero to one, observe where repeated effort and ambiguity accumulate, and turn what we learn into a system that can [scale](https://zerodha.tech/blog/scaling-with-common-sense/) beyond its original builders.
 
 ## The questions behind the work
 
 I believe good infrastructure makes meaningful ambition executable by default.
 
-The best abstractions do not hide complexity indiscriminately. They preserve the distinctions people need to make good decisions and absorb the complexity they should not have to manage themselves. They make state visible, preserve evidence, provide meaningful points of control, and turn exceptional outcomes into repeatable ones.
+The best abstractions do not [hide complexity](https://gwern.net/language#:~:text=Batuman2005-,Simplicity%20does%20not%20precede%20complexity%2C%20but%20follows%20it.,-Alan%20Perlis%2C%201982) indiscriminately. They preserve the distinctions people need to make good decisions and absorb the complexity they should not have to manage themselves. They make state visible, preserve evidence, provide meaningful points of control, and [turn exceptional outcomes into repeatable ones](https://en.wikipedia.org/wiki/The_Toyota_Way).
 
-This leads me to questions that cross conventional technical boundaries:
+This leads me to questions that [cross conventional technical boundaries](https://www.poorcharliesalmanack.com/):
 
 How should AI systems manage memory, evaluation, identity, authority, and long-running state? What should programming runtimes take responsibility for instead of application developers? How do we build platforms without depriving their users of agency? What becomes possible when businesses, markets, and financial relationships become more observable and programmable?
 
@@ -57,17 +57,15 @@ Outside my work at Woven, I explore these questions through writing, technical e
 
 ## Background
 
-I studied computer science at IIT Indore. My early interests included machine learning, algorithms that [learn from their data](https://learned.di.unipi.it/publication/learned-data-structures/learned-data-structures.pdf), distributed systems, and programming languages, particularly systems that could learn from their workloads or generate parts of their own implementation.
+I studied computer science at IIT Indore. My early interests included machine learning, algorithms, distributed systems, and programming languages, particularly systems that could [learn from their workloads](https://learned.di.unipi.it/publication/learned-data-structures/learned-data-structures.pdf) or generate parts of their own implementation.
 
 Growing up, websites such as [MIT OpenCourseWare](https://ocw.mit.edu/) and the [Linux Documentation Project](https://tldp.org/) gave me access to knowledge that would otherwise have been difficult to find. They shaped my belief that technical knowledge becomes more valuable when it is made understandable and shared openly. This website is my attempt to contribute to that tradition, while giving unfinished ideas somewhere to become better ones.
 
-I am drawn to long-term builders such as [Toyota](https://en.wikipedia.org/wiki/The_Toyota_Way), [Zerodha](https://zerodha.tech/blog/scaling-with-common-sense/), and [Charlie Munger](https://www.poorcharliesalmanack.com/).
-
-Outside work, I read widely across technology, business, economics, history, and science. Books I return to include *[7 Powers](https://www.arjunsriva.com/library/book_1/book_1030.html)* by Hamilton Helmer, *[The Model Thinker](https://www.arjunsriva.com/library/book_0/book_699.html)* by Scott E. Page, *[Dataclysm](https://www.arjunsriva.com/library/book_0/book_698.html)* by Christian Rudder, and *[Who Gets What—and Why](https://www.arjunsriva.com/library/book_1/book_1000.html)* by Alvin E. Roth. I also love biryani, Mexican food, barbecue, swimming, and skating.
+Outside work, I read widely across technology, [business](https://www.arjunsriva.com/library/book_1/book_1030.html), economics, history, and [science](https://www.arjunsriva.com/library/book_0/book_699.html). I also love biryani, Mexican food, barbecue, swimming, and skating.
 
 ## Let’s connect
 
-I enjoy hearing from people building ambitious systems in machine learning, data, developer infrastructure, search, memory, marketplaces, and financial technology—especially when the difficult part is not merely making something possible, but making it dependable and widely usable.
+I enjoy hearing from people building ambitious systems in machine learning, data, developer infrastructure, search, memory, [marketplaces](https://www.arjunsriva.com/library/book_0/book_698.html), and financial technology—especially when the difficult part is not merely making something possible, but making it dependable and widely usable.
 
 You can reach me at **arjunsriva at gmail**, or find me on [LinkedIn](https://linkedin.com/in/arjunsriva), [GitHub](https://github.com/arjunbazinga), and [Twitter](https://twitter.com/arjunsriv).
 
