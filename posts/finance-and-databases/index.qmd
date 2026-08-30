@@ -9,12 +9,12 @@ date: "2026-04-08"
 image: cover.webp
 toc: true
 toc-depth: 2
-toc-location: body
+toc-location: right
 toc-title: Contents
 format:
   html:
     toc: true
-    toc-location: body
+    toc-location: right
     code-fold: false
 include-in-header:
       text: |
@@ -29,20 +29,6 @@ include-in-header:
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-variant-ligatures: none;
             white-space: pre;
-          }
-          #quarto-document-content {
-            display: flex;
-            flex-direction: column;
-          }
-          #quarto-document-content > .quarto-figure:first-of-type {
-            order: -1;
-            margin-top: 0.25rem;
-            margin-bottom: 1.25rem;
-          }
-          #TOC {
-            margin-top: 0.25rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
           }
           .cover-art {
             display: block;
