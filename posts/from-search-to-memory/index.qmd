@@ -14,7 +14,7 @@ description: A systems-design account of immutable conversation archives, entity
 layout: post
 categories: [AI, Systems, Memory]
 comments: false
-date: "2026-08-25"
+date: "2026-07-31"
 image: persistence-of-memory.jpg
 format:
   html:
