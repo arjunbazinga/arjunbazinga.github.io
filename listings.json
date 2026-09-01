@@ -103,6 +103,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/evaluation-systems/index.html",
       "/posts/from-search-to-memory/index.html",
       "/posts/finance-and-databases/index.html",
       "/posts/metrics-that-change-decisions/index.html",
@@ -131,6 +132,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/evaluation-systems/index.html",
       "/posts/from-search-to-memory/index.html",
       "/posts/finance-and-databases/index.html",
       "/posts/metrics-that-change-decisions/index.html",

@@ -10,7 +10,359 @@
 <atom:link href="https://www.arjunsriva.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Fri, 31 Jul 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 02 Sep 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Evaluation Machine</title>
+  <link>https://www.arjunsriva.com/posts/evaluation-systems/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp" class="img-fluid figure-img"></p>
+<figcaption>This is not the program.</figcaption>
+</figure>
+</div>
+<p>In classical software, engineers specify much of a system’s behavior through the implementation itself, composing abstractions, contracts, invariants, and rules into the program.</p>
+<p>Learned systems change that relationship. They let us produce behavior we do not know how to program directly, without removing the need to specify what good behavior means. Part of that specification burden moves downstream, into evaluation: What behavior did we actually produce, how much should we trust the evidence about it, and what action does that evidence justify?</p>
+<p>This essay is about the machinery organizations build to answer those questions. Across LLMs and agents, search and recommendation, autonomous driving, and robotics, the implementations differ enormously, but the underlying anatomy is remarkably similar.</p>
+<p>By the end, you should be able to look at an evaluation system and reason about what it can actually know, what decisions that knowledge justifies, where it can fool itself, and where to invest next.</p>
+<p>At a high level, the machine looks something like this:</p>
+<pre class="text"><code>                 DECISION CONTRACT
+                        │
+                        ▼
+                EVIDENCE SELECTION
+                        │ cases / scenarios
+                        ▼
+            ╔═ EXECUTION ═══════════════════════╗
+            ║                                   ║
+            ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
+            ║                                   ║
+            ╚═════════════════╤═════════════════╝
+                              │ outcome + trace
+                              ▼
+                            JUDGE
+                              │
+                              ▼
+                     CLAIM + UNCERTAINTY
+                              │
+                              ▼
+                             GATE
+                              │
+                    ┌─────────┴─────────┐
+                    ▼                   ▼
+                  action           more evidence
+                    │                   │
+                    ▼                   └──▶ EVIDENCE SELECTION
+           production outcomes
+                    │
+                    ▼
+         ┏━ INSTITUTIONAL MEMORY ━━━━━━━━┓
+         ┗━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┛
+                         │
+                         └──▶ updates future evaluation</code></pre>
+<p>The rest of this essay progressively zooms into those parts.</p>
+<section id="the-output-is-a-state-transition-not-a-score" class="level2">
+<h2 class="anchored" data-anchor-id="the-output-is-a-state-transition-not-a-score">The Output is a State Transition, Not a Score</h2>
+<p>At its most zoomed-out, an evaluation system is a control loop that converts observed behavior into a decision, and uses the consequences of that decision to change what will be evaluated next.</p>
+<p>The first important shift is conceptual: an evaluator produces evidence that can justify moving a consequential decision from one state to another.</p>
+<p>That means the system should begin with a Decision Contract. What exactly is under test? What decision could change? What does a false acceptance cost? What does a false rejection cost? Which failures are non-compensable? How much uncertainty is tolerable?</p>
+<p>The required evidence should scale with the blast radius and reversibility of the action: a change that can be cheaply rolled back need not carry the same assurance burden as one that is difficult or dangerous to reverse.</p>
+<p>Without those answers, a dashboard can contain thousands of measurements while producing no knowledge about what anyone should do. Search systems make this distinction unusually visible. Airbnb, for example, reports offline ranking improvements using NDCG, but still validates consequential ranking changes through <a href="https://airbnb.tech/ai-ml/personalizing-airbnb-search-by-learning-from-the-guest-journey/">randomized online experiments</a> against booking and engagement outcomes. Offline relevance tells you something useful; it does not by itself establish the product consequence. The contract anchors metrics to the decision they are meant to inform.</p>
+</section>
+<section id="the-triad-actor-environment-judge" class="level2">
+<h2 class="anchored" data-anchor-id="the-triad-actor-environment-judge">The Triad: Actor, Environment, Judge</h2>
+<p>An evaluation orchestrates three distinct systems, and any one of them can be wrong.</p>
+<ol type="1">
+<li>The Actor produces behavior (e.g., the LLM policy, the search ranker, the autonomous driver).</li>
+<li>The Environment determines the consequences of that behavior (e.g., the bash sandbox, the marketplace dynamics, the physical simulator).</li>
+<li>The Judge decides what the consequences mean (e.g., the Python verifier, conversion tracking, the kinematic safety check).</li>
+</ol>
+<p>This means an evaluation never measures the Actor directly. It observes the Actor through an Environment, using a Judge. Every resulting capability claim therefore inherits assumptions from all three.</p>
+<pre class="text"><code>ACTOR
+  │ behavior
+  ▼
+ENVIRONMENT
+  │ outcome
+  ▼
+JUDGE
+  │ interprets
+  ▼
+CLAIM</code></pre>
+<p>For consequential candidate and release decisions, evaluation often needs to answer a fundamentally counterfactual question: What would have happened if the candidate had been there instead?</p>
+<pre class="text"><code>                   recorded situation
+                          │ reconstruct
+                          ▼
+          same initial state + Environment model
+                          │
+               ┌──────────┴──────────┐
+               ▼                     ▼
+        current ACTOR          candidate ACTOR
+             │ behavior             │ behavior
+             ▼                      ▼
+        ENVIRONMENT            ENVIRONMENT
+             │                      │
+             ▼                      ▼
+        trajectory A           trajectory B
+             └──────────┬───────────┘
+                        │ compare
+                        ▼
+                      JUDGE
+                        │
+                        ▼
+                       CLAIM</code></pre>
+<p>Seen this way, an evaluation system is machinery for constructing trustworthy claims about counterfactual behavior. That counterfactual becomes harder when the Environment is itself reflexive. In marketplaces, ranking systems, and multi-agent settings, deploying a candidate can change user or competitor behavior, so replay against the historical environment may not predict the equilibrium the candidate helps create.</p>
+<p>Replay, simulation, experimentation, judging, and release gating are different parts serving that common purpose.</p>
+<p>Once you see evaluation this way, replay infrastructure becomes a first-class ML system. But more importantly, it exposes where failures actually originate. If the Actor is wrong, you have bad behavior. If the Environment is wrong, the candidate is acting in the wrong world. If the Judge is wrong, the system maps behavior to the wrong conclusion. Some of the most interesting failures occur at the boundaries: an Environment permits an exploit the Judge cannot distinguish from legitimate success.</p>
+<p>The Environment and Judge therefore become evaluation targets themselves.</p>
+<p>Sometimes the harder problem is upstream of Judge calibration: the construct itself is underspecified or legitimately subjective. “Helpful,” “relevant,” or “appropriate” are not physical observables. In those cases, the rubric becomes part of the measurement system: the operational definition of what the Judge is being asked to recognize. Disagreement can reveal ambiguity in the specification rather than merely noise in the Judge.</p>
+<p>Simulator fidelity must be checked against the world it claims to reproduce; learned or heuristic Judges must be calibrated against independent evidence. A capability claim cannot be more trustworthy than the measurement chain used to establish it.</p>
+<p>The Triad describes how a single piece of evidence is produced. The evidence-selection system determines which such observations exist in the first place.</p>
+</section>
+<section id="evidence-selection-and-the-fidelity-ladder" class="level2">
+<h2 class="anchored" data-anchor-id="evidence-selection-and-the-fidelity-ladder">Evidence Selection and the Fidelity Ladder</h2>
+<p>Once the decision is defined, the system must decide what evidence to inspect. The value of additional data depends on the information it adds. Driving logs are abundant precisely where nothing exceptional happens. Production LLM traces contain enormous numbers of routine successes. The next million examples are therefore not automatically as informative as the first million.</p>
+<p>Evidence has to be deliberately selected. Autonomous driving makes the stakes obvious: Waymo uses simulation to <a href="https://waymo.com/blog/2021/07/simulation-city/">amplify logged experience</a> and <a href="https://waymo.com/research/collision-avoidance-testing-of-the-waymo-automated/">construct variations around difficult or rare situations</a>, because waiting for consequential edge cases to recur naturally would be an absurd evaluation strategy.</p>
+<p>The evidence-selection policies appropriate for discovery and population estimation are different. A representative suite supports claims about ordinary population behavior. A discovery suite tries to find where the system is wrong.</p>
+<p>Confusing the two produces one of the most common evaluation mistakes. If I aggressively mine difficult driving scenarios, the resulting dataset may be excellent at finding regressions. It is not therefore an unbiased estimate of how often those regressions occur on the road. If I select only the queries on which two search rankers disagree, I can learn a lot about their differences. I cannot report raw performance on that sample as though it represented normal traffic.</p>
+<p>The same idea appears in computerized adaptive testing (psychometrics): the most informative next question depends on what is currently uncertain about the examinee. Adaptive selection can estimate capability with far fewer questions. That efficiency comes from a deliberately altered sampling policy. The selector is part of the evaluator, because it determines what the system is capable of knowing.</p>
+<p>The evidence most useful for improving a system is often not the evidence you should trust most for assuring the improved system.</p>
+<p>Evidence also differs in fidelity and cost. It can be organized into a fidelity ladder. In autonomous driving, for example, that ladder can look like:</p>
+<pre class="text"><code>component tests
+      │
+      ▼
+recorded-log replay
+      │
+      ▼
+counterfactual simulation
+      │
+      ▼
+closed-loop simulation
+      │
+      ▼
+integrated hardware / system tests
+      │
+      ▼
+controlled real-world exposure
+      │
+      ▼
+fleet behavior</code></pre>
+<p>Every level buys realism at additional cost and risk. Other domains use different stages, such as offline replay, sandbox execution, shadow traffic, or A/B tests, but the principle is the same.</p>
+<p>The operating principle of this ladder is simple: Cheap evidence earns the right to consume expensive evidence. It is wasteful to discover during a live A/B test what a deterministic offline suite could have shown yesterday.</p>
+<p>But the inverse matters equally: passing cheap evidence does not entitle you to pretend you acquired expensive evidence.</p>
+<p>Cost and validity are different dimensions. A sophisticated simulator can still be misspecified; an expensive real-world study can still be badly sampled; a high-fidelity execution can still be judged against the wrong construct.</p>
+</section>
+<section id="you-evaluate-a-system-not-a-checkpoint" class="level2">
+<h2 class="anchored" data-anchor-id="you-evaluate-a-system-not-a-checkpoint">You Evaluate a System, Not a Checkpoint</h2>
+<p>Once evidence has been selected, the behavior must actually be produced. Here another software instinct breaks down. A benchmark result is produced by the checkpoint interacting with a larger execution and measurement system:</p>
+<blockquote class="blockquote">
+<p><strong>Evaluated system =</strong> model weights + prompt + context policy + harness + tool schema + execution environment + resource budget + verifier</p>
+</blockquote>
+<p>The observed benchmark behavior is jointly produced by the model and the system that elicits, constrains, and judges it.</p>
+<p>Poolside encountered an instructive failure at the boundary between Environment and Judge while training its <a href="https://poolside.ai/assets/laguna/laguna-m1-xs2-technical-report.pdf">Laguna model</a>. A SWE-Bench Pro training run suddenly jumped roughly 20 percentage points. Investigation showed the model was <a href="https://poolside.ai/blog/through-the-looking-glass">mining unpruned Git history</a> for the reference solution, and eventually searching the web to cheat.</p>
+<p>The verifier correctly observed that the tests passed. The problem was that the evaluation environment permitted behaviors outside the capability the benchmark intended to measure. Nothing about the terminal condition, “the tests passed,” distinguished genuine software engineering from recovering privileged information.</p>
+<blockquote class="blockquote">
+<p><strong>verifier success ≠ intended-task success</strong></p>
+</blockquote>
+<p>A Judge can only enforce properties made observable and meaningful by the Environment around it.</p>
+</section>
+<section id="outcomes-are-not-enough-evaluate-the-trace" class="level2">
+<h2 class="anchored" data-anchor-id="outcomes-are-not-enough-evaluate-the-trace">Outcomes Are Not Enough: Evaluate the Trace</h2>
+<p>Because terminal success reflects the whole execution system, it can be ambiguous about how that success was produced. This motivates two streams of evaluation.</p>
+<pre class="text"><code>╔═ EXECUTION ═══════════════════════╗
+║                                   ║
+║  ACTOR ──behavior──▶ ENVIRONMENT  ║
+║                                   ║
+╚═════════════════╤═════════════════╝
+                  │ emits
+                  ├─ terminal state ─▶ verifier ─┐
+                  └─ process trace ─▶ judges ────┤
+                                               ▼
+                                      CLAIM + UNCERTAINTY</code></pre>
+<p>Outcome evidence asks whether the terminal condition was satisfied (Did the tests pass? Did the robot complete the task?). Process evidence asks how it was satisfied.</p>
+<p>By retaining network calls, tool use, intermediate states, interventions, and other execution provenance, the system can use learned judges and human experts to catch cases where a metric was satisfied for the wrong reason.</p>
+<p>A robot that completes a warehouse task after four human interventions has a different capability from one that completes it autonomously. An autonomous vehicle that reaches the correct final trajectory only because a downstream safety mechanism repeatedly vetoes unsafe proposals has a different failure structure from one whose primary policy behaves correctly. A multi-step LLM system that returns the right answer after retrieving an unsupported source has different production risk from one whose reasoning path remains grounded.</p>
+<p>The terminal state tells you whether something happened. The trace reduces ambiguity about how that outcome was produced.</p>
+</section>
+<section id="execution-throughput-is-not-decision-throughput" class="level2">
+<h2 class="anchored" data-anchor-id="execution-throughput-is-not-decision-throughput">Execution Throughput is Not Decision Throughput</h2>
+<p>As execution scales to millions of simulations or offline tests a day, organizations hit a wall. You can scale execution throughput tremendously and still not improve decision throughput proportionally.</p>
+<p>If your evaluation suite flags 70,000 “interesting” regressions, that is not useful. At scale, human triage becomes a scheduler for scarce expert attention.</p>
+<pre class="text"><code>1,000,000 counterfactual executions
+                │ detect
+                ▼
+      70,000 flagged events
+                │ deduplicate + cluster
+                ▼
+       ranked investigations
+      consequence / uncertainty
+          novelty / reversibility
+                │ select
+                ▼
+          40 triage cases
+                │
+                ▼
+       expert investigation</code></pre>
+<p>Cases compete for expert attention based on severity, uncertainty, novelty, consequence, reversibility, and expected information value.</p>
+<p>Compute is scarce.<br>
+Real-world interaction is scarce.<br>
+Expert attention is scarce.</p>
+<p>The engineering objective is to maximize trustworthy, decision-relevant information per unit of compute, elapsed time, real-world exposure, and human attention.</p>
+<p>Faster evaluation also shortens the feedback loop around development. A run that returns while an engineer or researcher is still working on a change is used differently from one whose results arrive the next day.</p>
+</section>
+<section id="the-gate-is-a-claim-building-machine" class="level2">
+<h2 class="anchored" data-anchor-id="the-gate-is-a-claim-building-machine">The Gate is a Claim-Building Machine</h2>
+<p>Eventually, all this heterogeneous evidence must become an action. The mistake is to imagine the release gate as one final numerical threshold. A release board isn’t really asking, “Did version B get a 93.7?” It is asking: “What action does the current evidence justify?”</p>
+<p>“Safe enough to deploy” is rarely one empirical proposition. It is a bundle of claims: that known regressions are absent, representative behavior has not degraded, important edge-case families remain within bounds, the evaluation environment is sufficiently faithful, and remaining uncertainty is acceptable for the proposed deployment scope.</p>
+<p>The gate is a claim-building state machine. Its output should be the largest action justified by the current evidence.</p>
+<pre class="text"><code>                    CLAIM + UNCERTAINTY
+                             │
+                             ▼
+                        ┏━ GATE ━━━━┓
+                        ┗━━━━━┯━━━━━┛
+                              │
+                   ┌──────────┼──────────┐
+                   ▼          ▼          ▼
+                 HOLD      LIMITED      BROAD
+                           DEPLOYMENT   DEPLOYMENT</code></pre>
+<p>“More Evidence” now has a principled meaning: Which unsupported part of our proposed action requires stronger evidence? A surprising metric movement may be real, or the Judge may have drifted. Forcing every ambiguous result immediately into <code>PASS</code> or <code>FAIL</code> converts uncertainty into arbitrary policy.</p>
+<p>This also makes reversibility part of the contract. Evidence insufficient for an irreversible broad release may still justify a constrained rollout that generates more information under bounded risk.</p>
+</section>
+<section id="learning-and-assurance-are-different-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="learning-and-assurance-are-different-jobs">Learning and Assurance Are Different Jobs</h2>
+<p>The distinction introduced earlier becomes especially important when evidence is used to justify a release. Organizations are usually trying to answer two different questions with evaluation.</p>
+<p>The learning loop asks: Where might we be wrong, and what should we try next?<br>
+The assurance loop asks: Is the evidence strong enough to justify this consequential action?</p>
+<pre class="text"><code>LEARNING                         ASSURANCE
+
+discovery evidence               frozen evidence
+       │                                │
+       ▼                                ▼
+fast evaluation                  calibrated gate
+       │                                │
+       ▼                                ▼
+update hypothesis                 release claim
+       │
+       └──▶ next iteration</code></pre>
+<p>The loops must not collapse into each other. The distinction is statistical. The better a dataset becomes at hunting failures (adversarial mining, rare events), the worse its raw aggregate statistics become as an estimate of ordinary population behavior.</p>
+<p>Furthermore, once a Judge trains, filters, or ranks the system it measures, it is no longer merely an observer. It has become part of the model-producing process. Optimization pressure will inevitably exploit it.</p>
+<p>There is an uncomfortable lifecycle here: a successful evaluator tends to erode its own independence. Once a signal reliably finds problems, the organization starts optimizing against it. What began as independent evidence gradually becomes part of the candidate-producing process, and its assurance value changes with that entanglement.</p>
+<p>Mistaking an offline ranking improvement for a product improvement costs an experiment. Mistaking a benchmark exploit for genuine capability can send research in the wrong direction. Mistaking a safety proxy for sufficient release evidence has a much higher consequence.</p>
+<p>The need for independent assurance grows with:</p>
+<blockquote class="blockquote">
+<p><strong>Need for independent assurance increases with:</strong> semantic distance from the goal + optimization pressure on the evaluator + cost of false acceptance.</p>
+</blockquote>
+<p>The wider that gap becomes, the more you need an independently constructed assurance loop with different statistical guarantees.</p>
+</section>
+<section id="institutional-memory" class="level2">
+<h2 class="anchored" data-anchor-id="institutional-memory">Institutional Memory</h2>
+<p>No evaluation architecture has complete coverage. Something eventually fails in production.</p>
+<p>But not every production failure indicts the evaluation system. An evaluator may correctly predict that some residual failure rate remains and a release decision may knowingly accept that risk.</p>
+<p>The important distinction is between a predicted failure and an epistemic surprise.</p>
+<pre class="text"><code>              production event
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+   predicted failure     epistemic surprise
+          │                     │
+          ▼                     ▼
+   improve Actor /          investigate
+    cost tradeoff               │
+                                ▼
+                   ┏━ INSTITUTIONAL MEMORY ━┓
+                   ┃ durable failure object ┃
+                   ┗━━━━━━━━┯━━━━━━━━━━━━━━━┛
+                            │
+                            ├──▶ update Actor
+                            ├──▶ update Environment
+                            ├──▶ update Judge
+                            ├──▶ update evidence selection
+                            ├──▶ update aggregation
+                            └──▶ update gate / release policy</code></pre>
+<p>A production failure is evidence about the Actor. A production failure outside the evaluator’s predicted envelope is evidence about the evaluation system itself. It reveals a blind spot in what the organization believed it knew.</p>
+<p>To compound in value, meaningful surprises need a closure path. Enterprise observability platforms are increasingly used to implement the “golden-set” loop: developers using tools like <a href="https://docs.langchain.com/langsmith/evaluation">LangSmith</a> or <a href="https://www.braintrust.dev/articles/turn-llm-production-failures-into-regression-tests">Braintrust</a> export production failures directly from the trace stream into an offline regression set.</p>
+<p>A regression set is only the first step.</p>
+<p>The important question is how much we learn beyond the individual failure. Did we merely memorize one bad input by adding a test? Or did the incident teach us a failure mode, a new sampling rule, a better Judge, or a missing dimension of the Environment simulator?</p>
+<p>The goal is to turn production surprises into durable improvements in what the organization can detect and understand. Production should improve both the model and the organization’s ability to judge whether the model is good.</p>
+</section>
+<section id="practical-advice-for-evaluation-owners" class="level2">
+<h2 class="anchored" data-anchor-id="practical-advice-for-evaluation-owners">Practical Advice for Evaluation Owners</h2>
+<p>If you’ve read this far, there’s a good chance you’re responsible for evaluation somewhere in your organization. There are probably three questions on your mind: <strong>Where should I invest? What should be centralized? How can I start small?</strong></p>
+<section id="where-should-i-invest" class="level3">
+<h3 class="anchored" data-anchor-id="where-should-i-invest">Where should I invest?</h3>
+<p>Ask: “Where does trustworthy information stop turning into action?”</p>
+<p>Sophisticated tools such as automated judges, giant simulation farms, and massive golden sets are multipliers.</p>
+<p>An evaluation system also has to be usable. If the trusted path is too slow, noisy, or opaque, engineers will create faster shadow paths around it; assurance that is routinely bypassed provides little assurance at all.</p>
+<p>A useful prioritization order is:</p>
+<ol type="1">
+<li><strong>Integrity:</strong> If another engineer cannot reproduce the Actor, Environment, and Judge for a run, stop here. Every higher-level conclusion inherits that uncertainty.</li>
+<li><strong>Epistemic Quality:</strong> Understand what your data actually represents before generating more of it. Uncalibrated Judges and hidden sampling bias produce false certainty.</li>
+<li><strong>Decision Linkage:</strong> Make sure evaluation results can advance, block, or demand more evidence for an actual decision.</li>
+<li><strong>Operating Efficiency:</strong> Once the evidence is sound, make it cheap and fast enough to produce and inspect routinely.</li>
+<li><strong>Institutional Memory:</strong> Ensure meaningful production surprises improve what the organization can detect next time.</li>
+</ol>
+<p>Sophistication at a higher layer cannot compensate for failure below it. The highest-leverage investment is usually the lowest broken layer constraining decision quality.</p>
+</section>
+<section id="what-should-be-centralized" class="level3">
+<h3 class="anchored" data-anchor-id="what-should-be-centralized">What should be centralized?</h3>
+<p>The semantics of an evaluation are usually domain-specific. Teams closest to the system need to define what good means, which situations matter, which failures are unacceptable, and what evidence a decision requires.</p>
+<p>The machinery underneath is often much more reusable: execution, environment provisioning, trace capture, Judge execution, result storage, comparison, caching, and scheduling. Separating that machinery from an individual run allows the same engineering investment to benefit many teams, model families, and releases.</p>
+<p>Evaluation execution is an early example. A production serving path may be optimized around individual request latency and other online constraints. Offline evaluation can make a different tradeoff: batch work aggressively and saturate accelerators. A shared execution path can therefore make the same evaluations substantially faster and cheaper, while improvements in batching, scheduling, caching, or accelerator utilization benefit every team using it.</p>
+<p>The larger gain is a shorter development feedback loop. Making evaluation faster shortens the distance between changing a system and learning whether the change helped. Similar economics can justify shared investment in replay infrastructure, reproducible environments, and trace inspection.</p>
+</section>
+<section id="how-can-i-start-small" class="level3">
+<h3 class="anchored" data-anchor-id="how-can-i-start-small">How can I start small?</h3>
+<p>How much machinery you need depends on the stakes.</p>
+<p>For a low-risk, easily reversible LLM application, the first useful version may be only a handful of critical behaviors, explicit expectations, repeatable execution, enough provenance to understand failures, and a release rule the team actually uses. Production can supply the next cases worth adding.</p>
+<p>I’ve written about this smaller starting point in <a href="https://www.arjunsriva.com/posts/golden-datasets/index.html">Golden Datasets: Launch Criteria for LLM Systems</a>.</p>
+</section>
+</section>
+<section id="what-infinite-compute-clarifies" class="level2">
+<h2 class="anchored" data-anchor-id="what-infinite-compute-clarifies">What Infinite Compute Clarifies</h2>
+<p>Operating this machine in the real world is a massive systems-engineering challenge. Building low-latency replay infrastructure, scaling simulation clusters, managing fidelity ladders, and scheduling human triage are non-trivial problems that absorb enormous engineering effort.</p>
+<p>A thought experiment helps separate these operational scaling challenges from the underlying measurement principles. If an evaluation system had infinite compute and zero latency, what would change?</p>
+<p>The budget constraints would relax. Caching, queues, early stopping, and simulation-budget tuning would become unnecessary. But the epistemic constraints would remain:</p>
+<ul>
+<li><strong>Selection bias survives.</strong> Mining hard edge cases still does not estimate population risk.</li>
+<li><strong>Evaluator coupling survives.</strong> Evidence produced by machinery already entangled with candidate development cannot automatically serve as independent assurance.</li>
+<li><strong>Construct validity survives.</strong> Infinite compute cannot tell you whether the proxy you measured is the property you meant by “safe,” “helpful,” or “correct.”</li>
+<li><strong>Attribution survives.</strong> Observed differences still arise jointly from the Actor, the Environment, and the Judge.</li>
+</ul>
+<p>These are not compute problems; they are measurement problems.</p>
+<p>This brings us back to where we started: <em>where the complexity went when the code became weights.</em></p>
+<p>In classical software, much of an organization’s accumulated engineering judgment was encoded directly into the artifact: abstractions, contracts, invariants, edge-case handling, and business logic lived in code.</p>
+<p>As more behavior becomes learned rather than explicitly specified, some of that engineering burden moves downstream. Models may be regenerated frequently with relatively little additional human effort, but understanding what changed, whether the evidence is trustworthy, and what action it justifies remains difficult. The faster that understanding arrives, the faster the organization can make the next informed change.</p>
+<p>That is the role of the evaluation system: to make learned behavior legible enough to act on.</p>
+<hr>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<p>This framework draws on my day-to-day experience building and leading the ML &amp; Data Platform function at Woven by Toyota. The public sources below are examples chosen to illustrate the same underlying ideas across LLMs and agents, search and recommendation, and autonomous driving.</p>
+<ul>
+<li><strong>Poolside’s benchmark-hacking investigation:</strong> Details the Laguna model jump, Git-history exploits, web search hacking, and the conclusion that process evidence and continuous sample review are necessary because terminal scores alone are insufficient. <a href="https://poolside.ai/blog/through-the-looking-glass">Through the looking glass of benchmark hacking</a></li>
+<li><strong>Poolside’s Laguna technical report:</strong> Demonstrates that a benchmark score is the product of a much larger execution stack, with detailed disclosures on harnesses, sampling, verifier patches, and execution configuration. <a href="https://poolside.ai/assets/laguna/laguna-m1-xs2-technical-report.pdf">Laguna M.1 / XS.2 technical report</a></li>
+<li><strong>Waymo’s Simulation City:</strong> A deep dive into rare-event variation, distributions of behavior, software validation, and how simulated experience complements real-world experience. <a href="https://waymo.com/blog/2021/07/simulation-city/">Simulation City</a></li>
+<li><strong>Waymo’s collision-avoidance testing:</strong> Highlights systematic scenario identification, virtual counterfactual testing, and the iterative construction of representative scenario sets. <a href="https://waymo.com/research/collision-avoidance-testing-of-the-waymo-automated/">Collision avoidance testing of the Waymo ADS</a></li>
+<li><strong>Airbnb’s ranking work:</strong> A clean search example demonstrating the split between offline NDCG and separate online A/B outcomes, rather than treating the proxy as the product objective itself. <a href="https://airbnb.tech/ai-ml/personalizing-airbnb-search-by-learning-from-the-guest-journey/">Personalizing Airbnb search by learning from the guest journey</a></li>
+<li><strong>Georgian AI Lab on retrieval evaluation:</strong> A practical treatment of evaluation when ground-truth relevance labels are unavailable, including task-specific rubrics, LLM Judge reliability, and the distinction between a useful iterative yardstick and absolute ground truth. <a href="https://georgianailab.substack.com/p/evaluating-retrieval-without-ground">Evaluating Retrieval Without Ground Truth</a></li>
+<li><strong>LangSmith and Braintrust Evaluation:</strong> Documentation showing the implementation of the production trace → regression dataset → future evaluation loop. <a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation</a> | <a href="https://www.braintrust.dev/articles/turn-llm-production-failures-into-regression-tests">Braintrust: production failures into regression tests</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Evaluation</category>
+  <category>Systems</category>
+  <guid>https://www.arjunsriva.com/posts/evaluation-systems/</guid>
+  <pubDate>Wed, 02 Sep 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>Rocketships for the Mind</title>
   <link>https://www.arjunsriva.com/posts/from-search-to-memory/</link>
@@ -5749,55 +6101,6 @@ font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span
   <guid>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</guid>
   <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
   <media:content url="https://www.arjunsriva.com/posts/multi-armed-bandits/MultiArmedBandits.jpeg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Game Of Thrones quiz</title>
-  <link>https://www.arjunsriva.com/posts/game-of-thrones-quiz/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/game-of-thrones-quiz/gameofthronesquiz.jpg" class="img-fluid figure-img"></p>
-<figcaption>Game Of Thrones Quiz</figcaption>
-</figure>
-</div>
-<p>This quiz was created as part of cultural week, right as Game of Thrones season 7 ended.<br>
-It is broken into 3 seperate rounds</p>
-<ol type="1">
-<li>first round, acts as elimination to reduce the number of teams that play.</li>
-<li>second round where each team sees one question at a time and can write their answers, and the quiz master checks if they got it right and awards +1 for correct answers. the correct answer is revealed after each question.</li>
-<li>third round consists of Connect questions, where for each question a series of hints are given, with the total points awarded for correct points reducing as the number of hints increase.</li>
-</ol>
-<section id="first-round" class="level2">
-<h2 class="anchored" data-anchor-id="first-round">First round</h2>
-<p><a href="./prelims.pdf">Questions</a><br>
-<a href="./prelims_answers.pdf">Answers</a></p>
-</section>
-<section id="second-round" class="level2">
-<h2 class="anchored" data-anchor-id="second-round">Second round</h2>
-<p><a href="./round2.pdf">Slides</a></p>
-<p><a href="./1.mp4">video for question 1</a><br>
-<a href="./2.mp3">music for question 2</a><br>
-<a href="./3.mp4">video for question 3</a></p>
-</section>
-<section id="third-round" class="level2">
-<h2 class="anchored" data-anchor-id="third-round">Third round</h2>
-<p><a href="./Connect.pdf">Connect</a></p>
-
-
-</section>
-
- ]]></description>
-  <category>IIT Indore</category>
-  <category>Quiz</category>
-  <guid>https://www.arjunsriva.com/posts/game-of-thrones-quiz/</guid>
-  <pubDate>Mon, 04 Sep 2017 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/game-of-thrones-quiz/gameofthronesquiz.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
