@@ -2,7 +2,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
-      "/posts/allreduce-all-the-way-down/index.html",
+      "/posts/communication-collectives/index.html",
       "/posts/evaluation-systems/index.html",
       "/posts/from-search-to-memory/index.html",
       "/posts/finance-and-databases/index.html",
@@ -133,7 +133,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/allreduce-all-the-way-down/index.html",
+      "/posts/communication-collectives/index.html",
       "/posts/evaluation-systems/index.html",
       "/posts/from-search-to-memory/index.html",
       "/posts/finance-and-databases/index.html",
