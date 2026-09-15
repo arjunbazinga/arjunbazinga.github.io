@@ -1,0 +1,592 @@
+---
+title: "AllReduce, All the Way Down"
+subtitle: "How collective semantics become programs for real machines"
+site: arjunsriva
+collection: system-studies
+status: drafting
+canonical_url: null
+employer_derived: false
+audience: Technically strong systems generalists and technical leaders who need to reason below the distributed-training abstractions they normally use or own.
+reader_outcome: Understand how a collective request is lowered through algorithms, topology, GPU execution, workload-specific communication, and automated optimization—and where each abstraction stops being sufficient.
+bluf: AllReduce has simple semantics. Making it fast requires progressively resolving that semantic request into an algorithm, a physical schedule, and GPU/network execution; modern workloads increasingly need to open the collective and program communication at a lower level.
+description: "A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis."
+layout: post
+categories: [AI, Systems, Distributed Computing]
+comments: false
+date: "2026-09-08"
+format:
+  html:
+    toc: true
+    code-fold: false
+include-in-header:
+  text: |
+    <style>
+      pre.sourceCode.text, pre.text, div.sourceCode pre {
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 1.28;
+        font-size: 0.78rem;
+      }
+      pre.sourceCode.text code, pre.text code, div.sourceCode pre code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-variant-ligatures: none;
+        white-space: pre;
+      }
+    </style>
+---
+
+Two GPUs finish a backward pass with different gradients.
+
+```text
+GPU 0: g₀
+GPU 1: g₁
+```
+
+If they hold copies of the same model, they cannot take independent optimizer steps. Each needs the same combined gradient:
+
+```text
+GPU 0: g₀ + g₁
+GPU 1: g₀ + g₁
+```
+
+We call this **AllReduce**.
+
+At the [PyTorch `torch.distributed`](https://docs.pytorch.org/docs/stable/distributed) level, it can look like one line:
+
+```python
+dist.all_reduce(x)
+```
+
+On NVIDIA GPUs, that call will often reach NCCL. Its C API is roughly:
+
+```c
+ncclAllReduce(
+    sendbuff,
+    recvbuff,
+    count,
+    datatype,
+    op,
+    comm,
+    stream
+);
+```
+
+There is no model in that call. No gradient. No layer number. Nothing says we are training a neural network.
+
+NCCL gets buffers, a datatype, a reduction, a group of participants, and a CUDA stream; the [collective API](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/colls.html) is deliberately small.
+
+From that small request it may have to choose a collective algorithm, map it onto NVLink, PCIe and a network fabric, divide the tensor into chunks, pipeline those chunks through several channels, and run communication while the model is using the same GPU.
+
+Newer workloads stretch the interface further. Expert parallelism ties communication to token routing. NCCL now exposes communication primitives directly inside CUDA kernels. DeepEP builds expert-specific communication on top of those lower-level mechanisms. Other systems try to automate pieces of the mapping with solvers, compilers, profiling and program search.
+
+The rest of this essay follows that gap downward.
+
+By the end, you should be able to look at a communication path in a distributed ML system and separate four questions: what state transition the application wants, which algorithm realizes it, how that algorithm maps onto the machine, and whether the collective is still the right abstraction for the workload.
+
+## Overview
+
+This article follows one request—“put the reduced value on every rank”—down through the layers that make it real:
+
+1. **[The contract](#the-contract-what-allreduce-means).** What a collective specifies, and what it deliberately leaves open.
+2. **[The machine](#from-a-collective-to-a-machine).** Algorithms, topology, chunking, protocols, GPU resources, and why a faster collective can make the application slower.
+3. **[When the workload shapes communication](#when-the-workload-shapes-communication).** Mixture-of-experts, DeepEP, NVSHMEM, and NCCL’s device-side APIs.
+4. **[Optimizing the mapping](#optimizing-the-mapping).** Where solvers, compilers, autotuners, and coding agents fit—and where each stops.
+
+## The Contract: What AllReduce Means
+
+It helps to forget networks for a moment.
+
+Imagine four ranks, each holding one shard:
+
+```text
+Rank 0: [A]
+Rank 1: [B]
+Rank 2: [C]
+Rank 3: [D]
+```
+
+If the next computation needs the complete value on every rank, the desired state is:
+
+```text
+Rank 0: [A B C D]
+Rank 1: [A B C D]
+Rank 2: [A B C D]
+Rank 3: [A B C D]
+```
+
+That is an **AllGather**.
+
+Nothing in that definition says how `A`, `B`, `C` and `D` should move. They might circulate around a ring, travel through a tree, or follow some topology-specific schedule. AllGather only describes the result.
+
+The other familiar [NCCL collectives](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html) work the same way. AllReduce leaves every rank with the reduction. ReduceScatter leaves each rank with one reduced shard. AllToAll redistributes different parts of each input to different destinations.
+
+```text
+ALLGATHER
+
+before            ── gather shards ──▶   after
+
+R0  [ A ]                                R0  [ A B C D ]
+R1  [ B ]                                R1  [ A B C D ]
+R2  [ C ]                                R2  [ A B C D ]
+R3  [ D ]                                R3  [ A B C D ]
+
+
+ALLREDUCE
+
+before            ── reduce + copy ──▶   after
+
+R0  [ A ]                                R0  [ Σ ]
+R1  [ B ]                                R1  [ Σ ]
+R2  [ C ]                                R2  [ Σ ]
+R3  [ D ]                                R3  [ Σ ]
+
+Σ = A + B + C + D
+
+
+REDUCESCATTER
+
+before            ── reduce + shard ──▶  after
+
+R0  [ a0 a1 a2 a3 ]                     R0  [ Σ0 ]
+R1  [ b0 b1 b2 b3 ]                     R1  [ Σ1 ]
+R2  [ c0 c1 c2 c3 ]                     R2  [ Σ2 ]
+R3  [ d0 d1 d2 d3 ]                     R3  [ Σ3 ]
+
+Σj = aj + bj + cj + dj
+
+
+ALLTOALL
+
+before            ── by destination ──▶  after
+
+R0  [ a0 a1 a2 a3 ]                     R0  [ a0 b0 c0 d0 ]
+R1  [ b0 b1 b2 b3 ]                     R1  [ a1 b1 c1 d1 ]
+R2  [ c0 c1 c2 c3 ]                     R2  [ a2 b2 c2 d2 ]
+R3  [ d0 d1 d2 d3 ]                     R3  [ a3 b3 c3 d3 ]
+```
+
+*Collectives specify the distributed state after the operation, not the route used to get there.*
+
+The operation names tell us what state to produce. The implementation is still almost completely open.
+
+These operations are often introduced as a list of fundamental primitives. That framing is a little misleading. There is nothing uniquely fundamental about exactly this set. They are common distributed-state transformations that became worth naming and optimizing aggressively.
+
+A program can also send directly to another process, manipulate remote memory, or build an application-specific protocol.
+
+The advantage of a collective is that it tells the runtime more. If the application says “AllReduce this buffer,” the runtime knows the final state it must produce and remains free to choose the path there.
+
+The same boundary tells us what NCCL knows.
+
+In `ncclAllReduce`, `sendbuff` and `recvbuff` identify memory. `count` and `datatype` describe the values. `op` supplies the reduction. `comm` identifies the participating ranks.
+
+`stream` is where the accelerator execution model appears.
+
+A CUDA stream is an ordered queue of GPU work. A program can enqueue computation, then communication, then more computation. Work on separate streams may overlap when dependencies and hardware resources permit.
+
+The framework above NCCL knows much more. PyTorch may know that a buffer contains gradients. FSDP may know that a parameter is sharded. The framework may know which layer produced the data and which operation will consume it next.
+
+NCCL does not need any of that to execute AllReduce.
+
+The collective interface barely looks NVIDIA-specific because AllReduce and its relatives long predate modern GPU training. The NVIDIA-specific work begins lower down, when that abstract operation has to run efficiently on a particular machine.
+
+## From a Collective to a Machine
+
+One way to implement AllReduce is a ring.
+
+Suppose four ranks each hold four chunks:
+
+```text
+R0: A0 A1 A2 A3
+R1: B0 B1 B2 B3
+R2: C0 C1 C2 C3
+R3: D0 D1 D2 D3
+```
+
+Rather than animate all four chunks at once, follow chunk 0.
+
+```text
+RING ALLREDUCE · FOLLOW CHUNK 0
+
+other chunks move concurrently around the same ring
+
+REDUCESCATTER  ·  reduce as the chunk moves
+
+      R0 ─────▶ R1 ─────▶ R2 ─────▶ R3
+
+0     ╔════╗
+R0    ║ A0 ║
+      ╚════╝
+R1    [ B0 ]
+R2    [ C0 ]
+R3    [ D0 ]
+
+1
+R0
+R1    ╔═════════╗
+      ║ A0 + B0 ║
+      ╚═════════╝
+R2    [ C0 ]
+R3    [ D0 ]
+
+2
+R0
+R1
+R2    ╔══════════════╗
+      ║ A0 + B0 + C0 ║
+      ╚══════════════╝
+R3    [ D0 ]
+
+3
+R0
+R1
+R2
+R3    ╔══════════════════╗
+      ║ A0+B0+C0+D0 = Σ0 ║
+      ╚══════════════════╝
+
+ALLGATHER  ·  copy the completed chunk
+
+      R3 ─────▶ R0 ─────▶ R1 ─────▶ R2
+
+4
+R0    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R1
+R2
+R3    [ Σ0 ]
+
+5
+R0    [ Σ0 ]
+R1    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R2
+R3    [ Σ0 ]
+
+6
+R0    [ Σ0 ]
+R1    [ Σ0 ]
+R2    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R3    [ Σ0 ]
+```
+
+*One chunk is reduced as it circulates, then the completed chunk is copied around the ring. Other chunks make the same journey concurrently.*
+
+Tracing one chunk is enough to see the algorithm; the performance question begins when we ask how all of those concurrent journeys map onto a real machine.
+
+For a tensor containing \(N\) bytes across \(P\) ranks, each rank moves roughly
+
+\[
+2\frac{P-1}{P}N
+\]
+
+bytes. As \(P\) grows, this approaches \(2N\). For large transfers, Ring uses link bandwidth very efficiently.
+
+AllReduce is old, and Ring AllReduce is old. The remaining choices become visible as soon as the message size changes.
+
+A useful toy model is
+
+\[
+T \approx s\alpha + \frac{B}{\beta}
+\]
+
+where \(s\) is the number of dependent communication steps, \(\alpha\) captures startup cost, \(B\) is the number of bytes moved, and \(\beta\) is effective bandwidth.
+
+For a few gigabytes, bandwidth dominates. For a few kilobytes, there is little data to move and the number of communication stages matters much more.
+
+A tree can reach all participants in fewer dependent stages than a ring. This may be a better trade in a latency-sensitive regime. NCCL therefore contains several algorithm families rather than a single universal implementation. It also has multiple protocol families, including Simple, LL and LL128; the [NCCL configuration reference](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html) exposes many of these controls.
+
+That comparison still assumes an unrealistically tidy machine.
+
+So far, `R0 → R1` has just been an arrow.
+
+On an actual cluster it might be an NVLink transfer. Another pair of ranks may cross PCIe. A transfer leaving the server goes through a NIC and an InfiniBand or RoCE fabric. [GPUDirect RDMA](https://developer.nvidia.com/gpudirect) lets a suitable device access GPU memory directly rather than staging the payload through CPU memory.
+
+```text
+PHYSICAL PLACEMENT
+
+╔═ node A ═════════════════════╗      ╔═ node B ═════════════════════╗
+║  R0     R1     R2     R3     ║      ║  R4     R5     R6     R7     ║
+╚══════════════════════════════╝      ╚══════════════════════════════╝
+                    └──────── fabric ────────┘
+
+A. alternating ranks
+
+R0(A) ─▶ R4(B) ─▶ R1(A) ─▶ R5(B) ─▶ R2(A) ─▶ R6(B) ─▶ R3(A) ─▶ R7(B)
+
+Every hop changes node; the closing R7(B) ─▶ R0(A) does too.
+fabric crossings: 8
+
+
+B. topology-aware ordering
+
+R0(A) ─▶ R1(A) ─▶ R2(A) ─▶ R3(A) ─▶ R4(B) ─▶ R5(B) ─▶ R6(B) ─▶ R7(B)
+
+Only R3(A) ─▶ R4(B) and the closing R7(B) ─▶ R0(A) cross.
+fabric crossings: 2
+```
+
+*The logical ring is cheap or expensive depending on where its adjacent ranks physically live.*
+
+The rank graph and the machine graph are different objects.
+
+Hierarchical algorithms follow directly from this topology. If communication inside a node is cheap and communication between nodes is expensive, doing more work locally before crossing the global boundary makes sense.
+
+There can be structure within the node too. Some GPUs have better paths to particular NICs. Multiple network rails may exist without being equally convenient from every GPU.
+
+Choosing Ring and a sensible rank ordering still does not produce an executable implementation.
+
+NCCL must decide how the tensor is chunked and pipelined, how many communication channels to use, which protocol and transport to select, and how much GPU execution capacity communication should consume.
+
+Even the reduction can happen in different places.
+
+A straightforward implementation could receive data, write it to memory, reduce it, then read and forward the result. A specialized kernel can combine some of those steps. On supported systems, NVLink SHARP can move some reduction work into the NVSwitch domain instead of treating the fabric as a passive pipe.
+
+“Ring AllReduce” names much less of the implementation than it first appears to.
+
+```text
+semantic request        algorithm          topology mapping
+┌───────────────┐       ┌─────────┐        ┌──────────────────────┐
+│   AllReduce   │──────▶│  Ring   │───────▶│ R0 ─▶ R1 ─▶ R2 ─▶ R3 │
+└───────────────┘       └─────────┘        └─────────┬───────────┘
+                                                     │ chunk + stripe
+                                                     ▼
+                                          execution plan
+                                          ┌──────────────────────┐
+                                          │ ch0  [00][01][02]    │
+                                          │ ch1  [10][11][12]    │
+                                          └──────────┬───────────┘
+                                                     │ lower
+                                                     ▼
+                                          SMs ↔ HBM ↔ NVLink
+                                                     ↕
+                                                NIC ↔ fabric
+```
+
+*“AllReduce” is progressively resolved into an algorithm, a topology mapping, an execution plan, and finally hardware activity.*
+
+By the time bytes move, the original semantic request has accumulated a large number of machine-specific decisions.
+
+The execution plan shares the machine with the model.
+
+During backpropagation, frameworks often start communicating gradients before backward has finished. On a timeline, much of that communication can appear hidden beneath compute.
+
+```text
+SAME TIME INTERVAL
+
+time ───────────────────────────────────────────────▶
+
+compute        █████████████████████████████
+communication       █████████████████
+
+                           │ zoom into the overlap
+                           ▼
+
+compute        ───────────▶ SMs
+        └─────────────────▶ HBM
+
+communication  ───────────▶ SMs
+        ├─────────────────▶ HBM
+        └─────────────────▶ NIC / fabric
+
+Overlap in time does not create separate hardware.
+
+Meta GEM example · reported SM use for an AllGather path
+
+conventional   ║░░░░░░░░░░░░░░░░░░░░░░░  24 SMs
+NCCLX          ║▓                           N~1 SM
+                         │
+                         └─ pure transfer shifts toward Copy Engine / RDMA
+```
+
+*Communication can disappear from the critical-path timeline and still compete with the model for SMs and memory bandwidth.*
+
+Meta described this while scaling its GEM recommendation model. In the configuration discussed in the post, some communication collectives occupied about 24 SMs while model computation ran alongside them. Meta reported up to a 15% efficiency hit from this interference. For pure data movement, its NCCLX path moved more work toward Copy Engines inside the node and RDMA across nodes, reducing the reported SM footprint of an AllGather from roughly 24 to 1 ([Meta GEM](https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/)).
+
+Suppose one AllGather implementation takes 90 μs and another takes 100 μs. If the 90 μs version slows the concurrent matrix multiplication by 40 μs, it loses.
+
+The fastest isolated collective is not necessarily the one that produces the fastest training step.
+
+## When the Workload Shapes Communication
+
+Dense data parallelism is almost ideal for a collective library. The same ranks repeatedly communicate similarly shaped gradient buffers. The pattern is known and regular.
+
+Expert parallelism is different.
+
+```text
+DENSE DATA PARALLEL                         EXPERT PARALLEL
+
+same peers, same-shaped buffers             destinations follow routing
+
+R0  [ gggg ] ─┐                             R0  [ t0 t1 t2 t3 ]
+R1  [ gggg ] ─┼── AllReduce ──▶ [ ΣΣΣΣ ]        ├── t0,t2 ──▶ expert 3
+R2  [ gggg ] ─┼── on every rank                  ├── t1    ──▶ expert 7
+R3  [ gggg ] ─┘                                   └── t3    ──▶ expert 11
+
+                                                expert compute
+                                                     │
+                                                     ▼
+                                                combine results
+
+regular                                             routed + uneven
+```
+
+*Dense data parallelism repeats a regular collective pattern; expert parallelism turns model routing decisions into uneven communication.*
+
+Calling the right-hand side an AllToAll describes the movement, but loses information about why those transfers exist and what happens between dispatch and combine.
+
+The number of tokens sent to each peer changes with routing decisions. An expert that receives more traffic also receives more computation. Routing information is useful again when the results return.
+
+During large-batch training or prefill, sustained throughput matters heavily. During autoregressive decode, messages become smaller and latency matters more.
+
+DeepEP exposes **dispatch** and **combine** directly. Its current V2 interface carries routing information through the operation and is built specifically around expert-parallel communication. The V2 rewrite also moved its primary backend from NVSHMEM to NCCL GIN ([DeepEP](https://github.com/deepseek-ai/DeepEP)).
+
+A collective such as AllReduce tells the runtime a lot about the desired global operation. In return, the application gives up control over individual transfers.
+
+At a lower level, a program can say something closer to:
+
+```text
+put these bytes there
+signal that peer
+wait until these transfers are complete
+continue computing
+```
+
+NVSHMEM exposes this kind of GPU-oriented one-sided communication model. It provides a global address space spanning GPU memory and allows fine-grained operations to be initiated from GPU code, CPU code, or CUDA streams ([NVSHMEM](https://developer.nvidia.com/nvshmem)).
+
+For gradient reduction, `AllReduce` is a very good interface precisely because it tells the runtime what global operation is wanted. Lower-level control becomes useful when routing, synchronization and computation no longer line up cleanly with one standard collective.
+
+NCCL itself now exposes more of that layer.
+
+Starting with NCCL 2.28, NVIDIA added device-side communication APIs callable from CUDA kernels ([NCCL device-initiated communication](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html)).
+
+The current Device API includes mechanisms for peer memory access, hardware multicast/reduction, GPU-initiated networking, and lower-level reduce/copy operations. These pieces can be used to construct custom or fused communication kernels rather than always invoking a complete host-launched collective ([NCCL Device API](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html)).
+
+```text
+FAMILIAR NCCL PATH
+
+                                      NCCL collective
+host ── ncclAllReduce() ──▶ ┏━━━━━━━━━━━━━━━━━━━━━━━┓
+                            ┃ algorithm + schedule ┃
+                            ┗━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+OPEN ONE LAYER
+
+CUDA kernel
+   │
+   ├── load / store ───────▶ peer GPU memory                LSA
+   │
+   ├── put / get / signal ─▶ NIC ── fabric ──▶ remote GPU   GIN
+   │
+   └── multicast / reduce ─▶ NVSwitch reduction domain      Multimem
+
+The named collective remains available; device code can now reach below it.
+```
+
+*Classic NCCL asks for a complete collective; the Device API also lets GPU code work with lower-level communication mechanisms directly.*
+
+That is the layer a specialized runtime such as DeepEP can use when a named collective is too coarse.
+
+DeepEP provides a neat historical snapshot. Its first version used NVSHMEM for lower-level communication. NCCL later gained richer device-side mechanisms, including GIN. DeepEP V2 now uses NCCL GIN as its main backend ([DeepEP](https://github.com/deepseek-ai/DeepEP)).
+
+DeepEP V2 therefore shows NCCL in a different role: programmable enough to sit underneath a specialized communication library rather than only implementing named collectives itself.
+
+Similar pressure appears elsewhere. Pipeline parallelism moves activations between particular stages. Context parallelism ties communication to how sequence state is partitioned. Disaggregated inference may move KV state between machines with different roles.
+
+Collectives remain useful throughout these systems, alongside lower-level interfaces for workloads that need more control.
+
+The optimizer now has choices at several different levels.
+
+## Optimizing the Mapping
+
+Start with the cleanest version of the problem.
+
+We know the collective semantics. We know the topology. We know which data dependencies are legal and have some model of link cost.
+
+A human does not necessarily need to invent the schedule.
+
+SCCL formalized collective generation as a synthesis problem. Given semantics and topology, it uses an SMT solver to search for schedules along a latency/bandwidth Pareto frontier ([SCCL paper](https://arxiv.org/abs/2008.08708)).
+
+As the search grows, exact synthesis becomes harder. TACCL lets a human provide a higher-level communication sketch and solves the lower-level routing and scheduling around it ([TACCL, NSDI 2023](https://www.usenix.org/conference/nsdi23/presentation/shah)).
+
+The resulting schedule still has to become a GPU program.
+
+GC3 addresses that layer with a small language for collective communication and a compiler that lowers the program into executable GPU communication ([GC3 paper](https://arxiv.org/abs/2201.11840)).
+
+CoCoNet widens the representation further by putting computation and communication into the same intermediate program. That makes transformations such as splitting, reordering, overlap and fusion possible across the boundary between them ([CoCoNeT paper](https://arxiv.org/abs/2105.05720)).
+
+The Meta example already showed why this larger representation matters: optimizing communication in isolation can produce a worse application-level result. A compiler that sees both sides has more room to trade resources across them.
+
+Near the hardware, however, cost models get messy.
+
+Kernel occupancy, memory traffic, protocol choice and concurrent work interact in ways that may be easier to measure than to predict.
+
+AutoCCL searches NCCL configuration empirically and includes an online mode that profiles communication while compute is running. Its results show why the distinction matters: a configuration chosen with concurrent compute can differ from one chosen from communication behavior alone ([AutoCCL, NSDI 2025](https://www.usenix.org/conference/nsdi25/presentation/xu-guanbin)).
+
+An empirical tuner can use the machine itself as the cost model.
+
+It still assumes somebody decided in advance what can change. The tuner searches channel counts, protocols or other parameters inside a known space.
+
+A coding agent can, at least in principle, alter the program itself.
+
+CUCo is a recent experiment in that direction. It first applies structured transformations toward device-initiated communication, then allows an LLM-based optimizer to modify bounded regions of CUDA code. Candidates are compiled, checked across multiple GPUs and benchmarked. The paper reports up to 1.57× end-to-end improvement on its evaluated workloads ([CUCo paper](https://arxiv.org/abs/2603.02376)).
+
+The surrounding system makes that search tractable. Distributed communication gives unusually concrete feedback: code can fail to compile, produce the wrong values, hang, or run slowly. A candidate that survives correctness checks can be measured on the target machine.
+
+There is little reason to ask an agent to rediscover what a solver or compiler already knows. CUCo gives the model communication primitives, structured transformations, bounded edit regions, compilation, correctness tests and benchmarking.
+
+These approaches address different parts of the design space. Clean routing and scheduling problems admit mathematical optimization. Structured communication programs give compilers something to transform. Hardware-specific choices can be measured. Program search becomes useful when the implementation itself may need to change.
+
+None of those methods solves the whole mapping. A bandwidth-efficient ring can still lose on latency; a good logical schedule can map badly onto the physical topology; a fast communication kernel can slow the model running beside it; and a well-implemented collective can still be an awkward fit for traffic determined dynamically by routing.
+
+The original NCCL call remains small:
+
+```c
+ncclAllReduce(
+    sendbuff,
+    recvbuff,
+    count,
+    datatype,
+    op,
+    comm,
+    stream
+);
+```
+
+Underneath it might sit a ring or a tree, a topology-aware rank order, several channels, different protocols, GPU kernels, RDMA and switch-assisted reduction. The communication may overlap model compute and compete with it for resources.
+
+Or the application may go below the collective, carry routing information into a specialized dispatch operation, and initiate network communication from inside a GPU kernel.
+
+AllReduce still means exactly what it did at the start: produce the reduced value on every rank.
+
+Everything else in this essay is the machinery needed to make that statement true quickly on a real machine.
+
+---
+
+## References
+
+### Core documentation and implementations
+
+- [PyTorch `torch.distributed` documentation](https://docs.pytorch.org/docs/stable/distributed)
+- NVIDIA, [NCCL: Collective Communication Functions](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/colls.html)
+- NVIDIA, [NCCL: Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html)
+- NVIDIA, [NCCL: Environment Variables / algorithm and protocol controls](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html)
+- NVIDIA, [GPUDirect](https://developer.nvidia.com/gpudirect)
+- NVIDIA, [NVSHMEM](https://developer.nvidia.com/nvshmem)
+- NVIDIA, [NCCL: Device-Initiated Communication](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html)
+- NVIDIA, [NCCL: Device API](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html)
+- DeepSeek, [DeepEP](https://github.com/deepseek-ai/DeepEP)
+- Meta Engineering, [GEM Training: How Meta Doubled the Efficiency of Its LLM-Scale Ads Foundation Model](https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/), 2026
+
+### Collective synthesis, compilation, and optimization
+
+- Cai et al., [*Synthesizing Optimal Collective Algorithms*](https://arxiv.org/abs/2008.08708) — SCCL
+- Shah et al., [*TACCL: Guiding Collective Algorithm Synthesis using Communication Sketches*](https://www.usenix.org/conference/nsdi23/presentation/shah), NSDI 2023
+- Cowan et al., [*GC3: An Optimizing Compiler for GPU Collective Communication*](https://arxiv.org/abs/2201.11840)
+- Jangda et al., [*Breaking the Computation and Communication Abstraction Barrier in Distributed Machine Learning Workloads*](https://arxiv.org/abs/2105.05720) — CoCoNeT
+- Xu et al., [*AutoCCL: Automated Collective Communication Tuning for Accelerating Distributed and Parallel DNN Training*](https://www.usenix.org/conference/nsdi25/presentation/xu-guanbin), NSDI 2025
+- Varadharajan et al., [*CUCo: An Agentic Framework for Compute and Communication Co-design*](https://arxiv.org/abs/2603.02376), 2026
