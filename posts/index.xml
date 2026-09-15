@@ -10,7 +10,463 @@
 <atom:link href="https://www.arjunsriva.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Wed, 02 Sep 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 08 Sep 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>AllReduce, All the Way Down</title>
+  <link>https://www.arjunsriva.com/posts/allreduce-all-the-way-down/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>Two GPUs finish a backward pass with different gradients.</p>
+<pre class="text"><code>GPU 0: g₀
+GPU 1: g₁</code></pre>
+<p>If they hold copies of the same model, they cannot take independent optimizer steps. Each needs the same combined gradient:</p>
+<pre class="text"><code>GPU 0: g₀ + g₁
+GPU 1: g₀ + g₁</code></pre>
+<p>We call this <strong>AllReduce</strong>.</p>
+<p>At the <a href="https://docs.pytorch.org/docs/stable/distributed">PyTorch <code>torch.distributed</code></a> level, it can look like one line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">dist.all_reduce(x)</span></code></pre></div></div>
+<p>On NVIDIA GPUs, that call will often reach NCCL. Its C API is roughly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1">ncclAllReduce<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span></span>
+<span id="cb4-2">    sendbuff<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-3">    recvbuff<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-4">    count<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-5">    datatype<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-6">    op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-7">    comm<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb4-8">    stream</span>
+<span id="cb4-9"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span></code></pre></div></div>
+<p>There is no model in that call. No gradient. No layer number. Nothing says we are training a neural network.</p>
+<p>NCCL gets buffers, a datatype, a reduction, a group of participants, and a CUDA stream; the <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/colls.html">collective API</a> is deliberately small.</p>
+<p>From that small request it may have to choose a collective algorithm, map it onto NVLink, PCIe and a network fabric, divide the tensor into chunks, pipeline those chunks through several channels, and run communication while the model is using the same GPU.</p>
+<p>Newer workloads stretch the interface further. Expert parallelism ties communication to token routing. NCCL now exposes communication primitives directly inside CUDA kernels. DeepEP builds expert-specific communication on top of those lower-level mechanisms. Other systems try to automate pieces of the mapping with solvers, compilers, profiling and program search.</p>
+<p>The rest of this essay follows that gap downward.</p>
+<p>By the end, you should be able to look at a communication path in a distributed ML system and separate four questions: what state transition the application wants, which algorithm realizes it, how that algorithm maps onto the machine, and whether the collective is still the right abstraction for the workload.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This article follows one request—“put the reduced value on every rank”—down through the layers that make it real:</p>
+<ol type="1">
+<li><strong>The contract.</strong> What a collective specifies, and what it deliberately leaves open.</li>
+<li><strong>The machine.</strong> Algorithms, topology, chunking, protocols, GPU resources, and why a faster collective can make the application slower.</li>
+<li><strong>When the workload shapes communication.</strong> Mixture-of-experts, DeepEP, NVSHMEM, and NCCL’s device-side APIs.</li>
+<li><strong>Optimizing the mapping.</strong> Where solvers, compilers, autotuners, and coding agents fit—and where each stops.</li>
+</ol>
+</section>
+<section id="the-contract-what-allreduce-means" class="level2">
+<h2 class="anchored" data-anchor-id="the-contract-what-allreduce-means">The Contract: What AllReduce Means</h2>
+<p>It helps to forget networks for a moment.</p>
+<p>Imagine four ranks, each holding one shard:</p>
+<pre class="text"><code>Rank 0: [A]
+Rank 1: [B]
+Rank 2: [C]
+Rank 3: [D]</code></pre>
+<p>If the next computation needs the complete value on every rank, the desired state is:</p>
+<pre class="text"><code>Rank 0: [A B C D]
+Rank 1: [A B C D]
+Rank 2: [A B C D]
+Rank 3: [A B C D]</code></pre>
+<p>That is an <strong>AllGather</strong>.</p>
+<p>Nothing in that definition says how <code>A</code>, <code>B</code>, <code>C</code> and <code>D</code> should move. They might circulate around a ring, travel through a tree, or follow some topology-specific schedule. AllGather only describes the result.</p>
+<p>The other familiar <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html">NCCL collectives</a> work the same way. AllReduce leaves every rank with the reduction. ReduceScatter leaves each rank with one reduced shard. AllToAll redistributes different parts of each input to different destinations.</p>
+<pre class="text"><code>ALLGATHER
+
+before            ── gather shards ──▶   after
+
+R0  [ A ]                                R0  [ A B C D ]
+R1  [ B ]                                R1  [ A B C D ]
+R2  [ C ]                                R2  [ A B C D ]
+R3  [ D ]                                R3  [ A B C D ]
+
+
+ALLREDUCE
+
+before            ── reduce + copy ──▶   after
+
+R0  [ A ]                                R0  [ Σ ]
+R1  [ B ]                                R1  [ Σ ]
+R2  [ C ]                                R2  [ Σ ]
+R3  [ D ]                                R3  [ Σ ]
+
+Σ = A + B + C + D
+
+
+REDUCESCATTER
+
+before            ── reduce + shard ──▶  after
+
+R0  [ a0 a1 a2 a3 ]                     R0  [ Σ0 ]
+R1  [ b0 b1 b2 b3 ]                     R1  [ Σ1 ]
+R2  [ c0 c1 c2 c3 ]                     R2  [ Σ2 ]
+R3  [ d0 d1 d2 d3 ]                     R3  [ Σ3 ]
+
+Σj = aj + bj + cj + dj
+
+
+ALLTOALL
+
+before            ── by destination ──▶  after
+
+R0  [ a0 a1 a2 a3 ]                     R0  [ a0 b0 c0 d0 ]
+R1  [ b0 b1 b2 b3 ]                     R1  [ a1 b1 c1 d1 ]
+R2  [ c0 c1 c2 c3 ]                     R2  [ a2 b2 c2 d2 ]
+R3  [ d0 d1 d2 d3 ]                     R3  [ a3 b3 c3 d3 ]</code></pre>
+<p><em>Collectives specify the distributed state after the operation, not the route used to get there.</em></p>
+<p>The operation names tell us what state to produce. The implementation is still almost completely open.</p>
+<p>These operations are often introduced as a list of fundamental primitives. That framing is a little misleading. There is nothing uniquely fundamental about exactly this set. They are common distributed-state transformations that became worth naming and optimizing aggressively.</p>
+<p>A program can also send directly to another process, manipulate remote memory, or build an application-specific protocol.</p>
+<p>The advantage of a collective is that it tells the runtime more. If the application says “AllReduce this buffer,” the runtime knows the final state it must produce and remains free to choose the path there.</p>
+<p>The same boundary tells us what NCCL knows.</p>
+<p>In <code>ncclAllReduce</code>, <code>sendbuff</code> and <code>recvbuff</code> identify memory. <code>count</code> and <code>datatype</code> describe the values. <code>op</code> supplies the reduction. <code>comm</code> identifies the participating ranks.</p>
+<p><code>stream</code> is where the accelerator execution model appears.</p>
+<p>A CUDA stream is an ordered queue of GPU work. A program can enqueue computation, then communication, then more computation. Work on separate streams may overlap when dependencies and hardware resources permit.</p>
+<p>The framework above NCCL knows much more. PyTorch may know that a buffer contains gradients. FSDP may know that a parameter is sharded. The framework may know which layer produced the data and which operation will consume it next.</p>
+<p>NCCL does not need any of that to execute AllReduce.</p>
+<p>The collective interface barely looks NVIDIA-specific because AllReduce and its relatives long predate modern GPU training. The NVIDIA-specific work begins lower down, when that abstract operation has to run efficiently on a particular machine.</p>
+</section>
+<section id="from-a-collective-to-a-machine" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-collective-to-a-machine">From a Collective to a Machine</h2>
+<p>One way to implement AllReduce is a ring.</p>
+<p>Suppose four ranks each hold four chunks:</p>
+<pre class="text"><code>R0: A0 A1 A2 A3
+R1: B0 B1 B2 B3
+R2: C0 C1 C2 C3
+R3: D0 D1 D2 D3</code></pre>
+<p>Rather than animate all four chunks at once, follow chunk 0.</p>
+<pre class="text"><code>RING ALLREDUCE · FOLLOW CHUNK 0
+
+other chunks move concurrently around the same ring
+
+REDUCESCATTER  ·  reduce as the chunk moves
+
+      R0 ─────▶ R1 ─────▶ R2 ─────▶ R3
+
+0     ╔════╗
+R0    ║ A0 ║
+      ╚════╝
+R1    [ B0 ]
+R2    [ C0 ]
+R3    [ D0 ]
+
+1
+R0
+R1    ╔═════════╗
+      ║ A0 + B0 ║
+      ╚═════════╝
+R2    [ C0 ]
+R3    [ D0 ]
+
+2
+R0
+R1
+R2    ╔══════════════╗
+      ║ A0 + B0 + C0 ║
+      ╚══════════════╝
+R3    [ D0 ]
+
+3
+R0
+R1
+R2
+R3    ╔══════════════════╗
+      ║ A0+B0+C0+D0 = Σ0 ║
+      ╚══════════════════╝
+
+ALLGATHER  ·  copy the completed chunk
+
+      R3 ─────▶ R0 ─────▶ R1 ─────▶ R2
+
+4
+R0    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R1
+R2
+R3    [ Σ0 ]
+
+5
+R0    [ Σ0 ]
+R1    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R2
+R3    [ Σ0 ]
+
+6
+R0    [ Σ0 ]
+R1    [ Σ0 ]
+R2    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R3    [ Σ0 ]</code></pre>
+<p><em>One chunk is reduced as it circulates, then the completed chunk is copied around the ring. Other chunks make the same journey concurrently.</em></p>
+<p>Tracing one chunk is enough to see the algorithm; the performance question begins when we ask how all of those concurrent journeys map onto a real machine.</p>
+<p>For a tensor containing (N) bytes across (P) ranks, each rank moves roughly</p>
+<p>[ 2N ]</p>
+<p>bytes. As (P) grows, this approaches (2N). For large transfers, Ring uses link bandwidth very efficiently.</p>
+<p>AllReduce is old, and Ring AllReduce is old. The remaining choices become visible as soon as the message size changes.</p>
+<p>A useful toy model is</p>
+<p>[ T s+ ]</p>
+<p>where (s) is the number of dependent communication steps, () captures startup cost, (B) is the number of bytes moved, and () is effective bandwidth.</p>
+<p>For a few gigabytes, bandwidth dominates. For a few kilobytes, there is little data to move and the number of communication stages matters much more.</p>
+<p>A tree can reach all participants in fewer dependent stages than a ring. This may be a better trade in a latency-sensitive regime. NCCL therefore contains several algorithm families rather than a single universal implementation. It also has multiple protocol families, including Simple, LL and LL128; the <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NCCL configuration reference</a> exposes many of these controls.</p>
+<p>That comparison still assumes an unrealistically tidy machine.</p>
+<p>So far, <code>R0 → R1</code> has just been an arrow.</p>
+<p>On an actual cluster it might be an NVLink transfer. Another pair of ranks may cross PCIe. A transfer leaving the server goes through a NIC and an InfiniBand or RoCE fabric. <a href="https://developer.nvidia.com/gpudirect">GPUDirect RDMA</a> lets a suitable device access GPU memory directly rather than staging the payload through CPU memory.</p>
+<pre class="text"><code>PHYSICAL PLACEMENT
+
+╔═ node A ═════════════════════╗      ╔═ node B ═════════════════════╗
+║  R0     R1     R2     R3     ║      ║  R4     R5     R6     R7     ║
+╚══════════════════════════════╝      ╚══════════════════════════════╝
+                    └──────── fabric ────────┘
+
+A. alternating ranks
+
+R0(A) ─▶ R4(B) ─▶ R1(A) ─▶ R5(B) ─▶ R2(A) ─▶ R6(B) ─▶ R3(A) ─▶ R7(B)
+
+Every hop changes node; the closing R7(B) ─▶ R0(A) does too.
+fabric crossings: 8
+
+
+B. topology-aware ordering
+
+R0(A) ─▶ R1(A) ─▶ R2(A) ─▶ R3(A) ─▶ R4(B) ─▶ R5(B) ─▶ R6(B) ─▶ R7(B)
+
+Only R3(A) ─▶ R4(B) and the closing R7(B) ─▶ R0(A) cross.
+fabric crossings: 2</code></pre>
+<p><em>The logical ring is cheap or expensive depending on where its adjacent ranks physically live.</em></p>
+<p>The rank graph and the machine graph are different objects.</p>
+<p>Hierarchical algorithms follow directly from this topology. If communication inside a node is cheap and communication between nodes is expensive, doing more work locally before crossing the global boundary makes sense.</p>
+<p>There can be structure within the node too. Some GPUs have better paths to particular NICs. Multiple network rails may exist without being equally convenient from every GPU.</p>
+<p>Choosing Ring and a sensible rank ordering still does not produce an executable implementation.</p>
+<p>NCCL must decide how the tensor is chunked and pipelined, how many communication channels to use, which protocol and transport to select, and how much GPU execution capacity communication should consume.</p>
+<p>Even the reduction can happen in different places.</p>
+<p>A straightforward implementation could receive data, write it to memory, reduce it, then read and forward the result. A specialized kernel can combine some of those steps. On supported systems, NVLink SHARP can move some reduction work into the NVSwitch domain instead of treating the fabric as a passive pipe.</p>
+<p>“Ring AllReduce” names much less of the implementation than it first appears to.</p>
+<pre class="text"><code>semantic request        algorithm          topology mapping
+┌───────────────┐       ┌─────────┐        ┌──────────────────────┐
+│   AllReduce   │──────▶│  Ring   │───────▶│ R0 ─▶ R1 ─▶ R2 ─▶ R3 │
+└───────────────┘       └─────────┘        └─────────┬───────────┘
+                                                     │ chunk + stripe
+                                                     ▼
+                                          execution plan
+                                          ┌──────────────────────┐
+                                          │ ch0  [00][01][02]    │
+                                          │ ch1  [10][11][12]    │
+                                          └──────────┬───────────┘
+                                                     │ lower
+                                                     ▼
+                                          SMs ↔ HBM ↔ NVLink
+                                                     ↕
+                                                NIC ↔ fabric</code></pre>
+<p><em>“AllReduce” is progressively resolved into an algorithm, a topology mapping, an execution plan, and finally hardware activity.</em></p>
+<p>By the time bytes move, the original semantic request has accumulated a large number of machine-specific decisions.</p>
+<p>The execution plan shares the machine with the model.</p>
+<p>During backpropagation, frameworks often start communicating gradients before backward has finished. On a timeline, much of that communication can appear hidden beneath compute.</p>
+<pre class="text"><code>SAME TIME INTERVAL
+
+time ───────────────────────────────────────────────▶
+
+compute        █████████████████████████████
+communication       █████████████████
+
+                           │ zoom into the overlap
+                           ▼
+
+compute        ───────────▶ SMs
+        └─────────────────▶ HBM
+
+communication  ───────────▶ SMs
+        ├─────────────────▶ HBM
+        └─────────────────▶ NIC / fabric
+
+Overlap in time does not create separate hardware.
+
+Meta GEM example · reported SM use for an AllGather path
+
+conventional   ║░░░░░░░░░░░░░░░░░░░░░░░  24 SMs
+NCCLX          ║▓                           N~1 SM
+                         │
+                         └─ pure transfer shifts toward Copy Engine / RDMA</code></pre>
+<p><em>Communication can disappear from the critical-path timeline and still compete with the model for SMs and memory bandwidth.</em></p>
+<p>Meta described this while scaling its GEM recommendation model. In the configuration discussed in the post, some communication collectives occupied about 24 SMs while model computation ran alongside them. Meta reported up to a 15% efficiency hit from this interference. For pure data movement, its NCCLX path moved more work toward Copy Engines inside the node and RDMA across nodes, reducing the reported SM footprint of an AllGather from roughly 24 to 1 (<a href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/">Meta GEM</a>).</p>
+<p>Suppose one AllGather implementation takes 90 μs and another takes 100 μs. If the 90 μs version slows the concurrent matrix multiplication by 40 μs, it loses.</p>
+<p>The fastest isolated collective is not necessarily the one that produces the fastest training step.</p>
+</section>
+<section id="when-the-workload-shapes-communication" class="level2">
+<h2 class="anchored" data-anchor-id="when-the-workload-shapes-communication">When the Workload Shapes Communication</h2>
+<p>Dense data parallelism is almost ideal for a collective library. The same ranks repeatedly communicate similarly shaped gradient buffers. The pattern is known and regular.</p>
+<p>Expert parallelism is different.</p>
+<pre class="text"><code>DENSE DATA PARALLEL                         EXPERT PARALLEL
+
+same peers, same-shaped buffers             destinations follow routing
+
+R0  [ gggg ] ─┐                             R0  [ t0 t1 t2 t3 ]
+R1  [ gggg ] ─┼── AllReduce ──▶ [ ΣΣΣΣ ]        ├── t0,t2 ──▶ expert 3
+R2  [ gggg ] ─┼── on every rank                  ├── t1    ──▶ expert 7
+R3  [ gggg ] ─┘                                   └── t3    ──▶ expert 11
+
+                                                expert compute
+                                                     │
+                                                     ▼
+                                                combine results
+
+regular                                             routed + uneven</code></pre>
+<p><em>Dense data parallelism repeats a regular collective pattern; expert parallelism turns model routing decisions into uneven communication.</em></p>
+<p>Calling the right-hand side an AllToAll describes the movement, but loses information about why those transfers exist and what happens between dispatch and combine.</p>
+<p>The number of tokens sent to each peer changes with routing decisions. An expert that receives more traffic also receives more computation. Routing information is useful again when the results return.</p>
+<p>During large-batch training or prefill, sustained throughput matters heavily. During autoregressive decode, messages become smaller and latency matters more.</p>
+<p>DeepEP exposes <strong>dispatch</strong> and <strong>combine</strong> directly. Its current V2 interface carries routing information through the operation and is built specifically around expert-parallel communication. The V2 rewrite also moved its primary backend from NVSHMEM to NCCL GIN (<a href="https://github.com/deepseek-ai/DeepEP">DeepEP</a>).</p>
+<p>A collective such as AllReduce tells the runtime a lot about the desired global operation. In return, the application gives up control over individual transfers.</p>
+<p>At a lower level, a program can say something closer to:</p>
+<pre class="text"><code>put these bytes there
+signal that peer
+wait until these transfers are complete
+continue computing</code></pre>
+<p>NVSHMEM exposes this kind of GPU-oriented one-sided communication model. It provides a global address space spanning GPU memory and allows fine-grained operations to be initiated from GPU code, CPU code, or CUDA streams (<a href="https://developer.nvidia.com/nvshmem">NVSHMEM</a>).</p>
+<p>For gradient reduction, <code>AllReduce</code> is a very good interface precisely because it tells the runtime what global operation is wanted. Lower-level control becomes useful when routing, synchronization and computation no longer line up cleanly with one standard collective.</p>
+<p>NCCL itself now exposes more of that layer.</p>
+<p>Starting with NCCL 2.28, NVIDIA added device-side communication APIs callable from CUDA kernels (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html">NCCL device-initiated communication</a>).</p>
+<p>The current Device API includes mechanisms for peer memory access, hardware multicast/reduction, GPU-initiated networking, and lower-level reduce/copy operations. These pieces can be used to construct custom or fused communication kernels rather than always invoking a complete host-launched collective (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html">NCCL Device API</a>).</p>
+<pre class="text"><code>FAMILIAR NCCL PATH
+
+                                      NCCL collective
+host ── ncclAllReduce() ──▶ ┏━━━━━━━━━━━━━━━━━━━━━━━┓
+                            ┃ algorithm + schedule ┃
+                            ┗━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+OPEN ONE LAYER
+
+CUDA kernel
+   │
+   ├── load / store ───────▶ peer GPU memory                LSA
+   │
+   ├── put / get / signal ─▶ NIC ── fabric ──▶ remote GPU   GIN
+   │
+   └── multicast / reduce ─▶ NVSwitch reduction domain      Multimem
+
+The named collective remains available; device code can now reach below it.</code></pre>
+<p><em>Classic NCCL asks for a complete collective; the Device API also lets GPU code work with lower-level communication mechanisms directly.</em></p>
+<p>That is the layer a specialized runtime such as DeepEP can use when a named collective is too coarse.</p>
+<p>DeepEP provides a neat historical snapshot. Its first version used NVSHMEM for lower-level communication. NCCL later gained richer device-side mechanisms, including GIN. DeepEP V2 now uses NCCL GIN as its main backend (<a href="https://github.com/deepseek-ai/DeepEP">DeepEP</a>).</p>
+<p>DeepEP V2 therefore shows NCCL in a different role: programmable enough to sit underneath a specialized communication library rather than only implementing named collectives itself.</p>
+<p>Similar pressure appears elsewhere. Pipeline parallelism moves activations between particular stages. Context parallelism ties communication to how sequence state is partitioned. Disaggregated inference may move KV state between machines with different roles.</p>
+<p>Collectives remain useful throughout these systems, alongside lower-level interfaces for workloads that need more control.</p>
+<p>The optimizer now has choices at several different levels.</p>
+</section>
+<section id="optimizing-the-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="optimizing-the-mapping">Optimizing the Mapping</h2>
+<p>Start with the cleanest version of the problem.</p>
+<p>We know the collective semantics. We know the topology. We know which data dependencies are legal and have some model of link cost.</p>
+<p>A human does not necessarily need to invent the schedule.</p>
+<p>SCCL formalized collective generation as a synthesis problem. Given semantics and topology, it uses an SMT solver to search for schedules along a latency/bandwidth Pareto frontier (<a href="https://arxiv.org/abs/2008.08708">SCCL paper</a>).</p>
+<p>As the search grows, exact synthesis becomes harder. TACCL lets a human provide a higher-level communication sketch and solves the lower-level routing and scheduling around it (<a href="https://www.usenix.org/conference/nsdi23/presentation/shah">TACCL, NSDI 2023</a>).</p>
+<p>The resulting schedule still has to become a GPU program.</p>
+<p>GC3 addresses that layer with a small language for collective communication and a compiler that lowers the program into executable GPU communication (<a href="https://arxiv.org/abs/2201.11840">GC3 paper</a>).</p>
+<p>CoCoNet widens the representation further by putting computation and communication into the same intermediate program. That makes transformations such as splitting, reordering, overlap and fusion possible across the boundary between them (<a href="https://arxiv.org/abs/2105.05720">CoCoNeT paper</a>).</p>
+<p>The Meta example already showed why this larger representation matters: optimizing communication in isolation can produce a worse application-level result. A compiler that sees both sides has more room to trade resources across them.</p>
+<p>Near the hardware, however, cost models get messy.</p>
+<p>Kernel occupancy, memory traffic, protocol choice and concurrent work interact in ways that may be easier to measure than to predict.</p>
+<p>AutoCCL searches NCCL configuration empirically and includes an online mode that profiles communication while compute is running. Its results show why the distinction matters: a configuration chosen with concurrent compute can differ from one chosen from communication behavior alone (<a href="https://www.usenix.org/conference/nsdi25/presentation/xu-guanbin">AutoCCL, NSDI 2025</a>).</p>
+<p>An empirical tuner can use the machine itself as the cost model.</p>
+<p>It still assumes somebody decided in advance what can change. The tuner searches channel counts, protocols or other parameters inside a known space.</p>
+<p>A coding agent can, at least in principle, alter the program itself.</p>
+<p>CUCo is a recent experiment in that direction. It first applies structured transformations toward device-initiated communication, then allows an LLM-based optimizer to modify bounded regions of CUDA code. Candidates are compiled, checked across multiple GPUs and benchmarked. The paper reports up to 1.57× end-to-end improvement on its evaluated workloads (<a href="https://arxiv.org/abs/2603.02376">CUCo paper</a>).</p>
+<p>The surrounding system makes that search tractable. Distributed communication gives unusually concrete feedback: code can fail to compile, produce the wrong values, hang, or run slowly. A candidate that survives correctness checks can be measured on the target machine.</p>
+<p>There is little reason to ask an agent to rediscover what a solver or compiler already knows. CUCo gives the model communication primitives, structured transformations, bounded edit regions, compilation, correctness tests and benchmarking.</p>
+<p>These approaches address different parts of the design space. Clean routing and scheduling problems admit mathematical optimization. Structured communication programs give compilers something to transform. Hardware-specific choices can be measured. Program search becomes useful when the implementation itself may need to change.</p>
+<p>None of those methods solves the whole mapping. A bandwidth-efficient ring can still lose on latency; a good logical schedule can map badly onto the physical topology; a fast communication kernel can slow the model running beside it; and a well-implemented collective can still be an awkward fit for traffic determined dynamically by routing.</p>
+<p>The original NCCL call remains small:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1">ncclAllReduce<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span></span>
+<span id="cb16-2">    sendbuff<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb16-3">    recvbuff<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb16-4">    count<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb16-5">    datatype<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb16-6">    op<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb16-7">    comm<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span></span>
+<span id="cb16-8">    stream</span>
+<span id="cb16-9"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span></code></pre></div></div>
+<p>Underneath it might sit a ring or a tree, a topology-aware rank order, several channels, different protocols, GPU kernels, RDMA and switch-assisted reduction. The communication may overlap model compute and compete with it for resources.</p>
+<p>Or the application may go below the collective, carry routing information into a specialized dispatch operation, and initiate network communication from inside a GPU kernel.</p>
+<p>AllReduce still means exactly what it did at the start: produce the reduced value on every rank.</p>
+<p>Everything else in this essay is the machinery needed to make that statement true quickly on a real machine.</p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="core-documentation-and-implementations" class="level3">
+<h3 class="anchored" data-anchor-id="core-documentation-and-implementations">Core documentation and implementations</h3>
+<ul>
+<li><a href="https://docs.pytorch.org/docs/stable/distributed">PyTorch <code>torch.distributed</code> documentation</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/colls.html">NCCL: Collective Communication Functions</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html">NCCL: Collective Operations</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NCCL: Environment Variables / algorithm and protocol controls</a></li>
+<li>NVIDIA, <a href="https://developer.nvidia.com/gpudirect">GPUDirect</a></li>
+<li>NVIDIA, <a href="https://developer.nvidia.com/nvshmem">NVSHMEM</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html">NCCL: Device-Initiated Communication</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html">NCCL: Device API</a></li>
+<li>DeepSeek, <a href="https://github.com/deepseek-ai/DeepEP">DeepEP</a></li>
+<li>Meta Engineering, <a href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/">GEM Training: How Meta Doubled the Efficiency of Its LLM-Scale Ads Foundation Model</a>, 2026</li>
+</ul>
+</section>
+<section id="collective-synthesis-compilation-and-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="collective-synthesis-compilation-and-optimization">Collective synthesis, compilation, and optimization</h3>
+<ul>
+<li>Cai et al., <a href="https://arxiv.org/abs/2008.08708"><em>Synthesizing Optimal Collective Algorithms</em></a> — SCCL</li>
+<li>Shah et al., <a href="https://www.usenix.org/conference/nsdi23/presentation/shah"><em>TACCL: Guiding Collective Algorithm Synthesis using Communication Sketches</em></a>, NSDI 2023</li>
+<li>Cowan et al., <a href="https://arxiv.org/abs/2201.11840"><em>GC3: An Optimizing Compiler for GPU Collective Communication</em></a></li>
+<li>Jangda et al., <a href="https://arxiv.org/abs/2105.05720"><em>Breaking the Computation and Communication Abstraction Barrier in Distributed Machine Learning Workloads</em></a> — CoCoNeT</li>
+<li>Xu et al., <a href="https://www.usenix.org/conference/nsdi25/presentation/xu-guanbin"><em>AutoCCL: Automated Collective Communication Tuning for Accelerating Distributed and Parallel DNN Training</em></a>, NSDI 2025</li>
+<li>Varadharajan et al., <a href="https://arxiv.org/abs/2603.02376"><em>CUCo: An Agentic Framework for Compute and Communication Co-design</em></a>, 2026</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Systems</category>
+  <category>Distributed Computing</category>
+  <guid>https://www.arjunsriva.com/posts/allreduce-all-the-way-down/</guid>
+  <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The Evaluation Machine</title>
   <link>https://www.arjunsriva.com/posts/evaluation-systems/</link>
@@ -4730,1377 +5186,6 @@ A course which aims to teach by coding, and takes a top down approach.</p></li>
   <category>AI</category>
   <guid>https://www.arjunsriva.com/posts/learning-machine-learning/</guid>
   <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Multi Armed Bandits</title>
-  <link>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<section id="problem" class="level2">
-<h2 class="anchored" data-anchor-id="problem">Problem</h2>
-<p>Imagine you are at a casino, and you have N slot machines to play, each slot machine gives rewards according to a fixed probability distribution. What strategy should you play with to maximise your total reward ?</p>
-<p>This problem is known as <a href="https://en.wikipedia.org/wiki/Multi-armed_bandit">Multi Armed Bandit</a> problem.</p>
-<div id="cell-2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Importing numpy for math, and matplotlib for plots</span></span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-4"><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%</span>matplotlib inline</span></code></pre></div></div>
-</div>
-</section>
-<section id="arms" class="level2">
-<h2 class="anchored" data-anchor-id="arms">Arms</h2>
-<p>An arm when pulled, gives a random number from a normal distribution with fixed mean(mu) and deviation(sigma). When pulled many times the frequency of the rewards look like this:</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/350px-Normal_Distribution_PDF.svg.png" class="img-fluid" alt="normal distribution"> X axis is the magnitude of reward<br>
-Y axis is it’s frequency.</p>
-<p>The Arm class provides an arm with these properties.</p>
-<div id="cell-4" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> Arm:</span>
-<span id="cb2-2"></span>
-<span id="cb2-3">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, mu<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>, sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>):</span>
-<span id="cb2-4">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> mu <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">is</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>:</span>
-<span id="cb2-5">            <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.mu <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.absolute(np.random.uniform())</span>
-<span id="cb2-6">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span>:</span>
-<span id="cb2-7">            <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.mu <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> mu</span>
-<span id="cb2-8">        </span>
-<span id="cb2-9">        </span>
-<span id="cb2-10">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> sigma <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">is</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>:</span>
-<span id="cb2-11">            <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.sigma<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>np.absolute(np.random.uniform())</span>
-<span id="cb2-12">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span>:</span>
-<span id="cb2-13">            <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.sigma <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> sigma</span>
-<span id="cb2-14"></span>
-<span id="cb2-15"></span>
-<span id="cb2-16">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> pull(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb2-17">        reward <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.normal(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.mu, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.sigma, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb2-18">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> reward</span>
-<span id="cb2-19"></span>
-<span id="cb2-20"></span>
-<span id="cb2-21"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> get_arms(k):</span>
-<span id="cb2-22">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># returns a list of arms</span></span>
-<span id="cb2-23">    arms <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb2-24">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(k):</span>
-<span id="cb2-25">        arms.append(Arm())</span>
-<span id="cb2-26">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> arms</span></code></pre></div></div>
-</div>
-</section>
-<section id="agents" class="level2">
-<h2 class="anchored" data-anchor-id="agents">Agents</h2>
-<p>An agent here is a player who pulls arms to play. It has a policy, which is a list of probabilities associated with each arm.</p>
-<p>The agent class makes designing agents <strong>fast</strong>. The object is initialised with arms and whether it should play all arms once as part of the initialisation.</p>
-<p>Features provided by this class:<br>
-Attributes: * expectations[i]: gives the expected reward on playing arm[i] * times_played[i]: gives the number of times the agent has played arm[i] * N = Total number of times agent has played * reward_history : list of rewards earned by the agent * choice_history : list of choices made by the agent</p>
-<p>Methods: * gamble(i): Plays for i iterations while updating it’s policy. * play(i): Pulls arm[i] and updates reward_history, N , times_played * select_arm(): returns index of an arm by sampling probability distribution given by the policy</p>
-<div id="cell-6" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> agent:</span>
-<span id="cb3-2">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb3-3">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(arms))</span>
-<span id="cb3-4">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.times_played <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(arms))</span>
-<span id="cb3-5">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.arms <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> arms</span>
-<span id="cb3-6"></span>
-<span id="cb3-7">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.number_of_arms <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(arms)</span>
-<span id="cb3-8">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.N <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span></span>
-<span id="cb3-9"></span>
-<span id="cb3-10">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.reward_history <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb3-11">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.choice_history <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb3-12"></span>
-<span id="cb3-13">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> play_once <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>:</span>
-<span id="cb3-14">            <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.number_of_arms):</span>
-<span id="cb3-15">                <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations[i] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.play(i)</span>
-<span id="cb3-16"></span>
-<span id="cb3-17">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> play(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, index):</span>
-<span id="cb3-18">        reward <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.arms[index].pull()</span>
-<span id="cb3-19"></span>
-<span id="cb3-20">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.times_played[index] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb3-21">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.N <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb3-22"></span>
-<span id="cb3-23">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.choice_history.append(index)</span>
-<span id="cb3-24">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.reward_history.append(reward)</span>
-<span id="cb3-25"></span>
-<span id="cb3-26">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> reward</span>
-<span id="cb3-27"></span>
-<span id="cb3-28">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb3-29">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">pass</span></span>
-<span id="cb3-30"></span>
-<span id="cb3-31">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> update_expectations(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, reward, index):</span>
-<span id="cb3-32">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations[index] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+=</span> (reward <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations[index])<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.N</span>
-<span id="cb3-33"></span>
-<span id="cb3-34">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> select_arm(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb3-35">        options <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.number_of_arms)</span>
-<span id="cb3-36">        i <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.random.choice(options, p<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.policy(), replace<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">False</span>)</span>
-<span id="cb3-37">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> i</span>
-<span id="cb3-38"></span>
-<span id="cb3-39">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> gamble(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, iterations):</span>
-<span id="cb3-40">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(iterations):</span>
-<span id="cb3-41">            index <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.select_arm()</span>
-<span id="cb3-42">            reward <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.play(index)</span>
-<span id="cb3-43">            <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.update_expectations(reward, index)</span></code></pre></div></div>
-</div>
-<section id="example-agents" class="level3">
-<h3 class="anchored" data-anchor-id="example-agents">Example agents</h3>
-<p>To make a new agent we <a href="">inherit</a> the agent class.</p>
-<p>Time to make some agents!</p>
-</section>
-<section id="first-up-epsilon-greedy" class="level3">
-<h3 class="anchored" data-anchor-id="first-up-epsilon-greedy">First up: epsilon-greedy</h3>
-<p>This agent plays the arm with the highest expected reward with <em>1 - epsilon</em> probability, and plays a random arm with <em>epsilon</em> probability</p>
-<p>So<br>
-epsilon = 1 =&gt; random choices<br>
-epsilon = 0 =&gt; greedy choices</p>
-<div id="cell-9" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> epsilon_greedy(agent):</span>
-<span id="cb4-2"></span>
-<span id="cb4-3">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, epsilon<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>):</span>
-<span id="cb4-4">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb4-5">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epsilon <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> epsilon</span>
-<span id="cb4-6">        </span>
-<span id="cb4-7">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__str__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb4-8">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Epsilon-Greedy Agent, epsilon= "</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epsilon)</span>
-<span id="cb4-9">    </span>
-<span id="cb4-10">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb4-11">        temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros_like(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations)</span>
-<span id="cb4-12">        temp[np.argmax(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations)] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epsilon</span>
-<span id="cb4-13">        ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.epsilon<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.number_of_arms</span>
-<span id="cb4-14">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> ans</span></code></pre></div></div>
-</div>
-</section>
-<section id="beta-softmax" class="level3">
-<h3 class="anchored" data-anchor-id="beta-softmax">Beta-Softmax</h3>
-<p>This agent plays an arm[i] with probability proportional to: e^(expected_reward(arm[i])/beta)<br>
-We normalise the whole thing by the sum over all the arms.</p>
-<div id="cell-11" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> softmax(agent):</span>
-<span id="cb5-2"></span>
-<span id="cb5-3">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, beta<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb5-4">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb5-5">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> beta</span>
-<span id="cb5-6">        </span>
-<span id="cb5-7">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__str__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb5-8">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Softmax agent, beta= "</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta)</span>
-<span id="cb5-9"></span>
-<span id="cb5-10">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb5-11">        temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.exp(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta)</span>
-<span id="cb5-12">        ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(temp, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb5-13">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> ans</span></code></pre></div></div>
-</div>
-</section>
-<section id="upper-confidence-bound-ucb1" class="level3">
-<h3 class="anchored" data-anchor-id="upper-confidence-bound-ucb1">Upper Confidence Bound (UCB1)</h3>
-<p>UCB1 agent plays the arm with the highest metric, where metric of arm i is : metric[i] = expected_reward[i] + sqrt(2*log(N)/times_played[i])</p>
-<p><strong>Note</strong> Best peformance when rewards are between 0 and 1</p>
-<div id="cell-13" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> ucb(agent):</span>
-<span id="cb6-2"></span>
-<span id="cb6-3">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb6-4">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb6-5"></span>
-<span id="cb6-6">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__str__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb6-7">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"UCB1 agent"</span></span>
-<span id="cb6-8">    </span>
-<span id="cb6-9">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb6-10">        temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> np.sqrt(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>np.log(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.N)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.times_played)</span>
-<span id="cb6-11">        ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros_like(temp)</span>
-<span id="cb6-12">        ans[np.argmax(temp)] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb6-13">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> ans</span></code></pre></div></div>
-</div>
-</section>
-</section>
-<section id="metrics" class="level2">
-<h2 class="anchored" data-anchor-id="metrics">Metrics</h2>
-<p>Metric : A scalar number, makes comparison easier.<br>
-To compare the performance of our agents we can use these metrics</p>
-<ul>
-<li><p>avg_reward[i] : this gives the average reward till i+1 iteration.</p></li>
-<li><p>max_reward : this tells us the maximum expected reward</p></li>
-<li><p>euclid_distance : we can think of as learnt policy and optimal policy as vectors and compute the distance between them , smaller is better</p></li>
-<li><p>cosine_simmilarity : compute the cos(q) between the policies. larger is better</p></li>
-</ul>
-<div id="cell-15" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> maxreward(arms):</span>
-<span id="cb7-2">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#Max rewards</span></span>
-<span id="cb7-3">    a<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [arm.mu <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> arm <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> arms]</span>
-<span id="cb7-4">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">max</span>(a)</span>
-<span id="cb7-5"></span>
-<span id="cb7-6"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> avg_reward(rewards):</span>
-<span id="cb7-7">    ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb7-8">    ans.append(rewards[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>])</span>
-<span id="cb7-9">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>,<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(rewards)):</span>
-<span id="cb7-10">        ans.append(ans[i<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span>rewards[i])</span>
-<span id="cb7-11">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(ans)):</span>
-<span id="cb7-12">        ans[i]<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/=</span>i<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb7-13">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> ans</span>
-<span id="cb7-14"></span>
-<span id="cb7-15"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> cosine_similarity(a,b):</span>
-<span id="cb7-16">    temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> a<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>b</span>
-<span id="cb7-17">    temp<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/=</span>(euclid_distance(a)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> euclid_distance(b))</span>
-<span id="cb7-18">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(temp, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb7-19">    </span>
-<span id="cb7-20"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> euclid_distance(a):</span>
-<span id="cb7-21">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> np.sqrt(np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(a<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>a, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>))</span></code></pre></div></div>
-</div>
-<section id="test" class="level3">
-<h3 class="anchored" data-anchor-id="test">Test</h3>
-<p>This function takes a list of agents and the number of iterations. Makes each agent play, and prints its metrics.</p>
-<div id="cell-17" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> test(agents, iterations):</span>
-<span id="cb8-2">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> agent <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> agents:</span>
-<span id="cb8-3">        </span>
-<span id="cb8-4">        agent.gamble(iterations)</span>
-<span id="cb8-5">        </span>
-<span id="cb8-6">        temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [ arm.mu <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> arm <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> levers] </span>
-<span id="cb8-7">        optimal_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros_like(agent.expectations)</span>
-<span id="cb8-8">        optimal_policy[temp.index(<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">max</span>(temp))] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb8-9">        </span>
-<span id="cb8-10">        avg_rewards_earned <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> avg_reward(agent.reward_history)</span>
-<span id="cb8-11">        </span>
-<span id="cb8-12">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(agent)</span>
-<span id="cb8-13">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"maximum possible reward:"</span>, maxreward(levers))</span>
-<span id="cb8-14">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"average reward:"</span>, avg_rewards_earned[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>])</span>
-<span id="cb8-15">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"cosine similarity"</span> ,cosine_similarity(agent.policy(), optimal_policy))</span>
-<span id="cb8-16">        euclid_norm <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> euclid_distance(agent.policy()<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>optimal_policy)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(optimal_policy)</span>
-<span id="cb8-17">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"euclidian norm "</span>,euclid_norm)</span>
-<span id="cb8-18">        </span>
-<span id="cb8-19">        </span>
-<span id="cb8-20">        plt.plot(avg_rewards_earned)</span>
-<span id="cb8-21">        plt.ylabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Average Reward'</span>)</span>
-<span id="cb8-22">        plt.xlabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Iteration'</span>)</span>
-<span id="cb8-23">        plt.show()</span>
-<span id="cb8-24">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">\n</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="cb8-25">    </span>
-<span id="cb8-26">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># print("optimal policy:" , optimal)</span></span>
-<span id="cb8-27">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># print("learnt policy:" ,agent.policy())</span></span>
-<span id="cb8-28">        </span>
-<span id="cb8-29">    </span>
-<span id="cb8-30">        </span>
-<span id="cb8-31">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plt.scatter(range(len(agent.choice_history)),y=agent.choice_history)</span></span>
-<span id="cb8-32">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plt.title("Choices")</span></span>
-<span id="cb8-33">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plt.xlabel("time")</span></span>
-<span id="cb8-34">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plt.ylabel("arm")</span></span>
-<span id="cb8-35">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plt.show()</span></span>
-<span id="cb8-36">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># print("\n")</span></span>
-<span id="cb8-37">    </span>
-<span id="cb8-38">    </span></code></pre></div></div>
-</div>
-<div id="cell-18" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">levers <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> get_arms(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>)</span>
-<span id="cb9-2"></span>
-<span id="cb9-3">agents <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> [</span>
-<span id="cb9-4">    epsilon_greedy(levers, epsilon<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>),</span>
-<span id="cb9-5">    epsilon_greedy(levers, epsilon<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>),</span>
-<span id="cb9-6">    softmax(levers, beta<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>),</span>
-<span id="cb9-7">    ucb(levers)</span>
-<span id="cb9-8"></span>
-<span id="cb9-9">]</span></code></pre></div></div>
-</div>
-<div id="cell-19" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">plt.plot([ arm.mu <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> arm <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> levers] )</span>
-<span id="cb10-2">plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"distribution of expected value of arms"</span>)</span></code></pre></div></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="cell-20" class="cell" data-scrolled="false" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">test(agents, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5000</span>)</span></code></pre></div></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Epsilon-Greedy Agent, epsilon= 1
-maximum possible reward: 0.9851042878107023
-average reward: [0.47962497]
-cosine similarity 0.3162277660168379
-euclidian norm  0.09486832980505139</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-
-Epsilon-Greedy Agent, epsilon= 0
-maximum possible reward: 0.9851042878107023
-average reward: [0.98686237]
-cosine similarity 1.0
-euclidian norm  0.0</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-4.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-
-Softmax agent, beta= 0.1
-maximum possible reward: 0.9851042878107023
-average reward: [0.91348264]
-cosine similarity 0.9992727823574249
-euclidian norm  0.008915931500017809</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-6.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-
-UCB1 agent
-maximum possible reward: 0.9851042878107023
-average reward: [0.89258379]
-cosine similarity 0.0
-euclidian norm  0.1414213562373095</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits_files/figure-html/cell-12-output-8.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-</code></pre>
-</div>
-</div>
-</section>
-<section id="experimental-stuff" class="level3">
-<h3 class="anchored" data-anchor-id="experimental-stuff">Experimental stuff:</h3>
-<p>Below are a few agents I wrote for fun.</p>
-<div id="cell-22" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"></span>
-<span id="cb17-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> softmax_with_exponentiation(agent):</span>
-<span id="cb17-3"></span>
-<span id="cb17-4">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, beta<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, exp<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb17-5">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb17-6">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> beta</span>
-<span id="cb17-7">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.exp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> exp</span>
-<span id="cb17-8"></span>
-<span id="cb17-9">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb17-10">        temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.exp(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta)</span>
-<span id="cb17-11">        ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(temp, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb17-12">        ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> ans<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">**</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.exp</span>
-<span id="cb17-13">        ans <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/=</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(ans, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb17-14">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> ans</span>
-<span id="cb17-15"></span>
-<span id="cb17-16"></span>
-<span id="cb17-17"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> softmax_with_reccurence(agent):</span>
-<span id="cb17-18"></span>
-<span id="cb17-19">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, beta<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb17-20">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb17-21">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.ones_like(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.l</span>
-<span id="cb17-22">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> beta</span>
-<span id="cb17-23"></span>
-<span id="cb17-24">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb17-25">        temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.exp(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.beta)</span>
-<span id="cb17-26">        new_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> temp <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(temp, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb17-27"></span>
-<span id="cb17-28">        result <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.multiply(new_policy, <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.old_policy)</span>
-<span id="cb17-29">        result <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/=</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(result, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb17-30">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> result</span>
-<span id="cb17-31"></span>
-<span id="cb17-32">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> result</span>
-<span id="cb17-33"></span>
-<span id="cb17-34"></span>
-<span id="cb17-35"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> greedy_with_reccurence(agent):</span>
-<span id="cb17-36">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># alpha = number &lt; 1; will sum over a number of observations and will keep</span></span>
-<span id="cb17-37">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># osiclating.</span></span>
-<span id="cb17-38">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># alpha = N will allow the algo to converge to an arm, greedy doesn't</span></span>
-<span id="cb17-39">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># really need this, kind of always give one answer.</span></span>
-<span id="cb17-40"></span>
-<span id="cb17-41">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, arms, play_once<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>):</span>
-<span id="cb17-42">        <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(arms, play_once)</span>
-<span id="cb17-43">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.ones_like(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations)</span>
-<span id="cb17-44">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.alpha <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> alpha</span>
-<span id="cb17-45"></span>
-<span id="cb17-46">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>):</span>
-<span id="cb17-47">        new_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.zeros_like(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations)</span>
-<span id="cb17-48">        new_policy[np.argmax(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.expectations)] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb17-49"></span>
-<span id="cb17-50">        new_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.alpha)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>new_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.old_policy</span>
-<span id="cb17-51"></span>
-<span id="cb17-52">        new_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/=</span> np.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">sum</span>(new_policy, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>)</span>
-<span id="cb17-53">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.old_policy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> new_policy</span>
-<span id="cb17-54"></span>
-<span id="cb17-55">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> new_policy</span>
-<span id="cb17-56"></span>
-<span id="cb17-57"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># class magic(agent):</span></span>
-<span id="cb17-58"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#    def __init__(self, arms, play_once=1, exp=1):</span></span>
-<span id="cb17-59"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#        super().__init__(arms, play_once)</span></span>
-<span id="cb17-60"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#        self.old_policy = np.ones_like(self.expectations)/self.l</span></span>
-<span id="cb17-61"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#        self.exp = exp</span></span>
-<span id="cb17-62"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#</span></span>
-<span id="cb17-63"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#    def policy(self):</span></span>
-<span id="cb17-64"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#        new_policy = f(old_policy, g(expectations))</span></span></code></pre></div></div>
-</div>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>AI</category>
-  <guid>https://www.arjunsriva.com/posts/multi-armed-bandits/multi-armed-bandits.html</guid>
-  <pubDate>Sun, 12 Nov 2017 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/multi-armed-bandits/MultiArmedBandits.jpeg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

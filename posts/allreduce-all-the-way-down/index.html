@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-08">
+<meta name="description" content="A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.">
+
+<title>AllReduce, All the Way Down – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-a515e054079012129989d5397ee3c9c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<style>
+  pre.sourceCode.text, pre.text, div.sourceCode pre {
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.28;
+    font-size: 0.78rem;
+  }
+  pre.sourceCode.text code, pre.text code, div.sourceCode pre code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-variant-ligatures: none;
+    white-space: pre;
+  }
+</style>
+
+
+<meta property="og:title" content="AllReduce, All the Way Down – Arjun Srivastava">
+<meta property="og:description" content="A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="AllReduce, All the Way Down – Arjun Srivastava">
+<meta name="twitter:description" content="A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.com/library"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">AllReduce, All the Way Down</h1>
+            <p class="subtitle lead">How collective semantics become programs for real machines</p>
+                  <div>
+        <div class="description">
+          A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">Systems</div>
+                <div class="quarto-category">Distributed Computing</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 8, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-contract-what-allreduce-means" id="toc-the-contract-what-allreduce-means" class="nav-link" data-scroll-target="#the-contract-what-allreduce-means">The Contract: What AllReduce Means</a></li>
+  <li><a href="#from-a-collective-to-a-machine" id="toc-from-a-collective-to-a-machine" class="nav-link" data-scroll-target="#from-a-collective-to-a-machine">From a Collective to a Machine</a></li>
+  <li><a href="#when-the-workload-shapes-communication" id="toc-when-the-workload-shapes-communication" class="nav-link" data-scroll-target="#when-the-workload-shapes-communication">When the Workload Shapes Communication</a></li>
+  <li><a href="#optimizing-the-mapping" id="toc-optimizing-the-mapping" class="nav-link" data-scroll-target="#optimizing-the-mapping">Optimizing the Mapping</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <ul class="collapse">
+  <li><a href="#core-documentation-and-implementations" id="toc-core-documentation-and-implementations" class="nav-link" data-scroll-target="#core-documentation-and-implementations">Core documentation and implementations</a></li>
+  <li><a href="#collective-synthesis-compilation-and-optimization" id="toc-collective-synthesis-compilation-and-optimization" class="nav-link" data-scroll-target="#collective-synthesis-compilation-and-optimization">Collective synthesis, compilation, and optimization</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>Two GPUs finish a backward pass with different gradients.</p>
+<pre class="text"><code>GPU 0: g₀
+GPU 1: g₁</code></pre>
+<p>If they hold copies of the same model, they cannot take independent optimizer steps. Each needs the same combined gradient:</p>
+<pre class="text"><code>GPU 0: g₀ + g₁
+GPU 1: g₀ + g₁</code></pre>
+<p>We call this <strong>AllReduce</strong>.</p>
+<p>At the <a href="https://docs.pytorch.org/docs/stable/distributed">PyTorch <code>torch.distributed</code></a> level, it can look like one line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dist.all_reduce(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On NVIDIA GPUs, that call will often reach NCCL. Its C API is roughly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ncclAllReduce<span class="op">(</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    sendbuff<span class="op">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    recvbuff<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    count<span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    datatype<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    op<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    comm<span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    stream</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>There is no model in that call. No gradient. No layer number. Nothing says we are training a neural network.</p>
+<p>NCCL gets buffers, a datatype, a reduction, a group of participants, and a CUDA stream; the <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/colls.html">collective API</a> is deliberately small.</p>
+<p>From that small request it may have to choose a collective algorithm, map it onto NVLink, PCIe and a network fabric, divide the tensor into chunks, pipeline those chunks through several channels, and run communication while the model is using the same GPU.</p>
+<p>Newer workloads stretch the interface further. Expert parallelism ties communication to token routing. NCCL now exposes communication primitives directly inside CUDA kernels. DeepEP builds expert-specific communication on top of those lower-level mechanisms. Other systems try to automate pieces of the mapping with solvers, compilers, profiling and program search.</p>
+<p>The rest of this essay follows that gap downward.</p>
+<p>By the end, you should be able to look at a communication path in a distributed ML system and separate four questions: what state transition the application wants, which algorithm realizes it, how that algorithm maps onto the machine, and whether the collective is still the right abstraction for the workload.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This article follows one request—“put the reduced value on every rank”—down through the layers that make it real:</p>
+<ol type="1">
+<li><strong><a href="#the-contract-what-allreduce-means">The contract</a>.</strong> What a collective specifies, and what it deliberately leaves open.</li>
+<li><strong><a href="#from-a-collective-to-a-machine">The machine</a>.</strong> Algorithms, topology, chunking, protocols, GPU resources, and why a faster collective can make the application slower.</li>
+<li><strong><a href="#when-the-workload-shapes-communication">When the workload shapes communication</a>.</strong> Mixture-of-experts, DeepEP, NVSHMEM, and NCCL’s device-side APIs.</li>
+<li><strong><a href="#optimizing-the-mapping">Optimizing the mapping</a>.</strong> Where solvers, compilers, autotuners, and coding agents fit—and where each stops.</li>
+</ol>
+</section>
+<section id="the-contract-what-allreduce-means" class="level2">
+<h2 class="anchored" data-anchor-id="the-contract-what-allreduce-means">The Contract: What AllReduce Means</h2>
+<p>It helps to forget networks for a moment.</p>
+<p>Imagine four ranks, each holding one shard:</p>
+<pre class="text"><code>Rank 0: [A]
+Rank 1: [B]
+Rank 2: [C]
+Rank 3: [D]</code></pre>
+<p>If the next computation needs the complete value on every rank, the desired state is:</p>
+<pre class="text"><code>Rank 0: [A B C D]
+Rank 1: [A B C D]
+Rank 2: [A B C D]
+Rank 3: [A B C D]</code></pre>
+<p>That is an <strong>AllGather</strong>.</p>
+<p>Nothing in that definition says how <code>A</code>, <code>B</code>, <code>C</code> and <code>D</code> should move. They might circulate around a ring, travel through a tree, or follow some topology-specific schedule. AllGather only describes the result.</p>
+<p>The other familiar <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html">NCCL collectives</a> work the same way. AllReduce leaves every rank with the reduction. ReduceScatter leaves each rank with one reduced shard. AllToAll redistributes different parts of each input to different destinations.</p>
+<pre class="text"><code>ALLGATHER
+
+before            ── gather shards ──▶   after
+
+R0  [ A ]                                R0  [ A B C D ]
+R1  [ B ]                                R1  [ A B C D ]
+R2  [ C ]                                R2  [ A B C D ]
+R3  [ D ]                                R3  [ A B C D ]
+
+
+ALLREDUCE
+
+before            ── reduce + copy ──▶   after
+
+R0  [ A ]                                R0  [ Σ ]
+R1  [ B ]                                R1  [ Σ ]
+R2  [ C ]                                R2  [ Σ ]
+R3  [ D ]                                R3  [ Σ ]
+
+Σ = A + B + C + D
+
+
+REDUCESCATTER
+
+before            ── reduce + shard ──▶  after
+
+R0  [ a0 a1 a2 a3 ]                     R0  [ Σ0 ]
+R1  [ b0 b1 b2 b3 ]                     R1  [ Σ1 ]
+R2  [ c0 c1 c2 c3 ]                     R2  [ Σ2 ]
+R3  [ d0 d1 d2 d3 ]                     R3  [ Σ3 ]
+
+Σj = aj + bj + cj + dj
+
+
+ALLTOALL
+
+before            ── by destination ──▶  after
+
+R0  [ a0 a1 a2 a3 ]                     R0  [ a0 b0 c0 d0 ]
+R1  [ b0 b1 b2 b3 ]                     R1  [ a1 b1 c1 d1 ]
+R2  [ c0 c1 c2 c3 ]                     R2  [ a2 b2 c2 d2 ]
+R3  [ d0 d1 d2 d3 ]                     R3  [ a3 b3 c3 d3 ]</code></pre>
+<p><em>Collectives specify the distributed state after the operation, not the route used to get there.</em></p>
+<p>The operation names tell us what state to produce. The implementation is still almost completely open.</p>
+<p>These operations are often introduced as a list of fundamental primitives. That framing is a little misleading. There is nothing uniquely fundamental about exactly this set. They are common distributed-state transformations that became worth naming and optimizing aggressively.</p>
+<p>A program can also send directly to another process, manipulate remote memory, or build an application-specific protocol.</p>
+<p>The advantage of a collective is that it tells the runtime more. If the application says “AllReduce this buffer,” the runtime knows the final state it must produce and remains free to choose the path there.</p>
+<p>The same boundary tells us what NCCL knows.</p>
+<p>In <code>ncclAllReduce</code>, <code>sendbuff</code> and <code>recvbuff</code> identify memory. <code>count</code> and <code>datatype</code> describe the values. <code>op</code> supplies the reduction. <code>comm</code> identifies the participating ranks.</p>
+<p><code>stream</code> is where the accelerator execution model appears.</p>
+<p>A CUDA stream is an ordered queue of GPU work. A program can enqueue computation, then communication, then more computation. Work on separate streams may overlap when dependencies and hardware resources permit.</p>
+<p>The framework above NCCL knows much more. PyTorch may know that a buffer contains gradients. FSDP may know that a parameter is sharded. The framework may know which layer produced the data and which operation will consume it next.</p>
+<p>NCCL does not need any of that to execute AllReduce.</p>
+<p>The collective interface barely looks NVIDIA-specific because AllReduce and its relatives long predate modern GPU training. The NVIDIA-specific work begins lower down, when that abstract operation has to run efficiently on a particular machine.</p>
+</section>
+<section id="from-a-collective-to-a-machine" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-collective-to-a-machine">From a Collective to a Machine</h2>
+<p>One way to implement AllReduce is a ring.</p>
+<p>Suppose four ranks each hold four chunks:</p>
+<pre class="text"><code>R0: A0 A1 A2 A3
+R1: B0 B1 B2 B3
+R2: C0 C1 C2 C3
+R3: D0 D1 D2 D3</code></pre>
+<p>Rather than animate all four chunks at once, follow chunk 0.</p>
+<pre class="text"><code>RING ALLREDUCE · FOLLOW CHUNK 0
+
+other chunks move concurrently around the same ring
+
+REDUCESCATTER  ·  reduce as the chunk moves
+
+      R0 ─────▶ R1 ─────▶ R2 ─────▶ R3
+
+0     ╔════╗
+R0    ║ A0 ║
+      ╚════╝
+R1    [ B0 ]
+R2    [ C0 ]
+R3    [ D0 ]
+
+1
+R0
+R1    ╔═════════╗
+      ║ A0 + B0 ║
+      ╚═════════╝
+R2    [ C0 ]
+R3    [ D0 ]
+
+2
+R0
+R1
+R2    ╔══════════════╗
+      ║ A0 + B0 + C0 ║
+      ╚══════════════╝
+R3    [ D0 ]
+
+3
+R0
+R1
+R2
+R3    ╔══════════════════╗
+      ║ A0+B0+C0+D0 = Σ0 ║
+      ╚══════════════════╝
+
+ALLGATHER  ·  copy the completed chunk
+
+      R3 ─────▶ R0 ─────▶ R1 ─────▶ R2
+
+4
+R0    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R1
+R2
+R3    [ Σ0 ]
+
+5
+R0    [ Σ0 ]
+R1    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R2
+R3    [ Σ0 ]
+
+6
+R0    [ Σ0 ]
+R1    [ Σ0 ]
+R2    ╔════╗
+      ║ Σ0 ║
+      ╚════╝
+R3    [ Σ0 ]</code></pre>
+<p><em>One chunk is reduced as it circulates, then the completed chunk is copied around the ring. Other chunks make the same journey concurrently.</em></p>
+<p>Tracing one chunk is enough to see the algorithm; the performance question begins when we ask how all of those concurrent journeys map onto a real machine.</p>
+<p>For a tensor containing (N) bytes across (P) ranks, each rank moves roughly</p>
+<p>[ 2N ]</p>
+<p>bytes. As (P) grows, this approaches (2N). For large transfers, Ring uses link bandwidth very efficiently.</p>
+<p>AllReduce is old, and Ring AllReduce is old. The remaining choices become visible as soon as the message size changes.</p>
+<p>A useful toy model is</p>
+<p>[ T s+ ]</p>
+<p>where (s) is the number of dependent communication steps, () captures startup cost, (B) is the number of bytes moved, and () is effective bandwidth.</p>
+<p>For a few gigabytes, bandwidth dominates. For a few kilobytes, there is little data to move and the number of communication stages matters much more.</p>
+<p>A tree can reach all participants in fewer dependent stages than a ring. This may be a better trade in a latency-sensitive regime. NCCL therefore contains several algorithm families rather than a single universal implementation. It also has multiple protocol families, including Simple, LL and LL128; the <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NCCL configuration reference</a> exposes many of these controls.</p>
+<p>That comparison still assumes an unrealistically tidy machine.</p>
+<p>So far, <code>R0 → R1</code> has just been an arrow.</p>
+<p>On an actual cluster it might be an NVLink transfer. Another pair of ranks may cross PCIe. A transfer leaving the server goes through a NIC and an InfiniBand or RoCE fabric. <a href="https://developer.nvidia.com/gpudirect">GPUDirect RDMA</a> lets a suitable device access GPU memory directly rather than staging the payload through CPU memory.</p>
+<pre class="text"><code>PHYSICAL PLACEMENT
+
+╔═ node A ═════════════════════╗      ╔═ node B ═════════════════════╗
+║  R0     R1     R2     R3     ║      ║  R4     R5     R6     R7     ║
+╚══════════════════════════════╝      ╚══════════════════════════════╝
+                    └──────── fabric ────────┘
+
+A. alternating ranks
+
+R0(A) ─▶ R4(B) ─▶ R1(A) ─▶ R5(B) ─▶ R2(A) ─▶ R6(B) ─▶ R3(A) ─▶ R7(B)
+
+Every hop changes node; the closing R7(B) ─▶ R0(A) does too.
+fabric crossings: 8
+
+
+B. topology-aware ordering
+
+R0(A) ─▶ R1(A) ─▶ R2(A) ─▶ R3(A) ─▶ R4(B) ─▶ R5(B) ─▶ R6(B) ─▶ R7(B)
+
+Only R3(A) ─▶ R4(B) and the closing R7(B) ─▶ R0(A) cross.
+fabric crossings: 2</code></pre>
+<p><em>The logical ring is cheap or expensive depending on where its adjacent ranks physically live.</em></p>
+<p>The rank graph and the machine graph are different objects.</p>
+<p>Hierarchical algorithms follow directly from this topology. If communication inside a node is cheap and communication between nodes is expensive, doing more work locally before crossing the global boundary makes sense.</p>
+<p>There can be structure within the node too. Some GPUs have better paths to particular NICs. Multiple network rails may exist without being equally convenient from every GPU.</p>
+<p>Choosing Ring and a sensible rank ordering still does not produce an executable implementation.</p>
+<p>NCCL must decide how the tensor is chunked and pipelined, how many communication channels to use, which protocol and transport to select, and how much GPU execution capacity communication should consume.</p>
+<p>Even the reduction can happen in different places.</p>
+<p>A straightforward implementation could receive data, write it to memory, reduce it, then read and forward the result. A specialized kernel can combine some of those steps. On supported systems, NVLink SHARP can move some reduction work into the NVSwitch domain instead of treating the fabric as a passive pipe.</p>
+<p>“Ring AllReduce” names much less of the implementation than it first appears to.</p>
+<pre class="text"><code>semantic request        algorithm          topology mapping
+┌───────────────┐       ┌─────────┐        ┌──────────────────────┐
+│   AllReduce   │──────▶│  Ring   │───────▶│ R0 ─▶ R1 ─▶ R2 ─▶ R3 │
+└───────────────┘       └─────────┘        └─────────┬───────────┘
+                                                     │ chunk + stripe
+                                                     ▼
+                                          execution plan
+                                          ┌──────────────────────┐
+                                          │ ch0  [00][01][02]    │
+                                          │ ch1  [10][11][12]    │
+                                          └──────────┬───────────┘
+                                                     │ lower
+                                                     ▼
+                                          SMs ↔ HBM ↔ NVLink
+                                                     ↕
+                                                NIC ↔ fabric</code></pre>
+<p><em>“AllReduce” is progressively resolved into an algorithm, a topology mapping, an execution plan, and finally hardware activity.</em></p>
+<p>By the time bytes move, the original semantic request has accumulated a large number of machine-specific decisions.</p>
+<p>The execution plan shares the machine with the model.</p>
+<p>During backpropagation, frameworks often start communicating gradients before backward has finished. On a timeline, much of that communication can appear hidden beneath compute.</p>
+<pre class="text"><code>SAME TIME INTERVAL
+
+time ───────────────────────────────────────────────▶
+
+compute        █████████████████████████████
+communication       █████████████████
+
+                           │ zoom into the overlap
+                           ▼
+
+compute        ───────────▶ SMs
+        └─────────────────▶ HBM
+
+communication  ───────────▶ SMs
+        ├─────────────────▶ HBM
+        └─────────────────▶ NIC / fabric
+
+Overlap in time does not create separate hardware.
+
+Meta GEM example · reported SM use for an AllGather path
+
+conventional   ║░░░░░░░░░░░░░░░░░░░░░░░  24 SMs
+NCCLX          ║▓                           N~1 SM
+                         │
+                         └─ pure transfer shifts toward Copy Engine / RDMA</code></pre>
+<p><em>Communication can disappear from the critical-path timeline and still compete with the model for SMs and memory bandwidth.</em></p>
+<p>Meta described this while scaling its GEM recommendation model. In the configuration discussed in the post, some communication collectives occupied about 24 SMs while model computation ran alongside them. Meta reported up to a 15% efficiency hit from this interference. For pure data movement, its NCCLX path moved more work toward Copy Engines inside the node and RDMA across nodes, reducing the reported SM footprint of an AllGather from roughly 24 to 1 (<a href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/">Meta GEM</a>).</p>
+<p>Suppose one AllGather implementation takes 90 μs and another takes 100 μs. If the 90 μs version slows the concurrent matrix multiplication by 40 μs, it loses.</p>
+<p>The fastest isolated collective is not necessarily the one that produces the fastest training step.</p>
+</section>
+<section id="when-the-workload-shapes-communication" class="level2">
+<h2 class="anchored" data-anchor-id="when-the-workload-shapes-communication">When the Workload Shapes Communication</h2>
+<p>Dense data parallelism is almost ideal for a collective library. The same ranks repeatedly communicate similarly shaped gradient buffers. The pattern is known and regular.</p>
+<p>Expert parallelism is different.</p>
+<pre class="text"><code>DENSE DATA PARALLEL                         EXPERT PARALLEL
+
+same peers, same-shaped buffers             destinations follow routing
+
+R0  [ gggg ] ─┐                             R0  [ t0 t1 t2 t3 ]
+R1  [ gggg ] ─┼── AllReduce ──▶ [ ΣΣΣΣ ]        ├── t0,t2 ──▶ expert 3
+R2  [ gggg ] ─┼── on every rank                  ├── t1    ──▶ expert 7
+R3  [ gggg ] ─┘                                   └── t3    ──▶ expert 11
+
+                                                expert compute
+                                                     │
+                                                     ▼
+                                                combine results
+
+regular                                             routed + uneven</code></pre>
+<p><em>Dense data parallelism repeats a regular collective pattern; expert parallelism turns model routing decisions into uneven communication.</em></p>
+<p>Calling the right-hand side an AllToAll describes the movement, but loses information about why those transfers exist and what happens between dispatch and combine.</p>
+<p>The number of tokens sent to each peer changes with routing decisions. An expert that receives more traffic also receives more computation. Routing information is useful again when the results return.</p>
+<p>During large-batch training or prefill, sustained throughput matters heavily. During autoregressive decode, messages become smaller and latency matters more.</p>
+<p>DeepEP exposes <strong>dispatch</strong> and <strong>combine</strong> directly. Its current V2 interface carries routing information through the operation and is built specifically around expert-parallel communication. The V2 rewrite also moved its primary backend from NVSHMEM to NCCL GIN (<a href="https://github.com/deepseek-ai/DeepEP">DeepEP</a>).</p>
+<p>A collective such as AllReduce tells the runtime a lot about the desired global operation. In return, the application gives up control over individual transfers.</p>
+<p>At a lower level, a program can say something closer to:</p>
+<pre class="text"><code>put these bytes there
+signal that peer
+wait until these transfers are complete
+continue computing</code></pre>
+<p>NVSHMEM exposes this kind of GPU-oriented one-sided communication model. It provides a global address space spanning GPU memory and allows fine-grained operations to be initiated from GPU code, CPU code, or CUDA streams (<a href="https://developer.nvidia.com/nvshmem">NVSHMEM</a>).</p>
+<p>For gradient reduction, <code>AllReduce</code> is a very good interface precisely because it tells the runtime what global operation is wanted. Lower-level control becomes useful when routing, synchronization and computation no longer line up cleanly with one standard collective.</p>
+<p>NCCL itself now exposes more of that layer.</p>
+<p>Starting with NCCL 2.28, NVIDIA added device-side communication APIs callable from CUDA kernels (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html">NCCL device-initiated communication</a>).</p>
+<p>The current Device API includes mechanisms for peer memory access, hardware multicast/reduction, GPU-initiated networking, and lower-level reduce/copy operations. These pieces can be used to construct custom or fused communication kernels rather than always invoking a complete host-launched collective (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html">NCCL Device API</a>).</p>
+<pre class="text"><code>FAMILIAR NCCL PATH
+
+                                      NCCL collective
+host ── ncclAllReduce() ──▶ ┏━━━━━━━━━━━━━━━━━━━━━━━┓
+                            ┃ algorithm + schedule ┃
+                            ┗━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+OPEN ONE LAYER
+
+CUDA kernel
+   │
+   ├── load / store ───────▶ peer GPU memory                LSA
+   │
+   ├── put / get / signal ─▶ NIC ── fabric ──▶ remote GPU   GIN
+   │
+   └── multicast / reduce ─▶ NVSwitch reduction domain      Multimem
+
+The named collective remains available; device code can now reach below it.</code></pre>
+<p><em>Classic NCCL asks for a complete collective; the Device API also lets GPU code work with lower-level communication mechanisms directly.</em></p>
+<p>That is the layer a specialized runtime such as DeepEP can use when a named collective is too coarse.</p>
+<p>DeepEP provides a neat historical snapshot. Its first version used NVSHMEM for lower-level communication. NCCL later gained richer device-side mechanisms, including GIN. DeepEP V2 now uses NCCL GIN as its main backend (<a href="https://github.com/deepseek-ai/DeepEP">DeepEP</a>).</p>
+<p>DeepEP V2 therefore shows NCCL in a different role: programmable enough to sit underneath a specialized communication library rather than only implementing named collectives itself.</p>
+<p>Similar pressure appears elsewhere. Pipeline parallelism moves activations between particular stages. Context parallelism ties communication to how sequence state is partitioned. Disaggregated inference may move KV state between machines with different roles.</p>
+<p>Collectives remain useful throughout these systems, alongside lower-level interfaces for workloads that need more control.</p>
+<p>The optimizer now has choices at several different levels.</p>
+</section>
+<section id="optimizing-the-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="optimizing-the-mapping">Optimizing the Mapping</h2>
+<p>Start with the cleanest version of the problem.</p>
+<p>We know the collective semantics. We know the topology. We know which data dependencies are legal and have some model of link cost.</p>
+<p>A human does not necessarily need to invent the schedule.</p>
+<p>SCCL formalized collective generation as a synthesis problem. Given semantics and topology, it uses an SMT solver to search for schedules along a latency/bandwidth Pareto frontier (<a href="https://arxiv.org/abs/2008.08708">SCCL paper</a>).</p>
+<p>As the search grows, exact synthesis becomes harder. TACCL lets a human provide a higher-level communication sketch and solves the lower-level routing and scheduling around it (<a href="https://www.usenix.org/conference/nsdi23/presentation/shah">TACCL, NSDI 2023</a>).</p>
+<p>The resulting schedule still has to become a GPU program.</p>
+<p>GC3 addresses that layer with a small language for collective communication and a compiler that lowers the program into executable GPU communication (<a href="https://arxiv.org/abs/2201.11840">GC3 paper</a>).</p>
+<p>CoCoNet widens the representation further by putting computation and communication into the same intermediate program. That makes transformations such as splitting, reordering, overlap and fusion possible across the boundary between them (<a href="https://arxiv.org/abs/2105.05720">CoCoNeT paper</a>).</p>
+<p>The Meta example already showed why this larger representation matters: optimizing communication in isolation can produce a worse application-level result. A compiler that sees both sides has more room to trade resources across them.</p>
+<p>Near the hardware, however, cost models get messy.</p>
+<p>Kernel occupancy, memory traffic, protocol choice and concurrent work interact in ways that may be easier to measure than to predict.</p>
+<p>AutoCCL searches NCCL configuration empirically and includes an online mode that profiles communication while compute is running. Its results show why the distinction matters: a configuration chosen with concurrent compute can differ from one chosen from communication behavior alone (<a href="https://www.usenix.org/conference/nsdi25/presentation/xu-guanbin">AutoCCL, NSDI 2025</a>).</p>
+<p>An empirical tuner can use the machine itself as the cost model.</p>
+<p>It still assumes somebody decided in advance what can change. The tuner searches channel counts, protocols or other parameters inside a known space.</p>
+<p>A coding agent can, at least in principle, alter the program itself.</p>
+<p>CUCo is a recent experiment in that direction. It first applies structured transformations toward device-initiated communication, then allows an LLM-based optimizer to modify bounded regions of CUDA code. Candidates are compiled, checked across multiple GPUs and benchmarked. The paper reports up to 1.57× end-to-end improvement on its evaluated workloads (<a href="https://arxiv.org/abs/2603.02376">CUCo paper</a>).</p>
+<p>The surrounding system makes that search tractable. Distributed communication gives unusually concrete feedback: code can fail to compile, produce the wrong values, hang, or run slowly. A candidate that survives correctness checks can be measured on the target machine.</p>
+<p>There is little reason to ask an agent to rediscover what a solver or compiler already knows. CUCo gives the model communication primitives, structured transformations, bounded edit regions, compilation, correctness tests and benchmarking.</p>
+<p>These approaches address different parts of the design space. Clean routing and scheduling problems admit mathematical optimization. Structured communication programs give compilers something to transform. Hardware-specific choices can be measured. Program search becomes useful when the implementation itself may need to change.</p>
+<p>None of those methods solves the whole mapping. A bandwidth-efficient ring can still lose on latency; a good logical schedule can map badly onto the physical topology; a fast communication kernel can slow the model running beside it; and a well-implemented collective can still be an awkward fit for traffic determined dynamically by routing.</p>
+<p>The original NCCL call remains small:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ncclAllReduce<span class="op">(</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    sendbuff<span class="op">,</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    recvbuff<span class="op">,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    count<span class="op">,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    datatype<span class="op">,</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    op<span class="op">,</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    comm<span class="op">,</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    stream</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Underneath it might sit a ring or a tree, a topology-aware rank order, several channels, different protocols, GPU kernels, RDMA and switch-assisted reduction. The communication may overlap model compute and compete with it for resources.</p>
+<p>Or the application may go below the collective, carry routing information into a specialized dispatch operation, and initiate network communication from inside a GPU kernel.</p>
+<p>AllReduce still means exactly what it did at the start: produce the reduced value on every rank.</p>
+<p>Everything else in this essay is the machinery needed to make that statement true quickly on a real machine.</p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="core-documentation-and-implementations" class="level3">
+<h3 class="anchored" data-anchor-id="core-documentation-and-implementations">Core documentation and implementations</h3>
+<ul>
+<li><a href="https://docs.pytorch.org/docs/stable/distributed">PyTorch <code>torch.distributed</code> documentation</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/colls.html">NCCL: Collective Communication Functions</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html">NCCL: Collective Operations</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NCCL: Environment Variables / algorithm and protocol controls</a></li>
+<li>NVIDIA, <a href="https://developer.nvidia.com/gpudirect">GPUDirect</a></li>
+<li>NVIDIA, <a href="https://developer.nvidia.com/nvshmem">NVSHMEM</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html">NCCL: Device-Initiated Communication</a></li>
+<li>NVIDIA, <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html">NCCL: Device API</a></li>
+<li>DeepSeek, <a href="https://github.com/deepseek-ai/DeepEP">DeepEP</a></li>
+<li>Meta Engineering, <a href="https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/">GEM Training: How Meta Doubled the Efficiency of Its LLM-Scale Ads Foundation Model</a>, 2026</li>
+</ul>
+</section>
+<section id="collective-synthesis-compilation-and-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="collective-synthesis-compilation-and-optimization">Collective synthesis, compilation, and optimization</h3>
+<ul>
+<li>Cai et al., <a href="https://arxiv.org/abs/2008.08708"><em>Synthesizing Optimal Collective Algorithms</em></a> — SCCL</li>
+<li>Shah et al., <a href="https://www.usenix.org/conference/nsdi23/presentation/shah"><em>TACCL: Guiding Collective Algorithm Synthesis using Communication Sketches</em></a>, NSDI 2023</li>
+<li>Cowan et al., <a href="https://arxiv.org/abs/2201.11840"><em>GC3: An Optimizing Compiler for GPU Collective Communication</em></a></li>
+<li>Jangda et al., <a href="https://arxiv.org/abs/2105.05720"><em>Breaking the Computation and Communication Abstraction Barrier in Distributed Machine Learning Workloads</em></a> — CoCoNeT</li>
+<li>Xu et al., <a href="https://www.usenix.org/conference/nsdi25/presentation/xu-guanbin"><em>AutoCCL: Automated Collective Communication Tuning for Accelerating Distributed and Parallel DNN Training</em></a>, NSDI 2025</li>
+<li>Varadharajan et al., <a href="https://arxiv.org/abs/2603.02376"><em>CUCo: An Agentic Framework for Compute and Communication Co-design</em></a>, 2026</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
