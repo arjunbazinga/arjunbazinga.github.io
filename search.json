@@ -987,11 +987,88 @@
     "text": "More writing\n\n\n\n  \n    From Payments to Claims: Where Finance Infrastructure Goes Next\n    Apr 8, 2026\n  \n\n  \n    How to Design Metrics That Change Decisions\n    Dec 12, 2025\n  \n\n  \n    Golden Datasets: Launch Criteria for LLM Systems\n    Aug 25, 2025\n  \n\n  \n    LLMs for Backend Engineers: From First Principles\n    Jun 17, 2025\n  \n\n\nNo matching items"
   },
   {
+    "objectID": "index.html#album",
+    "href": "index.html#album",
+    "title": "Arjun Srivastava",
+    "section": "Album",
+    "text": "Album\n\n  \n  \n    Kudanshita, Tokyo\n    9 October 2026\n    The last light catching the grasses beside the water.\n    View the album"
+  },
+  {
     "objectID": "index.html#new-essays-by-email",
     "href": "index.html#new-essays-by-email",
     "title": "Arjun Srivastava",
     "section": "New essays by email",
     "text": "New essays by email\nWriting on systems, machine learning, and data infrastructure."
+  },
+  {
+    "objectID": "album/index.html",
+    "href": "album/index.html",
+    "title": "Album",
+    "section": "",
+    "text": "Things I thought were pretty.\n\nSelect a photograph to see it larger."
+  },
+  {
+    "objectID": "album/index.html#kudanshita-tokyo",
+    "href": "album/index.html#kudanshita-tokyo",
+    "title": "Album",
+    "section": "Kudanshita, Tokyo",
+    "text": "Kudanshita, Tokyo\n\n9 October 2026\n\nThe last light catching the grasses beside the water."
+  },
+  {
+    "objectID": "album/index.html#otaru-hokkaido",
+    "href": "album/index.html#otaru-hokkaido",
+    "title": "Album",
+    "section": "Otaru, Hokkaido",
+    "text": "Otaru, Hokkaido\n\n23 December 2024, 7:37 am\n\nMorning from the window."
+  },
+  {
+    "objectID": "album/index.html#otaru-hokkaido-1",
+    "href": "album/index.html#otaru-hokkaido-1",
+    "title": "Album",
+    "section": "Otaru, Hokkaido",
+    "text": "Otaru, Hokkaido\n\n23 December 2024, 7:04 am\n\nThe same waterfront, half an hour earlier."
+  },
+  {
+    "objectID": "album/index.html#asahikawa-hokkaido",
+    "href": "album/index.html#asahikawa-hokkaido",
+    "title": "Album",
+    "section": "Asahikawa, Hokkaido",
+    "text": "Asahikawa, Hokkaido\n\n25 December 2024\n\nChristmas Day in the snow."
+  },
+  {
+    "objectID": "album/index.html#kyu-nakagawa-tokyo",
+    "href": "album/index.html#kyu-nakagawa-tokyo",
+    "title": "Album",
+    "section": "Kyu Nakagawa, Tokyo",
+    "text": "Kyu Nakagawa, Tokyo\n\n2 May 2024\n\nA pink sky above the river."
+  },
+  {
+    "objectID": "album/index.html#akama-jingu-shimonoseki",
+    "href": "album/index.html#akama-jingu-shimonoseki",
+    "title": "Album",
+    "section": "Akama-jingu, Shimonoseki",
+    "text": "Akama-jingu, Shimonoseki\n\n12 July 2025\n\nRed pillars, blue water."
+  },
+  {
+    "objectID": "album/index.html#shimonoseki-yamaguchi",
+    "href": "album/index.html#shimonoseki-yamaguchi",
+    "title": "Album",
+    "section": "Shimonoseki, Yamaguchi",
+    "text": "Shimonoseki, Yamaguchi\n\n12 July 2025\n\nBlue water beneath the bridge."
+  },
+  {
+    "objectID": "album/index.html#lake-ashinoko-hakone",
+    "href": "album/index.html#lake-ashinoko-hakone",
+    "title": "Album",
+    "section": "Lake Ashinoko, Hakone",
+    "text": "Lake Ashinoko, Hakone\n\n16 February 2026\n\nA red gate at the water’s edge."
+  },
+  {
+    "objectID": "album/index.html#hakone-kanagawa",
+    "href": "album/index.html#hakone-kanagawa",
+    "title": "Album",
+    "section": "Hakone, Kanagawa",
+    "text": "Hakone, Kanagawa\n\n15 February 2026\n\nStars above the trees."
   },
   {
     "objectID": "about.html",
@@ -1019,7 +1096,7 @@
     "href": "about.html#background",
     "title": "About Arjun",
     "section": "Background",
-    "text": "Background\nI studied computer science at IIT Indore. Open resources such as MIT OpenCourseWare and the Linux Documentation Project shaped my belief that technical knowledge becomes more valuable when it is understandable and shared openly. This website is my contribution to that tradition.\nOutside work, I read across technology, business, economics, history, and science. You can explore my Library or listen to Byte-Sized Breakthroughs, my collection of AI-generated research-paper conversations. I also love biryani, Mexican food, barbecue, swimming, and skating.\nI enjoy hearing from people building ambitious systems in ML, data, developer infrastructure, search, and memory. Get in touch, or subscribe to new essays on Substack.\nLast updated October 2026."
+    "text": "Background\nI studied computer science at IIT Indore. Open resources such as MIT OpenCourseWare and the Linux Documentation Project shaped my belief that technical knowledge becomes more valuable when it is understandable and shared openly. This website is my contribution to that tradition.\nOutside work, I read across technology, business, economics, history, and science. You can explore my Library or listen to Byte-Sized Breakthroughs, my collection of AI-generated research-paper conversations. My Album collects things I thought were pretty. I also love biryani, Mexican food, barbecue, swimming, and skating.\nI enjoy hearing from people building ambitious systems in ML, data, developer infrastructure, search, and memory. Get in touch, or subscribe to new essays on Substack.\nLast updated October 2026."
   },
   {
     "objectID": "archive/index.html",

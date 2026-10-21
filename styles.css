@@ -374,6 +374,49 @@ audio { width: 100%; }
 .episode-follow { border-top: 1px solid var(--site-rule); padding-top: 24px; }
 .plyr { --plyr-color-main: var(--site-accent); --plyr-audio-controls-background: var(--site-surface); --plyr-audio-control-color: var(--site-ink); --plyr-audio-control-color-hover: var(--site-paper); }
 
+/* Photographs sit on the same paper as the writing, in their own proportions. */
+.home-page main .album-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 40px;
+  align-items: center;
+  margin-top: 24px;
+  color: var(--site-ink);
+  text-decoration: none;
+}
+.album-preview img { display: block; width: 100%; height: auto; }
+.home-page main .album-preview h3 { margin: 0 0 8px; font-size: 1.55rem; line-height: 1.25; letter-spacing: -0.025em; }
+.album-date { font-family: var(--font-ui); font-size: 0.75rem; line-height: 1.7; color: var(--site-muted); }
+.album-preview-copy > p:not(.album-date) { max-width: 28ch; margin-block: 20px; font-family: var(--font-body); font-size: 1.05rem; line-height: 1.65; }
+.album-preview-action { display: inline-block; font-family: var(--font-ui); font-size: 0.8rem; color: var(--site-accent); text-decoration: underline; text-underline-offset: 0.2em; }
+.album-preview:is(:hover, :focus-visible) h3 { color: var(--site-accent); }
+.album-page #quarto-content { display: block; max-width: 964px; margin-inline: auto; padding-inline: 32px; }
+.album-page main { margin-top: 0; padding-block: 48px 64px; }
+.album-page #title-block-header { margin-bottom: 14px; }
+.album-page .quarto-title h1.title { font-size: clamp(2.5rem, 5vw, 3.4rem); }
+.album-intro { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; margin-bottom: 32px; }
+.album-intro > p { margin: 0; font-family: var(--font-body); font-size: 1.1rem; }
+.album-view-hint { color: var(--site-muted); font-family: var(--font-ui); font-size: 0.72rem; }
+.album-view-hint p { margin: 0; }
+.album-collection { display: grid; gap: 64px; }
+.album-photo { min-width: 0; margin: 0; }
+.album-photo > p { margin: 0; }
+.album-photo a.lightbox { display: block; cursor: zoom-in; }
+.album-photo img { display: block; width: 100%; height: auto; margin: 0; }
+.album-caption { margin-top: 16px; }
+.album-page main .album-caption h2 { margin: 0 0 4px; padding: 0; border: 0; font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.015em; }
+.album-caption .album-date { margin: 0 0 10px; }
+.album-caption > p:last-child { margin-bottom: 0; font-family: var(--font-body); font-size: 1rem; line-height: 1.6; }
+.album-pair { display: grid; gap: 40px; align-items: start; }
+/* Column widths follow the original aspect ratios, giving each pair a shared
+   image height without cropping. Reverse the balance between successive rows. */
+.album-pair-landscape-square { grid-template-columns: minmax(0, 4fr) minmax(0, 3fr); }
+.album-pair-landscape-portrait { grid-template-columns: minmax(0, 16fr) minmax(0, 9fr); }
+.album-pair-portrait-landscape { grid-template-columns: minmax(0, 9fr) minmax(0, 16fr); }
+.album-page .gslide-description { background: var(--site-paper); color: var(--site-ink); }
+.album-page .gslide-title { color: var(--site-ink); font-family: var(--font-display); }
+.album-page .gslide-desc { color: var(--site-muted); font-family: var(--font-ui); }
+
 @media (max-width: 991px) {
   .mobile-contents { display: block; position: sticky; top: 64px; z-index: 10; background: var(--site-paper); border-block: 1px solid var(--site-rule); margin-block: 12px 24px; font-family: var(--font-ui); font-size: 0.85rem; line-height: 1.7; }
   .mobile-contents summary { padding: 12px 4px; cursor: pointer; color: var(--site-accent); }
@@ -383,6 +426,14 @@ audio { width: 100%; }
   .mobile-contents a { display: block; padding-block: 7px; text-decoration: none; }
 }
 @media (max-width: 700px) {
+  .home-page main .album-preview { grid-template-columns: 1fr; gap: 20px; }
+  .album-preview-copy > p:not(.album-date) { max-width: none; margin-block: 12px; }
+  .album-page #quarto-content { padding-inline: 22px; }
+  .album-page main { padding-block: 28px 40px; }
+  .album-intro { flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .album-collection { gap: 40px; }
+  .album-pair { grid-template-columns: 1fr; gap: 40px; }
+  .album-caption { margin-top: 14px; }
   .essay-page main pre.ascii-diagram { padding: 1.15rem 1rem; margin-block: 1.5rem; }
   .subscribe-note { align-items: start; flex-direction: column; gap: 16px; }
   .compact-writing .compact-writing-link { flex-direction: column; gap: 4px; }
