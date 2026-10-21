@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,14 +80,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-98cf82f7baee0e05ae06e0de2cd83fcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-a515e054079012129989d5397ee3c9c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c37dfa679b2c1d9e43fdc3941f76ee37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -144,17 +144,18 @@ ga('send', {
 </style>
 
 
+<link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Rocketships for the Mind – Arjun Srivastava">
 <meta property="og:description" content="A systems-design account of immutable conversation archives, entity reconciliation, semantic indexes, typed evidence, temporal state, task-conditioned queries, agentic investigation, and reviewed memory.">
-<meta property="og:image" content="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/from-search-to-memory/thumbnail.webp">
 <meta property="og:site_name" content="Arjun Srivastava">
 <meta name="twitter:title" content="Rocketships for the Mind – Arjun Srivastava">
 <meta name="twitter:description" content="A systems-design account of immutable conversation archives, entity reconciliation, semantic indexes, typed evidence, temporal state, task-conditioned queries, agentic investigation, and reviewed memory.">
-<meta name="twitter:image" content="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/from-search-to-memory/thumbnail.webp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed essay-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -319,7 +320,7 @@ ga('send', {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -334,30 +335,20 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../podcast"> 
-<span class="menu-text">Podcast</span></a>
+    <a class="nav-link" href="../../posts/"> 
+<span class="menu-text">Writing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts"> 
-<span class="menu-text">Thoughts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://arjunsriva.com/library"> 
+    <a class="nav-link" href="https://www.arjunsriva.com/library/"> 
 <span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast/"> 
+<span class="menu-text">Podcast</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -368,44 +359,11 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Rocketships for the Mind</h1>
-            <p class="subtitle lead">Learning and experiments in building tools to think with</p>
-                  <div>
-        <div class="description">
-          A systems-design account of immutable conversation archives, entity reconciliation, semantic indexes, typed evidence, temporal state, task-conditioned queries, agentic investigation, and reviewed memory.
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">AI</div>
-                <div class="quarto-category">Systems</div>
-                <div class="quarto-category">Memory</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">July 31, 2026</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#the-workload-questions-that-cross-threads" id="toc-the-workload-questions-that-cross-threads" class="nav-link active" data-scroll-target="#the-workload-questions-that-cross-threads">The workload: questions that cross threads</a></li>
@@ -462,43 +420,68 @@ ga('send', {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Rocketships for the Mind</h1>
+<p class="subtitle lead">Learning and experiments in building tools to think with</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Systems</div>
+    <div class="quarto-category">Memory</div>
+  </div>
+  </div>
 
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="persistence-of-memory.jpg" class="img-fluid figure-img"></p>
-<figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
-</figure>
+<div>
+  <div class="description">
+    A systems-design account of immutable conversation archives, entity reconciliation, semantic indexes, typed evidence, temporal state, task-conditioned queries, agentic investigation, and reviewed memory.
+  </div>
 </div>
-<p>I wanted to share a few things that I have been working on.</p>
-<p>LLMs, chatbots, and agents have been a huge blessing for me. They let me learn as much as I want, pick up topics I find interesting, bounce ideas around, talk through what I think, and build things that I might once have found too tedious.</p>
-<p>They also let me leave something in a chat window without having to keep all of it in my head. I can disconnect from it for a while and come back later. They help me draft messages, think through different scenarios, and look at something through another reader’s eyes. Often, I can start by saying what I want instead of describing every step, then look at the result and keep going.</p>
-<p>But I have problems.</p>
-<p>One of them is that once I feel I have made decent progress on something, I often lose the motivation to keep going. This has been true for a long time.</p>
-<p>One of my favorite classes in college was discrete mathematics. It was supposed to be difficult, and many people did not enjoy it, but I found it fascinating. The difficult questions held my attention because I had to find my own way through them. When the final exam included questions whose method already felt clear, I found myself doing the hard ones first and putting off the easy ones, even though they still had to be done.</p>
-<p>Computer-architecture labs exposed the same pattern in a different way. Each exercise introduced a few new ideas. Moving from one question to the next meant figuring out the main complication, but it could also mean copying and wiring dozens of components, followed by twenty minutes of pointing and clicking. I liked finding the core solution. Once I had it, my lab partner often helped close the loop on the manual work that remained.</p>
-<p>In many ways, this has been the boon of LLMs. They let me focus on the part I find interesting while helping hold the context and keep the execution moving.</p>
-<p>This works to an extent, especially while a conversation is active. The problem appears when I return months later.</p>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 31, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>I built a system to recover project state from a large archive of AI conversations: find related work, reconcile what the evidence supports, identify the current version, and construct memory for the task at hand.</p>
+<p>Long-running personal research rarely stays in one place. An architectural decision starts in a conversation, becomes a prototype in a repository, and gets revisited months later in another tool. Returning to the work means recovering both the reasoning and the state of what was built.</p>
 <p>Between January 2023 and July 2026, my AI conversation archive accumulated 6,604 conversations: 100,694 message turns and 35.7 million words. They contain architectural designs, codebases, operational decisions, abandoned experiments, and technical trade-offs that exist nowhere else.</p>
 <p>Returning to that history requires more than finding an old passage. I need to know which fragments belong together, whether the code still exists, what actually ran, which version is current, and what I should do next.</p>
-<p>That last question is why I built this system. My recurring problem was not forgetting trivia; it was failing to close loops. I would solve the core technical challenge of a project, get it to 80% or 90% completion, stop, and leave several partial implementations scattered across repositories and chat sessions. Later, I remembered only the feeling that I had done substantial work without a durable artifact to show for it.</p>
+<p>Answering those questions requires a durable account of the work: which artifacts exist, what the evidence supports, which decisions supersede earlier ones, and what remains to be done. Retrieving a relevant conversation is only the beginning.</p>
 <p>Search recovered the scattered pieces. It did not tell me what those pieces meant.</p>
 <p>The system therefore grew from a search pipeline into a closed loop:</p>
-<pre class="text"><code>raw history ──▶ evidence ledger ──▶ task projections ──▶ reusable state
+<pre class="text ascii-diagram"><code>raw history ──▶ evidence ledger ──▶ task projections ──▶ reusable state
       ▲                                                           │
       └──────────────── corrections / new artifacts ──────────────┘</code></pre>
 <p>Search finds material related to a question. Memory is the machinery that works out what the material refers to, what it can prove, what is current, how it should be represented for a specific task, and what is worth carrying forward.</p>
 <p>Each question emerged as more of my working context accumulated in conversations. Finding the text was the first problem. Recovering the state required progressively more machinery.</p>
 <p>The distinction becomes clear through six progressive questions and the output each one produces.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="persistence-of-memory.jpg" class="essay-art img-fluid figure-img"></p>
+<figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
+</figure>
+</div>
 <section id="the-workload-questions-that-cross-threads" class="level2">
 <h2 class="anchored" data-anchor-id="the-workload-questions-that-cross-threads">The workload: questions that cross threads</h2>
 <p>The archive spans six sources, but the volume is heavily skewed:</p>
-<pre class="text"><code>words per source
+<pre class="text ascii-diagram"><code>words per source
 
 AI Studio   ║████████████████████████████████████  20.5M
 Claude      ║███████████████                       8.5M
@@ -511,7 +494,7 @@ Claude Code ║·                                    0.04M
 <p><em>(Word counts are measured directly from normalized message text. Model token counts vary depending on tokenizers, chunk boundaries, and prompt overhead.)</em></p>
 <p>AI Studio accounts for roughly 57% of the total words despite representing only 20% of the conversations. Measuring corpus size purely by thread count hides where the substantive technical weight lives.</p>
 <p>Querying this corpus requires answering six progressively harder questions:</p>
-<pre class="text"><code>FIND          Where was this discussed?
+<pre class="text ascii-diagram"><code>FIND          Where was this discussed?
   │
   ▼
 IDENTIFY      What durable entity does it belong to?
@@ -543,6 +526,7 @@ search → identity → authority → time → projection → memory</code></pre
 <section id="normalizing-six-conversation-formats" class="level3">
 <h3 class="anchored" data-anchor-id="normalizing-six-conversation-formats">Normalizing six conversation formats</h3>
 <p>Each source platform exports an incompatible data model with its own edge cases:</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -573,6 +557,7 @@ search → identity → authority → time → projection → memory</code></pre
 </tr>
 </tbody>
 </table>
+</div>
 <p>Source adapters parse raw exports, convert them into a uniform schema, and attach permanent locators (<code>source_id</code>, <code>conversation_id</code>, <code>turn_index</code>).</p>
 <p>This establishes a core invariant:</p>
 <blockquote class="blockquote">
@@ -613,7 +598,7 @@ Matches:  6 distinct implementation surfaces
 <p>The pipeline extracts a model-generated facet for each conversation (such as the core user intent), embeds the facets, and clusters them.</p>
 <p>Crucially, base clusters are <strong>named contrastively</strong>: representative cluster members are shown alongside nearby non-members so the model describes what makes the cluster distinct, not merely what its members have in common.</p>
 <p>Higher levels are generated bottom-up: cluster descriptions are embedded, grouped into neighborhoods, proposed as candidate parent nodes, deduplicated, assigned children, and finally <strong>renamed only after knowing which children they actually received</strong>:</p>
-<pre class="text"><code>6,604 conversations
+<pre class="text ascii-diagram"><code>6,604 conversations
         │ generate one facet each
         ▼
 ┌─ facets ─────────────────────────────────┐
@@ -631,6 +616,7 @@ Matches:  6 distinct implementation surfaces
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</code></pre>
 <p>Two steps prevent semantic drift: <strong>naming a cluster against what it excludes</strong>, and <strong>naming a parent node only after its children are finalized</strong>.</p>
 <p>This semantic index and the canonical entity map solve distinct problems:</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -653,8 +639,9 @@ Matches:  6 distinct implementation surfaces
 </tr>
 </tbody>
 </table>
+</div>
 <p>The two mechanisms intersect without collapsing into each other:</p>
-<pre class="text"><code>source records             canonical identity       semantic views
+<pre class="text ascii-diagram"><code>source records             canonical identity       semantic views
 
 conversation A ─┐
 conversation B ─┼─ same thing ─▶ Project P ─┬─▶ theme: memory systems
@@ -666,7 +653,7 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 <section id="example-output-canonical-entity-relationship-discovery" class="level3">
 <h3 class="anchored" data-anchor-id="example-output-canonical-entity-relationship-discovery">Example Output: Canonical Entity &amp; Relationship Discovery</h3>
 <p>Canonicalization must avoid over-merging. Companion tools and related codebases must remain separate entities connected by explicit, typed relationships rather than being collapsed into a single alias:</p>
-<pre class="text"><code>C065 — LeJEPA Interactive Demos
+<pre class="text ascii-diagram"><code>C065 — LeJEPA Interactive Demos
         browser experiments, visual explanation, publication surfaces
 
                     pairs_with
@@ -691,6 +678,7 @@ C234 — Pure Python LeJEPA Training
 <h3 class="anchored" data-anchor-id="grounding-chat-in-external-evidence">Grounding chat in external evidence</h3>
 <p>Harder operational questions required integrating additional evidence sources:</p>
 <div class="table-responsive">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -722,6 +710,7 @@ C234 — Pure Python LeJEPA Training
 </tbody>
 </table>
 </div>
+</div>
 <p>These sources arrive via historical exports, scheduled API syncs, or authenticated fetches via a sandboxed browser. All sources conform to the same versioned record contract.</p>
 <p>The core architectural invariant is that <strong>every record retains sufficient provenance for downstream queries to evaluate its evidentiary weight.</strong></p>
 </section>
@@ -730,7 +719,7 @@ C234 — Pure Python LeJEPA Training
 <p>Retrieval asks: <em>What evidence exists?</em><br>
 Authority asks: <em>What can this evidence establish?</em></p>
 <p>The state model strictly decouples three layers:</p>
-<pre class="text"><code>╔═ evidence ledger ══╗   ┌─ interpretation ─┐   ┏━ accepted state ━┓
+<pre class="text ascii-diagram"><code>╔═ evidence ledger ══╗   ┌─ interpretation ─┐   ┏━ accepted state ━┓
 ║ source evidence in ║──▶│ reads several    │──▶┃ reviewed current ┃
 ║ a named revision   ║   │ records          │   ┃ view             ┃
 ╚════════════════════╝   └──────────────────┘   ┗━━━━━━━━━┯━━━━━━━━┛
@@ -755,7 +744,7 @@ Authority asks: <em>What can this evidence establish?</em></p>
 <section id="example-output-the-maturity-audit" class="level3">
 <h3 class="anchored" data-anchor-id="example-output-the-maturity-audit">Example Output: The Maturity Audit</h3>
 <p>Inspecting the evidence for LeJEPA separated running code from conversational proposals:</p>
-<pre class="text"><code>Component                Inspected Evidence          Maturity Decision
+<pre class="text ascii-diagram"><code>Component                Inspected Evidence          Maturity Decision
 ───────────────────────────────────────────────────────────────────────────
 Python / C++ Core        Repo commits, clean tests   Implemented
 WebGL Browser Port       Single-file HTML/JS canvas  Working prototype
@@ -771,7 +760,7 @@ Speculative Extensions   Chat proposals only         Concept (not built)</code><
 <p>During one ingestion run, a fresh ChatGPT export contained 174 conversations that were significantly shorter than the versions already stored in the archive.</p>
 <p>Whether caused by branch selection bugs, server-side data retention issues, or export format shifts, automatically overwriting existing records with the latest download would have permanently destroyed detail.</p>
 <p>The importer retained the new export, but quarantined those 174 records from promotion:</p>
-<pre class="text"><code>raw arrival
+<pre class="text ascii-diagram"><code>raw arrival
     │ normalize
     ▼
 ╔═ evidence ledger ════╗
@@ -798,7 +787,7 @@ Speculative Extensions   Chat proposals only         Concept (not built)</code><
 <section id="example-output-revision-quarantine" class="level3">
 <h3 class="anchored" data-anchor-id="example-output-revision-quarantine">Example Output: Revision Quarantine</h3>
 <p>In one verified instance, a 250-message conversation regressed to 179 messages in a subsequent export. The temporal engine preserved the fuller past:</p>
-<pre class="text"><code>Observation               Revision ID    Messages    Bytes     State Decision
+<pre class="text ascii-diagram"><code>Observation               Revision ID    Messages    Bytes     State Decision
 ───────────────────────────────────────────────────────────────────────────
 Prior Retained Version    4e8fe683...    250         146 KB    Active Current View
 Later Exported Version    3d0bf4cf...    179          81 KB    Quarantined (Held)</code></pre>
@@ -831,7 +820,7 @@ Later Exported Version    3d0bf4cf...    179          81 KB    Quarantined (Held
 <section id="relevance-is-task-conditioned" class="level3">
 <h3 class="anchored" data-anchor-id="relevance-is-task-conditioned">Relevance is task-conditioned</h3>
 <p>Consider four distinct projections derived from the same project history:</p>
-<pre class="text"><code>same project history
+<pre class="text ascii-diagram"><code>same project history
         │
         ├─ year-in-review
         │    → temporal deltas, major shifts, recurring themes
@@ -902,7 +891,7 @@ Resulting projection:
 <h3 class="anchored" data-anchor-id="the-agent-as-an-adaptive-query-planner">The agent as an adaptive query planner</h3>
 <p>Fixed retrieval pipelines (<code>embed → retrieve → rerank → generate</code>) fail when intermediate evidence alters the direction of the inquiry.</p>
 <p>In complex investigations, the conversational agent acts as an adaptive query planner, alternating between exact relational queries, semantic searches, artifact inspections, and dynamic facet creation:</p>
-<pre class="text"><code>   hypothesis
+<pre class="text ascii-diagram"><code>   hypothesis
        │
        ▼
 ┌─ choose tool and query ─┐ ◀────────────┐
@@ -929,6 +918,7 @@ Resulting projection:
 <p>A novel investigation may produce a highly specific projection that is valuable once and useless afterward. Other views—such as a verified entity map or project roster—recur constantly.</p>
 <p>Recomputing those views on every read costs more than compute: it introduces variance. Two model invocations may not produce the same interpretation.</p>
 <p>The promotion boundary is operational:</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -963,6 +953,7 @@ Resulting projection:
 </tr>
 </tbody>
 </table>
+</div>
 <p>A task-generated projection remains temporary as long as those conditions remain uncertain.</p>
 <section id="materialization-requires-provenance" class="level3">
 <h3 class="anchored" data-anchor-id="materialization-requires-provenance">Materialization requires provenance</h3>
@@ -982,7 +973,7 @@ Resulting projection:
 <h3 class="anchored" data-anchor-id="closing-the-write-loop">Closing the write loop</h3>
 <p>Memory improves when later work can update state without rewriting history.</p>
 <p>When an investigation uncovers missing context, a human corrects a misattribution, or a production release supersedes a design RFC, these events are committed as new typed records in the evidence ledger:</p>
-<pre class="text"><code>╔═ evidence ledger ═╗
+<pre class="text ascii-diagram"><code>╔═ evidence ledger ═╗
 ╚═════════╤═════════╝
           │ investigate
           ▼
@@ -1013,7 +1004,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <section id="the-architecture-now-with-the-boxes-explained" class="level2">
 <h2 class="anchored" data-anchor-id="the-architecture-now-with-the-boxes-explained">The architecture, now with the boxes explained</h2>
 <p>With every failure mode addressed, the full system architecture can now be understood:</p>
-<pre class="text"><code>     historical exports                                live capture
+<pre class="text ascii-diagram"><code>     historical exports                                live capture
              │                                               │
              └─────────────────────────┬─────────────────────┘
                                        ▼
@@ -1044,6 +1035,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 │                                                          │
 └─── promotion / correction ───────────────────────────────┘</code></pre>
 <p>The six progressive questions map directly to the system layers:</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1082,6 +1074,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 </tr>
 </tbody>
 </table>
+</div>
 <p>The foundation is the immutable evidence ledger. Above that foundation, three read paths operate:</p>
 <ol type="1">
 <li><strong>Batch indexes</strong> expose broad structure that is useful across many tasks.</li>
@@ -1099,6 +1092,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <section id="project-genealogy" class="level3">
 <h3 class="anchored" data-anchor-id="project-genealogy">Project genealogy</h3>
 <div class="table-responsive">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1134,6 +1128,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 </tbody>
 </table>
 </div>
+</div>
 <p>Four principles survived every rewrite:</p>
 <ol type="1">
 <li><strong>Keep evidence immutable; make views disposable.</strong> Raw arrivals land in an append-only ledger. Indexes, entity maps, and current views can be rebuilt or thrown away at any time.</li>
@@ -1154,6 +1149,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <p>The next problem is not making private memory universally searchable. It is constructing something useful for a particular reader while preserving the boundaries that made the archive safe enough to exist. If memory decides what should be carried forward, it eventually also has to understand what should remain private.</p>
 
 
+<nav class="essay-next" aria-label="Continue reading"><p class="next-label">Read next</p><p class="next-title"><a href="../../posts/evaluation-systems/">The Evaluation Machine</a></p><p class="reading-links"><a href="../../posts/">All writing</a><a href="https://arjunsriva.substack.com/">Subscribe on Substack</a></p></nav>
 </section>
 
 </main> <!-- /main -->
@@ -1571,6 +1567,36 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Arjun Srivastava · Tokyo</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.substack.com/">
+<p>Subscribe</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../index.xml">
+<p>Writing RSS</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arjunbazinga">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="../../static/reading-tools.js" defer=""></script>
 
 
 

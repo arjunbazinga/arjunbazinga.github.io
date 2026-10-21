@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,14 +80,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-98cf82f7baee0e05ae06e0de2cd83fcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-a515e054079012129989d5397ee3c9c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c37dfa679b2c1d9e43fdc3941f76ee37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -144,15 +144,18 @@ ga('send', {
 </style>
 
 
+<link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="AllReduce, All the Way Down – Arjun Srivastava">
 <meta property="og:description" content="A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/communication-collectives/thumbnail.svg">
 <meta property="og:site_name" content="Arjun Srivastava">
 <meta name="twitter:title" content="AllReduce, All the Way Down – Arjun Srivastava">
 <meta name="twitter:description" content="A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/communication-collectives/thumbnail.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed essay-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -317,7 +320,7 @@ ga('send', {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -332,30 +335,20 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../podcast"> 
-<span class="menu-text">Podcast</span></a>
+    <a class="nav-link" href="../../posts/"> 
+<span class="menu-text">Writing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts"> 
-<span class="menu-text">Thoughts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://arjunsriva.com/library"> 
+    <a class="nav-link" href="https://www.arjunsriva.com/library/"> 
 <span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast/"> 
+<span class="menu-text">Podcast</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -366,44 +359,11 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">AllReduce, All the Way Down</h1>
-            <p class="subtitle lead">How collective semantics become programs for real machines</p>
-                  <div>
-        <div class="description">
-          A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">AI</div>
-                <div class="quarto-category">Systems</div>
-                <div class="quarto-category">Distributed Computing</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 8, 2026</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
@@ -424,11 +384,43 @@ ga('send', {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">AllReduce, All the Way Down</h1>
+<p class="subtitle lead">How collective semantics become programs for real machines</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Systems</div>
+    <div class="quarto-category">Distributed Computing</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 8, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <p>Two GPUs finish a backward pass with different gradients.</p>
@@ -482,7 +474,7 @@ Rank 3: [A B C D]</code></pre>
 <p>That is an <strong>AllGather</strong>.</p>
 <p>Nothing in that definition says how <code>A</code>, <code>B</code>, <code>C</code> and <code>D</code> should move. They might circulate around a ring, travel through a tree, or follow some topology-specific schedule. AllGather only describes the result.</p>
 <p>The other familiar <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html">NCCL collectives</a> work the same way. AllReduce leaves every rank with the reduction. ReduceScatter leaves each rank with one reduced shard. AllToAll redistributes different parts of each input to different destinations.</p>
-<pre class="text"><code>ALLGATHER
+<pre class="text ascii-diagram"><code>ALLGATHER
 
 before            ── gather shards ──▶   after
 
@@ -546,7 +538,7 @@ R1: B0 B1 B2 B3
 R2: C0 C1 C2 C3
 R3: D0 D1 D2 D3</code></pre>
 <p>Rather than animate all four chunks at once, follow chunk 0.</p>
-<pre class="text"><code>RING ALLREDUCE · FOLLOW CHUNK 0
+<pre class="text ascii-diagram"><code>RING ALLREDUCE · FOLLOW CHUNK 0
 
 other chunks move concurrently around the same ring
 
@@ -626,7 +618,7 @@ R3    [ Σ0 ]</code></pre>
 <p>That comparison still assumes an unrealistically tidy machine.</p>
 <p>So far, <code>R0 → R1</code> has just been an arrow.</p>
 <p>On an actual cluster it might be an NVLink transfer. Another pair of ranks may cross PCIe. A transfer leaving the server goes through a NIC and an InfiniBand or RoCE fabric. <a href="https://developer.nvidia.com/gpudirect">GPUDirect RDMA</a> lets a suitable device access GPU memory directly rather than staging the payload through CPU memory.</p>
-<pre class="text"><code>PHYSICAL PLACEMENT
+<pre class="text ascii-diagram"><code>PHYSICAL PLACEMENT
 
 ╔═ node A ═════════════════════╗      ╔═ node B ═════════════════════╗
 ║  R0     R1     R2     R3     ║      ║  R4     R5     R6     R7     ║
@@ -656,7 +648,7 @@ fabric crossings: 2</code></pre>
 <p>Even the reduction can happen in different places.</p>
 <p>A straightforward implementation could receive data, write it to memory, reduce it, then read and forward the result. A specialized kernel can combine some of those steps. On supported systems, NVLink SHARP can move some reduction work into the NVSwitch domain instead of treating the fabric as a passive pipe.</p>
 <p>“Ring AllReduce” names much less of the implementation than it first appears to.</p>
-<pre class="text"><code>semantic request        algorithm          topology mapping
+<pre class="text ascii-diagram"><code>semantic request        algorithm          topology mapping
 ┌───────────────┐       ┌─────────┐        ┌──────────────────────┐
 │   AllReduce   │──────▶│  Ring   │───────▶│ R0 ─▶ R1 ─▶ R2 ─▶ R3 │
 └───────────────┘       └─────────┘        └─────────┬───────────┘
@@ -676,7 +668,7 @@ fabric crossings: 2</code></pre>
 <p>By the time bytes move, the original semantic request has accumulated a large number of machine-specific decisions.</p>
 <p>The execution plan shares the machine with the model.</p>
 <p>During backpropagation, frameworks often start communicating gradients before backward has finished. On a timeline, much of that communication can appear hidden beneath compute.</p>
-<pre class="text"><code>SAME TIME INTERVAL
+<pre class="text ascii-diagram"><code>SAME TIME INTERVAL
 
 time ───────────────────────────────────────────────▶
 
@@ -710,7 +702,7 @@ NCCLX          ║▓                           N~1 SM
 <h2 class="anchored" data-anchor-id="when-the-workload-shapes-communication">When the Workload Shapes Communication</h2>
 <p>Dense data parallelism is almost ideal for a collective library. The same ranks repeatedly communicate similarly shaped gradient buffers. The pattern is known and regular.</p>
 <p>Expert parallelism is different.</p>
-<pre class="text"><code>DENSE DATA PARALLEL                         EXPERT PARALLEL
+<pre class="text ascii-diagram"><code>DENSE DATA PARALLEL                         EXPERT PARALLEL
 
 same peers, same-shaped buffers             destinations follow routing
 
@@ -741,7 +733,7 @@ continue computing</code></pre>
 <p>NCCL itself now exposes more of that layer.</p>
 <p>Starting with NCCL 2.28, NVIDIA added device-side communication APIs callable from CUDA kernels (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html">NCCL device-initiated communication</a>).</p>
 <p>The current Device API includes mechanisms for peer memory access, hardware multicast/reduction, GPU-initiated networking, and lower-level reduce/copy operations. These pieces can be used to construct custom or fused communication kernels rather than always invoking a complete host-launched collective (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html">NCCL Device API</a>).</p>
-<pre class="text"><code>FAMILIAR NCCL PATH
+<pre class="text ascii-diagram"><code>FAMILIAR NCCL PATH
 
                                       NCCL collective
 host ── ncclAllReduce() ──▶ ┏━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -835,6 +827,7 @@ The named collective remains available; device code can now reach below it.</cod
 </ul>
 
 
+<nav class="essay-next" aria-label="Continue reading"><p class="next-label">Read next</p><p class="next-title"><a href="../../posts/from-search-to-memory/">Rocketships for the Mind</a></p><p class="reading-links"><a href="../../posts/">All writing</a><a href="https://arjunsriva.substack.com/">Subscribe on Substack</a></p></nav>
 </section>
 </section>
 
@@ -1253,6 +1246,36 @@ The named collective remains available; device code can now reach below it.</cod
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Arjun Srivastava · Tokyo</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.substack.com/">
+<p>Subscribe</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../index.xml">
+<p>Writing RSS</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arjunbazinga">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="../../static/reading-tools.js" defer=""></script>
 
 
 

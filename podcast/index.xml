@@ -8,8 +8,8 @@
 <title>Arjun Srivastava</title>
 <link>https://www.arjunsriva.com/podcast/</link>
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
-<description>Curated AI papers, clearly explained.</description>
-<generator>quarto-1.10.18</generator>
+<description>Research-paper conversations for when you’d rather listen.</description>
+<generator>quarto-1.10.19</generator>
 <lastBuildDate>Tue, 06 May 2025 08:50:05 GMT</lastBuildDate>
 <item>
   <title>GAIA-2 Controllable Multi-View Generative World Model for Autonomous Driving</title>
@@ -17,58 +17,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>GAIA-2 introduces key innovations like multi-camera generation, structured conditioning inputs, and employs continuous latent space for better temporal coherence. Its applicability extends to potentially transforming testing and validation processes within autonomous driving development.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="GAIA-2 Controllable Multi-View Generative World Model for Autonomous Driving">
         <source src="../../../static/podcast_data/arxiv/audio/2503.20523.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2503.20523.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2503.20523.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2503.20523">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2503.20523.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2503.20523.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2503.20523">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>GAIA-2 introduces key innovations like multi-camera generation, structured conditioning inputs, and employs continuous latent space for better temporal coherence. Its applicability extends to potentially transforming testing and validation processes within autonomous driving development.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -76,6 +45,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -99,58 +69,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>The key takeaways for engineers/specialists include using the distillation scaling law for resource allocation decisions, understanding the importance of compute and data requirements, and resorting to supervised learning only when a well-designed plan for the teacher model is unavailable to avoid additional costs.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Distillation Scaling Laws">
         <source src="../../../static/podcast_data/arxiv/audio/2502.08606.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2502.08606.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2502.08606.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2502.08606">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2502.08606.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2502.08606.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2502.08606">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>The key takeaways for engineers/specialists include using the distillation scaling law for resource allocation decisions, understanding the importance of compute and data requirements, and resorting to supervised learning only when a well-designed plan for the teacher model is unavailable to avoid additional costs.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -158,6 +97,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -179,58 +119,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Engineers and specialists can learn about the importance of hardware alignment in designing sparse attention mechanisms, the benefits of training sparse attention models from scratch instead of applying sparsity post-hoc, and the significant speedups in training and inference efficiency achieved by Native Sparse Attention compared to Full Attention and other sparse attention methods.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention">
         <source src="../../../static/podcast_data/arxiv/audio/2502.11089.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2502.11089.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2502.11089.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2502.11089">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2502.11089.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2502.11089.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2502.11089">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Engineers and specialists can learn about the importance of hardware alignment in designing sparse attention mechanisms, the benefits of training sparse attention models from scratch instead of applying sparsity post-hoc, and the significant speedups in training and inference efficiency achieved by Native Sparse Attention compared to Full Attention and other sparse attention methods.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -238,6 +147,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -261,58 +171,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Streaming DiLoCo introduces three main improvements: streaming synchronization reduces peak bandwidth, overlapping communication with computation hides latency, and quantization compresses data exchanged between workers. The research shows similar performance to Data-Parallel training but with significantly reduced bandwidth, making it a promising approach for distributed LLM training.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Streaming DiLoCo: Efficient Distributed Training of Large Language Models">
         <source src="../../../static/podcast_data/arxiv/audio/2501.18512v1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2501.18512v1.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2501.18512v1.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2501.18512v1">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2501.18512v1.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2501.18512v1.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2501.18512v1">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Streaming DiLoCo introduces three main improvements: streaming synchronization reduces peak bandwidth, overlapping communication with computation hides latency, and quantization compresses data exchanged between workers. The research shows similar performance to Data-Parallel training but with significantly reduced bandwidth, making it a promising approach for distributed LLM training.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -320,6 +199,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -343,58 +223,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Engineers and specialists can take away the importance of considering partitioning strategies and low-level optimizations for efficiently scaling Transformer inference. The use of an analytical cost model, multi-query attention, and batch-wise sharding are highlighted as crucial for scaling context length and maximizing hardware utilization.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Efficiently Scaling Transformer Inference">
         <source src="../../../static/podcast_data/arxiv/audio/2211.05102.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2211.05102.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2211.05102.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2211.05102">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2211.05102.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2211.05102.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2211.05102">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Engineers and specialists can take away the importance of considering partitioning strategies and low-level optimizations for efficiently scaling Transformer inference. The use of an analytical cost model, multi-query attention, and batch-wise sharding are highlighted as crucial for scaling context length and maximizing hardware utilization.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -402,6 +251,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -424,58 +274,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways include the introduction of RLVR for task alignment, emphasis on data quality and decontamination for model generalization, and the significance of releasing comprehensive training resources for transparent and reproducible results.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Tülu 3: Pushing Frontiers in Open Language Model Post-Training">
         <source src="../../../static/podcast_data/arxiv/audio/2411.15124.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2411.15124.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2411.15124.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2411.15124">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2411.15124.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2411.15124.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2411.15124">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways include the introduction of RLVR for task alignment, emphasis on data quality and decontamination for model generalization, and the significance of releasing comprehensive training resources for transparent and reproducible results.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -483,6 +302,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -505,58 +325,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways for engineers/specialists from the paper include the introduction of a novel end-to-end architecture for GUI agents, utilizing enhanced perception for improved understanding of GUI elements, implementing unified action modeling for platform-agnostic interactions, incorporating system-2 reasoning for deliberate decision-making, and utilizing iterative training with reflective online traces to continuously improve model performance.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Bytedance: UI-TARS: End-to-End Model for Automated GUI Interaction">
         <source src="../../../static/podcast_data/arxiv/audio/2501.12326.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2501.12326.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2501.12326.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2501.12326">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2501.12326.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2501.12326.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2501.12326">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways for engineers/specialists from the paper include the introduction of a novel end-to-end architecture for GUI agents, utilizing enhanced perception for improved understanding of GUI elements, implementing unified action modeling for platform-agnostic interactions, incorporating system-2 reasoning for deliberate decision-making, and utilizing iterative training with reflective online traces to continuously improve model performance.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -564,6 +353,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -585,58 +375,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>The key takeaways for engineers/specialists are: 1. Powerful reasoning can emerge from pure reinforcement learning without strict supervised fine-tuning. 2. A multi-stage pipeline using cold-start data can significantly improve the results of RL training. 3. Effective distillation techniques allow transferring reasoning knowledge from larger models to smaller, more efficient models for practical deployment.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning">
         <source src="../../../static/podcast_data/arxiv/audio/deepseek-r1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/deepseek-r1.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/deepseek-r1.txt">Read transcript</a> · <a href="https://arxiv.org/abs/deepseek-r1">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/deepseek-r1.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/deepseek-r1.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/deepseek-r1">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>The key takeaways for engineers/specialists are: 1. Powerful reasoning can emerge from pure reinforcement learning without strict supervised fine-tuning. 2. A multi-stage pipeline using cold-start data can significantly improve the results of RL training. 3. Effective distillation techniques allow transferring reasoning knowledge from larger models to smaller, more efficient models for practical deployment.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -644,6 +403,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -668,58 +428,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways include the introduction of innovative techniques such as the auxiliary-loss-free load balancing method for Mixture-of-Experts models, the multi-token prediction training objective for densified training and faster inference, FP8 mixed-precision training for reduced memory usage, and the optimized DualPipe algorithm for efficient distributed training. The performance of DeepSeek-V3 on coding and math tasks surpasses leading closed-source models at a lower training cost, making it a significant contribution to the open-source community.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="DeepSeek-V3: Advancements in Open-Source Large Language Models">
         <source src="../../../static/podcast_data/arxiv/audio/2412.19437.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2412.19437.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2412.19437.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2412.19437">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2412.19437.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2412.19437.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2412.19437">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways include the introduction of innovative techniques such as the auxiliary-loss-free load balancing method for Mixture-of-Experts models, the multi-token prediction training objective for densified training and faster inference, FP8 mixed-precision training for reduced memory usage, and the optimized DualPipe algorithm for efficient distributed training. The performance of DeepSeek-V3 on coding and math tasks surpasses leading closed-source models at a lower training cost, making it a significant contribution to the open-source community.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -727,6 +456,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -749,58 +479,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>The key takeaways for engineers/specialists are that effective memory models need to be dynamic, surprise-driven, and have mechanisms to forget the past. The research showcases how incorporating a neural long term memory module that continuously learns at test time can lead to higher performance in language modeling, common-sense reasoning, needle-in-a-haystack tasks, DNA modeling, and time-series forecasting. By introducing the Titans architecture, the paper provides a framework for effectively integrating such memory modules into various tasks.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Titans: Learning to Memorize at Test Time">
         <source src="../../../static/podcast_data/arxiv/audio/2501.00663v1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2501.00663v1.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2501.00663v1.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2501.00663v1">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2501.00663v1.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2501.00663v1.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2501.00663v1">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>The key takeaways for engineers/specialists are that effective memory models need to be dynamic, surprise-driven, and have mechanisms to forget the past. The research showcases how incorporating a neural long term memory module that continuously learns at test time can lead to higher performance in language modeling, common-sense reasoning, needle-in-a-haystack tasks, DNA modeling, and time-series forecasting. By introducing the Titans architecture, the paper provides a framework for effectively integrating such memory modules into various tasks.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -808,6 +507,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -830,58 +530,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways are that SVF outperforms traditional fine-tuning methods like LoRA in efficiency, flexibility, and robustness. The paper also introduces innovative adaptation strategies like Few-Shot Adaptation using the Cross-Entropy Method, showcasing the effectiveness of the Transformer2 framework in adaptive AI systems.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Transformer2: Self-Adaptive Large Language Models">
         <source src="../../../static/podcast_data/arxiv/audio/2501.06252.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2501.06252.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2501.06252.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2501.06252">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2501.06252.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2501.06252.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2501.06252">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways are that SVF outperforms traditional fine-tuning methods like LoRA in efficiency, flexibility, and robustness. The paper also introduces innovative adaptation strategies like Few-Shot Adaptation using the Cross-Entropy Method, showcasing the effectiveness of the Transformer2 framework in adaptive AI systems.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -889,6 +558,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -912,58 +582,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Engineers and specialists can learn from this paper that training an LSTM-based optimizer can outperform traditional hand-crafted optimization algorithms across various tasks. The use of coordinatewise LSTMs and backpropagation through time for training provides scalability, efficiency, and generalizability. The approach shows promise for automating hyperparameter tuning, developing specialized optimizers, and enhancing the robustness of neural networks.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Learning to Learn Optimization Algorithms with LSTM Networks">
         <source src="../../../static/podcast_data/arxiv/audio/1606.04474.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/1606.04474.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/1606.04474.txt">Read transcript</a> · <a href="https://arxiv.org/abs/1606.04474">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/1606.04474.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/1606.04474.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/1606.04474">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Engineers and specialists can learn from this paper that training an LSTM-based optimizer can outperform traditional hand-crafted optimization algorithms across various tasks. The use of coordinatewise LSTMs and backpropagation through time for training provides scalability, efficiency, and generalizability. The approach shows promise for automating hyperparameter tuning, developing specialized optimizers, and enhancing the robustness of neural networks.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -971,6 +610,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -993,58 +633,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways: TRPO offers monotonic policy improvements by using a trust region constraint controlled by KL divergence, which leads to more robust and reliable learning. The paper demonstrated the algorithm’s success in complex tasks like robotic locomotion and Atari games, highlighting its flexibility and effectiveness.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Trust Region Policy Optimization">
         <source src="../../../static/podcast_data/arxiv/audio/1502.05477.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/1502.05477.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/1502.05477.txt">Read transcript</a> · <a href="https://arxiv.org/abs/1502.05477">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/1502.05477.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/1502.05477.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/1502.05477">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways: TRPO offers monotonic policy improvements by using a trust region constraint controlled by KL divergence, which leads to more robust and reliable learning. The paper demonstrated the algorithm’s success in complex tasks like robotic locomotion and Atari games, highlighting its flexibility and effectiveness.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1052,6 +661,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1074,58 +684,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>The SOAP search space allows for flexible parallelization strategies across Sample, Operation, Attribute, and Parameter dimensions, outperforming traditional methods by up to 3.8 times. FlexFlow’s simulator predicts performance without real executions, reducing search time and enhancing efficiency.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Efficient Deep Learning Parallelization using SOAP Search Space and FlexFlow Framework">
         <source src="../../../static/podcast_data/arxiv/audio/1807.05358.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/1807.05358.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/1807.05358.txt">Read transcript</a> · <a href="https://arxiv.org/abs/1807.05358">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/1807.05358.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/1807.05358.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/1807.05358">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>The SOAP search space allows for flexible parallelization strategies across Sample, Operation, Attribute, and Parameter dimensions, outperforming traditional methods by up to 3.8 times. FlexFlow’s simulator predicts performance without real executions, reducing search time and enhancing efficiency.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1133,6 +712,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1156,58 +736,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Engineers and specialists can benefit from the paper by understanding how DR revolutionizes large-scale recommendation systems through its innovative approach of learning efficient structures directly from user-item interactions. By adopting a path-based mechanism and utilizing multi-path designs, DR can provide accurate recommendations comparable to computationally expensive methods while remaining more efficient. The ability of DR to handle diverse preferences, promote less popular content, and improve user engagement highlights its potential to reshape recommendation systems for better performance and inclusivity.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Deep Retrieval: Learning Efficient Structures for Large-Scale Recommendation Systems">
         <source src="../../../static/podcast_data/arxiv/audio/2007.07203.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2007.07203.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2007.07203.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2007.07203">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2007.07203.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2007.07203.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2007.07203">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Engineers and specialists can benefit from the paper by understanding how DR revolutionizes large-scale recommendation systems through its innovative approach of learning efficient structures directly from user-item interactions. By adopting a path-based mechanism and utilizing multi-path designs, DR can provide accurate recommendations comparable to computationally expensive methods while remaining more efficient. The ability of DR to handle diverse preferences, promote less popular content, and improve user engagement highlights its potential to reshape recommendation systems for better performance and inclusivity.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1215,6 +764,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1237,58 +787,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways for engineers/specialists include the importance of efficient sharing of user representations in personalized advertising systems, the benefits of utilizing upstream models for downstream tasks, and the significance of handling dynamic user features and maintaining embedding freshness for improved performance.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Scaling User Modeling for Personalized Advertising at Meta">
         <source src="../../../static/podcast_data/arxiv/audio/2311.09544.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2311.09544.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2311.09544.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2311.09544">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2311.09544.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2311.09544.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2311.09544">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways for engineers/specialists include the importance of efficient sharing of user representations in personalized advertising systems, the benefits of utilizing upstream models for downstream tasks, and the significance of handling dynamic user features and maintaining embedding freshness for improved performance.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1296,6 +815,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1318,58 +838,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>LiNR’s key contributions include model-based retrieval with pre-filtering, quantization techniques for memory optimization, and integration of GPU capabilities. It outperformed traditional systems, leading to significant increases in user interactions, unique users, and content engagement.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="LiNR: Revolutionizing Large-Scale Retrieval for Recommendation Systems">
         <source src="../../../static/podcast_data/arxiv/audio/2407.13218.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2407.13218.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2407.13218.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2407.13218">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2407.13218.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.13218.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2407.13218">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>LiNR’s key contributions include model-based retrieval with pre-filtering, quantization techniques for memory optimization, and integration of GPU capabilities. It outperformed traditional systems, leading to significant increases in user interactions, unique users, and content engagement.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1377,6 +866,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1400,58 +890,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>The key takeaways for engineers/specialists from the paper are the importance of accurate user response prediction for targeted advertising, the need for advanced bidding strategies based on estimated utility, and the significance of dynamic pricing optimization and ad fraud detection techniques to ensure a fair and efficient advertising ecosystem.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Comprehensive Guide to Real-Time Bidding (RTB): Challenges and Opportunities">
         <source src="../../../static/podcast_data/arxiv/audio/1610.03013.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/1610.03013.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/1610.03013.txt">Read transcript</a> · <a href="https://arxiv.org/abs/1610.03013">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/1610.03013.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/1610.03013.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/1610.03013">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>The key takeaways for engineers/specialists from the paper are the importance of accurate user response prediction for targeted advertising, the need for advanced bidding strategies based on estimated utility, and the significance of dynamic pricing optimization and ad fraud detection techniques to ensure a fair and efficient advertising ecosystem.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1459,6 +918,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1484,58 +944,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Engineers can leverage LLM.int8() to reduce memory requirements and efficiently run large language models without performance degradation, even at scales exceeding billions of parameters. The method incorporates vector-wise quantization and mixed-precision decomposition to maintain full 16-bit performance in perplexity and zeroshot accuracy across large models, demonstrating significant memory savings and modest speedups for inference.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Efficient Inference for Large Language Models with LLM.int8()">
         <source src="../../../static/podcast_data/arxiv/audio/2208.07339.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2208.07339.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2208.07339.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2208.07339">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2208.07339.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2208.07339.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2208.07339">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Engineers can leverage LLM.int8() to reduce memory requirements and efficiently run large language models without performance degradation, even at scales exceeding billions of parameters. The method incorporates vector-wise quantization and mixed-precision decomposition to maintain full 16-bit performance in perplexity and zeroshot accuracy across large models, demonstrating significant memory savings and modest speedups for inference.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1543,6 +972,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'
@@ -1565,58 +995,27 @@
   <description><![CDATA[ 
     
   
-    
       
 
   
-  <p>Key takeaways include the importance of diverse, large datastores for enhancing language model performance, the cost efficiency of constructing datastores compared to training models, and the potential for smaller models with access to large datastores to outperform larger models with limited data access.</p>
-  
-  
-
-
-
-  <div class="podcast-section">
-
-    <h3 class="anchored">Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="../../../static/podcast_data/feed.xml"><img src="https://www.arjunsriva.com/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed" width="40"></a>
-
-
-
-    <h3 class="anchored">Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls="">
+      <audio id="player" controls="" preload="metadata" aria-label="Enhancing Language Models with a Massive Datastore">
         <source src="../../../static/podcast_data/arxiv/audio/2407.12854.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="../../../static/podcast_data/arxiv/audio/2407.12854.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="../../../static/podcast_data/arxiv/transcripts/2407.12854.txt">Read transcript</a> · <a href="https://arxiv.org/abs/2407.12854">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4 class="anchored">Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/2407.12854.mp3" download>Download audio</a></li> -->
-        <li><a href="../../../static/podcast_data/arxiv/transcripts/2407.12854.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/2407.12854">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    <p>Key takeaways include the importance of diverse, large datastores for enhancing language model performance, the cost efficiency of constructing datastores compared to training models, and the potential for smaller models with access to large datastores to outperform larger models with limited data access.</p>
+    
+    
+  </details>
 
-    <h4 class="anchored">The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -1624,6 +1023,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'

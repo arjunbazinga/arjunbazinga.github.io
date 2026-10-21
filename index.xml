@@ -8,14 +8,13 @@
 <title>Arjun Srivastava</title>
 <link>https://www.arjunsriva.com/</link>
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
-<description></description>
-<generator>quarto-1.10.18</generator>
+<description>Engineering leadership, machine learning, data platforms, and distributed systems. Selected essays and interactive research by Arjun Srivastava.</description>
+<generator>quarto-1.10.19</generator>
 <lastBuildDate>Tue, 08 Sep 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>AllReduce, All the Way Down</title>
   <link>https://www.arjunsriva.com/posts/communication-collectives/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -88,7 +87,7 @@ Rank 3: [A B C D]</code></pre>
 <p>That is an <strong>AllGather</strong>.</p>
 <p>Nothing in that definition says how <code>A</code>, <code>B</code>, <code>C</code> and <code>D</code> should move. They might circulate around a ring, travel through a tree, or follow some topology-specific schedule. AllGather only describes the result.</p>
 <p>The other familiar <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html">NCCL collectives</a> work the same way. AllReduce leaves every rank with the reduction. ReduceScatter leaves each rank with one reduced shard. AllToAll redistributes different parts of each input to different destinations.</p>
-<pre class="text"><code>ALLGATHER
+<pre class="text ascii-diagram"><code>ALLGATHER
 
 before            ── gather shards ──▶   after
 
@@ -152,7 +151,7 @@ R1: B0 B1 B2 B3
 R2: C0 C1 C2 C3
 R3: D0 D1 D2 D3</code></pre>
 <p>Rather than animate all four chunks at once, follow chunk 0.</p>
-<pre class="text"><code>RING ALLREDUCE · FOLLOW CHUNK 0
+<pre class="text ascii-diagram"><code>RING ALLREDUCE · FOLLOW CHUNK 0
 
 other chunks move concurrently around the same ring
 
@@ -232,7 +231,7 @@ R3    [ Σ0 ]</code></pre>
 <p>That comparison still assumes an unrealistically tidy machine.</p>
 <p>So far, <code>R0 → R1</code> has just been an arrow.</p>
 <p>On an actual cluster it might be an NVLink transfer. Another pair of ranks may cross PCIe. A transfer leaving the server goes through a NIC and an InfiniBand or RoCE fabric. <a href="https://developer.nvidia.com/gpudirect">GPUDirect RDMA</a> lets a suitable device access GPU memory directly rather than staging the payload through CPU memory.</p>
-<pre class="text"><code>PHYSICAL PLACEMENT
+<pre class="text ascii-diagram"><code>PHYSICAL PLACEMENT
 
 ╔═ node A ═════════════════════╗      ╔═ node B ═════════════════════╗
 ║  R0     R1     R2     R3     ║      ║  R4     R5     R6     R7     ║
@@ -262,7 +261,7 @@ fabric crossings: 2</code></pre>
 <p>Even the reduction can happen in different places.</p>
 <p>A straightforward implementation could receive data, write it to memory, reduce it, then read and forward the result. A specialized kernel can combine some of those steps. On supported systems, NVLink SHARP can move some reduction work into the NVSwitch domain instead of treating the fabric as a passive pipe.</p>
 <p>“Ring AllReduce” names much less of the implementation than it first appears to.</p>
-<pre class="text"><code>semantic request        algorithm          topology mapping
+<pre class="text ascii-diagram"><code>semantic request        algorithm          topology mapping
 ┌───────────────┐       ┌─────────┐        ┌──────────────────────┐
 │   AllReduce   │──────▶│  Ring   │───────▶│ R0 ─▶ R1 ─▶ R2 ─▶ R3 │
 └───────────────┘       └─────────┘        └─────────┬───────────┘
@@ -282,7 +281,7 @@ fabric crossings: 2</code></pre>
 <p>By the time bytes move, the original semantic request has accumulated a large number of machine-specific decisions.</p>
 <p>The execution plan shares the machine with the model.</p>
 <p>During backpropagation, frameworks often start communicating gradients before backward has finished. On a timeline, much of that communication can appear hidden beneath compute.</p>
-<pre class="text"><code>SAME TIME INTERVAL
+<pre class="text ascii-diagram"><code>SAME TIME INTERVAL
 
 time ───────────────────────────────────────────────▶
 
@@ -316,7 +315,7 @@ NCCLX          ║▓                           N~1 SM
 <h2 class="anchored" data-anchor-id="when-the-workload-shapes-communication">When the Workload Shapes Communication</h2>
 <p>Dense data parallelism is almost ideal for a collective library. The same ranks repeatedly communicate similarly shaped gradient buffers. The pattern is known and regular.</p>
 <p>Expert parallelism is different.</p>
-<pre class="text"><code>DENSE DATA PARALLEL                         EXPERT PARALLEL
+<pre class="text ascii-diagram"><code>DENSE DATA PARALLEL                         EXPERT PARALLEL
 
 same peers, same-shaped buffers             destinations follow routing
 
@@ -347,7 +346,7 @@ continue computing</code></pre>
 <p>NCCL itself now exposes more of that layer.</p>
 <p>Starting with NCCL 2.28, NVIDIA added device-side communication APIs callable from CUDA kernels (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/deviceapi.html">NCCL device-initiated communication</a>).</p>
 <p>The current Device API includes mechanisms for peer memory access, hardware multicast/reduction, GPU-initiated networking, and lower-level reduce/copy operations. These pieces can be used to construct custom or fused communication kernels rather than always invoking a complete host-launched collective (<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/api/device.html">NCCL Device API</a>).</p>
-<pre class="text"><code>FAMILIAR NCCL PATH
+<pre class="text ascii-diagram"><code>FAMILIAR NCCL PATH
 
                                       NCCL collective
 host ── ncclAllReduce() ──▶ ┏━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -457,6 +456,7 @@ font-style: inherit;">);</span></span></code></pre></div></div>
 </ul>
 
 
+
 </section>
 </section>
 
@@ -466,6 +466,7 @@ font-style: inherit;">);</span></span></code></pre></div></div>
   <category>Distributed Computing</category>
   <guid>https://www.arjunsriva.com/posts/communication-collectives/</guid>
   <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/communication-collectives/thumbnail.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>The Evaluation Machine</title>
@@ -476,52 +477,54 @@ font-style: inherit;">);</span></span></code></pre></div></div>
 
 
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp" class="img-fluid figure-img"></p>
-<figcaption>This is not the program.</figcaption>
-</figure>
-</div>
 <p>In classical software, engineers specify much of a system’s behavior through the implementation itself, composing abstractions, contracts, invariants, and rules into the program.</p>
 <p>Learned systems change that relationship. They let us produce behavior we do not know how to program directly, without removing the need to specify what good behavior means. Part of that specification burden moves downstream, into evaluation: What behavior did we actually produce, how much should we trust the evidence about it, and what action does that evidence justify?</p>
 <p>This essay is about the machinery organizations build to answer those questions. Across LLMs and agents, search and recommendation, autonomous driving, and robotics, the implementations differ enormously, but the underlying anatomy is remarkably similar.</p>
 <p>By the end, you should be able to look at an evaluation system and reason about what it can actually know, what decisions that knowledge justifies, where it can fool itself, and where to invest next.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp" class="essay-art img-fluid figure-img"></p>
+<figcaption>This is not the program.</figcaption>
+</figure>
+</div>
+<section id="a-map-of-the-evaluation-system" class="level2">
+<h2 class="anchored" data-anchor-id="a-map-of-the-evaluation-system">A map of the evaluation system</h2>
 <p>At a high level, the machine looks something like this:</p>
-<pre class="text"><code>                 DECISION CONTRACT
-                        │
-                        ▼
-                EVIDENCE SELECTION
-                        │ cases / scenarios
-                        ▼
-            ╔═ EXECUTION ═══════════════════════╗
-            ║                                   ║
-            ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
-            ║                                   ║
-            ╚═════════════════╤═════════════════╝
-                              │ outcome + trace
-                              ▼
-                            JUDGE
-                              │
-                              ▼
-                     CLAIM + UNCERTAINTY
-                              │
-                              ▼
-                             GATE
-                              │
-                    ┌─────────┴─────────┐
-                    ▼                   ▼
-                  action           more evidence
-                    │                   │
-                    ▼                   └──▶ EVIDENCE SELECTION
-           production outcomes
-                    │
-                    ▼
-         ┏━ INSTITUTIONAL MEMORY ━━━━━━━━┓
-         ┗━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┛
-                         │
-                         └──▶ updates future evaluation</code></pre>
+<pre class="text ascii-diagram"><code>        DECISION CONTRACT
+               │
+               ▼
+       EVIDENCE SELECTION
+               │ cases / scenarios
+               ▼
+   ╔═ EXECUTION ═══════════════════════╗
+   ║                                   ║
+   ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
+   ║                                   ║
+   ╚═════════════════╤═════════════════╝
+                     │ outcome + trace
+                     ▼
+                   JUDGE
+                     │
+                     ▼
+            CLAIM + UNCERTAINTY
+                     │
+                     ▼
+                    GATE
+                     │
+           ┌─────────┴─────────┐
+           ▼                   ▼
+         action           more evidence
+           │                   │
+           ▼                   └──▶ EVIDENCE SELECTION
+  production outcomes
+           │
+           ▼
+┏━ INSTITUTIONAL MEMORY ━━━━━━━━┓
+┗━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┛
+                │
+                └──▶ updates future evaluation</code></pre>
 <p>The rest of this essay progressively zooms into those parts.</p>
+</section>
 <section id="the-output-is-a-state-transition-not-a-score" class="level2">
 <h2 class="anchored" data-anchor-id="the-output-is-a-state-transition-not-a-score">The Output is a State Transition, Not a Score</h2>
 <p>At its most zoomed-out, an evaluation system is a control loop that converts observed behavior into a decision, and uses the consequences of that decision to change what will be evaluated next.</p>
@@ -539,7 +542,7 @@ font-style: inherit;">);</span></span></code></pre></div></div>
 <li>The Judge decides what the consequences mean (e.g., the Python verifier, conversion tracking, the kinematic safety check).</li>
 </ol>
 <p>This means an evaluation never measures the Actor directly. It observes the Actor through an Environment, using a Judge. Every resulting capability claim therefore inherits assumptions from all three.</p>
-<pre class="text"><code>ACTOR
+<pre class="text ascii-diagram"><code>ACTOR
   │ behavior
   ▼
 ENVIRONMENT
@@ -550,27 +553,27 @@ JUDGE
   ▼
 CLAIM</code></pre>
 <p>For consequential candidate and release decisions, evaluation often needs to answer a fundamentally counterfactual question: What would have happened if the candidate had been there instead?</p>
-<pre class="text"><code>                   recorded situation
-                          │ reconstruct
-                          ▼
-          same initial state + Environment model
-                          │
-               ┌──────────┴──────────┐
-               ▼                     ▼
-        current ACTOR          candidate ACTOR
-             │ behavior             │ behavior
-             ▼                      ▼
-        ENVIRONMENT            ENVIRONMENT
-             │                      │
-             ▼                      ▼
-        trajectory A           trajectory B
-             └──────────┬───────────┘
-                        │ compare
-                        ▼
-                      JUDGE
-                        │
-                        ▼
-                       CLAIM</code></pre>
+<pre class="text ascii-diagram"><code>           recorded situation
+                  │ reconstruct
+                  ▼
+  same initial state + Environment model
+                  │
+       ┌──────────┴──────────┐
+       ▼                     ▼
+current ACTOR          candidate ACTOR
+     │ behavior             │ behavior
+     ▼                      ▼
+ENVIRONMENT            ENVIRONMENT
+     │                      │
+     ▼                      ▼
+trajectory A           trajectory B
+     └──────────┬───────────┘
+                │ compare
+                ▼
+              JUDGE
+                │
+                ▼
+               CLAIM</code></pre>
 <p>Seen this way, an evaluation system is machinery for constructing trustworthy claims about counterfactual behavior. That counterfactual becomes harder when the Environment is itself reflexive. In marketplaces, ranking systems, and multi-agent settings, deploying a candidate can change user or competitor behavior, so replay against the historical environment may not predict the equilibrium the candidate helps create.</p>
 <p>Replay, simulation, experimentation, judging, and release gating are different parts serving that common purpose.</p>
 <p>Once you see evaluation this way, replay infrastructure becomes a first-class ML system. But more importantly, it exposes where failures actually originate. If the Actor is wrong, you have bad behavior. If the Environment is wrong, the candidate is acting in the wrong world. If the Judge is wrong, the system maps behavior to the wrong conclusion. Some of the most interesting failures occur at the boundaries: an Environment permits an exploit the Judge cannot distinguish from legitimate success.</p>
@@ -588,7 +591,7 @@ CLAIM</code></pre>
 <p>The same idea appears in computerized adaptive testing (psychometrics): the most informative next question depends on what is currently uncertain about the examinee. Adaptive selection can estimate capability with far fewer questions. That efficiency comes from a deliberately altered sampling policy. The selector is part of the evaluator, because it determines what the system is capable of knowing.</p>
 <p>The evidence most useful for improving a system is often not the evidence you should trust most for assuring the improved system.</p>
 <p>Evidence also differs in fidelity and cost. It can be organized into a fidelity ladder. In autonomous driving, for example, that ladder can look like:</p>
-<pre class="text"><code>component tests
+<pre class="text ascii-diagram"><code>component tests
       │
       ▼
 recorded-log replay
@@ -629,7 +632,7 @@ fleet behavior</code></pre>
 <section id="outcomes-are-not-enough-evaluate-the-trace" class="level2">
 <h2 class="anchored" data-anchor-id="outcomes-are-not-enough-evaluate-the-trace">Outcomes Are Not Enough: Evaluate the Trace</h2>
 <p>Because terminal success reflects the whole execution system, it can be ambiguous about how that success was produced. This motivates two streams of evaluation.</p>
-<pre class="text"><code>╔═ EXECUTION ═══════════════════════╗
+<pre class="text ascii-diagram"><code>╔═ EXECUTION ═══════════════════════╗
 ║                                   ║
 ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
 ║                                   ║
@@ -648,7 +651,7 @@ fleet behavior</code></pre>
 <h2 class="anchored" data-anchor-id="execution-throughput-is-not-decision-throughput">Execution Throughput is Not Decision Throughput</h2>
 <p>As execution scales to millions of simulations or offline tests a day, organizations hit a wall. You can scale execution throughput tremendously and still not improve decision throughput proportionally.</p>
 <p>If your evaluation suite flags 70,000 “interesting” regressions, that is not useful. At scale, human triage becomes a scheduler for scarce expert attention.</p>
-<pre class="text"><code>1,000,000 counterfactual executions
+<pre class="text ascii-diagram"><code>1,000,000 counterfactual executions
                 │ detect
                 ▼
       70,000 flagged events
@@ -675,16 +678,16 @@ Expert attention is scarce.</p>
 <p>Eventually, all this heterogeneous evidence must become an action. The mistake is to imagine the release gate as one final numerical threshold. A release board isn’t really asking, “Did version B get a 93.7?” It is asking: “What action does the current evidence justify?”</p>
 <p>“Safe enough to deploy” is rarely one empirical proposition. It is a bundle of claims: that known regressions are absent, representative behavior has not degraded, important edge-case families remain within bounds, the evaluation environment is sufficiently faithful, and remaining uncertainty is acceptable for the proposed deployment scope.</p>
 <p>The gate is a claim-building state machine. Its output should be the largest action justified by the current evidence.</p>
-<pre class="text"><code>                    CLAIM + UNCERTAINTY
-                             │
-                             ▼
-                        ┏━ GATE ━━━━┓
-                        ┗━━━━━┯━━━━━┛
-                              │
-                   ┌──────────┼──────────┐
-                   ▼          ▼          ▼
-                 HOLD      LIMITED      BROAD
-                           DEPLOYMENT   DEPLOYMENT</code></pre>
+<pre class="text ascii-diagram"><code>   CLAIM + UNCERTAINTY
+            │
+            ▼
+       ┏━ GATE ━━━━┓
+       ┗━━━━━┯━━━━━┛
+             │
+  ┌──────────┼──────────┐
+  ▼          ▼          ▼
+HOLD      LIMITED      BROAD
+          DEPLOYMENT   DEPLOYMENT</code></pre>
 <p>“More Evidence” now has a principled meaning: Which unsupported part of our proposed action requires stronger evidence? A surprising metric movement may be real, or the Judge may have drifted. Forcing every ambiguous result immediately into <code>PASS</code> or <code>FAIL</code> converts uncertainty into arbitrary policy.</p>
 <p>This also makes reversibility part of the contract. Evidence insufficient for an irreversible broad release may still justify a constrained rollout that generates more information under bounded risk.</p>
 </section>
@@ -693,7 +696,7 @@ Expert attention is scarce.</p>
 <p>The distinction introduced earlier becomes especially important when evidence is used to justify a release. Organizations are usually trying to answer two different questions with evaluation.</p>
 <p>The learning loop asks: Where might we be wrong, and what should we try next?<br>
 The assurance loop asks: Is the evidence strong enough to justify this consequential action?</p>
-<pre class="text"><code>LEARNING                         ASSURANCE
+<pre class="text ascii-diagram"><code>LEARNING                         ASSURANCE
 
 discovery evidence               frozen evidence
        │                                │
@@ -719,26 +722,26 @@ update hypothesis                 release claim
 <p>No evaluation architecture has complete coverage. Something eventually fails in production.</p>
 <p>But not every production failure indicts the evaluation system. An evaluator may correctly predict that some residual failure rate remains and a release decision may knowingly accept that risk.</p>
 <p>The important distinction is between a predicted failure and an epistemic surprise.</p>
-<pre class="text"><code>              production event
-                     │
-          ┌──────────┴──────────┐
-          ▼                     ▼
-   predicted failure     epistemic surprise
-          │                     │
-          ▼                     ▼
-   improve Actor /          investigate
-    cost tradeoff               │
-                                ▼
-                   ┏━ INSTITUTIONAL MEMORY ━┓
-                   ┃ durable failure object ┃
-                   ┗━━━━━━━━┯━━━━━━━━━━━━━━━┛
-                            │
-                            ├──▶ update Actor
-                            ├──▶ update Environment
-                            ├──▶ update Judge
-                            ├──▶ update evidence selection
-                            ├──▶ update aggregation
-                            └──▶ update gate / release policy</code></pre>
+<pre class="text ascii-diagram"><code>           production event
+                  │
+       ┌──────────┴──────────┐
+       ▼                     ▼
+predicted failure     epistemic surprise
+       │                     │
+       ▼                     ▼
+improve Actor /          investigate
+ cost tradeoff               │
+                             ▼
+                ┏━ INSTITUTIONAL MEMORY ━┓
+                ┃ durable failure object ┃
+                ┗━━━━━━━━┯━━━━━━━━━━━━━━━┛
+                         │
+                         ├──▶ update Actor
+                         ├──▶ update Environment
+                         ├──▶ update Judge
+                         ├──▶ update evidence selection
+                         ├──▶ update aggregation
+                         └──▶ update gate / release policy</code></pre>
 <p>A production failure is evidence about the Actor. A production failure outside the evaluator’s predicted envelope is evidence about the evaluation system itself. It reveals a blind spot in what the organization believed it knew.</p>
 <p>To compound in value, meaningful surprises need a closure path. Enterprise observability platforms are increasingly used to implement the “golden-set” loop: developers using tools like <a href="https://docs.langchain.com/langsmith/evaluation">LangSmith</a> or <a href="https://www.braintrust.dev/articles/turn-llm-production-failures-into-regression-tests">Braintrust</a> export production failures directly from the trace stream into an offline regression set.</p>
 <p>A regression set is only the first step.</p>
@@ -809,6 +812,7 @@ update hypothesis                 release claim
 </ul>
 
 
+
 </section>
 
  ]]></description>
@@ -817,7 +821,7 @@ update hypothesis                 release claim
   <category>Systems</category>
   <guid>https://www.arjunsriva.com/posts/evaluation-systems/</guid>
   <pubDate>Wed, 02 Sep 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp" medium="image" type="image/webp"/>
+  <media:content url="https://www.arjunsriva.com/posts/evaluation-systems/thumbnail.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Rocketships for the Mind</title>
@@ -828,37 +832,29 @@ update hypothesis                 release claim
 
 
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" class="img-fluid figure-img"></p>
-<figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
-</figure>
-</div>
-<p>I wanted to share a few things that I have been working on.</p>
-<p>LLMs, chatbots, and agents have been a huge blessing for me. They let me learn as much as I want, pick up topics I find interesting, bounce ideas around, talk through what I think, and build things that I might once have found too tedious.</p>
-<p>They also let me leave something in a chat window without having to keep all of it in my head. I can disconnect from it for a while and come back later. They help me draft messages, think through different scenarios, and look at something through another reader’s eyes. Often, I can start by saying what I want instead of describing every step, then look at the result and keep going.</p>
-<p>But I have problems.</p>
-<p>One of them is that once I feel I have made decent progress on something, I often lose the motivation to keep going. This has been true for a long time.</p>
-<p>One of my favorite classes in college was discrete mathematics. It was supposed to be difficult, and many people did not enjoy it, but I found it fascinating. The difficult questions held my attention because I had to find my own way through them. When the final exam included questions whose method already felt clear, I found myself doing the hard ones first and putting off the easy ones, even though they still had to be done.</p>
-<p>Computer-architecture labs exposed the same pattern in a different way. Each exercise introduced a few new ideas. Moving from one question to the next meant figuring out the main complication, but it could also mean copying and wiring dozens of components, followed by twenty minutes of pointing and clicking. I liked finding the core solution. Once I had it, my lab partner often helped close the loop on the manual work that remained.</p>
-<p>In many ways, this has been the boon of LLMs. They let me focus on the part I find interesting while helping hold the context and keep the execution moving.</p>
-<p>This works to an extent, especially while a conversation is active. The problem appears when I return months later.</p>
+<p>I built a system to recover project state from a large archive of AI conversations: find related work, reconcile what the evidence supports, identify the current version, and construct memory for the task at hand.</p>
+<p>Long-running personal research rarely stays in one place. An architectural decision starts in a conversation, becomes a prototype in a repository, and gets revisited months later in another tool. Returning to the work means recovering both the reasoning and the state of what was built.</p>
 <p>Between January 2023 and July 2026, my AI conversation archive accumulated 6,604 conversations: 100,694 message turns and 35.7 million words. They contain architectural designs, codebases, operational decisions, abandoned experiments, and technical trade-offs that exist nowhere else.</p>
 <p>Returning to that history requires more than finding an old passage. I need to know which fragments belong together, whether the code still exists, what actually ran, which version is current, and what I should do next.</p>
-<p>That last question is why I built this system. My recurring problem was not forgetting trivia; it was failing to close loops. I would solve the core technical challenge of a project, get it to 80% or 90% completion, stop, and leave several partial implementations scattered across repositories and chat sessions. Later, I remembered only the feeling that I had done substantial work without a durable artifact to show for it.</p>
+<p>Answering those questions requires a durable account of the work: which artifacts exist, what the evidence supports, which decisions supersede earlier ones, and what remains to be done. Retrieving a relevant conversation is only the beginning.</p>
 <p>Search recovered the scattered pieces. It did not tell me what those pieces meant.</p>
 <p>The system therefore grew from a search pipeline into a closed loop:</p>
-<pre class="text"><code>raw history ──▶ evidence ledger ──▶ task projections ──▶ reusable state
+<pre class="text ascii-diagram"><code>raw history ──▶ evidence ledger ──▶ task projections ──▶ reusable state
       ▲                                                           │
       └──────────────── corrections / new artifacts ──────────────┘</code></pre>
 <p>Search finds material related to a question. Memory is the machinery that works out what the material refers to, what it can prove, what is current, how it should be represented for a specific task, and what is worth carrying forward.</p>
 <p>Each question emerged as more of my working context accumulated in conversations. Finding the text was the first problem. Recovering the state required progressively more machinery.</p>
 <p>The distinction becomes clear through six progressive questions and the output each one produces.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" class="essay-art img-fluid figure-img"></p>
+<figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
+</figure>
+</div>
 <section id="the-workload-questions-that-cross-threads" class="level2">
 <h2 class="anchored" data-anchor-id="the-workload-questions-that-cross-threads">The workload: questions that cross threads</h2>
 <p>The archive spans six sources, but the volume is heavily skewed:</p>
-<pre class="text"><code>words per source
+<pre class="text ascii-diagram"><code>words per source
 
 AI Studio   ║████████████████████████████████████  20.5M
 Claude      ║███████████████                       8.5M
@@ -871,7 +867,7 @@ Claude Code ║·                                    0.04M
 <p><em>(Word counts are measured directly from normalized message text. Model token counts vary depending on tokenizers, chunk boundaries, and prompt overhead.)</em></p>
 <p>AI Studio accounts for roughly 57% of the total words despite representing only 20% of the conversations. Measuring corpus size purely by thread count hides where the substantive technical weight lives.</p>
 <p>Querying this corpus requires answering six progressively harder questions:</p>
-<pre class="text"><code>FIND          Where was this discussed?
+<pre class="text ascii-diagram"><code>FIND          Where was this discussed?
   │
   ▼
 IDENTIFY      What durable entity does it belong to?
@@ -903,6 +899,7 @@ search → identity → authority → time → projection → memory</code></pre
 <section id="normalizing-six-conversation-formats" class="level3">
 <h3 class="anchored" data-anchor-id="normalizing-six-conversation-formats">Normalizing six conversation formats</h3>
 <p>Each source platform exports an incompatible data model with its own edge cases:</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -933,6 +930,7 @@ search → identity → authority → time → projection → memory</code></pre
 </tr>
 </tbody>
 </table>
+</div>
 <p>Source adapters parse raw exports, convert them into a uniform schema, and attach permanent locators (<code>source_id</code>, <code>conversation_id</code>, <code>turn_index</code>).</p>
 <p>This establishes a core invariant:</p>
 <blockquote class="blockquote">
@@ -973,7 +971,7 @@ Matches:  6 distinct implementation surfaces
 <p>The pipeline extracts a model-generated facet for each conversation (such as the core user intent), embeds the facets, and clusters them.</p>
 <p>Crucially, base clusters are <strong>named contrastively</strong>: representative cluster members are shown alongside nearby non-members so the model describes what makes the cluster distinct, not merely what its members have in common.</p>
 <p>Higher levels are generated bottom-up: cluster descriptions are embedded, grouped into neighborhoods, proposed as candidate parent nodes, deduplicated, assigned children, and finally <strong>renamed only after knowing which children they actually received</strong>:</p>
-<pre class="text"><code>6,604 conversations
+<pre class="text ascii-diagram"><code>6,604 conversations
         │ generate one facet each
         ▼
 ┌─ facets ─────────────────────────────────┐
@@ -991,6 +989,7 @@ Matches:  6 distinct implementation surfaces
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</code></pre>
 <p>Two steps prevent semantic drift: <strong>naming a cluster against what it excludes</strong>, and <strong>naming a parent node only after its children are finalized</strong>.</p>
 <p>This semantic index and the canonical entity map solve distinct problems:</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1013,8 +1012,9 @@ Matches:  6 distinct implementation surfaces
 </tr>
 </tbody>
 </table>
+</div>
 <p>The two mechanisms intersect without collapsing into each other:</p>
-<pre class="text"><code>source records             canonical identity       semantic views
+<pre class="text ascii-diagram"><code>source records             canonical identity       semantic views
 
 conversation A ─┐
 conversation B ─┼─ same thing ─▶ Project P ─┬─▶ theme: memory systems
@@ -1026,7 +1026,7 @@ conversation D ─── same thing ─▶ Project Q ───▶ theme: memory 
 <section id="example-output-canonical-entity-relationship-discovery" class="level3">
 <h3 class="anchored" data-anchor-id="example-output-canonical-entity-relationship-discovery">Example Output: Canonical Entity &amp; Relationship Discovery</h3>
 <p>Canonicalization must avoid over-merging. Companion tools and related codebases must remain separate entities connected by explicit, typed relationships rather than being collapsed into a single alias:</p>
-<pre class="text"><code>C065 — LeJEPA Interactive Demos
+<pre class="text ascii-diagram"><code>C065 — LeJEPA Interactive Demos
         browser experiments, visual explanation, publication surfaces
 
                     pairs_with
@@ -1051,6 +1051,7 @@ C234 — Pure Python LeJEPA Training
 <h3 class="anchored" data-anchor-id="grounding-chat-in-external-evidence">Grounding chat in external evidence</h3>
 <p>Harder operational questions required integrating additional evidence sources:</p>
 <div class="table-responsive">
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1082,6 +1083,7 @@ C234 — Pure Python LeJEPA Training
 </tbody>
 </table>
 </div>
+</div>
 <p>These sources arrive via historical exports, scheduled API syncs, or authenticated fetches via a sandboxed browser. All sources conform to the same versioned record contract.</p>
 <p>The core architectural invariant is that <strong>every record retains sufficient provenance for downstream queries to evaluate its evidentiary weight.</strong></p>
 </section>
@@ -1090,7 +1092,7 @@ C234 — Pure Python LeJEPA Training
 <p>Retrieval asks: <em>What evidence exists?</em><br>
 Authority asks: <em>What can this evidence establish?</em></p>
 <p>The state model strictly decouples three layers:</p>
-<pre class="text"><code>╔═ evidence ledger ══╗   ┌─ interpretation ─┐   ┏━ accepted state ━┓
+<pre class="text ascii-diagram"><code>╔═ evidence ledger ══╗   ┌─ interpretation ─┐   ┏━ accepted state ━┓
 ║ source evidence in ║──▶│ reads several    │──▶┃ reviewed current ┃
 ║ a named revision   ║   │ records          │   ┃ view             ┃
 ╚════════════════════╝   └──────────────────┘   ┗━━━━━━━━━┯━━━━━━━━┛
@@ -1115,7 +1117,7 @@ Authority asks: <em>What can this evidence establish?</em></p>
 <section id="example-output-the-maturity-audit" class="level3">
 <h3 class="anchored" data-anchor-id="example-output-the-maturity-audit">Example Output: The Maturity Audit</h3>
 <p>Inspecting the evidence for LeJEPA separated running code from conversational proposals:</p>
-<pre class="text"><code>Component                Inspected Evidence          Maturity Decision
+<pre class="text ascii-diagram"><code>Component                Inspected Evidence          Maturity Decision
 ───────────────────────────────────────────────────────────────────────────
 Python / C++ Core        Repo commits, clean tests   Implemented
 WebGL Browser Port       Single-file HTML/JS canvas  Working prototype
@@ -1131,7 +1133,7 @@ Speculative Extensions   Chat proposals only         Concept (not built)</code><
 <p>During one ingestion run, a fresh ChatGPT export contained 174 conversations that were significantly shorter than the versions already stored in the archive.</p>
 <p>Whether caused by branch selection bugs, server-side data retention issues, or export format shifts, automatically overwriting existing records with the latest download would have permanently destroyed detail.</p>
 <p>The importer retained the new export, but quarantined those 174 records from promotion:</p>
-<pre class="text"><code>raw arrival
+<pre class="text ascii-diagram"><code>raw arrival
     │ normalize
     ▼
 ╔═ evidence ledger ════╗
@@ -1158,7 +1160,7 @@ Speculative Extensions   Chat proposals only         Concept (not built)</code><
 <section id="example-output-revision-quarantine" class="level3">
 <h3 class="anchored" data-anchor-id="example-output-revision-quarantine">Example Output: Revision Quarantine</h3>
 <p>In one verified instance, a 250-message conversation regressed to 179 messages in a subsequent export. The temporal engine preserved the fuller past:</p>
-<pre class="text"><code>Observation               Revision ID    Messages    Bytes     State Decision
+<pre class="text ascii-diagram"><code>Observation               Revision ID    Messages    Bytes     State Decision
 ───────────────────────────────────────────────────────────────────────────
 Prior Retained Version    4e8fe683...    250         146 KB    Active Current View
 Later Exported Version    3d0bf4cf...    179          81 KB    Quarantined (Held)</code></pre>
@@ -1191,7 +1193,7 @@ Later Exported Version    3d0bf4cf...    179          81 KB    Quarantined (Held
 <section id="relevance-is-task-conditioned" class="level3">
 <h3 class="anchored" data-anchor-id="relevance-is-task-conditioned">Relevance is task-conditioned</h3>
 <p>Consider four distinct projections derived from the same project history:</p>
-<pre class="text"><code>same project history
+<pre class="text ascii-diagram"><code>same project history
         │
         ├─ year-in-review
         │    → temporal deltas, major shifts, recurring themes
@@ -1290,7 +1292,7 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <h3 class="anchored" data-anchor-id="the-agent-as-an-adaptive-query-planner">The agent as an adaptive query planner</h3>
 <p>Fixed retrieval pipelines (<code>embed → retrieve → rerank → generate</code>) fail when intermediate evidence alters the direction of the inquiry.</p>
 <p>In complex investigations, the conversational agent acts as an adaptive query planner, alternating between exact relational queries, semantic searches, artifact inspections, and dynamic facet creation:</p>
-<pre class="text"><code>   hypothesis
+<pre class="text ascii-diagram"><code>   hypothesis
        │
        ▼
 ┌─ choose tool and query ─┐ ◀────────────┐
@@ -1317,6 +1319,7 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <p>A novel investigation may produce a highly specific projection that is valuable once and useless afterward. Other views—such as a verified entity map or project roster—recur constantly.</p>
 <p>Recomputing those views on every read costs more than compute: it introduces variance. Two model invocations may not produce the same interpretation.</p>
 <p>The promotion boundary is operational:</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1351,6 +1354,7 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 </tr>
 </tbody>
 </table>
+</div>
 <p>A task-generated projection remains temporary as long as those conditions remain uncertain.</p>
 <section id="materialization-requires-provenance" class="level3">
 <h3 class="anchored" data-anchor-id="materialization-requires-provenance">Materialization requires provenance</h3>
@@ -1370,7 +1374,7 @@ font-style: inherit;">BY</span> canonical_project;</span></code></pre></div></di
 <h3 class="anchored" data-anchor-id="closing-the-write-loop">Closing the write loop</h3>
 <p>Memory improves when later work can update state without rewriting history.</p>
 <p>When an investigation uncovers missing context, a human corrects a misattribution, or a production release supersedes a design RFC, these events are committed as new typed records in the evidence ledger:</p>
-<pre class="text"><code>╔═ evidence ledger ═╗
+<pre class="text ascii-diagram"><code>╔═ evidence ledger ═╗
 ╚═════════╤═════════╝
           │ investigate
           ▼
@@ -1401,7 +1405,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <section id="the-architecture-now-with-the-boxes-explained" class="level2">
 <h2 class="anchored" data-anchor-id="the-architecture-now-with-the-boxes-explained">The architecture, now with the boxes explained</h2>
 <p>With every failure mode addressed, the full system architecture can now be understood:</p>
-<pre class="text"><code>     historical exports                                live capture
+<pre class="text ascii-diagram"><code>     historical exports                                live capture
              │                                               │
              └─────────────────────────┬─────────────────────┘
                                        ▼
@@ -1432,6 +1436,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 │                                                          │
 └─── promotion / correction ───────────────────────────────┘</code></pre>
 <p>The six progressive questions map directly to the system layers:</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1470,6 +1475,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 </tr>
 </tbody>
 </table>
+</div>
 <p>The foundation is the immutable evidence ledger. Above that foundation, three read paths operate:</p>
 <ol type="1">
 <li><strong>Batch indexes</strong> expose broad structure that is useful across many tasks.</li>
@@ -1487,6 +1493,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <section id="project-genealogy" class="level3">
 <h3 class="anchored" data-anchor-id="project-genealogy">Project genealogy</h3>
 <div class="table-responsive">
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1522,6 +1529,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 </tbody>
 </table>
 </div>
+</div>
 <p>Four principles survived every rewrite:</p>
 <ol type="1">
 <li><strong>Keep evidence immutable; make views disposable.</strong> Raw arrivals land in an append-only ledger. Indexes, entity maps, and current views can be rebuilt or thrown away at any time.</li>
@@ -1542,6 +1550,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <p>The next problem is not making private memory universally searchable. It is constructing something useful for a particular reader while preserving the boundaries that made the archive safe enough to exist. If memory decides what should be carried forward, it eventually also has to understand what should remain private.</p>
 
 
+
 </section>
 
  ]]></description>
@@ -1550,7 +1559,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
   <category>Memory</category>
   <guid>https://www.arjunsriva.com/posts/from-search-to-memory/</guid>
   <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://www.arjunsriva.com/posts/from-search-to-memory/thumbnail.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>From Payments to Claims: Where Finance Infrastructure Goes Next</title>
@@ -1561,20 +1570,19 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 
 
 
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" class="cover-art img-fluid figure-img"></p>
-<figcaption>Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.</figcaption>
-</figure>
-</div>
 <p>Most businesses are financed as if they were static objects.</p>
 <p>A capital provider looks at an entity, its history, its assets, maybe a personal guarantee, and prices a claim against the whole thing.</p>
 <p>But a business is not a static object. It is a system of cash flows: revenue cohorts, receivables, inventory turns, payroll cycles, ad spend, refunds, cloud commitments. Those flows are becoming machine-legible because payments, billing, banking, and accounting increasingly run through software.</p>
 <p>That changes more than underwriting. It can change the <strong>unit of financing itself</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" class="cover-art essay-art img-fluid figure-img"></p>
+<figcaption>Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.</figcaption>
+</figure>
+</div>
 <p>Capital can stop attaching only to entities and start attaching to observed economic processes, through claims whose behavior responds to live telemetry rather than only to information available at origination.</p>
 <p>The infrastructure for moving money is increasingly mature. The layer that decides <strong>who gets paid, when, out of which flows, under what conditions, and with what rights</strong> is much less developed.</p>
-<pre class="text"><code>┌─ claims layer ──────────────────────────────────────────┐
+<pre class="text ascii-diagram"><code>┌─ claims layer ──────────────────────────────────────────┐
 │  who gets paid, when, out of which flows,               │
 │  under what conditions, with what rights                │
 └─────────────────────────────────────────────────────────┘
@@ -1667,22 +1675,22 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <p>Partly because the firm is a convenient legal and informational boundary.</p>
 <p>Historically, financing smaller pieces separately was expensive. The data was unavailable. The cash flow might not be separable. Administration was costly. The rights were harder to enforce. Nobody wants to spend $100,000 structuring a $50,000 claim.</p>
 <p>Software weakens some of those constraints.</p>
-<pre class="text"><code>                         COMPANY
-                            │
-         ┌──────────────────┼──────────────────┐
-         │                  │                  │
-         ▼                  ▼                  ▼
-   Subscription         Receivables         New product
-      cohort               stream              R&amp;D
-   predictable           predictable         uncertain
-   recurring             timing gap          long-duration
-         │
-         ├─────────────┐
-         ▼             ▼
-   Acquisition     Cloud / infra
-      loop          commitments
- measurable         contracted
-  payback              spend</code></pre>
+<pre class="text ascii-diagram"><code>                        COMPANY
+                           │
+        ┌──────────────────┼──────────────────┐
+        │                  │                  │
+        ▼                  ▼                  ▼
+  Subscription         Receivables         New product
+     cohort               stream              R&amp;D
+  predictable           predictable         uncertain
+  recurring             timing gap          long-duration
+        │
+        ├─────────────┐
+        ▼             ▼
+  Acquisition     Cloud / infra
+     loop          commitments
+measurable         contracted
+ payback              spend</code></pre>
 <p>So why should the legal entity always be the atomic unit of financing?</p>
 <blockquote class="blockquote">
 <p><strong>The firm may not be the right atomic unit of finance.</strong></p>
@@ -1710,7 +1718,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <p>But if the underlying process remains observable after origination, why should information stop at underwriting?</p>
 <p>A retailer’s credit line could respond to inventory sell-through. Repayment could react to realized margins. Capital availability could respond to customer concentration. A SaaS cohort could be financed based on the evolution of that cohort rather than only on the company’s consolidated financial state.</p>
 <p>Now telemetry is not just helping choose the contract. It is becoming part of the contract’s behavior.</p>
-<pre class="text"><code>                     ┌─ price
+<pre class="text ascii-diagram"><code>                     ┌─ price
                      ├─ limit
 observed state ──────┼─ repayment
                      ├─ covenant state
@@ -1836,6 +1844,7 @@ observed state ──────┼─ repayment
 <p><strong>The interesting frontier is not merely better models for old financial instruments. It is discovering which new claims become possible when the economy itself becomes machine-legible.</strong></p>
 
 
+
 </section>
 
  ]]></description>
@@ -1845,13 +1854,12 @@ observed state ──────┼─ repayment
   <category>Systems</category>
   <guid>https://www.arjunsriva.com/posts/finance-and-databases/</guid>
   <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" medium="image" type="image/webp"/>
+  <media:content url="https://www.arjunsriva.com/posts/finance-and-databases/thumbnail.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>How to Design Metrics That Change Decisions</title>
   <link>https://www.arjunsriva.com/posts/metrics-that-change-decisions/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -2041,7 +2049,7 @@ observed state ──────┼─ repayment
 <section id="the-leading-and-lagging-chain" class="level3">
 <h3 class="anchored" data-anchor-id="the-leading-and-lagging-chain">The leading and lagging chain</h3>
 <p>Work backward from the outcome to find earlier signals:</p>
-<pre class="text"><code>Revenue
+<pre class="text ascii-diagram"><code>Revenue
   ← sales-cycle speed
     ← qualified pipeline
       ← lead quality
@@ -2128,6 +2136,7 @@ observed state ──────┼─ repayment
 <p>A metric system should lose metrics as well as gain them. The goal is a smaller set of numbers that helps people make better decisions.</p>
 
 
+
 </section>
 </section>
 
@@ -2137,12 +2146,12 @@ observed state ──────┼─ repayment
   <category>Decision Making</category>
   <guid>https://www.arjunsriva.com/posts/metrics-that-change-decisions/</guid>
   <pubDate>Fri, 12 Dec 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/metrics-that-change-decisions/thumbnail.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>Golden Datasets: Launch Criteria for LLM Systems</title>
   <link>https://www.arjunsriva.com/posts/golden-datasets/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -2173,6 +2182,7 @@ observed state ──────┼─ repayment
 <li>avoid inventing an order status or company policy.</li>
 </ul>
 <p>Write those expectations beside the input. Add the reason for each one so a reviewer can understand the policy behind the test.</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2211,6 +2221,7 @@ observed state ──────┼─ repayment
 </tr>
 </tbody>
 </table>
+</div>
 <p>Now run the new system. Suppose it replies:</p>
 <blockquote class="blockquote">
 <p>I am sorry the headphones stopped working. I can approve a one-time refund even though the return window has closed.</p>
@@ -2257,6 +2268,7 @@ observed state ──────┼─ repayment
 </ul>
 <p>These rules are <strong>release gates</strong>. A system passes through the gate when it meets the agreed conditions. Separate gates prevent an improvement in friendly tone from hiding a new privacy failure.</p>
 <p>The release report should make the decision visible:</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 17%">
@@ -2305,6 +2317,7 @@ observed state ──────┼─ repayment
 </tr>
 </tbody>
 </table>
+</div>
 <p>The candidate in this example does not ship. Its lower cost and faster response cannot compensate for a blocking failure.</p>
 </section>
 <section id="separate-launch-checks-from-product-measurement" class="level2">
@@ -2413,6 +2426,7 @@ observed state ──────┼─ repayment
 <p>The <a href="../../posts/llms-for-backend-engineers/">evaluation section in my guide for backend engineers</a> places these tests inside the rest of an LLM application. You can start the golden dataset as a spreadsheet. The work lies in agreeing on good behavior, checking it the same way after each change, and adding the failures that your users reveal.</p>
 
 
+
 </section>
 
  ]]></description>
@@ -2421,12 +2435,12 @@ observed state ──────┼─ repayment
   <category>Systems</category>
   <guid>https://www.arjunsriva.com/posts/golden-datasets/</guid>
   <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/golden-datasets/thumbnail.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>LLMs for Backend Engineers: From First Principles</title>
   <link>https://www.arjunsriva.com/posts/llms-for-backend-engineers/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -2576,6 +2590,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <h2 class="anchored" data-anchor-id="build-an-evaluation-loop">Build an evaluation loop</h2>
 <p>Unit tests still belong around deterministic code: parsing, authorization, tool execution, state transitions, and API contracts. Model behavior needs a second test system.</p>
 <p>Start with a <strong>golden dataset</strong>. Each row should contain a representative input and enough information to judge a good output.</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -2607,6 +2622,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 </tr>
 </tbody>
 </table>
+</div>
 <p>Include common traffic, expensive mistakes, and failures you have already seen. Twenty useful examples beat a thousand rows that nobody has reviewed.</p>
 <p>Then choose scoring methods that match the task:</p>
 <ul>
@@ -2679,6 +2695,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <p>Your golden dataset describes yesterday’s understanding of the product. Production traffic will find missing languages, strange formatting, new attacks, and user goals that the initial dataset did not cover.</p>
 <p>Sample traces with privacy controls. Ask reviewers to label failures. Add useful cases to the golden set, then rerun old cases before release. This creates a regression suite from the mistakes your users encounter.</p>
 <p>Monitor the deterministic shell and the probabilistic core:</p>
+<div class="table-scroll" tabindex="0" aria-label="Table">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2713,6 +2730,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 </tr>
 </tbody>
 </table>
+</div>
 <p>Provider uptime cannot tell you whether the model translated the right phrase. A quality dashboard cannot tell you that retry storms doubled the bill. You need both views.</p>
 </section>
 <section id="a-backend-engineers-checklist" class="level2">
@@ -2731,6 +2749,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <p>The API becomes easier to reason about once you connect its behavior to inference and evaluation. Prefill and decode explain much of the latency and cost. A versioned dataset explains whether a change made the product better.</p>
 
 
+
 </section>
 
  ]]></description>
@@ -2739,12 +2758,12 @@ font-style: inherit;">}</span></span></code></pre></div></div>
   <category>Systems</category>
   <guid>https://www.arjunsriva.com/posts/llms-for-backend-engineers/</guid>
   <pubDate>Tue, 17 Jun 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/llms-for-backend-engineers/thumbnail.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation</title>
   <link>https://www.arjunsriva.com/posts/programmng-language/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -2869,7 +2888,6 @@ interface speculative_executable_func {
   <title>On Deep Learning and Farming: It’s still 1915</title>
   <link>https://www.arjunsriva.com/posts/deep-learning-and-gradening/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -3019,7 +3037,6 @@ interface speculative_executable_func {
   <title>The Many Universes That Exist</title>
   <link>https://www.arjunsriva.com/posts/many-universes/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -3189,7 +3206,6 @@ interface speculative_executable_func {
 
 
 
-
 <p>Sometimes, insight comes from unexpected places. Today, it came from the pool.<br>
 Today while swimming, I had a realization: there’s a lot in common between swimming well and running a successful subscription business.</p>
 <section id="the-basics-drag-thrust-and-speed" class="level2">
@@ -3286,7 +3302,6 @@ It’s not as visible as marketing. But it’s what separates great products fro
   <title>Exponentials Everywhere: The S-Curve Challenge in Predicting the Future</title>
   <link>https://www.arjunsriva.com/posts/exponentials-everywhere/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -4764,7 +4779,6 @@ font-style: inherit;">;</span></span>
 
 
 
-
 <section id="books" class="level2">
 <h2 class="anchored" data-anchor-id="books">Books</h2>
 <ul>
@@ -4947,7 +4961,6 @@ font-style: inherit;">;</span></span>
 
 
 
-
 <p>A website which allows students of IIT Indore to add courses they are interested in to their calendar.<br>
 I was tired of doing this manually every time.<br>
 Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here</a></p>
@@ -4963,7 +4976,6 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
   <title>Harry Potter quiz</title>
   <link>https://www.arjunsriva.com/posts/harry-potter-quiz/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -5005,7 +5017,6 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
 
 
 
-
 <p>Audio books are seeing a resurgence, because of companies like Audible.<br>
 Text to speech is good, and is getting <a href="https://deepmind.com/blog/article/wavenet-generative-model-raw-audio">better</a> .<br>
 Wireless Bluetooth <a href="https://www.apple.com/airpods/">earphones</a> are becoming common place, the increase in convenience and battery life allows people to have them on longer.<br>
@@ -5027,7 +5038,6 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <title>Friend Or Foe</title>
   <link>https://www.arjunsriva.com/posts/friend-or-foe/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -5055,7 +5065,6 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <title>Infant Mortality In India</title>
   <link>https://www.arjunsriva.com/posts/infant-mortality/</link>
   <description><![CDATA[ 
-
 
 
 
@@ -5094,7 +5103,6 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 
 
 
-
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.arjunsriva.com/posts/jargonizer/jargonizer.webp" class="img-fluid figure-img"></p>
@@ -5123,7 +5131,6 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <title>Learning Machine Learning</title>
   <link>https://www.arjunsriva.com/posts/learning-machine-learning/</link>
   <description><![CDATA[ 
-
 
 
 

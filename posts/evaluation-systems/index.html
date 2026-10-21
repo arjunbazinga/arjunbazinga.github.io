@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,14 +45,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-98cf82f7baee0e05ae06e0de2cd83fcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-a515e054079012129989d5397ee3c9c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c37dfa679b2c1d9e43fdc3941f76ee37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,17 +109,18 @@ ga('send', {
 </style>
 
 
+<link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="The Evaluation Machine – Arjun Srivastava">
 <meta property="og:description" content="A systems framework for specifying, measuring, and deciding what learned behavior is good enough to ship.">
-<meta property="og:image" content="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/evaluation-systems/thumbnail.webp">
 <meta property="og:site_name" content="Arjun Srivastava">
 <meta name="twitter:title" content="The Evaluation Machine – Arjun Srivastava">
 <meta name="twitter:description" content="A systems framework for specifying, measuring, and deciding what learned behavior is good enough to ship.">
-<meta name="twitter:image" content="https://www.arjunsriva.com/posts/evaluation-systems/treachery-of-images.webp">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/evaluation-systems/thumbnail.webp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed essay-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -284,7 +285,7 @@ ga('send', {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -299,30 +300,20 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../podcast"> 
-<span class="menu-text">Podcast</span></a>
+    <a class="nav-link" href="../../posts/"> 
+<span class="menu-text">Writing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts"> 
-<span class="menu-text">Thoughts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://arjunsriva.com/library"> 
+    <a class="nav-link" href="https://www.arjunsriva.com/library/"> 
 <span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast/"> 
+<span class="menu-text">Podcast</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -333,47 +324,15 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The Evaluation Machine</h1>
-            <p class="subtitle lead">Where the complexity went when the code became weights</p>
-                  <div>
-        <div class="description">
-          A systems framework for specifying, measuring, and deciding what learned behavior is good enough to ship.
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">AI</div>
-                <div class="quarto-category">Evaluation</div>
-                <div class="quarto-category">Systems</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 2, 2026</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-output-is-a-state-transition-not-a-score" id="toc-the-output-is-a-state-transition-not-a-score" class="nav-link active" data-scroll-target="#the-output-is-a-state-transition-not-a-score">The Output is a State Transition, Not a Score</a></li>
+  <li><a href="#a-map-of-the-evaluation-system" id="toc-a-map-of-the-evaluation-system" class="nav-link active" data-scroll-target="#a-map-of-the-evaluation-system">A map of the evaluation system</a></li>
+  <li><a href="#the-output-is-a-state-transition-not-a-score" id="toc-the-output-is-a-state-transition-not-a-score" class="nav-link" data-scroll-target="#the-output-is-a-state-transition-not-a-score">The Output is a State Transition, Not a Score</a></li>
   <li><a href="#the-triad-actor-environment-judge" id="toc-the-triad-actor-environment-judge" class="nav-link" data-scroll-target="#the-triad-actor-environment-judge">The Triad: Actor, Environment, Judge</a></li>
   <li><a href="#evidence-selection-and-the-fidelity-ladder" id="toc-evidence-selection-and-the-fidelity-ladder" class="nav-link" data-scroll-target="#evidence-selection-and-the-fidelity-ladder">Evidence Selection and the Fidelity Ladder</a></li>
   <li><a href="#you-evaluate-a-system-not-a-checkpoint" id="toc-you-evaluate-a-system-not-a-checkpoint" class="nav-link" data-scroll-target="#you-evaluate-a-system-not-a-checkpoint">You Evaluate a System, Not a Checkpoint</a></li>
@@ -398,58 +357,93 @@ ga('send', {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Evaluation Machine</h1>
+<p class="subtitle lead">Where the complexity went when the code became weights</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Evaluation</div>
+    <div class="quarto-category">Systems</div>
+  </div>
+  </div>
 
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="treachery-of-images.webp" class="img-fluid figure-img"></p>
-<figcaption>This is not the program.</figcaption>
-</figure>
+<div>
+  <div class="description">
+    A systems framework for specifying, measuring, and deciding what learned behavior is good enough to ship.
+  </div>
 </div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 2, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <p>In classical software, engineers specify much of a system’s behavior through the implementation itself, composing abstractions, contracts, invariants, and rules into the program.</p>
 <p>Learned systems change that relationship. They let us produce behavior we do not know how to program directly, without removing the need to specify what good behavior means. Part of that specification burden moves downstream, into evaluation: What behavior did we actually produce, how much should we trust the evidence about it, and what action does that evidence justify?</p>
 <p>This essay is about the machinery organizations build to answer those questions. Across LLMs and agents, search and recommendation, autonomous driving, and robotics, the implementations differ enormously, but the underlying anatomy is remarkably similar.</p>
 <p>By the end, you should be able to look at an evaluation system and reason about what it can actually know, what decisions that knowledge justifies, where it can fool itself, and where to invest next.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="treachery-of-images.webp" class="essay-art img-fluid figure-img"></p>
+<figcaption>This is not the program.</figcaption>
+</figure>
+</div>
+<section id="a-map-of-the-evaluation-system" class="level2">
+<h2 class="anchored" data-anchor-id="a-map-of-the-evaluation-system">A map of the evaluation system</h2>
 <p>At a high level, the machine looks something like this:</p>
-<pre class="text"><code>                 DECISION CONTRACT
-                        │
-                        ▼
-                EVIDENCE SELECTION
-                        │ cases / scenarios
-                        ▼
-            ╔═ EXECUTION ═══════════════════════╗
-            ║                                   ║
-            ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
-            ║                                   ║
-            ╚═════════════════╤═════════════════╝
-                              │ outcome + trace
-                              ▼
-                            JUDGE
-                              │
-                              ▼
-                     CLAIM + UNCERTAINTY
-                              │
-                              ▼
-                             GATE
-                              │
-                    ┌─────────┴─────────┐
-                    ▼                   ▼
-                  action           more evidence
-                    │                   │
-                    ▼                   └──▶ EVIDENCE SELECTION
-           production outcomes
-                    │
-                    ▼
-         ┏━ INSTITUTIONAL MEMORY ━━━━━━━━┓
-         ┗━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┛
-                         │
-                         └──▶ updates future evaluation</code></pre>
+<pre class="text ascii-diagram"><code>        DECISION CONTRACT
+               │
+               ▼
+       EVIDENCE SELECTION
+               │ cases / scenarios
+               ▼
+   ╔═ EXECUTION ═══════════════════════╗
+   ║                                   ║
+   ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
+   ║                                   ║
+   ╚═════════════════╤═════════════════╝
+                     │ outcome + trace
+                     ▼
+                   JUDGE
+                     │
+                     ▼
+            CLAIM + UNCERTAINTY
+                     │
+                     ▼
+                    GATE
+                     │
+           ┌─────────┴─────────┐
+           ▼                   ▼
+         action           more evidence
+           │                   │
+           ▼                   └──▶ EVIDENCE SELECTION
+  production outcomes
+           │
+           ▼
+┏━ INSTITUTIONAL MEMORY ━━━━━━━━┓
+┗━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┛
+                │
+                └──▶ updates future evaluation</code></pre>
 <p>The rest of this essay progressively zooms into those parts.</p>
+</section>
 <section id="the-output-is-a-state-transition-not-a-score" class="level2">
 <h2 class="anchored" data-anchor-id="the-output-is-a-state-transition-not-a-score">The Output is a State Transition, Not a Score</h2>
 <p>At its most zoomed-out, an evaluation system is a control loop that converts observed behavior into a decision, and uses the consequences of that decision to change what will be evaluated next.</p>
@@ -467,7 +461,7 @@ ga('send', {
 <li>The Judge decides what the consequences mean (e.g., the Python verifier, conversion tracking, the kinematic safety check).</li>
 </ol>
 <p>This means an evaluation never measures the Actor directly. It observes the Actor through an Environment, using a Judge. Every resulting capability claim therefore inherits assumptions from all three.</p>
-<pre class="text"><code>ACTOR
+<pre class="text ascii-diagram"><code>ACTOR
   │ behavior
   ▼
 ENVIRONMENT
@@ -478,27 +472,27 @@ JUDGE
   ▼
 CLAIM</code></pre>
 <p>For consequential candidate and release decisions, evaluation often needs to answer a fundamentally counterfactual question: What would have happened if the candidate had been there instead?</p>
-<pre class="text"><code>                   recorded situation
-                          │ reconstruct
-                          ▼
-          same initial state + Environment model
-                          │
-               ┌──────────┴──────────┐
-               ▼                     ▼
-        current ACTOR          candidate ACTOR
-             │ behavior             │ behavior
-             ▼                      ▼
-        ENVIRONMENT            ENVIRONMENT
-             │                      │
-             ▼                      ▼
-        trajectory A           trajectory B
-             └──────────┬───────────┘
-                        │ compare
-                        ▼
-                      JUDGE
-                        │
-                        ▼
-                       CLAIM</code></pre>
+<pre class="text ascii-diagram"><code>           recorded situation
+                  │ reconstruct
+                  ▼
+  same initial state + Environment model
+                  │
+       ┌──────────┴──────────┐
+       ▼                     ▼
+current ACTOR          candidate ACTOR
+     │ behavior             │ behavior
+     ▼                      ▼
+ENVIRONMENT            ENVIRONMENT
+     │                      │
+     ▼                      ▼
+trajectory A           trajectory B
+     └──────────┬───────────┘
+                │ compare
+                ▼
+              JUDGE
+                │
+                ▼
+               CLAIM</code></pre>
 <p>Seen this way, an evaluation system is machinery for constructing trustworthy claims about counterfactual behavior. That counterfactual becomes harder when the Environment is itself reflexive. In marketplaces, ranking systems, and multi-agent settings, deploying a candidate can change user or competitor behavior, so replay against the historical environment may not predict the equilibrium the candidate helps create.</p>
 <p>Replay, simulation, experimentation, judging, and release gating are different parts serving that common purpose.</p>
 <p>Once you see evaluation this way, replay infrastructure becomes a first-class ML system. But more importantly, it exposes where failures actually originate. If the Actor is wrong, you have bad behavior. If the Environment is wrong, the candidate is acting in the wrong world. If the Judge is wrong, the system maps behavior to the wrong conclusion. Some of the most interesting failures occur at the boundaries: an Environment permits an exploit the Judge cannot distinguish from legitimate success.</p>
@@ -516,7 +510,7 @@ CLAIM</code></pre>
 <p>The same idea appears in computerized adaptive testing (psychometrics): the most informative next question depends on what is currently uncertain about the examinee. Adaptive selection can estimate capability with far fewer questions. That efficiency comes from a deliberately altered sampling policy. The selector is part of the evaluator, because it determines what the system is capable of knowing.</p>
 <p>The evidence most useful for improving a system is often not the evidence you should trust most for assuring the improved system.</p>
 <p>Evidence also differs in fidelity and cost. It can be organized into a fidelity ladder. In autonomous driving, for example, that ladder can look like:</p>
-<pre class="text"><code>component tests
+<pre class="text ascii-diagram"><code>component tests
       │
       ▼
 recorded-log replay
@@ -557,7 +551,7 @@ fleet behavior</code></pre>
 <section id="outcomes-are-not-enough-evaluate-the-trace" class="level2">
 <h2 class="anchored" data-anchor-id="outcomes-are-not-enough-evaluate-the-trace">Outcomes Are Not Enough: Evaluate the Trace</h2>
 <p>Because terminal success reflects the whole execution system, it can be ambiguous about how that success was produced. This motivates two streams of evaluation.</p>
-<pre class="text"><code>╔═ EXECUTION ═══════════════════════╗
+<pre class="text ascii-diagram"><code>╔═ EXECUTION ═══════════════════════╗
 ║                                   ║
 ║  ACTOR ──behavior──▶ ENVIRONMENT  ║
 ║                                   ║
@@ -576,7 +570,7 @@ fleet behavior</code></pre>
 <h2 class="anchored" data-anchor-id="execution-throughput-is-not-decision-throughput">Execution Throughput is Not Decision Throughput</h2>
 <p>As execution scales to millions of simulations or offline tests a day, organizations hit a wall. You can scale execution throughput tremendously and still not improve decision throughput proportionally.</p>
 <p>If your evaluation suite flags 70,000 “interesting” regressions, that is not useful. At scale, human triage becomes a scheduler for scarce expert attention.</p>
-<pre class="text"><code>1,000,000 counterfactual executions
+<pre class="text ascii-diagram"><code>1,000,000 counterfactual executions
                 │ detect
                 ▼
       70,000 flagged events
@@ -603,16 +597,16 @@ Expert attention is scarce.</p>
 <p>Eventually, all this heterogeneous evidence must become an action. The mistake is to imagine the release gate as one final numerical threshold. A release board isn’t really asking, “Did version B get a 93.7?” It is asking: “What action does the current evidence justify?”</p>
 <p>“Safe enough to deploy” is rarely one empirical proposition. It is a bundle of claims: that known regressions are absent, representative behavior has not degraded, important edge-case families remain within bounds, the evaluation environment is sufficiently faithful, and remaining uncertainty is acceptable for the proposed deployment scope.</p>
 <p>The gate is a claim-building state machine. Its output should be the largest action justified by the current evidence.</p>
-<pre class="text"><code>                    CLAIM + UNCERTAINTY
-                             │
-                             ▼
-                        ┏━ GATE ━━━━┓
-                        ┗━━━━━┯━━━━━┛
-                              │
-                   ┌──────────┼──────────┐
-                   ▼          ▼          ▼
-                 HOLD      LIMITED      BROAD
-                           DEPLOYMENT   DEPLOYMENT</code></pre>
+<pre class="text ascii-diagram"><code>   CLAIM + UNCERTAINTY
+            │
+            ▼
+       ┏━ GATE ━━━━┓
+       ┗━━━━━┯━━━━━┛
+             │
+  ┌──────────┼──────────┐
+  ▼          ▼          ▼
+HOLD      LIMITED      BROAD
+          DEPLOYMENT   DEPLOYMENT</code></pre>
 <p>“More Evidence” now has a principled meaning: Which unsupported part of our proposed action requires stronger evidence? A surprising metric movement may be real, or the Judge may have drifted. Forcing every ambiguous result immediately into <code>PASS</code> or <code>FAIL</code> converts uncertainty into arbitrary policy.</p>
 <p>This also makes reversibility part of the contract. Evidence insufficient for an irreversible broad release may still justify a constrained rollout that generates more information under bounded risk.</p>
 </section>
@@ -621,7 +615,7 @@ Expert attention is scarce.</p>
 <p>The distinction introduced earlier becomes especially important when evidence is used to justify a release. Organizations are usually trying to answer two different questions with evaluation.</p>
 <p>The learning loop asks: Where might we be wrong, and what should we try next?<br>
 The assurance loop asks: Is the evidence strong enough to justify this consequential action?</p>
-<pre class="text"><code>LEARNING                         ASSURANCE
+<pre class="text ascii-diagram"><code>LEARNING                         ASSURANCE
 
 discovery evidence               frozen evidence
        │                                │
@@ -647,26 +641,26 @@ update hypothesis                 release claim
 <p>No evaluation architecture has complete coverage. Something eventually fails in production.</p>
 <p>But not every production failure indicts the evaluation system. An evaluator may correctly predict that some residual failure rate remains and a release decision may knowingly accept that risk.</p>
 <p>The important distinction is between a predicted failure and an epistemic surprise.</p>
-<pre class="text"><code>              production event
-                     │
-          ┌──────────┴──────────┐
-          ▼                     ▼
-   predicted failure     epistemic surprise
-          │                     │
-          ▼                     ▼
-   improve Actor /          investigate
-    cost tradeoff               │
-                                ▼
-                   ┏━ INSTITUTIONAL MEMORY ━┓
-                   ┃ durable failure object ┃
-                   ┗━━━━━━━━┯━━━━━━━━━━━━━━━┛
-                            │
-                            ├──▶ update Actor
-                            ├──▶ update Environment
-                            ├──▶ update Judge
-                            ├──▶ update evidence selection
-                            ├──▶ update aggregation
-                            └──▶ update gate / release policy</code></pre>
+<pre class="text ascii-diagram"><code>           production event
+                  │
+       ┌──────────┴──────────┐
+       ▼                     ▼
+predicted failure     epistemic surprise
+       │                     │
+       ▼                     ▼
+improve Actor /          investigate
+ cost tradeoff               │
+                             ▼
+                ┏━ INSTITUTIONAL MEMORY ━┓
+                ┃ durable failure object ┃
+                ┗━━━━━━━━┯━━━━━━━━━━━━━━━┛
+                         │
+                         ├──▶ update Actor
+                         ├──▶ update Environment
+                         ├──▶ update Judge
+                         ├──▶ update evidence selection
+                         ├──▶ update aggregation
+                         └──▶ update gate / release policy</code></pre>
 <p>A production failure is evidence about the Actor. A production failure outside the evaluator’s predicted envelope is evidence about the evaluation system itself. It reveals a blind spot in what the organization believed it knew.</p>
 <p>To compound in value, meaningful surprises need a closure path. Enterprise observability platforms are increasingly used to implement the “golden-set” loop: developers using tools like <a href="https://docs.langchain.com/langsmith/evaluation">LangSmith</a> or <a href="https://www.braintrust.dev/articles/turn-llm-production-failures-into-regression-tests">Braintrust</a> export production failures directly from the trace stream into an offline regression set.</p>
 <p>A regression set is only the first step.</p>
@@ -737,6 +731,7 @@ update hypothesis                 release claim
 </ul>
 
 
+<nav class="essay-next" aria-label="Continue reading"><p class="next-label">Read next</p><p class="next-title"><a href="../../posts/golden-datasets/">Golden Datasets: Launch Criteria for LLM Systems</a></p><p class="reading-links"><a href="../../posts/">All writing</a><a href="https://arjunsriva.substack.com/">Subscribe on Substack</a></p></nav>
 </section>
 
 </main> <!-- /main -->
@@ -1154,6 +1149,36 @@ update hypothesis                 release claim
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Arjun Srivastava · Tokyo</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.substack.com/">
+<p>Subscribe</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../index.xml">
+<p>Writing RSS</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arjunbazinga">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="../../static/reading-tools.js" defer=""></script>
 
 
 

@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Essays on machine learning, evaluation, data infrastructure, and distributed systems.">
 
-<title>Thoughts – Arjun Srivastava</title>
+<title>Writing – Arjun Srivastava</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -43,16 +44,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-98cf82f7baee0e05ae06e0de2cd83fcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a515e054079012129989d5397ee3c9c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-65ab6f6afcc98c2005f3bec1c5e98b7d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c37dfa679b2c1d9e43fdc3941f76ee37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,20 +83,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-selected-writing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-filters','listing-engines','listing-language','listing-draft-mode','listing-freeze','listing-body-classes','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-execute','listing-title','listing-subtitle','listing-site','listing-collection','listing-status','listing-canonical_url','listing-employer_derived','listing-audience','listing-reader_outcome','listing-bluf','listing-description','listing-image','listing-featured','listing-next-read-title','listing-next-read-url','listing-homepage','listing-homepage-order','listing-homepage-topic','listing-homepage-description','listing-layout','listing-categories','listing-comments','listing-date','listing-include-in-header','listing-path','listing-outputHref','listing-date-modified','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-toc-depth','listing-source_projects',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-filters","listing-engines","listing-language","listing-draft-mode","listing-freeze","listing-body-classes","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-execute","listing-title","listing-subtitle","listing-site","listing-collection","listing-status","listing-canonical_url","listing-employer_derived","listing-audience","listing-reader_outcome","listing-bluf","listing-description","listing-image","listing-featured","listing-next-read-title","listing-next-read-url","listing-homepage","listing-homepage-order","listing-homepage-topic","listing-homepage-description","listing-layout","listing-categories","listing-comments","listing-date","listing-include-in-header","listing-path","listing-outputHref","listing-date-modified","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-toc-depth","listing-source_projects"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-selected-writing'] = new List('listing-selected-writing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -154,15 +154,20 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="Arjun Srivastava" href="index.xml" data-external="1"><meta property="og:title" content="Thoughts – Arjun Srivastava">
-<meta property="og:image" content="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp">
+<link rel="stylesheet" href="../styles.css">
+<link rel="alternate" type="application/rss+xml" title="Arjun Srivastava" href="index.xml" data-external="1"><meta property="og:title" content="Writing – Arjun Srivastava">
+<meta property="og:description" content="Essays on machine learning, evaluation, data infrastructure, and distributed systems.">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/communication-collectives/thumbnail.svg">
 <meta property="og:site_name" content="Arjun Srivastava">
-<meta name="twitter:title" content="Thoughts – Arjun Srivastava">
-<meta name="twitter:image" content="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp">
+<meta property="og:image:alt" content="">
+<meta name="twitter:title" content="Writing – Arjun Srivastava">
+<meta name="twitter:description" content="Essays on machine learning, evaluation, data infrastructure, and distributed systems.">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/communication-collectives/thumbnail.svg">
+<meta name="twitter:image:alt" content="">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed writing-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -327,7 +332,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -342,30 +347,20 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../podcast"> 
-<span class="menu-text">Podcast</span></a>
+    <a class="nav-link" href="../posts/"> 
+<span class="menu-text">Writing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../posts"> 
-<span class="menu-text">Thoughts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://arjunsriva.com/library"> 
+    <a class="nav-link" href="https://www.arjunsriva.com/library/"> 
 <span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../podcast/"> 
+<span class="menu-text">Podcast</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/arjunsriv"> <i class="bi bi-twitter" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../index.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -376,873 +371,176 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Thoughts</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(25)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(8)</span></div><div class="category" data-category="QW5hbG9neQ==">Analogy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QW5hbHlzaXM=">Analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmFja2VuZA==">Backend <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QnVzaW5lc3M=">Business <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGF0YWJhc2Vz">Databases <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGVjaXNpb24lMjBNYWtpbmc=">Decision Making <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGlzdHJpYnV0ZWQlMjBDb21wdXRpbmc=">Distributed Computing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXZhbHVhdGlvbg==">Evaluation <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RXhwZXJpbWVudGF0aW9u">Experimentation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RmluYW5jZQ==">Finance <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RmludGVjaA==">Fintech <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Rm9yZWNhc3Rpbmc=">Forecasting <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RnV0dXJl">Future <span class="quarto-category-count">(4)</span></div><div class="category" data-category="SWRlYQ==">Idea <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SUlUJTIwSW5kb3Jl">IIT Indore <span class="quarto-category-count">(4)</span></div><div class="category" data-category="TWF0aA==">Math <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWVtb3J5">Memory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWV0YQ==">Meta <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWV0cmljcw==">Metrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvZHVjdA==">Product <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvamVjdHM=">Projects <span class="quarto-category-count">(3)</span></div><div class="category" data-category="UXVpeg==">Quiz <span class="quarto-category-count">(3)</span></div><div class="category" data-category="U3lzdGVtcw==">Systems <span class="quarto-category-count">(6)</span></div><div class="category" data-category="VGhvdWdodHM=">Thoughts <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V0lQ">WIP <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Writing</h1>
+</div>
 
-
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-      <option value="listing-author" data-direction="asc">
-        Author
-      </option>
-    </select>
+<div>
+  <div class="description">
+    Essays on machine learning, evaluation, data infrastructure, and distributed systems.
   </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
 </div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="QUklMkNTeXN0ZW1zJTJDRGlzdHJpYnV0ZWQlMjBDb21wdXRpbmc=" data-listing-date-sort="1788825600000" data-listing-file-modified-sort="1789437794872" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5319">
-<div class="thumbnail"><a href="../posts/communication-collectives/index.html" class="no-external">
 
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/communication-collectives/index.html" class="no-external">AllReduce, All the Way Down</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/communication-collectives/index.html" class="no-external">How collective semantics become programs for real machines</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3lzdGVtcw=='); return false;">Systems</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGlzdHJpYnV0ZWQlMjBDb21wdXRpbmc='); return false;">Distributed Computing</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/communication-collectives/index.html" class="no-external">
-<p>A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/communication-collectives/index.html" class="no-external">
-<div class="listing-date">
-Sep 8, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="QUklMkNFdmFsdWF0aW9uJTJDU3lzdGVtcw==" data-listing-date-sort="1788307200000" data-listing-file-modified-sort="1789437794874" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="32" data-listing-word-count-sort="6273">
-<div class="thumbnail"><a href="../posts/evaluation-systems/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/evaluation-systems/treachery-of-images.webp" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/evaluation-systems/index.html" class="no-external">The Evaluation Machine</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/evaluation-systems/index.html" class="no-external">Where the complexity went when the code became weights</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXZhbHVhdGlvbg=='); return false;">Evaluation</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3lzdGVtcw=='); return false;">Systems</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/evaluation-systems/index.html" class="no-external">
-<p>A systems framework for specifying, measuring, and deciding what learned behavior is good enough to ship.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/evaluation-systems/index.html" class="no-external">
-<div class="listing-date">
-Sep 2, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="QUklMkNTeXN0ZW1zJTJDTWVtb3J5" data-listing-date-sort="1785456000000" data-listing-file-modified-sort="1789437794877" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="37" data-listing-word-count-sort="7333">
-<div class="thumbnail"><a href="../posts/from-search-to-memory/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/from-search-to-memory/persistence-of-memory.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/from-search-to-memory/index.html" class="no-external">Rocketships for the Mind</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/from-search-to-memory/index.html" class="no-external">Learning and experiments in building tools to think with</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3lzdGVtcw=='); return false;">Systems</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWVtb3J5'); return false;">Memory</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/from-search-to-memory/index.html" class="no-external">
-<p>A systems-design account of immutable conversation archives, entity reconciliation, semantic indexes, typed evidence, temporal state, task-conditioned queries, agentic investigation, and reviewed memory.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/from-search-to-memory/index.html" class="no-external">
-<div class="listing-date">
-Jul 31, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="RmluYW5jZSUyQ0ZpbnRlY2glMkNEYXRhYmFzZXMlMkNTeXN0ZW1z" data-listing-date-sort="1775606400000" data-listing-file-modified-sort="1789437794876" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4214">
-<div class="thumbnail"><a href="../posts/finance-and-databases/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/finance-and-databases/cover.webp" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/finance-and-databases/index.html" class="no-external">From Payments to Claims: Where Finance Infrastructure Goes Next</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/finance-and-databases/index.html" class="no-external">How changing workloads and infrastructure create new financial instruments.</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RmluYW5jZQ=='); return false;">Finance</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RmludGVjaA=='); return false;">Fintech</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGF0YWJhc2Vz'); return false;">Databases</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3lzdGVtcw=='); return false;">Systems</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/finance-and-databases/index.html" class="no-external">
-<p>Financial instruments are architectures for economic workloads. As business flows become machine-legible, observability may change not just underwriting, but the unit of financing itself.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/finance-and-databases/index.html" class="no-external">
-<div class="listing-date">
-Apr 8, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="UHJvZHVjdCUyQ01ldHJpY3MlMkNEZWNpc2lvbiUyME1ha2luZw==" data-listing-date-sort="1765497600000" data-listing-file-modified-sort="1789437795115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1941">
-<div class="thumbnail"><a href="../posts/metrics-that-change-decisions/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/metrics-that-change-decisions/index.html" class="no-external">How to Design Metrics That Change Decisions</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/metrics-that-change-decisions/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvZHVjdA=='); return false;">Product</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWV0cmljcw=='); return false;">Metrics</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGVjaXNpb24lMjBNYWtpbmc='); return false;">Decision Making</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/metrics-that-change-decisions/index.html" class="no-external">
-<p>A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/metrics-that-change-decisions/index.html" class="no-external">
-<div class="listing-date">
-Dec 12, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="QUklMkNFdmFsdWF0aW9uJTJDU3lzdGVtcw==" data-listing-date-sort="1756080000000" data-listing-file-modified-sort="1789437794948" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2571">
-<div class="thumbnail"><a href="../posts/golden-datasets/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/golden-datasets/index.html" class="no-external">Golden Datasets: Launch Criteria for LLM Systems</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/golden-datasets/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXZhbHVhdGlvbg=='); return false;">Evaluation</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3lzdGVtcw=='); return false;">Systems</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/golden-datasets/index.html" class="no-external">
-<p>How to decide what must pass before a new model, instruction, or workflow ships</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/golden-datasets/index.html" class="no-external">
-<div class="listing-date">
-Aug 25, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="QUklMkNCYWNrZW5kJTJDU3lzdGVtcw==" data-listing-date-sort="1750118400000" data-listing-file-modified-sort="1789437795115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1737">
-<div class="thumbnail"><a href="../posts/llms-for-backend-engineers/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/llms-for-backend-engineers/index.html" class="no-external">LLMs for Backend Engineers: From First Principles</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/llms-for-backend-engineers/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QmFja2VuZA=='); return false;">Backend</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U3lzdGVtcw=='); return false;">Systems</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/llms-for-backend-engineers/index.html" class="no-external">
-<p>A systems view of LLM latency, cost, reliability, and evaluation</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/llms-for-backend-engineers/index.html" class="no-external">
-<div class="listing-date">
-Jun 17, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="RnV0dXJlJTJDSWRlYSUyQ1dJUA==" data-listing-date-sort="1743379200000" data-listing-file-modified-sort="1789437795128" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1779">
-<div class="thumbnail"><a href="../posts/programmng-language/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/programmng-language/index.html" class="no-external">Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/programmng-language/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RnV0dXJl'); return false;">Future</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SWRlYQ=='); return false;">Idea</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V0lQ'); return false;">WIP</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/programmng-language/index.html" class="no-external">
-<p>Some thoughts on features that could make programming languages more powerful</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/programmng-language/index.html" class="no-external">
-<div class="listing-date">
-Mar 31, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="QW5hbG9neSUyQ0Z1dHVyZQ==" data-listing-date-sort="1741132800000" data-listing-file-modified-sort="1789437794873" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1456">
-<div class="thumbnail"><a href="../posts/deep-learning-and-gradening/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/deep-learning-and-gradening/fertilizer.jpeg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/deep-learning-and-gradening/index.html" class="no-external">On Deep Learning and Farming: It’s still 1915</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/deep-learning-and-gradening/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QW5hbG9neQ=='); return false;">Analogy</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RnV0dXJl'); return false;">Future</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/deep-learning-and-gradening/index.html" class="no-external">
-<p>What agriculture can teach us about AI development</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/deep-learning-and-gradening/index.html" class="no-external">
-<div class="listing-date">
-Mar 5, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="QnVzaW5lc3MlMkNGdXR1cmUlMkNUaG91Z2h0cw==" data-listing-date-sort="1740787200000" data-listing-file-modified-sort="1789437795115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2619">
-<div class="thumbnail"><a href="../posts/many-universes/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/many-universes/index.html" class="no-external">The Many Universes That Exist</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/many-universes/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QnVzaW5lc3M='); return false;">Business</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RnV0dXJl'); return false;">Future</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">Thoughts</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/many-universes/index.html" class="no-external">
-<p>The constraints that determine what exists</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/many-universes/index.html" class="no-external">
-<div class="listing-date">
-Mar 1, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="QnVzaW5lc3M=" data-listing-date-sort="1691798400000" data-listing-file-modified-sort="1789437795128" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1132">
-<div class="thumbnail"><a href="../posts/saas-and-swimming/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/saas-and-swimming/index.html" class="no-external">On SaaS and Swimming: Hidden Factors of Success</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/saas-and-swimming/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QnVzaW5lc3M='); return false;">Business</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/saas-and-swimming/index.html" class="no-external">
-<p>How to figure out what matters in business and sports</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/saas-and-swimming/index.html" class="no-external">
-<div class="listing-date">
-Aug 12, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="Rm9yZWNhc3RpbmclMkNNYXRo" data-listing-date-sort="1654041600000" data-listing-file-modified-sort="1789437794875" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2534">
-<div class="thumbnail"><a href="../posts/exponentials-everywhere/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/exponentials-everywhere/sigmoid.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/exponentials-everywhere/index.html" class="no-external">Exponentials Everywhere: The S-Curve Challenge in Predicting the Future</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/exponentials-everywhere/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Rm9yZWNhc3Rpbmc='); return false;">Forecasting</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWF0aA=='); return false;">Math</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/exponentials-everywhere/index.html" class="no-external">
-<p>S-curves are way trickier than you’d think. Here’s why predicting pandemics, product adoption, and other exponential phenomena is far more challenging than it seems – and what that means for all of us.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/exponentials-everywhere/index.html" class="no-external">
-<div class="listing-date">
-Jun 1, 2022
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="12" data-categories="RXhwZXJpbWVudGF0aW9u" data-listing-date-sort="1616284800000" data-listing-file-modified-sort="1789437794875" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="405">
-<div class="thumbnail"><a href="../posts/exerimentations-platforms/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/exerimentations-platforms/experimentation.webp" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/exerimentations-platforms/index.html" class="no-external">Experimentation Platforms</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/exerimentations-platforms/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXhwZXJpbWVudGF0aW9u'); return false;">Experimentation</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/exerimentations-platforms/index.html" class="no-external">
-<p>An Overview of Experimentation Platforms.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/exerimentations-platforms/index.html" class="no-external">
-<div class="listing-date">
-Mar 21, 2021
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="13" data-categories="SUlUJTIwSW5kb3Jl" data-listing-date-sort="1578441600000" data-listing-file-modified-sort="1789437794872" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
-<div class="thumbnail"><a href="../posts/course-schedule-generator/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/course-schedule-generator/index.html" class="no-external">Course Schedule Generator</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/course-schedule-generator/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('SUlUJTIwSW5kb3Jl'); return false;">IIT Indore</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/course-schedule-generator/index.html" class="no-external">
-<p>A website which adds courses to your personal calendar, for students of IIT Indore.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/course-schedule-generator/index.html" class="no-external">
-<div class="listing-date">
-Jan 8, 2020
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="14" data-categories="SUlUJTIwSW5kb3JlJTJDUXVpeg==" data-listing-date-sort="1535241600000" data-listing-file-modified-sort="1789437795052" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="49">
-<div class="thumbnail"><a href="../posts/harry-potter-quiz/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/harry-potter-quiz/pottermania.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/harry-potter-quiz/index.html" class="no-external">Harry Potter quiz</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/harry-potter-quiz/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('SUlUJTIwSW5kb3Jl'); return false;">IIT Indore</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVpeg=='); return false;">Quiz</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/harry-potter-quiz/index.html" class="no-external">
-<p>A beginner friendly quiz on the wizarding world</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/harry-potter-quiz/index.html" class="no-external">
-<div class="listing-date">
-Aug 26, 2018
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="15" data-categories="RnV0dXJl" data-listing-date-sort="1533427200000" data-listing-file-modified-sort="1789437795129" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="113">
-<div class="thumbnail"><a href="../posts/state-of-reading/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/state-of-reading/index.html" class="no-external">The state of reading in 2018 and beyond.</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/state-of-reading/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RnV0dXJl'); return false;">Future</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/state-of-reading/index.html" class="no-external">
-Audio books are seeing a resurgence, because of companies like Audible.<br>
-Text to speech is good, and is getting better .<br>
-Wireless Bluetooth earphones are becoming common…<br><br><br><br><br><br>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/state-of-reading/index.html" class="no-external">
-<div class="listing-date">
-Aug 5, 2018
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="16" data-categories="QUklMkNQcm9qZWN0cw==" data-listing-date-sort="1532736000000" data-listing-file-modified-sort="1789437794877" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28">
-<div class="thumbnail"><a href="../posts/friend-or-foe/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/friend-or-foe/environment.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/friend-or-foe/index.html" class="no-external">Friend Or Foe</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/friend-or-foe/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvamVjdHM='); return false;">Projects</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/friend-or-foe/index.html" class="no-external">
-<p>An interactive game inspired by the paper “AI Safety Grid Worlds”</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/friend-or-foe/index.html" class="no-external">
-<div class="listing-date">
-Jul 28, 2018
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="17" data-categories="QW5hbHlzaXM=" data-listing-date-sort="1529020800000" data-listing-file-modified-sort="1789437795084" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="225">
-<div class="thumbnail"><a href="../posts/infant-mortality/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/infant-mortality/infantmortality.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/infant-mortality/index.html" class="no-external">Infant Mortality In India</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/infant-mortality/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QW5hbHlzaXM='); return false;">Analysis</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/infant-mortality/index.html" class="no-external">
-<p>An analysis of infant mortality rates across India.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/infant-mortality/index.html" class="no-external">
-<div class="listing-date">
-Jun 15, 2018
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="18" data-categories="UHJvamVjdHM=" data-listing-date-sort="1528761600000" data-listing-file-modified-sort="1789437795114" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="96">
-<div class="thumbnail"><a href="../posts/jargonizer/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/jargonizer/jargonizer.webp" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/jargonizer/index.html" class="no-external">Jargonizer</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/jargonizer/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="essays" class="level2 writing-collection-heading">
+<h2 class="writing-collection-heading" data-anchor-id="essays">Essays</h2>
+<p>Start with <a href="../posts/evaluation-systems/">The Evaluation Machine</a>, or browse all selected essays below, newest first.</p>
+<div id="listing-selected-writing" class="quarto-listing quarto-listing-container-custom">
+<div class="writing-list">
+
+  <article>
+    <a class="writing-entry" href="../posts/communication-collectives/index.html" aria-label="AllReduce, All the Way Down">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">AllReduce, All the Way Down</h3>
+        <p>Follow AllReduce from a simple operation through collective algorithms, network topology, and GPU execution.</p>
+        <span class="work-date">Sep 8, 2026</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/communication-collectives/thumbnail.svg" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
+
+  <article>
+    <a class="writing-entry" href="../posts/evaluation-systems/index.html" aria-label="The Evaluation Machine">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">The Evaluation Machine</h3>
+        <p>How contracts, evidence, environments, and release gates help teams decide whether learned behavior is ready to ship.</p>
+        <span class="work-date">Sep 2, 2026</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/evaluation-systems/thumbnail.webp" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
+
+  <article>
+    <a class="writing-entry" href="../posts/from-search-to-memory/index.html" aria-label="Rocketships for the Mind">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">Rocketships for the Mind</h3>
+        <p>A system I built to recover project state from 6,604 AI conversations, reconcile evidence, and construct task-specific memory.</p>
+        <span class="work-date">Jul 31, 2026</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/from-search-to-memory/thumbnail.webp" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
+
+  <article>
+    <a class="writing-entry" href="../posts/finance-and-databases/index.html" aria-label="From Payments to Claims: Where Finance Infrastructure Goes Next">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">From Payments to Claims: Where Finance Infrastructure Goes Next</h3>
+        <p>Financial instruments are architectures for economic workloads. As business flows become machine-legible, observability may change not just underwriting, but the unit of financing itself.</p>
+        <span class="work-date">Apr 8, 2026</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/finance-and-databases/thumbnail.webp" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
+
+  <article>
+    <a class="writing-entry" href="../posts/metrics-that-change-decisions/index.html" aria-label="How to Design Metrics That Change Decisions">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">How to Design Metrics That Change Decisions</h3>
+        <p>A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help</p>
+        <span class="work-date">Dec 12, 2025</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/metrics-that-change-decisions/thumbnail.svg" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
+
+  <article>
+    <a class="writing-entry" href="../posts/golden-datasets/index.html" aria-label="Golden Datasets: Launch Criteria for LLM Systems">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">Golden Datasets: Launch Criteria for LLM Systems</h3>
+        <p>How to decide what must pass before a new model, instruction, or workflow ships</p>
+        <span class="work-date">Aug 25, 2025</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/golden-datasets/thumbnail.svg" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
+
+  <article>
+    <a class="writing-entry" href="../posts/llms-for-backend-engineers/index.html" aria-label="LLMs for Backend Engineers: From First Principles">
+      <div class="writing-entry-copy">
+        <h3 class="no-anchor">LLMs for Backend Engineers: From First Principles</h3>
+        <p>A systems view of LLM latency, cost, reliability, and evaluation</p>
+        <span class="work-date">Jun 17, 2025</span>
+      </div>
+      <img class="writing-thumbnail" src="../posts/llms-for-backend-engineers/thumbnail.svg" alt="" width="176" height="124" loading="lazy">
+    </a>
+  </article>
 
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvamVjdHM='); return false;">Projects</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/jargonizer/index.html" class="no-external">
-<p>Generate sentences that nobody can read.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/jargonizer/index.html" class="no-external">
-<div class="listing-date">
-Jun 12, 2018
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="19" data-categories="QUk=" data-listing-date-sort="1510444800000" data-listing-file-modified-sort="1789437795115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="284">
-<div class="thumbnail"><a href="../posts/learning-machine-learning/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/learning-machine-learning/index.html" class="no-external">Learning Machine Learning</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/learning-machine-learning/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/learning-machine-learning/index.html" class="no-external">
-This post will talk about resources for how I’m going about learning machine learning.
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/learning-machine-learning/index.html" class="no-external">
-<div class="listing-date">
-Nov 12, 2017
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="20" data-categories="QUk=" data-listing-date-sort="1510444800000" data-listing-file-modified-sort="1789437795117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
-<div class="thumbnail"><a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external">
-
-<img loading="lazy" src="../posts/multi-armed-bandits/MultiArmedBandits.jpeg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external">Multi Armed Bandits</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external">
-<p>or how to balance exploration and exploitation more formally</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/multi-armed-bandits/multi-armed-bandits.html" class="no-external">
-<div class="listing-date">
-Nov 12, 2017
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="21" data-categories="SUlUJTIwSW5kb3JlJTJDUXVpeg==" data-listing-date-sort="1504483200000" data-listing-file-modified-sort="1789437794940" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140">
-<div class="thumbnail"><a href="../posts/game-of-thrones-quiz/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/game-of-thrones-quiz/gameofthronesquiz.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/game-of-thrones-quiz/index.html" class="no-external">Game Of Thrones quiz</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/game-of-thrones-quiz/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('SUlUJTIwSW5kb3Jl'); return false;">IIT Indore</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVpeg=='); return false;">Quiz</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/game-of-thrones-quiz/index.html" class="no-external">
-<p>A quiz made for cultural week</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/game-of-thrones-quiz/index.html" class="no-external">
-<div class="listing-date">
-Sep 4, 2017
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="22" data-categories="SUlUJTIwSW5kb3JlJTJDUXVpeg==" data-listing-date-sort="1503187200000" data-listing-file-modified-sort="1789437795128" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="43">
-<div class="thumbnail"><a href="../posts/newbie-quiz/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/newbie-quiz/newbiequiz.jpeg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/newbie-quiz/index.html" class="no-external">Newbie quiz</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/newbie-quiz/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('SUlUJTIwSW5kb3Jl'); return false;">IIT Indore</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UXVpeg=='); return false;">Quiz</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/newbie-quiz/index.html" class="no-external">
-<p>A quiz to introduce quizzing to new people and narrowing down potential recruits.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/newbie-quiz/index.html" class="no-external">
-<div class="listing-date">
-Aug 20, 2017
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="23" data-categories="UHJvamVjdHM=" data-listing-date-sort="1483833600000" data-listing-file-modified-sort="1789437795115" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
-<div class="thumbnail"><a href="../posts/mental-health-checklist/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/mental-health-checklist/index.html" class="no-external">Mental Health Checklists</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/mental-health-checklist/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvamVjdHM='); return false;">Projects</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/mental-health-checklist/index.html" class="no-external">
-<p>A website which allows quick tracking of mental health.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/mental-health-checklist/index.html" class="no-external">
-<div class="listing-date">
-Jan 8, 2017
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="24" data-categories="TWV0YQ==" data-listing-date-sort="1451606400000" data-listing-file-modified-sort="1789437794872" data-listing-date-modified-sort="1715040000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="166">
-<div class="thumbnail"><a href="../posts/about-this-website/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/about-this-website/index.html" class="no-external">About this website</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/about-this-website/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWV0YQ=='); return false;">Meta</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/about-this-website/index.html" class="no-external">
-<p>a meta post about this website</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/about-this-website/index.html" class="no-external">
-<div class="listing-date">
-Jan 1, 2016
-</div>
-</a>
-</div>
-</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+</section>
+<section id="interactive-research" class="level2">
+<h2 data-anchor-id="interactive-research">Interactive research</h2>
+<p>Interactive essays and experiments from my independent research site, <a href="https://www.novusopus.org/research/">Novus Opus</a>.</p>
+<div class="research-grid">
+<div class="research-entry">
+<a class="research-thumbnail" href="https://www.novusopus.org/research/bend-not-shift/" tabindex="-1" aria-hidden="true"><img src="../static/research-previews/bend-not-shift.webp" alt="" width="112" height="88" loading="lazy"></a>
+<section id="bend-not-shift" class="level3 no-anchor research-copy">
+<h3 class="no-anchor" data-anchor-id="bend-not-shift"><a href="https://www.novusopus.org/research/bend-not-shift/">Bend, Not Shift</a></h3>
+<p>Explore scaling laws and what would make a learner better at learning.</p>
+</section>
+</div>
+<div class="research-entry">
+<a class="research-thumbnail" href="https://www.novusopus.org/research/the-second-loop/" tabindex="-1" aria-hidden="true"><img src="../static/research-previews/second-loop.webp" alt="" width="112" height="88" loading="lazy"></a>
+<section id="the-second-loop" class="level3 no-anchor research-copy">
+<h3 class="no-anchor" data-anchor-id="the-second-loop"><a href="https://www.novusopus.org/research/the-second-loop/">The Second Loop</a></h3>
+<p>Explore the control loops that could help AI maintain long-running plans and commitments.</p>
+</section>
+</div>
+<div class="research-entry">
+<a class="research-thumbnail" href="https://www.novusopus.org/research/connectivity-and-innovation/" tabindex="-1" aria-hidden="true"><img src="../static/research-previews/connectivity.webp" alt="" width="112" height="88" loading="lazy"></a>
+<section id="the-limits-of-connectivity" class="level3 no-anchor research-copy">
+<h3 class="no-anchor" data-anchor-id="the-limits-of-connectivity"><a href="https://www.novusopus.org/research/connectivity-and-innovation/">The Limits of Connectivity</a></h3>
+<p>Experiment with the trade-off between communication and independent discovery.</p>
+</section>
+</div>
+<div class="research-entry">
+<a class="research-thumbnail" href="https://www.novusopus.org/research/opinion-dynamics/" tabindex="-1" aria-hidden="true"><img src="../static/research-previews/opinion-dynamics.webp" alt="" width="112" height="88" loading="lazy"></a>
+<section id="the-geometry-of-disagreement" class="level3 no-anchor research-copy">
+<h3 class="no-anchor" data-anchor-id="the-geometry-of-disagreement"><a href="https://www.novusopus.org/research/opinion-dynamics/">The Geometry of Disagreement</a></h3>
+<p>Build an opinion-dynamics model, then experiment with trust, network structure, and polarization.</p>
+</section>
+</div>
+</div>
+</section>
+<div class="subscribe-note">
+<section id="new-essays-by-email" class="level2 unlisted unnumbered subscribe-copy">
+<h2 class="unlisted unnumbered" data-anchor-id="new-essays-by-email">New essays by email</h2>
+<p>Writing on systems, machine learning, and data infrastructure.</p>
+</section>
+<p><a href="https://arjunsriva.substack.com/" class="subscribe-link">Subscribe on Substack</a></p>
+</div>
+<div class="archive-note">
+<p><a href="../archive/">Earlier writing</a> collects older essays, projects, and experiments. The <a href="../index.xml">RSS feed</a> includes both selected and earlier writing.</p>
+</div>
+
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1258,13 +556,6 @@ Jan 1, 2016
       window.document.body.appendChild(a);
     }
     setColorSchemeToggle(hasAlternateSentinel())
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
@@ -1657,6 +948,36 @@ Jan 1, 2016
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Arjun Srivastava · Tokyo</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.substack.com/">
+<p>Subscribe</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../index.xml">
+<p>Writing RSS</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arjunbazinga">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="../static/reading-tools.js" defer=""></script>
 
 
 
