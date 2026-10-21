@@ -1,0 +1,20 @@
+// Shared type roles across the light and dark palettes.
+$font-family-sans-serif: "Sora", "Gill Sans", "Trebuchet MS", sans-serif;
+$font-family-serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+$font-family-base: $font-family-serif;
+$font-family-monospace: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+$headings-font-family: "Fraunces", "Palatino Linotype", Palatino, serif;
+$headings-font-weight: 500;
+$headings-line-height: 1.2;
+$font-size-root: 17px;
+$font-size-base: 1rem;
+$line-height-base: 1.65;
+$navbar-bg: $body-bg;
+$navbar-fg: $body-color;
+$navbar-hl: $link-color;
+$navbar-light-color: $body-color;
+$navbar-dark-color: $body-color;
+$navbar-light-icon-color: $body-color;
+$navbar-dark-icon-color: $body-color;
+$code-color: $body-color;
+$border-radius: 0.2rem;

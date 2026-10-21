@@ -1,6 +1,10 @@
 ---
 title: "Golden Datasets: Launch Criteria for LLM Systems"
 description: "How to decide what must pass before a new model, instruction, or workflow ships"
+image: thumbnail.svg
+featured: true
+next-read-title: "LLMs for Backend Engineers: From First Principles"
+next-read-url: /posts/llms-for-backend-engineers/
 layout: post
 categories: [AI, Evaluation, Systems]
 comments: false

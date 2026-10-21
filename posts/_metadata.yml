@@ -4,14 +4,17 @@
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
 
+# Reading typography and measure for essays (the Writing index has its own layout).
+body-classes: essay-page
+
 # Enable banner style title blocks
-title-block-banner: true
+title-block-banner: false
 
 
 
 # Default for table of contents
 toc: true
-toc-title: Table of contents
+toc-title: On this page
 toc-location: left
 
 # Default knitr options

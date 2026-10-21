@@ -1,6 +1,10 @@
 ---
 title: "LLMs for Backend Engineers: From First Principles"
 description: "A systems view of LLM latency, cost, reliability, and evaluation"
+image: thumbnail.svg
+featured: true
+next-read-title: "Golden Datasets: Launch Criteria for LLM Systems"
+next-read-url: /posts/golden-datasets/
 layout: post
 categories: [AI, Backend, Systems]
 comments: false

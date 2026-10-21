@@ -1,72 +1,50 @@
 ---
-title: "About"
+title: "About Arjun"
 image: profile.jpeg
-about:
-  template: marquee
-  links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/arjunsriv
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com/in/arjunsriva
-    - icon: github
-      text: Github
-      href: https://github.com/arjunbazinga
+page-layout: full
+title-block-banner: false
+toc: false
+body-classes: about-page
 ---
 
-I’m a hands-on engineering leader and systems builder working across machine learning, data infrastructure, and distributed systems. I currently lead ML & Data Platform for MS1 at [Woven by Toyota](https://woven.toyota/en/) and am based in Tokyo.
+::: {.about-intro}
+::: {.about-intro-copy}
+I’m an engineering leader and systems builder working across machine learning, data infrastructure, and distributed systems. I lead **ML & Data Platform for MS1 at Woven by Toyota**, based in Tokyo.
 
-I tend to work where a technical capability is possible but not yet dependable. A model works, but nobody can safely ship it. The data exists, but people cannot tell whether it is trustworthy. A workflow succeeds once, but only because the person who invented it knows all the hidden steps. I build the surrounding systems—interfaces, infrastructure, evaluation, observability, governance, and operating mechanisms—that make those capabilities usable by people who did not create them.
+I build the infrastructure that turns promising technical capabilities into dependable products: evaluation, data contracts, observability, and the tools that help teams ship.
+
+::: {.contact-links}
+[Email me](mailto:arjunsriva@gmail.com) · [LinkedIn](https://linkedin.com/in/arjunsriva) · [GitHub](https://github.com/arjunbazinga) · [Twitter](https://twitter.com/arjunsriv)
+:::
+:::
+
+```{=html}
+<img class="about-portrait" src="profile.jpeg" alt="Arjun Srivastava" width="176" height="176">
+```
+:::
 
 ## Work
 
-At [Woven by Toyota](https://woven.toyota/en/), I was one of the founding engineers of MS1, a B2B product focused on talent mobility. I helped build the product from its early stages, including its data infrastructure, skill-intelligence systems, [adaptive assessments](https://en.wikipedia.org/wiki/Item_response_theory), course recommendations, [talent matching](https://www.arjunsriva.com/library/book_1/book_1000.html), and cloud foundations.
+At [Woven by Toyota](https://woven.toyota/en/), I was one of the founding engineers of MS1, a B2B product focused on talent mobility. I helped build its data infrastructure, skill-intelligence systems, adaptive assessments, course recommendations, talent matching, and cloud foundations.
 
-I now lead the ML and Data Platform team. Our work spans production ML and AI infrastructure, data orchestration, model evaluation and observability, developer experience, platform reliability, data contracts, privacy, and governance. My role combines hands-on architecture with technical leadership: deciding what the platform should own, building the mechanisms that make it dependable, and helping other engineers and data scientists move faster without needing to understand every layer underneath.
+I now lead the ML and Data Platform team. Our work spans production ML and AI infrastructure, data orchestration, model evaluation, developer experience, platform reliability, privacy, and governance. My role combines hands-on architecture with technical leadership: deciding what the platform should own and helping engineers and data scientists build on it.
 
-Previously, at [BookMyShow](https://bookmyshow.com), I built real-time data and discovery infrastructure used to personalize entertainment experiences for millions of users. Earlier in my career, I worked on distributed databases, [consensus systems](https://pmg.csail.mit.edu/papers/osdi99.pdf), and education products.
+Previously, at [BookMyShow](https://bookmyshow.com), I built real-time data and discovery infrastructure used to personalize entertainment experiences for millions of users. Earlier work included distributed databases, consensus systems, and education products.
 
-Across these roles, the recurring pattern has been the same: build something from zero to one, observe where repeated effort and ambiguity accumulate, and turn what we learn into a system that can [scale](https://zerodha.tech/blog/scaling-with-common-sense/) beyond its original builders.
+## What I’m exploring
 
-## The questions behind the work
+I’m interested in how systems preserve evidence, make state visible, and give people meaningful control. Those questions connect my work on AI evaluation, memory, data platforms, and distributed systems.
 
-I believe good infrastructure makes meaningful ambition executable by default.
+In [The Evaluation Machine](/posts/evaluation-systems/), I examine the contracts and evidence that let teams decide whether learned behavior is ready to ship. [Rocketships for the Mind](/posts/from-search-to-memory/) describes a system I built to recover project state and construct useful memory from 6,604 AI conversations.
 
-The best abstractions do not [hide complexity](https://gwern.net/language#:~:text=Batuman2005-,Simplicity%20does%20not%20precede%20complexity%2C%20but%20follows%20it.,-Alan%20Perlis%2C%201982) indiscriminately. They preserve the distinctions people need to make good decisions and absorb the complexity they should not have to manage themselves. They make state visible, preserve evidence, provide meaningful points of control, and [turn exceptional outcomes into repeatable ones](https://en.wikipedia.org/wiki/The_Toyota_Way).
-
-This leads me to questions that [cross conventional technical boundaries](https://www.poorcharliesalmanack.com/):
-
-How should AI systems manage memory, evaluation, identity, authority, and long-running state? What should programming runtimes take responsibility for instead of application developers? How do we build platforms without depriving their users of agency? What becomes possible when businesses, markets, and financial relationships become more observable and programmable?
-
-These may look like questions about different fields, but I see them as versions of the same problem: how bounded people and machines can act effectively inside systems too complex to understand or control in full.
-
-Outside my work at Woven, I explore these questions through writing, technical experiments, and independent research. Some of this work is speculative. I publish it because writing helps turn an intuition into something precise enough to examine, criticize, and eventually build.
-
-## Selected writing
-
-* [Building Search and Memory Over Three Years of My AI Conversations](/posts/from-search-to-memory/) describes a system for turning a large conversation archive into verifiable, task-specific memory without collapsing the underlying evidence.
-
-* [Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation](/posts/programmng-language/) explores what programming systems could absorb so developers can express intent without manually implementing the machinery around it.
-
-* [From Payments to Claims: Where Finance Infrastructure Goes Next](/posts/finance-and-databases/) asks how machine-legible business activity could change not only how financial claims are priced, but which economic processes can be financed at all.
-
-* [LLMs for Backend Engineers: From First Principles](/posts/llms-for-backend-engineers/) explains language models through the production concerns backend engineers already understand: latency, cost, state, reliability, and evaluation.
-
-* [Golden Datasets: Launch Criteria for LLM Systems](/posts/golden-datasets/) presents evaluation datasets as durable, inspectable agreements about what an AI system must be able to do before it ships.
+I also publish [interactive research at Novus Opus](https://www.novusopus.org/research/), where readers can explore ideas through simulations and experiments. The full collection is in [Writing](/posts/).
 
 ## Background
 
-I studied computer science at IIT Indore. My early interests included machine learning, algorithms, distributed systems, and programming languages, particularly systems that could [learn from their workloads](https://learned.di.unipi.it/publication/learned-data-structures/learned-data-structures.pdf) or generate parts of their own implementation.
+I studied computer science at IIT Indore. Open resources such as [MIT OpenCourseWare](https://ocw.mit.edu/) and the [Linux Documentation Project](https://tldp.org/) shaped my belief that technical knowledge becomes more valuable when it is understandable and shared openly. This website is my contribution to that tradition.
 
-Growing up, websites such as [MIT OpenCourseWare](https://ocw.mit.edu/) and the [Linux Documentation Project](https://tldp.org/) gave me access to knowledge that would otherwise have been difficult to find. They shaped my belief that technical knowledge becomes more valuable when it is made understandable and shared openly. This website is my attempt to contribute to that tradition, while giving unfinished ideas somewhere to become better ones.
+Outside work, I read across technology, business, economics, history, and science. You can explore my [Library](https://www.arjunsriva.com/library/) or listen to [Byte-Sized Breakthroughs](/podcast/), my collection of AI-generated research-paper conversations. I also love biryani, Mexican food, barbecue, swimming, and skating.
 
-Outside work, I read widely across technology, [business](https://www.arjunsriva.com/library/book_1/book_1030.html), economics, history, and [science](https://www.arjunsriva.com/library/book_0/book_699.html). I also love biryani, Mexican food, barbecue, swimming, and skating.
+I enjoy hearing from people building ambitious systems in ML, data, developer infrastructure, search, and memory. [Get in touch](mailto:arjunsriva@gmail.com), or [subscribe to new essays on Substack](https://arjunsriva.substack.com/).
 
-## Let’s connect
-
-I enjoy hearing from people building ambitious systems in machine learning, data, developer infrastructure, search, memory, [marketplaces](https://www.arjunsriva.com/library/book_0/book_698.html), and financial technology—especially when the difficult part is not merely making something possible, but making it dependable and widely usable.
-
-You can reach me at **arjunsriva at gmail**, or find me on [LinkedIn](https://linkedin.com/in/arjunsriva), [GitHub](https://github.com/arjunbazinga), and [Twitter](https://twitter.com/arjunsriv).
-
-*Last updated August 2026.*
+*Last updated October 2026.*

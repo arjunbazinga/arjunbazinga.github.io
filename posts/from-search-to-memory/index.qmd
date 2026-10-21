@@ -11,11 +11,18 @@ audience: Senior engineers and technical founders designing search, retrieval, o
 reader_outcome: Understand how progressively harder questions turn a searchable conversation archive into a task-conditioned evidence and memory system.
 bluf: Search retrieves candidate evidence. Memory also has to reconcile identity, authority, and time; construct different views for different tasks; and decide which reviewed results become reusable state.
 description: A systems-design account of immutable conversation archives, entity reconciliation, semantic indexes, typed evidence, temporal state, task-conditioned queries, agentic investigation, and reviewed memory.
+featured: true
+next-read-title: "The Evaluation Machine"
+next-read-url: /posts/evaluation-systems/
+homepage: true
+homepage-order: 3
+homepage-topic: "Search & memory"
+homepage-description: "A system I built to recover project state from 6,604 AI conversations, reconcile evidence, and construct task-specific memory."
 layout: post
 categories: [AI, Systems, Memory]
 comments: false
 date: "2026-07-31"
-image: persistence-of-memory.jpg
+image: thumbnail.webp
 format:
   html:
     toc: true
@@ -37,31 +44,15 @@ include-in-header:
         </style>
 ---
 
-![Salvador Dalí, *The Persistence of Memory* (1931)](persistence-of-memory.jpg)
+I built a system to recover project state from a large archive of AI conversations: find related work, reconcile what the evidence supports, identify the current version, and construct memory for the task at hand.
 
-I wanted to share a few things that I have been working on.
-
-LLMs, chatbots, and agents have been a huge blessing for me. They let me learn as much as I want, pick up topics I find interesting, bounce ideas around, talk through what I think, and build things that I might once have found too tedious.
-
-They also let me leave something in a chat window without having to keep all of it in my head. I can disconnect from it for a while and come back later. They help me draft messages, think through different scenarios, and look at something through another reader's eyes. Often, I can start by saying what I want instead of describing every step, then look at the result and keep going.
-
-But I have problems.
-
-One of them is that once I feel I have made decent progress on something, I often lose the motivation to keep going. This has been true for a long time.
-
-One of my favorite classes in college was discrete mathematics. It was supposed to be difficult, and many people did not enjoy it, but I found it fascinating. The difficult questions held my attention because I had to find my own way through them. When the final exam included questions whose method already felt clear, I found myself doing the hard ones first and putting off the easy ones, even though they still had to be done.
-
-Computer-architecture labs exposed the same pattern in a different way. Each exercise introduced a few new ideas. Moving from one question to the next meant figuring out the main complication, but it could also mean copying and wiring dozens of components, followed by twenty minutes of pointing and clicking. I liked finding the core solution. Once I had it, my lab partner often helped close the loop on the manual work that remained.
-
-In many ways, this has been the boon of LLMs. They let me focus on the part I find interesting while helping hold the context and keep the execution moving.
-
-This works to an extent, especially while a conversation is active. The problem appears when I return months later.
+Long-running personal research rarely stays in one place. An architectural decision starts in a conversation, becomes a prototype in a repository, and gets revisited months later in another tool. Returning to the work means recovering both the reasoning and the state of what was built.
 
 Between January 2023 and July 2026, my AI conversation archive accumulated 6,604 conversations: 100,694 message turns and 35.7 million words. They contain architectural designs, codebases, operational decisions, abandoned experiments, and technical trade-offs that exist nowhere else.
 
 Returning to that history requires more than finding an old passage. I need to know which fragments belong together, whether the code still exists, what actually ran, which version is current, and what I should do next.
 
-That last question is why I built this system. My recurring problem was not forgetting trivia; it was failing to close loops. I would solve the core technical challenge of a project, get it to 80% or 90% completion, stop, and leave several partial implementations scattered across repositories and chat sessions. Later, I remembered only the feeling that I had done substantial work without a durable artifact to show for it.
+Answering those questions requires a durable account of the work: which artifacts exist, what the evidence supports, which decisions supersede earlier ones, and what remains to be done. Retrieving a relevant conversation is only the beginning.
 
 Search recovered the scattered pieces. It did not tell me what those pieces meant.
 
@@ -78,6 +69,8 @@ Search finds material related to a question. Memory is the machinery that works 
 Each question emerged as more of my working context accumulated in conversations. Finding the text was the first problem. Recovering the state required progressively more machinery.
 
 The distinction becomes clear through six progressive questions and the output each one produces.
+
+![Salvador Dalí, *The Persistence of Memory* (1931)](persistence-of-memory.jpg){.essay-art}
 
 ## The workload: questions that cross threads
 

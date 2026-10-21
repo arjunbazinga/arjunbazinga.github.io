@@ -2,19 +2,22 @@
 title: "From Payments to Claims: Where Finance Infrastructure Goes Next"
 subtitle: "How changing workloads and infrastructure create new financial instruments."
 description: "Financial instruments are architectures for economic workloads. As business flows become machine-legible, observability may change not just underwriting, but the unit of financing itself."
+featured: true
+next-read-title: "How to Design Metrics That Change Decisions"
+next-read-url: /posts/metrics-that-change-decisions/
 layout: post
 categories: [Finance, Fintech, Databases, Systems]
 comments: false
 date: "2026-04-08"
-image: cover.webp
+image: thumbnail.webp
 toc: true
 toc-depth: 2
-toc-location: right
-toc-title: Contents
+toc-location: left
+toc-title: On this page
 format:
   html:
     toc: true
-    toc-location: right
+    toc-location: left
     code-fold: false
 include-in-header:
       text: |
@@ -52,8 +55,6 @@ include-in-header:
         </style>
 ---
 
-![Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.](cover.webp){.cover-art}
-
 Most businesses are financed as if they were static objects.
 
 A capital provider looks at an entity, its history, its assets, maybe a personal guarantee, and prices a claim against the whole thing.
@@ -61,6 +62,8 @@ A capital provider looks at an entity, its history, its assets, maybe a personal
 But a business is not a static object. It is a system of cash flows: revenue cohorts, receivables, inventory turns, payroll cycles, ad spend, refunds, cloud commitments. Those flows are becoming machine-legible because payments, billing, banking, and accounting increasingly run through software.
 
 That changes more than underwriting. It can change the **unit of financing itself**.
+
+![Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.](cover.webp){.cover-art .essay-art}
 
 Capital can stop attaching only to entities and start attaching to observed economic processes, through claims whose behavior responds to live telemetry rather than only to information available at origination.
 

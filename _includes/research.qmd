@@ -1,0 +1,53 @@
+## Interactive research
+
+Interactive essays and experiments from my independent research site, [Novus Opus](https://www.novusopus.org/research/).
+
+::: {.research-grid}
+::: {.research-entry}
+```{=html}
+<a class="research-thumbnail" href="https://www.novusopus.org/research/bend-not-shift/" tabindex="-1" aria-hidden="true"><img src="/static/research-previews/bend-not-shift.webp" alt="" width="112" height="88" loading="lazy"></a>
+```
+
+::: {.research-copy}
+### [Bend, Not Shift](https://www.novusopus.org/research/bend-not-shift/) {.no-anchor}
+
+Explore scaling laws and what would make a learner better at learning.
+:::
+:::
+
+::: {.research-entry}
+```{=html}
+<a class="research-thumbnail" href="https://www.novusopus.org/research/the-second-loop/" tabindex="-1" aria-hidden="true"><img src="/static/research-previews/second-loop.webp" alt="" width="112" height="88" loading="lazy"></a>
+```
+
+::: {.research-copy}
+### [The Second Loop](https://www.novusopus.org/research/the-second-loop/) {.no-anchor}
+
+Explore the control loops that could help AI maintain long-running plans and commitments.
+:::
+:::
+
+::: {.research-entry}
+```{=html}
+<a class="research-thumbnail" href="https://www.novusopus.org/research/connectivity-and-innovation/" tabindex="-1" aria-hidden="true"><img src="/static/research-previews/connectivity.webp" alt="" width="112" height="88" loading="lazy"></a>
+```
+
+::: {.research-copy}
+### [The Limits of Connectivity](https://www.novusopus.org/research/connectivity-and-innovation/) {.no-anchor}
+
+Experiment with the trade-off between communication and independent discovery.
+:::
+:::
+
+::: {.research-entry}
+```{=html}
+<a class="research-thumbnail" href="https://www.novusopus.org/research/opinion-dynamics/" tabindex="-1" aria-hidden="true"><img src="/static/research-previews/opinion-dynamics.webp" alt="" width="112" height="88" loading="lazy"></a>
+```
+
+::: {.research-copy}
+### [The Geometry of Disagreement](https://www.novusopus.org/research/opinion-dynamics/) {.no-anchor}
+
+Build an opinion-dynamics model, then experiment with trust, network structure, and polarization.
+:::
+:::
+:::

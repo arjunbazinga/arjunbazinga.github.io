@@ -1,0 +1,20 @@
+---
+title: "Earlier writing"
+listing:
+  contents: ../posts/*/index.qmd
+  exclude:
+    featured: true
+  sort: "date desc"
+  template: ../_includes/archive-list.ejs.md
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  page-size: 25
+page-layout: full
+title-block-banner: false
+toc: false
+anchor-sections: false
+body-classes: archive-page
+---
+
+Projects, experiments, and essays from earlier chapters. These reflect what I was exploring at the time; you can find my current focus in [selected writing](/posts/).

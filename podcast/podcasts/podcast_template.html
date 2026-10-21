@@ -97,56 +97,25 @@
   $toc.html()$
   $endif$
 
-  $body$
-
-
-
-  <div class="podcast-section">
-
-    <h3>Listen on your favorite platforms</h3>
-
-    <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0"><img
-        src="/static/podcast_data/pocastapps/spotify.svg" alt="Spotify" width="150"></a>
-    <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141"><img
-        src="/static/podcast_data/pocastapps/apple.svg" alt="Apple Podcasts" width="120"></a>
-    <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak"><img
-        src="/static/podcast_data/pocastapps/youtube.svg" alt="YouTube" width="120"></a>
-    <a href="/static/podcast_data/feed.xml"><img src="/static/podcast_data/pocastapps/rss.svg" alt="RSS Feed"
-        width="40"></a>
-
-
-
-    <h3>Listen to the Episode</h3>
+  <section class="podcast-listen" aria-label="Listen to the episode">
     <div class="plyr-audio-player">
-      <audio id="player" controls>
+      <audio id="player" controls preload="metadata" aria-label="$title$">
         <source src="/static/podcast_data/arxiv/audio/$arxiv-paper-id$.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <a href="/static/podcast_data/arxiv/audio/$arxiv-paper-id$.mp3">Download the episode</a>
       </audio>
     </div>
+    <p class="episode-links"><a href="/static/podcast_data/arxiv/transcripts/$arxiv-paper-id$.txt">Read transcript</a> · <a href="https://arxiv.org/abs/$arxiv-paper-id$">Original paper</a></p>
+    <p class="episode-provenance">AI-generated voices discussing a paper selected by Arjun Srivastava.</p>
+  </section>
 
-    <div class="podcast-links">
-      <h4>Related Links</h4>
-      <ul>
-        <!-- <li><a href="/static/podcast_data/arxiv/audio/$arxiv-paper-id$.mp3" download>Download audio</a></li> -->
-        <li><a href="/static/podcast_data/arxiv/transcripts/$arxiv-paper-id$.txt">Read transcript</a></li>
-        <li><a href="https://arxiv.org/pdf/$arxiv-paper-id$">Read original paper</a></li>
-      </ul>
-    </div>
+  <details class="episode-details"><summary>About this paper</summary>
+    $body$
+  </details>
 
-    <h4>The (AI) Team</h4>
-    <ul>
-      <li><strong>Alex Askwell</strong>: Our curious and knowledgeable moderator, always ready with the right
-        questions
-        to guide our exploration.</li>
-      <li><strong>Dr. Paige Turner</strong>: Our lead researcher and paper expert, diving deep into the methods and
-        results.</li>
-      <li><strong>Prof. Wyd Spectrum</strong>: Our field expert, providing broader context and critical insights.</li>
-    </ul>
-
-
-
-  </div>
-
+  <nav class="episode-follow" aria-label="More episodes">
+    <p><a href="/podcast/">Browse all episodes</a></p>
+    <p class="episode-platforms">Listen on <a href="https://open.spotify.com/show/5x88UyAEyAKXXjlQOGIPi0">Spotify</a>, <a href="https://podcasts.apple.com/us/podcast/byte-sized-breakthroughs/id1758956141">Apple Podcasts</a>, or <a href="https://www.youtube.com/playlist?list=PLVGy51T4g6zVYbuGfE07OHKr4zsySxFak">YouTube</a>. <a href="/static/podcast_data/feed.xml">Podcast RSS</a></p>
+  </nav>
 
   <!-- Add Plyr JS -->
   <!-- TODO : remove this network dependency embed script directly as part of build -->
@@ -154,6 +123,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      if (!window.Plyr) return;
       const player = new Plyr('#player', {
         controls: [
           'play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'settings', 'airplay', 'download'

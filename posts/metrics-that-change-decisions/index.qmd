@@ -1,6 +1,10 @@
 ---
 title: "How to Design Metrics That Change Decisions"
 description: "A practical framework for choosing metrics, setting action thresholds, and retiring the ones that no longer help"
+image: thumbnail.svg
+featured: true
+next-read-title: "The Evaluation Machine"
+next-read-url: /posts/evaluation-systems/
 layout: post
 categories: [Product, Metrics, Decision Making]
 comments: false

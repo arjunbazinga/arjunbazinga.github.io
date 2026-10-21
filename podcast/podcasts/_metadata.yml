@@ -3,7 +3,9 @@ format:
     template: podcast_template.html
 
 layout: post
-title-block-banner: true
+title-block-banner: false
+body-classes: podcast-episode
+toc: false
 
 resources:
   - "static/podcast_data/*"

@@ -1,14 +1,74 @@
 ---
-title: "Home"
-listing:
-  contents: posts/*/index.qmd
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: true
-  filter-ui: true
-  feed: true
+title: "Arjun Srivastava"
+description: "Engineering leadership, machine learning, data platforms, and distributed systems. Selected essays and interactive research by Arjun Srivastava."
+pagetitle: "Systems, ML, and data infrastructure"
+title-block-banner: false
+toc: false
+anchor-sections: false
 page-layout: full
-title-block-banner: true
-
+body-classes: home-page
+listing:
+  - id: featured-work
+    contents: posts/*/index.qmd
+    include:
+      homepage: true
+    sort: "homepage-order asc"
+    template: _includes/featured-work.ejs.md
+    categories: false
+    sort-ui: false
+    filter-ui: false
+  - id: more-writing
+    contents: posts/*/index.qmd
+    include:
+      featured: true
+    exclude:
+      homepage: true
+    sort: "date desc"
+    template: _includes/compact-writing.ejs.md
+    categories: false
+    sort-ui: false
+    filter-ui: false
+  # Preserve the existing RSS feed's coverage independently of homepage curation.
+  - id: feed-all
+    contents: posts/*/index.qmd
+    template: _includes/feed-only.ejs.md
+    categories: false
+    sort-ui: false
+    filter-ui: false
+    feed: true
 ---
+
+::: {.home-intro}
+::: {.intro-copy}
+# Arjun Srivastava
+
+::: {.intro-lead}
+Engineering leader working on machine learning, data platforms, and distributed systems.
+:::
+
+::: {.intro-role}
+I lead ML & Data Platform for MS1 at Woven by Toyota, based in Tokyo. [More about me](/about.html).
+:::
+:::
+
+```{=html}
+<img class="intro-portrait" src="profile.jpeg" alt="Arjun Srivastava" width="72" height="72">
+```
+:::
+
+## Featured work
+
+::: {#featured-work}
+:::
+
+{{< include _includes/research.qmd >}}
+
+## More writing
+
+::: {#more-writing}
+:::
+
+{{< include _includes/subscribe.qmd >}}
+
+::: {#feed-all .feed-only aria-hidden="true"}
+:::

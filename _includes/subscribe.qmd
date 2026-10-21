@@ -1,0 +1,9 @@
+::: {.subscribe-note}
+::: {.subscribe-copy}
+## New essays by email {.unlisted .unnumbered}
+
+Writing on systems, machine learning, and data infrastructure.
+:::
+
+[Subscribe on Substack](https://arjunsriva.substack.com/){.subscribe-link}
+:::

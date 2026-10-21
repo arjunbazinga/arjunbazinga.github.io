@@ -1,5 +1,18 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "posts/**"
+    - "podcast/**"
+    - "til/**"
+    - "archive/**"
+    - "!drafts/**"
+    - "!scripts/**"
+    - "!.claude/**"
+  resources:
+    - static/fonts/**
+    - static/research-previews/**
+    - static/reading-tools.js
   preview:
     port: 4200
     browser: true
@@ -11,24 +24,23 @@ website:
   draft-mode: "unlinked"
   navbar:
     right:
-      - text: Podcast
-        href: /podcast
-      - text: Thoughts
-        href: /posts
+      - text: Writing
+        href: /posts/
       - text: Library
-        href: https://arjunsriva.com/library
+        href: https://www.arjunsriva.com/library/
+      - text: Podcast
+        href: /podcast/
       - text: About
         href: /about.html
-      # - text: TIL
-      #   href: /til
-      - icon: twitter
-        href: https://twitter.com/arjunsriv
-      # - icon: github
-      #   href: https://github.com/arjunbazinga
-      # - icon: linkedin
-      #   href: https://www.linkedin.com/in/arjunsriva
-      - icon: rss
-        href: index.xml
+  page-footer:
+    left: "Arjun Srivastava · Tokyo"
+    right:
+      - text: Subscribe
+        href: https://arjunsriva.substack.com/
+      - text: Writing RSS
+        href: /index.xml
+      - text: GitHub
+        href: https://github.com/arjunbazinga
   favicon: favicon.ico
   twitter-card: true
   open-graph: true
@@ -36,6 +48,14 @@ website:
 
 format:
   html:
+    include-after-body:
+      text: '<script src="/static/reading-tools.js" defer></script>'
     theme:
-      light: flatly
-      dark: darkly
+      light: [default, theme/light.scss]
+      dark: [default, theme/dark.scss]
+    css: styles.css
+    highlight-style:
+      light: github-light
+      dark: github-dark
+filters:
+  - _includes/reading-layout.lua

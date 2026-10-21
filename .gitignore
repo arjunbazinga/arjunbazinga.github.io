@@ -6,3 +6,13 @@ _freeze/
 .ipynb_checkpoints/
 temp/
 *.npy
+
+# Local drafts, agent state, credentials, and generated/downloaded inputs.
+/drafts/
+/.claude/
+.env
+.env.*
+!.env.example
+__pycache__/
+/scripts/venv/
+/static/podcast_data/arxiv/pdfs/

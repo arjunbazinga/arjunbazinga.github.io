@@ -10,6 +10,14 @@ audience: Technically strong systems generalists and technical leaders who need 
 reader_outcome: Understand how a collective request is lowered through algorithms, topology, GPU execution, workload-specific communication, and automated optimization—and where each abstraction stops being sufficient.
 bluf: AllReduce has simple semantics. Making it fast requires progressively resolving that semantic request into an algorithm, a physical schedule, and GPU/network execution; modern workloads increasingly need to open the collective and program communication at a lower level.
 description: "A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis."
+image: thumbnail.svg
+featured: true
+next-read-title: "Rocketships for the Mind"
+next-read-url: /posts/from-search-to-memory/
+homepage: true
+homepage-order: 2
+homepage-topic: "Distributed ML"
+homepage-description: "Follow AllReduce from a simple operation through collective algorithms, network topology, and GPU execution."
 layout: post
 categories: [AI, Systems, Distributed Computing]
 comments: false

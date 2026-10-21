@@ -10,11 +10,18 @@ audience: Senior engineers and technical leaders designing evaluation systems fo
 reader_outcome: Understand how decision contracts, evidence selection, environments, judges, gates, and institutional memory combine into an evaluation system that can justify action.
 bluf: Learned systems let us produce behavior we do not know how to program directly. Evaluation carries part of the specification burden by defining what good behavior means, gathering evidence about what was produced, and deciding what action that evidence justifies.
 description: "A systems framework for specifying, measuring, and deciding what learned behavior is good enough to ship."
+featured: true
+next-read-title: "Golden Datasets: Launch Criteria for LLM Systems"
+next-read-url: /posts/golden-datasets/
+homepage: true
+homepage-order: 1
+homepage-topic: "AI evaluation"
+homepage-description: "How contracts, evidence, environments, and release gates help teams decide whether learned behavior is ready to ship."
 layout: post
 categories: [AI, Evaluation, Systems]
 comments: false
 date: "2026-09-02"
-image: treachery-of-images.webp
+image: thumbnail.webp
 format:
   html:
     toc: true
@@ -36,8 +43,6 @@ include-in-header:
     </style>
 ---
 
-![This is not the program.](treachery-of-images.webp)
-
 In classical software, engineers specify much of a system’s behavior through the implementation itself, composing abstractions, contracts, invariants, and rules into the program.
 
 Learned systems change that relationship. They let us produce behavior we do not know how to program directly, without removing the need to specify what good behavior means. Part of that specification burden moves downstream, into evaluation: What behavior did we actually produce, how much should we trust the evidence about it, and what action does that evidence justify?
@@ -45,6 +50,10 @@ Learned systems change that relationship. They let us produce behavior we do not
 This essay is about the machinery organizations build to answer those questions. Across LLMs and agents, search and recommendation, autonomous driving, and robotics, the implementations differ enormously, but the underlying anatomy is remarkably similar.
 
 By the end, you should be able to look at an evaluation system and reason about what it can actually know, what decisions that knowledge justifies, where it can fool itself, and where to invest next.
+
+![This is not the program.](treachery-of-images.webp){.essay-art}
+
+## A map of the evaluation system
 
 At a high level, the machine looks something like this:
 
