@@ -1,0 +1,17 @@
+## Album
+
+```{=html}
+<a class="album-preview" href="/album/">
+  <img src="/static/album/kudanshita-800.webp"
+       srcset="/static/album/kudanshita-800.webp 800w, /static/album/kudanshita-1600.webp 1600w"
+       sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 1120px) 56vw, 600px"
+       width="1600" height="1200" loading="lazy" decoding="async"
+       alt="Sunlight catching tall grasses beside the water, framed by a tree in Kudanshita.">
+  <div class="album-preview-copy">
+    <h3>Kudanshita, Tokyo</h3>
+    <p class="album-date"><time datetime="2026-10-09">9 October 2026</time></p>
+    <p>The last light catching the grasses beside the water.</p>
+    <span class="album-preview-action">View the album</span>
+  </div>
+</a>
+```

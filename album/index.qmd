@@ -1,0 +1,162 @@
+---
+title: "Album"
+description-meta: "Things I thought were pretty. Photographs by Arjun Srivastava."
+image: /static/album/kudanshita-1600.webp
+page-layout: full
+title-block-banner: false
+toc: false
+anchor-sections: false
+body-classes: album-page
+lightbox:
+  match: auto
+  effect: none
+---
+
+::: {.album-intro}
+Things I thought were pretty.
+
+::: {.album-view-hint}
+Select a photograph to see it larger.
+:::
+:::
+
+::: {.album-collection}
+
+::: {#kudanshita .album-photo role="figure" aria-labelledby="caption-kudanshita"}
+
+![](/static/album/kudanshita-1600.webp){.lightbox group="album" alt="A tree frames the water in Kudanshita, with sunlight falling on pale grasses in the foreground." width="1600" height="1200" srcset="/static/album/kudanshita-800.webp 800w, /static/album/kudanshita-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 964px) calc(100vw - 64px), 900px" decoding="async" title="Kudanshita, Tokyo" description="**Kudanshita, Tokyo**. 9 October 2026. The last light catching the grasses beside the water."}
+
+::: {#caption-kudanshita .album-caption}
+## Kudanshita, Tokyo
+
+<p class="album-date"><time datetime="2026-10-09">9 October 2026</time></p>
+
+The last light catching the grasses beside the water.
+:::
+:::
+
+::: {.album-pair .album-pair-landscape-square}
+
+::: {#otaru-window .album-photo role="figure" aria-labelledby="caption-otaru-window"}
+
+![](/static/album/otaru-window-1600.webp){.lightbox group="album" alt="Two chairs and a small table face a wide window overlooking the sea and softly lit clouds in Otaru." width="1600" height="1200" srcset="/static/album/otaru-window-800.webp 800w, /static/album/otaru-window-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 490px" loading="lazy" decoding="async" title="Otaru, Hokkaido" description="**Otaru, Hokkaido**. 23 December 2024, 7:37 am. Morning from the window."}
+
+::: {#caption-otaru-window .album-caption}
+## Otaru, Hokkaido
+
+<p class="album-date"><time datetime="2024-12-23T07:37:35+09:00">23 December 2024, 7:37 am</time></p>
+
+Morning from the window.
+:::
+:::
+
+::: {#otaru-harbour .album-photo role="figure" aria-labelledby="caption-otaru-harbour"}
+
+![](/static/album/otaru-harbour-1600.webp){.lightbox group="album" alt="Snow-covered roads and harbour walls border still blue water in Otaru at dawn." width="1600" height="1600" srcset="/static/album/otaru-harbour-800.webp 800w, /static/album/otaru-harbour-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 370px" loading="lazy" decoding="async" title="Otaru, Hokkaido" description="**Otaru, Hokkaido**. 23 December 2024, 7:04 am. The same waterfront, half an hour earlier."}
+
+::: {#caption-otaru-harbour .album-caption}
+## Otaru, Hokkaido
+
+<p class="album-date"><time datetime="2024-12-23T07:04:50+09:00">23 December 2024, 7:04 am</time></p>
+
+The same waterfront, half an hour earlier.
+:::
+:::
+
+:::
+
+::: {.album-pair .album-pair-landscape-portrait}
+
+::: {#asahikawa .album-photo role="figure" aria-labelledby="caption-asahikawa"}
+
+![](/static/album/asahikawa-1600.webp){.lightbox group="album" alt="Deep rounded drifts of fresh snow fill a field in Asahikawa, with small houses and a cloud-filled blue sky beyond." width="1600" height="1200" srcset="/static/album/asahikawa-800.webp 800w, /static/album/asahikawa-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 550px" loading="lazy" decoding="async" title="Asahikawa, Hokkaido" description="**Asahikawa, Hokkaido**. 25 December 2024. Christmas Day in the snow."}
+
+::: {#caption-asahikawa .album-caption}
+## Asahikawa, Hokkaido
+
+<p class="album-date"><time datetime="2024-12-25">25 December 2024</time></p>
+
+Christmas Day in the snow.
+:::
+:::
+
+::: {#kyu-nakagawa .album-photo role="figure" aria-labelledby="caption-kyu-nakagawa"}
+
+![](/static/album/kyu-nakagawa-1600.webp){.lightbox group="album" alt="Tokyo Skytree rises beyond the Kyu Nakagawa River beneath a pale pink evening sky." width="1600" height="2133" srcset="/static/album/kyu-nakagawa-800.webp 800w, /static/album/kyu-nakagawa-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 310px" loading="lazy" decoding="async" title="Kyu Nakagawa, Tokyo" description="**Kyu Nakagawa, Tokyo**. 2 May 2024. A pink sky above the river."}
+
+::: {#caption-kyu-nakagawa .album-caption}
+## Kyu Nakagawa, Tokyo
+
+<p class="album-date"><time datetime="2024-05-02">2 May 2024</time></p>
+
+A pink sky above the river.
+:::
+:::
+
+:::
+
+::: {.album-pair .album-pair-portrait-landscape}
+
+::: {#akama-jingu .album-photo role="figure" aria-labelledby="caption-akama-jingu"}
+
+![](/static/album/akama-jingu-1600.webp){.lightbox group="album" alt="The red and white gate of Akama-jingu Shrine frames the waterfront in Shimonoseki, with pine branches around its pale green roof." width="1600" height="2133" srcset="/static/album/akama-jingu-800.webp 800w, /static/album/akama-jingu-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 310px" loading="lazy" decoding="async" description="**Akama-jingu, Shimonoseki**. 12 July 2025. Red pillars, blue water."}
+
+::: {#caption-akama-jingu .album-caption}
+## Akama-jingu, Shimonoseki
+
+<p class="album-date"><time datetime="2025-07-12">12 July 2025</time></p>
+
+Red pillars, blue water.
+:::
+:::
+
+::: {#shimonoseki .album-photo role="figure" aria-labelledby="caption-shimonoseki"}
+
+![](/static/album/shimonoseki-1600.webp){.lightbox group="album" alt="A long suspension bridge spans blue water in Shimonoseki, with green hills and scattered white clouds beyond." width="1600" height="1200" srcset="/static/album/shimonoseki-800.webp 800w, /static/album/shimonoseki-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 550px" loading="lazy" decoding="async" title="Shimonoseki, Yamaguchi" description="**Shimonoseki, Yamaguchi**. 12 July 2025. Blue water beneath the bridge."}
+
+::: {#caption-shimonoseki .album-caption}
+## Shimonoseki, Yamaguchi
+
+<p class="album-date"><time datetime="2025-07-12">12 July 2025</time></p>
+
+Blue water beneath the bridge.
+:::
+:::
+
+:::
+
+::: {.album-pair .album-pair-landscape-portrait}
+
+::: {#hakone-torii .album-photo role="figure" aria-labelledby="caption-hakone-torii"}
+
+![](/static/album/hakone-torii-1600.webp){.lightbox group="album" alt="A red torii gate stands at the edge of Lake Ashinoko, backed by a wooded hillside, with a small boat on the water." width="1600" height="1200" srcset="/static/album/hakone-torii-800.webp 800w, /static/album/hakone-torii-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 550px" loading="lazy" decoding="async" description="**Lake Ashinoko, Hakone**. 16 February 2026. A red gate at the water’s edge."}
+
+::: {#caption-hakone-torii .album-caption}
+## Lake Ashinoko, Hakone
+
+<p class="album-date"><time datetime="2026-02-16">16 February 2026</time></p>
+
+A red gate at the water’s edge.
+:::
+:::
+
+::: {#hakone-night .album-photo role="figure" aria-labelledby="caption-hakone-night"}
+
+![](/static/album/hakone-night-1600.webp){.lightbox group="album" alt="Stars fill a deep blue night sky framed by warmly lit bare branches in Hakone." width="1600" height="2133" srcset="/static/album/hakone-night-800.webp 800w, /static/album/hakone-night-1600.webp 1600w" sizes="(max-width: 700px) calc(100vw - 44px), 310px" loading="lazy" decoding="async" description="**Hakone, Kanagawa**. 15 February 2026. Stars above the trees."}
+
+::: {#caption-hakone-night .album-caption}
+## Hakone, Kanagawa
+
+<p class="album-date"><time datetime="2026-02-15">15 February 2026</time></p>
+
+Stars above the trees.
+:::
+:::
+
+:::
+
+:::
+
+```{=html}
+<script src="/static/album/viewer.js" defer></script>
+```

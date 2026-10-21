@@ -6,6 +6,7 @@ project:
     - "podcast/**"
     - "til/**"
     - "archive/**"
+    - "album/**"
     - "!drafts/**"
     - "!scripts/**"
     - "!.claude/**"
@@ -13,6 +14,7 @@ project:
     - static/fonts/**
     - static/research-previews/**
     - static/reading-tools.js
+    - static/album/**
   preview:
     port: 4200
     browser: true
@@ -30,6 +32,8 @@ website:
         href: https://www.arjunsriva.com/library/
       - text: Podcast
         href: /podcast/
+      - text: Album
+        href: /album/
       - text: About
         href: /about.html
   page-footer:

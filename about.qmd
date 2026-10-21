@@ -43,7 +43,7 @@ I also publish [interactive research at Novus Opus](https://www.novusopus.org/re
 
 I studied computer science at IIT Indore. Open resources such as [MIT OpenCourseWare](https://ocw.mit.edu/) and the [Linux Documentation Project](https://tldp.org/) shaped my belief that technical knowledge becomes more valuable when it is understandable and shared openly. This website is my contribution to that tradition.
 
-Outside work, I read across technology, business, economics, history, and science. You can explore my [Library](https://www.arjunsriva.com/library/) or listen to [Byte-Sized Breakthroughs](/podcast/), my collection of AI-generated research-paper conversations. I also love biryani, Mexican food, barbecue, swimming, and skating.
+Outside work, I read across technology, business, economics, history, and science. You can explore my [Library](https://www.arjunsriva.com/library/) or listen to [Byte-Sized Breakthroughs](/podcast/), my collection of AI-generated research-paper conversations. My [Album](/album/) collects things I thought were pretty. I also love biryani, Mexican food, barbecue, swimming, and skating.
 
 I enjoy hearing from people building ambitious systems in ML, data, developer infrastructure, search, and memory. [Get in touch](mailto:arjunsriva@gmail.com), or [subscribe to new essays on Substack](https://arjunsriva.substack.com/).
 

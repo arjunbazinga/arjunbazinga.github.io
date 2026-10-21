@@ -68,6 +68,8 @@ I lead ML & Data Platform for MS1 at Woven by Toyota, based in Tokyo. [More abou
 ::: {#more-writing}
 :::
 
+{{< include _includes/album-preview.qmd >}}
+
 {{< include _includes/subscribe.qmd >}}
 
 ::: {#feed-all .feed-only aria-hidden="true"}
