@@ -1,7 +1,7 @@
 ---
 title: "Arjun Srivastava"
-description: "Engineering leadership, machine learning, data platforms, and distributed systems. Selected essays and interactive research by Arjun Srivastava."
-pagetitle: "Systems, ML, and data infrastructure"
+description: "I build and write about AI, software, and complex systems. Essays, interactive research, books, and photography by Arjun Srivastava."
+pagetitle: "AI, software, and complex systems"
 title-block-banner: false
 toc: false
 anchor-sections: false
@@ -40,19 +40,19 @@ listing:
 
 ::: {.home-intro}
 ::: {.intro-copy}
-# Arjun Srivastava
+# Hi, I’m Arjun.
 
 ::: {.intro-lead}
-Engineering leader working on machine learning, data platforms, and distributed systems.
+I build and write about AI, software, and complex systems.
 :::
 
 ::: {.intro-role}
-I lead ML & Data Platform for MS1 at Woven by Toyota, based in Tokyo. [More about me](/about.html).
+Here you’ll find essays, interactive research, books, and photography. [More about me.](/about.html)
 :::
 :::
 
 ```{=html}
-<img class="intro-portrait" src="profile.jpeg" alt="Arjun Srivastava" width="72" height="72">
+<img class="intro-portrait" src="profile.jpeg" alt="Arjun Srivastava" width="128" height="128">
 ```
 :::
 

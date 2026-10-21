@@ -155,9 +155,9 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 .writing-page #title-block-header { padding-top: 24px; }
 .home-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 72px;
-  gap: 32px;
-  align-items: start;
+  grid-template-columns: minmax(0, 760px) 128px;
+  gap: 40px;
+  align-items: center;
   padding-block: 12px 28px;
 }
 .home-intro h1 {
@@ -171,7 +171,7 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 .intro-lead p { margin-bottom: 10px; }
 .intro-role { max-width: 780px; color: var(--site-muted); font-size: 0.82rem; line-height: 1.7; }
 .intro-role p { margin-bottom: 0; }
-.intro-portrait { width: 72px; height: 72px; object-fit: cover; border-radius: 50%; margin-top: 4px; }
+.intro-portrait { width: 128px; height: 128px; object-fit: cover; border-radius: 50%; }
 .home-page main h2, .writing-page main h2 {
   margin-top: 34px;
   padding-bottom: 12px;
@@ -219,10 +219,13 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
   #quarto-header .navbar-brand { font-size: 1.1rem; }
   .home-page #quarto-content, .writing-page #quarto-content { padding-inline: 22px; }
   .home-page main { padding-top: 20px; }
-  .home-intro { grid-template-columns: minmax(0, 1fr) 52px; gap: 16px; padding-block: 4px 24px; }
-  .home-intro h1 { font-size: 1.9rem; }
+  .home-intro { grid-template-columns: minmax(0, 1fr) 64px; gap: 12px 16px; padding-block: 4px 24px; }
+  .home-intro .intro-copy { display: contents; }
+  .home-intro h1 { grid-column: 1; grid-row: 1; margin-bottom: 0; font-size: 1.9rem; }
+  .home-intro .intro-lead, .home-intro .intro-role { grid-column: 1 / -1; }
   .intro-lead { font-size: 0.92rem; }
-  .intro-portrait { width: 52px; height: 52px; }
+  .home-intro .intro-lead p { margin-bottom: 0; }
+  .intro-portrait { grid-column: 2; grid-row: 1; width: 64px; height: 64px; }
   .featured-grid { grid-template-columns: 1fr; gap: 24px; }
   .home-page main .featured-entry h3 { font-size: 1.45rem; margin-bottom: 8px; }
   .featured-topic { margin-bottom: 6px; }
