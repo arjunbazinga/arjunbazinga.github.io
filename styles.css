@@ -203,7 +203,7 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 .feed-only { display: none; }
 .home-page main a, .writing-page main a { color: var(--bs-link-color); }
 .home-page main .featured-entry h3 a { color: var(--bs-body-color); text-decoration: none; }
-.home-page main .featured-entry h3 a:hover { color: var(--bs-link-color); text-decoration: underline; }
+.home-page main .featured-entry h3 a:hover { color: var(--bs-link-color); }
 .writing-page .quarto-listing-default .quarto-post { display: flex; flex-direction: column; gap: 10px; padding-block: 24px; border-bottom-color: var(--site-rule); }
 .writing-page .quarto-post .body { width: 100%; }
 .writing-page .quarto-post .listing-title { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.25; font-weight: 500; }
@@ -213,7 +213,7 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 .writing-page main .quarto-post .listing-description a,
 .writing-page main .quarto-post .metadata a { color: var(--site-muted); }
 .writing-page .quarto-post .listing-subtitle { display: none; }
-.writing-page main .quarto-post a:hover { color: var(--bs-link-color); text-decoration: underline; }
+.writing-page main .quarto-post a:hover { color: var(--bs-link-color); }
 @media (max-width: 700px) {
   .navbar > .container-fluid { padding-inline: 18px; }
   #quarto-header .navbar-brand { font-size: 1.1rem; }
@@ -238,32 +238,29 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
 
-/* Whole-item links preserve the homepage's existing composition. */
+/* Whole-item links keep the paper surface stable; only titles change on hover.
+   Keyboard focus uses the shared outline, separate from pointer feedback. */
 .home-page main .featured-entry {
   color: var(--site-ink);
   text-decoration: none;
   border-radius: 2px;
 }
-.featured-entry:hover, .featured-entry:focus-visible {
-  background: var(--site-surface);
-  box-shadow: 0 0 0 10px var(--site-surface);
-}
-.featured-entry:hover h3, .featured-entry:focus-visible h3 { color: var(--site-accent); text-decoration: underline; text-underline-offset: 0.2em; }
+.featured-entry:is(:hover, :focus-visible) h3 { color: var(--site-accent); }
 .research-entry { position: relative; }
 .research-entry h3 a:not(.anchorjs-link)::after { content: ""; position: absolute; inset: -8px; }
-.research-entry:hover, .research-entry:focus-within { background: var(--site-surface); box-shadow: 0 0 0 8px var(--site-surface); }
-.research-entry:focus-within { outline: 2px solid var(--site-focus); outline-offset: 8px; }
+.research-entry:is(:hover, :has(a:focus-visible)) h3 a { color: var(--bs-link-hover-color); }
+.research-entry:has(a:focus-visible) { outline: 2px solid var(--site-focus); outline-offset: 8px; }
+.research-entry h3 a:focus-visible { outline: none; }
 .compact-writing li { display: block; padding: 0; }
 .compact-writing .compact-writing-link { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding-block: 12px; text-decoration: none; }
-.compact-writing-link:hover { background: var(--site-surface); }
-.compact-writing-link:hover > span:first-child { text-decoration: underline; }
+.home-page main .compact-writing-link:is(:hover, :focus-visible) > span:first-child { color: var(--bs-link-hover-color); }
 
 /* An invitation after the content, without introducing another visual theme. */
 .subscribe-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--site-rule); margin-top: 36px; padding-block: 26px 8px; }
 .home-page main .subscribe-note h2, .writing-page main .subscribe-note h2 { margin: 0 0 8px; padding: 0; border: 0; font-size: 1.5rem; }
 .subscribe-note p { margin: 0; font-family: var(--font-ui); font-size: 0.85rem; color: var(--site-muted); }
 .subscribe-note .subscribe-link { display: inline-block; padding: 10px 16px; border: 1px solid var(--site-accent); border-radius: 3px; font-family: var(--font-ui); font-size: 0.85rem; white-space: nowrap; text-decoration: none; }
-.subscribe-link:hover { background: var(--site-surface); text-decoration: underline; }
+.subscribe-note .subscribe-link:is(:hover, :focus-visible) { color: var(--bs-link-hover-color); border-color: var(--bs-link-hover-color); }
 .work-date, .featured-topic { font-size: 0.76rem; }
 
 /* A browsable writing collection with small, content-specific thumbnails. */
@@ -273,8 +270,7 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 .writing-entry-copy { min-width: 0; }
 .writing-page main .writing-entry h3 { margin: 0 0 10px; font-size: 1.55rem; line-height: 1.25; letter-spacing: -0.02em; }
 .writing-entry p { max-width: 74ch; margin-bottom: 10px; font-family: var(--font-ui); font-size: 0.86rem; line-height: 1.7; color: var(--site-muted); }
-.writing-entry:hover, .writing-entry:focus-visible { background: var(--site-surface); }
-.writing-entry:hover h3, .writing-entry:focus-visible h3 { color: var(--site-accent); text-decoration: underline; text-underline-offset: 0.2em; }
+.writing-entry:is(:hover, :focus-visible) h3 { color: var(--site-accent); }
 .writing-thumbnail { width: 176px; height: 124px; object-fit: contain; background: var(--site-surface); border: 1px solid var(--site-rule); }
 
 /* About starts with professional context and contact, followed by supporting detail. */
@@ -364,9 +360,8 @@ audio { width: 100%; }
 .podcast-feature audio { margin-block: 8px 16px; }
 .episode-entry { border-bottom: 1px solid var(--site-rule); }
 .episode-entry > a { display: block; padding-block: 22px; text-decoration: none; color: var(--site-ink); }
-.episode-entry > a:hover { background: var(--site-surface); }
 .podcast-page main .episode-entry h3 { margin: 0 0 8px; font-size: 1.35rem; line-height: 1.3; }
-.episode-entry a:hover h3 { color: var(--site-accent); text-decoration: underline; }
+.episode-entry > a:is(:hover, :focus-visible) h3 { color: var(--site-accent); }
 .episode-entry .listing-description { font-size: 0.95rem; line-height: 1.6; max-width: 78ch; color: var(--site-muted); }
 .episode-action { margin-left: 24px; font-family: var(--font-ui); font-size: 0.8rem; color: var(--site-accent); }
 .episode-search-status { font-family: var(--font-ui); font-size: 0.8rem; color: var(--site-muted); margin-block: 8px; }
