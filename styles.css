@@ -422,6 +422,7 @@ audio { width: 100%; }
 
 @media (max-width: 991px) {
   .mobile-contents { display: block; position: sticky; top: 64px; z-index: 10; background: var(--site-paper); border-block: 1px solid var(--site-rule); margin-block: 12px 24px; font-family: var(--font-ui); font-size: 0.85rem; line-height: 1.7; }
+  .mobile-contents { transition: top 200ms linear; }
   .mobile-contents summary { padding: 12px 4px; cursor: pointer; color: var(--site-accent); }
   .mobile-contents nav { max-height: 55vh; overflow-y: auto; padding: 0 4px 16px; }
   .mobile-contents ul { list-style: none; padding-left: 0; }

@@ -38,7 +38,8 @@
     const toc = document.querySelector('#TOC');
     if (toc && !main.querySelector('.mobile-contents')) {
       const details = document.createElement('details');
-      details.className = 'mobile-contents';
+      // headroom-target lets Quarto move it up with the header when that hides on scroll.
+      details.className = 'mobile-contents headroom-target';
       const summary = document.createElement('summary');
       summary.textContent = 'On this page';
       const nav = document.createElement('nav');
