@@ -2,7 +2,7 @@
 title:  "Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation"
 description: Some thoughts on features that could make programming languages more powerful
 layout: post
-categories: [Future, Idea, WIP]
+categories: [Future, Idea]
 comments: false
 
 date: "2025-03-31"
