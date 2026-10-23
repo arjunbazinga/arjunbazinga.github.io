@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-23">
+<meta name="description" content="What a keychain camera’s firmware does to a photograph, what a film look is made of, and how to compile one into the other.">
+
+<title>Better Taste for a Tiny Camera – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-98cf82f7baee0e05ae06e0de2cd83fcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c37dfa679b2c1d9e43fdc3941f76ee37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<link rel="stylesheet" href="../../static/charmera/charmera.css">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Better Taste for a Tiny Camera – Arjun Srivastava">
+<meta property="og:description" content="What a keychain camera’s firmware does to a photograph, what a film look is made of, and how to compile one into the other.">
+<meta property="og:image" content="https://www.arjunsriva.com/posts/tiny-camera-better-taste/thumbnail.webp">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="Better Taste for a Tiny Camera – Arjun Srivastava">
+<meta name="twitter:description" content="What a keychain camera’s firmware does to a photograph, what a film look is made of, and how to compile one into the other.">
+<meta name="twitter:image" content="https://www.arjunsriva.com/posts/tiny-camera-better-taste/thumbnail.webp">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed essay-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.arjunsriva.com/library/"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast/"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../album/"> 
+<span class="menu-text">Album</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-happens-when-you-press-the-shutter" id="toc-what-happens-when-you-press-the-shutter" class="nav-link active" data-scroll-target="#what-happens-when-you-press-the-shutter">What happens when you press the shutter</a></li>
+  <li><a href="#a-look-is-a-process-not-a-tint" id="toc-a-look-is-a-process-not-a-tint" class="nav-link" data-scroll-target="#a-look-is-a-process-not-a-tint">A look is a process, not a tint</a></li>
+  <li><a href="#seven-photographic-worlds" id="toc-seven-photographic-worlds" class="nav-link" data-scroll-target="#seven-photographic-worlds">Seven photographic worlds</a></li>
+  <li><a href="#the-darkroom" id="toc-the-darkroom" class="nav-link" data-scroll-target="#the-darkroom">The darkroom</a></li>
+  <li><a href="#the-filters-it-already-has" id="toc-the-filters-it-already-has" class="nav-link" data-scroll-target="#the-filters-it-already-has">The filters it already has</a></li>
+  <li><a href="#how-the-camera-spends-light" id="toc-how-the-camera-spends-light" class="nav-link" data-scroll-target="#how-the-camera-spends-light">How the camera spends light</a></li>
+  <li><a href="#the-curve-that-meters" id="toc-the-curve-that-meters" class="nav-link" data-scroll-target="#the-curve-that-meters">The curve that meters</a></li>
+  <li><a href="#complexity-belongs-off-the-camera" id="toc-complexity-belongs-off-the-camera" class="nav-link" data-scroll-target="#complexity-belongs-off-the-camera">Complexity belongs off the camera</a></li>
+  <li><a href="#the-bug-that-wasnt" id="toc-the-bug-that-wasnt" class="nav-link" data-scroll-target="#the-bug-that-wasnt">The bug that wasn’t</a></li>
+  <li><a href="#being-wrong-carefully" id="toc-being-wrong-carefully" class="nav-link" data-scroll-target="#being-wrong-carefully">Being wrong carefully</a></li>
+  <li><a href="#where-it-stands" id="toc-where-it-stands" class="nav-link" data-scroll-target="#where-it-stands">Where it stands</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Better Taste for a Tiny Camera</h1>
+<p class="subtitle lead">What a keychain camera does to a photograph, and how to give it film</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Photography</div>
+    <div class="quarto-category">Imaging</div>
+    <div class="quarto-category">Reverse Engineering</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    What a keychain camera’s firmware does to a photograph, what a film look is made of, and how to compile one into the other.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The Charmera’s firmware knows seven photo sizes. The largest is 4960 × 3720, about eighteen and a half megapixels. Every one of them is made from the same 800 × 600 image.</p>
+<p>Kodak’s Charmera is a digital camera small enough to hang from a keychain. It has a fixed lens, a small noisy sensor, a direct flash and almost no settings. I want it to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping.</p>
+<p>That test sent me through film emulation, colour science and a 2 MiB firmware image. The rule I settled on early was:</p>
+<blockquote class="blockquote">
+<p>Don’t remove the Charmera from the photograph. Give the Charmera better taste.</p>
+</blockquote>
+<section id="what-happens-when-you-press-the-shutter" class="level2">
+<h2 class="anchored" data-anchor-id="what-happens-when-you-press-the-shutter">What happens when you press the shutter</h2>
+<p>Project Sirius published a dump of the Charmera’s firmware. It runs on a Generalplus GPCV2247F, an ARM7 chip. There is no Linux or shell to log into, so understanding it meant disassembling it. I ran the original instructions in an emulator, one routine at a time, with the hardware around them modelled explicitly. That turned the dump into a fairly exact account of how a still photograph is made.</p>
+<p>Step through it. The yellow box follows the same patch of the scene, and the loupe shows that patch at each stage’s own resolution.</p>
+<figure class="pipeline figure" id="charmera-pipeline" aria-labelledby="pipeline-caption">
+  <ol class="pipeline-steps" aria-label="Pipeline stages"></ol>
+  <div class="pipeline-body">
+    <div class="pipeline-view">
+      <canvas class="pipeline-canvas" width="1280" height="720" role="img" aria-label="Pipeline stage"></canvas>
+      <noscript><p class="charmera-noscript">This step-through needs JavaScript.</p></noscript>
+    </div>
+    <div class="pipeline-side">
+      <p class="pipeline-title" aria-live="polite"></p>
+      <p class="pipeline-text"></p>
+      <label class="pipeline-size" hidden="">Photo size <select></select></label>
+      <div class="pipeline-bars" hidden=""></div>
+      <div class="pipeline-loupe-wrap">
+        <canvas class="pipeline-loupe" width="480" height="360" role="img" aria-label="Magnified patch of the scene at this stage's resolution"></canvas>
+        <p class="pipeline-loupe-note"></p>
+      </div>
+      <div class="pipeline-buttons">
+        <button type="button" class="pipeline-prev">Previous</button>
+        <button type="button" class="pipeline-next">Next</button>
+      </div>
+    </div>
+  </div>
+  <figcaption id="pipeline-caption">The traced still path for a card-backed photo: sensor mode, crop, capture surface, the post-capture hook, overlays and JPEG. The photo is from my <a href="../../album/">album</a>, not from a Charmera, and the resampling here uses the browser's scaler rather than the camera's.</figcaption>
+</figure>
+<p>The middle stage is the surprise. The sensor runs a 1280 × 720 mode. The firmware keeps the centre 960 × 720 and resamples it onto 480,000 pixels. Whatever detail the photograph has, it has at 800 × 600. The saved file is 1440 × 1080 by default. The larger configurations are enlargements of the same surface, and I haven’t established that the menu can even reach all of them.</p>
+<p>This was the first fact that changed the project. A film renderer for this camera never has to touch more than 480,000 pixels, and the firmware already has a place, at that size, where it runs CPU code over the whole image. I’ll come back to that place, the hook, because everything depends on it.</p>
+</section>
+<section id="a-look-is-a-process-not-a-tint" class="level2">
+<h2 class="anchored" data-anchor-id="a-look-is-a-process-not-a-tint">A look is a process, not a tint</h2>
+<p>Why do film photographs, and the cameras that imitate them, feel coherent when so many digital “film filters” feel cheap?</p>
+<p>Part of the answer has nothing to do with pixels. Film carries nostalgia, ritual, brand attachment and a certain amount of taste signalling. Those are real sources of value, but they don’t help a camera render a better photograph. So I asked a narrower question: if you remove the brand and the identity from the evaluation, which properties of the image are still beautiful and worth stealing?</p>
+<p>The answer is that a film look is a whole <strong>picture-formation process</strong>:</p>
+<ul>
+<li>a nonlinear tone response, especially how highlights roll off rather than clip;</li>
+<li>saturation and lightness that depend on hue, so a sky and a face are not treated alike;</li>
+<li>interactions between colour channels;</li>
+<li>particular treatment of memory colours such as skin, foliage and sky;</li>
+<li>exposure and white-balance choices;</li>
+<li>grain, halation around bright light, and local contrast;</li>
+<li>the print, scan or display that turns a negative into a picture.</li>
+</ul>
+<p>A three-dimensional lookup table (LUT) maps every input colour to an output colour. It can hold the first four items above, which carry a surprising amount of a look. It cannot hold grain, glow, sharpening, or any decision that depends on the scene. A film process is therefore <em>capture behaviour + global tone and colour + optional spatial effects + output</em>, and only the second term is a LUT.</p>
+<p>The Charmera is a good substrate because its weaknesses are already aesthetic material. Low resolution reads as softness. Sensor noise is texture. Limited dynamic range forces strong tonal decisions. Direct flash is the consumer-snapshot look. Large-camera film simulations add some of those artifacts deliberately. The Charmera already has them, so the computation should go to what it lacks: coherent tone, colour and highlight behaviour.</p>
+</section>
+<section id="seven-photographic-worlds" class="level2">
+<h2 class="anchored" data-anchor-id="seven-photographic-worlds">Seven photographic worlds</h2>
+<p>The camera ships with filters named Warm, Cool and B&amp;W. I wanted modes named for the <em>job</em> they do instead, with a film stock as each one’s starting teacher rather than its target:</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>When you’d use it</th>
+<th>Starting teacher</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FILM</td>
+<td>Leave it here most of the time</td>
+<td>Kodak Gold 200</td>
+</tr>
+<tr class="even">
+<td>PEOPLE</td>
+<td>Friends, dates, skin, highlights</td>
+<td>Portra</td>
+</tr>
+<tr class="odd">
+<td>TOKYO</td>
+<td>Stations, konbini, signs, cloudy streets</td>
+<td>Superia-like proxy</td>
+</tr>
+<tr class="even">
+<td>NIGHT</td>
+<td>Neon, tungsten, mixed LED</td>
+<td>CineStill 800T</td>
+</tr>
+<tr class="odd">
+<td>B&amp;W</td>
+<td>Hard sun, direct flash, documentary</td>
+<td>Tri-X</td>
+</tr>
+<tr class="even">
+<td>VIVID</td>
+<td>Colour as the subject</td>
+<td>Velvia</td>
+</tr>
+<tr class="odd">
+<td>EXPIRED</td>
+<td>Surprise me</td>
+<td>Seeded random drift</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The seven were chosen from a bank of twenty-seven candidates, with several variants each of Portra, Superia, Tri-X and expired instant film. The goal was a portfolio of jobs, not seven famous names, and certainly not seven slightly different warm presets.</p>
+<p>Each mode carries a reason to remove it. PEOPLE goes if FILM makes people look just as good. VIVID fails if it is only a saturation slider. EXPIRED is not allowed to be a fixed LUT, because uncertainty is the point of expired film: every frame should drift a little differently. The stock names stay in the notes. The camera’s screen would only ever say FILM, PEOPLE, TOKYO and so on.</p>
+</section>
+<section id="the-darkroom" class="level2">
+<h2 class="anchored" data-anchor-id="the-darkroom">The darkroom</h2>
+<p>This runs entirely in your browser. Pick a mode and a scene, then drag across the image to compare. You can also use a photo of your own; it never leaves your device.</p>
+<figure class="darkroom figure" id="charmera-darkroom" aria-labelledby="darkroom-caption">
+  <div class="darkroom-stage" aria-busy="true">
+    <canvas class="darkroom-before" width="800" height="600" role="img" aria-label="Scene before the mode"></canvas>
+    <canvas class="darkroom-after" width="800" height="600" role="img" aria-label="Scene rendered in the selected mode"></canvas>
+    <span class="darkroom-tag darkroom-label-before" aria-hidden="true">BEFORE</span>
+    <span class="darkroom-tag darkroom-label-after" aria-hidden="true">FILM</span>
+    <div class="darkroom-loading">Loading film data…</div>
+    <noscript><p class="charmera-noscript">The darkroom runs in your browser and needs JavaScript.</p></noscript>
+    <input class="darkroom-split" type="range" min="0" max="100" value="50" aria-label="Compare before and after. Lower values show more of the render.">
+  </div>
+  <div class="darkroom-mode-groups">
+    <div>
+      <p class="darkroom-label">Film modes</p>
+      <div class="darkroom-modes" role="group" aria-label="Film modes"></div>
+    </div>
+    <div>
+      <p class="darkroom-label">Stock Pixel filters</p>
+      <div class="darkroom-modes darkroom-stock" role="group" aria-label="Stock Pixel filters"></div>
+    </div>
+  </div>
+  <div class="darkroom-readout">
+    <p class="darkroom-note"></p>
+    <p class="darkroom-meta"></p>
+  </div>
+  <div class="darkroom-controls">
+    <div class="darkroom-engine" role="group" aria-label="Renderer">
+      <button type="button" data-value="lut">Full LUT</button>
+      <button type="button" data-value="student" title="A tone curve and colour matrix the camera's own hardware could run. Explained below.">Hardware student</button>
+    </div>
+    <label class="darkroom-check darkroom-diff-label" hidden=""><input class="darkroom-diff" type="checkbox"> Show difference</label>
+    <label class="darkroom-check"><input class="darkroom-capture" type="checkbox" checked=""> Simulate Charmera capture</label>
+    <button type="button" class="darkroom-reshoot" hidden="">Shoot again</button>
+  </div>
+  <div class="darkroom-scenes-wrap">
+    <p class="darkroom-label">Scene</p>
+    <div class="darkroom-scenes" role="group" aria-label="Scene">
+      <label class="darkroom-upload">Your<br>photo<input type="file" accept="image/*" aria-label="Use your own photo"></label>
+    </div>
+  </div>
+  <p class="visually-hidden darkroom-status" role="status" aria-live="polite"></p>
+  <figcaption id="darkroom-caption">The scenes are from my <a href="../../album/">album</a>, cropped to the camera's 4:3 frame at its 800 × 600 working size. <em>Simulate Charmera capture</em> adds softness, sensor noise that grows in the shadows, 4:2:0 colour subsampling and a JPEG pass; it illustrates the traced path rather than modelling this sensor. Five film LUTs reimplement <a href="https://github.com/GVal98/AutoLUT">AutoLUT</a> transforms (MIT, © 2026 Valerii Garifullin); TOKYO and EXPIRED use placeholder LUTs written for this project. The Pixel filters reproduce the camera's own loop.</figcaption>
+</figure>
+<p>A few things are worth trying.</p>
+<p><strong>NIGHT on the night scene.</strong> The orange glow around the lit branches does not come from the LUT. A LUT maps each pixel independently, so it can’t know that a pixel sits next to a bright one. The glow is a small spatial step: find strong highlights at quarter resolution, blur them, and keep only the halo that spills past their edges, tinted red the way film’s red layer catches light scattered back from its base. Night is where the sensor fails most technically, so it is where the look has to work hardest.</p>
+<p><strong>EXPIRED, then <em>Shoot again</em>.</strong> Each frame gets its own seeded white-balance shift, shadow tint, contrast change and fade.</p>
+<p><strong>Any stock Pixel filter on the shrine.</strong> These are the camera’s own filters, reimplemented from its original loop; more on them below. Look closely at the edges.</p>
+</section>
+<section id="the-filters-it-already-has" class="level2">
+<h2 class="anchored" data-anchor-id="the-filters-it-already-has">The filters it already has</h2>
+<p>The camera’s existing filters come in two kinds, and the difference between them decided the architecture.</p>
+<p><strong>Standard, Warm, Cool and B&amp;W are hardware settings.</strong> They set offsets and scales on the colour processor’s chroma channels, and B&amp;W zeroes them. Standard isn’t even a fixed setting. Its saturation steps down as the scene gets darker, through codes 40, 37, 35, 32 and 30. If 32 is unity, that’s about 1.25× in good light falling to about 0.94× in the dark, probably to keep chroma noise down. Nothing in the menu hints at it.</p>
+<p><strong>The four Pixel filters are software.</strong> A CPU loop walks the image two pixels at a time. Each pixel whose brightness is 124 or more becomes a flat palette colour; anything darker becomes black. I wanted to be sure, so I ran the original loop on test patterns in the emulator and checked the darkroom’s version against its output, including the exact threshold.</p>
+<p>That test turned up a quirk. The two pixels in each pair share one colour pair, but each pixel writes only <em>its own half</em> of it. When a bright pixel sits next to a dark one, the pair ends up with half a palette colour, and edges grow thin fringes in colours that aren’t in the palette. The retro filters have a small, accidental chromatic aberration.</p>
+<p>The Pixel filters are crude, but their existence is the most useful finding in the whole project. They prove that the firmware already pauses after capture to run arbitrary CPU code over every pixel. That happens before the frame, the date and the JPEG encoder, which is exactly where a film renderer would go. Executing the original capture dispatcher found a candidate insertion point just after the Pixel path cleans up and just before the overlays. It is a logical location, not yet a patch.</p>
+</section>
+<section id="how-the-camera-spends-light" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-camera-spends-light">How the camera spends light</h2>
+<p>Colour is half of a look. The other half is exposure.</p>
+<p>The sensor was identified from its own start-up program rather than from photographs of the circuit board. Tracing the real control bus, two GPIO pins bit-banging a camera-control protocol, recovered the 61 register writes the firmware sends at power-on. That sequence matched the open-source drivers for the SP140A sensor family. The camera’s live exposure writes landed on the same chip’s integration-time and gain registers.</p>
+<p>Auto-exposure doesn’t solve for shutter speed and gain directly. It moves an index along a <strong>program line</strong>, a table of roughly one-twentieth-stop steps. Each entry says how long to integrate, how much analog gain the sensor applies, and how much digital gain the colour processor adds. There are two tables, one for 50 Hz mains and one for 60 Hz.</p>
+<figure class="exposure-figure figure" id="charmera-exposure" aria-labelledby="exposure-caption">
+  <div class="exposure-head">
+    <ul class="exposure-legend" aria-label="Legend">
+      <li><i class="swatch exposure-shutter"></i>Shutter</li>
+      <li><i class="swatch exposure-analog"></i>Sensor gain</li>
+      <li><i class="swatch exposure-digital"></i>Digital gain</li>
+    </ul>
+    <div class="exposure-toggle" role="group" aria-label="Mains frequency">
+      <button type="button" data-value="50Hz" aria-pressed="true">50 Hz</button>
+      <button type="button" data-value="60Hz" aria-pressed="false">60 Hz</button>
+    </div>
+  </div>
+  <div class="exposure-frame">
+    <svg class="exposure-plot" role="img" tabindex="0" viewbox="0 0 680 300" aria-label="AE program line"></svg>
+    <div class="exposure-tooltip" hidden=""></div>
+    <p class="exposure-error" hidden="">The exposure tables could not be loaded.</p>
+  </div>
+  <details class="exposure-table-wrap">
+    <summary>Show the shutter plateaus as a table</summary>
+    
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
+<table class="exposure-table caption-top">
+<caption>Shutter plateaus in the 50Hz program line</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">AE index</th>
+<th data-quarto-table-cell-role="th" scope="col">Lines</th>
+<th data-quarto-table-cell-role="th" scope="col">Sensor gain</th>
+<th data-quarto-table-cell-role="th" scope="col">Digital gain</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+
+  </details>
+  <figcaption id="exposure-caption">Stops of exposure each stage adds over the brightest setting, read directly from the two program-line tables in the firmware. Hover over the chart, or focus it and use the arrow keys, to read individual entries. The totals are nominal codebook spans, not measured dynamic range.</figcaption>
+</figure>
+<p>The shape tells you the camera’s priorities. In bright light it only shortens or lengthens the exposure. Once exposures get long enough, integration time is allowed only a few values: multiples of about 240 lines on the 50 Hz table and about 167 on the 60 Hz table. That is the pattern you’d expect from anti-flicker steps of 10 ms and 8.33 ms, which keep fluorescent light from banding. The exact line period hasn’t been measured, though, so the milliseconds are an inference.</p>
+<p>Between those steps the camera holds the shutter and raises sensor gain. Then it jumps to the next step and gives most of the gain back, which is the sawtooth where the bands meet. After the longest step, gain is all that’s left. The 50 Hz table also keeps digital gain in reserve for the darkest scenes.</p>
+<p>The third column puzzled me for a while. It looked like an unused gain-like number until I followed it to a hardware register: the colour processor’s global gain. The exposure system has three stages, not two. The tables also have small oddities. At one of those jumps on the 50 Hz table, from index 140 to 141, nominal exposure actually <em>falls</em> by about a sixth of a stop. That is real in the codebook, but I haven’t tested whether it matters in practice.</p>
+</section>
+<section id="the-curve-that-meters" class="level2">
+<h2 class="anchored" data-anchor-id="the-curve-that-meters">The curve that meters</h2>
+<p>The most important finding about exposure came from the tone curve.</p>
+<p>The camera stores its gamma curve as 128 packed words. The firmware writes them to the colour processor’s gamma memory. It <em>also</em> decodes them into 1,024 values and samples every fourth one into a 256-entry table inside the auto-exposure engine. The engine passes every metering cell through that table before judging brightness. The curve is not only how the photograph looks. It is how the camera decides how bright the scene is.</p>
+<figure class="exposure-figure meter-figure figure" id="charmera-meter" aria-labelledby="meter-caption">
+  <label class="meter-control">Scene brightness, as the sensor's statistics see it
+    <input class="meter-slider" type="range" min="0" max="255" value="64" list="meter-ticks">
+    <datalist id="meter-ticks"><option value="16"></option><option value="64"></option><option value="100"></option><option value="160"></option><option value="240"></option></datalist>
+  </label>
+  <div class="exposure-frame">
+    <svg class="meter-plot exposure-plot" role="img" viewbox="0 0 680 320" aria-label="The stock tone curve and the identity line, with the auto-exposure target band"></svg>
+  </div>
+  <div class="meter-readout" aria-live="polite"></div>
+  <p class="meter-summary"></p>
+  <figcaption id="meter-caption">The stock curve is decoded from the firmware's calibration table. Dots mark cases where the original engine was executed on uniform scenes, under the controlled state of that test: target 100, deadband 4, no history. Between the dots the verdict is the curve compared with the target, not a fresh emulation.</figcaption>
+</figure>
+<p>The stock curve lifts shadows hard: a raw statistic of 16 reads as 63, and 64 reads as 149. Feed the original engine a uniform scene at 64 and it decides to <em>brighten</em> without the curve and to <em>darken</em> with it. The direction flip survived when the test was repeated with the camera’s own configuration: target 120, a metering mode that discards outliers, and the recovered window geometry.</p>
+<p><strong>You can’t change the look without changing the exposure.</strong> A film curve loaded into the gamma slot would quietly retune auto-exposure for every photograph. That is a strong argument for the hook. A look applied to the already captured 800 × 600 surface leaves metering alone, and exposure can become a deliberate, separate choice per mode. The firmware already has the knob for that: a 13-step table that scales the brightness target from 205 down to 47, around a default of 120. NIGHT, for example, could pick a different step, or accept more noise in exchange for less blur.</p>
+</section>
+<section id="complexity-belongs-off-the-camera" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-belongs-off-the-camera">Complexity belongs off the camera</h2>
+<p>Kodak sold its first camera, in 1888, with the line “You press the button, we do the rest.” It came loaded with a hundred exposures; you mailed the whole camera back to Rochester, and the factory developed, printed and reloaded it. The intelligence lived off the camera then too.</p>
+<p>The best film renderers today are expensive. Spectral film simulations model the negative and the print from measured data. Learned systems such as Deep Analog infer a whole LUT from a single reference photograph. None of that should run on a keychain.</p>
+<p>The architecture I ended up with works like a compiler:</p>
+<pre class="text ascii-diagram"><code>spectral / learned / hand-tuned teacher
+                 │
+                 ▼
+        offline optimisation
+                 │
+                 ▼
+     tiny deterministic student
+                 │
+                 ▼
+ tone curve · colour matrix · AE table ·
+ small LUT · tiny residual kernel</code></pre>
+<p>The expensive intelligence designs the camera’s behaviour. It does not run for every photograph.</p>
+<p>How small can the student be? A 17 × 17 × 17 LUT at 8 bits per channel takes 14,739 bytes per mode, so all seven fit in about 100 KiB. That is affordable in software at the hook. It would be cheaper still if hardware did the work. Generalplus’s related SDKs show a hardware luma curve and a 3 × 3 colour matrix, so I fitted each LUT with exactly that: a 256-entry curve on brightness, followed by a matrix.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>Curve + matrix vs full LUT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>B&amp;W</td>
+<td>40.9 dB</td>
+</tr>
+<tr class="even">
+<td>EXPIRED</td>
+<td>38.6 dB</td>
+</tr>
+<tr class="odd">
+<td>PEOPLE</td>
+<td>35.1 dB</td>
+</tr>
+<tr class="even">
+<td>TOKYO</td>
+<td>32.4 dB</td>
+</tr>
+<tr class="odd">
+<td>FILM</td>
+<td>32.2 dB</td>
+</tr>
+<tr class="even">
+<td>NIGHT</td>
+<td>29.4 dB</td>
+</tr>
+<tr class="odd">
+<td>VIVID</td>
+<td>22.0 dB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Those scores are measured across the whole colour cube. In the darkroom, choose <em>Hardware student</em> and then <em>Show difference</em> to see the same comparison on a real photograph, with the per-photo score underneath. B&amp;W survives almost perfectly; a monochrome look is mostly a tone curve. VIVID is the worst fit by a wide margin, but not where I expected.</p>
+<p>Velvia’s character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it is spread across the whole frame instead. On four of the album photos, VIVID’s student is 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It lost contrast. The fit treated every colour in the cube as equally important, so it spent its small budget on saturated extremes that photographs rarely contain, and gave up the contrast that every photograph uses.</p>
+<p>That is an evaluation lesson as much as a colour one: the score you optimise decides what you lose. The next fit should weight colours by how often real Charmera photographs contain them. Even then, some modes will live almost entirely in hardware, while others need a software residual at the hook. VIVID will need most of its look there.</p>
+</section>
+<section id="the-bug-that-wasnt" class="level2">
+<h2 class="anchored" data-anchor-id="the-bug-that-wasnt">The bug that wasn’t</h2>
+<p>The colour work only matters if a modified firmware can get onto the camera, and the camera’s own updater gave me the most instructive mistake of the project.</p>
+<p>The firmware looks for a file on the card named <code>JH_5408</code>, followed by a timestamp and a checksum that is simply the sum of the file’s bytes. A community member had already reported that updating this way bricked a camera, which then needed its flash chip reprogrammed directly. I ran the original updater in the emulator with a full 2 MiB image. After writing every block and verifying it, the updater issued one more erase, at an address 64 KiB <em>past the end</em> of the 2 MiB chip. If the flash controller wraps that address around, it erases the block at 64 KiB, which is part of the firmware itself. That looked like a smoking gun.</p>
+<p>Then I looked at what else the 2 MiB dump contained. The firmware’s resources end at <code>0x168E92</code>. Above that sit the camera’s live state: append-only settings records at <code>0x170000</code>, a saved-photo index at <code>0x17F000</code>, and two 960 × 720 JPEGs taken by whoever owned the dumped camera. A full dump isn’t an update package. It is software plus one camera’s settings and photographs.</p>
+<p>So I asked what a package of only the software would look like. Padded to the next 512-byte sector, it ends at <code>0x169000</code>, and the updater’s mysterious final erase then lands exactly on <code>0x170000</code>: the settings block. I ran the original settings and photo-index routines on the result. The settings reader finds no valid record, the firmware takes its own existing reset path, and the photo index is rebuilt empty. The final erase looks like a factory reset, not a bug.</p>
+<p>Two of my earlier recommendations would have made things worse. Deleting the erase would have removed the reset. A guard I had proposed against short reads would have rejected the final, legitimately shorter read of a resource-sized package. The cause of the reported bricking is still unconfirmed. It needs a real factory update or a before-and-after dump of a failed camera, not more emulation.</p>
+<p>The lesson was about evidence. “Preserve every non-blank byte” sounded like the safe success criterion, but it would have preserved someone else’s photographs and broken the reset the update intended.</p>
+</section>
+<section id="being-wrong-carefully" class="level2">
+<h2 class="anchored" data-anchor-id="being-wrong-carefully">Being wrong carefully</h2>
+<p>Reverse engineering depends on the path you took, so I kept the wrong turns as first-class evidence rather than editing them away. A few more:</p>
+<ul>
+<li><strong>“The sensor’s native resolution is 1280 × 720.”</strong> This was stated too confidently before the sensor was identified. At that point the evidence only showed a working raster.</li>
+<li><strong>“<code>sensor_preview_init</code> starts a task.”</strong> It doesn’t. The string is a tag passed to a memory allocator.</li>
+<li><strong>“This function is the auto-exposure controller.”</strong> It had the right arithmetic but no live callers. The real controller was elsewhere.</li>
+<li><strong>“Digital gain is masked to eight bits.”</strong> The instruction clears bits 9 to 15, so values keep nine bits.</li>
+<li><strong>“960 × 720 is a second photo mode.”</strong> It is the fallback used when there’s no memory card. It also drops JPEG quality from as high as 85 to 45.</li>
+<li><strong>“Standard is a constant 1.25× saturation.”</strong> It adapts with exposure, as described above.</li>
+</ul>
+<p>The rules that came out of these were plain ones. Keep what the binary shows separate from what a related SDK suggests, what emulation does, what the community reports and what real hardware does. Don’t promote a function’s name or its first caller into its meaning. Don’t let a plausible architecture harden into fact.</p>
+</section>
+<section id="where-it-stands" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-stands">Where it stands</h2>
+<p>No firmware has been patched or flashed. No look is worth losing the camera, so a verified backup and restore path for my specific unit comes before any installation.</p>
+<p>Some smaller things turned up along the way:</p>
+<ul>
+<li><strong>The EXIF date has an extra colon.</strong> The camera writes <code>2026:09:26:22:08:23</code> where the standard wants a space before the time. A small patch fixes it in emulation.</li>
+<li><strong>The four stock frames decode cleanly.</strong> They’re stored in the same 800 × 600 row-pair layout as the capture surface, and all twelve strips recompress into their existing slots, so custom frames are plausible.</li>
+<li><strong>USB memory access is one byte away.</strong> The stock handshake grants access level 1; the memory commands require 2. Changing <code>mov r0, #1</code> to <code>#2</code> opens them in emulation. Getting that byte onto the camera is the same installation problem as everything else.</li>
+</ul>
+<p>The open problems are concrete now:</p>
+<ul>
+<li>what automatic white balance does with real scenes rather than empty test statistics;</li>
+<li>which process owns each colour setting, so that an edit doesn’t get overwritten;</li>
+<li>an ARM version of the renderer whose output matches the reference byte for byte, within the hook’s memory and time budget;</li>
+<li>the sensor’s physical response, measured with a deliberately small set of about twelve real scenes rather than a giant benchmark.</li>
+</ul>
+<p>The first target is one excellent FILM default, end to end, before polishing the other six. The test stays the same: a tiny camera, an ordinary moment, a press of the shutter, and a photograph worth keeping.</p>
+<div class="archive-note">
+<p>This work builds on the Charmera community’s. <a href="https://github.com/Khimira/Project-Sirius">Project Sirius</a> published the firmware dump. <a href="https://byjp.pckt.blog/disassembling-the-kodak-charmera-psk3fky">byjp’s teardown</a> identified the chips. In <a href="https://github.com/Khimira/Project-Sirius/issues/1">Project Sirius issue #1</a>, swagnastywill had already reverse-engineered the frame format and LChouRepo had reported the USB authorization barrier. MrHDR reported the updater filename, checksum and bricking on r/CharmeraModding. Film teachers and references include <a href="https://github.com/andreavolpato/spektrafilm">spektrafilm</a>, <a href="https://github.com/thedevmark/film-lab">Film Lab</a>, <a href="https://github.com/TomPoczos/PoLUT">PoLUT</a>, <a href="https://github.com/GVal98/AutoLUT">AutoLUT</a> and <a href="https://arxiv.org/abs/2608.14702">Deep Analog</a>. Film-stock names are descriptive references; this project has no affiliation with Kodak, Fujifilm, CineStill or the projects cited.</p>
+</div>
+<script src="../../static/charmera/film-core.js"></script>
+<script src="../../static/charmera/pipeline.js" defer=""></script>
+<script src="../../static/charmera/darkroom.js" defer=""></script>
+<script src="../../static/charmera/exposure.js" defer=""></script>
+<script src="../../static/charmera/meter.js" defer=""></script>
+
+
+<nav class="essay-next" aria-label="Continue reading"><p class="next-label">Read next</p><p class="next-title"><a href="../../posts/evaluation-systems/">The Evaluation Machine</a></p><p class="reading-links"><a href="../../posts/">All writing</a><a href="https://arjunsriva.substack.com/">Subscribe on Substack</a></p></nav>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Arjun Srivastava · Tokyo</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.substack.com/">
+<p>Subscribe</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../index.xml">
+<p>Writing RSS</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arjunbazinga">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="../../static/reading-tools.js" defer=""></script>
+
+
+
+
+</body></html>
