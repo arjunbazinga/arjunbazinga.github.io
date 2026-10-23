@@ -15,6 +15,7 @@ project:
     - static/research-previews/**
     - static/reading-tools.js
     - static/album/**
+    - static/charmera/**
   preview:
     port: 4200
     browser: true

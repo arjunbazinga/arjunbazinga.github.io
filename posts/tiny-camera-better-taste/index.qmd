@@ -1,0 +1,270 @@
+---
+title: "Better Taste for a Tiny Camera"
+subtitle: "Film looks, firmware, and the Charmera"
+site: arjunsriva
+collection: system-studies
+status: drafting
+canonical_url: null
+employer_derived: false
+audience: Technically curious photographers and engineers who like knowing what happens between the shutter and the JPEG.
+reader_outcome: Understand what a film look is made of, how a keychain camera actually forms a photograph, and why the expensive part of a look belongs off the camera.
+bluf: A film look is a picture-formation process, not a tint. The Charmera's firmware already has the places to put one; the work is compiling a rich offline teacher into a student small enough to fit them, without removing the Charmera from the photograph.
+description: "What a film look is made of, what a keychain camera's firmware does to a photograph, and how to compile one into the other."
+image: thumbnail.webp
+featured: true
+next-read-title: "The Evaluation Machine"
+next-read-url: /posts/evaluation-systems/
+layout: post
+categories: [Photography, Imaging, Reverse Engineering]
+comments: false
+date: "2026-10-23"
+format:
+  html:
+    toc: true
+    code-fold: false
+include-in-header:
+  text: |
+    <link rel="stylesheet" href="/static/charmera/charmera.css">
+---
+
+The Charmera is a digital camera about the size of a matchbox. It hangs from a keychain. It has a fixed lens, a small noisy sensor, a direct flash, and almost no settings.
+
+I want it to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping. Everything in this essay, from film chemistry to ARM disassembly, serves that test.
+
+The rule I settled on early was:
+
+> Don't remove the Charmera from the photograph. Give the Charmera better taste.
+
+## A look is a process, not a tint
+
+Why do film photographs, and the cameras that imitate them, feel coherent when so many digital "film filters" feel cheap?
+
+Part of the answer has nothing to do with pixels. Film carries nostalgia, ritual, brand attachment and a certain amount of taste signalling. Those are real sources of value, but they don't help a camera render a better photograph. So I asked a narrower question: if you remove the brand and the identity from the evaluation, which properties of the image are still beautiful and worth stealing?
+
+The answer is that a film look is a whole **picture-formation process**:
+
+- a nonlinear tone response, especially how highlights roll off rather than clip;
+- saturation and lightness that depend on hue, so a sky and a face are not treated alike;
+- interactions between colour channels;
+- particular treatment of memory colours such as skin, foliage and sky;
+- exposure and white-balance choices;
+- grain, halation around bright light, and local contrast;
+- the print, scan or display that turns a negative into a picture.
+
+A three-dimensional lookup table (LUT) maps every input colour to an output colour. It can hold the first four items above, which carry a surprising amount of a look. It cannot hold grain, glow, sharpening, or any decision that depends on the scene. A film process is therefore *capture behaviour + global tone and colour + optional spatial effects + output*, and only the second term is a LUT.
+
+The Charmera is also a good substrate for this because its weaknesses are already aesthetic material. Low resolution reads as softness. Sensor noise is texture. Limited dynamic range forces strong tonal decisions. Direct flash is the consumer-snapshot look. A large-camera film simulation adds some of those artifacts deliberately. The Charmera already has them, so the computation should go to what it lacks: coherent tone, colour and highlight behaviour.
+
+## Seven photographic worlds
+
+The camera ships with filters named things like Warm, Cool and B&W. I wanted modes named for the *job* they do instead, with a film stock as each one's starting teacher rather than its target:
+
+| Mode | When you'd use it | Starting teacher |
+|---|---|---|
+| FILM | Leave it here most of the time | Kodak Gold 200 |
+| PEOPLE | Friends, dates, skin, highlights | Portra |
+| TOKYO | Stations, konbini, signs, cloudy streets | Superia-like proxy |
+| NIGHT | Neon, tungsten, mixed LED | CineStill 800T |
+| B&W | Hard sun, direct flash, documentary | Tri-X |
+| VIVID | Colour as the subject | Velvia |
+| EXPIRED | Surprise me | Seeded random drift |
+
+Each mode carries a reason to remove it. PEOPLE goes if FILM makes people look just as good. VIVID fails if it is only a saturation slider. EXPIRED is not allowed to be a fixed LUT, because uncertainty is the point of expired film. Every frame should drift a little differently.
+
+The stock names stay in the notes. The camera's screen would only ever say FILM, PEOPLE, TOKYO and so on.
+
+## The darkroom
+
+This runs entirely in your browser. Pick a mode and a scene, then drag across the image to compare. You can also use a photo of your own; it never leaves your device.
+
+```{=html}
+<figure class="darkroom" id="charmera-darkroom" aria-labelledby="darkroom-caption">
+  <div class="darkroom-stage" aria-busy="true">
+    <canvas class="darkroom-before" width="800" height="600" role="img" aria-label="Scene before the film mode"></canvas>
+    <canvas class="darkroom-after" width="800" height="600" role="img" aria-label="Scene rendered in the selected film mode"></canvas>
+    <span class="darkroom-tag darkroom-label-before" aria-hidden="true">BEFORE</span>
+    <span class="darkroom-tag darkroom-label-after" aria-hidden="true">FILM</span>
+    <div class="darkroom-loading">Loading film data…</div>
+    <input class="darkroom-split" type="range" min="0" max="100" value="50" aria-label="Compare before and after. Lower values show more of the film render.">
+  </div>
+  <p class="darkroom-label" style="margin-top:0.9rem">Mode</p>
+  <div class="darkroom-modes" role="group" aria-label="Film mode"></div>
+  <div class="darkroom-readout">
+    <p class="darkroom-note"></p>
+    <p class="darkroom-meta"></p>
+  </div>
+  <div class="darkroom-controls">
+    <div class="darkroom-engine" role="group" aria-label="Renderer">
+      <button type="button" data-value="lut">Full LUT</button>
+      <button type="button" data-value="student">Hardware student</button>
+    </div>
+    <label class="darkroom-capture-label"><input class="darkroom-capture" type="checkbox" checked> Simulate Charmera capture</label>
+    <button type="button" class="darkroom-reshoot" hidden>Shoot again</button>
+  </div>
+  <div class="darkroom-scenes-wrap">
+    <p class="darkroom-label">Scene</p>
+    <div class="darkroom-scenes" role="group" aria-label="Scene">
+      <label class="darkroom-upload">Your<br>photo<input type="file" accept="image/*" aria-label="Use your own photo"></label>
+    </div>
+  </div>
+  <p class="visually-hidden darkroom-status" role="status" aria-live="polite"></p>
+  <figcaption id="darkroom-caption">The scenes are from my <a href="/album/">album</a>, not from a Charmera. They are cropped to the camera's 4:3 frame at its 800×600 working size. <em>Simulate Charmera capture</em> adds softness, sensor noise that grows in the shadows, 4:2:0 colour subsampling and a JPEG pass. It illustrates the traced path rather than modelling this sensor. Five LUTs reimplement <a href="https://github.com/GVal98/AutoLUT">AutoLUT</a> transforms (MIT, © 2026 Valerii Garifullin). TOKYO and EXPIRED use placeholder LUTs written for this project.</figcaption>
+</figure>
+<script src="/static/charmera/darkroom.js" defer></script>
+```
+
+Three things are worth trying.
+
+**NIGHT on the night scene.** The orange glow that spreads around the lit branches does not come from the LUT. A LUT maps each pixel independently, so it cannot know that a pixel sits next to a bright one. The glow is a small spatial step: find the highlights at quarter resolution, blur them, and add them back with a red bias. Night is where the sensor fails most technically, so it is where the look has to work hardest.
+
+**EXPIRED, then *Shoot again*.** Each frame gets its own seeded white-balance shift, shadow tint, contrast change and fade. Expired film is a game of controlled surprise.
+
+**VIVID with *Hardware student*.** This one needs the firmware section to make sense, so I'll come back to it.
+
+## What the camera actually does
+
+A look is only useful if it can get into the camera. Project Sirius published a dump of the Charmera's 2 MiB firmware. It runs on a Generalplus GPCV2247F, and a long pass of disassembly and bounded emulation turned the dump into a fairly exact picture of how a still photograph is made.
+
+```text
+SP140A sensor, 1280×720 mode
+        │
+        ▼
+centred 960×720 crop at (160, 0)
+        │
+        ▼
+800×600 capture surface             ← the photograph, as far as detail goes
+        │
+        ├─ optional Pixel filter: 800×600 CPU round trip
+        ▼
+frame overlay → date stamp
+        │
+        ▼
+streaming scaler, 32-line buffers
+        │
+        ▼
+hardware JPEG, 1440×1080
+```
+
+The surprise is the middle box. The sensor runs a 1280×720 mode. The firmware takes the centre 960×720 and resamples it onto 480,000 working pixels. The saved JPEG then enlarges those to 1,555,200. Whatever detail the photograph has, it has at 800×600.
+
+The stock filters fall into two kinds:
+
+- **Standard, Warm, Cool and B&W are hardware settings.** They set offsets and scales on the colour processor's chroma channels, and B&W zeroes them. Standard is not a fixed setting either. Its saturation steps down as the scene gets darker, through codes 40, 37, 35, 32 and 30. If 32 is unity, that's about 1.25× in good light falling to about 0.94× in the dark.
+- **The four Pixel filters are software.** A CPU loop walks an 800×600 buffer, tests each pixel's brightness against 124, and repaints it in one of four flat colours: red, blue, yellow or grey.
+
+The Pixel filters are crude, but their existence is the most useful finding in the whole project. They prove that the firmware already pauses after capture to run arbitrary CPU code over the whole image before the frame, the date and the JPEG encoder. That is exactly where a film renderer would go. A recent test in the emulated dispatcher found a candidate insertion point just after the Pixel path cleans up and just before the overlays. It is a logical location, not yet a patch.
+
+## How the camera spends light
+
+Colour is half of a look. The other half is exposure, and here the firmware had a better story than I expected.
+
+The sensor was identified by its handshake rather than by guessing from photos of the circuit board. Tracing the real control bus recovered a 61-write start-up program. That program matched the open-source drivers for the SP140A family, and the camera's live exposure writes matched the same chip's register map.
+
+Auto-exposure does not solve for shutter speed and gain directly. It moves an index along a **program line**, a table of roughly one-twentieth-stop steps. Each entry says how long to integrate, how much analog gain the sensor applies, and how much digital gain the colour processor adds. There are two tables, one for 50 Hz mains and one for 60 Hz.
+
+```{=html}
+<figure class="exposure-figure" id="charmera-exposure" aria-labelledby="exposure-caption">
+  <div class="exposure-head">
+    <ul class="exposure-legend" aria-label="Legend">
+      <li><i class="swatch exposure-shutter"></i>Shutter</li>
+      <li><i class="swatch exposure-analog"></i>Sensor gain</li>
+      <li><i class="swatch exposure-digital"></i>Digital gain</li>
+    </ul>
+    <div class="exposure-toggle" role="group" aria-label="Mains frequency">
+      <button type="button" data-value="50Hz" aria-pressed="true">50 Hz</button>
+      <button type="button" data-value="60Hz" aria-pressed="false">60 Hz</button>
+    </div>
+  </div>
+  <div class="exposure-frame">
+    <svg class="exposure-plot" role="img" tabindex="0" viewBox="0 0 680 300" aria-label="AE program line"></svg>
+    <div class="exposure-tooltip" hidden></div>
+    <p class="exposure-error" hidden>The exposure tables could not be loaded.</p>
+  </div>
+  <details class="exposure-table-wrap">
+    <summary>Show the shutter plateaus as a table</summary>
+    <table class="exposure-table">
+      <caption>Shutter plateaus in the 50Hz program line</caption>
+      <thead><tr><th scope="col">AE index</th><th scope="col">Lines</th><th scope="col">Sensor gain</th><th scope="col">Digital gain</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </details>
+  <figcaption id="exposure-caption">Stops of exposure each stage adds over the brightest setting, read directly from the two program-line tables in the firmware. Hover over the chart, or focus it and use the arrow keys, to read individual entries. The totals are nominal codebook spans, not measured dynamic range.</figcaption>
+</figure>
+<script src="/static/charmera/exposure.js" defer></script>
+```
+
+The shape tells you the camera's priorities. In bright light it only shortens or lengthens the exposure. Once exposures get long enough, integration time is allowed only a few values: multiples of about 240 lines on the 50 Hz table and about 167 on the 60 Hz table. That is the pattern you'd expect from anti-flicker steps of 10 ms and 8.33 ms, which keep fluorescent light from banding. The exact line period hasn't been measured, though, so the milliseconds are an inference.
+
+Between those steps the camera holds the shutter and raises sensor gain. Then it jumps to the next step and gives most of the gain back, which is the sawtooth where the bands meet. After the longest step, gain is all that's left. The 50 Hz table also has digital gain in reserve for the darkest scenes.
+
+The third column puzzled me for a while. It looked like an unused gain-like number. Following it through to a hardware register showed that it is the colour processor's global gain, so the exposure system has three stages rather than two. The tables also have small oddities. At one of those jumps on the 50 Hz table, from index 140 to 141, nominal exposure actually *falls* by about a sixth of a stop. That is real in the codebook, but nobody has yet tested whether it matters in practice.
+
+The most important finding came later. The camera's tone curve is not only an output setting. The same curve is loaded into the auto-exposure engine, which uses it to judge brightness. In emulation of the original code, changing the curve could *reverse* the direction of an exposure adjustment for identical scene statistics. **You can't change the look without changing the exposure.** A mode is therefore a capture policy as much as a colour transform. NIGHT, for example, could legitimately choose to accept more noise and less blur than FILM.
+
+## Complexity belongs off the camera
+
+The best film renderers are expensive. Spectral film simulations model the negative and the print from measured data. Learned systems such as Deep Analog infer a whole LUT from a single reference photograph. None of that should run on a keychain.
+
+The architecture I ended up with works like a compiler:
+
+```text
+spectral / learned / hand-tuned teacher
+                 │
+                 ▼
+        offline optimisation
+                 │
+                 ▼
+     tiny deterministic student
+                 │
+                 ▼
+ tone curve · colour matrix · AE table ·
+ small LUT · tiny residual kernel
+```
+
+The expensive intelligence designs the camera's behaviour. It does not run for every photograph.
+
+How small can the student be? A 17×17×17 LUT at 8 bits per channel takes 14,739 bytes per mode. That is affordable in software at the 800×600 hook. It would be cheaper still if the colour processor's hardware did the work, since hardware stages are essentially free per pixel. Generalplus's related SDKs show a hardware luma curve and a 3×3 colour matrix. So I fitted each LUT with exactly that: a 256-entry curve on brightness, followed by a matrix.
+
+| Mode | Curve + matrix vs full LUT |
+|---|---|
+| B&W | 40.9 dB |
+| EXPIRED | 38.6 dB |
+| PEOPLE | 35.1 dB |
+| TOKYO | 32.4 dB |
+| FILM | 32.2 dB |
+| NIGHT | 29.4 dB |
+| VIVID | 22.0 dB |
+
+That's what the *Hardware student* switch in the darkroom shows. B&W survives almost perfectly; a monochrome look is mostly a tone curve. VIVID is the worst fit by a wide margin. The scores are measured across the whole colour cube, including saturated colours that a quiet lake scene barely touches. Try VIVID on the shrine and flip between the two renderers. Velvia's character is hue-dependent and nonlinear: it pushes some colours much harder than others. A brightness curve and a linear matrix cannot express that. The failure is informative because it sorts the modes. Some can live in hardware. Others need a software residual, and VIVID needs most of its look in software.
+
+The current plan is to use hardware for everything it can do and keep the smallest necessary residual for the software hook.
+
+## Being wrong carefully
+
+Reverse engineering depends on the path you took, so I kept the wrong turns as first-class evidence rather than editing them away. Some of my favourites:
+
+- **"The sensor's native resolution is 1280×720."** This was stated too confidently before the sensor was identified. At that point the evidence only showed a working raster.
+- **"`sensor_preview_init` starts a task."** It doesn't. The string is a tag passed to a memory allocator.
+- **"This function is the auto-exposure controller."** It had the right arithmetic but no live callers. The real controller was elsewhere.
+- **"Digital gain is masked to eight bits."** The instruction actually clears bits 9 to 15, so values keep nine bits.
+- **"960×720 is a second photo mode."** It is the fallback used when there's no memory card. It also forces JPEG quality down.
+- **"Standard is a constant 1.25× saturation."** It adapts with exposure, as described above.
+
+The rules that came out of these were plain ones. Keep what the binary shows separate from what a related SDK suggests, what emulation does, and what real hardware does. Don't promote a function's name or its first caller into its meaning. Don't let a plausible architecture harden into fact.
+
+## Where it stands
+
+No firmware has been patched or flashed. The camera's own SD-card updater turned out to be more dangerous than it looks. In emulation it could compute erase addresses beyond the flash and erase on short reads, which fits community reports of bricked cameras. No look is worth losing the camera, so a verified backup and restore path for my specific unit comes before any installation.
+
+The open problems are concrete now:
+
+- what automatic white balance does with real scenes rather than empty test statistics;
+- which process owns each colour setting, so that an edit doesn't get overwritten;
+- an ARM version of the renderer whose output matches the reference byte for byte;
+- the sensor's physical response, measured with a deliberately small set of about twelve real scenes rather than a giant benchmark.
+
+The first target is one excellent FILM default, end to end, before polishing the other six. The test stays the same: a tiny camera, an ordinary moment, a press of the shutter, and a photograph worth keeping.
+
+::: {.archive-note}
+Film-stock names are descriptive references; this project has no affiliation with Kodak, Fujifilm, CineStill or the projects cited. Sources and teachers include [spektrafilm](https://github.com/andreavolpato/spektrafilm), [Film Lab](https://github.com/thedevmark/film-lab), [PoLUT](https://github.com/TomPoczos/PoLUT), [AutoLUT](https://github.com/GVal98/AutoLUT) and [Deep Analog](https://arxiv.org/abs/2608.14702). The firmware analysis builds on Project Sirius's public dump.
+:::
