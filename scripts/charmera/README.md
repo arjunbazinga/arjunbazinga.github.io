@@ -72,6 +72,8 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `static/charmera/charmera-on-keys-*.webp` | Hero and social image: the camera on Arjun's keys, with the key's blade and stamped code blurred. |
 | `static/charmera/spectrum.json`, `detail.js` | The "What comes out" detail measurement and its chart. |
 | `scripts/charmera/source/` | The two Charmera JPEGs as received, inputs to `build_assets.py` and `measure_detail.py`. |
+| `static/charmera/firmware/` | Examples copied byte for byte from the public dump: the twelve stock frame strips (`F_n_00sGPZP.gpzp`), the startup logo and the five sounds. Also the four stock frames composited onto the street photo (`frame-n-on-street.webp`). |
+| `static/charmera/flash-map.json`, `flashmap.js` | The "Inside the 2 MiB" region map and its final-erase toggle. |
 | `static/charmera/frames.js`, `frame-slots.json` | The frame maker and the twelve frame-strip slots (name, flash offset, byte budget) read from the firmware's resource directory. |
 | `static/charmera/vendor/pako.min.js` | [pako](https://github.com/nodeca/pako) 2.1.0 (MIT and Zlib licences, header kept), used for fixed-Huffman DEFLATE in the frame maker. Loaded only when the frame maker nears the viewport. |
 | `static/charmera/LICENSE-AutoLUT.txt` | MIT notice for the five LUTs derived from AutoLUT. |
@@ -151,9 +153,9 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 
 - **LUTs.** Five (FILM, PEOPLE, NIGHT, B&W, VIVID) reimplement [AutoLUT](https://github.com/GVal98/AutoLUT) transforms (MIT; notice in `static/charmera/LICENSE-AutoLUT.txt`). TOKYO and EXPIRED are proxies authored in the project. G'MIC/Film-Luts, PoLUT and spektrafilm-derived assets were **not** shipped; their redistribution terms need a per-asset audit (see `docs/06_LICENSE_AND_PROVENANCE.md`).
 - **Deep Analog** is source-available, not open source. It is only cited.
+- **Firmware examples.** At Arjun's request (23 October 2026), the essay shows Kodak's four stock frames, the startup logo (Kodak's K mark) and the five sounds, copied unmodified from the public Project Sirius dump as research examples. The two photographs inside the dump are still not shown; the flash map marks where they sit.
 - **Not published:**
-  - the firmware binary, disassembly and research scripts;
-  - the decoded stock Kodak frame artwork;
+  - the firmware binary, full disassembly and research scripts (short snippets appear in the essay);
   - the two photographs found inside the public dump, which belong to whoever owned that camera;
   - community members' details beyond public handles and links.
 - **Photographs.** The darkroom and pipeline use Arjun's own album photographs. They were not taken on a Charmera, and the essay says so.
@@ -178,6 +180,15 @@ New findings, from the original binary:
 - **Budgets.** Slot sizes come straight from the resource directory, so a frame that fits changes no other resource's offset. The middle strips of slots 1 and 3 have only 2,048 bytes.
 
 The frame maker nudges opaque pairs that would land on the key (one luma level) and turns half-transparent pairs fully opaque, because the camera decides per pair. It does not generate the menu thumbnail, and nothing here installs anything.
+
+## Firmware examples (added 23 October 2026)
+
+Arjun asked for examples from the firmware itself. `build_assets.py` (`build_firmware_examples`) now copies them straight from the dump:
+
+- **Frames.** The twelve strips are copied exactly (compressed bytes, `GPZP` tag included) and inflated in the browser, so the frame maker's stock templates are the camera's own bytes. The gallery uses the same rule in Python (`compose_row_pair`).
+- **Logo and sounds.** `POWER_ON_LOGOJPG` is cut at its JPEG end marker. Each WAV is cut at its RIFF length.
+- **Map.** `flash-map.json` lists measured regions: 4 KiB used/blank scan, resource directory, settings at `0x170000`, photo index at `0x17F000`, and the two photo extents (`0x964E` and `0x958E` bytes, from the index). `GPRSPAK` starts with a `GPRS` tag (version 2); its format is not decoded.
+- **Snippets.** The see-through test (`0xEE28–0xEE34`) and the first two rows of the sensor init table are quoted in the essay.
 
 ## Design decisions
 

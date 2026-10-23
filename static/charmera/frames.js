@@ -114,8 +114,21 @@
   const preview = $('.frames-canvas'), status = $('.frames-status'), table = $('.frames-strips tbody');
   const caption = $('.frames-caption'), captionWrap = $('.frames-caption-wrap'), slotSelect = $('.frames-slot');
   const downloads = $('.frames-downloads'), verify = $('.frames-verify'), nudgedNote = $('.frames-nudged');
-  const state = { template: 'film', photo: 'charmera-street', film: false, slot: 3, upload: null, holes: false };
+  const state = { template: 'stock-0', photo: 'charmera-street', film: false, slot: 0, upload: null, holes: false };
   let slots, photoRgb = new Map(), film, frame, encoded;
+  const stock = new Map();
+
+  // The camera's own frames, inflated from the exact strip bytes in the firmware.
+  const STOCK = ['Film strip', 'Window', 'Pixel', '1987'];
+  const loadStock = async n => {
+    if (!stock.has(n)) {
+      const strips = await Promise.all([0, 1, 2].map(s => fetch(`${C.BASE}firmware/F_${n}_00${s}GPZP.gpzp`).then(r => r.arrayBuffer())));
+      const bytes = new Uint8Array(BYTES);
+      strips.forEach((buffer, s) => bytes.set(window.pako.inflateRaw(new Uint8Array(buffer).subarray(4)), s * BYTES / 3));
+      stock.set(n, bytes);
+    }
+    return stock.get(n);
+  };
 
   const art = document.createElement('canvas');
   art.width = W; art.height = H;
@@ -225,8 +238,9 @@
 
   const render = async () => {
     if (!window.pako || !slots) return;
-    const rgba = drawArt();
-    const { bytes, nudged } = frameToRowPair(rgba);
+    let bytes, nudged = 0;
+    if (state.template.startsWith('stock-')) bytes = await loadStock(Number(state.template.slice(6)));
+    else ({ bytes, nudged } = frameToRowPair(drawArt()));
     frame = bytes;
     const photo = await photoFor(state.photo);
     const out = compose(photo, frame);
@@ -247,7 +261,8 @@
     nudgedNote.textContent = nudged ? `${nudged.toLocaleString()} pixel pairs landed exactly on the see-through value and were nudged so they stay solid.` : '';
     encoded = encode(frame);
     showStrips();
-    preview.setAttribute('aria-label', `${TEMPLATES[state.template]?.label ?? 'Your'} frame on a real Charmera photo, composited with the camera's rule`);
+    const label = state.template.startsWith('stock-') ? `Stock ${STOCK[Number(state.template.slice(6))]}` : TEMPLATES[state.template]?.label ?? 'Your';
+    preview.setAttribute('aria-label', `${label} frame on a real Charmera photo, composited with the camera's rule`);
   };
 
   // Controls.
@@ -259,6 +274,8 @@
     const t = TEMPLATES[state.template];
     captionWrap.hidden = !t?.caption;
     if (t?.caption) caption.value = t.caption;
+    // A stock frame is checked against its own slot.
+    if (state.template.startsWith('stock-')) { state.slot = Number(state.template.slice(6)); slotSelect.value = String(state.slot); }
     render();
   }));
   $('.frames-upload input').addEventListener('change', async event => {
