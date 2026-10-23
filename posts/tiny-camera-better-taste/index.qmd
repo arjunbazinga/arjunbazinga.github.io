@@ -232,6 +232,56 @@ That test turned up a quirk. The two pixels in each pair share one colour pair, 
 
 The Pixel filters are crude, but their existence is the most useful finding in the whole project. They prove that the firmware already pauses after capture to run arbitrary CPU code over every pixel. That happens before the frame, the date and the JPEG encoder, which is exactly where a film renderer would go. Executing the original capture dispatcher found a candidate insertion point just after the Pixel path cleans up and just before the overlays. It is a logical location, not yet a patch.
 
+## Frames
+
+The camera has a third kind of look: four frames. They are Kodak's artwork, so I won't reproduce them, but they are fun: a 35 mm film strip, an old desktop-software window, pixel-art hearts and sparkles, and a yellow camera with "1987" across a rainbow stripe. In the firmware each is an 800 × 600 image in exactly the same row-pair layout as the capture surface. Each is split into three 200-row strips, compressed with DEFLATE behind a `GPZP` tag.
+
+Frames are drawn after the hook, so a film look would never tint them, and they have no alpha channel. To find out how the camera decides what is see-through, I ran its own frame routine on test patterns. It walks the image a pixel pair at a time and leaves the photo alone wherever both of the frame's brightness values are exactly 140. Colour isn't checked at all. A frame drawn in bright red that happens to have a brightness of 140 would show the photo straight through it.
+
+Every strip also has a fixed slot in flash, between 2 KB and 19 KB. A custom frame with the same layout and compression that fits its slots would change nothing else in the firmware. So here is a frame maker.
+
+```{=html}
+<figure class="frames" id="charmera-frames" aria-labelledby="frames-caption">
+  <div class="frames-stage">
+    <canvas class="frames-canvas" width="800" height="600" role="img" aria-label="Frame preview on a real Charmera photo"></canvas>
+    <div class="darkroom-loading">Loading the frame maker…</div>
+    <noscript><p class="charmera-noscript">The frame maker runs in your browser and needs JavaScript.</p></noscript>
+  </div>
+  <p class="darkroom-label" style="margin-top:0.9rem">Frame</p>
+  <div class="frames-templates darkroom-modes" role="group" aria-label="Frame template">
+    <button type="button" data-value="film">Film strip</button>
+    <button type="button" data-value="instant">Instant</button>
+    <button type="button" data-value="postcard">Postcard</button>
+    <button type="button" data-value="corners">Rounded</button>
+    <label class="frames-upload">Your PNG<input type="file" accept="image/png,image/*" aria-label="Use your own frame image; transparent areas become see-through"></label>
+  </div>
+  <label class="frames-caption-wrap" hidden>Caption <input class="frames-caption" type="text" maxlength="28"></label>
+  <div class="darkroom-controls">
+    <div class="frames-photo darkroom-engine" role="group" aria-label="Photo">
+      <button type="button" data-value="charmera-street">Street</button>
+      <button type="button" data-value="charmera-park">Park</button>
+    </div>
+    <label class="darkroom-check"><input class="frames-film" type="checkbox"> FILM look under it</label>
+    <label class="darkroom-check"><input class="frames-holes" type="checkbox"> Tint see-through areas</label>
+    <label class="frames-slot-wrap">Slot <select class="frames-slot"></select></label>
+  </div>
+  <div class="table-scroll">
+    <table class="exposure-table frames-strips">
+      <caption>Encoded strips against the chosen slot</caption>
+      <thead><tr><th scope="col">Strip</th><th scope="col">Encoded</th><th scope="col">Slot</th><th scope="col">Result</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="frames-nudged"></p>
+  <p class="frames-status" role="status" aria-live="polite"></p>
+  <div class="frames-files"><span class="frames-files-label">Files:</span> <span class="frames-downloads"></span></div>
+  <p class="frames-verify"></p>
+  <figcaption id="frames-caption">Templates are original designs; upload a PNG and its transparent areas become see-through. The preview uses the camera's compositing rule on a real Charmera photo; that photo already carries its date stamp, which on the camera is drawn after the frame, on top of it. Each strip is encoded with fixed-Huffman DEFLATE, the only kind the stock frames use. My encoder's output is byte-identical to zlib's, which is what the slot budgets were measured with. The files are real, but there is no safe way to install them yet, and the small menu thumbnails for frames use a format nobody has decoded.</figcaption>
+</figure>
+```
+
+Pick a template or upload your own. The table shows whether each strip fits the slot you choose. Detail costs bytes: the middle strips of slots 1 and 3 have only 2 KB, so the middle of those frames has to be almost all see-through. When installation is solved, this part is ready.
+
 ## How the camera spends light
 
 Colour is half of a look. The other half is exposure.
@@ -377,7 +427,6 @@ No firmware has been patched or flashed. No look is worth losing the camera, so 
 Some smaller things turned up along the way:
 
 - **The EXIF date has an extra colon.** The camera writes `2026:09:26:22:08:23` where the standard wants a space before the time. A small patch fixes it in emulation.
-- **The four stock frames decode cleanly.** They're stored in the same 800 × 600 row-pair layout as the capture surface, and all twelve strips recompress into their existing slots, so custom frames are plausible.
 - **USB memory access is one byte away.** The stock handshake grants access level 1; the memory commands require 2. Changing `mov r0, #1` to `#2` opens them in emulation. Getting that byte onto the camera is the same installation problem as everything else.
 
 The open problems are concrete now:
@@ -400,4 +449,5 @@ This work builds on the Charmera community's. [Project Sirius](https://github.co
 <script src="/static/charmera/exposure.js" defer></script>
 <script src="/static/charmera/meter.js" defer></script>
 <script src="/static/charmera/detail.js" defer></script>
+<script src="/static/charmera/frames.js" defer></script>
 ```
