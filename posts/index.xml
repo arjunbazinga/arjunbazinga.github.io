@@ -12,6 +12,198 @@
 <generator>quarto-1.10.19</generator>
 <lastBuildDate>Fri, 23 Oct 2026 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>Reading Millions of Conversations</title>
+  <link>https://www.arjunsriva.com/posts/reading-millions-of-conversations/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>A million conversations can tell you that people are asking an AI to debug software. They cannot, by themselves, tell you that the software got fixed.</p>
+<p>Between those two claims sits most of the interesting engineering.</p>
+<p>AI conversations contain an unusually rich record of work: the task someone attempted, the context they supplied, the assistant’s response, the correction, the retry. They also contain private information, missing context, and long stretches in which an answer appears but its consequence never does. Reading all of them is neither a scalable research method nor an acceptable default for access to people’s lives.</p>
+<p>Anthropic’s <strong>Clio</strong> offers a different approach. A model reads sampled conversations and answers a set of questions about each one. The answers are grouped, counted, and summarized. Researchers receive aggregate results after privacy checks, rather than a searchable pile of transcripts.<sup>1</sup></p>
+<p>The visible result can be a map of what people do with AI. The system underneath is a measuring instrument. Its questions determine what it notices; its release rules determine what anyone gets to see.</p>
+<figure class="clio-map figure" aria-labelledby="map-caption">
+  <p class="map-eyebrow">From private particulars to public patterns</p>
+  <div class="map-flow">
+    <div class="map-stage"><span class="map-number">01</span><strong>Conversations</strong><span>Rich, messy, private</span></div>
+    <div class="map-stage"><span class="map-number">02</span><strong>Questions</strong><span>Choose what survives</span></div>
+    <div class="map-stage"><span class="map-number">03</span><strong>Patterns</strong><span>Group and measure</span></div>
+    <div class="map-stage"><span class="map-number">04</span><strong>Release</strong><span>Only what clears the gate</span></div>
+  </div>
+  <figcaption id="map-caption">Each boundary changes what can be known. The final view inherits all four stages.</figcaption>
+</figure>
+<section id="the-question-is-part-of-the-sensor" class="level2">
+<h2 class="anchored" data-anchor-id="the-question-is-part-of-the-sensor">The question is part of the sensor</h2>
+<p>Consider a conversation about a failing deployment. You could ask what technology it concerns, what the user wants, where they get stuck, or whether the problem is resolved. Those questions produce different representations of the same exchange.</p>
+<p>Clio calls these questions <strong>facets</strong>. An open-ended facet might ask for the user’s overall request, producing a short description suitable for embedding and clustering. A categorical facet might ask whether an outcome is visible, choosing from a defined set of answers. Some facets, such as the number of messages, can be computed without a model.</p>
+<p>The crucial choice happens before clustering. If the model is asked about the task, similar tasks become neighbors. If it is asked about obstacles, conversations from different domains can become neighbors because they encounter the same obstacle. Improving the embedding model cannot recover a distinction that the facet answer discarded.</p>
+<p>Try changing the question below. The twelve exchanges stay fixed. Select a numbered conversation to inspect the evidence; <strong>04</strong> is a useful starting point.</p>
+<figure class="clio-lab figure" id="facet-lab" aria-labelledby="facet-title">
+  <header class="lab-heading"><span class="lab-number">Experiment 01</span><h3 id="facet-title" class="no-anchor">Same conversations. Different questions.</h3><p>Twelve invented exchanges, with hand-assigned labels. No model calls or embedding coordinates.</p></header>
+  <p class="lab-loading">The interactive view needs JavaScript. Static results are included below.</p>
+  <fieldset class="lab-controls segmented" hidden=""><legend>Choose a question</legend>
+    <label><input type="radio" name="facet" value="task" checked=""><span>The task</span></label>
+    <label><input type="radio" name="facet" value="friction"><span>The obstacle</span></label>
+    <label><input type="radio" name="facet" value="outcome"><span>The outcome</span></label>
+  </fieldset>
+  <div class="facet-workspace" hidden="">
+    <p class="facet-question"></p>
+    <div class="facet-groups" aria-label="Conversations grouped by the selected question"></div>
+    <p class="facet-note"></p>
+    <div class="facet-transcript" aria-label="Selected fictional conversation" aria-live="polite"></div>
+    <div class="outcome-reading" hidden="">
+      <div><strong data-outcome="all"></strong><span>Reported successes / all exchanges</span></div>
+      <div><strong data-outcome="known"></strong><span>Reported successes / reported outcomes</span></div>
+      <p>Both calculations are correct. Neither establishes the success rate of the seven unobserved outcomes.</p>
+    </div>
+  </div>
+  <p class="lab-sr-only facet-announcement"></p>
+  <details class="lab-details"><summary>Static results and example data</summary><p>Task: 4 repair, 3 writing, 2 explanation, 3 planning. Obstacle: 3 missing context, 2 unsuccessful iterations, 7 with no stated obstacle. Outcome: 3 reported successes, 2 reported failures, 7 not observable. Success is reported in 25% of all exchanges, or 60% of the five exchanges with a reported outcome.</p><p><a href="cases.json" download="">Download all twelve fictional exchanges and their labels (JSON)</a>.</p></details>
+  <figcaption>This is a demonstration of question-dependent grouping, not a reproduction of Clio's clustering. All text and labels were written for this essay.</figcaption>
+</figure>
+<p>The task view makes this look like a fairly ordinary mix of coding, writing, teaching, and planning. The obstacle view suggests a different intervention: perhaps the assistant needs a better way to obtain missing evidence. The outcome view shows how little of the result is actually observable.</p>
+<p>That last view needs an escape hatch. If the classifier must choose between “success” and “failure,” it has to turn absent evidence into a judgment. “Not observable” preserves an important fact about the instrument’s limits.</p>
+<p>Even an explicit success report has a scope. “The test passed” is evidence that the user reported a passing test. An independently captured test result is stronger evidence for that narrow claim. Neither establishes that the deployed service remained healthy a week later.</p>
+</section>
+<section id="give-discovery-and-counting-different-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="give-discovery-and-counting-different-jobs">Give discovery and counting different jobs</h2>
+<p>The original Clio pipeline embeds short facet answers and groups them with k-means. A stronger model names each group using examples from inside it and nearby examples outside it. That contrast helps the name express what distinguishes the group. Further rounds organize the groups into a hierarchy.<sup>2</sup></p>
+<p>This is useful for discovering categories you did not know to ask about. A fixed dashboard cannot show “a recurring kind of confusion no one thought to instrument” until someone invents the metric. Open-ended descriptions can surface it first.</p>
+<p>But a cluster’s name is an interpretation of a collection. It is not a predicate independently checked against every member.</p>
+<p>Suppose a group of one hundred conversations receives the name “Struggling with deployment.” Some members might be asking for setup instructions, some debugging a failure, and some checking that a repair worked. Counting the group does not establish that one hundred deployments failed. A vivid name makes this mistake especially easy.</p>
+<p>I would give the system two complementary jobs:</p>
+<ol type="1">
+<li><strong>Discover:</strong> use open descriptions and clusters to find a pattern worth investigating.</li>
+<li><strong>Measure:</strong> write an explicit criterion for that pattern, validate the classifier, and count its answers on an appropriate sample.</li>
+</ol>
+<p>For the deployment example, “The user explicitly reports that the proposed repair failed” is countable. The companion description can explain the kinds of failure. The count supports a rate; the descriptions help someone decide what to improve.</p>
+<p>This creates a useful loop: a surprising cluster becomes a candidate rubric, the rubric becomes an evaluation, and the evaluation can test a proposed fix. It connects production observation to the <a href="../../posts/evaluation-systems/">evaluation machinery</a> needed to justify action.</p>
+</section>
+<section id="the-denominator-is-a-design-decision" class="level2">
+<h2 class="anchored" data-anchor-id="the-denominator-is-a-design-decision">The denominator is a design decision</h2>
+<p>In the example above, three of twelve exchanges contain a reported success. Among the five with any reported outcome, three are successes. The resulting figures—25% and 60%—answer different questions.</p>
+<p>Neither is a minor presentation choice. People may return to report a failure more often than a success, or they may praise an answer before trying it. Restricting the denominator to observable outcomes can select an unusual population.</p>
+<p>Screeners introduce another boundary. If a study first keeps conversations that appear work-related, every later proportion is conditional on that selection unless explicitly reweighted. A convincing classifier downstream cannot restore cases discarded by a poor screener.</p>
+<p>The unit matters too. One person can have fifty conversations about a single task. One conversation can contain five tasks. A tool call, a session, a conversation, an account, and a person are different units; swapping them changes the claim.</p>
+<p>For a published number, I want a sentence that survives without the chart:</p>
+<blockquote class="blockquote">
+<p>Of the sampled conversations that passed this screener, this proportion met this written criterion, under this version of the classifier.</p>
+</blockquote>
+<p>That sentence exposes the commitments a polished percentage tends to hide. It also leaves room for what the data cannot establish: the population outside the sample, outcomes outside the transcript, and causes outside the study design.</p>
+</section>
+<section id="privacy-changes-the-instruments-resolution" class="level2">
+<h2 class="anchored" data-anchor-id="privacy-changes-the-instruments-resolution">Privacy changes the instrument’s resolution</h2>
+<p>A thousand conversations from two accounts are not a thousand independent people’s experiences. They are also a poor basis for describing a population privately. Message volume can grow while the number of people behind it stays tiny.</p>
+<p>Clio’s privacy design layers restrictions: reduce identifying detail in facet answers, require enough conversations and distinct accounts, write descriptions that omit identifying information, and audit those descriptions before release. The September 2025 Economic Index report gives concrete historical floors: <strong>15 conversations and 5 accounts</strong> for a reported cell; <strong>500 conversations and 250 accounts</strong> for a bottom-up request cluster.<sup>3</sup></p>
+<p>A number and a free-text description carry different disclosure risks. “600 conversations concerned business planning” reveals less than a description that identifies a company’s unannounced acquisition—even if both describe a large group.</p>
+<p>Switch the release format below. Then increase the number of conversations while keeping the accounts fixed.</p>
+<figure class="clio-lab figure" id="release-lab" aria-labelledby="release-title">
+  <header class="lab-heading"><span class="lab-number">Experiment 02</span><h3 id="release-title" class="no-anchor">More messages do not mean more people.</h3><p>Six invented groups. Historical count floors; a hand-written example of a description check.</p></header>
+  <p class="lab-loading">The interactive view needs JavaScript. Static results are included below.</p>
+  <div class="gate-interactive" hidden="">
+    <fieldset class="segmented"><legend>What leaves the system?</legend>
+      <label><input type="radio" name="release" value="counts" checked=""><span>Counts</span></label>
+      <label><input type="radio" name="release" value="descriptions"><span>Descriptions + counts</span></label>
+    </fieldset>
+    <p class="floor-note"></p>
+    <div class="volume-control"><label for="volume">Conversation volume <output for="volume">1×</output></label><input id="volume" type="range" min="1" max="10" value="1" step="1"><p>The same accounts start more conversations. Account counts do not change.</p></div>
+    <div class="gate-table-wrap" tabindex="0" aria-label="Synthetic inputs and release decisions; scroll horizontally if needed">
+      
+<div class="table-scroll" tabindex="0" aria-label="Synthetic inputs · visible here so you can inspect the gate">
+<table class="gate-table caption-top">
+<caption>Synthetic inputs · visible here so you can inspect the gate</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">Group</th>
+<th data-quarto-table-cell-role="th" scope="col">Conversations</th>
+<th data-quarto-table-cell-role="th" scope="col">Accounts</th>
+<th data-quarto-table-cell-role="th" scope="col">Decision</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+
+    </div>
+    <div class="released-view"><div class="released-heading"><h4 class="no-anchor">The released view</h4><span class="release-count"></span></div><ul class="release-output"></ul></div>
+    <button type="button" class="lab-reset" data-reset-gate="">Reset experiment</button>
+  </div>
+  <p class="lab-sr-only gate-announcement"></p>
+  <details class="lab-details"><summary>Static results and the limits of this gate</summary><p>At the starting volume, five groups pass the count floors and two pass the description gate. Doubling the volume lets interview preparation pass the description floor: 480 conversations become 960, from the same 310 accounts. Coursework still has only 80 accounts; template generation has only 2. The acquisition description remains identifying at every volume.</p><p>The identifying description is a predetermined teaching example, not an automated privacy audit. Passing these checks is not proof of anonymity. This exercise omits the rest of Clio's pipeline and does not model repeated-query or linkage attacks.</p></details>
+  <figcaption>All counts are invented. A real research release would not include the withheld inputs shown in this test bench. These historical floors are not a universal privacy policy.</figcaption>
+</figure>
+<p>The consequence is easy to miss: <strong>the released view has a resolution limit</strong>. Rare activity can disappear, be merged into a broader group, or remain unavailable. An empty area of the map can mean that nothing happened, that the system failed to recognize it, or that the system correctly refused to reveal it.</p>
+<p>These meanings should survive into the output. A suppressed cell is not a measured zero. An unavailable combination of facets is not an empty population. If the interface flattens all of them into blank space, it teaches the reader a false model of the world.</p>
+<p>There is also a tension with safety discovery. Some of the events we most want to find are rare. Lowering the public release floor until they become visible changes the protection being offered. A separately governed investigation can be the appropriate instrument; a public aggregate map cannot answer every question.</p>
+<p>Count floors and an auditor are defenses, not a mathematical privacy guarantee. Details can identify an organization; overlapping releases can expose information no single release reveals. A deployment needs a threat model for the audience, its background knowledge, and the collection of outputs it can see.</p>
+</section>
+<section id="a-better-model-can-break-a-time-series" class="level2">
+<h2 class="anchored" data-anchor-id="a-better-model-can-break-a-time-series">A better model can break a time series</h2>
+<p>The classifier is part of the measuring instrument. Upgrading it can change the result even when human behavior stays the same.</p>
+<p>Imagine that a system reports explicit failure in 20% of one month’s conversations and 35% of the next month’s. During the interval, the team also upgraded its classifier. Did failures rise by fifteen percentage points, or did the new classifier recognize more of them?</p>
+<p>The missing measurement is the new sample scored by the old classifier.</p>
+<figure class="clio-bridge figure" aria-labelledby="bridge-caption">
+  <p class="map-eyebrow">An invented bridge measurement</p>
+  <div class="bridge-readings">
+    <div><span>Earlier sample · old classifier</span><strong>20%</strong></div>
+    <div class="bridge-added"><span>Later sample · old classifier</span><strong>25%</strong><small>The bridge measurement</small></div>
+    <div><span>Later sample · new classifier</span><strong>35%</strong></div>
+  </div>
+  <div class="bridge-comparisons"><p><strong>+5 points</strong><span>Change across samples with the classifier fixed</span></p><p><strong>+10 points</strong><span>Change across classifiers with the later sample fixed</span></p></div>
+  <figcaption id="bridge-caption">Synthetic percentages, not Anthropic results. The bridge separates two comparisons; it does not prove what caused the population to change or that either classifier is correct.</figcaption>
+</figure>
+<p>This comparison is useful even if the new model is more accurate. The earlier series used a different ruler. The September 2025 Economic Index describes a version of this check: reclassifying the new data with the previous model to examine a change in interaction patterns.<sup>4</sup></p>
+<p>The bridge does not solve every comparability problem. Sampling, transcript truncation, the rubric, and the population may also have changed. Their versions belong with the result. Where practical, scoring both samples with both classifiers provides an additional check for a model change that affects the two populations differently.</p>
+<p>For a system I was building, I would make the release a versioned artifact: question and answer definitions, sampling unit and window, screener, preprocessing, model and prompt versions, aggregation rules, suppression rules, and validation evidence. A screenshot of the chart would be a view of that artifact, not the only surviving record of how the number was made.</p>
+</section>
+<section id="validate-the-chain-then-choose-an-action" class="level2">
+<h2 class="anchored" data-anchor-id="validate-the-chain-then-choose-an-action">Validate the chain, then choose an action</h2>
+<p>Clio’s original paper evaluates multiple stages: whether summaries represent conversations, whether names describe clusters, whether the hierarchy reconstructs known categories, and whether privacy checks catch identifying content.<sup>5</sup> That separation matters. A good summary can be assigned to the wrong cluster; a coherent cluster can receive a misleading name; an accurate description can still reveal too much.</p>
+<p>It also sets a limit on transferring evidence. Validation of topic extraction does not establish that a new facet measures autonomy, learning, emotional dependence, or hours saved. Each additional construct creates a new measurement problem.</p>
+<p>I would start a new facet on examples reviewers are entitled to read, including ambiguous and unanswerable cases. Disagreements would first be a test of the definition: do the reviewers disagree because the model is wrong, or because “successful” has never been specified? Then I would test on a relevant distribution, perturb the prompt, and check the direction of errors. A classifier that systematically mistakes confident prose for successful work may look stable while answering the wrong question.</p>
+<p>Finally, the evidence has to connect to an action. A cluster can suggest a missing product feature. A validated rate can prioritize a problem. A replay or experiment can test whether a change helps. Interviews or independently captured outcomes can answer questions the transcript leaves open.</p>
+<p>The map is useful because it directs those next measurements. Treating it as the final verdict would waste its most valuable property: helping us discover what we should investigate.</p>
+</section>
+<section id="what-should-survive-the-compression" class="level2">
+<h2 class="anchored" data-anchor-id="what-should-survive-the-compression">What should survive the compression?</h2>
+<p>In <a href="../../posts/from-search-to-memory/">Rocketships for the Mind</a>, I described a system for recovering particular decisions from my own conversation history. That system needs precise references: which project, which artifact, which statement superseded an earlier one.</p>
+<p>A population instrument has a different contract. It needs to learn something useful while preventing those particulars from reaching its readers. A feature that makes personal memory better—drilling down to the exact conversation—can break that contract when applied to other people’s histories.</p>
+<p>The design question is therefore more specific than “How do we summarize a million conversations?”</p>
+<p><strong>Which distinctions must survive, which particulars must disappear, and what decision will the remaining evidence justify?</strong></p>
+<p>Answer that well, and the language model becomes part of a useful instrument. Leave it unanswered, and a beautiful map can make a weak measurement look authoritative.</p>
+</section>
+<section id="sources-and-method" class="level2">
+<h2 class="anchored" data-anchor-id="sources-and-method">Sources and method</h2>
+<p>The system descriptions here draw on the public Clio paper and Economic Index methods, as organized in the accompanying research archive. The experiments are original teaching examples: their exchanges, labels, group counts, and time-series values are invented. They demonstrate mechanisms and trade-offs; they do not estimate Claude usage or reproduce an Anthropic study. The implementation recommendations above are my synthesis, rather than a description of Anthropic’s internal storage or approval systems.</p>
+<script type="module" src="lab.mjs"></script>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Alex Tamkin, Miles McCain, et al., <a href="https://arxiv.org/abs/2412.13678"><em>Clio: Privacy-Preserving Insights into Real-World AI Use</em></a>, December 2024. See the pipeline in the main text; Appendix C for utility evaluations, Appendix D for privacy evaluations, and Appendix G for prompts and implementation details. The later <a href="https://arxiv.org/abs/2503.04761">Economic Index methods paper</a> describes mapping conversations to a fixed occupational taxonomy.↩︎</p></li>
+<li id="fn2"><p>Alex Tamkin, Miles McCain, et al., <a href="https://arxiv.org/abs/2412.13678"><em>Clio: Privacy-Preserving Insights into Real-World AI Use</em></a>, December 2024. See the pipeline in the main text; Appendix C for utility evaluations, Appendix D for privacy evaluations, and Appendix G for prompts and implementation details. The later <a href="https://arxiv.org/abs/2503.04761">Economic Index methods paper</a> describes mapping conversations to a fixed occupational taxonomy.↩︎</p></li>
+<li id="fn3"><p>Anthropic, <em>Economic Index: Uneven geographic and enterprise AI adoption</em>, September 2025, p.&nbsp;28 and footnote 1, in the <a href="https://www.anthropic.com/economic-index">Economic Index reports</a>. The two threshold pairs are reported historical settings. They should not be treated as sufficient protection for another population or release design.↩︎</p></li>
+<li id="fn4"><p>The same September 2025 report, p.&nbsp;11, discusses reclassifying the newer sample with the prior classifier. The 20%, 25%, and 35% values in this essay are an independent illustration of the comparison, not figures from that report.↩︎</p></li>
+<li id="fn5"><p>Alex Tamkin, Miles McCain, et al., <a href="https://arxiv.org/abs/2412.13678"><em>Clio: Privacy-Preserving Insights into Real-World AI Use</em></a>, December 2024. See the pipeline in the main text; Appendix C for utility evaluations, Appendix D for privacy evaluations, and Appendix G for prompts and implementation details. The later <a href="https://arxiv.org/abs/2503.04761">Economic Index methods paper</a> describes mapping conversations to a fixed occupational taxonomy.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>AI</category>
+  <category>Systems</category>
+  <category>Measurement</category>
+  <guid>https://www.arjunsriva.com/posts/reading-millions-of-conversations/</guid>
+  <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://www.arjunsriva.com/posts/reading-millions-of-conversations/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
   <title>Better Taste for a Tiny Camera</title>
   <link>https://www.arjunsriva.com/posts/tiny-camera-better-taste/</link>
   <description><![CDATA[ 
