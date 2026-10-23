@@ -542,7 +542,7 @@ ga('send', {
 <h2 class="anchored" data-anchor-id="build-an-evaluation-loop">Build an evaluation loop</h2>
 <p>Unit tests still belong around deterministic code: parsing, authorization, tool execution, state transitions, and API contracts. Model behavior needs a second test system.</p>
 <p>Start with a <strong>golden dataset</strong>. Each row should contain a representative input and enough information to judge a good output.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table 1">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -647,7 +647,7 @@ ga('send', {
 <p>Your golden dataset describes yesterday’s understanding of the product. Production traffic will find missing languages, strange formatting, new attacks, and user goals that the initial dataset did not cover.</p>
 <p>Sample traces with privacy controls. Ask reviewers to label failures. Add useful cases to the golden set, then rerun old cases before release. This creates a regression suite from the mistakes your users encounter.</p>
 <p>Monitor the deterministic shell and the probabilistic core:</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Table">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Table 2">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
