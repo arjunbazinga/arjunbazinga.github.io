@@ -27,10 +27,15 @@ function CodeBlock(block)
   return block
 end
 
+-- Each scrollable table region needs its own name: use the caption, else a number.
+local table_count = 0
 function Table(table)
   if not FORMAT:match('html') then return nil end
+  table_count = table_count + 1
+  local caption = pandoc.utils.stringify(table.caption.long or {})
+  local label = caption ~= '' and caption or ('Table ' .. table_count)
   return pandoc.Div({table}, pandoc.Attr('', {'table-scroll'}, {
-    {'role', 'region'}, {'tabindex', '0'}, {'aria-label', 'Table'}
+    {'role', 'region'}, {'tabindex', '0'}, {'aria-label', label}
   }))
 end
 

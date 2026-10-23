@@ -51,7 +51,7 @@ This essay is about the machinery organizations build to answer those questions.
 
 By the end, you should be able to look at an evaluation system and reason about what it can actually know, what decisions that knowledge justifies, where it can fool itself, and where to invest next.
 
-![This is not the program.](treachery-of-images.webp){.essay-art}
+![This is not the program.](treachery-of-images.webp){.essay-art fig-alt="René Magritte's The Treachery of Images: a painted tobacco pipe above the handwritten words Ceci n'est pas une pipe."}
 
 ## A map of the evaluation system
 

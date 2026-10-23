@@ -201,7 +201,7 @@ Arjun asked for examples from the firmware itself. `build_assets.py` (`build_fir
   - The pipeline's date stamp is labelled illustrative.
   - Per-photo student scores are computed live.
 - **Performance.** The darkroom loads its LUTs and develops only near the viewport. The page transfers about 1.2 MB, most of it the real photos, which load lazily.
-- **Accessibility.** Every control is a native button, range input or checkbox. The canvases carry live `aria-label`s, the charts are keyboard-readable, and there are no-JS notes. An axe scan finds no violations in the essay's figures. Two site-wide findings remain: low-contrast category chips, and duplicate "Table" region labels from `_includes/reading-layout.lua`.
+- **Accessibility.** Every control is a native button, range input or checkbox. The canvases carry live `aria-label`s, the charts are keyboard-readable, and there are no-JS notes. An axe scan (axe-core 4.10.2) finds no violations on the essay, the homepage, the album or the other posts. Fixing that took two site-wide changes: the category chips and the "Published" heading in `styles.css` no longer inherit Quarto's reduced opacity, and `_includes/reading-layout.lua` names each scrollable table region from its caption (or "Table N") instead of labelling them all "Table".
 
 ## Corrections made while writing
 

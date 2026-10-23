@@ -292,7 +292,9 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 .essay-page .quarto-title:has(.subtitle) .description { display: none; }
 .quarto-title-meta { margin-top: 1.2rem; }
 .quarto-title-meta, .quarto-categories { font-size: 0.8rem; }
+/* Quarto fades these with opacity; the muted ink is already quiet enough and keeps them legible. */
 .quarto-category { font-size: 0.72rem; color: var(--site-muted); }
+#title-block-header .quarto-category, #title-block-header.quarto-title-block.default .quarto-title-meta-heading { opacity: 1; }
 main.content img.essay-art { display: block; max-width: min(100%, 340px); max-height: 220px; width: auto; height: auto; object-fit: contain; margin: 28px auto; }
 .table-scroll { min-width: 0; max-width: 100%; overflow-x: auto; margin-block: 1.5rem; overscroll-behavior-x: contain; }
 .table-scroll table { margin-bottom: 0; }
