@@ -393,6 +393,9 @@ audio { width: 100%; }
 .album-preview-copy > p:not(.album-date) { max-width: 28ch; margin-block: 20px; font-family: var(--font-body); font-size: 1.05rem; line-height: 1.65; }
 .album-preview-action { display: inline-block; font-family: var(--font-ui); font-size: 0.8rem; color: var(--site-accent); text-decoration: underline; text-underline-offset: 0.2em; }
 .album-preview:is(:hover, :focus-visible) h3 { color: var(--site-accent); }
+.album-related { margin-top: 18px; font-family: var(--font-ui); font-size: 0.8rem; line-height: 1.6; color: var(--site-muted); }
+.album-related p { margin: 0; }
+.album-page .album-related { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--site-rule); }
 .album-page #quarto-content { display: block; max-width: 964px; margin-inline: auto; padding-inline: 32px; }
 .album-page main { margin-top: 0; padding-block: 48px 64px; }
 .album-page #title-block-header { margin-bottom: 14px; }

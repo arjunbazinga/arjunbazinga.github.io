@@ -1,4 +1,5 @@
 ---
+# Context, sources and rebuild scripts for this essay: scripts/charmera/README.md
 title: "Better Taste for a Tiny Camera"
 subtitle: "What a keychain camera does to a photograph, and how to give it film"
 site: arjunsriva
@@ -246,11 +247,13 @@ The camera stores its gamma curve as 128 packed words. The firmware writes them 
 
 The stock curve lifts shadows hard: a raw statistic of 16 reads as 63, and 64 reads as 149. Feed the original engine a uniform scene at 64 and it decides to *brighten* without the curve and to *darken* with it. The direction flip survived when the test was repeated with the camera's own configuration: target 120, a metering mode that discards outliers, and the recovered window geometry.
 
-**You can't change the look without changing the exposure.** A film curve loaded into the gamma slot would quietly retune auto-exposure for every photograph. That is a strong argument for the hook. A look applied to the already captured 800 × 600 surface leaves metering alone, and exposure can become a deliberate, separate choice per mode. NIGHT, for example, could accept more noise in exchange for less blur.
+**You can't change the look without changing the exposure.** A film curve loaded into the gamma slot would quietly retune auto-exposure for every photograph. That is a strong argument for the hook. A look applied to the already captured 800 × 600 surface leaves metering alone, and exposure can become a deliberate, separate choice per mode. The firmware already has the knob for that: a 13-step table that scales the brightness target from 205 down to 47, around a default of 120. NIGHT, for example, could pick a different step, or accept more noise in exchange for less blur.
 
 ## Complexity belongs off the camera
 
-The best film renderers are expensive. Spectral film simulations model the negative and the print from measured data. Learned systems such as Deep Analog infer a whole LUT from a single reference photograph. None of that should run on a keychain.
+Kodak sold its first camera, in 1888, with the line "You press the button, we do the rest." It came loaded with a hundred exposures; you mailed the whole camera back to Rochester, and the factory developed, printed and reloaded it. The intelligence lived off the camera then too.
+
+The best film renderers today are expensive. Spectral film simulations model the negative and the print from measured data. Learned systems such as Deep Analog infer a whole LUT from a single reference photograph. None of that should run on a keychain.
 
 The architecture I ended up with works like a compiler:
 
