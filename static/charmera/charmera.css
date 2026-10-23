@@ -301,10 +301,48 @@ body.quarto-dark .exposure-figure {
 .frames-downloads { display: inline-flex; flex-wrap: wrap; gap: 6px 12px; }
 .frames-download { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.74rem; }
 
+/* Flash map and firmware assets. */
+.flash-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.flash-region { stroke: var(--site-surface); stroke-width: 0.5; }
+.flash-region.is-focus { stroke: var(--site-ink); stroke-width: 2; }
+.flash-header, .flash-code { fill: var(--site-muted); opacity: 0.55; }
+.flash-resources, .flash-frames { fill: var(--series-1); opacity: 0.75; }
+.flash-frames { opacity: 1; }
+.flash-state { fill: var(--series-2); }
+.flash-photos { fill: var(--series-3); }
+.flash-blank { fill: transparent; }
+.flash-outline { fill: none; stroke: var(--site-rule); stroke-width: 1; pointer-events: none; }
+.flash-label { fill: #fff; font-size: 11px; font-weight: 600; pointer-events: none; }
+.flash-tick, .flash-axis-title, .flash-written-label { fill: var(--site-muted); font-size: 11px; }
+.flash-written { stroke: var(--site-ink); stroke-width: 2; }
+.flash-written-end { stroke: var(--site-ink); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.flash-erase { fill: var(--site-accent); fill-opacity: 0.18; stroke: var(--site-accent); stroke-width: 2; pointer-events: none; }
+.flash-erase-label { fill: var(--site-accent); font-size: 11px; font-weight: 600; }
+.flash-connector { stroke: var(--site-rule); stroke-width: 1; stroke-dasharray: 3 3; }
+.flash-tooltip { display: grid; gap: 2px; margin-top: 0.5rem; padding: 8px 10px; border: 1px solid var(--site-rule); border-radius: 4px; background: var(--site-paper); font-size: 0.74rem; line-height: 1.45; }
+.flash-tooltip[hidden] { display: none; }
+.flash-note { margin: 0.6rem 0 0; font-family: var(--font-body); font-size: 0.98rem; line-height: 1.5; }
+.swatch.flash-swatch-code { color: var(--site-muted); opacity: 0.55; }
+.swatch.flash-swatch-resources { color: var(--series-1); }
+.swatch.flash-swatch-state { color: var(--series-2); }
+.swatch.flash-swatch-photos { color: var(--series-3); }
+.swatch.flash-swatch-erase { color: var(--site-accent); opacity: 0.6; }
+.charmera-assets { margin: 1.6rem 0 2rem; padding: 1rem; border: 1px solid var(--site-rule); border-radius: 6px; background: var(--site-surface); font-family: var(--font-ui); }
+.charmera-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 0.9rem; font-size: 0.78rem; color: var(--site-muted); }
+.charmera-logo img { width: 240px; height: auto; image-rendering: pixelated; border-radius: 2px; }
+.charmera-sounds { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.charmera-sounds li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 8.5rem; align-items: center; gap: 10px; font-size: 0.8rem; }
+.charmera-sounds audio { width: 100%; height: 32px; }
+.charmera-sounds small { color: var(--site-muted); font-size: 0.72rem; }
+.charmera-assets figcaption { margin-top: 0.8rem; font-size: 0.75rem; line-height: 1.6; color: var(--site-muted); }
+
 @media (max-width: 700px) {
   .darkroom, .exposure-figure, .pipeline, .frames { margin-inline: -6px; padding: 10px; }
   .pipeline-loupe { width: 168px; height: 126px; }
   .pipeline-loupe-wrap { flex-wrap: wrap; }
+  .charmera-sounds li { grid-template-columns: 4.5rem minmax(0, 1fr); }
+  .charmera-sounds small { grid-column: 2; }
+  .charmera-logo { flex-direction: column; align-items: flex-start; }
   .charmera-real-pair { grid-template-columns: minmax(0, 1fr); }
   .darkroom-modes button { flex: 1 1 calc(25% - 6px); padding: 0 6px; }
   .darkroom-scenes button, .darkroom-upload { width: 60px; height: 45px; }

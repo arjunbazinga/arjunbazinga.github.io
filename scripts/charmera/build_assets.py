@@ -16,6 +16,7 @@ import csv
 import json
 import struct
 import sys
+import zlib
 from pathlib import Path
 
 import numpy as np
@@ -122,13 +123,113 @@ def build_data(handoff):
         json.dump({"stock": stock, "cases": cases, "target": 100, "deadband": 4}, f, separators=(",", ":"))
 
 
-def build_frame_slots(handoff):
-    """Frame strip slots from the firmware's resource directory: name, flash offset and byte budget."""
-    fw = (handoff / "firmware-imaging" / "original" / "Original_Firmware.bin").read_bytes()
+def read_resources(fw):
+    """The firmware's resource directory at 0x120000: (name, flash offset), in order."""
     entries = []
     for p in range(0x120018, 0x120420, 24):  # 24-byte entries: 20-byte name, sector offset from 0x120000
         name = fw[p:p + 20].split(b"\0")[0].decode("ascii")
         entries.append((name, 0x120000 + struct.unpack_from("<I", fw, p + 20)[0] * 512))
+    return entries
+
+
+def decode_frame(fw, entries, n):
+    """Stock frame n as row-pair 4:2:0 bytes (three inflated GPZP strips)."""
+    offsets = dict(entries)
+    out = b""
+    for s in range(3):
+        d = zlib.decompressobj(-15)
+        out += d.decompress(fw[offsets[f"F_{n}_{s:03d}GPZP"] + 4:])
+    return np.frombuffer(out, np.uint8).reshape(300, 3, 800)
+
+
+def row_pair_to_rgb(a):
+    y = np.stack([a[:, 0, :], a[:, 2, :]], axis=1).reshape(600, 800).astype(float)
+    u = np.repeat(np.repeat(a[:, 1, ::2], 2, axis=1), 2, axis=0).astype(float) - 128
+    v = np.repeat(np.repeat(a[:, 1, 1::2], 2, axis=1), 2, axis=0).astype(float) - 128
+    return np.stack([y + 1.402 * v, y - 0.344136 * u - 0.714136 * v, y + 1.772 * u], -1).clip(0, 255).astype(np.uint8)
+
+
+def compose_row_pair(photo, frame):
+    """The camera's frame rule (file 0xEDA4): copy a pixel pair unless both frame lumas are 140;
+    on even rows the pair's U,V travels with it."""
+    out = photo.copy()
+    for half, row in ((0, 0), (1, 2)):
+        fy = frame[:, row, :].reshape(300, 400, 2)
+        drawn = ~((fy[..., 0] == 140) & (fy[..., 1] == 140))
+        oy = out[:, row, :].reshape(300, 400, 2)
+        oy[drawn] = fy[drawn]
+        out[:, row, :] = oy.reshape(300, 800)
+        if half == 0:
+            fc = frame[:, 1, :].reshape(300, 400, 2)
+            oc = out[:, 1, :].reshape(300, 400, 2)
+            oc[drawn] = fc[drawn]
+            out[:, 1, :] = oc.reshape(300, 800)
+    return out
+
+
+def rgb_to_row_pair(rgb):
+    rgb = rgb.astype(float)
+    y = 0.299 * rgb[..., 0] + 0.587 * rgb[..., 1] + 0.114 * rgb[..., 2]
+    u = -0.168736 * rgb[..., 0] - 0.331264 * rgb[..., 1] + 0.5 * rgb[..., 2] + 128
+    v = 0.5 * rgb[..., 0] - 0.418688 * rgb[..., 1] - 0.081312 * rgb[..., 2] + 128
+    blk = lambda c: c.reshape(300, 2, 400, 2).mean(axis=(1, 3))
+    out = np.zeros((300, 3, 800), np.uint8)
+    out[:, 0, :] = np.round(y[0::2]).clip(0, 255)
+    out[:, 2, :] = np.round(y[1::2]).clip(0, 255)
+    uv = np.stack([blk(u), blk(v)], -1).reshape(300, 800)
+    out[:, 1, :] = np.round(uv).clip(0, 255)
+    return out
+
+
+def build_firmware_examples(handoff):
+    """Exact resources copied from the public firmware dump: the twelve stock frame strips, the
+    startup logo and the five sounds; a gallery of the stock frames composited onto a real
+    Charmera photo with the camera's rule; and a region map of the 2 MiB image."""
+    fw = (handoff / "firmware-imaging" / "original" / "Original_Firmware.bin").read_bytes()
+    entries = read_resources(fw)
+    dest = OUT / "firmware"
+    dest.mkdir(parents=True, exist_ok=True)
+    for i, (name, off) in enumerate(entries):
+        if name.startswith("F_"):
+            d = zlib.decompressobj(-15)
+            d.decompress(fw[off + 4:])
+            used = len(fw) - off - len(d.unused_data)
+            (dest / f"{name}.gpzp").write_bytes(fw[off:off + used])
+        elif name.endswith("WAV"):
+            size = struct.unpack_from("<I", fw, off + 4)[0] + 8
+            short = {"BEEPWAV": "beep", "CLICKWAV": "click", "IMGWAV": "img", "POWEROFF_AUDIOWAV": "power-off", "POWERON_AUDIOWAV": "power-on"}[name]
+            (dest / f"{short}.wav").write_bytes(fw[off:off + size])
+        elif name == "POWER_ON_LOGOJPG":
+            end = fw.find(b"\xff\xd9", off) + 2
+            (dest / "power-on-logo.jpg").write_bytes(fw[off:end])
+    photo = np.asarray(Image.open(Path(__file__).resolve().parent / "source" / "charmera-street-as-received.jpg").convert("RGB").resize((800, 600), Image.LANCZOS))
+    base = rgb_to_row_pair(photo)
+    for n in range(4):
+        frame = decode_frame(fw, entries, n)
+        Image.fromarray(row_pair_to_rgb(compose_row_pair(base, frame))).resize((400, 300), Image.LANCZOS).save(dest / f"frame-{n}-on-street.webp", quality=86, method=6)
+    regions = [
+        [0x000000, 0x000200, "header", "Boot header", "SPII tag, load words and a short register-setup list"],
+        [0x000200, 0x120000, "code", "ARM program", "Firmware code and data, about 1.1 MiB"],
+        [0x120000, 0x124000, "resources", "UI resources", "Resource directory, icons, menu art, beep and click sounds"],
+        [0x124000, 0x141400, "frames", "Four frames", "Twelve compressed strips, three per frame"],
+        [0x141400, 0x15F600, "resources", "GPRS pack", "A 121 KiB pack whose format is not decoded"],
+        [0x15F600, 0x168E92, "resources", "UI resources", "Startup logo, power sounds, frame thumbnails, more menu art"],
+        [0x168E92, 0x170000, "blank", "Blank", "Erased flash"],
+        [0x170000, 0x172000, "state", "Settings", "Append-only settings records, checked with CRC32"],
+        [0x172000, 0x17F000, "blank", "Blank", "Erased flash"],
+        [0x17F000, 0x180000, "state", "Photo index", "Index entries for photos stored in the camera's own flash"],
+        [0x180000, 0x180000 + 0x964E, "photos", "Photo", "A 960×720 JPEG taken by the dump's owner (not shown)"],
+        [0x180000 + 0x964E, 0x1A5800, "blank", "Blank", "Erased flash"],
+        [0x1A5800, 0x1A5800 + 0x958E, "photos", "Photo", "A second 960×720 JPEG (not shown)"],
+        [0x1A5800 + 0x958E, 0x200000, "blank", "Blank", "Erased flash"],
+    ]
+    (OUT / "flash-map.json").write_text(json.dumps({"size": len(fw), "regions": regions}, separators=(",", ":")))
+
+
+def build_frame_slots(handoff):
+    """Frame strip slots from the firmware's resource directory: name, flash offset and byte budget."""
+    fw = (handoff / "firmware-imaging" / "original" / "Original_Firmware.bin").read_bytes()
+    entries = read_resources(fw)
     slots = []
     for n in range(4):
         strips = []
@@ -186,5 +287,6 @@ if __name__ == "__main__":
     build_sensor_frame()
     build_data(handoff)
     build_frame_slots(handoff)
+    build_firmware_examples(handoff)
     build_thumbnail()
     print("Rebuilt Charmera essay assets.")
