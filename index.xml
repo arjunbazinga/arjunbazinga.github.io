@@ -246,22 +246,50 @@
 </section>
 <section id="frames" class="level2">
 <h2 class="anchored" data-anchor-id="frames">Frames</h2>
-<p>The camera has a third kind of look: four frames. They are Kodak’s artwork, so I won’t reproduce them, but they are fun: a 35 mm film strip, an old desktop-software window, pixel-art hearts and sparkles, and a yellow camera with “1987” across a rainbow stripe. In the firmware each is an 800 × 600 image in exactly the same row-pair layout as the capture surface. Each is split into three 200-row strips, compressed with DEFLATE behind a <code>GPZP</code> tag.</p>
-<p>Frames are drawn after the hook, so a film look would never tint them, and they have no alpha channel. To find out how the camera decides what is see-through, I ran its own frame routine on test patterns. It walks the image a pixel pair at a time and leaves the photo alone wherever both of the frame’s brightness values are exactly 140. Colour isn’t checked at all. A frame drawn in bright red that happens to have a brightness of 140 would show the photo straight through it.</p>
-<p>Every strip also has a fixed slot in flash, between 2 KB and 19 KB. A custom frame with the same layout and compression that fits its slots would change nothing else in the firmware. So here is a frame maker.</p>
+<p>The camera has a third kind of look: four frames. Here they are, decoded from the firmware and laid over my street photo by the camera’s own rule.</p>
+<figure class="charmera-real charmera-stock-frames figure">
+  <div class="charmera-real-pair">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/frame-0-on-street.webp" width="400" height="300" loading="lazy" decoding="async" alt="Stock frame 1: a dark 35 mm film strip with sprocket holes and edge printing around the photo." class="figure-img">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/frame-1-on-street.webp" width="400" height="300" loading="lazy" decoding="async" alt="Stock frame 2: an old desktop-software window with a toolbar of icons, the photo inside the canvas." class="figure-img">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/frame-2-on-street.webp" width="400" height="300" loading="lazy" decoding="async" alt="Stock frame 3: pixel-art hearts, sparkles, batteries and film canisters scattered over the photo." class="figure-img">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/frame-3-on-street.webp" width="400" height="300" loading="lazy" decoding="async" alt="Stock frame 4: a yellow toy camera with the photo in its small screen, above a rainbow stripe and the year 1987." class="figure-img">
+  </div>
+  <figcaption>The four stock frames (Kodak's artwork, decoded from the public firmware dump) composited onto a real Charmera photo with the camera's own rule.</figcaption>
+</figure>
+<p>Each frame is an 800 × 600 image in exactly the same row-pair layout as the capture surface. Each is split into three 200-row strips, compressed with DEFLATE behind a <code>GPZP</code> tag.</p>
+<p>Frames are drawn after the hook, so a film look would never tint them, and they have no alpha channel. To find out how the camera decides what is see-through, I ran its own frame routine on test patterns. This is the test, four instructions in the routine at <code>0xEDA4</code>:</p>
+<pre class="text"><code>ldrh  r1, [r0]          ; load the frame's two lumas for this pixel pair
+sub   ip, r1, #0x8c00   ; compare them with 0x8C8C: luma 140, twice
+subs  ip, ip, #0x8c
+beq   skip              ; equal: leave the photo alone</code></pre>
+<p>It walks the image a pixel pair at a time and leaves the photo alone wherever both of the frame’s brightness values are exactly 140. Colour isn’t checked at all. A frame drawn in bright red that happens to have a brightness of 140 would show the photo straight through it.</p>
+<p>Every strip also has a fixed slot in flash, between 2 KB and 19 KB. The slots are packed back to back, each just the stock strip rounded up to the next 512-byte sector, so the stock frames fill them almost to the byte. A custom frame with the same layout and compression that fits its slots would change nothing else in the firmware. So here is a frame maker.</p>
 <figure class="frames figure" id="charmera-frames" aria-labelledby="frames-caption">
   <div class="frames-stage">
     <canvas class="frames-canvas" width="800" height="600" aria-label="Frame preview on a real Charmera photo"></canvas>
     <div class="darkroom-loading">Loading the frame maker…</div>
     <noscript><p class="charmera-noscript">The frame maker runs in your browser and needs JavaScript.</p></noscript>
   </div>
-  <p class="darkroom-label" style="margin-top:0.9rem">Frame</p>
-  <div class="frames-templates darkroom-modes" aria-label="Frame template">
+  <div class="darkroom-mode-groups">
+  <div>
+  <p class="darkroom-label">Stock frames, from the firmware</p>
+  <div class="frames-templates darkroom-modes" aria-label="Stock frames">
+    <button type="button" data-value="stock-0">Film strip</button>
+    <button type="button" data-value="stock-1">Window</button>
+    <button type="button" data-value="stock-2">Pixel</button>
+    <button type="button" data-value="stock-3">1987</button>
+  </div>
+  </div>
+  <div>
+  <p class="darkroom-label">Make your own</p>
+  <div class="frames-templates darkroom-modes" aria-label="Frame templates">
     <button type="button" data-value="film">Film strip</button>
     <button type="button" data-value="instant">Instant</button>
     <button type="button" data-value="postcard">Postcard</button>
     <button type="button" data-value="corners">Rounded</button>
     <label class="frames-upload">Your PNG<input type="file" accept="image/png,image/*" aria-label="Use your own frame image; transparent areas become see-through"></label>
+  </div>
+  </div>
   </div>
   <label class="frames-caption-wrap" hidden="">Caption <input class="frames-caption" type="text" maxlength="28"></label>
   <div class="darkroom-controls">
@@ -296,14 +324,17 @@
   <p class="frames-status" aria-live="polite"></p>
   <div class="frames-files"><span class="frames-files-label">Files:</span> <span class="frames-downloads"></span></div>
   <p class="frames-verify"></p>
-  <figcaption id="frames-caption">Templates are original designs; upload a PNG and its transparent areas become see-through. The preview uses the camera's compositing rule on a real Charmera photo; that photo already carries its date stamp, which on the camera is drawn after the frame, on top of it. Each strip is encoded with fixed-Huffman DEFLATE, the only kind the stock frames use. My encoder's output is byte-identical to zlib's, which is what the slot budgets were measured with. The files are real, but there is no safe way to install them yet, and the small menu thumbnails for frames use a format nobody has decoded.</figcaption>
+  <figcaption id="frames-caption">The stock frames are inflated in your browser from the exact strip bytes in the firmware. The other templates are original designs; upload a PNG and its transparent areas become see-through. The preview uses the camera's compositing rule on a real Charmera photo; that photo already carries its date stamp, which on the camera is drawn after the frame, on top of it. Each strip is encoded with fixed-Huffman DEFLATE, the only kind the stock frames use. My encoder's output is byte-identical to zlib's, which is what the slot budgets were measured with. The files are real, but there is no safe way to install them yet, and the small menu thumbnails for frames use a format nobody has decoded.</figcaption>
 </figure>
-<p>Pick a template or upload your own. The table shows whether each strip fits the slot you choose. Detail costs bytes: the middle strips of slots 1 and 3 have only 2 KB, so the middle of those frames has to be almost all see-through. When installation is solved, this part is ready.</p>
+<p>Start from a stock frame to see the camera’s own budget in action, then try a template or your own PNG. The table shows whether each strip fits the slot you choose. Detail costs bytes: the middle strips of slots 1 and 3 have only 2 KB, so the middle of those frames has to be almost all see-through. When installation is solved, this part is ready.</p>
 </section>
 <section id="how-the-camera-spends-light" class="level2">
 <h2 class="anchored" data-anchor-id="how-the-camera-spends-light">How the camera spends light</h2>
 <p>Colour is half of a look. The other half is exposure.</p>
-<p>The sensor was identified from its own start-up program rather than from photographs of the circuit board. Tracing the real control bus, two GPIO pins bit-banging a camera-control protocol, recovered the 61 register writes the firmware sends at power-on. That sequence matched the open-source drivers for the SP140A sensor family. The camera’s live exposure writes landed on the same chip’s integration-time and gain registers.</p>
+<p>The sensor was identified from its own start-up program rather than from photographs of the circuit board. Tracing the real control bus, two GPIO pins bit-banging a camera-control protocol, recovered the 61 register writes the firmware sends at power-on. They are stored as plain byte pairs, register then value, and begin like this:</p>
+<pre class="text"><code>FD 00  2F 1B  2E 01  33 00  30 2C          ; page 0
+FD 01  09 00  0A 78  05 01  06 DA  03 00  04 BB  24 20   ; page 1, incl. integration time (03, 04) and gain (24)</code></pre>
+<p>That sequence matched the open-source drivers for the SP140A sensor family. The camera’s live exposure writes landed on the same chip’s integration-time and gain registers.</p>
 <p>Auto-exposure doesn’t solve for shutter speed and gain directly. It moves an index along a <strong>program line</strong>, a table of roughly one-twentieth-stop steps. Each entry says how long to integrate, how much analog gain the sensor applies, and how much digital gain the colour processor adds. There are two tables, one for 50 Hz mains and one for 60 Hz.</p>
 <figure class="exposure-figure figure" id="charmera-exposure" aria-labelledby="exposure-caption">
   <div class="exposure-head">
@@ -429,12 +460,72 @@
 <p>Velvia’s character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it is spread across the whole frame instead. On four of the album photos, VIVID’s student is 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It lost contrast. The fit treated every colour in the cube as equally important, so it spent its small budget on saturated extremes that photographs rarely contain, and gave up the contrast that every photograph uses.</p>
 <p>That is an evaluation lesson as much as a colour one: the score you optimise decides what you lose. The next fit should weight colours by how often real Charmera photographs contain them. Even then, some modes will live almost entirely in hardware, while others need a software residual at the hook. VIVID will need most of its look there.</p>
 </section>
+<section id="inside-the-2-mib" class="level2">
+<h2 class="anchored" data-anchor-id="inside-the-2-mib">Inside the 2 MiB</h2>
+<p>Here is the whole firmware image as a map. Hover over a region, or focus the map and use the arrow keys, to see what it holds.</p>
+<figure class="exposure-figure flash-figure figure" id="charmera-flash" aria-labelledby="flash-caption">
+  <div class="flash-head">
+    <ul class="exposure-legend" aria-label="Legend">
+      <li><i class="swatch flash-swatch-code"></i>Program</li>
+      <li><i class="swatch flash-swatch-resources"></i>Resources</li>
+      <li><i class="swatch flash-swatch-state"></i>Camera state</li>
+      <li><i class="swatch flash-swatch-photos"></i>Photos (not shown)</li>
+      <li><i class="swatch flash-swatch-erase"></i>Final erase</li>
+    </ul>
+    <div class="exposure-toggle flash-toggle" aria-label="Update package">
+      <button type="button" data-value="full" aria-pressed="false">Full 2 MiB image</button>
+      <button type="button" data-value="package" aria-pressed="true">Software only</button>
+    </div>
+  </div>
+  <div class="exposure-frame">
+    <svg class="flash-plot exposure-plot" tabindex="0" viewbox="0 0 680 230" aria-label="Map of the firmware image"></svg>
+  </div>
+  <div class="flash-tooltip" hidden=""></div>
+  <p class="flash-note" aria-live="polite"></p>
+  <details class="exposure-table-wrap">
+    <summary>Show every region as a table</summary>
+    
+<div class="table-scroll" tabindex="0" aria-label="Table">
+<table class="exposure-table flash-table caption-top">
+<caption>Regions of the 2 MiB image</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">Range</th>
+<th data-quarto-table-cell-role="th" scope="col">Region</th>
+<th data-quarto-table-cell-role="th" scope="col">Size</th>
+<th data-quarto-table-cell-role="th" scope="col">What it holds</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+
+  </details>
+  <figcaption id="flash-caption">Regions measured from the public dump: used and blank space, the resource directory's 43 entries, and the settings and photo areas the firmware itself reads. The toggle shows where the updater's final erase lands for each kind of update file.</figcaption>
+</figure>
+<p>Most of it is program. The resources hold the UI: icons, menu art, the four frames, a 121 KiB pack whose format nobody has decoded, and some small things you can still play.</p>
+<figure class="charmera-assets figure">
+  <div class="charmera-logo">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/power-on-logo.jpg" width="160" height="80" alt="The startup logo stored in the firmware: Kodak's red K mark on a yellow background." class="figure-img">
+    <span>Startup logo, a 160 × 80 JPEG of 3.5 KB</span>
+  </div>
+  <ul class="charmera-sounds">
+    <li><span>Power on</span><audio controls="" preload="none" src="/static/charmera/firmware/power-on.wav"></audio><small>8 kHz, 8-bit, 0.76 s</small></li>
+    <li><span>Power off</span><audio controls="" preload="none" src="/static/charmera/firmware/power-off.wav"></audio><small>8 kHz, 8-bit, 1.05 s</small></li>
+    <li><span>IMG</span><audio controls="" preload="none" src="/static/charmera/firmware/img.wav"></audio><small>11 kHz, 8-bit, 0.50 s</small></li>
+    <li><span>Click</span><audio controls="" preload="none" src="/static/charmera/firmware/click.wav"></audio><small>8 kHz, 8-bit, 0.24 s</small></li>
+    <li><span>Beep</span><audio controls="" preload="none" src="/static/charmera/firmware/beep.wav"></audio><small>11 kHz, 16-bit, 0.18 s</small></li>
+  </ul>
+  <figcaption>The startup logo and all five sounds, copied byte for byte from the firmware. Names are the firmware's own.</figcaption>
+</figure>
+</section>
 <section id="the-bug-that-wasnt" class="level2">
 <h2 class="anchored" data-anchor-id="the-bug-that-wasnt">The bug that wasn’t</h2>
 <p>The colour work only matters if a modified firmware can get onto the camera, and the camera’s own updater gave me the most instructive mistake of the project.</p>
 <p>The firmware looks for a file on the card named <code>JH_5408</code>, followed by a timestamp and a checksum that is simply the sum of the file’s bytes. A community member had already reported that updating this way bricked a camera, which then needed its flash chip reprogrammed directly. I ran the original updater in the emulator with a full 2 MiB image. After writing every block and verifying it, the updater issued one more erase, at an address 64 KiB <em>past the end</em> of the 2 MiB chip. If the flash controller wraps that address around, it erases the block at 64 KiB, which is part of the firmware itself. That looked like a smoking gun.</p>
 <p>Then I looked at what else the 2 MiB dump contained. The firmware’s resources end at <code>0x168E92</code>. Above that sit the camera’s live state: append-only settings records at <code>0x170000</code>, a saved-photo index at <code>0x17F000</code>, and two 960 × 720 JPEGs taken by whoever owned the dumped camera. A full dump isn’t an update package. It is software plus one camera’s settings and photographs.</p>
-<p>So I asked what a package of only the software would look like. Padded to the next 512-byte sector, it ends at <code>0x169000</code>, and the updater’s mysterious final erase then lands exactly on <code>0x170000</code>: the settings block. I ran the original settings and photo-index routines on the result. The settings reader finds no valid record, the firmware takes its own existing reset path, and the photo index is rebuilt empty. The final erase looks like a factory reset, not a bug.</p>
+<p>So I asked what a package of only the software would look like; flip the map above between the two. Padded to the next 512-byte sector, it ends at <code>0x169000</code>, and the updater’s mysterious final erase then lands exactly on <code>0x170000</code>: the settings block. I ran the original settings and photo-index routines on the result. The settings reader finds no valid record, the firmware takes its own existing reset path, and the photo index is rebuilt empty. The final erase looks like a factory reset, not a bug.</p>
 <p>Two of my earlier recommendations would have made things worse. Deleting the erase would have removed the reset. A guard I had proposed against short reads would have rejected the final, legitimately shorter read of a resource-sized package. The cause of the reported bricking is still unconfirmed. It needs a real factory update or a before-and-after dump of a failed camera, not more emulation.</p>
 <p>The lesson was about evidence. “Preserve every non-blank byte” sounded like the safe success criterion, but it would have preserved someone else’s photographs and broken the reset the update intended.</p>
 </section>
@@ -477,6 +568,7 @@
 <script src="../../static/charmera/meter.js" defer=""></script>
 <script src="../../static/charmera/detail.js" defer=""></script>
 <script src="../../static/charmera/frames.js" defer=""></script>
+<script src="../../static/charmera/flashmap.js" defer=""></script>
 
 
 
