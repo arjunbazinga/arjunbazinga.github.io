@@ -57,7 +57,7 @@
     for (let index = 0; index < rows.length; index += width < 480 ? 100 : 50) {
       el('text', { x: x(index), y: pad.top + plotH + 18, 'text-anchor': 'middle' }, grid).textContent = index;
     }
-    el('text', { x: pad.left + plotW / 2, y: height - 4, 'text-anchor': 'middle', class: 'exposure-axis-title' }, grid).textContent = 'AE program index (darker scene →)';
+    el('text', { x: pad.left + plotW / 2, y: height - 4, 'text-anchor': 'middle', class: 'exposure-axis-title' }, grid).textContent = 'Auto-exposure table index (darker scene →)';
     el('text', { x: 12, y: pad.top + plotH / 2, transform: `rotate(-90 12 ${pad.top + plotH / 2})`, 'text-anchor': 'middle', class: 'exposure-axis-title' }, grid).textContent = 'Stops of exposure added';
 
     // Stack shutter, then sensor gain, then digital gain.

@@ -147,20 +147,24 @@
     return out;
   };
 
-  // NIGHT's spatial residual: threshold highlights at quarter resolution,
-  // blur them, and add the glow back with a red bias.
+  // NIGHT's spatial residual: threshold strong highlights in any colour at
+  // quarter resolution, blur them, and keep only the part that spills beyond
+  // each highlight. That halo is screened back with a red bias, as light
+  // scattered back from the film base re-exposes the red layer.
   const addHalation = (rgb, w, h) => {
     const q = 4, mw = w / q, mh = h / q;
     const mask = new Float32Array(mw * mh);
+    const source = new Float32Array(mw * mh);
     for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++) {
       let sum = 0;
       for (let dy = 0; dy < q; dy++) for (let dx = 0; dx < q; dx++) {
         const i = ((y * q + dy) * w + x * q + dx) * 3;
-        const over = Math.max(0, ((0.299 * rgb[i] + 0.587 * rgb[i + 1] + 0.114 * rgb[i + 2]) / 255 - 0.6) / 0.4);
+        const over = Math.max(0, (Math.max(rgb[i], rgb[i + 1], rgb[i + 2]) / 255 - 0.72) / 0.28);
         sum += over * over;
       }
       mask[y * mw + x] = sum / (q * q);
     }
+    source.set(mask);
     const radius = 4, tmp = new Float32Array(mw * mh);
     for (let pass = 0; pass < 3; pass++) {
       for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++) {
@@ -174,15 +178,18 @@
         mask[y * mw + x] = sum / (2 * radius + 1);
       }
     }
+    for (let k = 0; k < mask.length; k++) mask[k] = Math.max(0, mask[k] - source[k]);
+    const weights = [1, 0.32, 0.08];
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
       const fx = Math.min(Math.max((x + 0.5) / q - 0.5, 0), mw - 1.001), fy = Math.min(Math.max((y + 0.5) / q - 0.5, 0), mh - 1.001);
       const x0 = fx | 0, y0 = fy | 0, ax = fx - x0, ay = fy - y0;
       const top = mask[y0 * mw + x0] * (1 - ax) + mask[y0 * mw + x0 + 1] * ax;
       const bottom = mask[(y0 + 1) * mw + x0] * (1 - ax) + mask[(y0 + 1) * mw + x0 + 1] * ax;
-      const glow = (top * (1 - ay) + bottom * ay) * 255, i = (y * w + x) * 3;
-      rgb[i] = clamp(rgb[i] + 2.4 * glow);
-      rgb[i + 1] = clamp(rgb[i + 1] + 0.75 * glow);
-      rgb[i + 2] = clamp(rgb[i + 2] + 0.2 * glow);
+      const glow = Math.min(1, 2.2 * (top * (1 - ay) + bottom * ay)), i = (y * w + x) * 3;
+      for (let c = 0; c < 3; c++) {
+        const g = glow * weights[c];
+        rgb[i + c] = 255 - (255 - rgb[i + c]) * (1 - g);
+      }
     }
   };
 

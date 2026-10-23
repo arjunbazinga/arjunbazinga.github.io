@@ -29,7 +29,7 @@ include-in-header:
 
 The Charmera's firmware knows seven photo sizes. The largest is 4960 × 3720, about eighteen and a half megapixels. Every one of them is made from the same 800 × 600 image.
 
-The Charmera is a digital camera about the size of a matchbox. It hangs from a keychain. It has a fixed lens, a small noisy sensor, a direct flash and almost no settings. I want it to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping.
+Kodak's Charmera is a digital camera small enough to hang from a keychain. It has a fixed lens, a small noisy sensor, a direct flash and almost no settings. I want it to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping.
 
 That test sent me through film emulation, colour science and a 2 MiB firmware image. The rule I settled on early was:
 
@@ -47,6 +47,7 @@ Step through it. The yellow box follows the same patch of the scene, and the lou
   <div class="pipeline-body">
     <div class="pipeline-view">
       <canvas class="pipeline-canvas" width="1280" height="720" role="img" aria-label="Pipeline stage"></canvas>
+      <noscript><p class="charmera-noscript">This step-through needs JavaScript.</p></noscript>
     </div>
     <div class="pipeline-side">
       <p class="pipeline-title" aria-live="polite"></p>
@@ -121,6 +122,7 @@ This runs entirely in your browser. Pick a mode and a scene, then drag across th
     <span class="darkroom-tag darkroom-label-before" aria-hidden="true">BEFORE</span>
     <span class="darkroom-tag darkroom-label-after" aria-hidden="true">FILM</span>
     <div class="darkroom-loading">Loading film data…</div>
+    <noscript><p class="charmera-noscript">The darkroom runs in your browser and needs JavaScript.</p></noscript>
     <input class="darkroom-split" type="range" min="0" max="100" value="50" aria-label="Compare before and after. Lower values show more of the render.">
   </div>
   <div class="darkroom-mode-groups">
@@ -140,7 +142,7 @@ This runs entirely in your browser. Pick a mode and a scene, then drag across th
   <div class="darkroom-controls">
     <div class="darkroom-engine" role="group" aria-label="Renderer">
       <button type="button" data-value="lut">Full LUT</button>
-      <button type="button" data-value="student">Hardware student</button>
+      <button type="button" data-value="student" title="A tone curve and colour matrix the camera's own hardware could run. Explained below.">Hardware student</button>
     </div>
     <label class="darkroom-check darkroom-diff-label" hidden><input class="darkroom-diff" type="checkbox"> Show difference</label>
     <label class="darkroom-check"><input class="darkroom-capture" type="checkbox" checked> Simulate Charmera capture</label>
@@ -159,7 +161,7 @@ This runs entirely in your browser. Pick a mode and a scene, then drag across th
 
 A few things are worth trying.
 
-**NIGHT on the night scene.** The orange glow around the lit branches does not come from the LUT. A LUT maps each pixel independently, so it can't know that a pixel sits next to a bright one. The glow is a small spatial step: find the highlights at quarter resolution, blur them, and add them back with a red bias. Night is where the sensor fails most technically, so it is where the look has to work hardest.
+**NIGHT on the night scene.** The orange glow around the lit branches does not come from the LUT. A LUT maps each pixel independently, so it can't know that a pixel sits next to a bright one. The glow is a small spatial step: find strong highlights at quarter resolution, blur them, and keep only the halo that spills past their edges, tinted red the way film's red layer catches light scattered back from its base. Night is where the sensor fails most technically, so it is where the look has to work hardest.
 
 **EXPIRED, then *Shoot again*.** Each frame gets its own seeded white-balance shift, shadow tint, contrast change and fade.
 

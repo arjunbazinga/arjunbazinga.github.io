@@ -113,7 +113,7 @@
     afterLabel.textContent = state.diff && isFilm && state.engine === 'student' ? `${mode.id} · DIFFERENCE ×4` : mode.id;
     note.textContent = mode.note;
     let line;
-    if (!isFilm) line = `Stock Pixel filter, selector ${mode.selector} · exact reimplementation`;
+    if (!isFilm) line = `Stock Pixel filter, selector ${mode.selector} · reimplemented from the original loop`;
     else if (state.engine === 'lut') line = `Full 17³ LUT · ${mode.teacher} teacher`;
     else {
       const fit = film.students[mode.key];
@@ -217,6 +217,15 @@
   press(sceneButtons, state.scene);
   press(engineButtons, state.engine);
 
-  C.loadFilm().then(data => { film = data; root.classList.add('is-ready'); render(); })
+  // Load film data and develop the first frame only when the reader gets close.
+  const start = () => C.loadFilm().then(data => { film = data; root.classList.add('is-ready'); render(); })
     .catch(() => { status.textContent = 'The darkroom could not load its film data.'; });
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      start();
+    }, { rootMargin: '600px 0px' });
+    observer.observe(root);
+  } else start();
 })();

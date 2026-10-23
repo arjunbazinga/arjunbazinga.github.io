@@ -23,7 +23,7 @@
       text: 'The firmware keeps a centred 4:3 window starting 160 pixels in. Everything outside it, including the swan boat on the right, never reaches the photo.' },
     { id: 'capture', label: 'Capture', raster: () => CAPTURE,
       title: '800 × 600 · 0.48 MP',
-      text: 'The colour processor resamples the crop onto the capture surface: 720,000 bytes of 4:2:0 YUV. From here on, this is the photograph.' },
+      text: 'The colour processor resamples the crop onto the capture surface: 720,000 bytes, with colour stored at a quarter of the brightness resolution. From here on, this is the photograph.' },
     { id: 'film', label: 'Film', raster: () => CAPTURE,
       title: 'The hook · still 800 × 600',
       text: 'The stock Pixel filters already run CPU code over this whole surface here. It is where a film renderer would go. Shown: FILM.' },
@@ -58,8 +58,8 @@
     ctx.font = `600 ${size}px ui-monospace, SFMono-Regular, Menlo, monospace`;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'alphabetic';
-    ctx.shadowColor = 'rgba(255, 120, 20, 0.85)';
-    ctx.shadowBlur = size * 0.35;
+    ctx.shadowColor = 'rgba(255, 120, 20, 0.5)';
+    ctx.shadowBlur = size * 0.15;
     ctx.fillStyle = '#ffa23a';
     ctx.fillText("'26 10 23", w - size * 0.9, h - size * 0.8);
     ctx.shadowBlur = 0;
