@@ -29,7 +29,7 @@
       text: 'The stock Pixel filters already run CPU code over this whole surface here. It is where a film renderer would go. Shown: FILM.' },
     { id: 'overlay', label: 'Overlays', raster: () => CAPTURE,
       title: 'Frame, then date',
-      text: 'Frames and the date stamp are drawn after the hook, so a film look would never tint the date. This stamp is illustrative.' },
+      text: 'Frames and the date stamp are drawn after the hook, so a film look would never tint the date. This stamp copies the format of the camera’s own.' },
     { id: 'jpeg', label: 'JPEG', raster: () => ({ w: state.size[0], h: state.size[1] }),
       title: '',
       text: '' },
@@ -53,15 +53,17 @@
     return canvas;
   };
 
+  // Matches the camera's own stamp: DD MM YYYY in orange, about 3% of the
+  // frame high, set in from the bottom-right corner.
   const drawDate = (ctx, w, h) => {
-    const size = Math.round(h * 0.055);
+    const size = Math.round(h * 0.045);
     ctx.font = `600 ${size}px ui-monospace, SFMono-Regular, Menlo, monospace`;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'alphabetic';
-    ctx.shadowColor = 'rgba(255, 120, 20, 0.5)';
-    ctx.shadowBlur = size * 0.15;
-    ctx.fillStyle = '#ffa23a';
-    ctx.fillText("'26 10 23", w - size * 0.9, h - size * 0.8);
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+    ctx.shadowBlur = size * 0.08;
+    ctx.fillStyle = '#f2733f';
+    ctx.fillText('23 10 2026', w - w * 0.031, h - h * 0.049);
     ctx.shadowBlur = 0;
   };
 

@@ -3,12 +3,14 @@
 
 Usage, from the repository root:
 
-    python scripts/charmera/build_assets.py /path/to/charmera-aesthetics-handoff-2026-09-29-v20
+    python scripts/charmera/build_assets.py /path/to/charmera-aesthetics-handoff-2026-09-29-v20 [--hero /path/to/camera-photo.jpg]
 
 The argument is the extracted v20 handoff directory (see README.md in this
 folder for the archive's identity and hashes). Album photographs are read from
-static/album/. Outputs are written into static/charmera/ and the post folder.
-Requires numpy and Pillow.
+static/album/, real Charmera photos from scripts/charmera/source/. The hero
+photo of the camera is rebuilt only when its original is supplied; the original
+is not in the repository because it shows a house key. Outputs are written into
+static/charmera/ and the post folder. Requires numpy and Pillow.
 """
 import csv
 import json
@@ -16,7 +18,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFilter
 
 REPO = Path(__file__).resolve().parents[2]
 OUT = REPO / "static" / "charmera"
@@ -54,6 +56,27 @@ def build_scenes():
         im = im.crop((0, top, w, top + ch)).resize((800, 600), Image.LANCZOS)
         im.save(OUT / "scenes" / f"{name}.webp", quality=88, method=6)
         im.resize((160, 120), Image.LANCZOS).save(OUT / "scenes" / f"{name}-thumb.webp", quality=80, method=6)
+
+
+def build_real_scenes():
+    """Darkroom versions of the two real Charmera photos, at the 800x600 detail they actually hold."""
+    for name in ("street", "park"):
+        im = Image.open(Path(__file__).resolve().parent / "source" / f"charmera-{name}-as-received.jpg").convert("RGB")
+        im = im.resize((800, 600), Image.LANCZOS)
+        im.save(OUT / "scenes" / f"charmera-{name}.webp", quality=90, method=6)
+        im.resize((160, 120), Image.LANCZOS).save(OUT / "scenes" / f"charmera-{name}-thumb.webp", quality=80, method=6)
+
+
+def build_hero(original):
+    """The camera on a keyring, with the key's blade and stamped code blurred so it cannot be copied."""
+    im = Image.open(original).convert("RGB").crop((40, 330, 1120, 960))
+    mask = Image.new("L", im.size, 0)
+    draw = ImageDraw.Draw(mask)
+    draw.polygon([(700, 385), (1015, 395), (1020, 485), (700, 480)], fill=255)
+    draw.polygon([(600, 340), (720, 330), (730, 480), (600, 495)], fill=255)
+    im = Image.composite(im.filter(ImageFilter.GaussianBlur(14)), im, mask.filter(ImageFilter.GaussianBlur(10)))
+    im.save(OUT / "charmera-on-keys-1080.webp", quality=84, method=6)
+    im.resize((720, 420), Image.LANCZOS).save(OUT / "charmera-on-keys-720.webp", quality=84, method=6)
 
 
 def build_sensor_frame():
@@ -128,10 +151,19 @@ def build_thumbnail():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    args = sys.argv[1:]
+    hero = None
+    if "--hero" in args:
+        i = args.index("--hero")
+        hero = args[i + 1]
+        del args[i:i + 2]
+    if len(args) != 1:
         sys.exit(__doc__)
-    handoff = Path(sys.argv[1])
+    handoff = Path(args[0])
     build_scenes()
+    build_real_scenes()
+    if hero:
+        build_hero(hero)
     build_sensor_frame()
     build_data(handoff)
     build_thumbnail()

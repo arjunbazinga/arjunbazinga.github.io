@@ -7,6 +7,8 @@
 
   const W = 800, H = 600, N = W * H;
   const SCENES = [
+    { id: 'charmera-street', title: 'Charmera: Tokyo street', real: true, alt: 'A real Charmera photo: a cyclist blurs past a red pedestrian light under an elevated road.' },
+    { id: 'charmera-park', title: 'Charmera: park', real: true, alt: 'A real Charmera photo: tall trees and a wooden footbridge in a park on an overcast day.' },
     { id: 'hakone-torii', title: 'Hakone', alt: 'A red torii at the edge of Lake Ashi below a hillside of autumn cedars.' },
     { id: 'akama-jingu', title: 'Shimonoseki', alt: 'The red and white gate of Akama Shrine under a clear blue sky.' },
     { id: 'kudanshita', title: 'Kudanshita', alt: 'A tree frames water, with late sun on pale grasses in the foreground.' },
@@ -21,6 +23,7 @@
       note: 'Stock, reimplemented from the original loop: luma at or above 124 becomes the palette colour; below it, black. Look for coloured fringes on edges.' }))];
 
   const state = { scene: SCENES[0].id, mode: 0, engine: 'lut', capture: true, diff: false, frame: 1 };
+  const isReal = () => SCENES.find(scene => scene.id === state.scene)?.real === true;
   const sources = new Map(), captures = new Map();
   let film, renderToken = 0;
 
@@ -97,11 +100,13 @@
     if (!sources.has(id)) sources.set(id, C.readPixels(await C.loadImage(`${C.BASE}scenes/${id}.webp`), W, H));
     return sources.get(id);
   };
+  // Real Charmera photos have already been through the camera, so they skip the simulation.
+  const simulating = () => state.capture && !isReal();
   const captureFor = async id => {
-    const key = `${id}:${state.capture}`;
+    const key = `${id}:${simulating()}`;
     if (!captures.has(key)) {
       const src = await sourceFor(id);
-      captures.set(key, state.capture ? simulateCapture(src, id.length * 131 + 17) : src);
+      captures.set(key, simulating() ? simulateCapture(src, id.length * 131 + 17) : src);
     }
     return captures.get(key);
   };
@@ -122,6 +127,9 @@
     }
     if (mode.expired) line += ` · frame ${String(state.frame).padStart(2, '0')}`;
     meta.textContent = line;
+    realNote.hidden = !isReal();
+    captureBox.disabled = isReal();
+    captureBox.checked = isReal() || state.capture;
     root.querySelector('.darkroom-reshoot').hidden = !mode.expired;
     root.querySelector('.darkroom-engine').hidden = !isFilm;
     diffLabel.hidden = !(isFilm && state.engine === 'student');
@@ -151,7 +159,7 @@
       }
     }
     const showingDiff = state.diff && mode.kind === 'film' && state.engine === 'student';
-    const [drawBefore, drawAfter] = await Promise.all([toCanvas(before, input, state.capture), toCanvas(after, output, state.capture && !showingDiff)]);
+    const [drawBefore, drawAfter] = await Promise.all([toCanvas(before, input, simulating()), toCanvas(after, output, simulating() && !showingDiff)]);
     if (token !== renderToken) return;
     drawBefore(); drawAfter();
     describe(psnr);
@@ -178,7 +186,8 @@
     button.type = 'button';
     button.dataset.value = scene.id;
     button.title = scene.title;
-    button.innerHTML = `<img src="${C.BASE}scenes/${scene.id}-thumb.webp" alt="" width="80" height="60" loading="lazy"><span class="visually-hidden">${scene.title}: ${scene.alt}</span>`;
+    if (scene.real) button.classList.add('is-real');
+    button.innerHTML = `<img src="${C.BASE}scenes/${scene.id}-thumb.webp" alt="" width="80" height="60" loading="lazy">${scene.real ? '<span class="darkroom-real-badge" aria-hidden="true">Charmera</span>' : ''}<span class="visually-hidden">${scene.title}: ${scene.alt}</span>`;
     button.addEventListener('click', () => { state.scene = scene.id; press(sceneButtons, scene.id); render(); });
     $('.darkroom-scenes').append(button);
     return button;
@@ -202,7 +211,8 @@
 
   const engineButtons = [...root.querySelectorAll('.darkroom-engine button')];
   engineButtons.forEach(button => button.addEventListener('click', () => { state.engine = button.dataset.value; press(engineButtons, state.engine); render(); }));
-  $('.darkroom-capture').addEventListener('change', event => { state.capture = event.target.checked; render(); });
+  const captureBox = $('.darkroom-capture'), realNote = $('.darkroom-real-note');
+  captureBox.addEventListener('change', event => { state.capture = event.target.checked; render(); });
   $('.darkroom-diff').addEventListener('change', event => { state.diff = event.target.checked; render(); });
   $('.darkroom-reshoot').addEventListener('click', () => { state.frame += 1; render(); });
 

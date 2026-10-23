@@ -257,10 +257,30 @@ body.quarto-dark .exposure-figure {
 .meter-proof { font-size: 0.72rem; color: var(--site-muted); }
 .meter-summary { margin: 0.6rem 0 0; font-family: var(--font-body); font-size: 0.98rem; }
 
+/* Real Charmera photos: hero, figure pair, darkroom badge, detail chart. */
+.charmera-hero { margin: 1.6rem 0 2rem; }
+.charmera-hero img, .charmera-real img { display: block; width: 100%; height: auto; border-radius: 3px; }
+.charmera-hero figcaption, .charmera-real figcaption { margin-top: 0.6rem; font-family: var(--font-ui); font-size: 0.75rem; line-height: 1.6; color: var(--site-muted); }
+.charmera-real { margin: 2rem 0; }
+.charmera-real-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.darkroom-scenes button { position: relative; }
+.darkroom-real-badge { position: absolute; left: 3px; bottom: 3px; padding: 0 4px; border-radius: 2px; background: rgba(21, 18, 15, 0.78); color: #f4efe6; font-size: 0.55rem; line-height: 1.5; letter-spacing: 0.04em; }
+.darkroom-real-note { margin: 0.35rem 0 0; font-size: 0.74rem; color: var(--site-muted); }
+.darkroom-real-note[hidden] { display: none; }
+.darkroom-check:has(input:disabled) { opacity: 0.55; cursor: default; }
+.detail-line { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.detail-charmera { stroke: var(--series-1); color: var(--series-1); }
+.detail-squeezed { stroke: var(--series-2); color: var(--series-2); }
+.detail-phone { stroke: var(--series-3); color: var(--series-3); }
+.detail-limit { stroke: var(--site-ink); stroke-width: 1; stroke-dasharray: 4 3; }
+.detail-limit-label, .detail-direct-label { fill: var(--site-ink); font-size: 11px; }
+.detail-tooltip { min-width: 210px; }
+
 @media (max-width: 700px) {
   .darkroom, .exposure-figure, .pipeline { margin-inline: -6px; padding: 10px; }
   .pipeline-loupe { width: 168px; height: 126px; }
   .pipeline-loupe-wrap { flex-wrap: wrap; }
+  .charmera-real-pair { grid-template-columns: minmax(0, 1fr); }
   .darkroom-modes button { flex: 1 1 calc(25% - 6px); padding: 0 6px; }
   .darkroom-scenes button, .darkroom-upload { width: 60px; height: 45px; }
 }
