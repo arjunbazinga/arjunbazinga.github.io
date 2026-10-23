@@ -67,7 +67,11 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `static/charmera/students.json` | Per mode: Q8.8 3×3 matrix, 256-entry luma curve, PSNR against the full LUT across the cube. |
 | `static/charmera/ae-tables.json` | 50/60 Hz program lines: `[exposure_lines, analog_gain_q8, global_gain_q6]` per index. |
 | `static/charmera/meter.json` | The 256-entry stock AE curve, the executed identity/stock cases and the test's target/deadband. |
-| `static/charmera/scenes/`, `sensor/` | Album photographs cropped to 800×600 (darkroom) and 1280×720 (pipeline sensor stage). |
+| `static/charmera/scenes/`, `sensor/` | Album photographs cropped to 800×600 (darkroom) and 1280×720 (pipeline sensor stage), plus 800×600 versions of the two real Charmera photos (`charmera-street`, `charmera-park`). |
+| `static/charmera/real/` | The two real Charmera photos, byte-identical to the copies received (no further recompression). |
+| `static/charmera/charmera-on-keys-*.webp` | Hero and social image: the camera on Arjun's keys, with the key's blade and stamped code blurred. |
+| `static/charmera/spectrum.json`, `detail.js` | The "What comes out" detail measurement and its chart. |
+| `scripts/charmera/source/` | The two Charmera JPEGs as received, inputs to `build_assets.py` and `measure_detail.py`. |
 | `static/charmera/LICENSE-AutoLUT.txt` | MIT notice for the five LUTs derived from AutoLUT. |
 | `scripts/charmera/` | This README and the scripts below. |
 
@@ -89,7 +93,12 @@ node scripts/charmera/test_pixel.js
 
 # Recompute the VIVID (and FILM) student-error measurements quoted in the essay.
 python scripts/charmera/vivid_error.py 5 0
+
+# Recompute the fine-detail measurement behind "What comes out" (writes static/charmera/spectrum.json).
+python scripts/charmera/measure_detail.py
 ```
+
+To rebuild the hero, pass the original camera photo: `build_assets.py <handoff> --hero /path/to/photo.jpg`. The original is deliberately not in the repository because its key is sharp enough to copy.
 
 `build_assets.py` asserts that the sampled stock curve reproduces every executed metering value (16→63, 64→149, 100→177, 160→207, 240→250).
 
@@ -122,6 +131,8 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | EXIF extra colon; frames in row-pair layout; 12 strips recompress | *prior* `Charmera-firmware-findings.md`, "Assets" and "Date formatting" |
 | USB access level 1 vs 2; one-byte `mov r0, #1` → `#2` in emulation | *prior* `LATEST_FINDINGS_2026-09-27.md` §1 |
 | Kodak's 1888 "You press the button, we do the rest" | General history, not from the archive |
+| Real Charmera photos hold less fine detail than phone photos squeezed through 800×600 (350–400 band: Charmera 1.6–1.9%, squeezed 3.3–13%, phone 26–73%) | `measure_detail.py` on the two received photos; consistent with, not proof of, the 800×600 surface |
+| Real date stamp: DD MM YYYY, orange, ~3% of frame height, bottom right | Measured from the received photos; the pipeline's stamp copies it |
 
 ## Licensing and what was deliberately not published
 
@@ -134,8 +145,18 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
   - community members' details beyond public handles and links.
 - **Photographs.** The darkroom and pipeline use Arjun's own album photographs. They were not taken on a Charmera, and the essay says so.
 
+## Real Charmera photos (added 23 October 2026)
+
+Arjun supplied two Charmera photos (Tokyo street and a park, both stamped 27 09 2026) and a phone photo of the camera on Arjun's keys. All three arrived through a messaging app: progressive JPEGs, no EXIF, IJG quality-75 tables, and the Charmera shots resized to 1280×960 rather than the camera's 1440×1080. Consequences:
+
+- They cannot confirm the 1440×1080 output size or the EXIF date-colon bug. Originals copied straight off the SD card are still needed for that, and for the 12-scene calibration set.
+- They can bound detail, because recompression cannot add any. `measure_detail.py` compares them with four album photos sent through the same path, with and without an 800×600 squeeze.
+- The darkroom's capture simulation was checked against them for fine detail only: one blur pass already falls in the real range. Adding sharpening (the real photos show halos) did not fit two scenes reliably, so it was not tuned; colour and noise remain uncalibrated.
+- Privacy and safety: the phone photo had no location metadata. The key's cuts and stamped code are blurred, and the original is not committed. The street photo shows passers-by, including a cyclist, at a public crossing; Arjun supplied it for the essay.
+
 ## Design decisions
 
+- **Social image.** The post's `image` is the camera-on-keys hero, which reads better in listings and link previews than the four-slice thumbnail (still built, now unused).
 - **Placement.** The essay is `featured: true` (Writing index, homepage "More writing") but not in the homepage's three Featured slots. Those carry the site's AI/systems positioning. It is linked from the homepage Album section and the Album page, because the darkroom uses those photographs.
 - **No libraries.** Plain JavaScript and canvas/SVG on the site's own type and colour tokens. The chart palette (blue, orange, aqua) was checked with a colour-blindness validator; light mode needs the direct labels and the table view, which are present.
 - **Honesty in the interactives.**
@@ -143,7 +164,7 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
   - Meter verdicts between executed points are labelled as curve-versus-target comparisons.
   - The pipeline's date stamp is labelled illustrative.
   - Per-photo student scores are computed live.
-- **Performance.** The darkroom loads its LUTs and develops only near the viewport. The page transfers about 0.7 MB.
+- **Performance.** The darkroom loads its LUTs and develops only near the viewport. The page transfers about 1.2 MB, most of it the real photos, which load lazily.
 - **Accessibility.** Every control is a native button, range input or checkbox. The canvases carry live `aria-label`s, the charts are keyboard-readable, and there are no-JS notes. An axe scan finds no violations in the essay's figures. Two site-wide findings remain: low-contrast category chips, and duplicate "Table" region labels from `_includes/reading-layout.lua`.
 
 ## Corrections made while writing
@@ -161,7 +182,9 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 - **Settings persistence (CRC32 over 252 bytes)**, **sound assets**, **boot header and `0x1B0000`**, **SD read-guard experiments**: covered by the reset story or not needed by it.
 - **Visual evidence ledger and source atlas**: useful if a future piece covers how the seven films were chosen, with the candidate comparison images.
 
-Natural follow-ups:
+Natural follow-ups (the first needs Arjun):
+
+- copy the 12-scene set straight off the card (no messaging apps) to verify 1440×1080, the EXIF colon, colour and noise, and to refit the students on real Charmera colour statistics;
 
 - a piece on the physical calibration set (`capture-study/CHARMERA_EVALUATION_SET.md`) once real Charmera photos exist;
 - refitting the students weighted by real photo colour statistics;

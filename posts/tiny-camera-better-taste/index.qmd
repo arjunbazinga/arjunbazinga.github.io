@@ -11,7 +11,7 @@ audience: Technically curious photographers and engineers who like knowing what 
 reader_outcome: Understand how a tiny camera actually forms a photograph, what a film look is made of, and why the expensive part of a look belongs off the camera.
 bluf: A film look is a picture-formation process, not a tint. The Charmera's firmware already has a place to run one, at 800×600, after capture and before the date stamp. The work is compiling a rich offline teacher into a student small enough to live there, without removing the Charmera from the photograph.
 description: "What a keychain camera's firmware does to a photograph, what a film look is made of, and how to compile one into the other."
-image: thumbnail.webp
+image: /static/charmera/charmera-on-keys-1080.webp
 featured: true
 next-read-title: "The Evaluation Machine"
 next-read-url: /posts/evaluation-systems/
@@ -31,6 +31,13 @@ include-in-header:
 The Charmera's firmware knows seven photo sizes. The largest is 4960 × 3720, about eighteen and a half megapixels. Every one of them is made from the same 800 × 600 image.
 
 Kodak's Charmera is a digital camera small enough to hang from a keychain. It has a fixed lens, a small noisy sensor, a direct flash and almost no settings. I want it to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping.
+
+```{=html}
+<figure class="charmera-hero">
+  <img src="/static/charmera/charmera-on-keys-1080.webp" srcset="/static/charmera/charmera-on-keys-720.webp 720w, /static/charmera/charmera-on-keys-1080.webp 1080w" sizes="(max-width: 700px) calc(100vw - 32px), 680px" width="1080" height="630" alt="A small grey Kodak Charmera with a rainbow stripe, clipped to a keyring beside a house key and a leather fob." decoding="async">
+  <figcaption>My Charmera, on my keys. The key is blurred on purpose.</figcaption>
+</figure>
+```
 
 That test sent me through film emulation, colour science and a 2 MiB firmware image. The rule I settled on early was:
 
@@ -73,6 +80,50 @@ The middle stage is the surprise. The sensor runs a 1280 × 720 mode. The firmwa
 
 This was the first fact that changed the project. A film renderer for this camera never has to touch more than 480,000 pixels, and the firmware already has a place, at that size, where it runs CPU code over the whole image. I'll come back to that place, the hook, because everything depends on it.
 
+## What comes out
+
+Here are two photographs from my Charmera, both from 27 September 2026.
+
+```{=html}
+<figure class="charmera-real">
+  <div class="charmera-real-pair">
+    <img src="/static/charmera/real/charmera-street.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Charmera photo: under an elevated road in Tokyo, a pedestrian light glows red while a cyclist in the foreground smears past; the date stamp reads 27 09 2026.">
+    <img src="/static/charmera/real/charmera-park.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Charmera photo: tall trees around a wooden footbridge in a park under a white overcast sky; the date stamp reads 27 09 2026.">
+  </div>
+  <figcaption>Two Charmera photos, date stamp and all. These copies passed through a messaging app on the way to me, so they are 1280 × 960 and recompressed rather than the camera's own 1440 × 1080 files.</figcaption>
+</figure>
+```
+
+They look like a Charmera. The red light glows, the cyclist smears across a slow shutter, the shadows go green-black, and the branches carry bright halos against the white sky, probably from in-camera sharpening. And in the corner sits the orange date stamp.
+
+Do they really hold only 800 × 600 of detail? Recompression can remove detail but can't add it, so these copies can still answer that. I measured how much detail each photo holds at every scale, from coarse shapes to the finest texture. As a control, I sent four of my phone photos through the same resizing and recompression, once as they are and once squeezed through 800 × 600 first.
+
+```{=html}
+<figure class="exposure-figure detail-figure" id="charmera-detail" aria-labelledby="detail-caption">
+  <ul class="exposure-legend" aria-label="Legend">
+    <li><i class="swatch detail-charmera"></i>Charmera (2 photos)</li>
+    <li><i class="swatch detail-squeezed"></i>Phone through 800 × 600 (4)</li>
+    <li><i class="swatch detail-phone"></i>Phone (4)</li>
+  </ul>
+  <div class="exposure-frame">
+    <svg class="detail-plot exposure-plot" role="img" tabindex="0" viewBox="0 0 680 300" aria-label="Fine-detail energy by frequency"></svg>
+    <div class="exposure-tooltip detail-tooltip" hidden></div>
+    <p class="detail-error" hidden>The measurement could not be loaded.</p>
+  </div>
+  <details class="exposure-table-wrap">
+    <summary>Show each photo as a table</summary>
+    <table class="exposure-table detail-table">
+      <caption>Detail energy relative to coarse structure, by band (cycles per picture width)</caption>
+      <thead><tr><th scope="col">Source</th><th scope="col">Photo</th><th scope="col">200–300</th><th scope="col">350–400</th><th scope="col">400–500</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </details>
+  <figcaption id="detail-caption">Horizontal detail energy at each fineness, relative to the coarse 100–200 band, averaged per group. Every image went through the same 1280 × 960, quality-75 path as the Charmera copies; the date-stamp rows are excluded. The dashed line marks the finest detail an 800-pixel-wide image can hold.</figcaption>
+</figure>
+```
+
+Just short of that limit, my phone photos keep 26–73% as much energy as in their coarse structure. The phone photos squeezed through 800 × 600 keep 3–13%. The Charmera photos keep under 2%, less than the squeezed phone photos. That is consistent with the firmware's 800 × 600 surface, with the lens and in-camera noise reduction taking a little more. On its own it can't say which of those sets the limit, but the firmware already has: nothing finer than 800 × 600 survives.
+
 ## A look is a process, not a tint
 
 Why do film photographs, and the cameras that imitate them, feel coherent when so many digital "film filters" feel cheap?
@@ -113,7 +164,7 @@ Each mode carries a reason to remove it. PEOPLE goes if FILM makes people look j
 
 ## The darkroom
 
-This runs entirely in your browser. Pick a mode and a scene, then drag across the image to compare. You can also use a photo of your own; it never leaves your device.
+This runs entirely in your browser. Pick a mode and a scene, then drag across the image to compare. The first two scenes are the real Charmera photos above. You can also use a photo of your own; it never leaves your device.
 
 ```{=html}
 <figure class="darkroom" id="charmera-darkroom" aria-labelledby="darkroom-caption">
@@ -139,6 +190,7 @@ This runs entirely in your browser. Pick a mode and a scene, then drag across th
   <div class="darkroom-readout">
     <p class="darkroom-note"></p>
     <p class="darkroom-meta"></p>
+    <p class="darkroom-real-note" hidden>A real Charmera photo. The look is applied after the camera's own rendering and date stamp, so the stamp is tinted too; inside the camera, the hook runs before the stamp is drawn.</p>
   </div>
   <div class="darkroom-controls">
     <div class="darkroom-engine" role="group" aria-label="Renderer">
@@ -156,13 +208,13 @@ This runs entirely in your browser. Pick a mode and a scene, then drag across th
     </div>
   </div>
   <p class="visually-hidden darkroom-status" role="status" aria-live="polite"></p>
-  <figcaption id="darkroom-caption">The scenes are from my <a href="/album/">album</a>, cropped to the camera's 4:3 frame at its 800 × 600 working size. <em>Simulate Charmera capture</em> adds softness, sensor noise that grows in the shadows, 4:2:0 colour subsampling and a JPEG pass; it illustrates the traced path rather than modelling this sensor. Five film LUTs reimplement <a href="https://github.com/GVal98/AutoLUT">AutoLUT</a> transforms (MIT, © 2026 Valerii Garifullin); TOKYO and EXPIRED use placeholder LUTs written for this project. The Pixel filters reproduce the camera's own loop.</figcaption>
+  <figcaption id="darkroom-caption">The first two scenes are real Charmera photos, shown at 800 × 600. The rest are from my <a href="/album/">album</a>, cropped to the camera's 4:3 frame at the same size. For those, <em>Simulate Charmera capture</em> adds softness, sensor noise that grows in the shadows, 4:2:0 colour subsampling and a JPEG pass. Its fine detail falls in the same range as the real photos; its colour and noise are not calibrated. Five film LUTs reimplement <a href="https://github.com/GVal98/AutoLUT">AutoLUT</a> transforms (MIT, © 2026 Valerii Garifullin); TOKYO and EXPIRED use placeholder LUTs written for this project. The Pixel filters reproduce the camera's own loop.</figcaption>
 </figure>
 ```
 
 A few things are worth trying.
 
-**NIGHT on the night scene.** The orange glow around the lit branches does not come from the LUT. A LUT maps each pixel independently, so it can't know that a pixel sits next to a bright one. The glow is a small spatial step: find strong highlights at quarter resolution, blur them, and keep only the halo that spills past their edges, tinted red the way film's red layer catches light scattered back from its base. Night is where the sensor fails most technically, so it is where the look has to work hardest.
+**NIGHT on the street photo or the night scene.** The glow around the red light and the lit branches does not come from the LUT. A LUT maps each pixel independently, so it can't know that a pixel sits next to a bright one. The glow is a small spatial step: find strong highlights at quarter resolution, blur them, and keep only the halo that spills past their edges, tinted red the way film's red layer catches light scattered back from its base. Night is where the sensor fails most technically, so it is where the look has to work hardest.
 
 **EXPIRED, then *Shoot again*.** Each frame gets its own seeded white-balance shift, shadow tint, contrast change and fade.
 
@@ -333,7 +385,7 @@ The open problems are concrete now:
 - what automatic white balance does with real scenes rather than empty test statistics;
 - which process owns each colour setting, so that an edit doesn't get overwritten;
 - an ARM version of the renderer whose output matches the reference byte for byte, within the hook's memory and time budget;
-- the sensor's physical response, measured with a deliberately small set of about twelve real scenes rather than a giant benchmark.
+- the sensor's physical response, measured with a deliberately small set of about twelve real scenes rather than a giant benchmark. Two are in this essay; I need the rest, straight off the card.
 
 The first target is one excellent FILM default, end to end, before polishing the other six. The test stays the same: a tiny camera, an ordinary moment, a press of the shutter, and a photograph worth keeping.
 
@@ -347,4 +399,5 @@ This work builds on the Charmera community's. [Project Sirius](https://github.co
 <script src="/static/charmera/darkroom.js" defer></script>
 <script src="/static/charmera/exposure.js" defer></script>
 <script src="/static/charmera/meter.js" defer></script>
+<script src="/static/charmera/detail.js" defer></script>
 ```
