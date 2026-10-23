@@ -1,0 +1,168 @@
+# Charmera essay: context, provenance and how to rebuild
+
+This folder explains where [`posts/tiny-camera-better-taste/`](../../posts/tiny-camera-better-taste/index.qmd) ("Better Taste for a Tiny Camera") came from. It also holds the scripts that rebuild its data and check its independent claims. It is written for someone who has the research archive but not the conversation that produced the essay.
+
+Quarto does not render `scripts/`, so nothing here is published.
+
+## Why the essay exists
+
+The Charmera is Kodak's keychain-sized digital camera: fixed lens, small sensor, direct flash, almost no settings. A long research project, recorded in the archive below, asked one question: **how do you make this one camera a joy to carry, so that photographs taken without ceremony are worth keeping?** The project's slogan is "Don't remove the Charmera from the photograph. Give the Charmera better taste."
+
+The project had two strands:
+
+1. **Aesthetics.**
+   - It asked why film looks feel coherent, separating real image properties from nostalgia and brand signalling.
+   - It chose seven job-oriented modes (FILM, PEOPLE, TOKYO, NIGHT, B&W, VIVID, EXPIRED), each with a film stock as its starting teacher.
+   - It adopted a teacher → student architecture: expensive rendering offline, tiny deterministic tables on the camera.
+2. **Firmware.**
+   - It disassembled the public 2 MiB dump and executed selected original ARM routines in Unicorn with explicitly modelled hardware.
+   - This recovered the still pipeline, the sensor (SP140A family), the auto-exposure tables, the gamma → AE feedback, the stock filters, the post-capture hook, and the updater's behaviour.
+
+The project's own documents say a public "rabbit hole" write-up should come later and must not drive engineering choices. This essay is that write-up. Nothing has been patched or flashed. A verified backup and restore path for the physical camera comes before any installation.
+
+## Source archive
+
+| Item | Value |
+|---|---|
+| File as uploaded | `Charmera-Aesthetics-Handoff-2026-09-29-v201.zip` |
+| Size | 6,264,749 bytes |
+| SHA256 | `c3273ec2aa2fde3e64f1f228fdcf60196fbb8b6972beb9d0b8ca60e8d339339e` |
+| Top-level directory | `charmera-aesthetics-handoff-2026-09-29-v20/` (handoff v20, 2026-09-29) |
+| Pinned firmware inside it | `firmware-imaging/original/Original_Firmware.bin`, SHA256 `720ed0b65c91b149b0916498732b0ecf40227736ef5e3c126c487a7b5253436c`, from [Project Sirius](https://github.com/Khimira/Project-Sirius) commit `8d64da5ca8ab0f1cff06f99a3488ca01afba17b2` |
+
+The archive also contains three nested zips under `prior-artifacts/`. These cover the earlier updater/USB/assets research (`Charmera-Update-Contract-2026-09-27-111618-JST.zip`), the 27-candidate film bank and the v0.1 film set. Read `START_HERE.md`, then `docs/CURRENT_STATE.md`, then the per-version audits under `firmware-imaging/`. Superseded beliefs are kept on purpose in `docs/CORRECTIONS_AND_DEAD_ENDS.md`.
+
+Archive inputs the build uses (SHA256):
+
+| Path in the v20 directory | SHA256 |
+|---|---|
+| `luts/selected/01_GOLD_200.cube` | `491954dab6291e1e95c4230f1552b250bd27bfd2d2011590673ead57a784504f` |
+| `luts/selected/02_PORTRA.cube` | `3c6a3e9616a3119ef62ef49a9b36230a7dee521b6177a2ab9c2f73ce57d64833` |
+| `luts/selected/03_SUPERIA_400_PROXY.cube` | `3765ffab8653ddb84bc0deb166a5680c9ebd538b34d3e92a5b0f7444eb0d61ae` |
+| `luts/selected/04_800T.cube` | `a0ee193f98ae5e751bb2d250bbdcd1ffb3326e324a815cdf8cce3ce34eb721fc` |
+| `luts/selected/05_TRI_X.cube` | `b9c4f2c5e3cce52601ea852d89e002df338a9cd7d6f3b301e0547aa4accc27c3` |
+| `luts/selected/06_VELVIA.cube` | `d2d66d7f85a2da144b2f5e99100d7b81931540f9327d1b4e433e4f78c1ed6ee5` |
+| `luts/selected/07_EXPIRED_PROXY.cube` | `82a7dc595550a44c08cfedc9174e41a0dce7304fc3ae4de4280d13707c624dba` |
+| `firmware-imaging/scaler_fit_current_luts.json` | `e20ae85994ac4fd67c05936f6833c7267eaa9eab8ee89e7a3ad0007ba5c9630f` |
+| `firmware-imaging/ae-re/AE_TABLE_50Hz.csv` | `52e23dba8217d0aecf79c6c205fc0b5e09517d81628e430f5cd01ba7e3804eef` |
+| `firmware-imaging/ae-re/AE_TABLE_60Hz.csv` | `dc75394f0996e4e32556712dc5f54baeb114f8dc2fefd1d1d331b83b48c058ea` |
+| `firmware-imaging/control-audit/results_gamma.json` | `b5b5459152a2b5877eda075e29c3354ddac1e7be81013ad68b166bcd5af206f1` |
+| `firmware-imaging/ae-runtime-audit/results_active_gamma.json` | `44d50ad0accdc262a67957f383e2c98b7431c55bbf202b27f82f52c0a53facfa` |
+
+The archive's own `manifests/SHA256SUMS.txt` covers every other file.
+
+## What is in the repository
+
+| Path | What it is |
+|---|---|
+| `posts/tiny-camera-better-taste/index.qmd` | The essay. Interactive figures are raw HTML blocks; scripts load at the end. |
+| `posts/tiny-camera-better-taste/thumbnail.webp` | Listing image: one scene as original, B&W, FILM and VIVID slices. |
+| `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student, stock Pixel filter, NIGHT halation, EXPIRED drift. |
+| `static/charmera/pipeline.js` | "What happens when you press the shutter": six-stage explorer with loupe and photo-size menu. |
+| `static/charmera/darkroom.js` | The darkroom: simulated capture, seven film modes, four stock Pixel filters, LUT vs student difference view, reader's own photo (processed locally). Develops only when scrolled near. |
+| `static/charmera/exposure.js` | Stacked chart of the 50/60 Hz AE program lines, with keyboard readout and a table view. |
+| `static/charmera/meter.js` | "The curve that meters": stock gamma curve against the AE target, with executed engine cases. |
+| `static/charmera/charmera.css` | Styles, using the site's `--site-*` tokens; dark mode via `body.quarto-dark`. |
+| `static/charmera/luts.bin` | Seven 17³ RGB8 LUTs, 14,739 bytes each, red fastest (.cube order). |
+| `static/charmera/students.json` | Per mode: Q8.8 3×3 matrix, 256-entry luma curve, PSNR against the full LUT across the cube. |
+| `static/charmera/ae-tables.json` | 50/60 Hz program lines: `[exposure_lines, analog_gain_q8, global_gain_q6]` per index. |
+| `static/charmera/meter.json` | The 256-entry stock AE curve, the executed identity/stock cases and the test's target/deadband. |
+| `static/charmera/scenes/`, `sensor/` | Album photographs cropped to 800×600 (darkroom) and 1280×720 (pipeline sensor stage). |
+| `static/charmera/LICENSE-AutoLUT.txt` | MIT notice for the five LUTs derived from AutoLUT. |
+| `scripts/charmera/` | This README and the scripts below. |
+
+`_quarto.yml` publishes `static/charmera/**` as resources. The homepage album section (`_includes/album-preview.qmd`) and the end of `album/index.qmd` link to the essay.
+
+## Rebuild and verify
+
+From the repository root, with the archive extracted somewhere:
+
+```sh
+# Rebuild every data file and image above (numpy, Pillow). Byte-identical to the committed files as of this README.
+python scripts/charmera/build_assets.py /path/to/charmera-aesthetics-handoff-2026-09-29-v20
+
+# Run the original Pixel filter loop in Unicorn (pip install unicorn==2.1.4).
+python scripts/charmera/pixel_probe.py /path/to/charmera-aesthetics-handoff-2026-09-29-v20/firmware-imaging/original/Original_Firmware.bin
+
+# Check the JavaScript Pixel filter against those recorded outputs.
+node scripts/charmera/test_pixel.js
+
+# Recompute the VIVID (and FILM) student-error measurements quoted in the essay.
+python scripts/charmera/vivid_error.py 5 0
+```
+
+`build_assets.py` asserts that the sampled stock curve reproduces every executed metering value (16→63, 64→149, 100→177, 160→207, 240→250).
+
+## Where each claim comes from
+
+Paths are relative to the v20 directory unless marked *prior* (the update-contract zip).
+
+| Essay claim | Source |
+|---|---|
+| Photo path 1280×720 → crop 960×720 at (160,0) → 800×600 → 1440×1080 | `firmware-imaging/binary-audit/BINARY_AUDIT_V14.md` §1 |
+| Seven photo-size configurations up to 4960×3720, all from 800×600; UI reachability unproven | `firmware-imaging/system-audit/SYSTEM_AUDIT_V15.md`, mode matrix |
+| 720,000-byte row-pair 4:2:0 capture surface | `docs/CURRENT_STATE.md`; `firmware-imaging/control-audit/CONTROL_AUDIT_V16.md` |
+| JPEG quality 85/80/75; no-storage forces 45 and 960×720 | `SYSTEM_AUDIT_V15.md`; `sil-audit/CONTROL_SURFACE.md` |
+| Standard's adaptive saturation codes 40, 37, 35, 32, 30 | `BINARY_AUDIT_V14.md` §2 |
+| Pixel filters: luma ≥ 124 → palette, else black; per-pixel chroma half | Palette in `BINARY_AUDIT_V14.md` §4; threshold, dark branch and fringe found with `pixel_probe.py` (not in the archive) |
+| Candidate insertion point after Pixel cleanup, before overlays | `firmware-imaging/color-render-audit/COLOR_RENDER_AUDIT_V20.md` |
+| SP140A identification from SCCB bus and 61-write init table | `firmware-imaging/sensor-re/REVERSE_ENGINEERING_RESULT_2026-09-28.md` |
+| Program lines, ~1/20 stop per index, plateaus, third word = CDSP global gain, 140→141 dip | `firmware-imaging/ae-re/*.md`, `BINARY_AUDIT_V14.md` §5 |
+| Milliseconds are inferred from assumed anti-flicker alignment | `BINARY_AUDIT_V14.md` §5, "Important timing correction" |
+| Gamma: 128 packed words, 1,024 decoded values, 256-entry AE table | `CONTROL_AUDIT_V16.md`; `ae-runtime-audit/AE_RUNTIME_AUDIT_V17.md` |
+| Same scene, opposite AE decisions (identity +3 / stock −3 at 64) | `AE_RUNTIME_AUDIT_V17.md`, `results_active_gamma.json` |
+| Flip survives stock configuration (target 120, mode 5) | `init-schedule-audit/INIT_SCHEDULE_AUDIT_V18.md` |
+| 13-step target table, 205 … 47, default selector 6 = 120 | `INIT_SCHEDULE_AUDIT_V18.md`; `sil-audit/SIL_AUDIT_V19.md` |
+| Student PSNR table | `firmware-imaging/scaler_fit_current_luts.json` (fit uniform over the 17³ grid; `fit_scaler_student.py`) |
+| VIVID student loses contrast on photos | `vivid_error.py` (new measurement, not in the archive) |
+| 27-candidate film bank | `docs/15_CANDIDATE_FILM_BANK.md`; `prior-artifacts/charmera-film-bank-v0.1.zip` |
+| Updater: `JH_5408` name, byte-sum checksum, final erase at `0x210000` | *prior* `Charmera-firmware-findings.md`, `LATEST_FINDINGS_2026-09-27.md` |
+| Final erase as intentional settings reset for a `0x169000` package | *prior* `UPDATE_CONTRACT_FINDINGS.md` (supersedes the earlier "bug" reading) |
+| Dump contains settings at `0x170000`, photo index `0x17F000`, two 960×720 JPEGs | *prior* `UPDATE_CONTRACT_FINDINGS.md` §1 |
+| EXIF extra colon; frames in row-pair layout; 12 strips recompress | *prior* `Charmera-firmware-findings.md`, "Assets" and "Date formatting" |
+| USB access level 1 vs 2; one-byte `mov r0, #1` → `#2` in emulation | *prior* `LATEST_FINDINGS_2026-09-27.md` §1 |
+| Kodak's 1888 "You press the button, we do the rest" | General history, not from the archive |
+
+## Licensing and what was deliberately not published
+
+- **LUTs.** Five (FILM, PEOPLE, NIGHT, B&W, VIVID) reimplement [AutoLUT](https://github.com/GVal98/AutoLUT) transforms (MIT; notice in `static/charmera/LICENSE-AutoLUT.txt`). TOKYO and EXPIRED are proxies authored in the project. G'MIC/Film-Luts, PoLUT and spektrafilm-derived assets were **not** shipped; their redistribution terms need a per-asset audit (see `docs/06_LICENSE_AND_PROVENANCE.md`).
+- **Deep Analog** is source-available, not open source. It is only cited.
+- **Not published:**
+  - the firmware binary, disassembly and research scripts;
+  - the decoded stock Kodak frame artwork;
+  - the two photographs found inside the public dump, which belong to whoever owned that camera;
+  - community members' details beyond public handles and links.
+- **Photographs.** The darkroom and pipeline use Arjun's own album photographs. They were not taken on a Charmera, and the essay says so.
+
+## Design decisions
+
+- **Placement.** The essay is `featured: true` (Writing index, homepage "More writing") but not in the homepage's three Featured slots. Those carry the site's AI/systems positioning. It is linked from the homepage Album section and the Album page, because the darkroom uses those photographs.
+- **No libraries.** Plain JavaScript and canvas/SVG on the site's own type and colour tokens. The chart palette (blue, orange, aqua) was checked with a colour-blindness validator; light mode needs the direct labels and the table view, which are present.
+- **Honesty in the interactives.**
+  - The capture simulation is labelled illustrative.
+  - Meter verdicts between executed points are labelled as curve-versus-target comparisons.
+  - The pipeline's date stamp is labelled illustrative.
+  - Per-photo student scores are computed live.
+- **Performance.** The darkroom loads its LUTs and develops only near the viewport. The page transfers about 0.7 MB.
+- **Accessibility.** Every control is a native button, range input or checkbox. The canvases carry live `aria-label`s, the charts are keyboard-readable, and there are no-JS notes. An axe scan finds no violations in the essay's figures. Two site-wide findings remain: low-contrast category chips, and duplicate "Table" region labels from `_includes/reading-layout.lua`.
+
+## Corrections made while writing
+
+- The first draft said the updater "could compute erase addresses beyond the flash and erase on short reads, which fits community reports of bricked cameras". That repeated an interpretation the archive later superseded; the essay now tells the reset story.
+- The first draft called the sensor identification a "handshake". It is a 61-write register initialisation program.
+- I assumed VIVID's student failed on saturated colours. Measurement showed it lost contrast across the frame; the essay reports the measurement.
+- NIGHT's first halation blew out bright skies. It now keeps only the halo past each highlight and screens it in.
+
+## Archive material not used, and why
+
+- **AWB preset gains for modes 5–10** (`COLOR_RENDER_AUDIT_V20.md`): solid, but the UI names and the real-scene estimator are unknown, so there is no reader-facing story yet.
+- **Capture event ordering and the absence of a proven AE/AWB freeze at the shutter** (`AE_RUNTIME_AUDIT_V17.md`, `SIL_AUDIT_V19.md`): important for implementation, too fine-grained for the essay.
+- **Video configurations** (one is configured from the full 1280×720 source): not traced far enough to claim video keeps more detail.
+- **Settings persistence (CRC32 over 252 bytes)**, **sound assets**, **boot header and `0x1B0000`**, **SD read-guard experiments**: covered by the reset story or not needed by it.
+- **Visual evidence ledger and source atlas**: useful if a future piece covers how the seven films were chosen, with the candidate comparison images.
+
+Natural follow-ups:
+
+- a piece on the physical calibration set (`capture-study/CHARMERA_EVALUATION_SET.md`) once real Charmera photos exist;
+- refitting the students weighted by real photo colour statistics;
+- replacing the TOKYO and EXPIRED proxies.
