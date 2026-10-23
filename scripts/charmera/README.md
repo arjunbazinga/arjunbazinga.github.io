@@ -72,6 +72,8 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `static/charmera/charmera-on-keys-*.webp` | Hero and social image: the camera on Arjun's keys, with the key's blade and stamped code blurred. |
 | `static/charmera/spectrum.json`, `detail.js` | The "What comes out" detail measurement and its chart. |
 | `scripts/charmera/source/` | The two Charmera JPEGs as received, inputs to `build_assets.py` and `measure_detail.py`. |
+| `static/charmera/frames.js`, `frame-slots.json` | The frame maker and the twelve frame-strip slots (name, flash offset, byte budget) read from the firmware's resource directory. |
+| `static/charmera/vendor/pako.min.js` | [pako](https://github.com/nodeca/pako) 2.1.0 (MIT and Zlib licences, header kept), used for fixed-Huffman DEFLATE in the frame maker. Loaded only when the frame maker nears the viewport. |
 | `static/charmera/LICENSE-AutoLUT.txt` | MIT notice for the five LUTs derived from AutoLUT. |
 | `scripts/charmera/` | This README and the scripts below. |
 
@@ -96,6 +98,12 @@ python scripts/charmera/vivid_error.py 5 0
 
 # Recompute the fine-detail measurement behind "What comes out" (writes static/charmera/spectrum.json).
 python scripts/charmera/measure_detail.py
+
+# Run the camera's own frame compositor (file 0xEE80 -> 0xEDA4) on test pairs.
+python scripts/charmera/frame_probe.py /path/to/Original_Firmware.bin
+
+# Check the frame maker's compositing rule against those outputs.
+node scripts/charmera/test_frames.js
 ```
 
 To rebuild the hero, pass the original camera photo: `build_assets.py <handoff> --hero /path/to/photo.jpg`. The original is deliberately not in the repository because its key is sharp enough to copy.
@@ -133,6 +141,11 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | Kodak's 1888 "You press the button, we do the rest" | General history, not from the archive |
 | Real Charmera photos hold less fine detail than phone photos squeezed through 800×600 (350–400 band: Charmera 1.6–1.9%, squeezed 3.3–13%, phone 26–73%) | `measure_detail.py` on the two received photos; consistent with, not proof of, the 800×600 surface |
 | Real date stamp: DD MM YYYY, orange, ~3% of frame height, bottom right | Measured from the received photos; the pipeline's stamp copies it |
+| Frames: 800×600 row-pair layout, three 200-row strips, `GPZP` + raw DEFLATE; slot budgets 2,048–18,944 bytes | *prior* `Charmera-firmware-findings.md` (assets, frame compression checks); `build_frame_slots` re-reads the directory |
+| Every stock strip uses fixed-Huffman blocks (BTYPE 1) | New check on the twelve strips (first block header) |
+| See-through rule: a pixel pair is skipped when both frame lumas are 140 (halfword `0x8C8C`); chroma is not tested; on even rows the frame's U,V is copied with the lumas | Disassembly of `0xEDA4`, `0x142C8`, `0x1425C`; executed with `frame_probe.py` (not in the archive) |
+| pako fixed-Huffman output is byte-identical to zlib `Z_FIXED`, level 9 on all twelve stock strips | New check (pako 2.1.0 vs Python zlib) |
+| Frame menu thumbnails (`PV000`–`PV003`, 17,920 bytes) have an undecoded layout | *prior* `Charmera-firmware-findings.md` |
 
 ## Licensing and what was deliberately not published
 
@@ -153,6 +166,18 @@ Arjun supplied two Charmera photos (Tokyo street and a park, both stamped 27 09 
 - They can bound detail, because recompression cannot add any. `measure_detail.py` compares them with four album photos sent through the same path, with and without an 800×600 squeeze.
 - The darkroom's capture simulation was checked against them for fine detail only: one blur pass already falls in the real range. Adding sharpening (the real photos show halos) did not fit two scenes reliably, so it was not tuned; colour and noise remain uncalibrated.
 - Privacy and safety: the phone photo had no location metadata. The key's cuts and stamped code are blurred, and the original is not committed. The street photo shows passers-by, including a cyclist, at a public crossing; Arjun supplied it for the essay.
+
+## Frames (added 23 October 2026)
+
+Arjun asked whether the frames from the earlier research could be used. The stock four (a film strip, a desktop-software window, pixel-art hearts and sparkles, and a yellow "1987" camera) are Kodak's artwork. The essay describes them but does not reproduce them; they were decoded locally only to find the see-through value.
+
+New findings, from the original binary:
+
+- **See-through rule.** `0xEDA4` walks each 200-row strip one horizontal pixel pair at a time. It loads the pair's two luma bytes as a halfword (addressed by `0x142C8`) and skips the pair if it equals `0x8C8C`. Otherwise `0x1425C` copies the lumas, and on even rows the pair's U,V too. Chroma never affects the decision, so an opaque colour whose luma rounds to 140 in both pixels is a hole. `frame_probe.py` runs the routine and confirms this, including a saturated pair at luma 140 staying transparent.
+- **Compression.** All twelve stock strips are fixed-Huffman DEFLATE, so that is the only kind the camera is known to decode. The frame maker emits only fixed-Huffman (pako with `strategy: 4`), which matches zlib byte for byte.
+- **Budgets.** Slot sizes come straight from the resource directory, so a frame that fits changes no other resource's offset. The middle strips of slots 1 and 3 have only 2,048 bytes.
+
+The frame maker nudges opaque pairs that would land on the key (one luma level) and turns half-transparent pairs fully opaque, because the camera decides per pair. It does not generate the menu thumbnail, and nothing here installs anything.
 
 ## Design decisions
 

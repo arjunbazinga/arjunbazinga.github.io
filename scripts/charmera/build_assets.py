@@ -14,6 +14,7 @@ static/charmera/ and the post folder. Requires numpy and Pillow.
 """
 import csv
 import json
+import struct
 import sys
 from pathlib import Path
 
@@ -121,6 +122,24 @@ def build_data(handoff):
         json.dump({"stock": stock, "cases": cases, "target": 100, "deadband": 4}, f, separators=(",", ":"))
 
 
+def build_frame_slots(handoff):
+    """Frame strip slots from the firmware's resource directory: name, flash offset and byte budget."""
+    fw = (handoff / "firmware-imaging" / "original" / "Original_Firmware.bin").read_bytes()
+    entries = []
+    for p in range(0x120018, 0x120420, 24):  # 24-byte entries: 20-byte name, sector offset from 0x120000
+        name = fw[p:p + 20].split(b"\0")[0].decode("ascii")
+        entries.append((name, 0x120000 + struct.unpack_from("<I", fw, p + 20)[0] * 512))
+    slots = []
+    for n in range(4):
+        strips = []
+        for s in range(3):
+            i = next(k for k, (name, _) in enumerate(entries) if name == f"F_{n}_{s:03d}GPZP")
+            assert fw[entries[i][1]:entries[i][1] + 4] == b"GPZP"
+            strips.append({"name": entries[i][0], "offset": entries[i][1], "budget": entries[i + 1][1] - entries[i][1]})
+        slots.append({"slot": n, "strips": strips})
+    (OUT / "frame-slots.json").write_text(json.dumps(slots, separators=(",", ":")))
+
+
 def apply_lut(img, lut):
     """Trilinear lookup, matching applyLut in static/charmera/film-core.js."""
     x = img.astype(np.float32) * 16 / 255
@@ -166,5 +185,6 @@ if __name__ == "__main__":
         build_hero(hero)
     build_sensor_frame()
     build_data(handoff)
+    build_frame_slots(handoff)
     build_thumbnail()
     print("Rebuilt Charmera essay assets.")
