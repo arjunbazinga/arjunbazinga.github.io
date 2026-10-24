@@ -1,0 +1,191 @@
+---
+# Companion to index.qmd. Sources and checks: scripts/charmera/README.md
+title: "The Charmera, Inside and Out"
+subtitle: "A field guide to Kodak's keychain camera: what the spec sheet says, what's really in it, what it costs to build and who makes it"
+description: "The Charmera's spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, and who is behind it."
+image: /static/charmera/charmera-on-keys-1080.webp
+next-read-title: "Better Taste for a Tiny Camera"
+next-read-url: /posts/tiny-camera-better-taste/
+layout: post
+categories: [Photography, Imaging, Reverse Engineering]
+comments: false
+date: "2026-10-24"
+format:
+  html:
+    toc: true
+include-in-header:
+  text: |
+    <link rel="stylesheet" href="/static/charmera/charmera.css">
+---
+
+This is the reference companion to [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/). The essay tells the story: how the Charmera makes a photograph, what a film look is made of, and how better looks could reach cameras people already own. This page collects the facts underneath it, for anyone who owns one, is thinking of buying one, or wants to build on it.
+
+Every claim says where it comes from:
+
+- **Public**: a published source, linked.
+- **Firmware**: read from the [public firmware dump](https://github.com/Khimira/Project-Sirius), or found by running its code in an emulator. Nothing here has been checked on a camera with modified firmware.
+- **Estimate**: a number I modelled, with its assumptions stated.
+
+## The spec sheet, checked
+
+Most listings give the same handful of numbers. Here is what each one turns out to mean.
+
+| The listing says | What's actually there | Basis |
+|---|---|---|
+| 1.6 MP photos, 1440 × 1080 | The sensor runs a 1280 × 720 mode. The firmware keeps the centre 960 × 720, captures it at 800 × 600 (0.48 MP) and enlarges that to 1440 × 1080 when it saves the JPEG. | Firmware |
+| 1440 × 1080 or "1080p" video at 30 fps | Generalplus rates the chip's hardware motion-JPEG encoder at [up to 720p at 30 fps](https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail). The video is either enlarged too or recorded beyond that rating. I haven't traced the video path. | Public |
+| A "2 MP" camera module (community teardowns) | An SP140A sensor, identified by matching the firmware's register program against two open-source drivers. It is a 720-line part. | Firmware |
+| 7 filters and 4 frames | A 12-position mode selector: Standard plus three colour filters (Warm, Cool, B&W), four frames and four Pixel filters. Three colour filters plus four Pixel filters make the seven. The colour filters only change settings in the colour processor, so they cost nothing per photo. The Pixel filters run on the CPU over the whole 800 × 600 image. | Firmware |
+| "2 MB" of memory (teardown comments) | The 2 MB is the flash chip that holds the firmware. The working memory is [8 MB of DDR inside the processor's package](https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail). | Public |
+| No Wi-Fi | Correct for the hardware, but the firmware carries a complete Wi-Fi driver and network stack for a radio the camera doesn't have. | Firmware |
+| A Kodak camera | Made by Reto, a Hong Kong company, under a Kodak licence. The firmware's build strings name a project called `JH5408`, and the words Reto and Kodak appear nowhere in its code. | Public, Firmware |
+
+: The Charmera's listed specifications against what the hardware and firmware show
+
+None of this makes the Charmera a worse buy than its reviews say. It explains them. Reviewers describe soft, low-detail photos and jerky video, and the numbers above are why.
+
+## What's inside
+
+The Charmera is a car dashcam platform in a keychain shell. One chip does almost everything, which is why the board is so small and so cheap.
+
+```{=html}
+<figure class="board-map" aria-labelledby="board-caption">
+  <div class="board-grid">
+    <div class="board-part board-sensor"><strong>Sensor and lens</strong><span>SP140A, 1/4-inch, run at 1280 × 720 · fixed lens, about 35 mm equivalent, f/2.4 · module marked KC28</span></div>
+    <div class="board-part board-soc"><strong>Generalplus GPCV2247F</strong>
+      <ul>
+        <li>ARM7 processor, up to 144 MHz</li>
+        <li>8 MB DDR memory in the same package</li>
+        <li>Colour processor and scaler</li>
+        <li>JPEG encoder; motion JPEG up to 720p30</li>
+        <li>USB 2.0 and a lithium battery charger</li>
+      </ul>
+    </div>
+    <div class="board-part board-flash"><strong>Flash, 2 MiB</strong><span>Puya PY25D16HB · program, interface art, frames, sounds, settings</span></div>
+    <div class="board-part board-card"><strong>microSD card</strong><span>Your photos and video · up to 128 GB</span></div>
+    <div class="board-part board-io"><strong>Around the edges</strong><span>About 0.8-inch screen and an optical peephole · flash LED · speaker · five buttons · USB-C · 200 mAh battery</span></div>
+  </div>
+  <figcaption id="board-caption">The Charmera's main parts. The processor carries its own memory and battery charger, so the board needs very few other chips.</figcaption>
+</figure>
+```
+
+| Part | Notes |
+|---|---|
+| **Processor**<br>Generalplus GPCV2247F | A camera chip sold for dashcams. The 64 Mb (8 MB) of DDR memory, the colour processor, the JPEG engine, USB and the battery charger are all on one QFN64 package. |
+| **Sensor**<br>SP140A, 1/4-inch | Identified from the firmware's own register writes. The camera module is marked KC28, and the same module turns up in no-name keychain cameras. |
+| **Flash**<br>Puya PY25D16HB, 16 Mbit | Holds the whole 2 MiB firmware image, mapped region by region in the [essay](/posts/tiny-camera-better-taste/#inside-the-2-mib). |
+| **Screen**<br>About 0.8 inches | The interface art in the firmware is drawn at 160 × 80. The optical peephole beside it shows nothing electronic. |
+| **Battery**<br>200 mAh lithium polymer | Taped to the board; the chip's built-in charger is rated at 200 mA. |
+| **Build**<br>Two screws hold the board | The camera module plugs in on a ribbon cable, an infrared-cut filter is glued between sensor and lens, and the speaker hangs on two wires. |
+
+: Main components, from the chip maker's specification, the firmware and byjp's teardown
+
+The parts identification is [byjp's teardown](https://byjp.pckt.blog/disassembling-the-kodak-charmera-psk3fky); the processor details are Generalplus's own [product page](https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail). Lens figures are from retailer listings.
+
+### Relatives and copies
+
+The Charmera has close relatives. Godox's C100 camera runs the same Generalplus dashcam platform. Its community [firmware map](https://github.com/mombotro/Godox-C100-GHDK) lists the same USB ID, `1B3F:8301`, which also sits in the Charmera's firmware. It puts the colour processor at the same address, `0xD0800000`, but pairs it with a different sensor.
+
+The copies are a different story. The best-known Charmera clone, the G6 "thumb camera", sells for around $15 with a preview screen and a "1984" in place of "1987". [Hackaday](https://hackaday.com/tag/hx3302b/) found it runs on an unrelated chip, the HX-Tech HX3302B. [PetaPixel](https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/) called it a knockoff that "steals everything but the charm". The shell is easy to copy; the platform underneath is not the same.
+
+## What it costs to build
+
+My estimate is that Reto pays its factory about **$3.60 per camera for launch builds and about $3.95 for current builds**, give or take $0.30. That is around 12% of the $29.99 launch price.
+
+| Part | Launch | Now |
+|---|---:|---:|
+| Processor with 8 MB memory | $0.76 | $1.06 |
+| Camera module (sensor, lens, IR filter, cable) | $0.53 | $0.53 |
+| Screen module | $0.39 | $0.39 |
+| Battery with protection board | $0.25 | $0.25 |
+| Housing, printing, clasp | $0.21 | $0.21 |
+| Packaging and cable | $0.28 | $0.28 |
+| Flash chip | $0.05 | $0.09 |
+| Passives, connectors, board, speaker, buttons | $0.41 | $0.41 |
+| **Parts** | **$2.88** | **$3.22** |
+| Assembly, test, overhead, scrap | $0.45 | $0.45 |
+| Factory margin (about 8%) | $0.27 | $0.29 |
+| **Price to Reto, at the factory** | **about $3.60** | **about $3.95** |
+
+: Estimated factory price per Charmera, before and after the 2026 memory price rise
+
+How the estimate was built matters more than its precision. It started near $7, using typical prices for this kind of part. It came down as each line was rebuilt from the supplier's own economics:
+
+- **Processor:** Generalplus's reported gross margins, plus the cost of the die and of the memory stacked with it.
+- **Sensor:** the average selling price of a large Chinese sensor maker.
+- **Flash:** the flash supplier's average price per chip.
+- **Assembly:** each step timed from the teardown, about four minutes of labour per camera.
+
+Two corrections moved it most. The first was learning that the "2 MB of RAM" in teardowns is the flash, and that the chip carries 8 MB, not 16–32 MB, of memory. The second was replacing a margin at every tier with what a single factory would actually quote.
+
+The rise since launch is almost all memory. Contract prices for the older DDR memory inside the chip rose sharply through 2026, and small flash chips went up too. The molds are a separate one-off cost, perhaps $50,000 to $80,000, a few cents a camera at this volume. The rest of the $29.99 pays for Kodak's royalty, freight, tariffs, the retailer and Reto itself.
+
+## How many have sold
+
+Reto has never given a number. What's public:
+
+- The first drop, on 9 September 2025, [sold out within 24 hours](https://petapixel.com/2025/09/18/the-kodak-charmera-blind-boxes-sold-out-in-just-24-hours/). Reto's Vivienne Tsang said it sold about ten times what the company expected.
+- The next presale [sold out in eight minutes](https://www.vice.com/en/article/kodak-charmera-sold-out), limited to one box per order.
+- It stayed scarce until early 2026. Resold units went for several times the retail price.
+- Kodak's brand-licensing segment, which collects royalties from every Kodak licensee, earned [$13 million in the first half of 2026](https://www.sec.gov/Archives/edgar/data/0000031235/000119312526332850/kodk-20260630.htm), against $10 million a year earlier.
+
+If the Charmera pays Kodak something like a dollar a camera, even part of that $3 million increase means hundreds of thousands of cameras a quarter. **My working estimate is about a million in the first year.** The chip maker's revenue growth gives a looser ceiling of a few million. The weak link is the royalty: at fifty cents a camera, the estimate doubles.
+
+How the Millennium Edition is doing is genuinely unclear. Reto capped orders when it launched in June 2026, but neither edition has had the original's months of sell-outs since. Being in stock doesn't prove weak demand, because Reto may simply have built more. Kodak's next quarterly filing, the first to cover a full quarter of the new edition, will say more.
+
+## Who makes it
+
+**Reto** is a small Hong Kong design and brand company. It designs the products and sells them worldwide, and a contract factory builds them. Its founders keep a low profile; nearly everything public comes through Vivienne Tsang, its sales and marketing director.
+
+| When | What |
+|---|---|
+| 2019 | Reto's own three-lens 3D film camera, [crowdfunded on Kickstarter](https://kosmofoto.com/2019/03/reto3d-stereo-camera-kickstarter/) |
+| May 2022 | The [Kodak Ektar H35](https://kosmofoto.com/2022/05/reto-announces-kodak-branded-ektar-h35-half-frame-camera/), a $50 half-frame film camera and Reto's first Kodak camera |
+| September 2025 | The Kodak Charmera, its first digital camera |
+| Late 2025 | The [Kodak Snapic A1](https://www.australianphotography.com/gear/kodak-announces-affordable-35mm-film-camera-the-reto-snapic-a1), a $99 35 mm film camera with a glass lens |
+| 2026 | The Charmera wins an iF Design Award in March and a [Red Dot award](https://boingboing.net/2026/05/11/design-awards-charmed-by-kodaks-35-charmera.html) in May |
+| June 2026 | The Charmera Millennium Edition: the same hardware with new shells, frames and filters |
+
+: Reto's main products and milestones
+
+**Kodak** lends the name. Reto is one of its global brand licensees, and the Charmera's royalties show up, unseparated, in Kodak's brand segment.
+
+**The factory** wrote the software, built on Generalplus's. The firmware still carries its build history:
+
+- the project string `JH5408  20250520`;
+- source paths under `G:\code\2247\5408\v006`, meaning project 5408, on the 2247 chip, sixth revision;
+- paths from a Generalplus reference kit for a *different* chip, `GPCV1235F_WIFI_SingleCam_SDK_20191212`, which is where the Wi-Fi stack comes from;
+- an auto-exposure and white-balance library signed "by Comi", dated March 2020;
+- a second build date, `Oct 14 2025`, a month after launch.
+
+The card updater looks for files starting `JH_`, so "JH" is most likely the factory's own prefix. That makes each new edition, in effect, the factory swapping assets in its own build, which is why Reto's newest Charmera can have new filters while older ones can't get them.
+
+## Why it hit
+
+Most of the Charmera's success came from decisions Reto made deliberately. Some of it was timing.
+
+What Reto did well:
+
+- **The licence.** Reto has said that building a brand from scratch was the hard part with its own cameras. The Kodak name solved that, and opened doors to retailers.
+- **The reference.** The design tributes the Kodak Fling, Kodak's first disposable camera. The yellow model's "1987" is the Fling's year. It's specific enough to feel authentic, even to buyers born long after the Fling.
+- **The blind box.** It turned a $30 gadget into a collectible, with a 1-in-48 secret edition.
+- **The keychain.** Every owner carries it where other people can see it.
+- **Cheap engineering.** A vendor reference platform at a few dollars a unit kept the price an impulse buy, and made new editions cheap to produce.
+
+Where it was lucky:
+
+- **The wave.** It launched at the height of the 2025 blind-box craze and the lo-fi digital camera trend.
+- **Under-forecasting.** Selling ten times the plan created months of real scarcity, which fed the hype. It looks like first-run planning, not a tactic.
+- **Reviews that helped.** "[The worst camera I've ever used](https://www.techradar.com/cameras/compact-cameras/the-viral-kodak-charmera-is-the-worst-camera-ive-ever-used-but-its-so-bad-and-so-retro-that-i-actually-love-it)" came with "but I actually love it", because people were buying a charm that happens to take photos.
+
+## What's still unknown
+
+- How the video path actually works, and at what resolution video is really recorded.
+- Whether every production batch runs the same firmware and the same flash chip as the public dump.
+- The camera's physical colour and noise response, which needs untouched files straight off the card.
+- How many have sold, and the royalty rate behind every estimate.
+- Who the "JH" factory is.
+
+::: {.archive-note}
+Estimates on this page come from research notes kept alongside the essay. Firmware findings are against the public dump from [Project Sirius](https://github.com/Khimira/Project-Sirius), SHA-256 `720ed0b6…436c`. The context, the checks and the scripts are in [`scripts/charmera/README.md`](https://github.com/arjunbazinga/arjunbazinga.github.io/blob/master/scripts/charmera/README.md). This page has no affiliation with Kodak, Reto or Generalplus.
+:::

@@ -63,6 +63,7 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 
 | Path | What it is |
 |---|---|
+| `posts/tiny-camera-better-taste/inside.qmd` | "The Charmera, Inside and Out" (added 24 Oct 2026): the reference companion. Spec sheet vs reality, parts and relatives, cost table, sales, Reto timeline, why it hit. Linked from the essay's opening; not in the Writing listing, which only takes `*/index.qmd`. |
 | `posts/tiny-camera-better-taste/index.qmd` | The essay. Interactive figures are raw HTML blocks; scripts load at the end. |
 | `posts/tiny-camera-better-taste/thumbnail.webp` | Listing image: one scene as original, B&W, FILM and VIVID slices. |
 | `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student, stock Pixel filter, NIGHT halation, EXPIRED drift. |
@@ -157,6 +158,18 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | Sales: never disclosed; Kodak Brand segment $13M H1 2026 vs $10M H1 2025; "about a million in the first year" | [Kodak Q2 2026 10-Q](https://www.sec.gov/Archives/edgar/data/0000031235/000119312526332850/kodk-20260630.htm) for the segment figures; the volume is the chat's estimate at an assumed ~$1 royalty per camera, and the segment includes every Kodak licensee |
 | Fling tribute; the yellow model's "1987" replaces the Fling's "200" | Reto's own statements via press, collected in the bill-of-materials chat; the Fling launched in 1987 |
 | Build strings `JH5408  20250520` (file 0x18964), `G:\code\2247\5408\v006\…`, `F:\gp15\GPCV1235F_WIFI_SingleCam_SDK_20191212\wifi\ssv6158\…`, `GP$ v1.5.0 AE AWB library by Comi 20200318`; SSV6xxx Wi-Fi driver and lwIP 1.4.0 compiled in; no "Reto" or "Kodak" string | Checked with `strings` on the pinned dump (24 Oct 2026). "JH" being the factory is an inference; the card updater uses the same `JH_` prefix |
+| Field guide: GPCV2247F is ARM7TDMI up to 144 MHz, 64 Mb (8 MB) DDR in package, hardware MJPEG up to 720p30, Li-ion charger at 200 mA, QFN64 | [Generalplus product page](https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail); this also confirms the bill-of-materials chat's inferred 64 Mb |
+| Field guide: listings give 1440×1080 30 fps video; the video path is not traced | B&H and Adorama listings; Generalplus rating above |
+| Field guide: screen about 0.8 inch plus an optical peephole; lens ~35 mm equivalent f/2.4 | Tom's Guide and Analog Cafe reviews (Adorama lists 0.96 inch) |
+| Field guide: Godox C100 is the same platform: USB ID `1B3F:8301`, CDSP at `0xD0800000`, different sensor (GC2083) | [mombotro/Godox-C100-GHDK `FIRMWARE_MAP.md`](https://github.com/mombotro/Godox-C100-GHDK); the Charmera dump contains the bytes `3F 1B 01 83` at file `0xFFE54` |
+| Field guide: G6 clone runs an HX-Tech HX3302B, ~$15, "1984" | [Hackaday tag page](https://hackaday.com/tag/hx3302b/), [PetaPixel](https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/), One Camera One Lens review |
+| Field guide: presale sold out in eight minutes; ten times expected (Tsang to USA Today) | [Vice](https://www.vice.com/en/article/kodak-charmera-sold-out), PetaPixel |
+| Field guide: iF Design Award (Mar 2026), Red Dot (May 2026) | [Boing Boing](https://boingboing.net/2026/05/11/design-awards-charmed-by-kodaks-35-charmera.html) |
+| Field guide: Ektar H35 May 2022 ($49.99); Snapic A1 late 2025 ($99); Reto3D Kickstarter 2019 | Kosmo Foto (2022, 2019), Australian Photography, Fnac |
+| Field guide: board details (two screws, taped battery, wired speaker, glued IR-cut filter, KC28 module), 200 mAh | byjp's teardown, as read in the bill-of-materials chat (the page could not be re-fetched from this session) |
+| Essay: `time.txt` / `pwd.txt` readers have no callers | Static check, 24 Oct 2026: the functions that reference those strings (runtime `0x5294`, `0x5B78`) have no `B`/`BL` targets, computed `add rd, pc` addresses or literal pointers anywhere in the loaded image |
+| Essay: in-camera looks only beat phone-side looks on exposure, highlights and pre-quantisation tone | The firmware fork-analysis chat's risk discussion; reasoning, not measurement |
+| Not used: CLOT collaboration, Tomlov DM9 link, Generalplus revenue figures | Could not be re-verified from this session |
 | Camp Snap's early cameras shipped one firmware image per look | Camp Snap's own firmware download pages (V103: separate Standard, B&W and Vintage images), as studied in the verification chat |
 | Camp Snap CS-8: $20M in 11 months (company figure); Taylor Swift sighting Dec 2025 | [Digital Camera World](https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look); TMZ (17 Dec 2025) |
 | Millennium Edition, mid-June 2026: same core hardware, four new frames, seven new filters incl. Pixel coral/honey/teal/violet | [Photography Talk](https://www.photographytalk.com/kodak-charmera-millennium-edition/); The Gadgeteer; designboom; Domus (22 Jun 2026) |
