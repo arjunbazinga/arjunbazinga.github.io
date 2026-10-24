@@ -18,7 +18,15 @@ The project had two strands:
    - It disassembled the public 2 MiB dump and executed selected original ARM routines in Unicorn with explicitly modelled hardware.
    - This recovered the still pipeline, the sensor (SP140A family), the auto-exposure tables, the gamma → AE feedback, the stock filters, the post-capture hook, and the updater's behaviour.
 
-The project's own documents say a public "rabbit hole" write-up should come later and must not drive engineering choices. This essay is that write-up. Nothing has been patched or flashed. A verified backup and restore path for the physical camera comes before any installation.
+The project's own documents say a public "rabbit hole" write-up should come later and must not drive engineering choices. This essay is that write-up.
+
+A third strand never made it into the archive. Arjun also researched the business in separate ChatGPT and Claude conversations: Reto's history, the Kodak licence, the sell-out and Japanese distribution, import records as a rough volume signal, competitors such as Camp Snap, Kodak's filings (brand-licensing margin could not be isolated), and a parts estimate of about $4–5 against the $30 price. On 24 October 2026 Arjun dictated the vision behind all of it. The essay's opening and its compiler and customisation-plane sections come from that:
+
+- **The bet.** Reto's growth model is the next hit; the Millennium Edition is the same hardware with new frames and filters. The alternative is raising the lifetime value of cameras already sold with software: a VSCO-style look system, as Camp Snap's custom filter files already do.
+- **A customisation plane.** Map each data object's lifecycle (who creates, reads, updates and resets it). Then decouple what owners customise from the compiled binary, so customisation is data with formats, slots and checksums, and nobody has to fear patching the wrong thing.
+- **A style compiler.** A large teacher that understands colour and taste learns a style from a few examples. An optimiser then searches the camera's own parameter space through a simulator of its pipeline (light, sensor, AE, gamma, hook, JPEG), not on finished JPEGs. One teacher, many hardware targets.
+
+The import-record volume estimate is not in the essay because the numbers were not available to this session. The parts estimate is Arjun's own and is stated that way. Nothing has been patched or flashed. A verified backup and restore path for the physical camera comes before any installation.
 
 ## Source archive
 
@@ -141,13 +149,25 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | EXIF extra colon; frames in row-pair layout; 12 strips recompress | *prior* `Charmera-firmware-findings.md`, "Assets" and "Date formatting" |
 | USB access level 1 vs 2; one-byte `mov r0, #1` → `#2` in emulation | *prior* `LATEST_FINDINGS_2026-09-27.md` §1 |
 | Kodak's 1888 "You press the button, we do the rest" | General history, not from the archive |
+| Reto: Hong Kong, started 2019 with the Reto3D three-lens 3D film camera on Kickstarter, then licensed Kodak | Kodak brand-licensing case study (`kodak.com/content/pdfs/brand-licensing/reto-case-study.pdf`); Kosmo Foto and The Phoblographer on the Reto3D Kickstarter (2019) |
+| Charmera launch 9 September 2025, $29.99 blind boxes, seven designs, secret edition about 1 in 48, sold out within 24 hours, demand ~10× expectations | [PetaPixel](https://petapixel.com/2025/09/18/the-kodak-charmera-blind-boxes-sold-out-in-just-24-hours/); Boing Boing (19 Sep 2025, citing USA Today); Engadget |
+| Restocks in rounds; resale at several times retail | Digital Camera World (pre-order and stock reports) |
+| SAEDA is RETO's official Japanese distributor | Impress Watch (headline dated 18 Feb 2026; Millennium Japan release article `dc.watch.impress.co.jp/docs/news/2118595.html`) |
+| Parts estimate $4–5 | Arjun's own earlier research; not independently sourced |
+| Camp Snap CS-8: $20M in 11 months (company figure); Taylor Swift sighting Dec 2025 | [Digital Camera World](https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look); TMZ (17 Dec 2025) |
+| Millennium Edition, mid-June 2026: same core hardware, four new frames, seven new filters incl. Pixel coral/honey/teal/violet | [Photography Talk](https://www.photographytalk.com/kodak-charmera-millennium-edition/); The Gadgeteer; designboom; Domus (22 Jun 2026) |
+| Camp Snap firmware loads one custom `.flt` filter from the card; filters made on its website and shared on CampShades | [Camp Snap blog](https://www.campsnapphoto.com/blogs/camp-snap-news/customize-your-campsnap-with-filters-%F0%9F%8E%A8%F0%9F%93%B8) |
+| Third-party tools: EXIF-repairing importer; Mac app that applies film filters to copies | [jphastings/charmera](https://github.com/jphastings/charmera) (names the Generalplus EXIF defects, including the extra colon); [Lulzx/charmera](https://github.com/Lulzx/charmera) |
+| Interface art is little-endian RGB565 in `GPZP` resources, mostly 160×80; `USB_CONNECT` is 256×128; `AUDIO_REC_BG` is a 160×80 JPEG | New decode (`build_interface` in `build_assets.py`); widths chosen by row continuity and checked visually |
+| `GPRSPAK` is the menu text: 14 per-language tables of (length, offset) at word 26; English is ASCII, 155 entries; others store glyph numbers | New decode (`menu_text.py`); which strings the Charmera actually shows is not traced |
+| Customisation-plane table (where each thing lives, what reads it, what changes it) | Resource directory; `sil-audit/CONTROL_SURFACE.md`; `INIT_SCHEDULE_AUDIT_V18.md`; *prior* `UPDATE_CONTRACT_FINDINGS.md` lifecycle tests |
 | Real Charmera photos hold less fine detail than phone photos squeezed through 800×600 (350–400 band: Charmera 1.6–1.9%, squeezed 3.3–13%, phone 26–73%) | `measure_detail.py` on the two received photos; consistent with, not proof of, the 800×600 surface |
 | Real date stamp: DD MM YYYY, orange, ~3% of frame height, bottom right | Measured from the received photos; the pipeline's stamp copies it |
 | Frames: 800×600 row-pair layout, three 200-row strips, `GPZP` + raw DEFLATE; slot budgets 2,048–18,944 bytes | *prior* `Charmera-firmware-findings.md` (assets, frame compression checks); `build_frame_slots` re-reads the directory |
 | Every stock strip uses fixed-Huffman blocks (BTYPE 1) | New check on the twelve strips (first block header) |
 | See-through rule: a pixel pair is skipped when both frame lumas are 140 (halfword `0x8C8C`); chroma is not tested; on even rows the frame's U,V is copied with the lumas | Disassembly of `0xEDA4`, `0x142C8`, `0x1425C`; executed with `frame_probe.py` (not in the archive) |
 | pako fixed-Huffman output is byte-identical to zlib `Z_FIXED`, level 9 on all twelve stock strips | New check (pako 2.1.0 vs Python zlib) |
-| Frame menu thumbnails (`PV000`–`PV003`, 17,920 bytes) have an undecoded layout | *prior* `Charmera-firmware-findings.md` |
+| Frame menu thumbnails (`PV000`–`PV003`) are 112×80 little-endian RGB565, fixed-Huffman `GPZP`, in 1,024-byte slots (1,536 for the fourth); see-through areas are painted `0x8C71`, the key grey | New decode (24 Oct 2026); the prior archive listed them as undecoded. `test_frames.js` checks the RGB565 round trip |
 
 ## Licensing and what was deliberately not published
 
@@ -179,7 +199,7 @@ New findings, from the original binary:
 - **Compression.** All twelve stock strips are fixed-Huffman DEFLATE, so that is the only kind the camera is known to decode. The frame maker emits only fixed-Huffman (pako with `strategy: 4`), which matches zlib byte for byte.
 - **Budgets.** Slot sizes come straight from the resource directory, so a frame that fits changes no other resource's offset. The middle strips of slots 1 and 3 have only 2,048 bytes.
 
-The frame maker nudges opaque pairs that would land on the key (one luma level) and turns half-transparent pairs fully opaque, because the camera decides per pair. It does not generate the menu thumbnail, and nothing here installs anything.
+The frame maker nudges opaque pairs that would land on the key (one luma level) and turns half-transparent pairs fully opaque, because the camera decides per pair. It also writes the frame's menu thumbnail: the frame alone scaled to 112×80, RGB565, checked against the `PV` slot (stock frames keep the camera's own thumbnail file). Nothing here installs anything.
 
 ## Firmware examples (added 23 October 2026)
 
@@ -187,7 +207,8 @@ Arjun asked for examples from the firmware itself. `build_assets.py` (`build_fir
 
 - **Frames.** The twelve strips are copied exactly (compressed bytes, `GPZP` tag included) and inflated in the browser, so the frame maker's stock templates are the camera's own bytes. The gallery uses the same rule in Python (`compose_row_pair`).
 - **Logo and sounds.** `POWER_ON_LOGOJPG` is cut at its JPEG end marker. Each WAV is cut at its RIFF length.
-- **Map.** `flash-map.json` lists measured regions: 4 KiB used/blank scan, resource directory, settings at `0x170000`, photo index at `0x17F000`, and the two photo extents (`0x964E` and `0x958E` bytes, from the index). `GPRSPAK` starts with a `GPRS` tag (version 2); its format is not decoded.
+- **Map.** `flash-map.json` lists measured regions: 4 KiB used/blank scan, resource directory, settings at `0x170000`, photo index at `0x17F000`, and the two photo extents (`0x964E` and `0x958E` bytes, from the index). `GPRSPAK` is the menu text (see the claim map); the rest of its tables are not decoded.
+- **Interface art (24 Oct 2026).** `build_interface` writes `firmware/ui/`: home, charging, PC camera, disk drive and USB screens, the audio-recording background and the four frame-menu thumbnails. The `PV` files are also copied as `.gpzp` for the frame maker.
 - **Snippets.** The see-through test (`0xEE28–0xEE34`) and the first two rows of the sensor init table are quoted in the essay.
 
 ## Design decisions

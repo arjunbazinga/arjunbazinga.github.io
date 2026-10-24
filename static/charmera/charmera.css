@@ -347,3 +347,17 @@ body.quarto-dark .exposure-figure {
   .darkroom-modes button { flex: 1 1 calc(25% - 6px); padding: 0 6px; }
   .darkroom-scenes button, .darkroom-upload { width: 60px; height: 45px; }
 }
+
+/* Interface art and frame-menu thumbnails, decoded from the firmware */
+.charmera-screen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); align-items: start; gap: 14px 12px; }
+.charmera-screen-grid div { display: grid; gap: 4px; font-size: 0.74rem; color: var(--site-muted); }
+.charmera-screen-grid .is-wide { grid-column: span 2; }
+.charmera-screen-grid img, .charmera-frame-menu img, .frames-thumb { width: 100%; height: auto; image-rendering: pixelated; border-radius: 2px; }
+.charmera-frame-menu { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.frames-thumb-wrap { display: flex; align-items: center; gap: 12px; margin: 0.7rem 0; font-family: var(--font-ui); font-size: 0.75rem; line-height: 1.5; color: var(--site-muted); }
+.frames-thumb-wrap p { margin: 0; }
+.frames-thumb { flex: none; width: 168px; }
+@media (max-width: 700px) {
+  .charmera-frame-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .frames-thumb { width: 112px; }
+}
