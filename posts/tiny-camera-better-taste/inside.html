@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-24">
+<meta name="description" content="The Charmera’s spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, and who is behind it.">
+
+<title>The Charmera, Inside and Out – Arjun Srivastava</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-98cf82f7baee0e05ae06e0de2cd83fcb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b87295be8c133601476935b72ceb4ad6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c37dfa679b2c1d9e43fdc3941f76ee37.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bf2eee16b731e2be1ad6acb3a3c9ef96.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-101184475-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<link rel="stylesheet" href="../../static/charmera/charmera.css">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="The Charmera, Inside and Out – Arjun Srivastava">
+<meta property="og:description" content="The Charmera’s spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, and who is behind it.">
+<meta property="og:image" content="https://www.arjunsriva.com/static/charmera/charmera-on-keys-1080.webp">
+<meta property="og:site_name" content="Arjun Srivastava">
+<meta name="twitter:title" content="The Charmera, Inside and Out – Arjun Srivastava">
+<meta name="twitter:description" content="The Charmera’s spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, and who is behind it.">
+<meta name="twitter:image" content="https://www.arjunsriva.com/static/charmera/charmera-on-keys-1080.webp">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed essay-page quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Arjun Srivastava</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.arjunsriva.com/library/"> 
+<span class="menu-text">Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../podcast/"> 
+<span class="menu-text">Podcast</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../album/"> 
+<span class="menu-text">Album</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-spec-sheet-checked" id="toc-the-spec-sheet-checked" class="nav-link active" data-scroll-target="#the-spec-sheet-checked">The spec sheet, checked</a></li>
+  <li><a href="#whats-inside" id="toc-whats-inside" class="nav-link" data-scroll-target="#whats-inside">What’s inside</a>
+  <ul class="collapse">
+  <li><a href="#relatives-and-copies" id="toc-relatives-and-copies" class="nav-link" data-scroll-target="#relatives-and-copies">Relatives and copies</a></li>
+  </ul></li>
+  <li><a href="#what-it-costs-to-build" id="toc-what-it-costs-to-build" class="nav-link" data-scroll-target="#what-it-costs-to-build">What it costs to build</a></li>
+  <li><a href="#how-many-have-sold" id="toc-how-many-have-sold" class="nav-link" data-scroll-target="#how-many-have-sold">How many have sold</a></li>
+  <li><a href="#who-makes-it" id="toc-who-makes-it" class="nav-link" data-scroll-target="#who-makes-it">Who makes it</a></li>
+  <li><a href="#why-it-hit" id="toc-why-it-hit" class="nav-link" data-scroll-target="#why-it-hit">Why it hit</a></li>
+  <li><a href="#whats-still-unknown" id="toc-whats-still-unknown" class="nav-link" data-scroll-target="#whats-still-unknown">What’s still unknown</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Charmera, Inside and Out</h1>
+<p class="subtitle lead">A field guide to Kodak’s keychain camera: what the spec sheet says, what’s really in it, what it costs to build and who makes it</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Photography</div>
+    <div class="quarto-category">Imaging</div>
+    <div class="quarto-category">Reverse Engineering</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    The Charmera’s spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, and who is behind it.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is the reference companion to <a href="../../posts/tiny-camera-better-taste/">Better Taste for a Tiny Camera</a>. The essay tells the story: how the Charmera makes a photograph, what a film look is made of, and how better looks could reach cameras people already own. This page collects the facts underneath it, for anyone who owns one, is thinking of buying one, or wants to build on it.</p>
+<p>Every claim says where it comes from:</p>
+<ul>
+<li><strong>Public</strong>: a published source, linked.</li>
+<li><strong>Firmware</strong>: read from the <a href="https://github.com/Khimira/Project-Sirius">public firmware dump</a>, or found by running its code in an emulator. Nothing here has been checked on a camera with modified firmware.</li>
+<li><strong>Estimate</strong>: a number I modelled, with its assumptions stated.</li>
+</ul>
+<section id="the-spec-sheet-checked" class="level2">
+<h2 class="anchored" data-anchor-id="the-spec-sheet-checked">The spec sheet, checked</h2>
+<p>Most listings give the same handful of numbers. Here is what each one turns out to mean.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="The Charmera’s listed specifications against what the hardware and firmware show">
+<table class="caption-top table">
+<caption>The Charmera’s listed specifications against what the hardware and firmware show</caption>
+<thead>
+<tr class="header">
+<th>The listing says</th>
+<th>What’s actually there</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.6 MP photos, 1440 × 1080</td>
+<td>The sensor runs a 1280 × 720 mode. The firmware keeps the centre 960 × 720, captures it at 800 × 600 (0.48 MP) and enlarges that to 1440 × 1080 when it saves the JPEG.</td>
+<td>Firmware</td>
+</tr>
+<tr class="even">
+<td>1440 × 1080 or “1080p” video at 30 fps</td>
+<td>Generalplus rates the chip’s hardware motion-JPEG encoder at <a href="https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail">up to 720p at 30 fps</a>. The video is either enlarged too or recorded beyond that rating. I haven’t traced the video path.</td>
+<td>Public</td>
+</tr>
+<tr class="odd">
+<td>A “2 MP” camera module (community teardowns)</td>
+<td>An SP140A sensor, identified by matching the firmware’s register program against two open-source drivers. It is a 720-line part.</td>
+<td>Firmware</td>
+</tr>
+<tr class="even">
+<td>7 filters and 4 frames</td>
+<td>A 12-position mode selector: Standard plus three colour filters (Warm, Cool, B&amp;W), four frames and four Pixel filters. Three colour filters plus four Pixel filters make the seven. The colour filters only change settings in the colour processor, so they cost nothing per photo. The Pixel filters run on the CPU over the whole 800 × 600 image.</td>
+<td>Firmware</td>
+</tr>
+<tr class="odd">
+<td>“2 MB” of memory (teardown comments)</td>
+<td>The 2 MB is the flash chip that holds the firmware. The working memory is <a href="https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail">8 MB of DDR inside the processor’s package</a>.</td>
+<td>Public</td>
+</tr>
+<tr class="even">
+<td>No Wi-Fi</td>
+<td>Correct for the hardware, but the firmware carries a complete Wi-Fi driver and network stack for a radio the camera doesn’t have.</td>
+<td>Firmware</td>
+</tr>
+<tr class="odd">
+<td>A Kodak camera</td>
+<td>Made by Reto, a Hong Kong company, under a Kodak licence. The firmware’s build strings name a project called <code>JH5408</code>, and the words Reto and Kodak appear nowhere in its code.</td>
+<td>Public, Firmware</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>None of this makes the Charmera a worse buy than its reviews say. It explains them. Reviewers describe soft, low-detail photos and jerky video, and the numbers above are why.</p>
+</section>
+<section id="whats-inside" class="level2">
+<h2 class="anchored" data-anchor-id="whats-inside">What’s inside</h2>
+<p>The Charmera is a car dashcam platform in a keychain shell. One chip does almost everything, which is why the board is so small and so cheap.</p>
+<figure class="board-map figure" aria-labelledby="board-caption">
+  <div class="board-grid">
+    <div class="board-part board-sensor"><strong>Sensor and lens</strong><span>SP140A, 1/4-inch, run at 1280 × 720 · fixed lens, about 35 mm equivalent, f/2.4 · module marked KC28</span></div>
+    <div class="board-part board-soc"><strong>Generalplus GPCV2247F</strong>
+      <ul>
+        <li>ARM7 processor, up to 144 MHz</li>
+        <li>8 MB DDR memory in the same package</li>
+        <li>Colour processor and scaler</li>
+        <li>JPEG encoder; motion JPEG up to 720p30</li>
+        <li>USB 2.0 and a lithium battery charger</li>
+      </ul>
+    </div>
+    <div class="board-part board-flash"><strong>Flash, 2 MiB</strong><span>Puya PY25D16HB · program, interface art, frames, sounds, settings</span></div>
+    <div class="board-part board-card"><strong>microSD card</strong><span>Your photos and video · up to 128 GB</span></div>
+    <div class="board-part board-io"><strong>Around the edges</strong><span>About 0.8-inch screen and an optical peephole · flash LED · speaker · five buttons · USB-C · 200 mAh battery</span></div>
+  </div>
+  <figcaption id="board-caption">The Charmera's main parts. The processor carries its own memory and battery charger, so the board needs very few other chips.</figcaption>
+</figure>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Main components, from the chip maker’s specification, the firmware and byjp’s teardown">
+<table class="caption-top table">
+<caption>Main components, from the chip maker’s specification, the firmware and byjp’s teardown</caption>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Processor</strong><br>Generalplus GPCV2247F</td>
+<td>A camera chip sold for dashcams. The 64 Mb (8 MB) of DDR memory, the colour processor, the JPEG engine, USB and the battery charger are all on one QFN64 package.</td>
+</tr>
+<tr class="even">
+<td><strong>Sensor</strong><br>SP140A, 1/4-inch</td>
+<td>Identified from the firmware’s own register writes. The camera module is marked KC28, and the same module turns up in no-name keychain cameras.</td>
+</tr>
+<tr class="odd">
+<td><strong>Flash</strong><br>Puya PY25D16HB, 16 Mbit</td>
+<td>Holds the whole 2 MiB firmware image, mapped region by region in the <a href="../../posts/tiny-camera-better-taste/#inside-the-2-mib">essay</a>.</td>
+</tr>
+<tr class="even">
+<td><strong>Screen</strong><br>About 0.8 inches</td>
+<td>The interface art in the firmware is drawn at 160 × 80. The optical peephole beside it shows nothing electronic.</td>
+</tr>
+<tr class="odd">
+<td><strong>Battery</strong><br>200 mAh lithium polymer</td>
+<td>Taped to the board; the chip’s built-in charger is rated at 200 mA.</td>
+</tr>
+<tr class="even">
+<td><strong>Build</strong><br>Two screws hold the board</td>
+<td>The camera module plugs in on a ribbon cable, an infrared-cut filter is glued between sensor and lens, and the speaker hangs on two wires.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The parts identification is <a href="https://byjp.pckt.blog/disassembling-the-kodak-charmera-psk3fky">byjp’s teardown</a>; the processor details are Generalplus’s own <a href="https://www.generalplus.com/GPCV2247F-y95bp-phLVVLLvLN5006SVpnSNproduct_detail">product page</a>. Lens figures are from retailer listings.</p>
+<section id="relatives-and-copies" class="level3">
+<h3 class="anchored" data-anchor-id="relatives-and-copies">Relatives and copies</h3>
+<p>The Charmera has close relatives. Godox’s C100 camera runs the same Generalplus dashcam platform. Its community <a href="https://github.com/mombotro/Godox-C100-GHDK">firmware map</a> lists the same USB ID, <code>1B3F:8301</code>, which also sits in the Charmera’s firmware. It puts the colour processor at the same address, <code>0xD0800000</code>, but pairs it with a different sensor.</p>
+<p>The copies are a different story. The best-known Charmera clone, the G6 “thumb camera”, sells for around $15 with a preview screen and a “1984” in place of “1987”. <a href="https://hackaday.com/tag/hx3302b/">Hackaday</a> found it runs on an unrelated chip, the HX-Tech HX3302B. <a href="https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/">PetaPixel</a> called it a knockoff that “steals everything but the charm”. The shell is easy to copy; the platform underneath is not the same.</p>
+</section>
+</section>
+<section id="what-it-costs-to-build" class="level2">
+<h2 class="anchored" data-anchor-id="what-it-costs-to-build">What it costs to build</h2>
+<p>My estimate is that Reto pays its factory about <strong>$3.60 per camera for launch builds and about $3.95 for current builds</strong>, give or take $0.30. That is around 12% of the $29.99 launch price.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Estimated factory price per Charmera, before and after the 2026 memory price rise">
+<table class="caption-top table">
+<caption>Estimated factory price per Charmera, before and after the 2026 memory price rise</caption>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th style="text-align: right;">Launch</th>
+<th style="text-align: right;">Now</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Processor with 8 MB memory</td>
+<td style="text-align: right;">$0.76</td>
+<td style="text-align: right;">$1.06</td>
+</tr>
+<tr class="even">
+<td>Camera module (sensor, lens, IR filter, cable)</td>
+<td style="text-align: right;">$0.53</td>
+<td style="text-align: right;">$0.53</td>
+</tr>
+<tr class="odd">
+<td>Screen module</td>
+<td style="text-align: right;">$0.39</td>
+<td style="text-align: right;">$0.39</td>
+</tr>
+<tr class="even">
+<td>Battery with protection board</td>
+<td style="text-align: right;">$0.25</td>
+<td style="text-align: right;">$0.25</td>
+</tr>
+<tr class="odd">
+<td>Housing, printing, clasp</td>
+<td style="text-align: right;">$0.21</td>
+<td style="text-align: right;">$0.21</td>
+</tr>
+<tr class="even">
+<td>Packaging and cable</td>
+<td style="text-align: right;">$0.28</td>
+<td style="text-align: right;">$0.28</td>
+</tr>
+<tr class="odd">
+<td>Flash chip</td>
+<td style="text-align: right;">$0.05</td>
+<td style="text-align: right;">$0.09</td>
+</tr>
+<tr class="even">
+<td>Passives, connectors, board, speaker, buttons</td>
+<td style="text-align: right;">$0.41</td>
+<td style="text-align: right;">$0.41</td>
+</tr>
+<tr class="odd">
+<td><strong>Parts</strong></td>
+<td style="text-align: right;"><strong>$2.88</strong></td>
+<td style="text-align: right;"><strong>$3.22</strong></td>
+</tr>
+<tr class="even">
+<td>Assembly, test, overhead, scrap</td>
+<td style="text-align: right;">$0.45</td>
+<td style="text-align: right;">$0.45</td>
+</tr>
+<tr class="odd">
+<td>Factory margin (about 8%)</td>
+<td style="text-align: right;">$0.27</td>
+<td style="text-align: right;">$0.29</td>
+</tr>
+<tr class="even">
+<td><strong>Price to Reto, at the factory</strong></td>
+<td style="text-align: right;"><strong>about $3.60</strong></td>
+<td style="text-align: right;"><strong>about $3.95</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>How the estimate was built matters more than its precision. It started near $7, using typical prices for this kind of part. It came down as each line was rebuilt from the supplier’s own economics:</p>
+<ul>
+<li><strong>Processor:</strong> Generalplus’s reported gross margins, plus the cost of the die and of the memory stacked with it.</li>
+<li><strong>Sensor:</strong> the average selling price of a large Chinese sensor maker.</li>
+<li><strong>Flash:</strong> the flash supplier’s average price per chip.</li>
+<li><strong>Assembly:</strong> each step timed from the teardown, about four minutes of labour per camera.</li>
+</ul>
+<p>Two corrections moved it most. The first was learning that the “2 MB of RAM” in teardowns is the flash, and that the chip carries 8 MB, not 16–32 MB, of memory. The second was replacing a margin at every tier with what a single factory would actually quote.</p>
+<p>The rise since launch is almost all memory. Contract prices for the older DDR memory inside the chip rose sharply through 2026, and small flash chips went up too. The molds are a separate one-off cost, perhaps $50,000 to $80,000, a few cents a camera at this volume. The rest of the $29.99 pays for Kodak’s royalty, freight, tariffs, the retailer and Reto itself.</p>
+</section>
+<section id="how-many-have-sold" class="level2">
+<h2 class="anchored" data-anchor-id="how-many-have-sold">How many have sold</h2>
+<p>Reto has never given a number. What’s public:</p>
+<ul>
+<li>The first drop, on 9 September 2025, <a href="https://petapixel.com/2025/09/18/the-kodak-charmera-blind-boxes-sold-out-in-just-24-hours/">sold out within 24 hours</a>. Reto’s Vivienne Tsang said it sold about ten times what the company expected.</li>
+<li>The next presale <a href="https://www.vice.com/en/article/kodak-charmera-sold-out">sold out in eight minutes</a>, limited to one box per order.</li>
+<li>It stayed scarce until early 2026. Resold units went for several times the retail price.</li>
+<li>Kodak’s brand-licensing segment, which collects royalties from every Kodak licensee, earned <a href="https://www.sec.gov/Archives/edgar/data/0000031235/000119312526332850/kodk-20260630.htm">$13 million in the first half of 2026</a>, against $10 million a year earlier.</li>
+</ul>
+<p>If the Charmera pays Kodak something like a dollar a camera, even part of that $3 million increase means hundreds of thousands of cameras a quarter. <strong>My working estimate is about a million in the first year.</strong> The chip maker’s revenue growth gives a looser ceiling of a few million. The weak link is the royalty: at fifty cents a camera, the estimate doubles.</p>
+<p>How the Millennium Edition is doing is genuinely unclear. Reto capped orders when it launched in June 2026, but neither edition has had the original’s months of sell-outs since. Being in stock doesn’t prove weak demand, because Reto may simply have built more. Kodak’s next quarterly filing, the first to cover a full quarter of the new edition, will say more.</p>
+</section>
+<section id="who-makes-it" class="level2">
+<h2 class="anchored" data-anchor-id="who-makes-it">Who makes it</h2>
+<p><strong>Reto</strong> is a small Hong Kong design and brand company. It designs the products and sells them worldwide, and a contract factory builds them. Its founders keep a low profile; nearly everything public comes through Vivienne Tsang, its sales and marketing director.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Reto’s main products and milestones">
+<table class="caption-top table">
+<caption>Reto’s main products and milestones</caption>
+<thead>
+<tr class="header">
+<th>When</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2019</td>
+<td>Reto’s own three-lens 3D film camera, <a href="https://kosmofoto.com/2019/03/reto3d-stereo-camera-kickstarter/">crowdfunded on Kickstarter</a></td>
+</tr>
+<tr class="even">
+<td>May 2022</td>
+<td>The <a href="https://kosmofoto.com/2022/05/reto-announces-kodak-branded-ektar-h35-half-frame-camera/">Kodak Ektar H35</a>, a $50 half-frame film camera and Reto’s first Kodak camera</td>
+</tr>
+<tr class="odd">
+<td>September 2025</td>
+<td>The Kodak Charmera, its first digital camera</td>
+</tr>
+<tr class="even">
+<td>Late 2025</td>
+<td>The <a href="https://www.australianphotography.com/gear/kodak-announces-affordable-35mm-film-camera-the-reto-snapic-a1">Kodak Snapic A1</a>, a $99 35 mm film camera with a glass lens</td>
+</tr>
+<tr class="odd">
+<td>2026</td>
+<td>The Charmera wins an iF Design Award in March and a <a href="https://boingboing.net/2026/05/11/design-awards-charmed-by-kodaks-35-charmera.html">Red Dot award</a> in May</td>
+</tr>
+<tr class="even">
+<td>June 2026</td>
+<td>The Charmera Millennium Edition: the same hardware with new shells, frames and filters</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Kodak</strong> lends the name. Reto is one of its global brand licensees, and the Charmera’s royalties show up, unseparated, in Kodak’s brand segment.</p>
+<p><strong>The factory</strong> wrote the software, built on Generalplus’s. The firmware still carries its build history:</p>
+<ul>
+<li>the project string <code>JH5408  20250520</code>;</li>
+<li>source paths under <code>G:\code\2247\5408\v006</code>, meaning project 5408, on the 2247 chip, sixth revision;</li>
+<li>paths from a Generalplus reference kit for a <em>different</em> chip, <code>GPCV1235F_WIFI_SingleCam_SDK_20191212</code>, which is where the Wi-Fi stack comes from;</li>
+<li>an auto-exposure and white-balance library signed “by Comi”, dated March 2020;</li>
+<li>a second build date, <code>Oct 14 2025</code>, a month after launch.</li>
+</ul>
+<p>The card updater looks for files starting <code>JH_</code>, so “JH” is most likely the factory’s own prefix. That makes each new edition, in effect, the factory swapping assets in its own build, which is why Reto’s newest Charmera can have new filters while older ones can’t get them.</p>
+</section>
+<section id="why-it-hit" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-hit">Why it hit</h2>
+<p>Most of the Charmera’s success came from decisions Reto made deliberately. Some of it was timing.</p>
+<p>What Reto did well:</p>
+<ul>
+<li><strong>The licence.</strong> Reto has said that building a brand from scratch was the hard part with its own cameras. The Kodak name solved that, and opened doors to retailers.</li>
+<li><strong>The reference.</strong> The design tributes the Kodak Fling, Kodak’s first disposable camera. The yellow model’s “1987” is the Fling’s year. It’s specific enough to feel authentic, even to buyers born long after the Fling.</li>
+<li><strong>The blind box.</strong> It turned a $30 gadget into a collectible, with a 1-in-48 secret edition.</li>
+<li><strong>The keychain.</strong> Every owner carries it where other people can see it.</li>
+<li><strong>Cheap engineering.</strong> A vendor reference platform at a few dollars a unit kept the price an impulse buy, and made new editions cheap to produce.</li>
+</ul>
+<p>Where it was lucky:</p>
+<ul>
+<li><strong>The wave.</strong> It launched at the height of the 2025 blind-box craze and the lo-fi digital camera trend.</li>
+<li><strong>Under-forecasting.</strong> Selling ten times the plan created months of real scarcity, which fed the hype. It looks like first-run planning, not a tactic.</li>
+<li><strong>Reviews that helped.</strong> “<a href="https://www.techradar.com/cameras/compact-cameras/the-viral-kodak-charmera-is-the-worst-camera-ive-ever-used-but-its-so-bad-and-so-retro-that-i-actually-love-it">The worst camera I’ve ever used</a>” came with “but I actually love it”, because people were buying a charm that happens to take photos.</li>
+</ul>
+</section>
+<section id="whats-still-unknown" class="level2">
+<h2 class="anchored" data-anchor-id="whats-still-unknown">What’s still unknown</h2>
+<ul>
+<li>How the video path actually works, and at what resolution video is really recorded.</li>
+<li>Whether every production batch runs the same firmware and the same flash chip as the public dump.</li>
+<li>The camera’s physical colour and noise response, which needs untouched files straight off the card.</li>
+<li>How many have sold, and the royalty rate behind every estimate.</li>
+<li>Who the “JH” factory is.</li>
+</ul>
+<div class="archive-note">
+<p>Estimates on this page come from research notes kept alongside the essay. Firmware findings are against the public dump from <a href="https://github.com/Khimira/Project-Sirius">Project Sirius</a>, SHA-256 <code>720ed0b6…436c</code>. The context, the checks and the scripts are in <a href="https://github.com/arjunbazinga/arjunbazinga.github.io/blob/master/scripts/charmera/README.md"><code>scripts/charmera/README.md</code></a>. This page has no affiliation with Kodak, Reto or Generalplus.</p>
+</div>
+
+
+<nav class="essay-next" aria-label="Continue reading"><p class="next-label">Read next</p><p class="next-title"><a href="../../posts/tiny-camera-better-taste/">Better Taste for a Tiny Camera</a></p><p class="reading-links"><a href="../../posts/">All writing</a><a href="https://arjunsriva.substack.com/">Subscribe on Substack</a></p></nav>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.arjunsriva\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Arjun Srivastava · Tokyo</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://arjunsriva.substack.com/">
+<p>Subscribe</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../index.xml">
+<p>Writing RSS</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arjunbazinga">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script src="../../static/reading-tools.js" defer=""></script>
+
+
+
+
+</body></html>
