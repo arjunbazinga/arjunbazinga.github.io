@@ -222,6 +222,19 @@
 <blockquote class="blockquote">
 <p>Don’t remove the Charmera from the photograph. Give the Charmera better taste.</p>
 </blockquote>
+<section id="a-hit-made-of-software" class="level2">
+<h2 class="anchored" data-anchor-id="a-hit-made-of-software">A hit made of software</h2>
+<p>The Charmera isn’t made by Kodak. It comes from Reto, a small Hong Kong company that started in 2019 with a three-lens 3D film camera on Kickstarter and went on to license the Kodak name for a line of retro film cameras. The Charmera went on sale on 9 September 2025 at $29.99, in blind boxes: you don’t know which of seven designs you’ll get, and a clear “secret” edition turns up in about one box in 48. It <a href="https://petapixel.com/2025/09/18/the-kodak-charmera-blind-boxes-sold-out-in-just-24-hours/">sold out within a day</a>, and Reto said demand was about ten times what it had planned for. Restocks came in rounds, resale listings ran at several times the price, and an official distributor took it into Japan.</p>
+<p>Reto doesn’t appear to design the electronics itself. The chip is a Generalplus camera processor, and the firmware, as we’ll see, is a generic small-camera platform wearing a Kodak skin. The founders keep a low profile; most of what is public comes from marketing. My rough estimate of the parts came to $4 to $5, against the $30 price. The rest of the value is the Kodak name, the blind box and the timing.</p>
+<p>Timing matters in this market. Camp Snap’s screen-free CS-8 video camera <a href="https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look">sold $20 million in eleven months</a>, by the company’s account, and nearly sold out again after Taylor Swift was seen filming with one in December 2025.</p>
+<p>In June 2026 Reto followed up with the <a href="https://www.photographytalk.com/kodak-charmera-millennium-edition/">Charmera Millennium Edition</a>. The core hardware is the same. What’s new is the shells and the software: four new frames and seven new filters, including Pixel filters in coral, honey, teal and violet. The thing that makes a new Charmera new is software, but a Charmera already on someone’s keys can’t get it. Its looks are fixed at the factory, compiled into the firmware with everything else.</p>
+</section>
+<section id="a-camera-that-gets-better" class="level2">
+<h2 class="anchored" data-anchor-id="a-camera-that-gets-better">A camera that gets better</h2>
+<p>The usual way to stay in the zeitgeist is the next hit: new shells, new looks, a new box to buy. The other way is to make every camera already sold worth more. Phones went that way: VSCO sold film looks to people who already had a camera. Camp Snap has started doing it with its own hardware. Its newer firmware <a href="https://www.campsnapphoto.com/blogs/camp-snap-news/customize-your-campsnap-with-filters-%F0%9F%8E%A8%F0%9F%93%B8">loads a custom filter file</a> from the memory card, and owners design filters on Camp Snap’s website and share them with each other.</p>
+<p>Charmera owners are already working around their cameras. A <a href="https://github.com/jphastings/charmera">command-line importer</a> repairs the broken metadata in its photos, and a <a href="https://github.com/Lulzx/charmera">Mac app</a> re-processes them with film filters. A filter on a finished JPEG, though, works with whatever the camera left behind: exposure already chosen, highlights already clipped, detail already resampled and compressed. A look built into the camera can act before those losses.</p>
+<p>The rest of this essay works outwards from the photograph: how the camera makes one, what a look is and where it could live, what is in the flash and how an update gets there. Along the way it builds two larger ideas. A <em>style compiler</em> turns a rich model of taste into the few numbers this hardware can use. A <em>customisation plane</em> keeps looks, frames and exposure character as data, separate from the program, so owners can install them safely.</p>
+</section>
 <section id="what-happens-when-you-press-the-shutter" class="level2">
 <h2 class="anchored" data-anchor-id="what-happens-when-you-press-the-shutter">What happens when you press the shutter</h2>
 <p>Project Sirius published a dump of the Charmera’s firmware. It runs on a Generalplus GPCV2247F, an ARM7 chip. There is no Linux or shell to log into, so understanding it meant disassembling it. I ran the original instructions in an emulator, one routine at a time, with the hardware around them modelled explicitly. That turned the dump into a fairly exact account of how a still photograph is made.</p>
@@ -511,18 +524,17 @@ FD 01  09 00  0A 78  05 01  06 DA
 <h2 class="anchored" data-anchor-id="complexity-belongs-off-the-camera">Complexity belongs off the camera</h2>
 <p>Kodak sold its first camera, in 1888, with the line “You press the button, we do the rest.” It came loaded with a hundred exposures; you mailed the whole camera back to Rochester, and the factory developed, printed and reloaded it. The intelligence lived off the camera then too.</p>
 <p>The best film renderers today are expensive. Spectral film simulations model the negative and the print from measured data. Learned systems such as Deep Analog infer a whole LUT from a single reference photograph. None of that should run on a keychain.</p>
-<p>The architecture I ended up with works like a compiler:</p>
-<pre class="text ascii-diagram"><code>  spectral · learned · tuned
-         teacher
-            │
-            ▼
-  offline optimisation
-            │
-            ▼
-tiny deterministic student
-            │
-            ▼
-curve · matrix · AE table
+<p>The teacher can be richer than any one film stock. A model that has learned how colour, light and tone behave across a vast number of photographs can pick up a new style from a handful of examples. That knowledge is far too big for a keychain, so the job is distillation: find the few numbers this camera can actually use that make its photographs behave most like the teacher’s.</p>
+<p>The search shouldn’t run on finished JPEGs. It should run through a simulator of this camera: the sensor crop, auto-exposure and its gamma-fed metering, the 800 × 600 surface, the hook, the overlays and the JPEG encoder. The sections above are that simulator’s specification. The optimiser varies the student’s parameters, renders candidate photographs through the simulated camera, and keeps whatever the teacher prefers. The architecture works like a compiler:</p>
+<pre class="text ascii-diagram"><code>teacher: film · spectral · learned
+taste learned from examples
+    │
+    ▼
+optimiser ◀── camera simulator
+    │         sensor · AE · gamma
+    ▼         hook · JPEG
+student: this camera's knobs
+curve · matrix · AE step
 small LUT · residual kernel</code></pre>
 <p>The expensive intelligence designs the camera’s behaviour. It does not run for every photograph.</p>
 <p>How small can the student be? A 17 × 17 × 17 LUT at 8 bits per channel takes 14,739 bytes per mode, so all seven fit in about 100 KiB. That is affordable in software at the hook. It would be cheaper still if hardware did the work. Generalplus’s related SDKs show a hardware luma curve and a 3 × 3 colour matrix, so I fitted each LUT with exactly that: a 256-entry curve on brightness, followed by a matrix.</p>
@@ -569,6 +581,7 @@ small LUT · residual kernel</code></pre>
 <p>Those scores are measured across the whole colour cube. In the darkroom, choose <em>Hardware student</em> and then <em>Show difference</em> to see the same comparison on a real photograph, with the per-photo score underneath. B&amp;W survives almost perfectly; a monochrome look is mostly a tone curve. VIVID is the worst fit by a wide margin, but not where I expected.</p>
 <p>Velvia’s character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it is spread across the whole frame instead. On four of the album photos, VIVID’s student is 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It lost contrast. The fit treated every colour in the cube as equally important, so it spent its small budget on saturated extremes that photographs rarely contain, and gave up the contrast that every photograph uses.</p>
 <p>That is an evaluation lesson as much as a colour one: the score you optimise decides what you lose. The next fit should weight colours by how often real Charmera photographs contain them. Even then, some modes will live almost entirely in hardware, while others need a software residual at the hook. VIVID will need most of its look there.</p>
+<p>The same teacher can compile for more than one camera. The Charmera is one target. A Camp Snap, another camera on the same Generalplus platform, or a phone is another, each with its own simulator and its own knobs. Film looks have lived as know-how, in stocks, labs and photographers’ habits. A compiler like this turns that know-how into something more portable: a model of what people find beautiful, fitted to whatever hardware they already carry.</p>
 </section>
 <section id="inside-the-2-mib" class="level2">
 <h2 class="anchored" data-anchor-id="inside-the-2-mib">Inside the 2 MiB</h2>
@@ -614,7 +627,19 @@ small LUT · residual kernel</code></pre>
   </details>
   <figcaption id="flash-caption">Regions measured from the public dump: used and blank space, the resource directory's 43 entries, and the settings and photo areas the firmware itself reads. The toggle shows where the updater's final erase lands for each kind of update file.</figcaption>
 </figure>
-<p>Most of it is program. The resources hold the UI: icons, menu art, the four frames, a 121 KiB pack whose format nobody has decoded, and some small things you can still play.</p>
+<p>Most of it is program. The rest is the camera’s whole interface: icons, screens, menu text, the four frames and their thumbnails, and a few small things you can still play. The art is stored as compressed 16-bit colour pixels, and most of it is drawn for a 160 × 80 screen, the size of the startup logo.</p>
+<figure class="charmera-assets charmera-screens figure">
+  <div class="charmera-screen-grid">
+    <div><img src="https://www.arjunsriva.com/static/charmera/firmware/ui/home.png" width="160" height="80" alt="Home screen art: camera, video camera and a calendar with a wrench, on Kodak yellow." loading="lazy" class="figure-img"><span>Home</span></div>
+    <div><img src="https://www.arjunsriva.com/static/charmera/firmware/ui/charging.png" width="160" height="80" alt="Charging screen: a small green battery with a plug, on yellow." loading="lazy" class="figure-img"><span>Charging</span></div>
+    <div><img src="https://www.arjunsriva.com/static/charmera/firmware/ui/pc-cam.png" width="160" height="80" alt="PC camera screen: a white monitor outline with a camera inside, on yellow." loading="lazy" class="figure-img"><span>PC camera</span></div>
+    <div><img src="https://www.arjunsriva.com/static/charmera/firmware/ui/disk-drive.png" width="160" height="80" alt="Disk drive screen: a white USB stick outline, on yellow." loading="lazy" class="figure-img"><span>Disk drive</span></div>
+    <div><img src="https://www.arjunsriva.com/static/charmera/firmware/ui/audio-record.jpg" width="160" height="80" alt="Audio recording background: a microphone between sound-wave bars on a lilac gradient." loading="lazy" class="figure-img"><span>Audio recording</span></div>
+    <div class="is-wide"><img src="https://www.arjunsriva.com/static/charmera/firmware/ui/usb-connect.png" width="256" height="128" alt="USB screen: a pixel-art desktop computer and monitor with a USB symbol and a cable." loading="lazy" class="figure-img"><span>USB connected, 256 × 128</span></div>
+  </div>
+  <figcaption>Interface art decoded from the firmware's resources, enlarged with hard pixel edges. The audio-recording background is a JPEG copied byte for byte; the rest are inflated from their compressed resources. That art for a feature is present doesn't mean the Charmera can reach the feature.</figcaption>
+</figure>
+<p>The 121 KiB block the map labels <em>Menu text</em> holds every string the interface can draw, in 14 languages. The English set has 155 entries, and it reads like the manual of a different product: <em>Loop recording</em>, <em>Motion Detection</em>, <em>2.5K</em>, <em>1080P</em>, <em>WIFI download</em>, <em>MP3</em>, and a factory screen called <em>Key And USB Test</em>. A string table shows what the software was built from, not what the Charmera puts on its screen, and I haven’t traced which of these strings it ever shows. But it is the clearest sign of the platform under the Kodak skin: a generic small-camera firmware, configured down to a keychain.</p>
 <figure class="charmera-assets figure">
   <div class="charmera-logo">
     <img src="https://www.arjunsriva.com/static/charmera/firmware/power-on-logo.jpg" width="160" height="80" alt="The startup logo stored in the firmware: Kodak's red K mark on a yellow background." class="figure-img">
@@ -640,14 +665,20 @@ small LUT · residual kernel</code></pre>
     <img src="https://www.arjunsriva.com/static/charmera/firmware/frame-2-on-street.webp" width="400" height="300" loading="lazy" decoding="async" alt="Stock frame 3: pixel-art hearts, sparkles, batteries and film canisters scattered over the photo." class="figure-img">
     <img src="https://www.arjunsriva.com/static/charmera/firmware/frame-3-on-street.webp" width="400" height="300" loading="lazy" decoding="async" alt="Stock frame 4: a yellow toy camera with the photo in its small screen, above a rainbow stripe and the year 1987." class="figure-img">
   </div>
-  <figcaption>The four stock frames (Kodak's artwork, decoded from the public firmware dump) composited onto a real Charmera photo with the camera's own rule.</figcaption>
+  <div class="charmera-frame-menu">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/ui/frame-menu-0.png" width="112" height="80" loading="lazy" alt="Menu thumbnail for the film-strip frame, with a grey centre." class="figure-img">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/ui/frame-menu-1.png" width="112" height="80" loading="lazy" alt="Menu thumbnail for the window frame, with a grey canvas." class="figure-img">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/ui/frame-menu-2.png" width="112" height="80" loading="lazy" alt="Menu thumbnail for the pixel frame: hearts, sparkles and Kodak K marks on grey." class="figure-img">
+    <img src="https://www.arjunsriva.com/static/charmera/firmware/ui/frame-menu-3.png" width="112" height="80" loading="lazy" alt="Menu thumbnail for the 1987 frame: the yellow camera with a grey screen." class="figure-img">
+  </div>
+  <figcaption>The four stock frames (Kodak's artwork, decoded from the public firmware dump) composited onto a real Charmera photo with the camera's own rule. Below them are the 112 × 80 thumbnails the camera's frame menu shows, with the see-through area painted in the key grey.</figcaption>
 </figure>
 <p>Each frame is an 800 × 600 image in exactly the same row-pair layout as the capture surface. Each is split into three 200-row strips, compressed with DEFLATE behind a <code>GPZP</code> tag.</p>
 <p>Frames are drawn after the hook, so a film look would never tint them, and they have no alpha channel. To find out how the camera decides what is see-through, I ran its own frame routine on test patterns. This is the test, four instructions in the routine at <code>0xEDA4</code>:</p>
 <pre class="text"><code>ldrh r1, [r0]        ; two lumas
 sub  ip, r1, #0x8c00 ; minus 0x8C8C
 subs ip, ip, #0x8c   ; (140, 140)
-beq  skip            ; 0: keep photo</code></pre>
+beq  skip            ; keep photo</code></pre>
 <p>It walks the image a pixel pair at a time and leaves the photo alone wherever both of the frame’s brightness values are exactly 140. Colour isn’t checked at all. A frame drawn in bright red that happens to have a brightness of 140 would show the photo straight through it.</p>
 <p>Every strip also has a fixed slot in flash, between 2 KB and 19 KB. The slots are packed back to back, each just the stock strip rounded up to the next 512-byte sector, so the stock frames fill them almost to the byte. A custom frame with the same layout and compression that fits its slots would change nothing else in the firmware. So here is a frame maker.</p>
 <figure class="frames figure" id="charmera-frames" aria-labelledby="frames-caption">
@@ -689,12 +720,12 @@ beq  skip            ; 0: keep photo</code></pre>
   </div>
   <div class="table-scroll">
     
-<div class="table-scroll" tabindex="0" aria-label="Encoded strips against the chosen slot">
+<div class="table-scroll" tabindex="0" aria-label="Encoded files against the chosen slot">
 <table class="exposure-table frames-strips caption-top">
-<caption>Encoded strips against the chosen slot</caption>
+<caption>Encoded files against the chosen slot</caption>
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th" scope="col">Strip</th>
+<th data-quarto-table-cell-role="th" scope="col">File</th>
 <th data-quarto-table-cell-role="th" scope="col">Encoded</th>
 <th data-quarto-table-cell-role="th" scope="col">Slot</th>
 <th data-quarto-table-cell-role="th" scope="col">Result</th>
@@ -706,22 +737,95 @@ beq  skip            ; 0: keep photo</code></pre>
 </div>
 
   </div>
+  <div class="frames-thumb-wrap">
+    <canvas class="frames-thumb" width="112" height="80" aria-label="The frame's 112 by 80 menu thumbnail"></canvas>
+    <p>Menu thumbnail, 112 × 80. A stock frame keeps the camera's own; yours is generated from the frame, with see-through areas in the key grey.</p>
+  </div>
   <p class="frames-nudged"></p>
   <p class="frames-status" aria-live="polite"></p>
   <div class="frames-files"><span class="frames-files-label">Files:</span> <span class="frames-downloads"></span></div>
   <p class="frames-verify"></p>
-  <figcaption id="frames-caption">The stock frames are inflated in your browser from the exact strip bytes in the firmware. The other templates are original designs; upload a PNG and its transparent areas become see-through. The preview uses the camera's compositing rule on a real Charmera photo; that photo already carries its date stamp, which on the camera is drawn after the frame, on top of it. Each strip is encoded with fixed-Huffman DEFLATE, the only kind the stock frames use. My encoder's output is byte-identical to zlib's, which is what the slot budgets were measured with. The files are real, but there is no safe way to install them yet, and the small menu thumbnails for frames use a format nobody has decoded.</figcaption>
+  <figcaption id="frames-caption">The stock frames are inflated in your browser from the exact strip bytes in the firmware. The other templates are original designs; upload a PNG and its transparent areas become see-through. The preview uses the camera's compositing rule on a real Charmera photo; that photo already carries its date stamp, which on the camera is drawn after the frame, on top of it. Each strip is encoded with fixed-Huffman DEFLATE, the only kind the stock frames use. My encoder's output is byte-identical to zlib's, which is what the slot budgets were measured with. The fourth file is the frame's menu thumbnail, in the same 16-bit colour format as the rest of the camera's interface art. The files are real, but there is no safe way to install them yet.</figcaption>
 </figure>
-<p>Start from a stock frame to see the camera’s own budget in action, then try a template or your own PNG. The table shows whether each strip fits the slot you choose. Detail costs bytes: the middle strips of slots 1 and 3 have only 2 KB, so the middle of those frames has to be almost all see-through. When installation is solved, this part is ready.</p>
+<p>Start from a stock frame to see the camera’s own budget in action, then try a template or your own PNG. The table shows whether each strip, and the menu thumbnail, fits the slot you choose. Detail costs bytes: the middle strips of slots 1 and 3 have only 2 KB, so the middle of those frames has to be almost all see-through. When installation is solved, this part is ready.</p>
 </section>
 <section id="the-bug-that-wasnt" class="level2">
 <h2 class="anchored" data-anchor-id="the-bug-that-wasnt">The bug that wasn’t</h2>
-<p>None of this, the film modes or the frames, matters unless a modified firmware can get onto the camera. The camera’s own updater gave me the most instructive mistake of the project.</p>
+<p>None of this, the film modes or the frames, matters unless a modified firmware can get onto the camera. There are two ways in. One is an update file on the memory card. The other is USB: the camera speaks a protocol with memory commands, but the stock handshake grants a lower access level than they need (more on that below). Underneath both, the flash chip itself can be read and reprogrammed directly, which is how a bricked camera was recovered and how a backup can be made. The card updater gave me the most instructive mistake of the project.</p>
 <p>The firmware looks for a file on the card named <code>JH_5408</code>, followed by a timestamp and a checksum that is simply the sum of the file’s bytes. A community member had already reported that updating this way bricked a camera, which then needed its flash chip reprogrammed directly. I ran the original updater in the emulator with a full 2 MiB image. After writing every block and verifying it, the updater issued one more erase, at an address 64 KiB <em>past the end</em> of the 2 MiB chip. If the flash controller wraps that address around, it erases the block at 64 KiB, which is part of the firmware itself. That looked like a smoking gun.</p>
 <p>Then I looked at what else the 2 MiB dump contained. The firmware’s resources end at <code>0x168E92</code>. Above that sit the camera’s live state: append-only settings records at <code>0x170000</code>, a saved-photo index at <code>0x17F000</code>, and two 960 × 720 JPEGs taken by whoever owned the dumped camera. A full dump isn’t an update package. It is software plus one camera’s settings and photographs.</p>
 <p>So I asked what a package of only the software would look like; flip the map between the two. Padded to the next 512-byte sector, it ends at <code>0x169000</code>, and the updater’s mysterious final erase then lands exactly on <code>0x170000</code>: the settings block. I ran the original settings and photo-index routines on the result. The settings reader finds no valid record, the firmware takes its own existing reset path, and the photo index is rebuilt empty. The final erase looks like a factory reset, not a bug.</p>
 <p>Two of my earlier recommendations would have made things worse. Deleting the erase would have removed the reset. A guard I had proposed against short reads would have rejected the final, legitimately shorter read of a resource-sized package. The cause of the reported bricking is still unconfirmed. It needs a real factory update or a before-and-after dump of a failed camera, not more emulation.</p>
 <p>The lesson was about evidence. “Preserve every non-blank byte” sounded like the safe success criterion, but it would have preserved someone else’s photographs and broken the reset the update intended.</p>
+</section>
+<section id="a-customisation-plane" class="level2">
+<h2 class="anchored" data-anchor-id="a-customisation-plane">A customisation plane</h2>
+<p>In the end, all of this answers one question for each thing worth changing: where does it live, what reads it, and what changes it? If changing a look means patching code scattered through the program, every update risks the camera. If it means replacing data the program already reads, the risk shrinks to a known format, a fixed slot and a checksum.</p>
+<div class="table-scroll" tabindex="0" aria-label="Where each customisable thing lives, from the traced resource directory, the control-surface audit and the updater lifecycle tests. “An update” means the stock card updater, which rewrites program and resources together.">
+<table class="caption-top table">
+<caption>Where each customisable thing lives, from the traced resource directory, the control-surface audit and the updater lifecycle tests. “An update” means the stock card updater, which rewrites program and resources together.</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Thing</th>
+<th>Lives in</th>
+<th>Read by</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frames</td>
+<td>Twelve compressed strips in the resources, each in a fixed slot</td>
+<td>The frame routine, at every capture</td>
+<td>An update</td>
+</tr>
+<tr class="even">
+<td>Frame thumbnails</td>
+<td>Four 112 × 80 images in the resources</td>
+<td>The frame menu</td>
+<td>An update</td>
+</tr>
+<tr class="odd">
+<td>Tone curve</td>
+<td>Calibration data, inside the program image</td>
+<td>Metering and the image processor</td>
+<td>An update; it retunes exposure too</td>
+</tr>
+<tr class="even">
+<td>Exposure character</td>
+<td>The 13-step target table and the 50/60 Hz program lines, inside the program image</td>
+<td>Auto-exposure</td>
+<td>An update</td>
+</tr>
+<tr class="odd">
+<td>Pixel filter colours</td>
+<td>Constants inside the Pixel routine’s code</td>
+<td>The Pixel routine</td>
+<td>A code patch</td>
+</tr>
+<tr class="even">
+<td>Film look</td>
+<td>Nowhere yet</td>
+<td>A hook at the 800 × 600 surface, not yet built</td>
+<td>One code patch, then data</td>
+</tr>
+<tr class="odd">
+<td>Your settings</td>
+<td>Append-only records at <code>0x170000</code>, checked with CRC32</td>
+<td>Start-up and the setup menu</td>
+<td>The setup menu; reset by a software update (in emulation)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Most of what people would want to change is already data. Frames, thumbnails, the tone curve and the exposure tables sit at known places, in formats this essay has decoded. The curve and the tables happen to live inside the program image, so a checker has to know exactly which of those bytes are data and which are code. The film look is the exception. It needs one program change: a hook after capture that reads a look from a data slot, the way the frame routine reads a frame.</p>
+<p>That suggests the shape of a customisation plane. Change the program once, verify it byte for byte, and freeze it. After that, every customisation is a data package: a look, a frame and its thumbnail, an exposure step. Each has a fixed slot, a size budget and a checksum, and each is checked on a computer before it reaches the camera. The frame maker above already works that way. It refuses anything that doesn’t fit its slot and proves that every file inflates back to the exact bytes. An owner’s camera could then keep getting better without anyone patching code again. It is the separation Camp Snap’s filter files make, applied to a camera whose maker never planned for it.</p>
 </section>
 <section id="being-wrong-carefully" class="level2">
 <h2 class="anchored" data-anchor-id="being-wrong-carefully">Being wrong carefully</h2>
@@ -741,7 +845,7 @@ beq  skip            ; 0: keep photo</code></pre>
 <p>No firmware has been patched or flashed. No look is worth losing the camera, so a verified backup and restore path for my specific unit comes before any installation.</p>
 <p>Some smaller things turned up along the way:</p>
 <ul>
-<li><strong>The EXIF date has an extra colon.</strong> The camera writes <code>2026:09:26:22:08:23</code> where the standard wants a space before the time. A small patch fixes it in emulation.</li>
+<li><strong>The EXIF date has an extra colon.</strong> The camera writes <code>2026:09:26:22:08:23</code> where the standard wants a space before the time. Import tools repair it on the computer; a small patch fixes it at the source, in emulation.</li>
 <li><strong>USB memory access is one byte away.</strong> The stock handshake grants access level 1; the memory commands require 2. Changing <code>mov r0, #1</code> to <code>#2</code> opens them in emulation. Getting that byte onto the camera is the same installation problem as everything else.</li>
 </ul>
 <p>The open problems are concrete now:</p>
@@ -751,7 +855,9 @@ beq  skip            ; 0: keep photo</code></pre>
 <li>an ARM version of the renderer whose output matches the reference byte for byte, within the hook’s memory and time budget;</li>
 <li>the sensor’s physical response, measured with a deliberately small set of about twelve real scenes rather than a giant benchmark. Two are in this essay; I need the rest, straight off the card.</li>
 </ul>
-<p>The first target is one excellent FILM default, end to end, before polishing the other six. The test stays the same: a tiny camera, an ordinary moment, a press of the shutter, and a photograph worth keeping.</p>
+<p>The first target is one excellent FILM default, end to end, before polishing the other six. Then the plane: a frozen, verified program and looks that arrive as data.</p>
+<p>Beyond this one camera, the bet is simple. Cheap cameras will keep being built from the same few platforms, and the hits will keep coming. The value that lasts is in what the hardware does with light: an understanding of what people find beautiful, compiled into the knobs a given camera has, and delivered to cameras people already own. Kodak’s 1888 promise was “You press the button, we do the rest.” The rest can be done again, offline and ahead of time.</p>
+<p>The test stays the same: a tiny camera, an ordinary moment, a press of the shutter, and a photograph worth keeping.</p>
 <div class="archive-note">
 <p>This work builds on the Charmera community’s. <a href="https://github.com/Khimira/Project-Sirius">Project Sirius</a> published the firmware dump. <a href="https://byjp.pckt.blog/disassembling-the-kodak-charmera-psk3fky">byjp’s teardown</a> identified the chips. In <a href="https://github.com/Khimira/Project-Sirius/issues/1">Project Sirius issue #1</a>, swagnastywill had already reverse-engineered the frame format and LChouRepo had reported the USB authorization barrier. MrHDR reported the updater filename, checksum and bricking on r/CharmeraModding. Film teachers and references include <a href="https://github.com/andreavolpato/spektrafilm">spektrafilm</a>, <a href="https://github.com/thedevmark/film-lab">Film Lab</a>, <a href="https://github.com/TomPoczos/PoLUT">PoLUT</a>, <a href="https://github.com/GVal98/AutoLUT">AutoLUT</a> and <a href="https://arxiv.org/abs/2608.14702">Deep Analog</a>. Film-stock names are descriptive references; this project has no affiliation with Kodak, Fujifilm, CineStill or the projects cited.</p>
 </div>
