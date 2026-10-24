@@ -228,6 +228,28 @@ Arjun asked for examples from the firmware itself. `build_assets.py` (`build_fir
 - **Interface art (24 Oct 2026).** `build_interface` writes `firmware/ui/`: home, charging, PC camera, disk drive and USB screens, the audio-recording background and the four frame-menu thumbnails. The `PV` files are also copied as `.gpzp` for the frame maker.
 - **Snippets.** The see-through test (`0xEE28–0xEE34`) and the first two rows of the sensor init table are quoted in the essay.
 
+## Information architecture (24 Oct 2026)
+
+Arjun's dictated summary of the research (24 Oct 2026) reads well top to bottom because each answer raises the next question. The two pages now follow that scaffold.
+
+- **The essay (`index.qmd`) is the argument, as eight questions** in the order they had to be answered:
+  1. What is this thing, and why did it hit?
+  2. Can anyone get inside it?
+  3. How does it make a photo?
+  4. What could we change, and how safely?
+  5. Why is that worth doing?
+  6. What should it look like?
+  7. How do you fit taste onto a $30 camera?
+  8. Where does it stand, and where is it going?
+
+  Each is an `##` with an explicit id (`#q-what` … `#q-next`). The older sections sit under them as `###`. `toc-depth: 2` keeps the table of contents to the eight questions, a route list under the opening links them with one-line answers, and CSS labels each part "Question N of 8".
+- **Rules for future edits.** Every part opens with a sentence that picks up the previous answer and closes with one that raises the next question. A widget lives under the question it helps answer. Reference facts (specs, parts, costs, sales, company detail, method, wrong turns) go in the guide, not the essay. "Above" and "below" must stay true if anything moves.
+- **The guide (`inside.qmd`) is the reference**, ordered for lookup: spec sheet, what's inside, cost, sales, who makes it, why it hit, how this was figured out (method, the AI assistants' role, wrong turns), and what's unknown. It links back into the essay's questions.
+- **Decisions taken.**
+  - Part 2 comes before part 3, following the real order of discovery: the flash map and the updater story precede the photo pipeline.
+  - The AI role is stated plainly in both pages.
+  - The essay argues for upgrading cameras already sold without naming any app or business plan.
+
 ## Design decisions
 
 - **Social image.** The post's `image` is the camera-on-keys hero, which reads better in listings and link previews than the four-slice thumbnail (still built, now unused).

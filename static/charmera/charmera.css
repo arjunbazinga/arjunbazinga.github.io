@@ -380,3 +380,17 @@ body.quarto-dark .exposure-figure {
 }
 /* Long build strings and paths must wrap on phones. */
 main p code, main li code, main td code { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Essay scaffold: the question route and numbered question parts */
+.question-route { margin: 1.4rem 0 2.4rem; font-family: var(--font-ui); }
+.question-route ol { counter-reset: qr; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--site-rule); }
+.question-route li { counter-increment: qr; border-bottom: 1px solid var(--site-rule); }
+.question-route a { display: grid; grid-template-columns: 2.1rem minmax(0, 1fr); column-gap: 0.5rem; padding: 0.6rem 0.2rem; color: inherit; text-decoration: none; }
+.question-route a::before { content: counter(qr, decimal-leading-zero); grid-row: span 2; padding-top: 0.2rem; font-size: 0.74rem; font-variant-numeric: tabular-nums; color: var(--site-accent); }
+.question-route .qr-q { font-family: var(--font-body); font-size: 1.02rem; line-height: 1.4; color: var(--site-ink); }
+.question-route .qr-a { margin-top: 2px; font-size: 0.78rem; line-height: 1.5; color: var(--site-muted); }
+.question-route a:hover .qr-q, .question-route a:focus-visible .qr-q { color: var(--site-accent); text-decoration: underline; text-underline-offset: 3px; }
+.question-route a:focus-visible { outline: 2px solid var(--site-accent); outline-offset: 2px; border-radius: 2px; }
+main { counter-reset: qpart; }
+section[id^="q-"].level2 { counter-increment: qpart; }
+section[id^="q-"].level2 > h2::before { content: "Question " counter(qpart) " of 8"; display: block; margin-bottom: 0.35rem; font-family: var(--font-ui); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--site-accent); }

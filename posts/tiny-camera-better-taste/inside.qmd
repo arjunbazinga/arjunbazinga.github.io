@@ -18,7 +18,7 @@ include-in-header:
     <link rel="stylesheet" href="/static/charmera/charmera.css">
 ---
 
-This is the reference companion to [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/). The essay tells the story: how the Charmera makes a photograph, what a film look is made of, and how better looks could reach cameras people already own. This page collects the facts underneath it, for anyone who owns one, is thinking of buying one, or wants to build on it.
+This is the reference companion to [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/). The essay is an argument, told as eight questions in the order I had to answer them: what the Charmera is, whether anyone can get inside it, how it makes a photo, what could change, why that's worth doing, what it should look like, how to fit taste onto it, and where it stands. This page collects the facts underneath, for anyone who owns one, is thinking of buying one, or wants to build on it.
 
 Every claim says where it comes from:
 
@@ -42,7 +42,7 @@ Most listings give the same handful of numbers. Here is what each one turns out 
 
 : The Charmera's listed specifications against what the hardware and firmware show
 
-None of this makes the Charmera a worse buy than its reviews say. It explains them. Reviewers describe soft, low-detail photos and jerky video, and the numbers above are why.
+None of this makes the Charmera a worse buy than its reviews say. It explains them. Reviewers describe soft, low-detail photos and jerky video, and the numbers above are why. The essay traces the whole photo path in [How does it make a photo?](/posts/tiny-camera-better-taste/#q-photo)
 
 ## What's inside
 
@@ -86,7 +86,7 @@ The parts identification is [byjp's teardown](https://byjp.pckt.blog/disassembli
 
 The Charmera has close relatives. Godox's C100 camera runs the same Generalplus dashcam platform. Its community [firmware map](https://github.com/mombotro/Godox-C100-GHDK) lists the same USB ID, `1B3F:8301`, which also sits in the Charmera's firmware. It puts the colour processor at the same address, `0xD0800000`, but pairs it with a different sensor.
 
-The copies are a different story. The best-known Charmera clone, the G6 "thumb camera", sells for around $15 with a preview screen and a "1984" in place of "1987". [Hackaday](https://hackaday.com/tag/hx3302b/) found it runs on an unrelated chip, the HX-Tech HX3302B. [PetaPixel](https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/) called it a knockoff that "steals everything but the charm". The shell is easy to copy; the platform underneath is not the same.
+The copies are a different story. The best-known Charmera clone, the G6 "thumb camera", sells for around $15 with a preview screen and a "1984" in place of "1987". [Hackaday](https://hackaday.com/tag/hx3302b/) found it runs on an unrelated chip, the HX-Tech HX3302B. [PetaPixel](https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/) called it a knockoff that "steals everything but the charm". The shell is easy to copy; the platform underneath is not the same. How the firmware on that platform was read, and how changes could get back in, is the essay's [Can anyone get inside it?](/posts/tiny-camera-better-taste/#q-inside)
 
 ## What it costs to build
 
@@ -177,6 +177,33 @@ Where it was lucky:
 - **The wave.** It launched at the height of the 2025 blind-box craze and the lo-fi digital camera trend.
 - **Under-forecasting.** Selling ten times the plan created months of real scarcity, which fed the hype. It looks like first-run planning, not a tactic.
 - **Reviews that helped.** "[The worst camera I've ever used](https://www.techradar.com/cameras/compact-cameras/the-viral-kodak-charmera-is-the-worst-camera-ive-ever-used-but-its-so-bad-and-so-retro-that-i-actually-love-it)" came with "but I actually love it", because people were buying a charm that happens to take photos.
+
+## How this was figured out
+
+Most of this came from a few weeks of research in long conversations with AI assistants, ChatGPT and Claude. They read disassembly, wrote and ran the emulation harnesses, searched filings, teardowns and forums, and cross-checked one another's work. I chose the questions, judged the evidence and made the calls.
+
+The methods were plain ones:
+
+- **Static analysis of the public dump.** Call graphs, the camera's own build strings and resource directory, and the tables the code reads.
+- **Running the original code.** Selected routines from the dump, executed instruction by instruction in an emulator, with the hardware around them modelled explicitly. That is how the Pixel filter's threshold, the frame compositor's see-through rule and the way the tone curve feeds metering were confirmed. It is not the same as running on a camera, and nothing here has been flashed.
+- **Measuring real photos.** Two of my own Charmera photos, with phone photos as a control.
+- **Pricing from the supplier side.** Each line of the cost estimate built from the supplier's own margins and prices, not from retail.
+
+### Being wrong carefully
+
+Reverse engineering depends on the path you took, so the wrong turns stay on the record rather than being edited away. These are the ones that taught the most:
+
+- **"The sensor's native resolution is 1280 × 720."** This was stated too confidently before the sensor was identified. At that point the evidence only showed a working raster.
+- **"`sensor_preview_init` starts a task."** It doesn't. The string is a tag passed to a memory allocator.
+- **"This function is the auto-exposure controller."** It had the right arithmetic but no live callers. The real controller was elsewhere.
+- **"Digital gain is masked to eight bits."** The instruction clears bits 9 to 15, so values keep nine bits.
+- **"960 × 720 is a second photo mode."** It is the fallback used when there's no memory card. It also drops JPEG quality from as high as 85 to 45.
+- **"Standard is a constant 1.25× saturation."** It adapts with exposure, as the [essay describes](/posts/tiny-camera-better-taste/#the-filters-it-already-has).
+- **"The big empty block in the program is free space for new code."** It is the heap. The boot code hands exactly that range to the memory allocator, so code placed there would be overwritten by the first allocation.
+- **"The Wi-Fi stack is dead, so it can be overwritten."** Mostly dead, but two general-purpose helper functions happen to sit inside it, and live code calls them. Overwriting the region wholesale would have bricked the camera.
+- **"Teardowns say it has 2 MB of RAM."** The 2 MB is the flash chip. The processor carries 8 MB of memory in its own package, and getting that right was one of the two corrections that moved the cost estimate most.
+
+The rules that came out of these were plain ones. Keep what the binary shows separate from what a related SDK suggests, what emulation does, what the community reports and what real hardware does. Don't promote a function's name or its first caller into its meaning. Don't let a plausible architecture harden into fact.
 
 ## What's still unknown
 
