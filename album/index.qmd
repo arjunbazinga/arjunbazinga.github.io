@@ -162,5 +162,5 @@ Stars above the trees.
 ```
 
 ::: {.album-related}
-Several of these photographs reappear in [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/), where you can run them through a keychain camera's film modes.
+Several of these photographs reappear in [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/#the-darkroom), where you can run them through a keychain camera's film modes.
 :::
