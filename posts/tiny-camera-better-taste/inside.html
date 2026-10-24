@@ -332,6 +332,10 @@ ga('send', {
   <li><a href="#how-many-have-sold" id="toc-how-many-have-sold" class="nav-link" data-scroll-target="#how-many-have-sold">How many have sold</a></li>
   <li><a href="#who-makes-it" id="toc-who-makes-it" class="nav-link" data-scroll-target="#who-makes-it">Who makes it</a></li>
   <li><a href="#why-it-hit" id="toc-why-it-hit" class="nav-link" data-scroll-target="#why-it-hit">Why it hit</a></li>
+  <li><a href="#how-this-was-figured-out" id="toc-how-this-was-figured-out" class="nav-link" data-scroll-target="#how-this-was-figured-out">How this was figured out</a>
+  <ul class="collapse">
+  <li><a href="#being-wrong-carefully" id="toc-being-wrong-carefully" class="nav-link" data-scroll-target="#being-wrong-carefully">Being wrong carefully</a></li>
+  </ul></li>
   <li><a href="#whats-still-unknown" id="toc-whats-still-unknown" class="nav-link" data-scroll-target="#whats-still-unknown">What’s still unknown</a></li>
   </ul>
 </nav>
@@ -380,7 +384,7 @@ ga('send', {
 </header>
 
 
-<p>This is the reference companion to <a href="../../posts/tiny-camera-better-taste/">Better Taste for a Tiny Camera</a>. The essay tells the story: how the Charmera makes a photograph, what a film look is made of, and how better looks could reach cameras people already own. This page collects the facts underneath it, for anyone who owns one, is thinking of buying one, or wants to build on it.</p>
+<p>This is the reference companion to <a href="../../posts/tiny-camera-better-taste/">Better Taste for a Tiny Camera</a>. The essay is an argument, told as eight questions in the order I had to answer them: what the Charmera is, whether anyone can get inside it, how it makes a photo, what could change, why that’s worth doing, what it should look like, how to fit taste onto it, and where it stands. This page collects the facts underneath, for anyone who owns one, is thinking of buying one, or wants to build on it.</p>
 <p>Every claim says where it comes from:</p>
 <ul>
 <li><strong>Public</strong>: a published source, linked.</li>
@@ -439,7 +443,7 @@ ga('send', {
 </tbody>
 </table>
 </div>
-<p>None of this makes the Charmera a worse buy than its reviews say. It explains them. Reviewers describe soft, low-detail photos and jerky video, and the numbers above are why.</p>
+<p>None of this makes the Charmera a worse buy than its reviews say. It explains them. Reviewers describe soft, low-detail photos and jerky video, and the numbers above are why. The essay traces the whole photo path in <a href="../../posts/tiny-camera-better-taste/#q-photo">How does it make a photo?</a></p>
 </section>
 <section id="whats-inside" class="level2">
 <h2 class="anchored" data-anchor-id="whats-inside">What’s inside</h2>
@@ -503,7 +507,7 @@ ga('send', {
 <section id="relatives-and-copies" class="level3">
 <h3 class="anchored" data-anchor-id="relatives-and-copies">Relatives and copies</h3>
 <p>The Charmera has close relatives. Godox’s C100 camera runs the same Generalplus dashcam platform. Its community <a href="https://github.com/mombotro/Godox-C100-GHDK">firmware map</a> lists the same USB ID, <code>1B3F:8301</code>, which also sits in the Charmera’s firmware. It puts the colour processor at the same address, <code>0xD0800000</code>, but pairs it with a different sensor.</p>
-<p>The copies are a different story. The best-known Charmera clone, the G6 “thumb camera”, sells for around $15 with a preview screen and a “1984” in place of “1987”. <a href="https://hackaday.com/tag/hx3302b/">Hackaday</a> found it runs on an unrelated chip, the HX-Tech HX3302B. <a href="https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/">PetaPixel</a> called it a knockoff that “steals everything but the charm”. The shell is easy to copy; the platform underneath is not the same.</p>
+<p>The copies are a different story. The best-known Charmera clone, the G6 “thumb camera”, sells for around $15 with a preview screen and a “1984” in place of “1987”. <a href="https://hackaday.com/tag/hx3302b/">Hackaday</a> found it runs on an unrelated chip, the HX-Tech HX3302B. <a href="https://petapixel.com/2026/01/06/this-kodak-charmera-knockoff-steals-everything-but-the-charm/">PetaPixel</a> called it a knockoff that “steals everything but the charm”. The shell is easy to copy; the platform underneath is not the same. How the firmware on that platform was read, and how changes could get back in, is the essay’s <a href="../../posts/tiny-camera-better-taste/#q-inside">Can anyone get inside it?</a></p>
 </section>
 </section>
 <section id="what-it-costs-to-build" class="level2">
@@ -678,6 +682,33 @@ ga('send', {
 <li><strong>Under-forecasting.</strong> Selling ten times the plan created months of real scarcity, which fed the hype. It looks like first-run planning, not a tactic.</li>
 <li><strong>Reviews that helped.</strong> “<a href="https://www.techradar.com/cameras/compact-cameras/the-viral-kodak-charmera-is-the-worst-camera-ive-ever-used-but-its-so-bad-and-so-retro-that-i-actually-love-it">The worst camera I’ve ever used</a>” came with “but I actually love it”, because people were buying a charm that happens to take photos.</li>
 </ul>
+</section>
+<section id="how-this-was-figured-out" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-was-figured-out">How this was figured out</h2>
+<p>Most of this came from a few weeks of research in long conversations with AI assistants, ChatGPT and Claude. They read disassembly, wrote and ran the emulation harnesses, searched filings, teardowns and forums, and cross-checked one another’s work. I chose the questions, judged the evidence and made the calls.</p>
+<p>The methods were plain ones:</p>
+<ul>
+<li><strong>Static analysis of the public dump.</strong> Call graphs, the camera’s own build strings and resource directory, and the tables the code reads.</li>
+<li><strong>Running the original code.</strong> Selected routines from the dump, executed instruction by instruction in an emulator, with the hardware around them modelled explicitly. That is how the Pixel filter’s threshold, the frame compositor’s see-through rule and the way the tone curve feeds metering were confirmed. It is not the same as running on a camera, and nothing here has been flashed.</li>
+<li><strong>Measuring real photos.</strong> Two of my own Charmera photos, with phone photos as a control.</li>
+<li><strong>Pricing from the supplier side.</strong> Each line of the cost estimate built from the supplier’s own margins and prices, not from retail.</li>
+</ul>
+<section id="being-wrong-carefully" class="level3">
+<h3 class="anchored" data-anchor-id="being-wrong-carefully">Being wrong carefully</h3>
+<p>Reverse engineering depends on the path you took, so the wrong turns stay on the record rather than being edited away. These are the ones that taught the most:</p>
+<ul>
+<li><strong>“The sensor’s native resolution is 1280 × 720.”</strong> This was stated too confidently before the sensor was identified. At that point the evidence only showed a working raster.</li>
+<li><strong>“<code>sensor_preview_init</code> starts a task.”</strong> It doesn’t. The string is a tag passed to a memory allocator.</li>
+<li><strong>“This function is the auto-exposure controller.”</strong> It had the right arithmetic but no live callers. The real controller was elsewhere.</li>
+<li><strong>“Digital gain is masked to eight bits.”</strong> The instruction clears bits 9 to 15, so values keep nine bits.</li>
+<li><strong>“960 × 720 is a second photo mode.”</strong> It is the fallback used when there’s no memory card. It also drops JPEG quality from as high as 85 to 45.</li>
+<li><strong>“Standard is a constant 1.25× saturation.”</strong> It adapts with exposure, as the <a href="../../posts/tiny-camera-better-taste/#the-filters-it-already-has">essay describes</a>.</li>
+<li><strong>“The big empty block in the program is free space for new code.”</strong> It is the heap. The boot code hands exactly that range to the memory allocator, so code placed there would be overwritten by the first allocation.</li>
+<li><strong>“The Wi-Fi stack is dead, so it can be overwritten.”</strong> Mostly dead, but two general-purpose helper functions happen to sit inside it, and live code calls them. Overwriting the region wholesale would have bricked the camera.</li>
+<li><strong>“Teardowns say it has 2 MB of RAM.”</strong> The 2 MB is the flash chip. The processor carries 8 MB of memory in its own package, and getting that right was one of the two corrections that moved the cost estimate most.</li>
+</ul>
+<p>The rules that came out of these were plain ones. Keep what the binary shows separate from what a related SDK suggests, what emulation does, what the community reports and what real hardware does. Don’t promote a function’s name or its first caller into its meaning. Don’t let a plausible architecture harden into fact.</p>
+</section>
 </section>
 <section id="whats-still-unknown" class="level2">
 <h2 class="anchored" data-anchor-id="whats-still-unknown">What’s still unknown</h2>
