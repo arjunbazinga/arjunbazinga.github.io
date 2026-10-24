@@ -104,7 +104,27 @@
 
   const isKeyPair = (bytes, row, k) => bytes[row + 2 * k] === KEY && bytes[row + 2 * k + 1] === KEY;
 
-  window.CharmeraFrame = { W, H, KEY, frameToRowPair, photoToRowPair, compose, rowPairToImageData, isKeyPair };
+  // The frame menu shows each frame as a 112×80 thumbnail in little-endian RGB565, the pixel
+  // format of all the camera's interface art.
+  const THUMB_W = 112, THUMB_H = 80;
+  const toRgb565 = rgba => {
+    const out = new Uint8Array(rgba.length / 2);
+    for (let i = 0; i < rgba.length / 4; i++) {
+      const v = (rgba[i * 4] >> 3) << 11 | (rgba[i * 4 + 1] >> 2) << 5 | rgba[i * 4 + 2] >> 3;
+      out[2 * i] = v & 255; out[2 * i + 1] = v >> 8;
+    }
+    return out;
+  };
+  const fromRgb565 = bytes => {
+    const out = new Uint8ClampedArray(bytes.length * 2);
+    for (let i = 0; i < bytes.length / 2; i++) {
+      const v = bytes[2 * i] | bytes[2 * i + 1] << 8;
+      out.set([(v >> 11 & 31) * 255 / 31, (v >> 5 & 63) * 255 / 63, (v & 31) * 255 / 31, 255], i * 4);
+    }
+    return out;
+  };
+
+  window.CharmeraFrame = { W, H, KEY, THUMB_W, THUMB_H, frameToRowPair, photoToRowPair, compose, rowPairToImageData, isKeyPair, toRgb565, fromRgb565 };
 
   const root = typeof document !== 'undefined' && document.getElementById('charmera-frames');
   if (!root || !window.Charmera) return;
@@ -114,9 +134,10 @@
   const preview = $('.frames-canvas'), status = $('.frames-status'), table = $('.frames-strips tbody');
   const caption = $('.frames-caption'), captionWrap = $('.frames-caption-wrap'), slotSelect = $('.frames-slot');
   const downloads = $('.frames-downloads'), verify = $('.frames-verify'), nudgedNote = $('.frames-nudged');
+  const thumbView = $('.frames-thumb');
   const state = { template: 'stock-0', photo: 'charmera-street', film: false, slot: 0, upload: null, holes: false };
-  let slots, photoRgb = new Map(), film, frame, encoded;
-  const stock = new Map();
+  let slots, photoRgb = new Map(), film, frame, encoded, thumb;
+  const stock = new Map(), stockThumbs = new Map();
 
   // The camera's own frames, inflated from the exact strip bytes in the firmware.
   const STOCK = ['Film strip', 'Window', 'Pixel', '1987'];
@@ -129,10 +150,21 @@
     }
     return stock.get(n);
   };
+  // ...and the thumbnail its menu shows, kept as the exact file.
+  const loadStockThumb = async n => {
+    if (!stockThumbs.has(n)) {
+      const file = new Uint8Array(await fetch(`${C.BASE}firmware/PV00${n}GPZP.gpzp`).then(r => r.arrayBuffer()));
+      stockThumbs.set(n, { file, size: file.length, raw: window.pako.inflateRaw(file.subarray(4)), same: true });
+    }
+    return stockThumbs.get(n);
+  };
 
   const art = document.createElement('canvas');
   art.width = W; art.height = H;
   const actx = art.getContext('2d', { willReadFrequently: true });
+  const small = document.createElement('canvas');
+  small.width = THUMB_W; small.height = THUMB_H;
+  const sctx = small.getContext('2d', { willReadFrequently: true });
 
   const roundRect = (ctx, x, y, w, h, r) => { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); };
 
@@ -192,47 +224,58 @@
 
   const kb = n => `${(n / 1024).toFixed(1)} KB`;
 
-  // Encode each 200-row strip as "GPZP" + fixed-Huffman raw DEFLATE, the only kind the
-  // stock frames use, then prove it inflates back to the same bytes.
-  const encode = bytes => {
-    const strips = [];
-    for (let s = 0; s < 3; s++) {
-      const raw = bytes.subarray(s * BYTES / 3, (s + 1) * BYTES / 3);
-      const packed = window.pako.deflateRaw(raw, { level: 9, strategy: 4, windowBits: 15, memLevel: 8 });
-      const back = window.pako.inflateRaw(packed);
-      const same = back.length === raw.length && back.every((v, i) => v === raw[i]);
-      const file = new Uint8Array(packed.length + 4);
-      file.set([0x47, 0x50, 0x5a, 0x50]); file.set(packed, 4);
-      strips.push({ file, size: file.length, same });
-    }
-    return strips;
+  // "GPZP" + fixed-Huffman raw DEFLATE, the only kind the stock frames and thumbnails use,
+  // with proof that it inflates back to the same bytes.
+  const gpzp = raw => {
+    const packed = window.pako.deflateRaw(raw, { level: 9, strategy: 4, windowBits: 15, memLevel: 8 });
+    const back = window.pako.inflateRaw(packed);
+    const file = new Uint8Array(packed.length + 4);
+    file.set([0x47, 0x50, 0x5a, 0x50]); file.set(packed, 4);
+    return { file, size: file.length, raw, same: back.length === raw.length && back.every((v, i) => v === raw[i]) };
+  };
+  const encode = bytes => [0, 1, 2].map(s => gpzp(bytes.subarray(s * BYTES / 3, (s + 1) * BYTES / 3)));
+
+  // A new frame's thumbnail: the frame alone, scaled to 112×80. See-through areas come out in
+  // the key grey, which is how the stock thumbnails show them.
+  const makeThumb = bytes => {
+    actx.putImageData(rowPairToImageData(bytes), 0, 0);
+    sctx.imageSmoothingQuality = 'high';
+    sctx.drawImage(art, 0, 0, THUMB_W, THUMB_H);
+    return gpzp(toRgb565(sctx.getImageData(0, 0, THUMB_W, THUMB_H).data));
+  };
+  const showThumb = () => {
+    const image = thumbView.getContext('2d').createImageData(THUMB_W, THUMB_H);
+    image.data.set(fromRgb565(thumb.raw));
+    thumbView.getContext('2d').putImageData(image, 0, 0);
   };
 
   const showStrips = () => {
     const slot = slots[state.slot];
+    const files = [...encoded.map((strip, s) => ({ ...strip, ...slot.strips[s], label: `${s + 1} · rows ${s * 200}–${s * 200 + 199}` })),
+      { ...thumb, ...slot.thumb, label: 'Menu thumbnail' }];
     table.replaceChildren();
     let fits = true;
-    encoded.forEach((strip, s) => {
-      const budget = slot.strips[s].budget, ok = strip.size <= budget;
+    files.forEach(f => {
+      const ok = f.size <= f.budget;
       fits = fits && ok;
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${s + 1} · rows ${s * 200}–${s * 200 + 199}</td><td>${kb(strip.size)}</td><td>${kb(budget)}</td><td class="${ok ? 'is-ok' : 'is-over'}">${ok ? 'fits' : `over by ${kb(strip.size - budget)}`}</td>`;
+      tr.innerHTML = `<td>${f.label}</td><td>${kb(f.size)}</td><td>${kb(f.budget)}</td><td class="${ok ? 'is-ok' : 'is-over'}">${ok ? 'fits' : `over by ${kb(f.size - f.budget)}`}</td>`;
       table.append(tr);
     });
-    const verified = encoded.every(strip => strip.same);
-    verify.textContent = verified ? 'All three strips inflate back to exactly the bytes shown.' : 'Round-trip check failed.';
+    const verified = files.every(f => f.same);
+    verify.textContent = verified ? 'All four files inflate back to exactly the bytes shown.' : 'Round-trip check failed.';
     downloads.querySelectorAll('a').forEach(a => URL.revokeObjectURL(a.href));
     downloads.replaceChildren();
-    encoded.forEach((strip, s) => {
+    files.forEach(strip => {
       const a = document.createElement('a');
-      const name = slot.strips[s].name;
+      const name = strip.name;
       a.href = URL.createObjectURL(new Blob([strip.file], { type: 'application/octet-stream' }));
       a.download = `${name}.bin`;
       a.textContent = `${name}.bin`;
       a.className = 'frames-download';
       downloads.append(a);
     });
-    status.textContent = fits ? `Fits frame slot ${state.slot + 1}.` : `Too detailed for frame slot ${state.slot + 1}; simplify the strips marked over, or pick a larger slot.`;
+    status.textContent = fits ? `Fits frame slot ${state.slot + 1}.` : `Too detailed for frame slot ${state.slot + 1}; simplify the parts marked over, or pick a larger slot.`;
     return fits;
   };
 
@@ -260,6 +303,8 @@
     preview.getContext('2d').putImageData(image, 0, 0);
     nudgedNote.textContent = nudged ? `${nudged.toLocaleString()} pixel pairs landed exactly on the see-through value and were nudged so they stay solid.` : '';
     encoded = encode(frame);
+    thumb = state.template.startsWith('stock-') ? await loadStockThumb(Number(state.template.slice(6))) : makeThumb(frame);
+    showThumb();
     showStrips();
     const label = state.template.startsWith('stock-') ? `Stock ${STOCK[Number(state.template.slice(6))]}` : TEMPLATES[state.template]?.label ?? 'Your';
     preview.setAttribute('aria-label', `${label} frame on a real Charmera photo, composited with the camera's rule`);

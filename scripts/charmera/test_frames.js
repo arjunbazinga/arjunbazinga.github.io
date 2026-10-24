@@ -40,5 +40,14 @@ check('every opaque key-valued pair is nudged', nudged === (W / 2) * H && !F.isK
 const clear = F.frameToRowPair(new Uint8ClampedArray(W * H * 4));
 check('transparent art is all key', clear.nudged === 0 && F.isKeyPair(clear.bytes, 0, 0) && F.isKeyPair(clear.bytes, 2 * W, 399));
 
-console.log(failures ? `${failures} failures` : 'Frame compositing matches the camera\'s rule on all test pairs; key handling OK.');
+// The camera's own frame-menu thumbnails decode and re-encode to the same RGB565 bytes.
+const zlib = require('zlib'), fs = require('fs'), path = require('path');
+for (let n = 0; n < 4; n++) {
+  const file = fs.readFileSync(path.join(__dirname, '../../static/charmera/firmware', `PV00${n}GPZP.gpzp`));
+  const raw = zlib.inflateRawSync(file.subarray(4));
+  const back = F.toRgb565(F.fromRgb565(raw));
+  check(`thumbnail ${n} is ${F.THUMB_W}x${F.THUMB_H} RGB565 and round-trips`, raw.length === F.THUMB_W * F.THUMB_H * 2 && Buffer.from(back).equals(raw));
+}
+
+console.log(failures ? `${failures} failures` : 'Frame compositing matches the camera\'s rule on all test pairs; key handling and thumbnails OK.');
 process.exitCode = failures ? 1 : 0;

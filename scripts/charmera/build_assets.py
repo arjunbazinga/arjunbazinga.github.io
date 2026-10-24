@@ -182,15 +182,16 @@ def rgb_to_row_pair(rgb):
 
 
 def build_firmware_examples(handoff):
-    """Exact resources copied from the public firmware dump: the twelve stock frame strips, the
-    startup logo and the five sounds; a gallery of the stock frames composited onto a real
-    Charmera photo with the camera's rule; and a region map of the 2 MiB image."""
+    """Exact resources copied from the public firmware dump: the twelve stock frame strips, the four
+    frame-menu thumbnails, the startup logo and the five sounds; the interface art; a gallery of
+    the stock frames composited onto a real Charmera photo with the camera's rule; and a region
+    map of the 2 MiB image."""
     fw = (handoff / "firmware-imaging" / "original" / "Original_Firmware.bin").read_bytes()
     entries = read_resources(fw)
     dest = OUT / "firmware"
     dest.mkdir(parents=True, exist_ok=True)
     for i, (name, off) in enumerate(entries):
-        if name.startswith("F_"):
+        if name.startswith(("F_", "PV")):
             d = zlib.decompressobj(-15)
             d.decompress(fw[off + 4:])
             used = len(fw) - off - len(d.unused_data)
@@ -202,6 +203,7 @@ def build_firmware_examples(handoff):
         elif name == "POWER_ON_LOGOJPG":
             end = fw.find(b"\xff\xd9", off) + 2
             (dest / "power-on-logo.jpg").write_bytes(fw[off:end])
+    build_interface(fw, entries, dest / "ui")
     photo = np.asarray(Image.open(Path(__file__).resolve().parent / "source" / "charmera-street-as-received.jpg").convert("RGB").resize((800, 600), Image.LANCZOS))
     base = rgb_to_row_pair(photo)
     for n in range(4):
@@ -212,7 +214,7 @@ def build_firmware_examples(handoff):
         [0x000200, 0x120000, "code", "ARM program", "Firmware code and data, about 1.1 MiB"],
         [0x120000, 0x124000, "resources", "UI resources", "Resource directory, icons, menu art, beep and click sounds"],
         [0x124000, 0x141400, "frames", "Four frames", "Twelve compressed strips, three per frame"],
-        [0x141400, 0x15F600, "resources", "GPRS pack", "A 121 KiB pack whose format is not decoded"],
+        [0x141400, 0x15F600, "resources", "Menu text", "Every on-screen string in 14 languages, and tables not yet decoded"],
         [0x15F600, 0x168E92, "resources", "UI resources", "Startup logo, power sounds, frame thumbnails, more menu art"],
         [0x168E92, 0x170000, "blank", "Blank", "Erased flash"],
         [0x170000, 0x172000, "state", "Settings", "Append-only settings records, checked with CRC32"],
@@ -226,8 +228,36 @@ def build_firmware_examples(handoff):
     (OUT / "flash-map.json").write_text(json.dumps({"size": len(fw), "regions": regions}, separators=(",", ":")))
 
 
+def rgb565_image(data, width):
+    """Little-endian RGB565 pixels, as the camera's interface art is stored."""
+    a = np.frombuffer(data, "<u2").reshape(-1, width).astype(np.uint32)
+    return Image.fromarray(np.stack([(a >> 11 & 31) * 255 // 31, (a >> 5 & 63) * 255 // 63, (a & 31) * 255 // 31], -1).astype(np.uint8))
+
+
+INTERFACE = {  # resource name -> (published name, width)
+    "PV000GPZP": ("frame-menu-0", 112), "PV001GPZP": ("frame-menu-1", 112),
+    "PV002GPZP": ("frame-menu-2", 112), "PV003GPZP": ("frame-menu-3", 112),
+    "HOME_SMALLGPZP": ("home", 160), "BATTERY00GPZP": ("charging", 160),
+    "PC_CAMGPZ": ("pc-cam", 160), "U_DISKGPZ": ("disk-drive", 160),
+    "USB_CONNECTGPZP": ("usb-connect", 256),
+}
+
+
+def build_interface(fw, entries, dest):
+    """The camera's own interface art: GPZP resources inflated to lossless PNGs at their stored
+    size, plus the audio-recording background, a JPEG copied byte for byte."""
+    dest.mkdir(parents=True, exist_ok=True)
+    for name, off in entries:
+        if name in INTERFACE:
+            short, width = INTERFACE[name]
+            rgb565_image(zlib.decompressobj(-15).decompress(fw[off + 4:]), width).save(dest / f"{short}.png", optimize=True)
+        elif name == "AUDIO_REC_BGJPG":
+            (dest / "audio-record.jpg").write_bytes(fw[off:fw.find(b"\xff\xd9", off) + 2])
+
+
 def build_frame_slots(handoff):
-    """Frame strip slots from the firmware's resource directory: name, flash offset and byte budget."""
+    """Frame slots from the firmware's resource directory: name, flash offset and byte budget of
+    each strip and of the frame's 112×80 menu thumbnail."""
     fw = (handoff / "firmware-imaging" / "original" / "Original_Firmware.bin").read_bytes()
     entries = read_resources(fw)
     slots = []
@@ -237,7 +267,9 @@ def build_frame_slots(handoff):
             i = next(k for k, (name, _) in enumerate(entries) if name == f"F_{n}_{s:03d}GPZP")
             assert fw[entries[i][1]:entries[i][1] + 4] == b"GPZP"
             strips.append({"name": entries[i][0], "offset": entries[i][1], "budget": entries[i + 1][1] - entries[i][1]})
-        slots.append({"slot": n, "strips": strips})
+        i = next(k for k, (name, _) in enumerate(entries) if name == f"PV{n:03d}GPZP")
+        thumb = {"name": entries[i][0], "offset": entries[i][1], "budget": entries[i + 1][1] - entries[i][1]}
+        slots.append({"slot": n, "strips": strips, "thumb": thumb})
     (OUT / "frame-slots.json").write_text(json.dumps(slots, separators=(",", ":")))
 
 
