@@ -430,6 +430,7 @@ body.quarto-dark .compiler { --series-1: #3987e5; --series-2: #d95926; }
   .compiler-panel { grid-template-columns: minmax(0, 1fr); }
   .compiler-pane .darkroom-tag { top: 4px; left: 4px; padding: 2px 5px; font-size: 0.58rem; }
 }
-.compiler-reference-wrap .darkroom-check { font-size: 0.78rem; }
+.compiler-reference-checks .darkroom-check { font-size: 0.78rem; }
 .compiler-readout .table-scroll { margin: 0.3rem 0 0; }
 .compiler-readout .compiler-matrix { width: auto; margin: 0; }
+.compiler-reference-checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
