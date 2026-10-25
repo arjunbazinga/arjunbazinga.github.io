@@ -154,7 +154,9 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | VIVID first student loses contrast on photos (9–18 levels too bright in shadows, 8–15 too dark in highlights; mean error 10–17) | `vivid_error.py` on the archive's students |
 | Clip-aware VIVID student's mean error 3–5 levels on the same four photos | `vivid_error.py` on the committed `students.json` |
 | Held-out photo scores (B&W 41.9 → 49.3, PEOPLE 38.3 → 40.4, VIVID 33.4 → 34.0; cube scores fall) | `fit_students.py --report`: each photo fit uses the other eight scenes, sampled at 160×120. The widget samples photos through the browser's own resize, so its live numbers differ slightly. |
-| Deep Analog: one film scan → LUT, trained on synthetic transforms, code inspection-only, no released weights | [EtonMu/deep-analog](https://github.com/EtonMu/deep-analog) README, read 25 Oct 2026; arXiv:2608.14702 |
+| Deep Analog: random-transform self-supervision; 17³ residual LUT; statistics for tone and casts; the "no statistic … can answer" quote; illumination failure and future work | arXiv:2608.14702v1 §3.2, §3.4, §5.6, §6 (PDF supplied by Arjun) |
+| Deep Analog: inspection-only code, patent pending, no released weights | Repository `LICENSE`, `PATENTS.md`, `MODEL_WEIGHTS.md` (zip supplied by Arjun, 25 Oct 2026) |
+| 56% of Hakone unseen with the Asahikawa reference | Measured live by the compiler (`unseenIn` in `compiler.js`); a NumPy reimplementation gives 52% at PIL's resampling |
 | 27-candidate film bank | `docs/15_CANDIDATE_FILM_BANK.md`; `prior-artifacts/charmera-film-bank-v0.1.zip` |
 | Updater: `JH_5408` name, byte-sum checksum, final erase at `0x210000` | *prior* `Charmera-firmware-findings.md`, `LATEST_FINDINGS_2026-09-27.md` |
 | Final erase as intentional settings reset for a `0x169000` package | *prior* `UPDATE_CONTRACT_FINDINGS.md` (supersedes the earlier "bug" reading) |
@@ -264,15 +266,48 @@ Arjun's dictated summary of the research (24 Oct 2026) reads well top to bottom 
 
 ## The compiler and Deep Analog (25 Oct 2026)
 
-Arjun asked for the teacher → student idea to become something playable rather than a diagram, prompted by [Deep Analog](https://github.com/EtonMu/deep-analog) (Yitong Mu, RIT; arXiv:2608.14702).
+Arjun asked for the teacher → student idea to become something playable rather than a diagram. The prompt was [Deep Analog](https://github.com/EtonMu/deep-analog): Yitong Mu, RIT MSCS thesis, *Deep Analog: Open-Set Film Emulation with Reference-Conditioned 3D LUTs*, arXiv:2608.14702v1, 10 Aug 2026. Arjun supplied the paper PDF and a zip of the repository. Neither is committed here.
 
-- **What Deep Analog is.** From a single film scan, `StyleLUTNet` predicts a 3D LUT, trained self-supervised on procedurally generated colour transforms. `FilmAnalyzerNet` estimates tone, grain and halation parameters for a physics stage. Its README reports 22.05 dB for the colour stage on a 350-image FiveK split.
-- **Why none of it is used.** The repository is "All Rights Reserved", not open source, and patent pending. No trained weights are distributed, and the hosted Hugging Face demo needs an access code. The paper and demo were not reachable from this environment. So the site cites it as related work only. The compiler's reference mode uses classic, long-published methods: histogram matching, and Pitié and Kokaram's 2007 linear Monge–Kantorovich colour transfer, per luma band.
-- **What building it found.** Re-fitting the students in the browser showed that the archive's fitter scored unclipped output. A fitter that knows the camera clips, by treating overshoot past the displayable edge as free (`fit_students.py`), keeps the same 274 bytes and gains 0–8 dB across the cube on every mode, 7.9 on VIVID. The committed `students.json` and the darkroom now use those fits. Students are scored through 8-bit YUV storage, then the RGB clip; `applyStudent` gained the YUV clip at the same time.
-- **Choices in the widget.**
-  - It opens on the old, failing VIVID fit, so the first click shows the lesson.
-  - The photo weighting holds the test photo out of its own fit.
-  - The reference mode's lighting removal is only a mean-chroma correction, and the prose says so. The Kudanshita photo carries the strongest cast of the nine (about 13 levels warm). The Tokyo dusk photo looks pink but averages slightly blue, so it was not used to demonstrate the cast.
+**What the paper does.**
+- **StyleLUTNet** turns a reference image into a 3D LUT.
+  - A ResNet-18 encoder reads the reference at 224×224. An MLP decoder predicts a residual 17³ LUT, added to the identity and upsampled to 33³ for `.cube` export. The model has 82.6M parameters.
+  - Training is self-supervised with a RandomColorTransform. The same random 2–4-step colour transform is applied to two images. One becomes the reference, the other the target, and the untransformed second image is the ground truth. No film scans are needed.
+- **Tone and casts come from closed-form reference statistics, not the network.** Per-channel CDF matching (Gaussian-smoothed) handles tone. Black-point lift, highlight rolloff and shadow/highlight casts, weighted (1−L)² and L², come from the reference's statistics.
+  - The paper's argument is that only the colour transform needs learning, because "no statistic over the reference's own pixels can answer where the reference has no data".
+- **FilmAnalyzerNet** regresses 11 grain and halation parameters. A differentiable renderer applies them: three-octave grain with a luminance mask, and per-channel halation with radii 1.4 : 1.0 : 0.7.
+- **Results.** On 350 self-supervised test pairs (not FiveK retouching), the colour stage reaches 22.05 dB / 0.925 SSIM and the full pipeline 21.72 dB. The colour path runs in 5.2 ms at 1080p on an RTX 4060.
+  - In a four-person expert pilot, the experts picked the real film in 59.4% of real-or-rendered trials, where 50% is chance.
+- **The paper's other finding.** Multi-LUT banks with a softmax gate collapse onto one LUT, and an entropy term fixes it. That is not used here.
+- **Its stated limitations.** These are where the essay engages it:
+  - the reference's illumination is baked into the look (§5.6, with illumination estimation listed as future work);
+  - processing is display-referred;
+  - there is no MTF stage.
+
+**Status, and why none of it is used.**
+- The repository is "All Rights Reserved": inspection and academic discussion only, with no copyright or patent licence. The method is patent pending (`LICENSE`, `PATENTS.md`).
+- `MODEL_WEIGHTS.md` confirms that no checkpoints are distributed. The zip holds code, figures and result JSON only.
+- The paper describes a hosted Hugging Face Space. It was not reachable from this environment.
+- So the site cites the paper and uses none of its code, weights or specific pipeline. I read the paper, not the training code. The compiler's reference mode uses older published methods: histogram matching, and Pitié and Kokaram's 2007 linear Monge–Kantorovich transfer per luma band.
+
+**Where the essay uses the paper.**
+- The "manufactured supervision" paragraph credits it as an example of training on random transforms.
+- "A photo as the teacher" quotes its argument for a learned colour stage.
+- It notes that the learned network's output is a 17³ lattice, matching the camera LUT.
+- It cites the paper's own illumination failure.
+- *Mark colours the reference never shows* makes that argument playable. It hatches test-photo pixels whose colour cell never occurs in the reference. A cell is one of four luma bands × a 20×20 chroma grid over ±0.3, needs at least two reference pixels to count as covered, and is dilated by one cell.
+  - With Asahikawa as the reference and Hakone as the test photo, 56% of pixels are unseen.
+
+**What building the compiler found.**
+- Re-fitting the students in the browser showed that the archive's fitter scored unclipped output.
+- A fitter that knows the camera clips (`fit_students.py`) treats overshoot past the displayable edge as free. It keeps the same 274 bytes and gains 0–8 dB across the cube on every mode, 7.9 on VIVID.
+- The committed `students.json` and the darkroom now use those fits.
+- Students are scored through 8-bit YUV storage, then the RGB clip. `applyStudent` gained the YUV clip at the same time.
+
+**Choices in the widget.**
+- It opens on the old, failing VIVID fit, so the first click shows the lesson.
+- The photo weighting holds the test photo out of its own fit.
+- The lighting removal is only a mean-chroma correction, and the prose says so.
+- Kudanshita carries the strongest cast of the nine photos, about 13 levels warm. The Tokyo dusk photo looks pink but averages slightly blue, so it was not used to show the cast.
 
 ## Design decisions
 
