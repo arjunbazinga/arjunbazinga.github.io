@@ -471,7 +471,7 @@ That is what could change, and how safely. Whether it is worth doing is a separa
 
 ## Why is that worth doing? {#q-why}
 
-The usual way to stay in the zeitgeist is the next hit: new shells, new looks, a new box to buy. The other way is to make every camera already sold worth more. Phones went that way: VSCO sold film looks to people who already had a camera. Camp Snap has started doing it with its own hardware. Its early cameras shipped one firmware image per look; its newer firmware [loads a custom filter file](https://www.campsnapphoto.com/blogs/camp-snap-news/customize-your-campsnap-with-filters-%F0%9F%8E%A8%F0%9F%93%B8) from the memory card, and owners design filters on Camp Snap's website and share them with each other.
+The usual way to stay in the zeitgeist is the next hit: new shells, new looks, a new box to buy. The other way is to make every camera already sold worth more. Phones went that way: VSCO sold film looks to people who already had a camera. Camp Snap has started doing it with its own hardware. Its early cameras shipped one firmware image per look; its newer firmware [loads a custom filter file](https://www.campsnapphoto.com/blogs/camp-snap-news/customize-your-campsnap-with-filters-%F0%9F%8E%A8%F0%9F%93%B8) from the memory card, and owners design filters on Camp Snap's website and share them with each other. The same announcement sends owners to a third-party site for community-made filters: once looks are files, a small market grows around them.
 
 Charmera owners are already working around their cameras. A [command-line importer](https://github.com/jphastings/charmera) repairs the broken metadata in its photos, and a [Mac app](https://github.com/Lulzx/charmera) re-processes them with film filters. A filter on a finished JPEG, though, works with whatever the camera left behind: exposure already chosen, highlights already clipped, detail already resampled and compressed. A look built into the camera can act before those losses.
 
@@ -591,15 +591,21 @@ The way through comes from how large AI models are built. They are made in three
 
 **Pretrain.** A foundation model learns how colour, light and tone behave across a vast number of photographs. Most of its training signal doesn't need people. Supervision can be manufactured: pick a style, render two different scenes through the simulated camera with it, and train the model to recover the style from one of them. The transform is known, so the answer is exact, and randomising the lighting teaches the model to tell the look apart from the light.
 
-**Adapt.** A handful of examples, a film stock or a single reference photograph then steers the model toward one look, the way a prompt steers a language model. People are needed here, where a simulator can't reach: deciding which photographs are worth keeping. That makes the system sample-efficient, and the choices owners already make, what they keep, delete and share, could become the taste data, with their consent.
+**Adapt.** A handful of examples, a film stock or a single reference photograph then steers the model toward one look, the way a prompt steers a language model. People are needed here, where a simulator can't reach: deciding which photographs are worth keeping. Blind comparisons, two versions of one photo and the question of which you'd keep, steer the model toward looks people actually choose. That makes the system sample-efficient, and the choices owners already make, what they keep, delete and share, could become the taste data, with their consent.
 
 **Distil.** That knowledge is far too big for a keychain, so the last stage finds the few numbers this camera can actually use that make its photographs behave most like the teacher's.
 
 The distillation search shouldn't run on finished JPEGs. It should run through a simulator of this camera: the sensor crop, auto-exposure and its gamma-fed metering, the 800 × 600 surface, the hook, the overlays and the JPEG encoder. The sections above are that simulator's specification. The optimiser varies the student's parameters, renders candidate photographs through the simulated camera, and keeps whatever the teacher prefers. The architecture works like a compiler:
 
 ```text
- teacher: film · spectral · learned
- taste learned from examples
+ pretrain: colour, light, tone
+ from vast numbers of photos
+     │
+ adapt: a stock, examples,
+ a reference, what people keep
+     │
+     ▼
+ teacher
      │
      ▼
  optimiser ◀── camera simulator
@@ -612,11 +618,13 @@ The distillation search shouldn't run on finished JPEGs. It should run through a
 
 The expensive intelligence designs the camera's behaviour. It does not run for every photograph.
 
+The same teacher can compile for more than one camera. The Charmera is one target. A Camp Snap, another camera on the same Generalplus platform, or a phone is another, each with its own simulator and its own knobs. Film looks have lived as know-how, in stocks, labs and photographers' habits. A compiler like this turns that know-how into something more portable: a model of what people find beautiful, fitted to whatever hardware they already carry.
+
 How small can the student be? A 17 × 17 × 17 LUT at 8 bits per channel takes 14,739 bytes per mode, so all seven fit in about 100 KiB. That is affordable in software at the hook. It would be cheaper still if hardware did the work. Generalplus's related SDKs show a hardware luma curve and a 3 × 3 colour matrix, so the smallest student is exactly that: a 256-entry curve on brightness, then nine numbers. That is 274 bytes, about a fiftieth of the LUT.
 
 ### Compile one yourself
 
-The compiler below runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes.
+The compiler below plays the last stage, distillation, with a film look as the teacher. It runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes.
 
 ```{=html}
 <figure class="darkroom compiler" id="charmera-compiler" aria-labelledby="compiler-caption">
@@ -719,7 +727,7 @@ It opens on Kudanshita, lit by late sun. Untick *Remove its lighting first* and 
 
 Statistics have a second limit: they only know the colours the reference contains. Choose the Asahikawa snow as the reference and Hakone as the test photo, then tick *Mark colours the reference never shows*. More than half of the photo is hatched, nearly all of it the autumn hillside: the snow has no orange in it, so whatever the teacher does to orange is extrapolation. That is where a learned teacher earns its place. Trained on manufactured transforms across many scenes, it learns a general rule for colour, so it has an answer where the reference has none. Statistics remain the right tool for tone, which any reference settles on its own. In the three stages above, a reference photograph is only the adaptation step's prompt. The statistics here stand in for a teacher with no pretraining behind it, which is why they run out where the reference does. Whatever the teacher, the student is the same 274 bytes.
 
-The same teacher can compile for more than one camera. The Charmera is one target. A Camp Snap, another camera on the same Generalplus platform, or a phone is another, each with its own simulator and its own knobs. Film looks have lived as know-how, in stocks, labs and photographers' habits. A compiler like this turns that know-how into something more portable: a model of what people find beautiful, fitted to whatever hardware they already carry.
+All of that runs in a browser, on photographs. The last question is how far it is from a real camera.
 
 ## Where does it stand, and where is it going? {#q-next}
 
@@ -736,7 +744,7 @@ The open problems are concrete now:
 
 I did this work over several weeks with AI assistants, which read disassembly, ran the original code in an emulator, searched filings and checked each other; I set the questions, judged the evidence and made the calls. How that worked, what I got wrong along the way and how much to trust each claim are in the field guide, under [How this was figured out](/posts/tiny-camera-better-taste/inside.html#how-this-was-figured-out).
 
-The first target is one excellent FILM default, end to end, before polishing the other six. Then the plane: a frozen, verified program and looks that arrive as data.
+The first target is one excellent FILM default, end to end, before polishing the other six. Then the plane: a frozen, verified program and looks that arrive as data. A look would travel as a style object: a few hundred numbers that name the camera and firmware they were compiled for, with a few human controls on top, such as warmth, fade and grain. Each photo would carry the name of the look that made it, so the photographs themselves become the catalogue: see a picture you like, and put its look on your camera.
 
 Beyond this one camera, the bet is simple. Cheap cameras will keep being built from the same few platforms, and the hits will keep coming. The value that lasts is in what the hardware does with light: taste, learned once, compiled into the knobs each camera has, and delivered to cameras people already own. Kodak's 1888 promise was "You press the button, we do the rest." The rest can be done again, offline and ahead of time.
 
