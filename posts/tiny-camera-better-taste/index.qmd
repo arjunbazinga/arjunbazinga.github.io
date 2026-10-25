@@ -19,7 +19,7 @@ layout: post
 categories: [Photography, Imaging, Reverse Engineering]
 comments: false
 date: "2026-10-23"
-date-modified: "2026-10-24"
+date-modified: "2026-10-25"
 format:
   html:
     toc: true
@@ -608,25 +608,107 @@ The expensive intelligence designs the camera's behaviour. It does not run for e
 
 Most of the training signal doesn't need people either. Supervision can be manufactured: pick a style, render two different scenes through the simulated camera with it, and train a model to recover the style from one of them. The transform is known, so the answer is exact, and randomising the lighting teaches the model to tell the look apart from the light. People are needed where a simulator can't reach: deciding which photographs are worth keeping. That makes the system sample-efficient, and the choices owners already make, what they keep, delete and share, could become the taste data, with their consent.
 
-The same machinery gives the friendliest feature of all: hand it any photograph, a film scan or a picture a friend shared, and get back settings that make this camera render like that. Tone can be read straight from the reference's brightness distribution. Only colour needs the learned part, because it has to behave sensibly on colours the reference never showed. The reference's own lighting has to be estimated and removed first, or a sunset photo becomes an orange camera.
+How small can the student be? A 17 × 17 × 17 LUT at 8 bits per channel takes 14,739 bytes per mode, so all seven fit in about 100 KiB. That is affordable in software at the hook. It would be cheaper still if hardware did the work. Generalplus's related SDKs show a hardware luma curve and a 3 × 3 colour matrix, so the smallest student is exactly that: a 256-entry curve on brightness, then nine numbers. That is 274 bytes, about a fiftieth of the LUT.
 
-How small can the student be? A 17 × 17 × 17 LUT at 8 bits per channel takes 14,739 bytes per mode, so all seven fit in about 100 KiB. That is affordable in software at the hook. It would be cheaper still if hardware did the work. Generalplus's related SDKs show a hardware luma curve and a 3 × 3 colour matrix, so I fitted each LUT with exactly that: a 256-entry curve on brightness, followed by a matrix.
+### Compile one yourself
 
-| Mode | Curve + matrix vs full LUT |
-|---|---|
-| B&W | 40.9 dB |
-| EXPIRED | 38.6 dB |
-| PEOPLE | 35.1 dB |
-| TOKYO | 32.4 dB |
-| FILM | 32.2 dB |
-| NIGHT | 29.4 dB |
-| VIVID | 22.0 dB |
+The compiler below runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes.
 
-Those scores are measured across the whole colour cube. In the darkroom, choose *Hardware student* and then *Show difference* to see the same comparison on a real photograph, with the per-photo score underneath. B&W survives almost perfectly; a monochrome look is mostly a tone curve. VIVID is the worst fit by a wide margin, but not where I expected.
+```{=html}
+<figure class="darkroom compiler" id="charmera-compiler" aria-labelledby="compiler-caption">
+  <div class="compiler-stage" aria-busy="true">
+    <div class="compiler-pane">
+      <canvas class="compiler-teacher" width="400" height="300" role="img" aria-label="Test photo through the teacher"></canvas>
+      <span class="darkroom-tag" aria-hidden="true">TEACHER · 14,739 BYTES</span>
+    </div>
+    <div class="compiler-pane">
+      <canvas class="compiler-student" width="400" height="300" role="img" aria-label="Test photo through the compiled student"></canvas>
+      <span class="darkroom-tag compiler-tag-student" aria-hidden="true">STUDENT · 274 BYTES</span>
+    </div>
+    <div class="darkroom-loading">Loading the compiler…</div>
+    <noscript><p class="charmera-noscript">The compiler runs in your browser and needs JavaScript.</p></noscript>
+  </div>
+  <div class="compiler-panel">
+    <div class="compiler-chart">
+      <svg class="compiler-plot exposure-plot" role="img" viewBox="0 0 680 220" aria-label="How the teacher and the student brighten each grey level, over the test photo's brightness histogram"></svg>
+      <ul class="exposure-legend compiler-legend">
+        <li><span class="swatch compiler-swatch-teacher"></span>Teacher</li>
+        <li><span class="swatch compiler-swatch-student"></span>Student</li>
+        <li><span class="swatch compiler-swatch-histogram"></span>Test photo's brightness</li>
+      </ul>
+    </div>
+    <div class="compiler-readout">
+      <p class="compiler-score compiler-score-cube"><span>Every colour</span><b>–</b></p>
+      <p class="compiler-score compiler-score-photo"><span>This photo</span><b>–</b></p>
+      <p class="compiler-progress">Waiting</p>
+      <table class="compiler-matrix">
+        <caption>Matrix on Y, U, V (Q8.8)</caption>
+        <tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <p class="darkroom-note compiler-note"></p>
+  <div class="compiler-controls">
+    <div>
+      <p class="darkroom-label">Teacher</p>
+      <div class="darkroom-modes compiler-teachers" role="group" aria-label="Teacher"></div>
+    </div>
+    <div class="compiler-reference-wrap" hidden>
+      <p class="darkroom-label">Reference photo</p>
+      <div class="darkroom-scenes compiler-references" role="group" aria-label="Reference photo">
+        <label class="darkroom-upload compiler-upload">Your<br>photo<input type="file" accept="image/*" aria-label="Use your own photo as the reference"></label>
+      </div>
+      <label class="darkroom-check"><input class="compiler-neutral" type="checkbox" checked> Remove its lighting first</label>
+    </div>
+    <div>
+      <p class="darkroom-label">What the fit is scored on</p>
+      <div class="darkroom-engine compiler-weighting" role="group" aria-label="What the fit is scored on">
+        <button type="button" data-value="cube">Every colour equally</button>
+        <button type="button" data-value="photos">Colours in photographs</button>
+      </div>
+    </div>
+    <div class="darkroom-controls">
+      <label class="darkroom-check"><input class="compiler-clip" type="checkbox"> The fitter knows the camera clips</label>
+      <label class="darkroom-check"><input class="compiler-diff" type="checkbox"> Show difference</label>
+      <button type="button" class="darkroom-reshoot compiler-again">Compile again</button>
+    </div>
+    <div>
+      <p class="darkroom-label">Test photo</p>
+      <div class="darkroom-scenes compiler-scenes" role="group" aria-label="Test photo"></div>
+    </div>
+  </div>
+  <p class="visually-hidden compiler-status" role="status" aria-live="polite"></p>
+  <figcaption id="compiler-caption"><em>Every colour</em> scores the student against the teacher across the whole 17³ cube; <em>this photo</em> scores it on the test photo. Both are PSNR in decibels, where higher is closer. With <em>Colours in photographs</em>, the fit samples the other eight photos and never sees the test photo. Students are scored the way the camera would show them: stored as 8-bit YUV, then clipped to displayable RGB. <em>Match a photo</em> builds its teacher from the reference with classic statistics: brightness-histogram matching for tone, and Pitié and Kokaram's linear colour transfer in shadows, mid-tones and highlights. Nothing leaves your device.</figcaption>
+</figure>
+```
 
-Velvia's character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it is spread across the whole frame instead. On four of the album photos, VIVID's student is 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It lost contrast. The fit treated every colour in the cube as equally important, so it spent its small budget on saturated extremes that photographs rarely contain, and gave up the contrast that every photograph uses.
+It opens on VIVID, fitted the way I first fitted every mode: every colour in the cube counts the same, and the fitter scores its own raw output. Watch the chart. The teacher bends greys into a strong S, darker shadows and brighter highlights, while the student's dashed line stays much closer to no change. Then tick *The fitter knows the camera clips*.
 
-That is an evaluation lesson as much as a colour one: the score you optimise decides what you lose. The next fit should weight colours by how often real Charmera photographs contain them. Even then, some modes will live almost entirely in hardware, while others need a software residual at the hook. VIVID will need most of its look there.
+### The score decides what you lose
+
+| Mode | First fit | Fitter knows the camera clips |
+|---|---|---|
+| B&W | 40.8 dB | 41.2 dB |
+| EXPIRED | 38.5 dB | 38.5 dB |
+| PEOPLE | 35.0 dB | 37.9 dB |
+| TOKYO | 32.4 dB | 36.9 dB |
+| FILM | 32.2 dB | 35.0 dB |
+| NIGHT | 29.4 dB | 32.4 dB |
+| VIVID | 22.0 dB | 29.9 dB |
+
+Both columns are measured across the whole colour cube, and both students are scored the way the camera would show them. The darkroom's *Hardware student* now uses the right-hand column; choose it there and then *Show difference* to see the gap on any photo, with the per-photo score underneath. B&W survives almost perfectly, because a monochrome look is mostly a tone curve. VIVID was the worst fit by a wide margin, and it took me two wrong explanations to see why.
+
+Velvia's character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it was spread across the whole frame instead. On four of the album photos, the first student was 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It had lost contrast. My second explanation was the weighting: every colour in the cube counted the same, so the fit spent its small budget on saturated extremes that photographs rarely contain.
+
+That was half right. The fit was spending its budget on saturated extremes, but the cause was that it didn't know the camera clips. Velvia drives a saturated red to the edge of what can be stored. The fitter, scoring its raw output, worked hard to land exactly on that edge and paid for it in contrast. The camera clips whatever it writes, so overshooting the edge costs nothing. Once the fitter knows that, the same 274 bytes buy contrast instead. VIVID's average error on those four photos fell from 10–17 levels to 3–5. It was the essay's own argument coming back at me: the search has to run through a simulator of the camera, and mine had left out one line of it.
+
+Weighting still matters. Switch the compiler to *Colours in photographs*. It fits on eight of the photos and is scored on the ninth, which it never sees. Averaged over all nine held-out photos, B&W rises from 41.9 to 49.3 dB, PEOPLE from 38.3 to 40.4 and VIVID from 33.4 to 34.0, while their scores across the cube fall: the student stops caring about colours nobody photographs. FILM and EXPIRED barely move. Nine photographs are too few to settle the trade, which is why the next fit should use real Charmera photographs straight off the card. Even then, some modes will live almost entirely in hardware while others need a software residual at the hook. VIVID's hue-dependent push is still beyond a curve and a matrix, so the last of its look belongs there.
+
+### A photo as the teacher
+
+The same machinery gives the friendliest feature of all: hand it any photograph, a film scan or a picture a friend shared, and get back settings that make this camera render like that. Choose *Match a photo* in the compiler. Its teacher is built from the reference with classic statistics. Tone comes from matching the reference's brightness distribution to that of ordinary photos. Colour comes from matching the centre and spread of its colours separately in shadows, mid-tones and highlights. The result is baked into a LUT and compiled like any film.
+
+It opens on Kudanshita, lit by late sun. Untick *Remove its lighting first* and the shrine's white gate turns cream: the camera has copied the reference's sunlight along with its look. The reference's own lighting has to be estimated and removed, or a sunset photo becomes an orange camera. The removal here is crude: it subtracts the reference's average colour cast and keeps how its tints shift between shadows and highlights. Statistics also only know the colours the reference contains, so a reference with no blue in it says nothing useful about sky. That is where a learned teacher earns its place. [Deep Analog](https://arxiv.org/abs/2608.14702) predicts a whole LUT from a single film scan, using a network trained on synthetic colour transforms so that it behaves sensibly on colours the reference never showed. Its code is published for inspection only and its trained models are not released, so the compiler here uses the classic method. Whatever the teacher, the student is the same 274 bytes.
 
 The same teacher can compile for more than one camera. The Charmera is one target. A Camp Snap, another camera on the same Generalplus platform, or a phone is another, each with its own simulator and its own knobs. Film looks have lived as know-how, in stocks, labs and photographers' habits. A compiler like this turns that know-how into something more portable: a model of what people find beautiful, fitted to whatever hardware they already carry.
 
@@ -660,6 +742,7 @@ This work builds on the Charmera community's. [Project Sirius](https://github.co
 <script src="/static/charmera/film-core.js"></script>
 <script src="/static/charmera/pipeline.js" defer></script>
 <script src="/static/charmera/darkroom.js" defer></script>
+<script src="/static/charmera/compiler.js" defer></script>
 <script src="/static/charmera/exposure.js" defer></script>
 <script src="/static/charmera/meter.js" defer></script>
 <script src="/static/charmera/detail.js" defer></script>

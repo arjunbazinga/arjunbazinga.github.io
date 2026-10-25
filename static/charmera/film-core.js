@@ -106,7 +106,9 @@
   };
 
   // The hardware-shaped student: a 256-entry luma curve, then a 3×3 matrix on
-  // (Y, U, V), with Q8.8 coefficients fitted offline to each LUT.
+  // (Y, U, V) with Q8.8 coefficients. The camera stores the result as 8-bit
+  // YUV, and the viewer's decoder clips again in RGB.
+  const U_MAX = 127 / 255;
   const applyStudent = (src, fit) => {
     const m = fit.matrix.map(row => row.map(v => v / 256)), curve = fit.curve;
     const out = new Float32Array(src.length);
@@ -115,15 +117,114 @@
       const y = 0.299 * r + 0.587 * g + 0.114 * b;
       const u = (b - y) / 1.772, v = (r - y) / 1.402;
       const yc = curve[Math.round(Math.min(Math.max(y, 0), 1) * 255)] / 255;
-      const Y = m[0][0] * yc + m[0][1] * u + m[0][2] * v;
-      const U = m[1][0] * yc + m[1][1] * u + m[1][2] * v;
-      const V = m[2][0] * yc + m[2][1] * u + m[2][2] * v;
+      const Y = Math.min(Math.max(m[0][0] * yc + m[0][1] * u + m[0][2] * v, 0), 1);
+      const U = Math.min(Math.max(m[1][0] * yc + m[1][1] * u + m[1][2] * v, -0.5), U_MAX);
+      const V = Math.min(Math.max(m[2][0] * yc + m[2][1] * u + m[2][2] * v, -0.5), U_MAX);
       const R = Y + 1.402 * V, B = Y + 1.772 * U;
       out[i] = clamp(R * 255);
       out[i + 1] = clamp(((Y - 0.299 * R - 0.114 * B) / 0.587) * 255);
       out[i + 2] = clamp(B * 255);
     }
     return out;
+  };
+
+  // Fit a student to a teacher: x and t are matching RGB samples (0–255). Each
+  // step solves the matrix exactly with the curve fixed, then every curve entry
+  // with the matrix fixed. With clip on, the fitter knows the output is clipped:
+  // a prediction already past the displayable edge on the teacher's side costs
+  // nothing there. A port of scripts/charmera/fit_students.py.
+  const det3 = m => m[0] * (m[4] * m[8] - m[5] * m[7]) - m[1] * (m[3] * m[8] - m[5] * m[6]) + m[2] * (m[3] * m[7] - m[4] * m[6]);
+  const solve3 = (a, b) => { // a: 3×3 row-major, b: 3 → x with a·x = b (Cramer)
+    const d = det3(a);
+    return [0, 1, 2].map(k => det3(a.map((v, i) => (i % 3 === k ? b[(i / 3) | 0] : v))) / d);
+  };
+  // The exact inverse of the decoder's YUV→RGB matrix, as the Python fitter uses.
+  const TO_RGB = [1, 0, 1.402, 1, -0.344136, -0.714136, 1, 1.772, 0];
+  const TO_YUV = [0, 1, 2].map(r => solve3(TO_RGB, [0, 1, 2].map(c => (c === r ? 1 : 0))))
+    .reduce((rows, column, c) => (column.forEach((value, r) => { rows[r][c] = value; }), rows), [[], [], []]);
+  const createFit = (x, t, { clip = true } = {}) => {
+    const n = x.length / 3;
+    const u = new Float64Array(n), v = new Float64Array(n), bins = new Uint8Array(n);
+    const target = new Float64Array(n * 3), pred = new Float64Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const r = x[i * 3] / 255, g = x[i * 3 + 1] / 255, b = x[i * 3 + 2] / 255;
+      const y = 0.299 * r + 0.587 * g + 0.114 * b;
+      u[i] = (b - y) / 1.772; v[i] = (r - y) / 1.402;
+      bins[i] = Math.round(Math.min(Math.max(y, 0), 1) * 255);
+      for (let c = 0; c < 3; c++) target[i * 3 + c] = t[i * 3 + c] / 255;
+    }
+    const curve = new Float64Array(256).map((_, k) => k / 255);
+    let G, steps = 0;
+    const excess = p => (p < 0 ? p : p > 1 ? p - 1 : 0);
+    const effective = (i, c, censor) => target[i * 3 + c] + (censor ? excess(pred[i * 3 + c]) : 0);
+    // RGB = G · (curve(y), u, v): least squares through the 3×3 normal equations.
+    const solveMatrix = censor => {
+      const ata = new Float64Array(9), atb = [new Float64Array(3), new Float64Array(3), new Float64Array(3)];
+      for (let i = 0; i < n; i++) {
+        const f = [curve[bins[i]], u[i], v[i]];
+        for (let a = 0; a < 3; a++) {
+          for (let b = 0; b < 3; b++) ata[a * 3 + b] += f[a] * f[b];
+          for (let c = 0; c < 3; c++) atb[c][a] += f[a] * effective(i, c, censor);
+        }
+      }
+      for (let a = 0; a < 3; a++) ata[a * 4] += 1e-9 * n; // keeps a colourless sample set solvable
+      return atb.map(column => solve3(Array.from(ata), column));
+    };
+    const step = () => {
+      G = solveMatrix(clip && steps > 0);
+      for (let i = 0; i < n; i++) for (let c = 0; c < 3; c++) {
+        pred[i * 3 + c] = G[c][0] * curve[bins[i]] + G[c][1] * u[i] + G[c][2] * v[i];
+      }
+      const g0 = [G[0][0], G[1][0], G[2][0]], norm = g0[0] ** 2 + g0[1] ** 2 + g0[2] ** 2;
+      const num = new Float64Array(256), count = new Float64Array(256);
+      for (let i = 0; i < n; i++) {
+        let rest = 0;
+        for (let c = 0; c < 3; c++) rest += (effective(i, c, clip) - G[c][1] * u[i] - G[c][2] * v[i]) * g0[c];
+        num[bins[i]] += rest; count[bins[i]] += 1;
+      }
+      const known = [];
+      for (let k = 0; k < 256; k++) if (count[k] * norm > 1e-12) known.push(k);
+      for (let k = 0, j = 0; k < 256; k++) { // empty bins interpolate linearly between their neighbours
+        while (j < known.length - 1 && known[j + 1] <= k) j++;
+        const a = known[j], b = known[Math.min(j + 1, known.length - 1)];
+        const va = num[a] / (count[a] * norm), vb = num[b] / (count[b] * norm);
+        const value = k <= a ? va : k >= b ? vb : va + ((vb - va) * (k - a)) / (b - a);
+        curve[k] = Math.min(Math.max(value, 0), 1);
+      }
+      steps++;
+    };
+    // The camera's form: curve bytes and Q8.8 integers for the matrix on (Y, U, V).
+    const student = () => {
+      const last = solveMatrix(clip && steps > 0);
+      return {
+        curve: Array.from(curve, value => Math.min(Math.max(Math.round(value * 255), 0), 255)),
+        matrix: TO_YUV.map(row => [0, 1, 2].map(k => Math.round(256 * (row[0] * last[0][k] + row[1] * last[1][k] + row[2] * last[2][k])))),
+      };
+    };
+    return { step, student, get steps() { return steps; } };
+  };
+  const FIT_STEPS = 40;
+  const fitStudent = (x, t, options) => {
+    const fit = createFit(x, t, options);
+    for (let k = 0; k < FIT_STEPS; k++) fit.step();
+    return fit.student();
+  };
+
+  // The 17³ grid in the LUT's own order (red fastest), so mode k's bytes are its teacher outputs.
+  const cubeInputs = () => {
+    const out = new Float32Array(LUT_BYTES);
+    for (let i = 0; i < SIZE ** 3; i++) {
+      out[i * 3] = ((i % SIZE) * 255) / (SIZE - 1);
+      out[i * 3 + 1] = ((((i / SIZE) | 0) % SIZE) * 255) / (SIZE - 1);
+      out[i * 3 + 2] = (((i / SIZE / SIZE) | 0) * 255) / (SIZE - 1);
+    }
+    return out;
+  };
+
+  const psnr = (a, b) => {
+    let squared = 0;
+    for (let i = 0; i < a.length; i++) squared += (a[i] - b[i]) ** 2;
+    return squared === 0 ? Infinity : 20 * Math.log10(255 / Math.sqrt(squared / a.length));
   };
 
   // The stock Pixel loop walks VYUY pairs. Each pixel tests its own luma against
@@ -220,7 +321,8 @@
   };
 
   window.Charmera = {
-    BASE, MODES, PIXEL, PIXEL_THRESHOLD, clamp, random, gaussian,
+    BASE, MODES, PIXEL, PIXEL_THRESHOLD, SIZE, LUT_BYTES, FIT_STEPS, clamp, random, gaussian, psnr,
     loadFilm, loadImage, readPixels, toImageData, applyLut, applyStudent, applyPixelFilter, renderMode,
+    createFit, fitStudent, cubeInputs,
   };
 })();
