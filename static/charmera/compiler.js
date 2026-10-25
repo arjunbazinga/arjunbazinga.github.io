@@ -20,7 +20,7 @@
   const REFERENCE = -1; // teacher index for "match a photo"
   const STUDENT_BYTES = 256 + 9 * 2;
 
-  const state = { teacher: 5, scene: 'akama-jingu', reference: 'kudanshita', weighting: 'cube', clip: false, neutral: true, diff: false };
+  const state = { teacher: 5, scene: 'akama-jingu', reference: 'kudanshita', weighting: 'cube', clip: false, neutral: true, diff: false, unseen: false };
   const shown = new Map(), pooled = new Map(), uploads = new Map();
   let film, cube, run = 0, last;
 
@@ -29,7 +29,7 @@
   const chart = $('.compiler-plot'), status = $('.compiler-status'), note = $('.compiler-note');
   const cubeScore = $('.compiler-score-cube b'), photoScore = $('.compiler-score-photo b'), photoLabel = $('.compiler-score-photo span');
   const progress = $('.compiler-progress'), matrixCells = [...root.querySelectorAll('.compiler-matrix td')];
-  const studentTag = $('.compiler-tag-student');
+  const studentTag = $('.compiler-tag-student'), teacherTag = $('.compiler-tag-teacher');
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   const load = async (cache, id, w, h) => {
@@ -99,6 +99,46 @@
     return lut;
   };
 
+  // Where the statistics are guessing: test-photo pixels whose colour (by
+  // brightness band and chroma) never occurs in the reference. A learned
+  // teacher is trained to answer there; statistics can only extrapolate.
+  const BANDS = 4, BINS = 20, RANGE = 0.3;
+  const colourKey = (rgb, i) => {
+    const y = luma(rgb, i), u = (rgb[i + 2] / 255 - y) / 1.772, v = (rgb[i] / 255 - y) / 1.402;
+    const bin = c => Math.min(BINS - 1, Math.max(0, Math.floor(((c + RANGE) / (2 * RANGE)) * BINS)));
+    return [Math.min(BANDS - 1, Math.floor(y * BANDS)), bin(u), bin(v)];
+  };
+  const unseenIn = (reference, photo) => {
+    const count = new Uint16Array(BANDS * BINS * BINS), covered = new Uint8Array(count.length);
+    for (let i = 0; i < reference.length; i += 3) {
+      const [b, u, v] = colourKey(reference, i);
+      count[(b * BINS + u) * BINS + v]++;
+    }
+    for (let b = 0; b < BANDS; b++) for (let u = 0; u < BINS; u++) for (let v = 0; v < BINS; v++) {
+      if (count[(b * BINS + u) * BINS + v] < 2) continue; // a stray pixel or two is not coverage
+      for (let du = -1; du <= 1; du++) for (let dv = -1; dv <= 1; dv++) {
+        const uu = u + du, vv = v + dv;
+        if (uu >= 0 && uu < BINS && vv >= 0 && vv < BINS) covered[(b * BINS + uu) * BINS + vv] = 1;
+      }
+    }
+    const mask = new Uint8Array(photo.length / 3);
+    let unseen = 0;
+    for (let i = 0, k = 0; i < photo.length; i += 3, k++) {
+      const [b, u, v] = colourKey(photo, i);
+      if (!covered[(b * BINS + u) * BINS + v]) { mask[k] = 1; unseen++; }
+    }
+    return { mask, share: unseen / mask.length };
+  };
+  // Diagonal magenta hatching, so marked areas read without relying on hue alone.
+  const hatch = (rgb, mask) => {
+    const out = Float32Array.from(rgb);
+    for (let k = 0; k < mask.length; k++) {
+      if (!mask[k] || (((k % W) + ((k / W) | 0)) >> 2) % 2) continue;
+      out[k * 3] = 255; out[k * 3 + 1] = 0; out[k * 3 + 2] = 255;
+    }
+    return out;
+  };
+
   const teacherLut = async () => {
     if (state.teacher !== REFERENCE) return film.luts.subarray(state.teacher * C.LUT_BYTES, (state.teacher + 1) * C.LUT_BYTES);
     const pool = await Promise.all(SCENES.map(scene => load(pooled, scene.id, PW, PH)));
@@ -155,8 +195,15 @@
     }
     return out;
   };
-  const drawStudent = () => {
+  const drawTeacher = () => {
     if (!last) return;
+    const marking = state.unseen && last.unseen;
+    draw(teacherCanvas, marking ? hatch(last.teacherPhoto, last.unseen.mask) : last.teacherPhoto);
+    teacherTag.textContent = marking ? 'TEACHER · UNSEEN COLOURS MARKED' : 'TEACHER · 14,739 BYTES';
+    teacherCanvas.setAttribute('aria-label', `${sceneTitle(state.scene)} through the teacher, ${teacherName()}${marking ? `, with the ${Math.round(last.unseen.share * 100)}% of pixels whose colours the reference never shows hatched in magenta` : ''}`);
+  };
+  const drawStudent = () => {
+    if (!last?.rendered) return;
     draw(studentCanvas, state.diff ? differenceOf(last.teacherPhoto, last.rendered) : last.rendered);
     studentTag.textContent = state.diff ? 'STUDENT · DIFFERENCE ×4' : `STUDENT · ${STUDENT_BYTES} BYTES`;
     studentCanvas.setAttribute('aria-label', `${sceneTitle(state.scene)} through the compiled student${state.diff ? ', shown as its difference from the teacher' : ''}`);
@@ -192,9 +239,12 @@
     const teacherCurve = greyLuma(C.applyLut(greys, lut, 0));
     const histogram = new Array(32).fill(0);
     for (let i = 0; i < photo.length; i += 3) histogram[Math.min(31, Math.floor(luma(photo, i) * 32))]++;
-    draw(teacherCanvas, teacherPhoto);
-    teacherCanvas.setAttribute('aria-label', `${sceneTitle(state.scene)} through the teacher, ${teacherName()}`);
+    const unseen = state.teacher === REFERENCE ? unseenIn(await load(pooled, state.reference, PW, PH), photo) : undefined;
+    if (token !== run) return;
+    last = { teacherPhoto, unseen };
+    drawTeacher();
     note.textContent = NOTES[`${state.weighting}:${state.clip}`];
+    if (unseen) note.textContent += ` ${Math.round(unseen.share * 100)}% of ${sceneTitle(state.scene)}’s pixels have colours the reference never shows. There, the statistics can only extrapolate.`;
     photoLabel.textContent = state.weighting === 'photos' ? 'This photo, held out' : 'This photo';
 
     const fit = C.createFit(x, t, { clip: state.clip });
@@ -204,7 +254,7 @@
       const rendered = C.applyStudent(photo, student);
       cubeDb = C.psnr(C.applyStudent(cube, student), teacherCube);
       photoDb = C.psnr(rendered, teacherPhoto);
-      last = { teacherPhoto, rendered, chart: [teacherCurve, greyLuma(C.applyStudent(greys, student)), histogram] };
+      last = { teacherPhoto, unseen, rendered, chart: [teacherCurve, greyLuma(C.applyStudent(greys, student)), histogram] };
       drawStudent();
       drawChart(...last.chart);
       cubeScore.textContent = `${cubeDb.toFixed(1)} dB`;
@@ -279,6 +329,7 @@
   });
   $('.compiler-clip').addEventListener('change', event => { state.clip = event.target.checked; compile(); });
   neutralBox.addEventListener('change', event => { state.neutral = event.target.checked; compile(); });
+  $('.compiler-unseen').addEventListener('change', event => { state.unseen = event.target.checked; drawTeacher(); });
   $('.compiler-diff').addEventListener('change', event => { state.diff = event.target.checked; drawStudent(); });
   $('.compiler-again').addEventListener('click', compile);
 
