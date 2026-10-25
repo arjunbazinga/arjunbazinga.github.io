@@ -293,6 +293,18 @@ Arjun asked for the teacher → student idea to become something playable rather
 - *Mark colours the reference never shows* hatches test-photo pixels whose colour cell never occurs in the reference. A cell is one of four luma bands × a 20×20 chroma grid over ±0.3, needs at least two reference pixels to count as covered, and is dilated by one cell.
   - With Asahikawa as the reference and Hakone as the test photo, 56% of pixels are unseen.
 
+**Reader pass against the raw material (25 Oct 2026).** I re-read both pages top to bottom against Arjun's dictated transcript, the five pasted chats and the 21 Oct catalog, and added what the essay was missing:
+- **The style object** (catalog J13): stamped into every photo, so photos become the catalogue.
+- **Blind "which would you keep" tests** (J11).
+- **Camp Snap's community filter site** (K5), sourced to Camp Snap's own announcement.
+
+Structural edits:
+- The compiler diagram now shows the pretrain and adapt stages.
+- The "one teacher, many cameras" paragraph moved up beside the diagram.
+- A closing line bridges question 7 into question 8.
+
+Not added: the transcript recalls import or lot-size documents behind the sales estimate, but no such source is in the chats or the catalog, so the site doesn't claim it.
+
 ## Design decisions
 
 - **Social image.** The post's `image` is the camera-on-keys hero, which reads better in listings and link previews than the four-slice thumbnail (still built, now unused).
