@@ -62,7 +62,7 @@
   const mul2 = (p, q) => [p[0] * q[0] + p[1] * q[2], p[0] * q[1] + p[1] * q[3], p[2] * q[0] + p[3] * q[2], p[2] * q[1] + p[3] * q[3]];
   const sqrt2 = ([a, b, c, d]) => { const s = Math.sqrt(Math.max(a * d - b * c, 0)), t = Math.sqrt(a + d + 2 * s); return [(a + s) / t, b / t, c / t, (d + s) / t]; };
   const inv2 = ([a, b, c, d]) => { const k = a * d - b * c; return [d / k, -b / k, -c / k, a / k]; };
-  // Monge–Kantorovich linear map from covariance S to covariance R (Pitié and Kokaram, 2007).
+  // The closed-form linear map that carries covariance S onto covariance R with the least change.
   const mkMap = (S, R) => { const s = sqrt2(S), si = inv2(s); return mul2(mul2(si, sqrt2(mul2(mul2(s, R), s))), si); };
   const histogramCdf = pixels => {
     const hist = new Float64Array(256);
