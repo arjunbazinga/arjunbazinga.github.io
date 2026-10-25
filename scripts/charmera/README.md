@@ -66,14 +66,15 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `posts/tiny-camera-better-taste/inside.qmd` | "The Charmera, Inside and Out" (added 24 Oct 2026): the reference companion. Spec sheet vs reality, parts and relatives, cost table, sales, Reto timeline, why it hit. Linked from the essay's opening; not in the Writing listing, which only takes `*/index.qmd`. |
 | `posts/tiny-camera-better-taste/index.qmd` | The essay. Interactive figures are raw HTML blocks; scripts load at the end. |
 | `posts/tiny-camera-better-taste/thumbnail.webp` | Listing image: one scene as original, B&W, FILM and VIVID slices. |
-| `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student, stock Pixel filter, NIGHT halation, EXPIRED drift. |
+| `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student (with the camera's YUV and RGB clips), the student fitter (`createFit`, `fitStudent`, a port of `fit_students.py`), stock Pixel filter, NIGHT halation, EXPIRED drift. |
+| `static/charmera/compiler.js` | "Compile one yourself" (25 Oct 2026): fits a student to a film LUT or to a reference photo live, animated step by step; scores across the cube and on a test photo; toggles for photo weighting (held out) and clipping. |
 | `static/charmera/pipeline.js` | "What happens when you press the shutter": six-stage explorer with loupe and photo-size menu. |
 | `static/charmera/darkroom.js` | The darkroom: simulated capture, seven film modes, four stock Pixel filters, LUT vs student difference view, reader's own photo (processed locally). Develops only when scrolled near. |
 | `static/charmera/exposure.js` | Stacked chart of the 50/60 Hz AE program lines, with keyboard readout and a table view. |
 | `static/charmera/meter.js` | "The curve that meters": stock gamma curve against the AE target, with executed engine cases. |
 | `static/charmera/charmera.css` | Styles, using the site's `--site-*` tokens; dark mode via `body.quarto-dark`. |
 | `static/charmera/luts.bin` | Seven 17³ RGB8 LUTs, 14,739 bytes each, red fastest (.cube order). |
-| `static/charmera/students.json` | Per mode: Q8.8 3×3 matrix, 256-entry luma curve, PSNR against the full LUT across the cube. |
+| `static/charmera/students.json` | Per mode: Q8.8 3×3 matrix, 256-entry luma curve, PSNR against the full LUT across the cube. Written by `fit_students.py` (every colour, clipping simulated). |
 | `static/charmera/ae-tables.json` | 50/60 Hz program lines: `[exposure_lines, analog_gain_q8, global_gain_q6]` per index. |
 | `static/charmera/meter.json` | The 256-entry stock AE curve, the executed identity/stock cases and the test's target/deadband. |
 | `static/charmera/scenes/`, `sensor/` | Album photographs cropped to 800×600 (darkroom) and 1280×720 (pipeline sensor stage), plus 800×600 versions of the two real Charmera photos (`charmera-street`, `charmera-park`). |
@@ -95,7 +96,7 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 From the repository root, with the archive extracted somewhere:
 
 ```sh
-# Rebuild every data file and image above (numpy, Pillow). Byte-identical to the committed files as of this README.
+# Rebuild every data file and image above except students.json (numpy, Pillow). Byte-identical to the committed files as of this README.
 python scripts/charmera/build_assets.py /path/to/charmera-aesthetics-handoff-2026-09-29-v20
 
 # Run the original Pixel filter loop in Unicorn (pip install unicorn==2.1.4).
@@ -103,6 +104,13 @@ python scripts/charmera/pixel_probe.py /path/to/charmera-aesthetics-handoff-2026
 
 # Check the JavaScript Pixel filter against those recorded outputs.
 node scripts/charmera/test_pixel.js
+
+# Fit the seven hardware students (writes static/charmera/students.json). --report prints the
+# four fits the compiler offers, scored across the cube and on held-out photos (about a minute).
+python scripts/charmera/fit_students.py --report
+
+# Check the browser fitter reproduces students.json exactly.
+node scripts/charmera/test_students.js
 
 # Recompute the VIVID (and FILM) student-error measurements quoted in the essay.
 python scripts/charmera/vivid_error.py 5 0
@@ -141,8 +149,12 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | Same scene, opposite AE decisions (identity +3 / stock −3 at 64) | `AE_RUNTIME_AUDIT_V17.md`, `results_active_gamma.json` |
 | Flip survives stock configuration (target 120, mode 5) | `init-schedule-audit/INIT_SCHEDULE_AUDIT_V18.md` |
 | 13-step target table, 205 … 47, default selector 6 = 120 | `INIT_SCHEDULE_AUDIT_V18.md`; `sil-audit/SIL_AUDIT_V19.md` |
-| Student PSNR table | `firmware-imaging/scaler_fit_current_luts.json` (fit uniform over the 17³ grid; `fit_scaler_student.py`) |
-| VIVID student loses contrast on photos | `vivid_error.py` (new measurement, not in the archive) |
+| Student table, "First fit" column | The archive's students (`firmware-imaging/scaler_fit_current_luts.json`, fitted uniformly over the 17³ grid by `fit_scaler_student.py`), re-scored through the camera's clips with `fit_students.render`. Within 0.1 dB of the archive's own figures. |
+| Student table, "Fitter knows the camera clips" column; 274 bytes | `fit_students.py` (new, not in the archive). 274 = 256 curve bytes + nine 16-bit Q8.8 coefficients. |
+| VIVID first student loses contrast on photos (9–18 levels too bright in shadows, 8–15 too dark in highlights; mean error 10–17) | `vivid_error.py` on the archive's students |
+| Clip-aware VIVID student's mean error 3–5 levels on the same four photos | `vivid_error.py` on the committed `students.json` |
+| Held-out photo scores (B&W 41.9 → 49.3, PEOPLE 38.3 → 40.4, VIVID 33.4 → 34.0; cube scores fall) | `fit_students.py --report`: each photo fit uses the other eight scenes, sampled at 160×120. The widget samples photos through the browser's own resize, so its live numbers differ slightly. |
+| Deep Analog: one film scan → LUT, trained on synthetic transforms, code inspection-only, no released weights | [EtonMu/deep-analog](https://github.com/EtonMu/deep-analog) README, read 25 Oct 2026; arXiv:2608.14702 |
 | 27-candidate film bank | `docs/15_CANDIDATE_FILM_BANK.md`; `prior-artifacts/charmera-film-bank-v0.1.zip` |
 | Updater: `JH_5408` name, byte-sum checksum, final erase at `0x210000` | *prior* `Charmera-firmware-findings.md`, `LATEST_FINDINGS_2026-09-27.md` |
 | Final erase as intentional settings reset for a `0x169000` package | *prior* `UPDATE_CONTRACT_FINDINGS.md` (supersedes the earlier "bug" reading) |
@@ -250,6 +262,18 @@ Arjun's dictated summary of the research (24 Oct 2026) reads well top to bottom 
   - The AI role is stated plainly in both pages.
   - The essay argues for upgrading cameras already sold without naming any app or business plan.
 
+## The compiler and Deep Analog (25 Oct 2026)
+
+Arjun asked for the teacher → student idea to become something playable rather than a diagram, prompted by [Deep Analog](https://github.com/EtonMu/deep-analog) (Yitong Mu, RIT; arXiv:2608.14702).
+
+- **What Deep Analog is.** From a single film scan, `StyleLUTNet` predicts a 3D LUT, trained self-supervised on procedurally generated colour transforms. `FilmAnalyzerNet` estimates tone, grain and halation parameters for a physics stage. Its README reports 22.05 dB for the colour stage on a 350-image FiveK split.
+- **Why none of it is used.** The repository is "All Rights Reserved", not open source, and patent pending. No trained weights are distributed, and the hosted Hugging Face demo needs an access code. The paper and demo were not reachable from this environment. So the site cites it as related work only. The compiler's reference mode uses classic, long-published methods: histogram matching, and Pitié and Kokaram's 2007 linear Monge–Kantorovich colour transfer, per luma band.
+- **What building it found.** Re-fitting the students in the browser showed that the archive's fitter scored unclipped output. A fitter that knows the camera clips, by treating overshoot past the displayable edge as free (`fit_students.py`), keeps the same 274 bytes and gains 0–8 dB across the cube on every mode, 7.9 on VIVID. The committed `students.json` and the darkroom now use those fits. Students are scored through 8-bit YUV storage, then the RGB clip; `applyStudent` gained the YUV clip at the same time.
+- **Choices in the widget.**
+  - It opens on the old, failing VIVID fit, so the first click shows the lesson.
+  - The photo weighting holds the test photo out of its own fit.
+  - The reference mode's lighting removal is only a mean-chroma correction, and the prose says so. The Kudanshita photo carries the strongest cast of the nine (about 13 levels warm). The Tokyo dusk photo looks pink but averages slightly blue, so it was not used to demonstrate the cast.
+
 ## Design decisions
 
 - **Social image.** The post's `image` is the camera-on-keys hero, which reads better in listings and link previews than the four-slice thumbnail (still built, now unused).
@@ -267,7 +291,7 @@ Arjun's dictated summary of the research (24 Oct 2026) reads well top to bottom 
 
 - The first draft said the updater "could compute erase addresses beyond the flash and erase on short reads, which fits community reports of bricked cameras". That repeated an interpretation the archive later superseded; the essay now tells the reset story.
 - The first draft called the sensor identification a "handshake". It is a 61-write register initialisation program.
-- I assumed VIVID's student failed on saturated colours. Measurement showed it lost contrast across the frame; the essay reports the measurement.
+- I assumed VIVID's student failed on saturated colours. Measurement showed it lost contrast across the frame. I then blamed uniform weighting; the larger cause was that the fitter scored unclipped output while the camera clips (25 Oct 2026). The essay now tells both wrong turns, and the guide lists it under "Being wrong carefully".
 - NIGHT's first halation blew out bright skies. It now keeps only the halo past each highlight and screens it in.
 
 ## Archive material not used, and why
@@ -283,5 +307,6 @@ Natural follow-ups (the first needs Arjun):
 - copy the 12-scene set straight off the card (no messaging apps) to verify 1440×1080, the EXIF colon, colour and noise, and to refit the students on real Charmera colour statistics;
 
 - a piece on the physical calibration set (`capture-study/CHARMERA_EVALUATION_SET.md`) once real Charmera photos exist;
-- refitting the students weighted by real photo colour statistics;
+- refitting the students weighted by real Charmera photo colour statistics (the compiler's photo weighting uses album photos, which are not Charmera captures);
+- a software residual for VIVID's hue-dependent push, which a curve and matrix cannot hold;
 - replacing the TOKYO and EXPIRED proxies.

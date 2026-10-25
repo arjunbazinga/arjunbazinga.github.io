@@ -7,7 +7,9 @@ Modes are indices into the seven LUTs (default: 5 = VIVID and 0 = FILM). Prints
 mean absolute error by brightness and saturation band, and the signed error in
 shadows and highlights. The essay's VIVID numbers (student 9-18 levels too
 bright in shadows, 8-15 too dark in highlights) come from this script on the
-first four scenes. Requires numpy and Pillow.
+first four scenes, measured on the first students (fitted across the cube
+without simulating the camera's clipping; scripts/charmera/README.md records
+them). Requires numpy and Pillow.
 """
 import json
 import sys
@@ -19,24 +21,14 @@ from PIL import Image
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_assets import LUT_ORDER, apply_lut  # noqa: E402
+from fit_students import render  # noqa: E402
 
 SCENES = ["akama-jingu", "hakone-torii", "kudanshita", "otaru-window"]
 
 
 def apply_student(img, fit):
-    """Curve on luma, then a Q8.8 3x3 matrix on (Y, U, V); matches film-core.js."""
-    m = np.array(fit["matrix"]) / 256
-    curve = np.array(fit["curve"]) / 255
-    r, g, b = (img[..., k] / 255 for k in range(3))
-    y = 0.299 * r + 0.587 * g + 0.114 * b
-    u, v = (b - y) / 1.772, (r - y) / 1.402
-    yc = curve[np.clip(np.round(y * 255), 0, 255).astype(int)]
-    Y = m[0, 0] * yc + m[0, 1] * u + m[0, 2] * v
-    U = m[1, 0] * yc + m[1, 1] * u + m[1, 2] * v
-    V = m[2, 0] * yc + m[2, 1] * u + m[2, 2] * v
-    R, B = Y + 1.402 * V, Y + 1.772 * U
-    G = (Y - 0.299 * R - 0.114 * B) / 0.587
-    return np.clip(np.stack([R, G, B], -1) * 255, 0, 255)
+    """Curve on luma, Q8.8 matrix on (Y, U, V), both clips; matches film-core.js."""
+    return render(img.reshape(-1, 3), fit).reshape(img.shape)
 
 
 def main(modes):

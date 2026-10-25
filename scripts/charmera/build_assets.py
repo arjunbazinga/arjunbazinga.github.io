@@ -93,18 +93,15 @@ def build_sensor_frame():
 
 
 def build_data(handoff):
-    """luts.bin, students.json, ae-tables.json and meter.json from the handoff."""
+    """luts.bin, ae-tables.json and meter.json from the handoff."""
     blob = bytearray()
     for name in LUT_ORDER:
         for rgb in read_cube(handoff / "luts" / "selected" / f"{name}.cube"):  # red varies fastest
             blob += bytes(min(255, max(0, round(v * 255))) for v in rgb)
     (OUT / "luts.bin").write_bytes(bytes(blob))
 
-    fits = json.loads((handoff / "firmware-imaging" / "scaler_fit_current_luts.json").read_text())
-    students = {name: {"psnr": round(fits[name + ".cube"]["psnr_db"], 1),
-                       "matrix": fits[name + ".cube"]["matrix_q8_8_int"],
-                       "curve": fits[name + ".cube"]["y_gamma_u8"]} for name in LUT_ORDER}
-    (OUT / "students.json").write_text(json.dumps(students, separators=(",", ":")))
+    # students.json is fitted from luts.bin by fit_students.py. The archive's own
+    # first fits (scaler_fit_current_luts.json) are the essay's "First fit" column.
 
     ae = {}
     for hz in ("50Hz", "60Hz"):
