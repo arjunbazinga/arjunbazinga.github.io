@@ -266,12 +266,17 @@ Arjun's dictated summary of the research (24 Oct 2026) reads well top to bottom 
 
 Arjun asked for the teacher → student idea to become something playable rather than a diagram.
 
-**Attribution rule (Arjun, 25 Oct 2026).** The thinking here is original: the compiler framing, manufactured supervision, the camera simulator in the loop, and taste as the teacher. Don't credit outside systems in the essay for ideas developed here. Credit is for work actually used: the community's firmware findings, AutoLUT's LUTs and the cited licences. Deep Analog (arXiv:2608.14702) is one instance of a reference-conditioned LUT predictor. It is not the vision and is not mentioned on the site.
+**Attribution rule (Arjun, 25 Oct 2026).** The thinking here is original. It comes from scaling deep learning: self-supervised pretraining, then adaptation by supervision or prompting, then distillation. Applied to a camera, that gives the compiler framing, manufactured supervision, the camera simulator in the loop, and taste as the teacher. The essay's compile section is organised as those three stages (Pretrain, Adapt, Distil). Don't credit outside systems in the essay for ideas developed here. Credit is for work actually used: the community's firmware findings, AutoLUT's LUTs and the cited licences. Deep Analog (arXiv:2608.14702) is one instance of a reference-conditioned LUT predictor. It is not the vision and is not mentioned on the site.
 
 **Why no Deep Analog material is used.** Arjun supplied its paper and a zip of its repository, and neither is committed.
 - The repository is "All Rights Reserved", for inspection and academic discussion only, and the method is patent pending.
 - No trained weights are distributed.
 - Its reported colour-stage score (22.05 dB) is measured on 350 pairs made by its own random-transform method, not on FiveK retouching.
+- Read on 25 Oct 2026, it is an instance of the common recipe, not a source for this work:
+  - its colour model is an ImageNet-pretrained ResNet-18 with an MLP head that regresses a 17³ LUT;
+  - the public `train.py` trains on paired FiveK images, using each target as its own reference;
+  - the paper's random-transform self-supervision is not in the repository;
+  - nothing is distilled (the paper lists distillation as future work).
 
 **What building the compiler found.**
 - Re-fitting the students in the browser showed that the archive's fitter scored unclipped output.
