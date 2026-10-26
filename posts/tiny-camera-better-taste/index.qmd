@@ -614,6 +614,16 @@ The way through comes from how large AI models are built. They are made in three
 
 **Distil.** That knowledge is far too big for a keychain, so the last stage finds the few numbers this camera can actually use that make its photographs behave most like the teacher's.
 
+| Stage | For this camera | Built so far |
+|----|----------|----------|
+| Pretrain | A teacher that has learned colour, light and tone from scenes rendered through the simulated camera | Not yet |
+| Adapt | A film stock, a reference photo, and the versions people keep in blind comparisons | Stand-ins only: seven film LUTs, and *Match a photo*, which uses classic statistics |
+| Distil | The camera's curve and matrix, fitted to the teacher through a simulator of the camera | Yes, in the figures below. The simulator so far models only the camera's 8-bit storage and clipping |
+
+: The three stages, and how much of each exists today
+
+So the figures below play one stage of three, with stand-in teachers. That is enough to test the part that has to fit on the chip. The teacher is where most of the work ahead lies.
+
 The distillation search shouldn't run on finished JPEGs. It should run through a simulator of this camera: the sensor crop, auto-exposure and its gamma-fed metering, the 800 × 600 surface, the hook, the overlays and the JPEG encoder. The sections above are that simulator's specification. The optimiser varies the student's parameters, renders candidate photographs through the simulated camera, and keeps whatever the teacher prefers. The architecture works like a compiler:
 
 ```text

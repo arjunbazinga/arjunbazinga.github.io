@@ -67,7 +67,8 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `posts/tiny-camera-better-taste/index.qmd` | The essay. Interactive figures are raw HTML blocks; scripts load at the end. |
 | `posts/tiny-camera-better-taste/thumbnail.webp` | Listing image: one scene as original, B&W, FILM and VIVID slices. |
 | `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student (with the camera's YUV and RGB clips), the student fitter (`createFit`, `fitStudent`, a port of `fit_students.py`), stock Pixel filter, NIGHT halation, EXPIRED drift. |
-| `static/charmera/compiler.js` | "Compile one yourself" (25 Oct 2026): fits a student to a film LUT or to a reference photo live, animated step by step; scores across the cube and on a test photo; toggles for photo weighting (held out) and clipping. |
+| `static/charmera/clip.js` | "Distilling one look" (26 Oct 2026): VIVID's teacher and student on one photo, the grey-response chart and a single clipping toggle. Fits both students on load. |
+| `static/charmera/compiler.js` | "Compile one yourself" (25 Oct 2026): fits a student to a film LUT or to a reference photo live, animated step by step; scores across the cube and on a test photo; toggles for photo weighting (held out) and clipping; prints the student's 274 bytes and saves them as a `.bin`. |
 | `static/charmera/pipeline.js` | "What happens when you press the shutter": six-stage explorer with loupe and photo-size menu. |
 | `static/charmera/darkroom.js` | The darkroom: simulated capture, seven film modes, four stock Pixel filters, LUT vs student difference view, reader's own photo (processed locally). Develops only when scrolled near. |
 | `static/charmera/exposure.js` | Stacked chart of the 50/60 Hz AE program lines, with keyboard readout and a table view. |
@@ -285,7 +286,7 @@ Arjun asked for the teacher → student idea to become something playable rather
 - Students are scored through 8-bit YUV storage, then the RGB clip. `applyStudent` gained the YUV clip at the same time.
 
 **Choices in the widget.**
-- It opens on the old, failing VIVID fit, so the first click shows the lesson.
+- The clipping lesson has its own one-toggle figure (`clip.js`), which opens on the old, failing VIVID fit, so the first click shows the lesson. The full compiler opens on FILM with clipping on (changed 26 Oct 2026; it used to open on the VIVID lesson).
 - The photo weighting holds the test photo out of its own fit.
 - The reference mode uses classic statistics only: histogram matching for tone, and a linear map of chroma mean and covariance per luma band (the Monge–Kantorovich solution).
 - The lighting removal is only a mean-chroma correction, and the prose says so.
@@ -304,6 +305,20 @@ Structural edits:
 - A closing line bridges question 7 into question 8.
 
 Not added: the transcript recalls import or lot-size documents behind the sales estimate, but no such source is in the chats or the catalog, so the site doesn't claim it.
+
+## Reader pass through five lenses (26 Oct 2026)
+
+Arjun asked who the essay resembles. The answer was five writers, each strong on one layer: Bartosz Ciechanowski (figures that each add one idea), Ken Shirriff (the artifact and the designer's intent, detail in footnotes), bunnie Huang (the bill of materials as the argument), Andrej Karpathy (small enough to hold in your head, honest about what is toy) and Gwern (rigour kept out of the prose's way). The changes all of them agreed on, needing no new research:
+
+- **The bet comes first.** The opening says the factory builds it for under $4, the software is the product, and that software is frozen. Question 1 keeps only what the argument needs. Reto's Kickstarter history, the blind-box odds and six designs, the Japan distributor and Camp Snap's sales and Taylor Swift moved to the guide.
+- **Caveats are margin notes.** `reference-location: margin`, a "How sure is this?" line (`.charmera-status`) under the opening, and inline hedges turned into footnotes. New rule: a caveat that doesn't change the argument goes in a note, not the sentence. Quarto's margin layout makes `main` a full-width grid, which the site's 76ch cap on essays squeezed into the left half; `styles.css` now lifts the cap for `main.page-full` only. No other page uses margin content.
+- **The clipping lesson has its own figure** under "Distilling one look", ahead of the score table and the playground.
+- **The look is shown as bytes.** The compiler prints and saves the 274 bytes. The layout (curve, then nine signed 16-bit little-endian coefficients) is a display choice; the hook's format isn't designed, and the note says so.
+- **Question 7 says what is built.** A table maps pretrain, adapt and distil to the camera with a "Built so far" column: pretraining not yet, adaptation only as stand-ins, distillation built against a simulator that so far models only 8-bit storage and clipping.
+
+Checked by rendering with Quarto 1.10 and driving Chromium at 390, 800, 1100 and 1400 px: no horizontal scroll, no script errors, the clip figure reproduces 22.0 → 29.9 dB, and the saved FILM bytes equal `students.json`.
+
+Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
 ## Design decisions
 
