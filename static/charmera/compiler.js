@@ -20,7 +20,7 @@
   const REFERENCE = -1; // teacher index for "match a photo"
   const STUDENT_BYTES = 256 + 9 * 2;
 
-  const state = { teacher: 5, scene: 'akama-jingu', reference: 'kudanshita', weighting: 'cube', clip: false, neutral: true, diff: false, unseen: false };
+  const state = { teacher: 0, scene: 'akama-jingu', reference: 'kudanshita', weighting: 'cube', clip: true, neutral: true, diff: false, unseen: false };
   const shown = new Map(), pooled = new Map(), uploads = new Map();
   let film, cube, run = 0, last;
 

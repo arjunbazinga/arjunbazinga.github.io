@@ -641,9 +641,66 @@ The same teacher can compile for more than one camera. The Charmera is one targe
 
 How small can the student be? A 17 × 17 × 17 LUT at 8 bits per channel takes 14,739 bytes per mode, so all seven fit in about 100 KiB. That is affordable in software at the hook. It would be cheaper still if hardware did the work. Generalplus's related SDKs show a hardware luma curve and a 3 × 3 colour matrix, so the smallest student is exactly that: a 256-entry curve on brightness, then nine numbers. That is 274 bytes, about a fiftieth of the LUT.
 
+### Distilling one look
+
+Here is distillation at its smallest. The teacher is VIVID's 14,739-byte LUT. The student is those 274 bytes, fitted the way I first fitted every mode: every colour in the cube counts the same, and the fitter scores its own raw output.
+
+```{=html}
+<figure class="darkroom compiler clip-figure" id="charmera-clip" aria-labelledby="clip-caption">
+  <div class="compiler-stage" aria-busy="true">
+    <div class="compiler-pane">
+      <canvas class="clip-teacher" width="400" height="300" role="img" aria-label="The Shimonoseki shrine through VIVID's full LUT, the teacher"></canvas>
+      <span class="darkroom-tag" aria-hidden="true">TEACHER · 14,739 BYTES</span>
+    </div>
+    <div class="compiler-pane">
+      <canvas class="clip-student" width="400" height="300" role="img" aria-label="The Shimonoseki shrine through VIVID's student"></canvas>
+      <span class="darkroom-tag" aria-hidden="true">STUDENT · 274 BYTES</span>
+    </div>
+    <div class="darkroom-loading">Fitting two students…</div>
+    <noscript><p class="charmera-noscript">This figure fits its students in your browser and needs JavaScript.</p></noscript>
+  </div>
+  <div class="compiler-panel">
+    <div class="compiler-chart">
+      <svg class="clip-plot exposure-plot" role="img" viewBox="0 0 680 220" aria-label="How VIVID's teacher and its student brighten each grey level"></svg>
+      <ul class="exposure-legend compiler-legend">
+        <li><span class="swatch compiler-swatch-teacher"></span>Teacher</li>
+        <li><span class="swatch compiler-swatch-student"></span>Student</li>
+      </ul>
+    </div>
+    <div class="compiler-readout">
+      <p class="compiler-score"><span>Every colour</span><b class="clip-score-cube">–</b></p>
+      <p class="compiler-score"><span>This photo</span><b class="clip-score-photo">–</b></p>
+      <label class="darkroom-check clip-toggle"><input class="clip-box" type="checkbox"> The fitter knows the camera clips</label>
+    </div>
+  </div>
+  <p class="darkroom-note clip-note" aria-live="polite"></p>
+  <figcaption id="clip-caption">The teacher is VIVID's 17³ LUT. The student is a 256-entry brightness curve and nine numbers, fitted with every colour in the cube counting the same. Scores are PSNR in decibels, where higher is closer, with the student stored as 8-bit YUV and clipped to displayable RGB, the way the camera would show it.</figcaption>
+</figure>
+```
+
+Look at the chart. The teacher bends greys into a strong S, darker shadows and brighter highlights, while the student's dashed line stays much closer to no change. On four of the album photos, this student was 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It had lost contrast, and it took me two wrong explanations to see why.
+
+Velvia's character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it was spread across the whole frame instead. My second explanation was the weighting: every colour in the cube counted the same, so the fit spent its small budget on saturated extremes that photographs rarely contain.
+
+That was half right. The fit was spending its budget on saturated extremes, but the cause was that it didn't know the camera clips. Velvia drives a saturated red to the edge of what can be stored. The fitter, scoring its raw output, worked hard to land exactly on that edge and paid for it in contrast. The camera clips whatever it writes, so overshooting the edge costs nothing. Tick *The fitter knows the camera clips*: the same 274 bytes buy contrast instead. VIVID's average error on those four photos fell from 10–17 levels to 3–5. It was the essay's own argument coming back at me: the search has to run through a simulator of the camera, and mine had left out one line of it.
+
+### The score decides what you lose
+
+| Mode | First fit | Fitter knows the camera clips |
+|---|---|---|
+| B&W | 40.8 dB | 41.2 dB |
+| EXPIRED | 38.5 dB | 38.5 dB |
+| PEOPLE | 35.0 dB | 37.9 dB |
+| TOKYO | 32.4 dB | 36.9 dB |
+| FILM | 32.2 dB | 35.0 dB |
+| NIGHT | 29.4 dB | 32.4 dB |
+| VIVID | 22.0 dB | 29.9 dB |
+
+Both columns are measured across the whole colour cube, and both students are scored the way the camera would show them. VIVID gains the most; EXPIRED, already close, doesn't move. The darkroom's *Hardware student* now uses the right-hand column; choose it there and then *Show difference* to see the gap on any photo, with the per-photo score underneath. B&W survives almost perfectly, because a monochrome look is mostly a tone curve.
+
 ### Compile one yourself
 
-The compiler below plays the last stage, distillation, with a film look as the teacher. It runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes.
+The compiler below plays distillation with every teacher. It runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes.
 
 ```{=html}
 <figure class="darkroom compiler" id="charmera-compiler" aria-labelledby="compiler-caption">
@@ -702,7 +759,7 @@ The compiler below plays the last stage, distillation, with a film look as the t
       </div>
     </div>
     <div class="darkroom-controls">
-      <label class="darkroom-check"><input class="compiler-clip" type="checkbox"> The fitter knows the camera clips</label>
+      <label class="darkroom-check"><input class="compiler-clip" type="checkbox" checked> The fitter knows the camera clips</label>
       <label class="darkroom-check"><input class="compiler-diff" type="checkbox"> Show difference</label>
       <button type="button" class="darkroom-reshoot compiler-again">Compile again</button>
     </div>
@@ -716,27 +773,7 @@ The compiler below plays the last stage, distillation, with a film look as the t
 </figure>
 ```
 
-It opens on VIVID, fitted the way I first fitted every mode: every colour in the cube counts the same, and the fitter scores its own raw output. Watch the chart. The teacher bends greys into a strong S, darker shadows and brighter highlights, while the student's dashed line stays much closer to no change. Then tick *The fitter knows the camera clips*.
-
-### The score decides what you lose
-
-| Mode | First fit | Fitter knows the camera clips |
-|---|---|---|
-| B&W | 40.8 dB | 41.2 dB |
-| EXPIRED | 38.5 dB | 38.5 dB |
-| PEOPLE | 35.0 dB | 37.9 dB |
-| TOKYO | 32.4 dB | 36.9 dB |
-| FILM | 32.2 dB | 35.0 dB |
-| NIGHT | 29.4 dB | 32.4 dB |
-| VIVID | 22.0 dB | 29.9 dB |
-
-Both columns are measured across the whole colour cube, and both students are scored the way the camera would show them. The darkroom's *Hardware student* now uses the right-hand column; choose it there and then *Show difference* to see the gap on any photo, with the per-photo score underneath. B&W survives almost perfectly, because a monochrome look is mostly a tone curve. VIVID was the worst fit by a wide margin, and it took me two wrong explanations to see why.
-
-Velvia's character is hue-dependent: it pushes some colours much harder than others, which a brightness curve and a linear matrix cannot express. So I assumed the error would sit in saturated colours. On real photographs it was spread across the whole frame instead. On four of the album photos, the first student was 9 to 18 levels (out of 255) too bright in the shadows and 8 to 15 too dark in the highlights. It had lost contrast. My second explanation was the weighting: every colour in the cube counted the same, so the fit spent its small budget on saturated extremes that photographs rarely contain.
-
-That was half right. The fit was spending its budget on saturated extremes, but the cause was that it didn't know the camera clips. Velvia drives a saturated red to the edge of what can be stored. The fitter, scoring its raw output, worked hard to land exactly on that edge and paid for it in contrast. The camera clips whatever it writes, so overshooting the edge costs nothing. Once the fitter knows that, the same 274 bytes buy contrast instead. VIVID's average error on those four photos fell from 10–17 levels to 3–5. It was the essay's own argument coming back at me: the search has to run through a simulator of the camera, and mine had left out one line of it.
-
-Weighting still matters. Switch the compiler to *Colours in photographs*. It fits on eight of the photos and is scored on the ninth, which it never sees. Averaged over all nine held-out photos, B&W rises from 41.9 to 49.3 dB, PEOPLE from 38.3 to 40.4 and VIVID from 33.4 to 34.0, while their scores across the cube fall: the student stops caring about colours nobody photographs. FILM and EXPIRED barely move. Nine photographs are too few to settle the trade, which is why the next fit should use real Charmera photographs straight off the card. Even then, some modes will live almost entirely in hardware while others need a software residual at the hook. VIVID's hue-dependent push is still beyond a curve and a matrix, so the last of its look belongs there.
+Weighting still matters. Pick B&W in the compiler and switch it to *Colours in photographs*. It fits on eight of the photos and is scored on the ninth, which it never sees. Averaged over all nine held-out photos, B&W rises from 41.9 to 49.3 dB, PEOPLE from 38.3 to 40.4 and VIVID from 33.4 to 34.0, while their scores across the cube fall: the student stops caring about colours nobody photographs. FILM and EXPIRED barely move. Nine photographs are too few to settle the trade, which is why the next fit should use real Charmera photographs straight off the card. Even then, some modes will live almost entirely in hardware while others need a software residual at the hook. VIVID's hue-dependent push is still beyond a curve and a matrix, so the last of its look belongs there.
 
 ### A photo as the teacher
 
@@ -778,6 +815,7 @@ This work builds on the Charmera community's. [Project Sirius](https://github.co
 <script src="/static/charmera/film-core.js"></script>
 <script src="/static/charmera/pipeline.js" defer></script>
 <script src="/static/charmera/darkroom.js" defer></script>
+<script src="/static/charmera/clip.js" defer></script>
 <script src="/static/charmera/compiler.js" defer></script>
 <script src="/static/charmera/exposure.js" defer></script>
 <script src="/static/charmera/meter.js" defer></script>
