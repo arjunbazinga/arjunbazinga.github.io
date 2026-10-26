@@ -318,6 +318,16 @@ Arjun asked who the essay resembles. The answer was five writers, each strong on
 
 Checked by rendering with Quarto 1.10 and driving Chromium at 390, 800, 1100 and 1400 px: no horizontal scroll, no script errors, the clip figure reproduces 22.0 → 29.9 dB, and the saved FILM bytes equal `students.json`.
 
+A second pass, reading the rendered page top to bottom (26 Oct 2026), found pacing problems rather than missing rigour, and fixed the cheap ones:
+
+- The flash map opens on *Full 2 MiB image*, so the reader meets the erase past the end of the chip first; the prose flips it to *Software only* at the reveal. It used to open on the answer.
+- Question 7's ASCII compiler diagram is gone. The stage table already carried its structure, and the pipeline had been described four times before the first figure. One sentence keeps the compiler analogy: teacher as source, simulator as target machine, student as binary.
+- The bytes note says the first 256 bytes are the tone curve itself, so reading them traces the chart's line.
+- Question 1's closing bridge no longer repeats "frozen at the factory".
+- Site-wide: the rule that hides an essay's description when it has a subtitle never matched, because Quarto renders the description beside `.quarto-title`. It now matches on `#title-block-header`, for every post with a subtitle.
+
+Still open from that read: question 4 gives its answer (the customisation-plane table) after four screens of resources; the stock frames appear twice in a row; "A look is a process, not a tint" has no picture; several figure captions carry long caveats.
+
 Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
 ## Design decisions

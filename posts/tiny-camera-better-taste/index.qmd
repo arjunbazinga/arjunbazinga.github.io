@@ -83,7 +83,7 @@ In June 2026 Reto followed up with the [Charmera Millennium Edition](https://www
 
 Reto's history, the sales evidence, the spec sheet checked line by line, the parts and the cost table are in a companion field guide, [The Charmera, Inside and Out](/posts/tiny-camera-better-taste/inside.html).
 
-So here was a $30 camera built from a few dollars of standard parts, sold by the hundreds of thousands at least, whose software is the product and is frozen at the factory. The next question was whether anyone could get inside it.
+If the software is the product, the next question is whether anyone can get inside it.
 
 ## Can anyone get inside it? {#q-inside}
 
@@ -106,8 +106,8 @@ Everything the camera does, and anything I change, has to live in one 2 MiB flas
       <li><i class="swatch flash-swatch-erase"></i>Final erase</li>
     </ul>
     <div class="exposure-toggle flash-toggle" role="group" aria-label="Update package">
-      <button type="button" data-value="full" aria-pressed="false">Full 2 MiB image</button>
-      <button type="button" data-value="package" aria-pressed="true">Software only</button>
+      <button type="button" data-value="full" aria-pressed="true">Full 2 MiB image</button>
+      <button type="button" data-value="package" aria-pressed="false">Software only</button>
     </div>
   </div>
   <div class="exposure-frame">
@@ -133,7 +133,7 @@ The card route gave me the most instructive mistake of the project. The firmware
 
 Then I looked at what else the 2 MiB dump contained. The firmware's resources end at `0x168E92`. Above that sit the camera's live state: append-only settings records at `0x170000`, a saved-photo index at `0x17F000`, and two 960 × 720 JPEGs taken by whoever owned the dumped camera. A full dump isn't an update package. It is software plus one camera's settings and photographs.
 
-So I asked what a package of only the software would look like; [flip the map](#inside-the-2-mib) between the two. Padded to the next 512-byte sector, it ends at `0x169000`, and the updater's mysterious final erase then lands exactly on `0x170000`: the settings block. I ran the original settings and photo-index routines on the result. The settings reader finds no valid record, the firmware takes its own existing reset path, and the photo index is rebuilt empty. The final erase looks like a factory reset, not a bug.
+So I asked what a package of only the software would look like; [flip the map](#inside-the-2-mib) above to *Software only*. Padded to the next 512-byte sector, it ends at `0x169000`, and the updater's mysterious final erase then lands exactly on `0x170000`: the settings block. I ran the original settings and photo-index routines on the result. The settings reader finds no valid record, the firmware takes its own existing reset path, and the photo index is rebuilt empty. The final erase looks like a factory reset, not a bug.
 
 Two of my earlier recommendations would have made things worse. Deleting the erase would have removed the reset. A guard I had proposed against short reads would have rejected the final, legitimately shorter read of a resource-sized package. The cause of the reported bricking is still unconfirmed.[^brick]
 
@@ -624,28 +624,7 @@ The way through comes from how large AI models are built. They are made in three
 
 So the figures below play one stage of three, with stand-in teachers. That is enough to test the part that has to fit on the chip. The teacher is where most of the work ahead lies.
 
-The distillation search shouldn't run on finished JPEGs. It should run through a simulator of this camera: the sensor crop, auto-exposure and its gamma-fed metering, the 800 × 600 surface, the hook, the overlays and the JPEG encoder. The sections above are that simulator's specification. The optimiser varies the student's parameters, renders candidate photographs through the simulated camera, and keeps whatever the teacher prefers. The architecture works like a compiler:
-
-```text
- pretrain: colour, light, tone
- from vast numbers of photos
-     │
- adapt: a stock, examples,
- a reference, what people keep
-     │
-     ▼
- teacher
-     │
-     ▼
- optimiser ◀── camera simulator
-     │         sensor · AE · gamma
-     ▼         hook · JPEG
- student: this camera's knobs
- curve · matrix · AE step
- small LUT · residual kernel
-```
-
-The expensive intelligence designs the camera's behaviour. It does not run for every photograph.
+The distillation search shouldn't run on finished JPEGs. It should run through a simulator of this camera: the sensor crop, auto-exposure and its gamma-fed metering, the 800 × 600 surface, the hook, the overlays and the JPEG encoder. The sections above are that simulator's specification. The optimiser varies the student's parameters, renders candidate photographs through the simulated camera, and keeps whatever the teacher prefers. That makes the whole arrangement a compiler. The teacher is the source, the camera simulator describes the target machine, and the student is the binary: a tone curve, a colour matrix, an exposure step, perhaps a small LUT and a residual for the hook. The expensive intelligence designs the camera's behaviour. It does not run for every photograph.
 
 The same teacher can compile for more than one camera. The Charmera is one target. A Camp Snap, another camera on the same Generalplus platform, or a phone is another, each with its own simulator and its own knobs. Film looks have lived as know-how, in stocks, labs and photographers' habits. A compiler like this turns that know-how into something more portable: a model of what people find beautiful, fitted to whatever hardware they already carry.
 
@@ -748,7 +727,7 @@ The compiler below plays distillation with every teacher. It runs in your browse
   <div class="compiler-bytes">
     <p class="darkroom-label">The whole look, 274 bytes</p>
     <p class="compiler-hex" role="img" aria-label="The compiled student as 274 bytes in hexadecimal"><span class="compiler-hex-curve"></span> <span class="compiler-hex-matrix"></span></p>
-    <p class="compiler-bytes-note">The 256 curve bytes, then the nine matrix numbers (highlighted) as signed 16-bit values, little-endian. The hook's real format isn't designed yet. <button type="button" class="compiler-save">Save these bytes</button></p>
+    <p class="compiler-bytes-note">The first 256 bytes are the tone curve itself: each is where one input brightness lands, so reading them in order traces the student's line in the chart. Then come the nine matrix numbers (highlighted), as signed 16-bit values, little-endian. The hook's real format isn't designed yet. <button type="button" class="compiler-save">Save these bytes</button></p>
   </div>
   <p class="darkroom-note compiler-note"></p>
   <div class="compiler-controls">
