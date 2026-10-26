@@ -232,9 +232,9 @@ Just short of that limit, my phone photos keep 26–73% as much energy as in the
 
 The camera's existing filters come in two kinds, and the difference between them decided the architecture.
 
-**Standard, Warm, Cool and B&W are hardware settings.** They set offsets and scales on the colour processor's chroma channels, and B&W zeroes them. Standard isn't even a fixed setting. Its saturation steps down as the scene gets darker, through codes 40, 37, 35, 32 and 30. That's about 1.25× in good light, falling to about 0.94× in the dark,[^unity] probably to keep chroma noise down.
+**Standard, Warm, Cool and B&W are hardware settings.** They set offsets and scales on the colour processor's chroma channels, and B&W zeroes them. Standard isn't even a fixed setting. Its saturation steps down as the scene gets darker, through codes 40, 37, 35, 32 and 30. That's about 1.25× in good light, falling to about 0.94× in the dark,[^unity] probably to keep chroma noise down. Nothing in the menu hints at it.
 
-[^unity]: Assuming code 32 is unity gain. Nothing in the menu hints at it.
+[^unity]: Assuming code 32 is unity gain.
 
 **The four Pixel filters are software.** A CPU loop walks the image two pixels at a time. Each pixel whose brightness is 124 or more becomes a flat palette colour; anything darker becomes black. I wanted to be sure, so I ran the original loop on test patterns in the emulator and checked my reimplementation against its output, including the exact threshold. You can try it in the darkroom further down.
 
