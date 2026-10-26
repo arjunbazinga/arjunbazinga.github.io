@@ -37,6 +37,10 @@ Kodak's Charmera is a digital camera small enough to hang from a keychain: a fix
 
 This essay is about changing that. I want the camera to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping. And I want a camera already on someone's keys to keep getting closer to it.
 
+::: {.column-margin .charmera-status}
+**How sure is this?** Nothing has been flashed to a camera, and nothing here is installable yet. The firmware findings come from the public dump: reading it, and running its original code in an emulator. Costs and sales are my estimates. Caveats sit in margin notes like this one, and the field guide explains [how each kind of claim was established](/posts/tiny-camera-better-taste/inside.html#how-this-was-figured-out).
+:::
+
 ```{=html}
 <figure class="charmera-hero">
   <img src="/static/charmera/charmera-on-keys-1080.webp" srcset="/static/charmera/charmera-on-keys-720.webp 720w, /static/charmera/charmera-on-keys-1080.webp 1080w" sizes="(max-width: 700px) calc(100vw - 32px), 680px" width="1080" height="630" alt="A small grey Kodak Charmera with a rainbow stripe, clipped to a keyring beside a house key and a leather fob." decoding="async">
@@ -48,11 +52,7 @@ That test sent me through film emulation, colour science and a 2 MiB firmware im
 
 > Don't remove the Charmera from the photograph. Give the Charmera better taste.
 
-::: {.charmera-status}
-**How sure is this?** The firmware findings come from the public dump: reading it, and running its original code in an emulator. Nothing has been flashed to a camera. Costs and sales are my estimates. Caveats sit in the margin notes, and the field guide explains [how each kind of claim was established](/posts/tiny-camera-better-taste/inside.html#how-this-was-figured-out).
-:::
-
-What follows takes the questions in the order I had to answer them. Each answer raised the next one.
+The questions came in this order, each answer raising the next. Each has its short answer here, so you can skip to the part you came for.
 
 ```{=html}
 <nav class="question-route" aria-label="The questions this essay answers">
@@ -478,9 +478,9 @@ The usual way to stay in the zeitgeist is the next hit: new shells, new looks, a
 
 Charmera owners are already working around their cameras. A [command-line importer](https://github.com/jphastings/charmera) repairs the broken metadata in its photos, and a [Mac app](https://github.com/Lulzx/charmera) re-processes them with film filters. A filter on a finished JPEG, though, works with whatever the camera left behind: exposure already chosen, highlights already clipped, detail already resampled and compressed. A look built into the camera can act before those losses.
 
-That advantage is narrower than it sounds, and it is worth being exact about. Most of a film look is global colour, and colour applied to a decent JPEG afterwards comes out nearly the same as colour applied inside the camera. What only the camera can do is decide exposure and protect highlights before they clip, and shape tone before the image is squeezed into 8 bits. That is where an in-camera look earns its place. For the rest, an app on the phone would do, and the two should share the same looks.
+So why not just use an app? For most of a look, you could. Most of a film look is global colour, and colour applied to a decent JPEG afterwards comes out nearly the same as colour applied inside the camera. What only the camera can do is decide exposure, protect highlights before they clip, and shape tone before the image is squeezed into 8 bits. So the rule is to build into the camera only what only the camera can do. The rest can live in a phone app as well, and the two should share the same looks: one look, compiled for two targets.
 
-An in-camera look is worth building only where the camera has that advantage, and only if the look itself is good. Which raises the question underneath the whole project: what should a Charmera photograph look like?
+Either way, a look is only worth compiling if it is good. That leaves the question underneath the whole project: what should a Charmera photograph look like?
 
 ## What should it look like? {#q-look}
 

@@ -336,7 +336,13 @@ A third pass (26 Oct 2026) took the structural items:
 
 - **Captions say what the figure shows.** The frame maker, darkroom and compiler captions keep one or two sentences (what you are looking at, the Kodak artwork credit, the placeholder LUTs, that nothing leaves the device); method and provenance, including the AutoLUT licence credit, fold into an *About this figure* `<details>`.
 
-Still open after these passes: question 5's "narrower than it sounds" paragraph still undercuts the argument just after the reader accepts it, and the front matter before question 1 (opening, hero, slogan, status line, route list) runs to about two screens.
+A fourth pass (26 Oct 2026) started from what each reader wants at that point:
+
+- **Owners** want to know at once whether they can install a look. The "How sure is this?" note is now a margin note beside the promise paragraph, and leads with "nothing here is installable yet". On phones it falls right after the promise, not before the hook.
+- **Skimmers** want a path. The route list's lead says each question has its short answer there, so they can skip to the part they came for.
+- **Photographers** reach question 5 asking why not just use an app. The paragraph that used to concede ("narrower than it sounds") now answers that question and states the rule: build into the camera only what only the camera can do, and share the same looks with a phone app, one look compiled for two targets.
+
+Left for Arjun: showing the hero at 16:9, which would bring the slogan into the first screen but changes how the photo is framed.
 
 Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
