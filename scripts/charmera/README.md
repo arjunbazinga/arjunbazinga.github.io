@@ -334,7 +334,9 @@ A third pass (26 Oct 2026) took the structural items:
 - **Question 4 answers first.** Its opening states the short answer (almost everything is already data; only the film look needs one program change) and points to the table. The discovery order is unchanged.
 - **The process has a picture.** `process.js` shows the essay's formula (capture + tone and colour + spatial + output) on the real street photo under NIGHT. Tone only is the teacher's grey response applied to luma (equal shifts to R, G and B, so chroma is untouched); colour is the full LUT; glow is `renderMode`'s halation. The darkroom's NIGHT paragraph now points back to it instead of re-explaining halation.
 
-Still open from that read: "A look is a process, not a tint" has no picture; several figure captions carry long caveats.
+- **Captions say what the figure shows.** The frame maker, darkroom and compiler captions keep one or two sentences (what you are looking at, the Kodak artwork credit, the placeholder LUTs, that nothing leaves the device); method and provenance, including the AutoLUT licence credit, fold into an *About this figure* `<details>`.
+
+Still open after these passes: question 5's "narrower than it sounds" paragraph still undercuts the argument just after the reader accepts it, and the front matter before question 1 (opening, hero, slogan, status line, route list) runs to about two screens.
 
 Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
