@@ -439,3 +439,10 @@ body.quarto-dark .compiler { --series-1: #3987e5; --series-2: #d95926; }
 .charmera-status { margin: 1.4rem 0; padding: 0.2rem 0 0.2rem 0.9rem; border-left: 2px solid var(--site-rule); color: var(--site-muted); font-family: var(--font-ui); font-size: 0.82rem; line-height: 1.6; }
 .charmera-status p { margin: 0; }
 .charmera-status strong { color: var(--site-ink); font-weight: 600; }
+
+/* The compiled student, byte for byte. */
+.compiler-bytes { margin-top: 0.9rem; }
+.compiler-hex { margin: 0; font-family: var(--bs-font-monospace, monospace); font-size: 0.7rem; line-height: 1.6; color: var(--site-ink); overflow-wrap: anywhere; }
+.compiler-hex-matrix { color: var(--series-2); font-weight: 600; }
+.compiler-bytes-note { margin: 0.45rem 0 0; font-size: 0.72rem; color: var(--site-muted); }
+.compiler-bytes-note button { margin-left: 4px; padding: 2px 8px; font-size: 0.72rem; }

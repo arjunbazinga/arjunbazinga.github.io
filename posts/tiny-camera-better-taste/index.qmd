@@ -700,7 +700,7 @@ Both columns are measured across the whole colour cube, and both students are sc
 
 ### Compile one yourself
 
-The compiler below plays distillation with every teacher. It runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes.
+The compiler below plays distillation with every teacher. It runs in your browser. It starts from a student that changes nothing and fits it to the teacher a step at a time: each step solves the nine numbers exactly with the curve held still, then every entry of the curve with the numbers held still. The left image is the teacher. The right one is what the camera's own hardware could do with 274 bytes, and under them are the bytes themselves: the whole look, which you can save.
 
 ```{=html}
 <figure class="darkroom compiler" id="charmera-compiler" aria-labelledby="compiler-caption">
@@ -734,6 +734,11 @@ The compiler below plays distillation with every teacher. It runs in your browse
         <tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody>
       </table>
     </div>
+  </div>
+  <div class="compiler-bytes">
+    <p class="darkroom-label">The whole look, 274 bytes</p>
+    <p class="compiler-hex" role="img" aria-label="The compiled student as 274 bytes in hexadecimal"><span class="compiler-hex-curve"></span> <span class="compiler-hex-matrix"></span></p>
+    <p class="compiler-bytes-note">The 256 curve bytes, then the nine matrix numbers (highlighted) as signed 16-bit values, little-endian. The hook's real format isn't designed yet. <button type="button" class="compiler-save">Save these bytes</button></p>
   </div>
   <p class="darkroom-note compiler-note"></p>
   <div class="compiler-controls">
