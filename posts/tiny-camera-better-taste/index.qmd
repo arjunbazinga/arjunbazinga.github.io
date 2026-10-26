@@ -327,7 +327,9 @@ That is the whole path. It has two kinds of control: settings the firmware owns 
 
 ## What could we change, and how safely? {#q-change}
 
-The aim was the largest change for the smallest edit to the program. So for every piece of the camera worth changing I asked the same questions: who creates it, who reads it, who updates it, and when it gets reset. Start with what already sits in the flash as plain data.
+The aim was the largest change for the smallest edit to the program. So for every piece of the camera worth changing I asked the same questions: who creates it, who reads it, who updates it, and when it gets reset.
+
+The short answer: almost everything an owner would want to change is already data that the program reads from a known place. The frames, their thumbnails, the tone curve and the exposure tables all are. Only the film look needs the program itself to change, and only once. What follows is the evidence, piece by piece, and the [table at the end](#a-customisation-plane) puts it together. Start with what already sits in the flash as plain data.
 
 ### The camera's own resources
 
@@ -462,7 +464,7 @@ Put together, the firmware answers one question for each thing worth changing: w
 
 : Where each customisable thing lives, from the traced resource directory, the control-surface audit and the updater lifecycle tests. "An update" means the stock card updater, which rewrites program and resources together.
 
-Most of what people would want to change is already data. Frames, thumbnails, the tone curve and the exposure tables sit at known places, in formats this essay has decoded. The curve and the tables happen to live inside the program image, so a checker has to know exactly which of those bytes are data and which are code. The film look is the exception. It needs one program change: a hook after capture that reads a look from a data slot, the way the frame routine reads a frame.
+The table bears out the short answer, with one catch. The curve and the exposure tables happen to live inside the program image, so a checker has to know exactly which of those bytes are data and which are code. The film look is the one real exception. It needs one program change: a hook after capture that reads a look from a data slot, the way the frame routine reads a frame.
 
 The vendor seems to have half-expected this. The firmware contains routines that open `time.txt` and `pwd.txt` from the memory card and parse what they read, and nothing in the firmware calls them. Reading settings from the card is a pattern the platform already knows.
 
