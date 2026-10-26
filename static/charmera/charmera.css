@@ -446,3 +446,11 @@ body.quarto-dark .compiler { --series-1: #3987e5; --series-2: #d95926; }
 .compiler-hex-matrix { color: var(--series-2); font-weight: 600; }
 .compiler-bytes-note { margin: 0.45rem 0 0; font-size: 0.72rem; color: var(--site-muted); }
 .compiler-bytes-note button { margin-left: 4px; padding: 2px 8px; font-size: 0.72rem; }
+
+/* Stock frames are picked by the camera's own 112×80 menu thumbnails. */
+.frames-stock button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 5px 5px 6px; }
+.frames-stock img { display: block; width: 112px; height: auto; image-rendering: pixelated; border-radius: 2px; }
+@media (max-width: 700px) {
+  .frames-stock { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .frames-stock img { width: 100%; }
+}

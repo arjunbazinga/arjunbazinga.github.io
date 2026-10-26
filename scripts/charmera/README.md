@@ -326,7 +326,11 @@ A second pass, reading the rendered page top to bottom (26 Oct 2026), found paci
 - Question 1's closing bridge no longer repeats "frozen at the factory".
 - Site-wide: the rule that hides an essay's description when it has a subtitle never matched, because Quarto renders the description beside `.quarto-title`. It now matches on `#title-block-header`, for every post with a subtitle.
 
-Still open from that read: question 4 gives its answer (the customisation-plane table) after four screens of resources; the stock frames appear twice in a row; "A look is a process, not a tint" has no picture; several figure captions carry long caveats.
+A third pass (26 Oct 2026) took the structural items:
+
+- **One frame figure.** The static gallery of the four stock frames on the street photo is gone; the frame maker took its place and opens on the first stock frame. Its stock buttons are the camera's own 112 × 80 menu thumbnails, so the picker is the camera's interface. `firmware/frame-n-on-street.webp` are still built by `build_assets.py` but no longer shown.
+
+Still open from that read: question 4 gives its answer (the customisation-plane table) after four screens of resources; "A look is a process, not a tint" has no picture; several figure captions carry long caveats.
 
 Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
