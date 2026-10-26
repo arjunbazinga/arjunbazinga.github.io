@@ -19,7 +19,7 @@ layout: post
 categories: [Photography, Imaging, Reverse Engineering]
 comments: false
 date: "2026-10-23"
-date-modified: "2026-10-25"
+date-modified: "2026-10-26"
 format:
   html:
     toc: true
@@ -32,7 +32,9 @@ include-in-header:
 
 The Charmera's firmware knows seven photo sizes. The largest is 4960 × 3720, about eighteen and a half megapixels. Every one of them is made from the same 800 × 600 image.
 
-Kodak's Charmera is a digital camera small enough to hang from a keychain. It has a fixed lens, a small noisy sensor, a direct flash and almost no settings. I want it to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping.
+Kodak's Charmera is a digital camera small enough to hang from a keychain: a fixed lens, a small noisy sensor, a direct flash and almost no settings. It sells for $30, and by my estimate the factory builds it for under $4. What people pay for is the name, the box and the software that decides how a photograph looks. That software is frozen at the factory, so the photographs a Charmera takes on its first day are as good as it will ever get.
+
+This essay is about changing that. I want the camera to pass one test: a moment happens, I press the shutter without ceremony, and later the JPEG is something worth keeping. And I want a camera already on someone's keys to keep getting closer to it.
 
 ```{=html}
 <figure class="charmera-hero">
@@ -45,7 +47,7 @@ That test sent me through film emulation, colour science and a 2 MiB firmware im
 
 > Don't remove the Charmera from the photograph. Give the Charmera better taste.
 
-This essay follows the questions in the order I had to answer them. Each answer raised the next one.
+What follows takes the questions in the order I had to answer them. Each answer raised the next one.
 
 ```{=html}
 <nav class="question-route" aria-label="The questions this essay answers">
@@ -64,17 +66,17 @@ This essay follows the questions in the order I had to answer them. Each answer 
 
 ## What is this thing, and why did it hit? {#q-what}
 
-The Charmera isn't made by Kodak. It comes from Reto, a small Hong Kong company that began with a three-lens 3D film camera, crowdfunded on Kickstarter in 2019, and since 2022 has made retro film cameras under a Kodak licence. The Charmera is a tribute to the Kodak Fling, Kodak's first disposable camera; the yellow model swaps the Fling's "200" for "1987", the year the Fling came out and the year printed on one of the camera's own frames. It went on sale on 9 September 2025 at $29.99, in blind boxes: you get one of six designs, or, in about one box in 48, a clear "secret" edition. It [sold out within a day](https://petapixel.com/2025/09/18/the-kodak-charmera-blind-boxes-sold-out-in-just-24-hours/), and Reto said demand was about ten times what it had planned for. Restocks came in rounds, resale listings ran at several times the price, and an official distributor took it into Japan.
+The Charmera isn't made by Kodak. It comes from Reto, a small Hong Kong company that makes retro cameras under a Kodak licence, and it is a tribute to the Kodak Fling, Kodak's first disposable camera. It went on sale on 9 September 2025 at $29.99, in blind boxes, and [sold out within a day](https://petapixel.com/2025/09/18/the-kodak-charmera-blind-boxes-sold-out-in-just-24-hours/). Reto said demand was about ten times what it had planned for. It has never said how many it has sold; my working estimate is about a million in the first year.[^sales]
 
-Reto has never said how many it has sold. Kodak's royalty income gives a rough bound, and my working estimate is about a million in the first year.
+[^sales]: Kodak's brand-licensing segment, which collects royalties from every Kodak licensee, rose from $10 million to $13 million in the first half of 2026. At something like a dollar a camera, that implies hundreds of thousands a quarter. The royalty rate is the weak link: at fifty cents, the estimate doubles.
 
-Reto doesn't make the electronics, and apparently not the software either. The chip is a Generalplus camera processor. The firmware's own build strings name what looks like a factory project, `JH5408`, built on a Generalplus reference kit from 2019; the words Reto and Kodak appear nowhere in the code. The founders keep a low profile, and most of what is public comes from marketing. Working up from each supplier's own prices, I estimate Reto pays its factory about $3.60 a camera, parts, assembly and the factory's margin included: around 12% of the $29.99 price. The rest of the value is the Kodak name, the blind box and the timing.
+Reto doesn't make the electronics, and apparently not the software either. The chip is a Generalplus camera processor. The firmware's own build strings name what looks like a factory project, `JH5408`, built on a Generalplus reference kit from 2019; the words Reto and Kodak appear nowhere in the code. Working up from each supplier's own prices, I estimate Reto pays its factory about $3.60 a camera, parts, assembly and the factory's margin included: around 12% of the price.[^cost] The rest of the value is the Kodak name, the blind box and the timing.
 
-Timing matters in this market. Camp Snap's screen-free CS-8 video camera [sold $20 million in eleven months](https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look), by the company's account, and nearly sold out again after Taylor Swift was seen filming with one in December 2025.
+[^cost]: About $2.88 of parts and four minutes of assembly at launch, give or take $0.30, with the molds excluded. Memory prices have since pushed it to about $3.95. An estimate, not a disclosure; the field guide shows the working.
 
 In June 2026 Reto followed up with the [Charmera Millennium Edition](https://www.photographytalk.com/kodak-charmera-millennium-edition/). The core hardware is the same. What's new is the shells and the software: four new frames and seven new filters, including Pixel filters in coral, honey, teal and violet. The thing that makes a new Charmera new is software, but a Charmera already on someone's keys can't get it. Its looks are fixed at the factory, compiled into the firmware with everything else.
 
-The spec sheet checked line by line, the parts, the cost table and how these estimates were made are in a companion field guide, [The Charmera, Inside and Out](/posts/tiny-camera-better-taste/inside.html).
+Reto's history, the sales evidence, the spec sheet checked line by line, the parts and the cost table are in a companion field guide, [The Charmera, Inside and Out](/posts/tiny-camera-better-taste/inside.html).
 
 So here was a $30 camera built from a few dollars of standard parts, sold by the hundreds of thousands at least, whose software is the product and is frozen at the factory. The next question was whether anyone could get inside it.
 
