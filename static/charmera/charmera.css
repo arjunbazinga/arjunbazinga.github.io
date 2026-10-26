@@ -434,3 +434,8 @@ body.quarto-dark .compiler { --series-1: #3987e5; --series-2: #d95926; }
 .compiler-readout .table-scroll { margin: 0.3rem 0 0; }
 .compiler-readout .compiler-matrix { width: auto; margin: 0; }
 .compiler-reference-checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+
+/* How sure is this? A one-line epistemic status under the opening. */
+.charmera-status { margin: 1.4rem 0; padding: 0.2rem 0 0.2rem 0.9rem; border-left: 2px solid var(--site-rule); color: var(--site-muted); font-family: var(--font-ui); font-size: 0.82rem; line-height: 1.6; }
+.charmera-status p { margin: 0; }
+.charmera-status strong { color: var(--site-ink); font-weight: 600; }
