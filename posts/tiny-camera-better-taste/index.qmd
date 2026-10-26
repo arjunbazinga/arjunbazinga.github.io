@@ -504,6 +504,27 @@ The answer is that a film look is a whole **picture-formation process**:
 
 A three-dimensional lookup table (LUT) maps every input colour to an output colour. It can hold the first four items above, which carry a surprising amount of a look. It cannot hold grain, glow, sharpening, or any decision that depends on the scene. A film process is therefore *capture behaviour + global tone and colour + optional spatial effects + output*, and only the second term is a LUT.
 
+Here is that sum on one of my Charmera photos, with NIGHT as the look, one term at a time.
+
+```{=html}
+<figure class="darkroom process" id="charmera-process" aria-labelledby="process-caption">
+  <div class="process-stage">
+    <canvas class="process-canvas" width="800" height="600" role="img" aria-label="The street photo, as captured"></canvas>
+    <div class="darkroom-loading">Loading the film data…</div>
+    <noscript><p class="charmera-noscript">This figure renders in your browser and needs JavaScript.</p></noscript>
+  </div>
+  <div class="process-steps" role="group" aria-label="Terms of the look">
+    <button type="button">Captured</button>
+    <button type="button">+ Tone</button>
+    <button type="button">+ Colour</button>
+    <button type="button">+ Glow</button>
+    <span class="process-lut" aria-hidden="true">what one LUT can hold</span>
+  </div>
+  <p class="darkroom-note process-note" aria-live="polite"></p>
+  <figcaption id="process-caption">A real Charmera photo built up under NIGHT. Tone and colour come from its 17³ LUT; the glow is a separate spatial step. The last term, output, is the screen you are reading on.</figcaption>
+</figure>
+```
+
 The Charmera is a good substrate because its weaknesses are already aesthetic material. Low resolution reads as softness. Sensor noise is texture. Limited dynamic range forces strong tonal decisions. Direct flash is the consumer-snapshot look. Large-camera film simulations add some of those artifacts deliberately. The Charmera already has them, so the computation should go to what it lacks: coherent tone, colour and highlight behaviour.
 
 ### Seven photographic worlds
@@ -576,7 +597,7 @@ This runs entirely in your browser. Pick a mode and a scene, then drag across th
 
 A few things are worth trying.
 
-**NIGHT on the street photo or the night scene.** The glow around the red light and the lit branches does not come from the LUT. A LUT maps each pixel independently, so it can't know that a pixel sits next to a bright one. The glow is a small spatial step: find strong highlights at quarter resolution, blur them, and keep only the halo that spills past their edges, tinted red the way film's red layer catches light scattered back from its base. Night is where the sensor fails most technically, so it is where the look has to work hardest.
+**NIGHT on the night scene.** The glow from the street photo above, now on branches lit against a night sky. Night is where the sensor fails most technically, so it is where the look has to work hardest.
 
 **EXPIRED, then *Shoot again*.** Each frame gets its own seeded white-balance shift, shadow tint, contrast change and fade.
 
@@ -792,6 +813,7 @@ This work builds on the Charmera community's. [Project Sirius](https://github.co
 ```{=html}
 <script src="/static/charmera/film-core.js"></script>
 <script src="/static/charmera/pipeline.js" defer></script>
+<script src="/static/charmera/process.js" defer></script>
 <script src="/static/charmera/darkroom.js" defer></script>
 <script src="/static/charmera/clip.js" defer></script>
 <script src="/static/charmera/compiler.js" defer></script>

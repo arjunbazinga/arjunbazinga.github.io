@@ -67,6 +67,7 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `posts/tiny-camera-better-taste/index.qmd` | The essay. Interactive figures are raw HTML blocks; scripts load at the end. |
 | `posts/tiny-camera-better-taste/thumbnail.webp` | Listing image: one scene as original, B&W, FILM and VIVID slices. |
 | `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student (with the camera's YUV and RGB clips), the student fitter (`createFit`, `fitStudent`, a port of `fit_students.py`), stock Pixel filter, NIGHT halation, EXPIRED drift. |
+| `static/charmera/process.js` | "A look is a process, not a tint" (26 Oct 2026): the street photo under NIGHT, built up one term at a time (captured, tone only, full LUT, halation), with the LUT's reach marked. |
 | `static/charmera/clip.js` | "Distilling one look" (26 Oct 2026): VIVID's teacher and student on one photo, the grey-response chart and a single clipping toggle. Fits both students on load. |
 | `static/charmera/compiler.js` | "Compile one yourself" (25 Oct 2026): fits a student to a film LUT or to a reference photo live, animated step by step; scores across the cube and on a test photo; toggles for photo weighting (held out) and clipping; prints the student's 274 bytes and saves them as a `.bin`. |
 | `static/charmera/pipeline.js` | "What happens when you press the shutter": six-stage explorer with loupe and photo-size menu. |
@@ -330,7 +331,10 @@ A third pass (26 Oct 2026) took the structural items:
 
 - **One frame figure.** The static gallery of the four stock frames on the street photo is gone; the frame maker took its place and opens on the first stock frame. Its stock buttons are the camera's own 112 × 80 menu thumbnails, so the picker is the camera's interface. `firmware/frame-n-on-street.webp` are still built by `build_assets.py` but no longer shown.
 
-Still open from that read: question 4 gives its answer (the customisation-plane table) after four screens of resources; "A look is a process, not a tint" has no picture; several figure captions carry long caveats.
+- **Question 4 answers first.** Its opening states the short answer (almost everything is already data; only the film look needs one program change) and points to the table. The discovery order is unchanged.
+- **The process has a picture.** `process.js` shows the essay's formula (capture + tone and colour + spatial + output) on the real street photo under NIGHT. Tone only is the teacher's grey response applied to luma (equal shifts to R, G and B, so chroma is untouched); colour is the full LUT; glow is `renderMode`'s halation. The darkroom's NIGHT paragraph now points back to it instead of re-explaining halation.
+
+Still open from that read: "A look is a process, not a tint" has no picture; several figure captions carry long caveats.
 
 Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
