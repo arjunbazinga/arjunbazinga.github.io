@@ -478,11 +478,11 @@ The usual way to stay in the zeitgeist is the next hit: new shells, new looks, a
 
 Charmera owners are already working around their cameras. A [command-line importer](https://github.com/jphastings/charmera) repairs the broken metadata in its photos, and a [Mac app](https://github.com/Lulzx/charmera) re-processes them with film filters.
 
-So why not just use an app? Because an app puts back the work this camera exists to remove. Every photograph has to be imported, judged, given a filter and exported, and the choosing happens later, away from the moment. The whole value of a camera like this is that you never think about filters at all. You point, you press, and the photograph is already finished. That is thoughtful design, and it is the promise Kodak's name was built on. The taste has to be in the camera.
+So why not just use an app? Because an app moves the choice to the wrong moment. Choosing a look on the camera, before the shot, is easy and even fun, especially when the looks are well designed and each is named for what you are about to shoot. Choosing afterwards means importing every photograph, judging it, filtering it and exporting it, away from the moment, and the experience is gone. On the camera you choose, you point, you press, and the photograph is already finished. That is thoughtful design, and it is the promise Kodak's name was built on. The taste has to be in the camera.
 
 It is also where taste can do the most. A filter on a finished JPEG works with whatever the camera left behind: exposure already chosen, highlights already clipped, tone already squeezed into 8 bits. Inside the camera, a look acts before those losses.
 
-That puts all the weight on the look itself. If the owner shouldn't have to choose, the camera's default has to be good. Which raises the question underneath the whole project: what should a Charmera photograph look like?
+That puts all the weight on the looks themselves. Choosing one before the shot is only a pleasure if each is good and means something. Which raises the question underneath the whole project: what should a Charmera photograph look like?
 
 ## What should it look like? {#q-look}
 
