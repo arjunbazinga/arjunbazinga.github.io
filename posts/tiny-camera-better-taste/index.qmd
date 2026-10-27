@@ -476,11 +476,13 @@ That is what could change, and how safely. Whether it is worth doing is a separa
 
 The usual way to stay in the zeitgeist is the next hit: new shells, new looks, a new box to buy. The other way is to make every camera already sold worth more. Phones went that way: VSCO sold film looks to people who already had a camera. Camp Snap has started doing it with its own hardware. Its early cameras shipped one firmware image per look; its newer firmware [loads a custom filter file](https://www.campsnapphoto.com/blogs/camp-snap-news/customize-your-campsnap-with-filters-%F0%9F%8E%A8%F0%9F%93%B8) from the memory card, and owners design filters on Camp Snap's website and share them with each other. The same announcement sends owners to a third-party site for community-made filters: once looks are files, a small market grows around them.
 
-Charmera owners are already working around their cameras. A [command-line importer](https://github.com/jphastings/charmera) repairs the broken metadata in its photos, and a [Mac app](https://github.com/Lulzx/charmera) re-processes them with film filters. A filter on a finished JPEG, though, works with whatever the camera left behind: exposure already chosen, highlights already clipped, detail already resampled and compressed. A look built into the camera can act before those losses.
+Charmera owners are already working around their cameras. A [command-line importer](https://github.com/jphastings/charmera) repairs the broken metadata in its photos, and a [Mac app](https://github.com/Lulzx/charmera) re-processes them with film filters.
 
-So why not just use an app? For most of a look, you could. Most of a film look is global colour, and colour applied to a decent JPEG afterwards comes out nearly the same as colour applied inside the camera. What only the camera can do is decide exposure, protect highlights before they clip, and shape tone before the image is squeezed into 8 bits. So the rule is to build into the camera only what only the camera can do. The rest can live in a phone app as well, and the two should share the same looks: one look, compiled for two targets.
+So why not just use an app? Because an app puts back the work this camera exists to remove. Every photograph has to be imported, judged, given a filter and exported, and the choosing happens later, away from the moment. The whole value of a camera like this is that you never think about filters at all. You point, you press, and the photograph is already finished. That is thoughtful design, and it is the promise Kodak's name was built on. The taste has to be in the camera.
 
-Either way, a look is only worth compiling if it is good. That leaves the question underneath the whole project: what should a Charmera photograph look like?
+It is also where taste can do the most. A filter on a finished JPEG works with whatever the camera left behind: exposure already chosen, highlights already clipped, tone already squeezed into 8 bits. Inside the camera, a look acts before those losses.
+
+That puts all the weight on the look itself. If the owner shouldn't have to choose, the camera's default has to be good. Which raises the question underneath the whole project: what should a Charmera photograph look like?
 
 ## What should it look like? {#q-look}
 

@@ -182,7 +182,7 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | Field guide: Ektar H35 May 2022 ($49.99); Snapic A1 late 2025 ($99); Reto3D Kickstarter 2019 | Kosmo Foto (2022, 2019), Australian Photography, Fnac |
 | Field guide: board details (two screws, taped battery, wired speaker, glued IR-cut filter, KC28 module), 200 mAh | byjp's teardown, as read in the bill-of-materials chat (the page could not be re-fetched from this session) |
 | Essay: `time.txt` / `pwd.txt` readers have no callers | Static check, 24 Oct 2026: the functions that reference those strings (runtime `0x5294`, `0x5B78`) have no `B`/`BL` targets, computed `add rd, pc` addresses or literal pointers anywhere in the loaded image |
-| Essay: in-camera looks only beat phone-side looks on exposure, highlights and pre-quantisation tone | The firmware fork-analysis chat's risk discussion; reasoning, not measurement |
+| Essay: in-camera looks act before exposure, highlight clipping and 8-bit quantisation are fixed, which a filter on a finished JPEG cannot | The firmware fork-analysis chat's risk discussion; reasoning, not measurement |
 | Not used: CLOT collaboration, Tomlov DM9 link, Generalplus revenue figures | Could not be re-verified from this session |
 | Camp Snap's early cameras shipped one firmware image per look | Camp Snap's own firmware download pages (V103: separate Standard, B&W and Vintage images), as studied in the verification chat |
 | Camp Snap CS-8: $20M in 11 months (company figure); Taylor Swift sighting Dec 2025 | [Digital Camera World](https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look); TMZ (17 Dec 2025) |
@@ -340,7 +340,7 @@ A fourth pass (26 Oct 2026) started from what each reader wants at that point:
 
 - **Owners** want to know at once whether they can install a look. The "How sure is this?" note is now a margin note beside the promise paragraph, and leads with "nothing here is installable yet". On phones it falls right after the promise, not before the hook.
 - **Skimmers** want a path. The route list's lead says each question has its short answer there, so they can skip to the part they came for.
-- **Photographers** reach question 5 asking why not just use an app. The paragraph that used to concede ("narrower than it sounds") now answers that question and states the rule: build into the camera only what only the camera can do, and share the same looks with a phone app, one look compiled for two targets.
+- **Photographers** reach question 5 asking why not just use an app. The paragraph that used to concede ("narrower than it sounds") now answers it. Arjun's correction (27 Oct 2026): the answer is the experience, not the technology. An app puts back the work the camera exists to remove (import, judge, filter, export); the value is never thinking about filters, point and press and the photograph is finished. That is thoughtful design and the Kodak promise. The technical advantage (acting before exposure, clipping and 8-bit quantisation) supports it in a paragraph of its own. An earlier draft of this pass suggested sharing looks with a phone app; that was wrong and is gone. Question 5 names the promise; question 7 still quotes Kodak's 1888 line.
 
 Left for Arjun: showing the hero at 16:9, which would bring the slogan into the first screen but changes how the photo is framed.
 
