@@ -19,7 +19,7 @@
       note: 'A software-only package ends at 0x169000. The same final erase lands on 0x170000: the settings and photo index. The firmware finds no valid settings and takes its own reset path. It reads as a factory reset.',
     },
   };
-  let data, width, scenario = 'package', focus = null;
+  let data, width, scenario = 'full', focus = null;
   const pad = { left: 8, right: 8 };
   const ROW = { main: 34, zoom: 128 }, BAR = 38;
 

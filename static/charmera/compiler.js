@@ -20,7 +20,7 @@
   const REFERENCE = -1; // teacher index for "match a photo"
   const STUDENT_BYTES = 256 + 9 * 2;
 
-  const state = { teacher: 5, scene: 'akama-jingu', reference: 'kudanshita', weighting: 'cube', clip: false, neutral: true, diff: false, unseen: false };
+  const state = { teacher: 0, scene: 'akama-jingu', reference: 'kudanshita', weighting: 'cube', clip: true, neutral: true, diff: false, unseen: false };
   const shown = new Map(), pooled = new Map(), uploads = new Map();
   let film, cube, run = 0, last;
 
@@ -30,6 +30,7 @@
   const cubeScore = $('.compiler-score-cube b'), photoScore = $('.compiler-score-photo b'), photoLabel = $('.compiler-score-photo span');
   const progress = $('.compiler-progress'), matrixCells = [...root.querySelectorAll('.compiler-matrix td')];
   const studentTag = $('.compiler-tag-student'), teacherTag = $('.compiler-tag-teacher');
+  const hexCurve = $('.compiler-hex-curve'), hexMatrix = $('.compiler-hex-matrix');
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   const load = async (cache, id, w, h) => {
@@ -208,6 +209,20 @@
     studentTag.textContent = state.diff ? 'STUDENT · DIFFERENCE ×4' : `STUDENT · ${STUDENT_BYTES} BYTES`;
     studentCanvas.setAttribute('aria-label', `${sceneTitle(state.scene)} through the compiled student${state.diff ? ', shown as its difference from the teacher' : ''}`);
   };
+  // The student as the camera would carry it: 256 curve bytes, then the nine
+  // Q8.8 coefficients as signed 16-bit little-endian values, row by row.
+  const studentBytes = student => {
+    const bytes = new Uint8Array(STUDENT_BYTES), view = new DataView(bytes.buffer);
+    bytes.set(student.curve);
+    student.matrix.flat().forEach((v, k) => view.setInt16(256 + 2 * k, Math.min(Math.max(v, -32768), 32767), true));
+    return bytes;
+  };
+  const hex = bytes => Array.from(bytes, b => b.toString(16).padStart(2, '0')).join(' ');
+  const showBytes = student => {
+    const bytes = studentBytes(student);
+    hexCurve.textContent = hex(bytes.subarray(0, 256));
+    hexMatrix.textContent = hex(bytes.subarray(256));
+  };
   const sceneTitle = id => SCENES.find(scene => scene.id === id)?.title ?? 'your photo';
   const teacherName = () => (state.teacher === REFERENCE ? `a match for ${sceneTitle(state.reference)}` : C.MODES[state.teacher].id);
 
@@ -254,13 +269,14 @@
       const rendered = C.applyStudent(photo, student);
       cubeDb = C.psnr(C.applyStudent(cube, student), teacherCube);
       photoDb = C.psnr(rendered, teacherPhoto);
-      last = { teacherPhoto, unseen, rendered, chart: [teacherCurve, greyLuma(C.applyStudent(greys, student)), histogram] };
+      last = { teacherPhoto, unseen, rendered, student, chart: [teacherCurve, greyLuma(C.applyStudent(greys, student)), histogram] };
       drawStudent();
       drawChart(...last.chart);
       cubeScore.textContent = `${cubeDb.toFixed(1)} dB`;
       photoScore.textContent = `${photoDb.toFixed(1)} dB`;
       progress.textContent = fit.steps ? `Step ${fit.steps} of ${C.FIT_STEPS}` : 'Before fitting: no change';
       student.matrix.flat().forEach((v, k) => { matrixCells[k].textContent = v; });
+      showBytes(student);
     };
     show();
     for (let k = 0; k < C.FIT_STEPS; k++) {
@@ -332,6 +348,14 @@
   $('.compiler-unseen').addEventListener('change', event => { state.unseen = event.target.checked; drawTeacher(); });
   $('.compiler-diff').addEventListener('change', event => { state.diff = event.target.checked; drawStudent(); });
   $('.compiler-again').addEventListener('click', compile);
+  $('.compiler-save').addEventListener('click', () => {
+    if (!last?.student) return;
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([studentBytes(last.student)], { type: 'application/octet-stream' }));
+    link.download = `charmera-${teacherName().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}-student.bin`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  });
 
   press(teacherButtons, String(state.teacher));
   press(referenceButtons, state.reference);

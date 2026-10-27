@@ -67,7 +67,9 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `posts/tiny-camera-better-taste/index.qmd` | The essay. Interactive figures are raw HTML blocks; scripts load at the end. |
 | `posts/tiny-camera-better-taste/thumbnail.webp` | Listing image: one scene as original, B&W, FILM and VIVID slices. |
 | `static/charmera/film-core.js` | Shared rendering: LUT lookup, curve + matrix student (with the camera's YUV and RGB clips), the student fitter (`createFit`, `fitStudent`, a port of `fit_students.py`), stock Pixel filter, NIGHT halation, EXPIRED drift. |
-| `static/charmera/compiler.js` | "Compile one yourself" (25 Oct 2026): fits a student to a film LUT or to a reference photo live, animated step by step; scores across the cube and on a test photo; toggles for photo weighting (held out) and clipping. |
+| `static/charmera/process.js` | "A look is a process, not a tint" (26 Oct 2026): the street photo under NIGHT, built up one term at a time (captured, tone only, full LUT, halation), with the LUT's reach marked. |
+| `static/charmera/clip.js` | "Distilling one look" (26 Oct 2026): VIVID's teacher and student on one photo, the grey-response chart and a single clipping toggle. Fits both students on load. |
+| `static/charmera/compiler.js` | "Compile one yourself" (25 Oct 2026): fits a student to a film LUT or to a reference photo live, animated step by step; scores across the cube and on a test photo; toggles for photo weighting (held out) and clipping; prints the student's 274 bytes and saves them as a `.bin`. |
 | `static/charmera/pipeline.js` | "What happens when you press the shutter": six-stage explorer with loupe and photo-size menu. |
 | `static/charmera/darkroom.js` | The darkroom: simulated capture, seven film modes, four stock Pixel filters, LUT vs student difference view, reader's own photo (processed locally). Develops only when scrolled near. |
 | `static/charmera/exposure.js` | Stacked chart of the 50/60 Hz AE program lines, with keyboard readout and a table view. |
@@ -180,7 +182,7 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | Field guide: Ektar H35 May 2022 ($49.99); Snapic A1 late 2025 ($99); Reto3D Kickstarter 2019 | Kosmo Foto (2022, 2019), Australian Photography, Fnac |
 | Field guide: board details (two screws, taped battery, wired speaker, glued IR-cut filter, KC28 module), 200 mAh | byjp's teardown, as read in the bill-of-materials chat (the page could not be re-fetched from this session) |
 | Essay: `time.txt` / `pwd.txt` readers have no callers | Static check, 24 Oct 2026: the functions that reference those strings (runtime `0x5294`, `0x5B78`) have no `B`/`BL` targets, computed `add rd, pc` addresses or literal pointers anywhere in the loaded image |
-| Essay: in-camera looks only beat phone-side looks on exposure, highlights and pre-quantisation tone | The firmware fork-analysis chat's risk discussion; reasoning, not measurement |
+| Essay: in-camera looks act before exposure, highlight clipping and 8-bit quantisation are fixed, which a filter on a finished JPEG cannot | The firmware fork-analysis chat's risk discussion; reasoning, not measurement |
 | Not used: CLOT collaboration, Tomlov DM9 link, Generalplus revenue figures | Could not be re-verified from this session |
 | Camp Snap's early cameras shipped one firmware image per look | Camp Snap's own firmware download pages (V103: separate Standard, B&W and Vintage images), as studied in the verification chat |
 | Camp Snap CS-8: $20M in 11 months (company figure); Taylor Swift sighting Dec 2025 | [Digital Camera World](https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look); TMZ (17 Dec 2025) |
@@ -285,7 +287,7 @@ Arjun asked for the teacher → student idea to become something playable rather
 - Students are scored through 8-bit YUV storage, then the RGB clip. `applyStudent` gained the YUV clip at the same time.
 
 **Choices in the widget.**
-- It opens on the old, failing VIVID fit, so the first click shows the lesson.
+- The clipping lesson has its own one-toggle figure (`clip.js`), which opens on the old, failing VIVID fit, so the first click shows the lesson. The full compiler opens on FILM with clipping on (changed 26 Oct 2026; it used to open on the VIVID lesson).
 - The photo weighting holds the test photo out of its own fit.
 - The reference mode uses classic statistics only: histogram matching for tone, and a linear map of chroma mean and covariance per luma band (the Monge–Kantorovich solution).
 - The lighting removal is only a mean-chroma correction, and the prose says so.
@@ -304,6 +306,45 @@ Structural edits:
 - A closing line bridges question 7 into question 8.
 
 Not added: the transcript recalls import or lot-size documents behind the sales estimate, but no such source is in the chats or the catalog, so the site doesn't claim it.
+
+## Reader pass through five lenses (26 Oct 2026)
+
+Arjun asked who the essay resembles. The answer was five writers, each strong on one layer: Bartosz Ciechanowski (figures that each add one idea), Ken Shirriff (the artifact and the designer's intent, detail in footnotes), bunnie Huang (the bill of materials as the argument), Andrej Karpathy (small enough to hold in your head, honest about what is toy) and Gwern (rigour kept out of the prose's way). The changes all of them agreed on, needing no new research:
+
+- **The bet comes first.** The opening says the factory builds it for under $4, the software is the product, and that software is frozen. Question 1 keeps only what the argument needs. Reto's Kickstarter history, the blind-box odds and six designs, the Japan distributor and Camp Snap's sales and Taylor Swift moved to the guide.
+- **Caveats are margin notes.** `reference-location: margin`, a "How sure is this?" line (`.charmera-status`) under the opening, and inline hedges turned into footnotes. New rule: a caveat that doesn't change the argument goes in a note, not the sentence. Quarto's margin layout makes `main` a full-width grid, which the site's 76ch cap on essays squeezed into the left half; `styles.css` now lifts the cap for `main.page-full` only. No other page uses margin content.
+- **The clipping lesson has its own figure** under "Distilling one look", ahead of the score table and the playground.
+- **The look is shown as bytes.** The compiler prints and saves the 274 bytes. The layout (curve, then nine signed 16-bit little-endian coefficients) is a display choice; the hook's format isn't designed, and the note says so.
+- **Question 7 says what is built.** A table maps pretrain, adapt and distil to the camera with a "Built so far" column: pretraining not yet, adaptation only as stand-ins, distillation built against a simulator that so far models only 8-bit storage and clipping.
+
+Checked by rendering with Quarto 1.10 and driving Chromium at 390, 800, 1100 and 1400 px: no horizontal scroll, no script errors, the clip figure reproduces 22.0 → 29.9 dB, and the saved FILM bytes equal `students.json`.
+
+A second pass, reading the rendered page top to bottom (26 Oct 2026), found pacing problems rather than missing rigour, and fixed the cheap ones:
+
+- The flash map opens on *Full 2 MiB image*, so the reader meets the erase past the end of the chip first; the prose flips it to *Software only* at the reveal. It used to open on the answer.
+- Question 7's ASCII compiler diagram is gone. The stage table already carried its structure, and the pipeline had been described four times before the first figure. One sentence keeps the compiler analogy: teacher as source, simulator as target machine, student as binary.
+- The bytes note says the first 256 bytes are the tone curve itself, so reading them traces the chart's line.
+- Question 1's closing bridge no longer repeats "frozen at the factory".
+- Site-wide: the rule that hides an essay's description when it has a subtitle never matched, because Quarto renders the description beside `.quarto-title`. It now matches on `#title-block-header`, for every post with a subtitle.
+
+A third pass (26 Oct 2026) took the structural items:
+
+- **One frame figure.** The static gallery of the four stock frames on the street photo is gone; the frame maker took its place and opens on the first stock frame. Its stock buttons are the camera's own 112 × 80 menu thumbnails, so the picker is the camera's interface. `firmware/frame-n-on-street.webp` are still built by `build_assets.py` but no longer shown.
+
+- **Question 4 answers first.** Its opening states the short answer (almost everything is already data; only the film look needs one program change) and points to the table. The discovery order is unchanged.
+- **The process has a picture.** `process.js` shows the essay's formula (capture + tone and colour + spatial + output) on the real street photo under NIGHT. Tone only is the teacher's grey response applied to luma (equal shifts to R, G and B, so chroma is untouched); colour is the full LUT; glow is `renderMode`'s halation. The darkroom's NIGHT paragraph now points back to it instead of re-explaining halation.
+
+- **Captions say what the figure shows.** The frame maker, darkroom and compiler captions keep one or two sentences (what you are looking at, the Kodak artwork credit, the placeholder LUTs, that nothing leaves the device); method and provenance, including the AutoLUT licence credit, fold into an *About this figure* `<details>`.
+
+A fourth pass (26 Oct 2026) started from what each reader wants at that point:
+
+- **Owners** want to know at once whether they can install a look. The "How sure is this?" note is now a margin note beside the promise paragraph, and leads with "nothing here is installable yet". On phones it falls right after the promise, not before the hook.
+- **Skimmers** want a path. The route list's lead says each question has its short answer there, so they can skip to the part they came for.
+- **Photographers** reach question 5 asking why not just use an app. The paragraph that used to concede ("narrower than it sounds") now answers it. Arjun's correction (27 Oct 2026): the answer is the experience, not the technology. An app puts back the work the camera exists to remove (import, judge, filter, export); the value is never thinking about filters, point and press and the photograph is finished. That is thoughtful design and the Kodak promise. The technical advantage (acting before exposure, clipping and 8-bit quantisation) supports it in a paragraph of its own. An earlier draft of this pass suggested sharing looks with a phone app; that was wrong and is gone. Second correction (27 Oct 2026): the value is not never choosing. Choosing a well-designed, meaningfully named look on the camera before the shot is easy and part of the fun; choosing afterwards loses the experience. The section now says the app moves the choice to the wrong moment, and closes on the looks having to be good and meaningful. Question 5 names the promise; question 7 still quotes Kodak's 1888 line.
+
+Left for Arjun: showing the hero at 16:9, which would bring the slogan into the first screen but changes how the photo is framed.
+
+Not done, and why: an annotated board photo (needs a camera opened), a LUT-cube and row-pair figure, a score-per-step plot, a gongkai paragraph, ΔE scoring and a blind keep-or-delete test. All are worth doing; none was a must.
 
 ## Design decisions
 
