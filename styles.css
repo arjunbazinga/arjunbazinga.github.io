@@ -107,6 +107,8 @@ strong { font-weight: 600; }
 /* Long-form essays retain Quarto's document structure, figures, and code. */
 main.content { font-size: 1.1rem; line-height: 1.75; }
 .essay-page:not(.writing-page) main.content { max-width: 76ch; min-width: 0; }
+/* With margin notes Quarto makes main a full-width grid; its body column sets the measure instead. */
+.essay-page:not(.writing-page) main.content.page-full { max-width: none; }
 main.content h2 { font-size: 1.7rem; margin-top: 2rem; border-color: var(--site-rule); }
 main.content h3 { font-size: 1.35rem; margin-top: 1.7rem; }
 .quarto-title-banner {
@@ -289,7 +291,8 @@ div.sourceCode, pre.sourceCode, pre.text { background-color: var(--site-surface)
 
 /* Shared article furniture stays subordinate to the text. */
 .essay-page:not(.writing-page) #title-block-header { margin-bottom: 1.6rem; }
-.essay-page .quarto-title:has(.subtitle) .description { display: none; }
+/* Quarto renders the description beside .quarto-title, not inside it. */
+.essay-page #title-block-header:has(.subtitle) .description { display: none; }
 .quarto-title-meta { margin-top: 1.2rem; }
 .quarto-title-meta, .quarto-categories { font-size: 0.8rem; }
 /* Quarto fades these with opacity; the muted ink is already quiet enough and keeps them legible. */

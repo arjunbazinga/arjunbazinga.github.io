@@ -434,3 +434,37 @@ body.quarto-dark .compiler { --series-1: #3987e5; --series-2: #d95926; }
 .compiler-readout .table-scroll { margin: 0.3rem 0 0; }
 .compiler-readout .compiler-matrix { width: auto; margin: 0; }
 .compiler-reference-checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+
+/* How sure is this? A margin note beside the opening; inline after it on phones. */
+.charmera-status { margin: 0 0 1.2rem; padding: 0.2rem 0 0.2rem 0.9rem; border-left: 2px solid var(--site-rule); color: var(--site-muted); font-family: var(--font-ui); font-size: 0.82rem; line-height: 1.6; }
+.charmera-status p { margin: 0; }
+.charmera-status strong { color: var(--site-ink); font-weight: 600; }
+
+/* The compiled student, byte for byte. */
+.compiler-bytes { margin-top: 0.9rem; }
+.compiler-hex { margin: 0; font-family: var(--bs-font-monospace, monospace); font-size: 0.7rem; line-height: 1.6; color: var(--site-ink); overflow-wrap: anywhere; }
+.compiler-hex-matrix { color: var(--series-2); font-weight: 600; }
+.compiler-bytes-note { margin: 0.45rem 0 0; font-size: 0.72rem; color: var(--site-muted); }
+.compiler-bytes-note button { margin-left: 4px; padding: 2px 8px; font-size: 0.72rem; }
+
+/* Stock frames are picked by the camera's own 112×80 menu thumbnails. */
+.frames-stock button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 5px 5px 6px; }
+.frames-stock img { display: block; width: 112px; height: auto; image-rendering: pixelated; border-radius: 2px; }
+@media (max-width: 700px) {
+  .frames-stock { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .frames-stock img { width: 100%; }
+}
+
+/* A look is a process: one photo, built up a term at a time. */
+.process-stage { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; background: #15120f; }
+.process-canvas { display: block; width: 100%; height: 100%; }
+.process-stage .charmera-noscript { position: absolute; inset: auto 0 0; z-index: 3; }
+.process-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 0.8rem; }
+.process-steps button { min-height: 38px; padding: 0 6px; font-size: 0.78rem; }
+.process-lut { grid-column: 2 / 4; grid-row: 2; padding-top: 4px; border-top: 2px solid var(--site-accent); color: var(--site-accent); font-size: 0.7rem; letter-spacing: 0.04em; text-align: center; }
+.process-note { min-height: 4.5em; }
+
+/* A caption says what the figure shows; its provenance folds away. */
+.figure-notes { margin-top: 0.4rem; }
+.figure-notes summary { cursor: pointer; color: var(--site-muted); }
+.figure-notes[open] summary { margin-bottom: 0.3rem; }
