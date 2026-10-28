@@ -8,9 +8,9 @@ status: drafting
 canonical_url: null
 employer_derived: false
 audience: Technically curious photographers and engineers who like knowing what happens between the shutter and the JPEG.
-reader_outcome: Understand why a $30 keychain camera is worth this attention, how it actually forms a photograph, what a film look is made of, and how looks could become software that owners of cameras already sold can install.
-bluf: The Charmera is a hit built on a standard platform, and its maker's own follow-up changed mostly the software. A film look is a picture-formation process, not a tint, and the firmware already has a place to run one, at 800×600. Most of what owners would want to change already lives as data apart from the program. With one hook and a safe installer, a style compiler could keep shipping looks to cameras people already own.
-description: "A $30 keychain hit, taken apart one question at a time: what it is, how to get inside, how it makes a photo, what could change, and how to compile better taste into cameras people already own."
+reader_outcome: Understand why a $30 keychain camera is worth this attention, how it actually forms a photograph, what a film look is made of, how looks could become software that owners of cameras already sold can install, and what becomes possible once looks are cheap.
+bluf: The Charmera is a hit built on a standard platform, and its maker's own follow-up changed mostly the software. A film look is a picture-formation process, not a tint, and the firmware already has a place to run one, at 800×600. Most of what owners would want to change already lives as data apart from the program. With one hook and a safe installer, a style compiler could keep shipping looks to cameras people already own. Made cheap and standard, looks become material that many people can make and share, the way mills and standard sizes did for clothing.
+description: "A $30 keychain hit, taken apart one question at a time: what it is, how to get inside, how it makes a photo, what could change, how to compile better taste into cameras people already own, and what happens when looks are cheap."
 image: /static/charmera/charmera-on-keys-1080.webp
 featured: true
 next-read-title: "The Evaluation Machine"
@@ -19,7 +19,7 @@ layout: post
 categories: [Photography, Imaging, Reverse Engineering]
 comments: false
 date: "2026-10-23"
-date-modified: "2026-10-26"
+date-modified: "2026-10-28"
 format:
   html:
     toc: true
@@ -61,10 +61,11 @@ The questions came in this order, each answer raising the next. Each has its sho
     <li><a href="#q-inside"><span class="qr-q">Can anyone get inside it?</span><span class="qr-a">Yes. The firmware is public, and there are two ways back in. The updater teaches care.</span></a></li>
     <li><a href="#q-photo"><span class="qr-q">How does it make a photo?</span><span class="qr-a">Through an 800 × 600 surface, with exposure and tone tangled together.</span></a></li>
     <li><a href="#q-change"><span class="qr-q">What could we change, and how safely?</span><span class="qr-a">Most of it is already data. One small hook would make the rest data too.</span></a></li>
-    <li><a href="#q-why"><span class="qr-q">Why is that worth doing?</span><span class="qr-a">A camera people already own could keep getting better, instead of waiting for the next hit.</span></a></li>
-    <li><a href="#q-look"><span class="qr-q">What should it look like?</span><span class="qr-a">Film's best ideas, judged on the photographs rather than the brand.</span></a></li>
+    <li><a href="#q-why"><span class="qr-q">Why is that worth doing?</span><span class="qr-a">A camera people already own could keep getting better, and a look chosen before the shot finishes the photograph in the moment.</span></a></li>
+    <li><a href="#q-look"><span class="qr-q">What should it look like?</span><span class="qr-a">Defaults built on what people reliably like, with film's best ideas as teachers.</span></a></li>
     <li><a href="#q-compile"><span class="qr-q">How do you fit taste onto a $30 camera?</span><span class="qr-a">The way large AI models are built: pretrain a teacher, adapt it to a look, then distil it into the few numbers the chip can use.</span></a></li>
-    <li><a href="#q-next"><span class="qr-q">Where does it stand, and where is it going?</span><span class="qr-a">Nothing is flashed yet. The next experiments are clear, and the idea reaches past this one camera.</span></a></li>
+    <li><a href="#q-cheap"><span class="qr-q">What happens when looks are cheap?</span><span class="qr-a">They become material many people can make, share and wear, the way mills and standard sizes made clothing for everyone.</span></a></li>
+    <li><a href="#q-next"><span class="qr-q">Where does it stand, and where is it going?</span><span class="qr-a">Nothing is flashed yet. Each layer has a status and a next experiment.</span></a></li>
   </ol>
 </nav>
 ```
@@ -470,6 +471,8 @@ The vendor seems to have half-expected this. The firmware contains routines that
 
 That suggests the shape of a customisation plane. Change the program once, verify it byte for byte, and freeze it. After that, every customisation is a data package: a look, a frame and its thumbnail, an exposure step. Each has a fixed slot, a size budget and a checksum, and each is checked on a computer before it reaches the camera. The frame maker above already works that way. It refuses anything that doesn't fit its slot and proves that every file inflates back to the exact bytes. An owner's camera could then keep getting better without anyone patching code again. It is the separation Camp Snap's filter files make, applied to a camera whose maker never planned for it.
 
+The package that carries a look needs a name, because the rest of this essay leans on it. I'll call it a **style object**: the few numbers a camera needs to render one look, the camera and firmware they were compiled for, and a few human controls on top, such as warmth, fade and grain. The camera only ever sees style objects. Everything that makes them, from a film simulator to a friend's photograph, stays off the camera.
+
 That is what could change, and how safely. Whether it is worth doing is a separate question.
 
 ## Why is that worth doing? {#q-why}
@@ -480,13 +483,29 @@ Charmera owners are already working around their cameras. A [command-line import
 
 So why not just use an app? Because an app moves the choice to the wrong moment. Choosing a look on the camera, before the shot, is easy and even fun, especially when the looks are well designed and each is named for what you are about to shoot. Choosing afterwards means importing every photograph, judging it, filtering it and exporting it, away from the moment, and the experience is gone. On the camera you choose, you point, you press, and the photograph is already finished. That is thoughtful design, and it is the promise Kodak's name was built on. The taste has to be in the camera.
 
+The demand for that is real, and mostly buried. Fujifilm's cameras let owners set a look before shooting, and a whole culture of shared "recipes" has grown around it: settings people dial in so the camera's JPEGs come out finished. Fuji X Weekly ranks them by popularity every month, and in 2024 the top two imitated [Kodachrome 64 and Kodak Portra 400](https://fujixweekly.com/2025/01/02/top-25-most-popular-film-simulation-recipes-of-2024/). Almost everywhere else, looks are sold as edits, applied afterwards in an app, and most photographs are never edited. When people do filter, it pays: a study of 7.6 million Flickr photos found filtered photos 21% more likely to be viewed and 45% more likely to get comments, and casual photographers wanted bold transformations ([Bakhshi et al., 2015](https://ojs.aaai.org/index.php/ICWSM/article/view/14622)). The appetite is there. The friction sits at the wrong moment.
+
+Committing is part of the pleasure. A roll of film is chosen before the first frame and stays for the whole roll. A look baked into the JPEG works the same way: the photograph is finished when it is taken, and choosing becomes part of the moment.
+
 It is also where taste can do the most. A filter on a finished JPEG works with whatever the camera left behind: exposure already chosen, highlights already clipped, tone already squeezed into 8 bits. Inside the camera, a look acts before those losses.
 
 That puts all the weight on the looks themselves. Choosing one before the shot is only a pleasure if each is good and means something. Which raises the question underneath the whole project: what should a Charmera photograph look like?
 
 ## What should it look like? {#q-look}
 
-Film is where most people's sense of a good snapshot comes from, and it is also the easiest thing to imitate badly. The question is what, exactly, to take from it.
+A camera's looks have two jobs. The default has to make an ordinary photograph better without asking anything of the person holding the camera. The other modes give people something worth choosing. The first job rests on what people reliably like. The second can borrow from film, which is where most people's sense of a good snapshot comes from, and also the easiest thing to imitate badly.
+
+### What people reliably like
+
+Some preferences are stable enough to design for.
+
+- **Familiar colours, a little better than life.** In studies of preferred reproduction, people pick skin, sky and foliage slightly lighter and more saturated than they measure, by roughly one unit of lightness and two of chroma ([summarised here](https://fstoppers.com/education/three-colors-expose-every-bad-edit-and-why-your-brain-cant-ignore-them-903385)).
+- **Skin hue barely moves.** A face tolerates very little hue drift before it looks ill, unless the light explains it, as at sunset. Every mode has to protect it.
+- **Warmth, brightness and contrast.** These were the filter effects that raised views and comments most in the Flickr study above.
+- **Highlights that ease into white.** A sensor this small clips early. A curve that rolls off before the clip hides it; one that runs straight into it shows it.
+- **Taste is also personal.** The five experts behind the [MIT-Adobe FiveK](https://data.csail.mit.edu/graphics/fivek/) dataset each retouched the same 5,000 photographs their own way, and [PieNet](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/7579_ECCV_2020_paper.php) learned a person's preference from the 10 to 20 photos they picked.
+
+For the Charmera that describes FILM's job: warm, a touch bright, gentle in the highlights and careful with skin, offered at a mild and a bold strength for people who want a little or a lot. The rest of this section is about the second job, and what to take from film.
 
 ### A look is a process, not a tint
 
@@ -615,9 +634,9 @@ The best film renderers today are expensive. Spectral film simulations model the
 
 The way through comes from how large AI models are built. They are made in three stages. A long self-supervised stage learns how the world behaves from raw data. A short adaptation stage shapes that with a few labelled examples, preferences or a prompt. When the result has to run somewhere small, distillation trains a student that keeps the behaviour without the size. Taste for a camera can be built the same way.
 
-**Pretrain.** A foundation model learns how colour, light and tone behave across a vast number of photographs. Most of its training signal doesn't need people. Supervision can be manufactured: pick a style, render two different scenes through the simulated camera with it, and train the model to recover the style from one of them. The transform is known, so the answer is exact, and randomising the lighting teaches the model to tell the look apart from the light.
+**Pretrain.** A foundation model learns how colour, light and tone behave across a vast number of photographs. Most of its training signal doesn't need people. Supervision can be manufactured: pick a style, render two different scenes through the simulated camera with it, and train the model to recover the style from one of them. The transform is known, so the answer is exact, and randomising the lighting teaches the model to tell the look apart from the light. The styles come from a generator: [spektrafilm](https://github.com/andreavolpato/spektrafilm) rendering public raw photographs through measured film stocks, and thousands of LUTs, blended and pushed past their ends so that a hundred looks become a continuous space. Showing the model several scenes that share one look makes the look easier to read. When one photograph could have come from several looks, the model should say so by answering with a spread of likely looks.
 
-**Adapt.** A handful of examples, a film stock or a single reference photograph then steers the model toward one look, the way a prompt steers a language model. People are needed here, where a simulator can't reach: deciding which photographs are worth keeping. Blind comparisons, two versions of one photo and the question of which you'd keep, steer the model toward looks people actually choose. That makes the system sample-efficient, and the choices owners already make, what they keep, delete and share, could become the taste data, with their consent.
+**Adapt.** A handful of examples, a film stock or a single reference photograph then steers the model toward one look, the way a prompt steers a language model. People are needed here, where a simulator can't reach: deciding which photographs are worth keeping. Blind comparisons, two versions of one photo and the question of which you'd keep, steer the model toward looks people actually choose. That makes the system sample-efficient, and the choices owners already make, what they keep, delete and share, could become the taste data, with their consent. How much the examples change should grow with how many there are. One photograph earns a reading of its look. A few earn new camera settings. A few dozen earn a small correction on top. Only many examples justify changing the teacher itself.
 
 **Distil.** That knowledge is far too big for a keychain, so the last stage finds the few numbers this camera can actually use that make its photographs behave most like the teacher's.
 
@@ -630,6 +649,8 @@ The way through comes from how large AI models are built. They are made in three
 : The three stages, and how much of each exists today
 
 So the figures below play one stage of three, with stand-in teachers. That is enough to test the part that has to fit on the chip. The teacher is where most of the work ahead lies.
+
+Much of it can be borrowed. [AceTone](https://github.com/martian422/AceTone) turns a LUT into 64 tokens that a language model can write. [CanonCGT](https://github.com/Jinwon-Ko/CanonCGT) neutralises a photograph with one small LUT and grades it with a second. [Video Color Grading](https://github.com/seunghyuns98/VideoColorGrading) draws a LUT as a 64 × 64 picture with a stock diffusion model, and blends its 100 LUTs into a continuous space. A [LoRA for Qwen-Image-Edit](https://huggingface.co/ovi054/QIE-2511-Color-Grade-Transfer-LoRA) copies a reference photo's grade in four steps. All four publish code or weights under Apache 2.0. None of them knows film or this camera; those come from spektrafilm and from the camera simulator below. What each one releases is in the field guide, under [The teacher in the open](/posts/tiny-camera-better-taste/inside.html#the-teacher-in-the-open).
 
 The distillation search shouldn't run on finished JPEGs. It should run through a simulator of this camera: the sensor crop, auto-exposure and its gamma-fed metering, the 800 × 600 surface, the hook, the overlays and the JPEG encoder. The sections above are that simulator's specification. The optimiser varies the student's parameters, renders candidate photographs through the simulated camera, and keeps whatever the teacher prefers. That makes the whole arrangement a compiler. The teacher is the source, the camera simulator describes the target machine, and the student is the binary: a tone curve, a colour matrix, an exposure step, perhaps a small LUT and a residual for the hook. The expensive intelligence designs the camera's behaviour. It does not run for every photograph.
 
@@ -784,7 +805,46 @@ It opens on Kudanshita, lit by late sun. Untick *Remove its lighting first* and 
 
 Statistics have a second limit: they only know the colours the reference contains. Choose the Asahikawa snow as the reference and Hakone as the test photo, then tick *Mark colours the reference never shows*. More than half of the photo is hatched, nearly all of it the autumn hillside: the snow has no orange in it, so whatever the teacher does to orange is extrapolation. That is where a learned teacher earns its place. Trained on manufactured transforms across many scenes, it learns a general rule for colour, so it has an answer where the reference has none. Statistics remain the right tool for tone, which any reference settles on its own. In the three stages above, a reference photograph is only the adaptation step's prompt. The statistics here stand in for a teacher with no pretraining behind it, which is why they run out where the reference does. Whatever the teacher, the student is the same 274 bytes.
 
-All of that runs in a browser, on photographs. The last question is how far it is from a real camera.
+All of that runs in a browser, on photographs. Before asking how far it is from a real camera, it is worth asking what changes if it works.
+
+## What happens when looks are cheap? {#q-cheap}
+
+Clothing got cheap and good in layers. Mills made cloth in volume. Standard sizes and paper patterns let a garment cut in one place fit a body somewhere else. Factories turned one design into thousands of copies. Only then could designers, shops and magazines multiply, and most people wear something made with care. Looks can be built in the same order.
+
+| Fashion | Looks | What it is here |
+|---|---|---|
+| Fibre | Raw material | Photographs, film datasheets, colour science |
+| Mills | Engines | The teacher and the simulators |
+| Sizes and patterns | The standard | Style objects and camera profiles |
+| Factories | The compiler | Fitting a look to one camera's knobs |
+| Designers | Look makers | Anyone with a reference photo, a recipe or an eye |
+| Shops | Distribution | Getting style objects onto cameras |
+| Editors | Curation | Choosing which looks deserve attention |
+| The street | People shooting | What gets kept, shared and copied |
+
+: The layers, from material to street
+
+Capability flows down the table and taste flows up it. Each layer needs only the layers above it to hold still: a look maker needs the standard and the compiler, and never sees the teacher. Each photograph would carry the name of the look that made it, so the photographs themselves become the catalogue: see a picture you like, and put its look on your camera.
+
+Fashion has also worked out how people choose, and most of it carries over.
+
+- **Belonging and standing apart.** [Simmel](https://gwern.net/doc/sociology/1957-simmel.pdf) described fashion as two pulls at once, to imitate and to be distinct. Looks need both: a shared default, and somewhere to go from it.
+- **Basics and statement pieces.** Most wardrobes are basics with a few loud pieces. Most photographs should come from a great default; the bold modes are for some days.
+- **Occasions.** People dress for weddings, trips and nights out. A look can be made for one event and shared by everyone at it.
+- **Drops and permanence.** A limited run turns a release into an event. A permanent collection earns trust. A look platform needs both.
+- **Copying.** Fashion designs get little legal protection, and the industry thrives anyway: copying spreads a trend fast and pushes its first wearers on to the next one ([Raustiala and Sprigman, 2006](https://www.copyrightevidence.org/wiki/index.php/Raustiala_and_Sprigman_%282006%29)). Looks that copy freely should work the same way.
+- **Editors.** When making gets cheap, choosing becomes the scarce work. Magazines did it for clothes. Someone will do it for looks.
+
+Cheap looks also make room for ones nobody ships today, because none was ever worth a product line: a roll that ages, its colours drifting a little with every frame; a look a host shares with wedding guests that expires at midnight; a friend's photograph carried as a look for a week; a look that warms as the evening goes on. The field guide keeps a longer list, under [Looks nobody ships yet](/posts/tiny-camera-better-taste/inside.html#looks-nobody-ships-yet).
+
+The first uses are where the friction is highest today.
+
+- **Defaults for cheap cameras.** Each new hit ships with whatever look its platform came with. A good default, compiled once, improves every photograph the camera takes.
+- **Event looks.** Weddings, festivals and trips, where a group wants its photographs to belong together.
+- **Look makers publishing to cameras.** Recipe writers and preset sellers already have audiences. Today their looks stop at the edit.
+- **Licensed looks.** A film brand, a band or a magazine could ship its look the way fashion does collaborations.
+
+The point is better photographs for everyone, the way mills and standard sizes ended in better clothes for most people. With consent, the same system also records what people keep choosing, which is about as direct a study of photographic taste as I can imagine.
 
 ## Where does it stand, and where is it going? {#q-next}
 
@@ -792,18 +852,25 @@ No firmware has been patched or flashed. No look is worth losing the camera, so 
 
 One small fix is ready. The camera writes its EXIF date as `2026:09:26:22:08:23`, with an extra colon where the standard wants a space before the time. Import tools repair it on the computer; a small patch fixes it at the source, in emulation.
 
-The open problems are concrete now:
+Here is each layer, from the chip up, with what exists and what comes next.
 
-- what automatic white balance does with real scenes rather than empty test statistics;
-- which process owns each colour setting, so that an edit doesn't get overwritten;
-- an ARM version of the renderer whose output matches the reference byte for byte, within the hook's memory and time budget;
-- the sensor's physical response, measured with a deliberately small set of about twelve real scenes rather than a giant benchmark. Two are in this essay; I need the rest, straight off the card.
+| Layer | Where it stands | Next |
+|---|---|---|
+| Access | Firmware dumped, disassembled and run in emulation; both install routes understood | A verified backup and restore for my unit, before anything is flashed |
+| Pipeline | Capture traced from sensor to JPEG, with its metering and its curve | What automatic white balance does with real scenes; which process owns each colour setting, so an edit doesn't get overwritten |
+| Plane | Every customisable thing located; frames proven to fit their slots | The hook at the 800 × 600 surface, with an ARM renderer that matches the reference byte for byte inside the hook's memory and time budget |
+| Looks | Seven modes, designed as LUTs and shown in this essay | One excellent FILM default, end to end |
+| Compiler | A 274-byte student, fitted in the browser through a simulator of 8-bit storage and clipping | The full camera simulator; the sensor's response from about twelve real scenes straight off the card, two of which are in this essay |
+| Teacher | Stand-ins only: film LUTs and classic statistics | The pretraining generator, and the open models worth borrowing |
+| Platform | The style object, named | A file format, a way to install it, and a consented record of what people choose |
+
+: Status by layer, October 2026
 
 I did this work over several weeks with AI assistants, which read disassembly, ran the original code in an emulator, searched filings and checked each other; I set the questions, judged the evidence and made the calls. How that worked, what I got wrong along the way and how much to trust each claim are in the field guide, under [How this was figured out](/posts/tiny-camera-better-taste/inside.html#how-this-was-figured-out).
 
-The first target is one excellent FILM default, end to end, before polishing the other six. Then the plane: a frozen, verified program and looks that arrive as data. A look would travel as a style object: a few hundred numbers that name the camera and firmware they were compiled for, with a few human controls on top, such as warmth, fade and grain. Each photo would carry the name of the look that made it, so the photographs themselves become the catalogue: see a picture you like, and put its look on your camera.
+The first target is one excellent FILM default, end to end, before polishing the other six. Then the plane: a frozen, verified program and looks that arrive as style objects.
 
-Beyond this one camera, the bet is simple. Cheap cameras will keep being built from the same few platforms, and the hits will keep coming. The value that lasts is in what the hardware does with light: taste, learned once, compiled into the knobs each camera has, and delivered to cameras people already own. Kodak's 1888 promise was "You press the button, we do the rest." The rest can be done again, offline and ahead of time.
+Beyond this one camera, cheap cameras will keep being built from the same few platforms, and the hits will keep coming. What lasts is taste, learned once, compiled into the knobs each camera has, and delivered to cameras people already own. Kodak's 1888 promise was "You press the button, we do the rest." The rest can be done again, offline and ahead of time.
 
 The test stays the same: a tiny camera, an ordinary moment, a press of the shutter, and a photograph worth keeping.
 
