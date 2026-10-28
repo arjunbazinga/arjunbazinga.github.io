@@ -199,6 +199,23 @@ Paths are relative to the v20 directory unless marked *prior* (the update-contra
 | See-through rule: a pixel pair is skipped when both frame lumas are 140 (halfword `0x8C8C`); chroma is not tested; on even rows the frame's U,V is copied with the lumas | Disassembly of `0xEDA4`, `0x142C8`, `0x1425C`; executed with `frame_probe.py` (not in the archive) |
 | pako fixed-Huffman output is byte-identical to zlib `Z_FIXED`, level 9 on all twelve stock strips | New check (pako 2.1.0 vs Python zlib) |
 | Frame menu thumbnails (`PV000`–`PV003`) are 112×80 little-endian RGB565, fixed-Huffman `GPZP`, in 1,024-byte slots (1,536 for the fourth); see-through areas are painted `0x8C71`, the key grey | New decode (24 Oct 2026); the prior archive listed them as undecoded. `test_frames.js` checks the RGB565 round trip |
+| Essay Q5: Fuji X Weekly's top two 2024 recipes imitate Kodachrome 64 and Portra 400 | [Fuji X Weekly, top 25 of 2024](https://fujixweekly.com/2025/01/02/top-25-most-popular-film-simulation-recipes-of-2024/) |
+| Essay Q5/Q6: 7.6M Flickr photos; filtered photos 21% more views, 45% more comments; warmth, exposure and contrast help most; casual users prefer bold filters | [Bakhshi, Shamma, Kennedy and Gilbert, ICWSM 2015](https://ojs.aaai.org/index.php/ICWSM/article/view/14622) |
+| Essay Q6: preferred memory colours about 1 unit lighter and 2 units more chromatic; skin hue tightly constrained | Secondary summary ([Fstoppers](https://fstoppers.com/education/three-colors-expose-every-bad-edit-and-why-your-brain-cant-ignore-them-903385)) of the preferred-reproduction literature; the essay links only the summary |
+| Essay Q6: FiveK's five experts on 5,000 photos; PieNet learns from 10 to 20 picked photos | [MIT-Adobe FiveK](https://data.csail.mit.edu/graphics/fivek/); [PieNet, ECCV 2020](https://www.ecva.net/papers/eccv_2020/papers_ECCV/html/7579_ECCV_2020_paper.php) abstract |
+| Essay Q7 and field guide: AceTone, CanonCGT, Video Color Grading, SA-LUT internals and licences | Repos cloned and read 28 Oct 2026: AceTone `916393b`, Video Color Grading `9d58052`, CanonCGT `229a7d3`, SA-LUT `3e62f9c`; LICENSE files checked (Apache 2.0 ×3, S-Lab 1.0) |
+| Essay Q7 and field guide: Qwen-Image-Edit colour-grade LoRA, four steps, Apache 2.0 | The [weights](https://huggingface.co/ovi054/QIE-2511-Color-Grade-Transfer-LoRA), the [demo app](https://huggingface.co/spaces/build-small-hackathon/Color-Grade-Transfer) `app.py` and its ModelScope card, read 28 Oct 2026 |
+| Essay Q8: Simmel on imitation and distinction | Georg Simmel, "Fashion" (1904), reprinted in *American Journal of Sociology* 62(6), 1957 ([scan](https://gwern.net/doc/sociology/1957-simmel.pdf)) |
+| Essay Q8: the piracy paradox | Raustiala and Sprigman, "The Piracy Paradox", *Virginia Law Review* 92 (2006) 1687–1777 ([summary](https://www.copyrightevidence.org/wiki/index.php/Raustiala_and_Sprigman_%282006%29)) |
+| Essay Q8: the fashion-to-looks layer table, the fashion lessons, the first uses and the "looks nobody ships yet" ideas | Arjun's framing in the 28 Oct 2026 chat (mills and cheap labour, fast looks, better photos for everyone). Analogy and ideas only |
+| Essay Q9: status table | Restates the essay's own sections; no new claims |
+| Field guide: VSCO Film per-camera profiles, $120 a brand or $200 both | [PetaPixel, 18 Jan 2012](https://petapixel.com/2012/01/18/vsco-film-offers-fancy-schmancy-film-emulation-for-digital-raw-photos/) |
+| Field guide: Film X Strength, Character, Warmth | [VSCO journal](https://vsco.co/vsco-education/journal/strength-character-warmth) |
+| Field guide: VSCO 200M sign-ups, ~160K Pro at $59.99/yr, Pro 25% of revenue, profitable (2024) | [PetaPixel, 20 May 2024](https://petapixel.com/2024/05/20/vsco-is-now-profitable-thanks-to-200-million-users-and-160000-pro-subs), citing Bloomberg |
+| Field guide: VSCO laid off 24 (Dec 2025), consumer business "declined more than expected" | [TechCrunch, 9 Dec 2025](https://techcrunch.com/2025/12/09/vsco-lays-off-24-staff-as-its-consumer-business-suffers) |
+| Field guide: VSCO One, $499.99 a year, for professionals (June 2026) | [The Dead Pixels Society, 23 Jun 2026](https://thedeadpixelssociety.com/vsco-launches-vsco-one-the-first-connected-system-for-professional-photographers/) |
+| Field guide: "My reading" on VSCO (looks sold as edits narrowed the paying audience) | Interpretation |
+| Field guide: dataset sizes and licences (FiveK, PPR10K, RAISE, PST50, Cinestill 800T pairs, spektrafilm) | Each dataset's paper or page, as linked in the table; collected in the 28 Oct 2026 literature review |
 
 ## Licensing and what was deliberately not published
 

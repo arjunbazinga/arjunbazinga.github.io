@@ -2,7 +2,7 @@
 # Companion to index.qmd. Sources and checks: scripts/charmera/README.md
 title: "The Charmera, Inside and Out"
 subtitle: "A field guide to Kodak's keychain camera: what the spec sheet says, what's really in it, what it costs to build and who makes it"
-description: "The Charmera's spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, and who is behind it."
+description: "The Charmera's spec sheet checked line by line, its parts and their relatives, an estimate of what it costs to build, how many have sold, who is behind it, and the open work a look platform can build on."
 image: /static/charmera/charmera-on-keys-1080.webp
 next-read-title: "Better Taste for a Tiny Camera"
 next-read-url: /posts/tiny-camera-better-taste/
@@ -10,6 +10,7 @@ layout: post
 categories: [Photography, Imaging, Reverse Engineering]
 comments: false
 date: "2026-10-24"
+date-modified: "2026-10-28"
 format:
   html:
     toc: true
@@ -18,7 +19,7 @@ include-in-header:
     <link rel="stylesheet" href="/static/charmera/charmera.css">
 ---
 
-This is the reference companion to [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/). The essay is an argument, told as eight questions in the order I had to answer them: what the Charmera is, whether anyone can get inside it, how it makes a photo, what could change, why that's worth doing, what it should look like, how to fit taste onto it, and where it stands. This page collects the facts underneath, for anyone who owns one, is thinking of buying one, or wants to build on it.
+This is the reference companion to [Better Taste for a Tiny Camera](/posts/tiny-camera-better-taste/). The essay is an argument, told as nine questions in the order I had to answer them: what the Charmera is, whether anyone can get inside it, how it makes a photo, what could change, why that's worth doing, what it should look like, how to fit taste onto it, what happens when looks are cheap, and where it stands. This page collects the facts underneath, for anyone who owns one, is thinking of buying one, or wants to build on it. The later sections are for people building looks: what VSCO learned, the open models and data a teacher can start from, and looks nobody ships yet.
 
 Every claim says where it comes from:
 
@@ -178,6 +179,63 @@ Where it was lucky:
 - **The wave.** It launched at the height of the 2025 blind-box craze and the lo-fi digital camera trend. Camp Snap's screen-free CS-8 video camera [sold $20 million in eleven months](https://www.digitalcameraworld.com/cameras/camcorders/this-retro-video-camera-is-so-popular-it-sold-us-usd20-million-in-under-a-year-and-found-fame-with-taylor-swift-it-just-got-its-first-fresh-look), by the company's account, and nearly sold out again after Taylor Swift was seen filming with one in December 2025.
 - **Under-forecasting.** Selling ten times the plan created months of real scarcity, which fed the hype. It looks like first-run planning, not a tactic.
 - **Reviews that helped.** "[The worst camera I've ever used](https://www.techradar.com/cameras/compact-cameras/the-viral-kodak-charmera-is-the-worst-camera-ive-ever-used-but-its-so-bad-and-so-retro-that-i-actually-love-it)" came with "but I actually love it", because people were buying a charm that happens to take photos.
+
+## What VSCO learned
+
+VSCO is the nearest precedent: a company whose product was film looks for cameras people already owned. Its history is public, in pieces.
+
+- **Looks compiled per camera.** VSCO Film began as an add-on for Lightroom and Camera Raw that changed how raw files were interpreted, sold with separate profiles for Canon and Nikon bodies, at [$120 a brand or $200 for both](https://petapixel.com/2012/01/18/vsco-film-offers-fancy-schmancy-film-emulation-for-digital-raw-photos/). The same look needed different numbers for each camera, which is the compiler's job in the essay.
+- **Three human controls.** Its later Film X looks each carry [Strength, Character and Warmth](https://vsco.co/vsco-education/journal/strength-character-warmth): how heavily the look applies, how it behaves as if over- or underexposed, and its colour temperature. That is close to the controls a style object carries.
+- **Reach without payment.** In 2024 it reported [200 million sign-ups and about 160,000 Pro subscribers](https://petapixel.com/2024/05/20/vsco-is-now-profitable-thanks-to-200-million-users-and-160000-pro-subs) at $59.99 a year, with Pro a quarter of revenue, and was profitable.
+- **The consumer side shrank.** In December 2025 it [laid off 24 staff](https://techcrunch.com/2025/12/09/vsco-lays-off-24-staff-as-its-consumer-business-suffers) after its consumer business "declined more than expected", and turned toward professionals and AI tools. In June 2026 it launched [VSCO One](https://thedeadpixelssociety.com/vsco-launches-vsco-one-the-first-connected-system-for-professional-photographers/), a $499.99-a-year system for professional photographers.
+
+My reading: VSCO proved that people love named looks, and sold them as edits, after the shot. Most people never edit, so the paying audience narrowed to people who do. A look that lives in the camera reaches everyone who presses the shutter.
+
+## The teacher in the open
+
+The essay's teacher doesn't have to start from nothing. As of October 2026, these are the reference-to-look projects and what each releases.
+
+| Project | What it does | Released | Licence |
+|---|---|---|---|
+| [AceTone](https://github.com/martian422/AceTone) (CVPR 2026) | Turns a 32³ LUT into 64 tokens from a 256-entry codebook, so a vision-language model (Qwen2.5-VL, 3B) can write a look; trained with a colour-error reward | Full training code, the LUT tokenizer, a [3B preview model](https://huggingface.co/Vivre/AceTone-3B-PST-Preview) and a benchmark; not its 800K training set | Apache 2.0 |
+| [CanonCGT](https://github.com/Jinwon-Ko/CanonCGT) (CVPR 2026) | Neutralises a photo with one 17³ LUT and applies a reference's grade with another, read by a MobileNet-v2 encoder small enough for a phone | Full training code and weights, and a list of where its presets came from; the presets themselves aren't shared | Apache 2.0 |
+| [Video Color Grading](https://github.com/seunghyuns98/VideoColorGrading) (ICCV 2025) | Lays a 16³ LUT out as a 64 × 64 picture and generates it with a Stable Diffusion 1.5 network; blends and extrapolates its 100 LUTs into a continuous space | Code, weights and its LUTs | Apache 2.0 |
+| [Colour-grade LoRA](https://huggingface.co/ovi054/QIE-2511-Color-Grade-Transfer-LoRA) for Qwen-Image-Edit-2511 | Copies a reference photo's grade onto another photo in four steps; outputs images, so a LUT has to be fitted afterwards | Weights and a [demo app](https://huggingface.co/spaces/build-small-hackathon/Color-Grade-Transfer); no training data | Apache 2.0, per its model card |
+| [SA-LUT](https://github.com/Ry3nG/SA-LUT) (ICCV 2025) | Reads a graded reference back into a log space before reading its look | Code, weights and the [PST50](https://huggingface.co/datasets/zrgong/PST50) benchmark | S-Lab 1.0, non-commercial |
+| [StatLUT](https://arxiv.org/abs/2607.08227), [InstantRetouch](https://arxiv.org/abs/2602.17044), [LumiVideo](https://arxiv.org/abs/2604.02409), [ColorCtrl](https://arxiv.org/abs/2508.09131) | Colour histograms as the look encoder; retrieving similar example edits; fixed step sizes for words like "slightly"; training-free colour edits in generative models | Papers only | None |
+
+: Reference-to-look projects and what each releases, checked October 2026. Neural Preset (CVPR 2023), the best-known earlier system, never released official code.
+
+None of them knows real film or a particular cheap camera. Two of their tricks transfer directly: blending and extrapolating LUTs, so a few looks become many, and swapping input and target during training, so the model learns to remove a look as well as apply one.
+
+## Data for the teacher
+
+Photographs that teach how ordinary scenes look are plentiful. Data that ties a look to real film barely exists.
+
+| Dataset | What it is | Size |
+|---|---|---|
+| [MIT-Adobe FiveK](https://data.csail.mit.edu/graphics/fivek/) | Raw photos, each retouched by five experts; research licence | 5,000 |
+| [PPR10K](https://arxiv.org/abs/2105.09180) | Raw portraits in 1,681 groups, three experts each, with person masks | 11,161 |
+| [RAISE](https://loki.disi.unitn.it/RAISE/) | Uncompressed raw photos from three cameras, tagged by content; no licence stated | 8,156 |
+| [PST50](https://huggingface.co/datasets/zrgong/PST50) | Content and reference pairs at 1080p, references from graded film and documentary footage | 100 pairs |
+| [Cinestill 800T pairs](https://arxiv.org/abs/2411.15967) | Aligned shots of the same scenes on a Sony A7 and on film in a Nikon F3 | 38 pairs |
+| [spektrafilm](https://github.com/andreavolpato/spektrafilm) profiles | Film-stock response taken from Kodak and Fujifilm datasheets; code GPLv3, profiles CC BY-SA 4.0 | One per stock |
+
+: Starting data for a look teacher. Sizes are as published.
+
+Thirty-eight real film pairs is the public state of the art I could find. The rest of the teacher's examples have to be generated, which is why the essay's pretraining stage manufactures its own.
+
+## Looks nobody ships yet
+
+Once a look is a small file, looks that were never worth a product line become possible. These are ideas, none built. Some would need the hook to read the camera's clock or photo count, both of which the firmware already keeps.
+
+- **A roll that ages.** Colours drift a little with each frame, as if the film sat in a hot car.
+- **Midnight looks.** A host shares a look with wedding guests, and it stops working when the night ends.
+- **A friend's eye.** A look compiled from a friend's photograph, carried for a week.
+- **Evening light.** A look that warms and softens as the hours pass.
+- **One table, one roll.** Everyone at a dinner shoots with the same look, so the photographs match.
+- **Memory colours only.** Skin, sky and leaves kept rich; everything else drained toward grey.
+- **Seasonal drops.** A look released for one summer and retired after it.
 
 ## How this was figured out
 
