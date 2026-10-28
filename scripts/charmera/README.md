@@ -90,6 +90,7 @@ The archive's own `manifests/SHA256SUMS.txt` covers every other file.
 | `static/charmera/vendor/pako.min.js` | [pako](https://github.com/nodeca/pako) 2.1.0 (MIT and Zlib licences, header kept), used for fixed-Huffman DEFLATE in the frame maker. Loaded only when the frame maker nears the viewport. |
 | `static/charmera/LICENSE-AutoLUT.txt` | MIT notice for the five LUTs derived from AutoLUT. |
 | `scripts/charmera/` | This README and the scripts below. |
+| `scripts/charmera/spektrafilm/` | Feasibility check (28 Oct 2026): spektrafilm-rs baked into the essay's LUTs and built as wasm. Patch, bake script and results; nothing generated is committed. |
 
 `_quarto.yml` publishes `static/charmera/**` as resources. The homepage album section (`_includes/album-preview.qmd`) and the end of `album/index.qmd` link to the essay.
 

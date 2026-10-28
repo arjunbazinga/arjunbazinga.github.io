@@ -1,0 +1,238 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 6c92ef7..7264257 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -7,6 +7,7 @@ members = [
+     "crates/spektrafilm-model",
+     "crates/spektrafilm-cli",
+     "crates/spektrafilm-gui",
++    "crates/charmera-bake",
+ ]
+ 
+ [workspace.package]
+@@ -17,7 +18,7 @@ rust-version = "1.85"
+ 
+ [workspace.dependencies]
+ spektrafilm-core = { path = "crates/spektrafilm-core" }
+-spektrafilm-gpu = { path = "crates/spektrafilm-gpu" }
++spektrafilm-gpu = { path = "crates/spektrafilm-gpu", default-features = false }
+ spektrafilm-math = { path = "crates/spektrafilm-math" }
+ spektrafilm-model = { path = "crates/spektrafilm-model" }
+ 
+diff --git a/crates/charmera-bake/Cargo.toml b/crates/charmera-bake/Cargo.toml
+new file mode 100644
+index 0000000..523b20f
+--- /dev/null
++++ b/crates/charmera-bake/Cargo.toml
+@@ -0,0 +1,11 @@
++[package]
++name = "charmera-bake"
++version.workspace = true
++edition.workspace = true
++license.workspace = true
++
++[dependencies]
++spektrafilm-core.workspace = true
++spektrafilm-gpu.workspace = true
++spektrafilm-math.workspace = true
++anyhow.workspace = true
+diff --git a/crates/charmera-bake/src/main.rs b/crates/charmera-bake/src/main.rs
+new file mode 100644
+index 0000000..f701795
+--- /dev/null
++++ b/crates/charmera-bake/src/main.rs
+@@ -0,0 +1,96 @@
++// Bake spektrafilm into LUTs for the Charmera essay, and render photos for checking them.
++//
++//   charmera-bake lut    <data> <film> <paper|scan> <colour|full> <size> <patch> <out.f32>
++//   charmera-bake render <data> <film> <paper|scan> <colour|full> <w> <h> <in.rgb8> <out.f32>
++//
++// Inputs are 8-bit sRGB; outputs are sRGB-encoded f32, RGB interleaved, red fastest
++// for LUTs (.cube order). "colour" keeps every per-pixel stage plus DIR couplers and
++// switches off grain, halation, glare and sharpening; "full" is spektrafilm's default
++// look. Auto-exposure is off in both, so a LUT and a render see the same exposure.
++use anyhow::{Context, Result, bail};
++use spektrafilm_core::{params::RuntimeParams, pipeline::Pipeline, profile};
++use spektrafilm_math::{image::ImageBuf, precision::{Scalar, from_f32, srgb_decode, to_f32}};
++use std::{path::Path, time::Instant};
++
++fn pipeline(data: &Path, film: &str, paper: &str, mode: &str) -> Result<Pipeline> {
++    let film_p = profile::load_profile_by_name(data, film).context("film profile")?;
++    let scan = paper == "scan";
++    let print_p = profile::load_profile_by_name(data, if scan { film } else { paper }).context("paper profile")?;
++    let mut p = RuntimeParams::default();
++    p.io.scan_film = scan;
++    p.io.input_color_space = "sRGB".into();
++    p.io.input_cctf_decoding = false; // decoded here, as the CLI's PNG loader does
++    p.camera.auto_exposure = false;
++    match mode {
++        "colour" => {
++            p.film_render.grain.active = false;
++            p.film_render.halation.active = false;
++            p.film_render.glare.active = false;
++            p.print_render.glare.active = false;
++            p.scanner.unsharp_mask = [0.0, 0.0];
++        }
++        "pure" => {
++            p.film_render.grain.active = false;
++            p.film_render.halation.active = false;
++            p.film_render.glare.active = false;
++            p.print_render.glare.active = false;
++            p.scanner.unsharp_mask = [0.0, 0.0];
++            p.film_render.dir_couplers.active = false;
++        }
++        "grid" => {
++            p.film_render.grain.active = false;
++            p.film_render.halation.active = false;
++            p.film_render.glare.active = false;
++            p.print_render.glare.active = false;
++            p.scanner.unsharp_mask = [0.0, 0.0];
++            p.film_render.dir_couplers.diffusion_size_um = 0.0;
++            p.film_render.dir_couplers.diffusion_tail_weight = 0.0;
++        }
++        "full" => {}
++        _ => bail!("mode must be colour, pure or full"),
++    }
++    Pipeline::new_with_spectral(film_p, print_p, p, data).map_err(|e| anyhow::anyhow!("{e:?}"))
++}
++
++fn decode(v: u8) -> Scalar { srgb_decode(from_f32(v as f32 / 255.0)) }
++
++fn write_f32(path: &str, img: &ImageBuf) -> Result<()> {
++    let bytes: Vec<u8> = img.data.iter().flat_map(|&v| to_f32(v).to_le_bytes()).collect();
++    std::fs::write(path, bytes).context("writing output")
++}
++
++fn main() -> Result<()> {
++    let a: Vec<String> = std::env::args().collect();
++    let backend = spektrafilm_gpu::select_backend();
++    let t = Instant::now();
++    match a.get(1).map(String::as_str) {
++        Some("lut") => {
++            let (size, patch): (usize, u32) = (a[6].parse()?, a[7].parse()?);
++            let pipe = pipeline(Path::new(&a[2]), &a[3], &a[4], &a[5])?;
++            let mut out = ImageBuf::new((size * size * size) as u32, 1);
++            let mut i = 0;
++            for b in 0..size { for g in 0..size { for r in 0..size {
++                let level = |k: usize| (k as f32 * 255.0 / (size - 1) as f32).round() as u8;
++                let px = [decode(level(r)), decode(level(g)), decode(level(b))];
++                // Each grid colour is a uniform patch, so spatial stages see a flat field.
++                let img = ImageBuf::from_data(patch, patch, px.iter().copied().cycle().take((patch * patch * 3) as usize).collect());
++                let res = pipe.process(img, backend.as_ref());
++                let c = res.get(patch / 2, patch / 2);
++                out.data[i * 3..i * 3 + 3].copy_from_slice(&c);
++                i += 1;
++            }}}
++            write_f32(&a[8], &out)?;
++        }
++        Some("render") => {
++            let (w, h): (u32, u32) = (a[6].parse()?, a[7].parse()?);
++            let pipe = pipeline(Path::new(&a[2]), &a[3], &a[4], &a[5])?;
++            let raw = std::fs::read(&a[8]).context("reading input")?;
++            if raw.len() != (w * h * 3) as usize { bail!("input is not {w}x{h} RGB8"); }
++            let img = ImageBuf::from_data(w, h, raw.iter().map(|&v| decode(v)).collect());
++            write_f32(&a[9], &pipe.process(img, backend.as_ref()))?;
++        }
++        _ => bail!("usage: charmera-bake lut|render ..."),
++    }
++    eprintln!("{} {} {}: {} ms", a[1], a[3], a[5], t.elapsed().as_millis());
++    Ok(())
++}
+diff --git a/crates/spektrafilm-core/Cargo.toml b/crates/spektrafilm-core/Cargo.toml
+index 40bfad9..2c12085 100644
+--- a/crates/spektrafilm-core/Cargo.toml
++++ b/crates/spektrafilm-core/Cargo.toml
+@@ -27,6 +27,6 @@ image.workspace = true
+ cblas = "0.4"
+ blas-src = { version = "0.10", features = ["accelerate"] }
+ 
+-[target.'cfg(all(not(target_os = "macos"), not(target_os = "windows")))'.dependencies]
++[target.'cfg(any())'.dependencies]
+ cblas = "0.4"
+ blas-src = { version = "0.10", features = ["openblas"] }
+diff --git a/crates/spektrafilm-core/src/spectral_service.rs b/crates/spektrafilm-core/src/spectral_service.rs
+index 314ef93..37fce9e 100644
+--- a/crates/spektrafilm-core/src/spectral_service.rs
++++ b/crates/spektrafilm-core/src/spectral_service.rs
+@@ -9,7 +9,7 @@ use spektrafilm_math::spectral::{self, N_WAVELENGTHS, TcLut};
+ 
+ // Pull in BLAS for the spectra→tc_lut contraction (matches Python's
+ // opt_einsum + numpy summation pattern bit-for-bit on macOS Accelerate).
+-#[cfg(not(target_os = "windows"))]
++#[cfg(target_os = "macos")]
+ #[allow(unused_imports)]
+ use blas_src as _;
+ 
+@@ -18,7 +18,7 @@ fn dgemm_no_transpose(a: &[f64], b: &[f64], c: &mut [f64], m: usize, n: usize, k
+     assert_eq!(b.len(), k * n, "dgemm_no_transpose: b.len() != k*n");
+     assert_eq!(c.len(), m * n, "dgemm_no_transpose: c.len() != m*n");
+ 
+-    #[cfg(not(target_os = "windows"))]
++    #[cfg(target_os = "macos")]
+     unsafe {
+         cblas::dgemm(
+             cblas::Layout::RowMajor,
+@@ -38,7 +38,7 @@ fn dgemm_no_transpose(a: &[f64], b: &[f64], c: &mut [f64], m: usize, n: usize, k
+         );
+     }
+ 
+-    #[cfg(target_os = "windows")]
++    #[cfg(not(target_os = "macos"))]
+     {
+         for row in 0..m {
+             for col in 0..n {
+diff --git a/crates/spektrafilm-gpu/Cargo.toml b/crates/spektrafilm-gpu/Cargo.toml
+index 26ae41b..fc79a7c 100644
+--- a/crates/spektrafilm-gpu/Cargo.toml
++++ b/crates/spektrafilm-gpu/Cargo.toml
+@@ -27,7 +27,7 @@ cblas = "0.4"
+ blas-src = { version = "0.10", features = ["accelerate"] }
+ accelerate-src = "0.3"
+ 
+-[target.'cfg(all(not(target_os = "macos"), not(target_os = "windows")))'.dependencies]
++[target.'cfg(any())'.dependencies]
+ cblas = "0.4"
+ blas-src = { version = "0.10", features = ["openblas"] }
+ openblas-src = "0.10"
+diff --git a/crates/spektrafilm-gpu/src/cpu_backend.rs b/crates/spektrafilm-gpu/src/cpu_backend.rs
+index e4736d0..c0143de 100644
+--- a/crates/spektrafilm-gpu/src/cpu_backend.rs
++++ b/crates/spektrafilm-gpu/src/cpu_backend.rs
+@@ -8,7 +8,7 @@ use crate::{ComputeBackend, Lut3D};
+ // Pull in BLAS-src so `cblas_dgemm` is available at link time. The
+ // provider crate (Accelerate on macOS, OpenBLAS elsewhere) is selected
+ // in this crate's Cargo.toml.
+-#[cfg(not(target_os = "windows"))]
++#[cfg(target_os = "macos")]
+ #[allow(unused_imports)]
+ use blas_src as _;
+ 
+@@ -47,7 +47,7 @@ fn dgemm_blas(
+ ) {
+     assert_eq!(a.len(), m * k, "dgemm_blas: a.len() != m*k");
+     assert_eq!(c.len(), m * n, "dgemm_blas: c.len() != m*n");
+-    #[cfg(not(target_os = "windows"))]
++    #[cfg(target_os = "macos")]
+     unsafe {
+         cblas::dgemm(
+             cblas::Layout::RowMajor,
+@@ -69,7 +69,7 @@ fn dgemm_blas(
+             n as i32,
+         );
+     }
+-    #[cfg(target_os = "windows")]
++    #[cfg(not(target_os = "macos"))]
+     {
+         let _ = ldb;
+         c.par_chunks_exact_mut(n).enumerate().for_each(|(row, crow)| {
+diff --git a/crates/spektrafilm-math/Cargo.toml b/crates/spektrafilm-math/Cargo.toml
+index 5185003..91b23e7 100644
+--- a/crates/spektrafilm-math/Cargo.toml
++++ b/crates/spektrafilm-math/Cargo.toml
+@@ -18,3 +18,6 @@ half = "2.7"
+ libm.workspace = true
+ rand_mt = "5"
+ rustfft.workspace = true
++
++[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
++getrandom = { version = "0.3", features = ["wasm_js"] }
