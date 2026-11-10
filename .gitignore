@@ -16,3 +16,5 @@ temp/
 __pycache__/
 /scripts/venv/
 /static/podcast_data/arxiv/pdfs/
+
+**/*.quarto_ipynb

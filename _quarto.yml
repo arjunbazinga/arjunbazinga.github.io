@@ -16,6 +16,8 @@ project:
     - static/reading-tools.js
     - static/album/**
     - static/charmera/**
+    - static/profile-352.webp
+    - static/social-card.png
   preview:
     port: 4200
     browser: true
@@ -47,12 +49,19 @@ website:
       - text: GitHub
         href: https://github.com/arjunbazinga
   favicon: favicon.ico
+  image: /static/social-card.png
+  image-alt: "Arjun Srivastava. I build and write about AI, software, and complex systems."
   twitter-card: true
   open-graph: true
-  google-analytics: "UA-101184475-1"
 
 format:
   html:
+    canonical-url: true
+    include-in-header:
+      text: |
+        <link rel="preload" href="/static/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/static/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/static/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
     include-after-body:
       text: '<script src="/static/reading-tools.js" defer></script>'
     theme:

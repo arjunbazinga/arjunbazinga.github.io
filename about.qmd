@@ -1,5 +1,6 @@
 ---
 title: "About Arjun"
+description-meta: "Arjun Srivastava leads ML and Data Platform for MS1 at Woven by Toyota in Tokyo, and writes about AI evaluation, memory, data platforms, and distributed systems."
 image: profile.jpeg
 page-layout: full
 title-block-banner: false
@@ -19,7 +20,7 @@ I build the infrastructure that turns promising technical capabilities into depe
 :::
 
 ```{=html}
-<img class="about-portrait" src="profile.jpeg" alt="Arjun Srivastava" width="176" height="176">
+<img class="about-portrait" src="/static/profile-352.webp" alt="Arjun Srivastava" width="176" height="176">
 ```
 :::
 

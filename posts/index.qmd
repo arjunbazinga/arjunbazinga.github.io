@@ -16,6 +16,7 @@ listing:
 page-layout: full
 title-block-banner: false
 toc: false
+html-math-method: plain
 anchor-sections: false
 body-classes: writing-page
 ---
