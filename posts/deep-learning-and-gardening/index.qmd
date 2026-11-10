@@ -1,4 +1,7 @@
 ---
+# Earlier address, kept as a redirect.
+aliases:
+  - "/posts/deep-learning-and-gradening/"
 title: "On Deep Learning and Farming: It's still 1915"
 layout: post
 description: "What agriculture can teach us about AI development"

@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/about/"
 title: "About Arjun"
 description-meta: "Arjun Srivastava leads ML and Data Platform for MS1 at Woven by Toyota in Tokyo, and writes about AI evaluation, memory, data platforms, and distributed systems."
 image: profile.jpeg

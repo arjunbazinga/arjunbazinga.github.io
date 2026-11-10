@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/analysis/2018/06/15/infant-mortality.html"
 title: Infant Mortality In India
 layout: post
 categories: [Analysis]

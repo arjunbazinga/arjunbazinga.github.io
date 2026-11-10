@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/iit indore/quiz/2017/09/04/game-of-thrones-quiz.html"
 title: Game Of Thrones quiz
 layout: post
 description: A quiz made for cultural week

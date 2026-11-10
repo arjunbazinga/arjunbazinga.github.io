@@ -1,4 +1,7 @@
 ---
+# Earlier address, kept as a redirect.
+aliases:
+  - "/posts/programmng-language/"
 title:  "Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation"
 description: Some thoughts on features that could make programming languages more powerful
 layout: post

@@ -18,6 +18,7 @@ project:
     - static/charmera/**
     - static/profile-352.webp
     - static/social-card.png
+  post-render: scripts/post-render.ts
   preview:
     port: 4200
     browser: true

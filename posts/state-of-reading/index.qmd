@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/future/2018/08/05/state-of-reading.html"
 title: The state of reading in 2018 and beyond.
 categories : [Future]
 layout: post

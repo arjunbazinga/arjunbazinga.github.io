@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/jargonizer-website.html"
 title:  Jargonizer
 layout: post
 categories: [ Projects ]

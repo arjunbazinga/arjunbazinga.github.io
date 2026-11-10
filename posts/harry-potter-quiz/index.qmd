@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/iit indore/quiz/2018/08/26/harry-potter-quiz.html"
 title: Harry Potter quiz
 layout: post
 description: A beginner friendly quiz on the wizarding world

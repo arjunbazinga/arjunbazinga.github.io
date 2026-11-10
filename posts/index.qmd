@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/categories/"
 title: "Writing"
 description: "Essays on machine learning, evaluation, data infrastructure, and distributed systems."
 listing:

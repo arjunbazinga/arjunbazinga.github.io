@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/search/"
 title: "Arjun Srivastava"
 description: "I build and write about AI, software, and complex systems. Essays, interactive research, books, and photography by Arjun Srivastava."
 pagetitle: "AI, software, and complex systems"

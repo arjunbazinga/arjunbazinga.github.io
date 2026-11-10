@@ -1,4 +1,8 @@
 ---
+# Earlier addresses, kept as redirects.
+aliases:
+  - "/posts/exerimentations-platforms/"
+  - "/experimentation/2021/03/21/exerimentations-platforms.html"
 title: Experimentation Platforms
 description: An Overview of Experimentation Platforms.
 layout: post

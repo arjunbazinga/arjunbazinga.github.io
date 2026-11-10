@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/ai/projects/2018/07/28/friend-or-foe.html"
 title: Friend Or Foe
 layout: post
 categories: [AI, Projects]

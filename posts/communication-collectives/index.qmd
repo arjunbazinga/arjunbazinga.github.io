@@ -1,4 +1,7 @@
 ---
+# Earlier address, kept as a redirect.
+aliases:
+  - "/posts/allreduce-all-the-way-down/"
 title: "AllReduce, All the Way Down"
 subtitle: "How collective semantics become programs for real machines"
 site: arjunsriva

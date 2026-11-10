@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/projects/2017/01/08/mental-health-checklist.html"
 title: Mental Health Checklists
 description: A website which allows quick tracking of mental health.
 layout: post

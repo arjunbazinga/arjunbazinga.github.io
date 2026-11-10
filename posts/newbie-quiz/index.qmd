@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/iit indore/quiz/2017/08/20/newbie-quiz.html"
 title: Newbie quiz
 layout: post
 description: A quiz to introduce quizzing to new people  and narrowing down potential recruits.
