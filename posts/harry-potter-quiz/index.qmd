@@ -7,7 +7,7 @@ date: "2018-08-26"
 image: pottermania.jpg
 ---
 
-![Pottermania 2018](./pottermania.jpg)
+![Pottermania 2018](./pottermania.jpg){fig-alt="Harry Potter pointing his wand toward the viewer."}
 
 
 The goal of the is to be something easy that anybody with little experience in quizzing can take part in. 

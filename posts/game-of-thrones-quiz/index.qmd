@@ -7,7 +7,7 @@ date: "2017-09-04"
 image: gameofthronesquiz.jpg
 ---
 
-![Game Of Thrones Quiz](./gameofthronesquiz.jpg)
+![Game Of Thrones Quiz](./gameofthronesquiz.jpg){fig-alt="Game of Thrones title art showing a man seated on the Iron Throne."}
 
 This quiz was created as part of cultural week, right as Game of Thrones season 7 ended.  
 It is broken into 3 seperate rounds

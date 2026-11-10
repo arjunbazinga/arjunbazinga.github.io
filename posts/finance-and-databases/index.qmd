@@ -63,7 +63,7 @@ But a business is not a static object. It is a system of cash flows: revenue coh
 
 That changes more than underwriting. It can change the **unit of financing itself**.
 
-![Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.](cover.webp){.cover-art .essay-art}
+![Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.](cover.webp){.cover-art .essay-art fig-alt="A mock O'Reilly book cover titled Designing Capital-Intensive Applications, with an engraving of a leaping bull and Arjun Srivastava as the author."}
 
 Capital can stop attaching only to entities and start attaching to observed economic processes, through claims whose behavior responds to live telemetry rather than only to information available at origination.
 

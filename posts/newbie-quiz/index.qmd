@@ -7,7 +7,7 @@ date: "2017-08-20"
 image: newbiequiz.jpeg
 ---
 
-![Newbie Quiz](newbiequiz.jpeg)
+![Newbie Quiz](newbiequiz.jpeg){fig-alt="The Uncle Sam recruitment poster: a man in a star-spangled top hat points at the viewer above the words I want you."}
 
 Indraneel and I had prepared this quiz as a way of introducting quizzing to new people and narrowing down potential recruits.
 The quiz covers a broad range of topics, from pop culture, sports, technology, politics

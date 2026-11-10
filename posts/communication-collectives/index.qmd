@@ -11,6 +11,11 @@ reader_outcome: Understand how a collective request is lowered through algorithm
 bluf: AllReduce has simple semantics. Making it fast requires progressively resolving that semantic request into an algorithm, a physical schedule, and GPU/network execution; modern workloads increasingly need to open the collective and program communication at a lower level.
 description: "A systems tour from AllReduce semantics through NCCL, topology, GPU contention, expert parallelism, device-side communication, and communication synthesis."
 image: thumbnail.svg
+# Social platforms do not render SVG, so share cards use a PNG of the same drawing.
+open-graph:
+  image: social-card.png
+twitter-card:
+  image: social-card.png
 featured: true
 next-read-title: "Rocketships for the Mind"
 next-read-url: /posts/from-search-to-memory/

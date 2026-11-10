@@ -2,6 +2,11 @@
 title: "Golden Datasets: Launch Criteria for LLM Systems"
 description: "How to decide what must pass before a new model, instruction, or workflow ships"
 image: thumbnail.svg
+# Social platforms do not render SVG, so share cards use a PNG of the same drawing.
+open-graph:
+  image: social-card.png
+twitter-card:
+  image: social-card.png
 featured: true
 next-read-title: "LLMs for Backend Engineers: From First Principles"
 next-read-url: /posts/llms-for-backend-engineers/

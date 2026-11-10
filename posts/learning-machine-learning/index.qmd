@@ -3,6 +3,7 @@ title:  Learning Machine Learning
 layout : post
 categories: [AI]
 comments : false
+description: "The books, blogs, and podcasts I used to start learning machine learning."
 date: "2017-11-12"
 ---
 

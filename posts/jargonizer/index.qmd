@@ -8,7 +8,7 @@ date: "2018-06-12"
 image: jargonizer.webp
 ---
 
-![Jargonizer](jargonizer.webp)
+![Jargonizer](jargonizer.webp){fig-alt="Illustration of a desktop computer with a magnifying glass over its screen, surrounded by loose pages and colourful swirls."}
 
 What if instead of aiming for clarity and conciesness, our goal was to make our sentences as unweildy and hard to understand as possible? 
 

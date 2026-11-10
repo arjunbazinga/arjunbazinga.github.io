@@ -1,6 +1,12 @@
 (() => {
   const init = () => {
     document.querySelector('.navbar-toggler')?.removeAttribute('role');
+    // Quarto emits an empty logo link when the site has no logo; it is a blank tab stop.
+    document.querySelectorAll('.navbar-brand-logo').forEach(link => { if (!link.querySelector('img')) link.remove(); });
+    // Name each navigation landmark so screen readers can tell them apart.
+    document.querySelector('#quarto-header nav.navbar')?.setAttribute('aria-label', 'Site');
+    document.querySelector('#quarto-sidebar')?.setAttribute('aria-label', 'Sections');
+    document.querySelector('nav#TOC')?.setAttribute('aria-label', 'On this page');
     const episodeSearch = document.querySelector('.podcast-page .quarto-listing-filter input');
     if (episodeSearch) {
       episodeSearch.placeholder = 'Search episodes';

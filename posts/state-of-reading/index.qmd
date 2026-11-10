@@ -2,7 +2,7 @@
 title: The state of reading in 2018 and beyond.
 categories : [Future]
 layout: post
-descriptions : some thoughts on where reading is going, and how it changes with time.
+description: Some thoughts on where reading is going, and how it changes with time.
 date: "2018-08-05"
 ---
 
