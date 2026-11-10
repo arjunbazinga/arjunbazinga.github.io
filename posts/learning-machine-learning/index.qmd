@@ -1,8 +1,12 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/ai/2017/11/12/learning-machine-learning.html"
 title:  Learning Machine Learning
 layout : post
 categories: [AI]
 comments : false
+description: "The books, blogs, and podcasts I used to start learning machine learning."
 date: "2017-11-12"
 ---
 

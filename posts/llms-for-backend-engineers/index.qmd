@@ -2,6 +2,11 @@
 title: "LLMs for Backend Engineers: From First Principles"
 description: "A systems view of LLM latency, cost, reliability, and evaluation"
 image: thumbnail.svg
+# Social platforms do not render SVG, so share cards use a PNG of the same drawing.
+open-graph:
+  image: social-card.png
+twitter-card:
+  image: social-card.png
 featured: true
 next-read-title: "Golden Datasets: Launch Criteria for LLM Systems"
 next-read-url: /posts/golden-datasets/

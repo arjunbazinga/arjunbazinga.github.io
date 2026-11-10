@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/iit indore/quiz/2018/08/26/harry-potter-quiz.html"
 title: Harry Potter quiz
 layout: post
 description: A beginner friendly quiz on the wizarding world
@@ -7,7 +10,7 @@ date: "2018-08-26"
 image: pottermania.jpg
 ---
 
-![Pottermania 2018](./pottermania.jpg)
+![Pottermania 2018](./pottermania.jpg){fig-alt="Harry Potter pointing his wand toward the viewer."}
 
 
 The goal of the is to be something easy that anybody with little experience in quizzing can take part in. 

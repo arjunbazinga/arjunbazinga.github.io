@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/iit indore/2020/01/08/course-schedule-generator.html"
 title: Course Schedule Generator
 layout: post
 description: A website which adds courses to your personal calendar, for students of IIT Indore.

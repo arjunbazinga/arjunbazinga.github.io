@@ -70,7 +70,7 @@ Each question emerged as more of my working context accumulated in conversations
 
 The distinction becomes clear through six progressive questions and the output each one produces.
 
-![Salvador Dalí, *The Persistence of Memory* (1931)](persistence-of-memory.jpg){.essay-art}
+![Salvador Dalí, *The Persistence of Memory* (1931)](persistence-of-memory.jpg){.essay-art fig-alt="Surrealist painting of soft pocket watches draped over a branch, a ledge, and a sleeping form in a bare coastal landscape."}
 
 ## The workload: questions that cross threads
 

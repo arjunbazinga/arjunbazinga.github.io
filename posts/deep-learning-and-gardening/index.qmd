@@ -1,4 +1,7 @@
 ---
+# Earlier address, kept as a redirect.
+aliases:
+  - "/posts/deep-learning-and-gradening/"
 title: "On Deep Learning and Farming: It's still 1915"
 layout: post
 description: "What agriculture can teach us about AI development"
@@ -13,7 +16,7 @@ This is one of those posts where I explore what happens when we map concepts fro
 ## Building vs Growing: Two Ways to Create
 
 
-![Two ways to make things](two-ways-to-create.webp)
+![Two ways to make things](two-ways-to-create.webp){fig-alt="Split illustration. On the left, labelled Engineering, a hand assembles a table from parts. On the right, labelled Cultivation, a hand waters seedlings under the sun."}
 
 There are two fundamentally different ways to make things:
 
@@ -39,7 +42,7 @@ The parallels run deep:
 ## Architectural Limits: Neural Growing Patterns
 
 
-![Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits](heights.jpeg)
+![Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits](heights.jpeg){fig-alt="Three potted plants of increasing height, labelled bamboo, conifer tree, and redwood."}
 
 
 
@@ -51,7 +54,7 @@ This shows why both scaling AND architecture matter. Just as perfect soil won't 
 
 ## Different Plants for Different Soils
 
-![New models for other modes of data might look very similar to existing models, with just the roots changed.](nitrogen%20fixing.jpeg)
+![New models for other modes of data might look very similar to existing models, with just the roots changed.](nitrogen%20fixing.jpeg){fig-alt="Three seedlings shown above and below the soil line, labelled text data, video/audio data, and video/audio data. The leaves look alike; only the root systems differ."}
 
 Architectures, like plant species, specialize for specific environments. We've mastered text "soil" (RNNs→Transformers) but lack equally effective architectures for video and audio data - we're growing text-optimized plants in non-text soils.
 
@@ -74,7 +77,7 @@ Modern agriculture still needs industrial-scale operations that multiply output.
 
 ## Breaking the Malthusian Barrier
 
-![](world-population.svg)
+![](world-population.svg){fig-alt="Chart of world population from 1900 to 2015, split into the share that could be fed with and without synthetic nitrogen fertilizer. Just over half of today's population could be sustained without it."}
 
 Pre-fertilizer wheat yields remained at ~1.2 tons/hectare for centuries. No farming technique broke this ceiling. Malthus seemed right.
 
@@ -100,7 +103,7 @@ Other examples:
 The future isn't more realistic synthetic data - it's more effective synthetic data optimized for neural learning dynamics, not human recognizability.
 
 
-![We will see better capability growth with smaller pots with added “fertilizer”](fertilizer.jpeg)
+![We will see better capability growth with smaller pots with added “fertilizer”](fertilizer.jpeg){fig-alt="Two potted plants side by side. A wide pot labelled raw data holds a small plant; a small pot labelled synthetic data holds a much larger one."}
 
 ## Implications and Future Directions
 

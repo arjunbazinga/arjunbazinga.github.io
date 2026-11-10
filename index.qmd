@@ -1,9 +1,15 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/search/"
 title: "Arjun Srivastava"
 description: "I build and write about AI, software, and complex systems. Essays, interactive research, books, and photography by Arjun Srivastava."
 pagetitle: "AI, software, and complex systems"
+image: /static/social-card.png
+image-alt: "Arjun Srivastava. I build and write about AI, software, and complex systems."
 title-block-banner: false
 toc: false
+html-math-method: plain
 anchor-sections: false
 page-layout: full
 body-classes: home-page
@@ -52,7 +58,7 @@ Here you’ll find essays, interactive research, books, and photography. [More a
 :::
 
 ```{=html}
-<img class="intro-portrait" src="profile.jpeg" alt="Arjun Srivastava" width="128" height="128">
+<img class="intro-portrait" src="/static/profile-352.webp" alt="Arjun Srivastava" width="128" height="128">
 ```
 :::
 

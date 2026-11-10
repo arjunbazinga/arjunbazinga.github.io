@@ -1,4 +1,7 @@
 ---
+# Address from the pre-2024 Jekyll site, kept as a redirect.
+aliases:
+  - "/ai/projects/2018/07/28/friend-or-foe.html"
 title: Friend Or Foe
 layout: post
 categories: [AI, Projects]
@@ -7,7 +10,7 @@ date: "2018-07-28"
 image: environment.jpg
 ---
 
-![Co-opeartive and Adversarial Environments](environment.jpg)
+![Cooperative and Adversarial Environments](environment.jpg){fig-alt="Three small grid-world rooms coloured green, beige, and orange for good, neutral, and bad. Each has an agent at the bottom and two boxes at the top."}
 
 This is a mini interactive "game", I made inspired by the paper, without giving too much away, I urge you to [play](https://arjunsriva.com/fof).
 

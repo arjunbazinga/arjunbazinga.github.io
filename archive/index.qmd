@@ -1,5 +1,6 @@
 ---
 title: "Earlier writing"
+description-meta: "Older essays, projects, and experiments by Arjun Srivastava."
 listing:
   contents: ../posts/*/index.qmd
   exclude:
@@ -13,6 +14,7 @@ listing:
 page-layout: full
 title-block-banner: false
 toc: false
+html-math-method: plain
 anchor-sections: false
 body-classes: archive-page
 ---

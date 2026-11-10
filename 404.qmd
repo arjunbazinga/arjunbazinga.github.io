@@ -1,0 +1,17 @@
+---
+title: "Page not found"
+description-meta: "This page does not exist."
+page-layout: full
+title-block-banner: false
+toc: false
+anchor-sections: false
+html-math-method: plain
+search: false
+body-classes: archive-page not-found-page
+---
+
+This address has no page behind it. The link may be old, or the page may have moved.
+
+Try [Writing](/posts/) for current essays, [Earlier writing](/archive/) for older posts, or the search icon at the top of the page.
+
+[Back to the home page](/)
