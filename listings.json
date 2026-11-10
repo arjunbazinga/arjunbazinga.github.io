@@ -90,25 +90,25 @@
       "/podcast/podcasts/2304.08069/index.html",
       "/podcast/podcasts/2406.12214/index.html",
       "/podcast/podcasts/2402.12289/index.html",
-      "/podcast/podcasts/2306.00248v1/index.html",
-      "/podcast/podcasts/2310.13810/index.html",
-      "/podcast/podcasts/2401.10241/index.html",
-      "/podcast/podcasts/2006.06373/index.html",
-      "/podcast/podcasts/2002.11252/index.html",
       "/podcast/podcasts/1910.02054/index.html",
+      "/podcast/podcasts/2306.00248v1/index.html",
+      "/podcast/podcasts/2006.06373/index.html",
+      "/podcast/podcasts/2111.15397/index.html",
+      "/podcast/podcasts/2310.13810/index.html",
+      "/podcast/podcasts/2002.11252/index.html",
       "/podcast/podcasts/2103.01775/index.html",
-      "/podcast/podcasts/2111.15397/index.html"
+      "/podcast/podcasts/2401.10241/index.html"
     ]
   },
   {
     "listing": "/archive/index.html",
     "items": [
-      "/posts/programmng-language/index.html",
-      "/posts/deep-learning-and-gradening/index.html",
+      "/posts/programming-language/index.html",
+      "/posts/deep-learning-and-gardening/index.html",
       "/posts/many-universes/index.html",
       "/posts/saas-and-swimming/index.html",
       "/posts/exponentials-everywhere/index.html",
-      "/posts/exerimentations-platforms/index.html",
+      "/posts/experimentation-platforms/index.html",
       "/posts/course-schedule-generator/index.html",
       "/posts/harry-potter-quiz/index.html",
       "/posts/state-of-reading/index.html",
@@ -134,7 +134,7 @@
       "/posts/golden-datasets/index.html",
       "/posts/llms-for-backend-engineers/index.html",
       "/posts/course-schedule-generator/index.html",
-      "/posts/exerimentations-platforms/index.html",
+      "/posts/experimentation-platforms/index.html",
       "/posts/exponentials-everywhere/index.html",
       "/posts/friend-or-foe/index.html",
       "/posts/game-of-thrones-quiz/index.html",
@@ -144,11 +144,11 @@
       "/posts/learning-machine-learning/index.html",
       "/posts/mental-health-checklist/index.html",
       "/posts/newbie-quiz/index.html",
-      "/posts/deep-learning-and-gradening/index.html",
+      "/posts/deep-learning-and-gardening/index.html",
       "/posts/saas-and-swimming/index.html",
       "/posts/many-universes/index.html",
       "/posts/state-of-reading/index.html",
-      "/posts/programmng-language/index.html"
+      "/posts/programming-language/index.html"
     ]
   },
   {

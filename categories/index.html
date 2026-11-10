@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>This page has moved</title>
+<link rel="canonical" href="https://www.arjunsriva.com/posts/">
+<script>
+  // Keep any #section and ?query from the old address.
+  var targets = {"":"/posts/"};
+  var hash = location.hash.slice(1);
+  var target = targets[hash] || targets[""] + location.hash;
+  location.replace(target.replace(/(#.*)?$/, location.search + "$1"));
+</script>
+<meta http-equiv="refresh" content="0; url=/posts/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<p>This page has moved to <a href="/posts/">https://www.arjunsriva.com/posts/</a>.</p>
+</body>
+</html>

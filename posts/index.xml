@@ -9,7 +9,14 @@
 <link>https://www.arjunsriva.com/posts/</link>
 <atom:link href="https://www.arjunsriva.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Essays on machine learning, evaluation, data infrastructure, and distributed systems.</description>
-<generator>quarto-1.10.19</generator>
+<image>
+<url>https://www.arjunsriva.com/static/social-card.png</url>
+<title>Arjun Srivastava</title>
+<link>https://www.arjunsriva.com/posts/</link>
+<height>76</height>
+<width>144</width>
+</image>
+<generator>quarto-1.11.9</generator>
 <lastBuildDate>Fri, 23 Oct 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Reading Millions of Conversations</title>
@@ -2065,7 +2072,7 @@ improve Actor /          investigate
 <p>The distinction becomes clear through six progressive questions and the output each one produces.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" class="essay-art img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" class="essay-art img-fluid figure-img" alt="Surrealist painting of soft pocket watches draped over a branch, a ledge, and a sleeping form in a bare coastal landscape."></p>
 <figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
 </figure>
 </div>
@@ -2794,7 +2801,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <p>That changes more than underwriting. It can change the <strong>unit of financing itself</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" class="cover-art essay-art img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" class="cover-art essay-art img-fluid figure-img" alt="A mock O'Reilly book cover titled Designing Capital-Intensive Applications, with an engraving of a leaping bull and Arjun Srivastava as the author."></p>
 <figcaption>Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.</figcaption>
 </figure>
 </div>
@@ -3118,6 +3125,7 @@ observed state ──────┼─ repayment
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["What decision&lt;br/&gt;must we make?"] --&gt; B["Which belief&lt;br/&gt;does it depend on?"]
     B --&gt; C["Which metric&lt;br/&gt;tests that belief?"]
@@ -3589,6 +3597,7 @@ observed state ──────┼─ repayment
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["Change the model,&lt;br/&gt;instructions, or tools"] --&gt; B["Run the saved tests"]
     B --&gt; C{"Pass the release rules?"}
@@ -3723,6 +3732,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["Prompt tokens"] --&gt; B["Prefill&lt;br/&gt;Process the prompt in parallel"]
     B --&gt; C["KV cache&lt;br/&gt;Attention state for prior tokens"]
@@ -3866,6 +3876,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["Versioned prompt,&lt;br/&gt;model, tools, parameters"] --&gt; B["Run golden dataset"]
     B --&gt; C["Score quality,&lt;br/&gt;latency, and cost"]

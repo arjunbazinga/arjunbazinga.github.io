@@ -9,7 +9,14 @@
 <link>https://www.arjunsriva.com/podcast/</link>
 <atom:link href="https://www.arjunsriva.com/podcast/index.xml" rel="self" type="application/rss+xml"/>
 <description>Research-paper conversations for when you’d rather listen.</description>
-<generator>quarto-1.10.19</generator>
+<image>
+<url>https://www.arjunsriva.com/static/social-card.png</url>
+<title>Arjun Srivastava</title>
+<link>https://www.arjunsriva.com/podcast/</link>
+<height>76</height>
+<width>144</width>
+</image>
+<generator>quarto-1.11.9</generator>
 <lastBuildDate>Tue, 06 May 2025 08:50:05 GMT</lastBuildDate>
 <item>
   <title>GAIA-2 Controllable Multi-View Generative World Model for Autonomous Driving</title>

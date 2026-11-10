@@ -9,7 +9,14 @@
 <link>https://www.arjunsriva.com/</link>
 <atom:link href="https://www.arjunsriva.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>I build and write about AI, software, and complex systems. Essays, interactive research, books, and photography by Arjun Srivastava.</description>
-<generator>quarto-1.10.19</generator>
+<image>
+<url>https://www.arjunsriva.com/static/social-card.png</url>
+<title>Arjun Srivastava</title>
+<link>https://www.arjunsriva.com/</link>
+<height>76</height>
+<width>144</width>
+</image>
+<generator>quarto-1.11.9</generator>
 <lastBuildDate>Fri, 23 Oct 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Reading Millions of Conversations</title>
@@ -2065,7 +2072,7 @@ improve Actor /          investigate
 <p>The distinction becomes clear through six progressive questions and the output each one produces.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" class="essay-art img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/from-search-to-memory/persistence-of-memory.jpg" class="essay-art img-fluid figure-img" alt="Surrealist painting of soft pocket watches draped over a branch, a ledge, and a sleeping form in a bare coastal landscape."></p>
 <figcaption>Salvador Dalí, <em>The Persistence of Memory</em> (1931)</figcaption>
 </figure>
 </div>
@@ -2794,7 +2801,7 @@ Derivative State: Ready for secondary extension (do not re-announce as new work)
 <p>That changes more than underwriting. It can change the <strong>unit of financing itself</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" class="cover-art essay-art img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/finance-and-databases/cover.webp" class="cover-art essay-art img-fluid figure-img" alt="A mock O'Reilly book cover titled Designing Capital-Intensive Applications, with an engraving of a leaping bull and Arjun Srivastava as the author."></p>
 <figcaption>Designing Capital-Intensive Applications: the big ideas behind reliable, scalable, and maintainable balance sheets.</figcaption>
 </figure>
 </div>
@@ -3118,6 +3125,7 @@ observed state ──────┼─ repayment
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["What decision&lt;br/&gt;must we make?"] --&gt; B["Which belief&lt;br/&gt;does it depend on?"]
     B --&gt; C["Which metric&lt;br/&gt;tests that belief?"]
@@ -3589,6 +3597,7 @@ observed state ──────┼─ repayment
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["Change the model,&lt;br/&gt;instructions, or tools"] --&gt; B["Run the saved tests"]
     B --&gt; C{"Pass the release rules?"}
@@ -3723,6 +3732,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["Prompt tokens"] --&gt; B["Prefill&lt;br/&gt;Process the prompt in parallel"]
     B --&gt; C["KV cache&lt;br/&gt;Attention state for prior tokens"]
@@ -3866,6 +3876,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">flowchart LR
     A["Versioned prompt,&lt;br/&gt;model, tools, parameters"] --&gt; B["Run golden dataset"]
     B --&gt; C["Score quality,&lt;br/&gt;latency, and cost"]
@@ -3980,7 +3991,7 @@ font-style: inherit;">}</span></span></code></pre></div></div>
 </item>
 <item>
   <title>Write Simpler Code: Letting the Runtime Handle Incrementality, State, and Speculation</title>
-  <link>https://www.arjunsriva.com/posts/programmng-language/</link>
+  <link>https://www.arjunsriva.com/posts/programming-language/</link>
   <description><![CDATA[ 
 
 
@@ -4098,12 +4109,12 @@ interface speculative_executable_func {
  ]]></description>
   <category>Future</category>
   <category>Idea</category>
-  <guid>https://www.arjunsriva.com/posts/programmng-language/</guid>
+  <guid>https://www.arjunsriva.com/posts/programming-language/</guid>
   <pubDate>Mon, 31 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>On Deep Learning and Farming: It’s still 1915</title>
-  <link>https://www.arjunsriva.com/posts/deep-learning-and-gradening/</link>
+  <link>https://www.arjunsriva.com/posts/deep-learning-and-gardening/</link>
   <description><![CDATA[ 
 
 
@@ -4115,7 +4126,7 @@ interface speculative_executable_func {
 <h2 class="anchored" data-anchor-id="building-vs-growing-two-ways-to-create">Building vs Growing: Two Ways to Create</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/two-ways-to-create.webp" class="img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gardening/two-ways-to-create.webp" class="img-fluid figure-img" alt="Split illustration. On the left, labelled Engineering, a hand assembles a table from parts. On the right, labelled Cultivation, a hand waters seedlings under the sun."></p>
 <figcaption>Two ways to make things</figcaption>
 </figure>
 </div>
@@ -4130,7 +4141,7 @@ interface speculative_executable_func {
 <ul>
 <li><strong>Neural architectures are seeds</strong> - They contain the genetic potential that determines what capabilities can emerge. We go deeper on this in the following sections.</li>
 <li><strong>Data is soil</strong> - Raw data is the soil, the place where the model extracts the patterns and information it needs to grow. The quantity and quality of this soil directly impacts how well our AI “plants” can develop.</li>
-<li><strong>Optimization methods are cultivation techniques</strong> - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn’t otherwise converge) <img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/optimizers.jpeg" class="img-fluid" alt="Optimization methods are like different irrigation systems"></li>
+<li><strong>Optimization methods are cultivation techniques</strong> - SGD is traditional farming (reliable but inefficient), Adam is drip irrigation (precise resource delivery), and second-order methods are hydroponics (expensive but enabling growth where traditional methods fail, training models that wouldn’t otherwise converge) <img src="https://www.arjunsriva.com/posts/deep-learning-and-gardening/optimizers.jpeg" class="img-fluid" alt="Optimization methods are like different irrigation systems"></li>
 <li><strong>Hyperparameters are growing conditions</strong> - Learning rates are watering schedules, batch sizes are plot sizes, training duration is the growing season</li>
 <li><strong>Regularization is pruning</strong> - Techniques like dropout trim complexity to improve generalization, just as farmers remove unwanted growth to strengthen desired traits</li>
 </ul>
@@ -4139,7 +4150,7 @@ interface speculative_executable_func {
 <h2 class="anchored" data-anchor-id="architectural-limits-neural-growing-patterns">Architectural Limits: Neural Growing Patterns</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/heights.jpeg" class="img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gardening/heights.jpeg" class="img-fluid figure-img" alt="Three potted plants of increasing height, labelled bamboo, conifer tree, and redwood."></p>
 <figcaption>Different neural architectures have inherent capability ceilings, similar to how plant species have natural growth limits</figcaption>
 </figure>
 </div>
@@ -4150,7 +4161,7 @@ interface speculative_executable_func {
 <h2 class="anchored" data-anchor-id="different-plants-for-different-soils">Different Plants for Different Soils</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/nitrogen fixing.jpeg" class="img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gardening/nitrogen fixing.jpeg" class="img-fluid figure-img" alt="Three seedlings shown above and below the soil line, labelled text data, video/audio data, and video/audio data. The leaves look alike; only the root systems differ."></p>
 <figcaption>New models for other modes of data might look very similar to existing models, with just the roots changed.</figcaption>
 </figure>
 </div>
@@ -4167,7 +4178,7 @@ interface speculative_executable_func {
 </section>
 <section id="breaking-the-malthusian-barrier" class="level2">
 <h2 class="anchored" data-anchor-id="breaking-the-malthusian-barrier">Breaking the Malthusian Barrier</h2>
-<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/world-population.svg" class="img-fluid"></p>
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gardening/world-population.svg" class="img-fluid" alt="Chart of world population from 1900 to 2015, split into the share that could be fed with and without synthetic nitrogen fertilizer. Just over half of today's population could be sustained without it."></p>
 <p>Pre-fertilizer wheat yields remained at ~1.2 tons/hectare for centuries. No farming technique broke this ceiling. Malthus seemed right.</p>
 <p>After Haber-Bosch (1913), yields hit 2.5 tons by 1950 and exceed 8 tons today - a 7× increase impossible under natural constraints.</p>
 <p>Similarly, AI training faces efficiency barriers. Traditional approaches need ~1 trillion tokens for GPT-4 performance. Synthetic data can potentially reduce this by 10-100×, fundamentally changing what’s possible with limited compute - just as fertilizer transformed what could be grown on limited land.</p>
@@ -4186,7 +4197,7 @@ interface speculative_executable_func {
 <p>The future isn’t more realistic synthetic data - it’s more effective synthetic data optimized for neural learning dynamics, not human recognizability.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gradening/fertilizer.jpeg" class="img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/deep-learning-and-gardening/fertilizer.jpeg" class="img-fluid figure-img" alt="Two potted plants side by side. A wide pot labelled raw data holds a small plant; a small pot labelled synthetic data holds a much larger one."></p>
 <figcaption>We will see better capability growth with smaller pots with added “fertilizer”</figcaption>
 </figure>
 </div>
@@ -4246,9 +4257,9 @@ interface speculative_executable_func {
  ]]></description>
   <category>Analogy</category>
   <category>Future</category>
-  <guid>https://www.arjunsriva.com/posts/deep-learning-and-gradening/</guid>
+  <guid>https://www.arjunsriva.com/posts/deep-learning-and-gardening/</guid>
   <pubDate>Wed, 05 Mar 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/deep-learning-and-gradening/fertilizer.jpeg" medium="image" type="image/jpeg"/>
+  <media:content url="https://www.arjunsriva.com/posts/deep-learning-and-gardening/fertilizer.jpeg" medium="image" type="image/jpeg" height="81" width="144"/>
 </item>
 <item>
   <title>The Many Universes That Exist</title>
@@ -5985,11 +5996,11 @@ font-style: inherit;">;</span></span>
   <category>Math</category>
   <guid>https://www.arjunsriva.com/posts/exponentials-everywhere/</guid>
   <pubDate>Wed, 01 Jun 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/exponentials-everywhere/sigmoid.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://www.arjunsriva.com/posts/exponentials-everywhere/sigmoid.jpg" medium="image" type="image/jpeg" height="81" width="144"/>
 </item>
 <item>
   <title>Experimentation Platforms</title>
-  <link>https://www.arjunsriva.com/posts/exerimentations-platforms/</link>
+  <link>https://www.arjunsriva.com/posts/experimentation-platforms/</link>
   <description><![CDATA[ 
 
 
@@ -6165,9 +6176,9 @@ font-style: inherit;">;</span></span>
 
  ]]></description>
   <category>Experimentation</category>
-  <guid>https://www.arjunsriva.com/posts/exerimentations-platforms/</guid>
+  <guid>https://www.arjunsriva.com/posts/experimentation-platforms/</guid>
   <pubDate>Sun, 21 Mar 2021 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/exerimentations-platforms/experimentation.webp" medium="image" type="image/webp"/>
+  <media:content url="https://www.arjunsriva.com/posts/experimentation-platforms/experimentation.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Course Schedule Generator</title>
@@ -6200,7 +6211,7 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" class="img-fluid figure-img"></p>
+<p><img src="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" class="img-fluid figure-img" alt="Harry Potter pointing his wand toward the viewer."></p>
 <figcaption>Pottermania 2018</figcaption>
 </figure>
 </div>
@@ -6223,7 +6234,7 @@ Use it <a href="https://arjunbazinga.github.io/course-schedule-generator/">here<
   <category>Quiz</category>
   <guid>https://www.arjunsriva.com/posts/harry-potter-quiz/</guid>
   <pubDate>Sun, 26 Aug 2018 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://www.arjunsriva.com/posts/harry-potter-quiz/pottermania.jpg" medium="image" type="image/jpeg" height="81" width="144"/>
 </item>
 <item>
   <title>The state of reading in 2018 and beyond.</title>
@@ -6262,8 +6273,8 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" class="img-fluid figure-img"></p>
-<figcaption>Co-opeartive and Adversarial Environments</figcaption>
+<p><img src="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" class="img-fluid figure-img" alt="Three small grid-world rooms coloured green, beige, and orange for good, neutral, and bad. Each has an agent at the bottom and two boxes at the top."></p>
+<figcaption>Cooperative and Adversarial Environments</figcaption>
 </figure>
 </div>
 <p>This is a mini interactive “game”, I made inspired by the paper, without giving too much away, I urge you to <a href="https://arjunsriva.com/fof">play</a>.</p>
@@ -6276,7 +6287,7 @@ Most of the classic texts available for free on the <a href="http://libgen.is/">
   <category>Projects</category>
   <guid>https://www.arjunsriva.com/posts/friend-or-foe/</guid>
   <pubDate>Sat, 28 Jul 2018 00:00:00 GMT</pubDate>
-  <media:content url="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://www.arjunsriva.com/posts/friend-or-foe/environment.jpg" medium="image" type="image/jpeg" height="38" width="144"/>
 </item>
 <item>
   <title>Infant Mortality In India</title>

@@ -9,7 +9,14 @@
 <link>https://www.arjunsriva.com/til/</link>
 <atom:link href="https://www.arjunsriva.com/til/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.10.19</generator>
-<lastBuildDate>Wed, 28 Oct 2026 12:34:38 GMT</lastBuildDate>
+<image>
+<url>https://www.arjunsriva.com/static/social-card.png</url>
+<title>Arjun Srivastava</title>
+<link>https://www.arjunsriva.com/til/</link>
+<height>76</height>
+<width>144</width>
+</image>
+<generator>quarto-1.11.9</generator>
+<lastBuildDate>Tue, 10 Nov 2026 11:11:31 GMT</lastBuildDate>
 </channel>
 </rss>
