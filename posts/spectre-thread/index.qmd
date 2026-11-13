@@ -101,7 +101,7 @@ Thirty is the fewest possible among addresses of that simple form (one letter, t
 
 The recipe produces a line at every size you try. The question is whether it ever fails at some size nobody tried. The proof reduces infinitely many sizes to a few dozen checks.
 
-1. **Start small.** At the level of 71 tiles, an exhaustive search finds a valid route for each of the thirty states.
+1. **Start small.** At the level of 71 tiles (62 for the seven-piece shape), an exhaustive search finds a valid line for each of the thirty routes.
 2. **What growing needs.** A big route is its children's routes laid end to end. That works if, every time one child's route ends, the tile it ends on shares an edge with the tile where the next child's route begins. Call that a junction. The recipe has 200 of them, and each must hold at every size.
 3. **Junctions point to smaller junctions.** Because addresses are words read from the top down, dropping the first letter of each address turns a junction between two groups into the same claim about two of their children, one level down. So each junction points to another junction.
 4. **Positions are exact and finite.** Every corner of every tile can be written with four integers, and the key points of a group at one level are a fixed integer formula of those at the level below. Two relative positions that agree at 16 consecutive levels agree forever, so each one has a fingerprint, and only 24 occur.
