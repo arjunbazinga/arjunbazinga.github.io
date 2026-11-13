@@ -1,0 +1,1 @@
+PROVEN: locality <= 8.7658 at every level. 4484 nodes expanded (278 with consecutive blocks), 276847 pruned by the all-level bound, max depth 6; largest exact ratio met 8.76084 ('D|(7)|0(5)', 'D|0(5)|(7)', 142884, 20790, 6)  (2s)

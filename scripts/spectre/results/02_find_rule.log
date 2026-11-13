@@ -1,0 +1,9 @@
+exact integer tiles agree with the float construction; adjacency identical at levels 0-4 (2s)
+dimension of the quad-vector orbit (<= 16 levels suffice to identify a configuration): 6
+family pre<=0 per<=1: locations {'G': 5, 'D': 6} junction facts 6 configs 4 closed triples 6 candidate states 30 -> surviving 0
+family pre<=0 per<=2: locations {'G': 16, 'D': 19} junction facts 6 configs 23 closed triples 6 candidate states 200 -> surviving 0
+family pre<=1 per<=2: locations {'G': 100, 'D': 117} junction facts 384 configs 25 closed triples 159 candidate states 5876 -> surviving 3480
+family pre<=1 per<=1: locations {'G': 28, 'D': 32} junction facts 176 configs 25 closed triples 75 candidate states 642 -> surviving 642
+greedy rule: 39 states
+smallest closed rule: OPTIMAL, 30 states (solver objective 30, lower bound 30) {'G': 10, 'D': 20}
+written results/rule_found.json

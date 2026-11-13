@@ -1,0 +1,62 @@
+/* Figures for the spectre thread essay. Adapted from the standalone art page
+   (scripts/spectre/art/tmpl.html): same layout, set in the site's type and colours. */
+.spectre-fig {
+  --st-bg: var(--site-paper, #f4efe6);
+  --st-ghost: #cfc5b6;
+  --st-thread: #fbf7ec;
+  --st-casing: #0b1020;
+  --st-accent: #b8325f;
+  --st-btn: #ebe4d6;
+  margin: 2rem 0 2.25rem;
+  font-family: var(--font-ui);
+}
+body.quarto-dark .spectre-fig {
+  --st-ghost: #4a4239;
+  --st-accent: #f2a65a;
+  --st-btn: #36302a;
+}
+.spectre-fig .st-cap { margin: 0 0 0.5rem; min-height: 3.1em; font-size: 0.92rem; line-height: 1.5; }
+.spectre-fig .st-cap b {
+  display: block; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--st-accent); font-variant-numeric: tabular-nums;
+}
+.spectre-fig .st-plate { display: flex; justify-content: center; }
+.spectre-fig canvas[data-role="canvas"] { display: block; max-width: 100%; touch-action: pan-y; }
+.spectre-fig .st-still { display: block; width: 100%; height: auto; }
+.spectre-fig.is-live .st-still, .spectre-fig:not(.is-live) .st-live { display: none; }
+.spectre-fig.is-failed .st-still { display: block; }
+.spectre-fig .st-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;
+  margin-top: 10px; padding-block: 12px; border-block: 1px solid var(--site-rule);
+}
+.spectre-fig button {
+  font: 500 0.8rem var(--font-ui); color: var(--bs-body-color); background: var(--st-btn);
+  border: 1px solid transparent; border-radius: 999px; padding: 7px 14px; cursor: pointer;
+}
+.spectre-fig button:hover { border-color: var(--site-muted); }
+.spectre-fig [data-role="build"] { background: var(--bs-body-color); color: var(--bs-body-bg); min-width: 8.4em; }
+.spectre-fig [data-role="play"] { background: transparent; border-color: var(--bs-body-color); min-width: 6.4em; }
+.spectre-fig .st-seg, .spectre-fig .st-chips { display: flex; gap: 4px; }
+.spectre-fig .st-seg button[aria-pressed="true"] { border-color: var(--bs-body-color); }
+.spectre-fig .st-chips button { width: 40px; height: 28px; padding: 0; border-radius: 6px; border: 2px solid transparent; }
+.spectre-fig .st-chips button[aria-pressed="true"] { border-color: var(--bs-body-color); }
+.spectre-fig input[type=range] { flex: 1 1 180px; min-width: 0; accent-color: var(--st-accent); }
+.spectre-fig label.st-tog { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; margin: 0; }
+.spectre-fig label.st-tog input { accent-color: var(--st-accent); width: 16px; height: 16px; }
+.spectre-fig [data-role="read"] {
+  font-size: 0.75rem; font-variant-numeric: tabular-nums; color: var(--site-muted); white-space: nowrap; min-width: 10.5em;
+}
+.spectre-fig .st-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; margin-top: 12px; }
+.spectre-fig .st-grid button {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px;
+  border-radius: 10px; background: transparent; border: 1px solid var(--site-rule);
+}
+.spectre-fig .st-grid button[aria-pressed="true"] { border-color: var(--bs-body-color); background: var(--st-btn); }
+.spectre-fig .st-grid canvas { width: 60px; height: 60px; }
+.spectre-fig .st-grid span { font-size: 0.68rem; color: var(--site-muted); font-variant-numeric: tabular-nums; }
+.spectre-fig figcaption { margin-top: 10px; }
+.spectre-wide img { width: 100%; height: auto; border-radius: 6px; }
+@media (max-width: 700px) {
+  .spectre-fig .st-bar { gap: 8px; }
+  .spectre-fig [data-role="read"] { min-width: 0; }
+}

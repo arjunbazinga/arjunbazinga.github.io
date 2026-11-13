@@ -1,0 +1,20 @@
+edges each edge meets across the tiling (4,401 tiles):
+   edge  0 meets [3, 5, 7, 9, 11]
+   edge  1 meets [2, 4, 6, 8, 10]
+   edge  2 meets [1, 3, 7, 13]
+   edge  3 meets [0, 2, 6, 12]
+   edge  4 meets [1, 5, 11, 13]
+   edge  5 meets [0, 4, 8, 10, 12]
+   edge  6 meets [1, 3, 7, 13]
+   edge  7 meets [0, 2, 6, 12]
+   edge  8 meets [1, 5, 11, 13]
+   edge  9 meets [0, 10, 12]
+   edge 10 meets [1, 5, 9, 11, 13]
+   edge 11 meets [0, 4, 8, 10, 12]
+   edge 12 meets [3, 5, 7, 9, 11]
+   edge 13 meets [2, 4, 6, 8, 10]
+even edges meet only odd edges: True
+(a) pairs of edges that only ever meet each other: 0  -> no single one-stroke marking is consistent
+    smallest set of edges containing edge 0 that is closed under meeting: 14 of 14 -> partial markings are ruled out too
+(b) 429 markings with 7 non-crossing arcs, on 559 tiles: 0 are free of closed loops
+    share of arcs lying in closed loops: min 2.2%, median 65.3%; longest open strand: at most 11.1% of the arcs

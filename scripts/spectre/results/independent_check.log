@@ -1,0 +1,15 @@
+results/rule_min30.json: 30 states; base paths found by plain search; 200 junctions certified through 32 closed triples over 24 relative positions
+replay at level 2: all 30 states valid on exact geometry (1s)
+replay at level 3: all 30 states valid on exact geometry (2s)
+replay at level 4: all 30 states valid on exact geometry (6s)
+INDEPENDENT CHECK OK
+results/rule_found.json: 30 states; base paths found by plain search; 200 junctions certified through 32 closed triples over 24 relative positions
+replay at level 2: all 30 states valid on exact geometry (1s)
+replay at level 3: all 30 states valid on exact geometry (2s)
+replay at level 4: all 30 states valid on exact geometry (6s)
+INDEPENDENT CHECK OK
+results/rule_sampled53.json: 53 states; base paths found by plain search; 357 junctions certified through 41 closed triples over 24 relative positions
+replay at level 2: all 53 states valid on exact geometry (2s)
+replay at level 3: all 53 states valid on exact geometry (3s)
+replay at level 4: all 53 states valid on exact geometry (10s)
+INDEPENDENT CHECK OK

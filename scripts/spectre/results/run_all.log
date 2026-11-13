@@ -1,0 +1,92 @@
+L1 Gamma tiles=     8 boundary=    7 entries=    7 pairs=      22 child-orders= 26  path verified over 8 clusters  0s
+L1 Delta tiles=     9 boundary=    8 entries=    8 pairs=      30 child-orders= 38  path verified over 9 clusters  0s
+L2 Gamma tiles=    62 boundary=   36 entries=   34 pairs=     458 child-orders= 34  path verified over 63 clusters  0s
+L2 Delta tiles=    71 boundary=   42 entries=   39 pairs=     610 child-orders= 48  path verified over 72 clusters  0s
+L3 Gamma tiles=   488 boundary=  159 entries=  130 pairs=    8196 child-orders= 34  path verified over 496 clusters  0s
+L3 Delta tiles=   559 boundary=  186 entries=  149 pairs=   11296 child-orders= 48  path verified over 568 clusters  0s
+L4 Gamma tiles=  3842 boundary=  680 entries=  487 pairs=  126924 child-orders= 34  path verified over 3905 clusters  1s
+L4 Delta tiles=  4401 boundary=  796 entries=  561 pairs=  179904 child-orders= 48  path verified over 4473 clusters  1s
+L5 Gamma tiles= 30248 boundary= 2887 entries= 1858 pairs= 1930158 child-orders= 34  path verified over 30744 clusters  30s
+L5 Delta tiles= 34649 boundary= 3380 entries= 2149 pairs= 2754190 child-orders= 48  path verified over 35217 clusters  40s
+exact integer tiles agree with the float construction; adjacency identical at levels 0-4 (2s)
+dimension of the quad-vector orbit (<= 16 levels suffice to identify a configuration): 6
+family pre<=0 per<=1: locations {'G': 5, 'D': 6} junction facts 6 configs 4 closed triples 6 candidate states 30 -> surviving 0
+family pre<=0 per<=2: locations {'G': 16, 'D': 19} junction facts 6 configs 23 closed triples 6 candidate states 200 -> surviving 0
+family pre<=1 per<=2: locations {'G': 100, 'D': 117} junction facts 384 configs 25 closed triples 159 candidate states 5876 -> surviving 3480
+family pre<=1 per<=1: locations {'G': 28, 'D': 32} junction facts 176 configs 25 closed triples 75 candidate states 642 -> surviving 642
+greedy rule: 39 states
+smallest closed rule: OPTIMAL, 30 states (solver objective 30, lower bound 30) {'G': 10, 'D': 20}
+written results/rule_found.json
+results/rule_min30.json: 30 states {'G': 10, 'D': 20} | 200 junctions certified through 32 closed triples over 24 relative positions
+replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 10 states contain themselves. CERTIFICATE OK (3s)
+results/rule_found.json: 30 states {'G': 10, 'D': 20} | 200 junctions certified through 32 closed triples over 24 relative positions
+replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 10 states contain themselves. CERTIFICATE OK (4s)
+results/rule_sampled53.json: 53 states {'G': 14, 'D': 39} | 357 junctions certified through 41 closed triples over 24 relative positions
+replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 11 states contain themselves. CERTIFICATE OK (4s)
+state D|(2)|0(5)
+level 2:      71 tiles  locality 5.02   (diameter floor for any supertile-contiguous curve 1.94)  0s
+level 3:     559 tiles  locality 6.10   (diameter floor for any supertile-contiguous curve 2.49)  0s
+level 4:    4401 tiles  locality 8.07   (diameter floor for any supertile-contiguous curve 2.72)  0s
+level 5:   34649 tiles  locality 8.48   (diameter floor for any supertile-contiguous curve 2.80)  4s
+written results/spectre_curve.png
+results/rule_min30.json: 30 states; base paths found by plain search; 200 junctions certified through 32 closed triples over 24 relative positions
+replay at level 2: all 30 states valid on exact geometry (1s)
+replay at level 3: all 30 states valid on exact geometry (2s)
+replay at level 4: all 30 states valid on exact geometry (6s)
+INDEPENDENT CHECK OK
+results/rule_found.json: 30 states; base paths found by plain search; 200 junctions certified through 32 closed triples over 24 relative positions
+replay at level 2: all 30 states valid on exact geometry (1s)
+replay at level 3: all 30 states valid on exact geometry (2s)
+replay at level 4: all 30 states valid on exact geometry (6s)
+INDEPENDENT CHECK OK
+results/rule_sampled53.json: 53 states; base paths found by plain search; 357 junctions certified through 41 closed triples over 24 relative positions
+replay at level 2: all 53 states valid on exact geometry (2s)
+replay at level 3: all 53 states valid on exact geometry (3s)
+replay at level 4: all 53 states valid on exact geometry (10s)
+INDEPENDENT CHECK OK
+state D|(2)|0(5)
+level 2:        71 tiles  locality 5.0160  attained at steps 40..67 (gap 27, 38.0% of the curve)  [3 block pairs, 0s]
+level 3:       559 tiles  locality 6.0971  attained at steps 324..377 (gap 53, 9.5% of the curve)  [33 block pairs, 0s]
+level 4:      4401 tiles  locality 8.0724  attained at steps 2604..2977 (gap 373, 8.5% of the curve)  [453 block pairs, 0s]  Aitken extrapolation 3.709
+level 5:     34649 tiles  locality 8.4838  attained at steps 20518..23491 (gap 2973, 8.6% of the curve)  [5320 block pairs, 0s]  Aitken extrapolation 8.592
+level 6:    272791 tiles  locality 8.6913  attained at steps 89257..92159 (gap 2902, 1.1% of the curve)  [38780 block pairs, 3s]  Aitken extrapolation 8.903
+level 7:   2147679 tiles  locality 8.8702  attained at steps 702709..725583 (gap 22874, 1.1% of the curve)  [264196 block pairs, 19s]  Aitken extrapolation 9.988
+level 8:  16908641 tiles  locality 8.9416  attained at steps 5532433..5712493 (gap 180060, 1.1% of the curve)  [2096057 block pairs, 178s]  Aitken extrapolation 8.989
+state | self child | position in production | min tile-distance from the k-th nested copy to the boundary, levels 3/4/5
+D|(2)|0(5)             child 2  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(4)|(5)              child 4  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(5)|(4)              child 4  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(5)|0(5)             child 5  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(5)|0(5)             child 6  step 2/8  two-sided (Z)    k=1: 0/0/0  k=2: 2/4/10  k=3: 2/4/10
+D|(5)|6(2)             child 5  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|0(5)|(2)             child 2  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|0(5)|(5)             child 6  step 7/8  two-sided (Z)    k=1: 0/0/0  k=2: 2/4/10  k=3: 2/4/10
+D|0(5)|(5)             child 5  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|6(2)|(5)             child 5  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+G|(7)|0(5)             child 7  step 1/7  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+G|0(5)|(7)             child 7  step 7/7  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+12 self-containing states; 2 are two-sided with the nested copy strictly inside and its depth growing with level
+level  6: gap 2.902000e+03 steps  ratio 8.69133196
+level  7: gap 2.287400e+04 steps  ratio 8.87024789
+level  8: gap 1.800600e+05 steps  ratio 8.94164571
+level  9: gap 1.417636e+06 steps  ratio 8.96597766
+level 10: gap 1.116100e+07 steps  ratio 8.97496333
+level 11: gap 8.787038e+07 steps  ratio 8.97808044
+level 12: gap 6.918020e+08 steps  ratio 8.97922041
+level 16: gap 2.657903e+12 steps  ratio 8.97983027
+level 20: gap 1.021166e+16 steps  ratio 8.97984011
+level 24: gap 3.923321e+19 steps  ratio 8.97984027
+level 28: gap 1.507340e+23 steps  ratio 8.97984027
+level 32: gap 5.791199e+26 steps  ratio 8.97984027
+level 36: gap 2.224978e+30 steps  ratio 8.97984027
+level 40: gap 8.548366e+33 steps  ratio 8.97984027
+limit along this family: 8.979840  (last change 3.6e-15)
+grandchild 6,6 of a D supertile: its environment has 6 supertiles; the closure has 17 (shape, environment) pairs, environment sizes 6-6, 25 relative positions; every one is surrounded at level 2.
+Hence at every level n >= 4 each tile of that grandchild has all 14 edges inside the supertile. INTERIOR CERTIFIED (1s)
+normalised quantities are stationary beyond level 45: max change over two levels 3.6e-15
+normalised radius D: exact level 6 3.1582, bound at level 45 3.1843
+pairs inside a level-2 curve: worst 5.6430
+770 root nodes
+PROVEN: locality <= 8.979841 at every level. 1218 nodes expanded (72 with consecutive blocks), 75068 pruned by the all-level bound, max depth 12; largest exact ratio met 8.97983 ('D|(7)|0(5)', 'D|0(5)|(7)', 33215141225, 4832710856, 12)  (1s)
+VIOLATION: ratio 8.97984 > 8.97984 at depth 16 (an actual pair at level 19)  ('D|(7)|0(5)', 'D|0(5)|(7)', 127612563945785, 18567273848584, 16)
+exit=0

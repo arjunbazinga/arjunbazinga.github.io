@@ -1,0 +1,6 @@
+results/rule_min30.json: 30 states {'G': 10, 'D': 20} | 200 junctions certified through 32 closed triples over 24 relative positions
+replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 10 states contain themselves. CERTIFICATE OK (3s)
+results/rule_found.json: 30 states {'G': 10, 'D': 20} | 200 junctions certified through 32 closed triples over 24 relative positions
+replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 10 states contain themselves. CERTIFICATE OK (4s)
+results/rule_sampled53.json: 53 states {'G': 14, 'D': 39} | 357 junctions certified through 41 closed triples over 24 relative positions
+replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 11 states contain themselves. CERTIFICATE OK (4s)

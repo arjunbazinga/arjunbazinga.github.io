@@ -1,0 +1,8 @@
+locality constant (lower, upper)   states   file
+  [8.74504, 8.74522]    181   results/search_seed1.json
+  [8.97981, 8.97999]     30   results/search_seed2.json
+  [8.97984, 8.97984]     30   results/rule_min30.json  (reference)
+
+best: results/search_seed1.json -> results/rule_best_locality.json; verifying with both checkers
+  replayed all states at levels 2-5 (up to 34649 tiles): permutation, edge-adjacency, endpoints, contiguity of every supertile all hold. 14 states contain themselves. CERTIFICATE OK (9s)
+  INDEPENDENT CHECK OK

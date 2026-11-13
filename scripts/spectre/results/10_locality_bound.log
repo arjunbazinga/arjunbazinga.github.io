@@ -1,0 +1,6 @@
+normalised quantities are stationary beyond level 45: max change over two levels 3.6e-15
+normalised radius D: exact level 6 3.1582, bound at level 45 3.1843
+pairs inside a level-2 curve: worst 5.6430
+770 root nodes
+PROVEN: locality <= 8.979841 at every level. 1218 nodes expanded (72 with consecutive blocks), 75068 pruned by the all-level bound, max depth 12; largest exact ratio met 8.97983 ('D|(7)|0(5)', 'D|0(5)|(7)', 33215141225, 4832710856, 12)  (1s)
+VIOLATION: ratio 8.97984 > 8.97984 at depth 16 (an actual pair at level 19)  ('D|(7)|0(5)', 'D|0(5)|(7)', 127612563945785, 18567273848584, 16)
