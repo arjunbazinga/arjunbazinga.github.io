@@ -1,0 +1,6 @@
+4401 tiles; shared borders have [1, 2, 3, 4] edges
+drawing rule                                     crossings  outside  clearance  reach  length/tile
+centres only                                          0    0.15%     1.616    2.44     3.06
+centres + palette crossing edge                       0    0.00%     1.456    2.44     3.60
+centres + middle of the shared border                 0    0.00%     1.719    2.44     3.07
+centres + shared edge nearest the direct line         0    0.00%     1.719    2.44     3.07

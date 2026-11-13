@@ -1,0 +1,8 @@
+state D|(2)|0(5)
+level 2:        71 tiles  locality 5.0160  attained at steps 40..67 (gap 27, 38.0% of the curve)  [3 block pairs, 0s]
+level 3:       559 tiles  locality 6.0971  attained at steps 324..377 (gap 53, 9.5% of the curve)  [33 block pairs, 0s]
+level 4:      4401 tiles  locality 8.0724  attained at steps 2604..2977 (gap 373, 8.5% of the curve)  [453 block pairs, 0s]  Aitken extrapolation 3.709
+level 5:     34649 tiles  locality 8.4838  attained at steps 20518..23491 (gap 2973, 8.6% of the curve)  [5320 block pairs, 0s]  Aitken extrapolation 8.592
+level 6:    272791 tiles  locality 8.6913  attained at steps 89257..92159 (gap 2902, 1.1% of the curve)  [38780 block pairs, 3s]  Aitken extrapolation 8.903
+level 7:   2147679 tiles  locality 8.8702  attained at steps 702709..725583 (gap 22874, 1.1% of the curve)  [264196 block pairs, 19s]  Aitken extrapolation 9.988
+level 8:  16908641 tiles  locality 8.9416  attained at steps 5532433..5712493 (gap 180060, 1.1% of the curve)  [2096057 block pairs, 178s]  Aitken extrapolation 8.989

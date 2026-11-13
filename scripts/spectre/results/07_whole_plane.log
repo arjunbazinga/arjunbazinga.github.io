@@ -1,0 +1,14 @@
+state | self child | position in production | min tile-distance from the k-th nested copy to the boundary, levels 3/4/5
+D|(2)|0(5)             child 2  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(4)|(5)              child 4  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(5)|(4)              child 4  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(5)|0(5)             child 5  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|(5)|0(5)             child 6  step 2/8  two-sided (Z)    k=1: 0/0/0  k=2: 2/4/10  k=3: 2/4/10
+D|(5)|6(2)             child 5  step 1/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|0(5)|(2)             child 2  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|0(5)|(5)             child 6  step 7/8  two-sided (Z)    k=1: 0/0/0  k=2: 2/4/10  k=3: 2/4/10
+D|0(5)|(5)             child 5  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+D|6(2)|(5)             child 5  step 8/8  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+G|(7)|0(5)             child 7  step 1/7  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+G|0(5)|(7)             child 7  step 7/7  one-sided (ray)  k=1: 0/0/0  k=2: 0/0/0  k=3: 0/0/0
+12 self-containing states; 2 are two-sided with the nested copy strictly inside and its depth growing with level

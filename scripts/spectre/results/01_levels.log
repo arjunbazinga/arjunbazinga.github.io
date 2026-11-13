@@ -1,0 +1,10 @@
+L1 Gamma tiles=     8 boundary=    7 entries=    7 pairs=      22 child-orders= 26  path verified over 8 clusters  0s
+L1 Delta tiles=     9 boundary=    8 entries=    8 pairs=      30 child-orders= 38  path verified over 9 clusters  0s
+L2 Gamma tiles=    62 boundary=   36 entries=   34 pairs=     458 child-orders= 34  path verified over 63 clusters  0s
+L2 Delta tiles=    71 boundary=   42 entries=   39 pairs=     610 child-orders= 48  path verified over 72 clusters  0s
+L3 Gamma tiles=   488 boundary=  159 entries=  130 pairs=    8196 child-orders= 34  path verified over 496 clusters  0s
+L3 Delta tiles=   559 boundary=  186 entries=  149 pairs=   11296 child-orders= 48  path verified over 568 clusters  0s
+L4 Gamma tiles=  3842 boundary=  680 entries=  487 pairs=  126924 child-orders= 34  path verified over 3905 clusters  1s
+L4 Delta tiles=  4401 boundary=  796 entries=  561 pairs=  179904 child-orders= 48  path verified over 4473 clusters  1s
+L5 Gamma tiles= 30248 boundary= 2887 entries= 1858 pairs= 1930158 child-orders= 34  path verified over 30744 clusters  30s
+L5 Delta tiles= 34649 boundary= 3380 entries= 2149 pairs= 2754190 child-orders= 48  path verified over 35217 clusters  40s

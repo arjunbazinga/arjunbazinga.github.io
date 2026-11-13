@@ -16,6 +16,7 @@ project:
     - static/reading-tools.js
     - static/album/**
     - static/charmera/**
+    - static/spectre/**
     - static/profile-352.webp
     - static/social-card.png
   post-render: scripts/post-render.ts

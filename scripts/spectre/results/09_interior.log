@@ -1,0 +1,2 @@
+grandchild 6,6 of a D supertile: its environment has 6 supertiles; the closure has 17 (shape, environment) pairs, environment sizes 6-6, 25 relative positions; every one is surrounded at level 2.
+Hence at every level n >= 4 each tile of that grandchild has all 14 edges inside the supertile. INTERIOR CERTIFIED (1s)

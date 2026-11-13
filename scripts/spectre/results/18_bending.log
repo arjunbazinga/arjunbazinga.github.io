@@ -1,0 +1,8 @@
+Hilbert, 4096 cells: mean turn 72.0 deg, mean turn^2 1.974, straight-through share 0.20
+results/rule_best_locality.json       181 states: mean turn 75.5 deg, mean turn^2 2.188, near-straight share 0.12, mean step 2.97
+results/rule_found.json                30 states: mean turn 75.4 deg, mean turn^2 2.178, near-straight share 0.12, mean step 2.98
+results/rule_min30.json                30 states: mean turn 75.5 deg, mean turn^2 2.180, near-straight share 0.11, mean step 2.98
+results/rule_sampled53.json            53 states: mean turn 75.8 deg, mean turn^2 2.196, near-straight share 0.12, mean step 2.97
+results/rule_trial122.json            122 states: mean turn 75.7 deg, mean turn^2 2.200, near-straight share 0.12, mean step 2.98
+200 random closed rules: mean turn min 74.3, median 74.9, max 76.3 deg
+lowest: [(np.float64(74.26356008711012), 53, 'D|5(0)|0(3)'), (np.float64(74.40790111921784), 48, 'D|0(3)|6(4)'), (np.float64(74.41123546762758), 44, 'D|(0)|3(4)')]

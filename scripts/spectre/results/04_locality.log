@@ -1,0 +1,5 @@
+state D|(2)|0(5)
+level 2:      71 tiles  locality 5.02   (diameter floor for any supertile-contiguous curve 1.94)  0s
+level 3:     559 tiles  locality 6.10   (diameter floor for any supertile-contiguous curve 2.49)  0s
+level 4:    4401 tiles  locality 8.07   (diameter floor for any supertile-contiguous curve 2.72)  0s
+level 5:   34649 tiles  locality 8.48   (diameter floor for any supertile-contiguous curve 2.80)  4s
