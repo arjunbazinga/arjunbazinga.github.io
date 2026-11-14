@@ -22,21 +22,22 @@ Left out of the upload on purpose:
 
 - `docs/EMAILS.md`, unsent drafts to named researchers. Private correspondence does not belong in a public repository. `JOURNAL.md` and `OPEN.md` still mention it.
 - `archive/`, the superseded exploratory scripts.
-- The PNG figures in `results/` and `art/stills/` (about 5 MB). The essay's images were made from them and live in `static/spectre/`. `render.py` and `16_spectre_tree.py` regenerate the PNGs.
+- The PNG figures in `results/` and `art/stills/` (about 5 MB). `render.py` and `16_spectre_tree.py` regenerate them. `static/spectre/spectre-tree-1600.webp` is a WebP copy of the tree figure, kept for the companion material though the essay no longer shows it.
 - `art/spectre-thread.html`, the standalone art page. `python3 15_art_page.py` rebuilds it from `art/tmpl.html`.
 
-## How the essay maps to the package
+## How the essay relates to the package
+
+The first version of the essay (13 November 2026) was assembled from `docs/EXPLAINER.md`, `docs/WRITEUP.md` and `docs/JOURNAL.md`. It read as a collage of documents written for different readers, and on 14 November it was rewritten as one short narrative for a reader new to both Hilbert's curve and the spectre. The rewrite keeps the explainer's facts and drops the notation, the proof details, the locality table, the status table, the spectre tree and the account of wrong turns. Those all remain here, in `docs/`, for anyone who follows the essay's link.
 
 | Essay | Source |
 |---|---|
-| Most prose: ingredients, question, build-up, aperiodic vs non-periodic, ladder, order without symmetry, fractal, marked tiles, tree, "So what?" | `docs/EXPLAINER.md` |
-| "Why it works at every size", "From a patch to the whole plane", locality table, status table | `docs/WRITEUP.md`, `PROJECT.md` |
-| "How this was figured out" and "Being wrong carefully" | `docs/JOURNAL.md` sections 3, 6, 10, 16 and 19 |
-| What is open | `docs/OPEN.md` |
-| Footnotes and credits | `docs/LITERATURE.md` |
-| Both interactive figures | `static/spectre/thread.js`, the art page's script (`art/tmpl.html`) made into a function that mounts each figure from one shared copy of the data, in the site's fonts and colours, and following the site's dark-mode toggle |
+| Hilbert figure | `hilbert_figure.py` prints the inline SVG |
+| The three interactive figures (thread, build-up, marked tiles) | `static/spectre/thread.js`, the art page's script (`art/tmpl.html`) made into a function that mounts each figure from one shared copy of the data, in the site's fonts and colours, following the site's dark-mode toggle and reduced-motion setting |
 | Figure data | `static/spectre/thread-data.json`, written by `15_art_page.py` (the same bytes as `art/data.json`) |
-| Still images and social card | `art/stills/spectre_thread_light_559.png` and `results/spectre_tree.png`, converted to WebP |
+| Still image and social card | `art/stills/spectre_thread_light_559.png`, converted to WebP |
+| "Thirty routes", "200 joins", "32 claims" | `PROJECT.md`, `docs/WRITEUP.md` |
+| "A hundred steps apart, about thirty tile-widths" | the locality constant 8.97984 (`docs/WRITEUP.md`): distance² ≤ 8.98 × tile area × steps, so 100 steps gives about 30 √(tile area); Hilbert's 6 gives about 24.5 cells |
+| 32 and 20 strokes | `docs/JOURNAL.md` sections 16 and 19 |
 
 ## Rebuild
 

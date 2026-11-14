@@ -118,7 +118,7 @@
       if (pos){ pos.max = n; pos.value = k; }
       if (S.hi >= 0) say('Marked tile ' + (S.hi + 1) + ' of ' + PALETTE.length, num(PALETTE[S.hi][2]) + ' of the ' + num(N4) + ' tiles carry this stroke. They are the ones left in colour.');
       else if (grid) say('All ' + num(N4) + ' tiles', 'Pick a marked tile below to see where it is used.');
-      else say('The whole thread', 'One line, start to finish. Press Build it up to see how it is made.');
+      else say('The whole thread', num(n) + ' tiles, one line. Press Draw it to trace it in order.');
     }
 
     // build-up timeline: one tile, then four rounds of "treat it as one piece, join eight"
@@ -246,7 +246,8 @@
     new MutationObserver(retheme).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     let rw = cv.parentElement.clientWidth;
     new ResizeObserver(() => { const w = cv.parentElement.clientWidth; if (w !== rw){ rw = w; layout(); draw(); } }).observe(cv.parentElement);
-    const start = root.dataset.spectre === 'marks' ? 4 : (rw < 560 ? 3 : 4);
+    const kind = root.dataset.spectre, start = kind === 'marks' ? 4 : 3;
+    if (kind === 'build'){ S.mode = 'build'; S.t = 0; }
     tokens(); S.n = SIZES[start]; S.k = S.n; colours(); layout(); draw(); drawPalette();
   }
 })();
