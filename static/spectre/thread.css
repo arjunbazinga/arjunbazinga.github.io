@@ -61,5 +61,3 @@ body.quarto-dark .spectre-fig {
   .spectre-fig [data-role="read"] { min-width: 0; }
 }
 .hilbert-fig svg { display: block; width: 100%; height: auto; color: var(--bs-body-color); }
-.hilbert-fig .h-grid rect { fill: none; stroke: var(--site-rule); stroke-width: 1; }
-.hilbert-fig .h-line { fill: none; stroke: currentColor; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
