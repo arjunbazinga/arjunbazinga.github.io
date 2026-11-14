@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-11-13">
-<meta name="description" content="Hilbert threaded a square grid with one line. The spectre, found in 2023, tiles the plane only in patterns that never repeat. Here is one line through all of it, the thirty routes that build it, and why a finite check proves it works at every size.">
+<meta name="description" content="Hilbert filled a grid with one line by repeating one move. The spectre covers the plane without ever repeating. Here is one line through every spectre tile, the thirty routes that build it, and why it never breaks.">
 
 <title>Spectre Thread – Arjun Srivastava</title>
 <style>
@@ -95,19 +95,19 @@ gtag('config', 'G-0NQJ1JVYDF', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Spectre Thread – Arjun Srivastava">
-<meta property="og:description" content="Hilbert threaded a square grid with one line. The spectre, found in 2023, tiles the plane only in patterns that never repeat. Here is one line through all of it, the thirty routes that build it, and why a finite check proves it works at every size.">
+<meta property="og:description" content="Hilbert filled a grid with one line by repeating one move. The spectre covers the plane without ever repeating. Here is one line through every spectre tile, the thirty routes that build it, and why it never breaks.">
 <meta property="og:image" content="https://www.arjunsriva.com/static/spectre/social-card.webp">
 <meta property="og:site_name" content="Arjun Srivastava">
-<meta property="og:image:alt" content="A patch of 559 spectre tiles shaded from deep blue to orange along one white thread that winds through every tile.">
+<meta property="og:image:alt" content="A patch of 559 spectre tiles shaded from deep blue to pink along one white thread that winds through every tile.">
 <meta name="twitter:title" content="Spectre Thread – Arjun Srivastava">
-<meta name="twitter:description" content="Hilbert threaded a square grid with one line. The spectre, found in 2023, tiles the plane only in patterns that never repeat. Here is one line through all of it, the thirty routes that build it, and why a finite check proves it works at every size.">
+<meta name="twitter:description" content="Hilbert filled a grid with one line by repeating one move. The spectre covers the plane without ever repeating. Here is one line through every spectre tile, the thirty routes that build it, and why it never breaks.">
 <meta name="twitter:image" content="https://www.arjunsriva.com/static/spectre/social-card.webp">
-<meta name="twitter:image:alt" content="A patch of 559 spectre tiles shaded from deep blue to orange along one white thread that winds through every tile.">
+<meta name="twitter:image:alt" content="A patch of 559 spectre tiles shaded from deep blue to pink along one white thread that winds through every tile.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.arjunsriva.com/posts/spectre-thread/">
 </head>
 
-<body class="floating nav-fixed essay-page slimcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed essay-page quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -340,17 +340,12 @@ gtag('config', 'G-0NQJ1JVYDF', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#the-two-ingredients" id="toc-the-two-ingredients" class="nav-link active" data-scroll-target="#the-two-ingredients">The two ingredients</a></li>
-  <li><a href="#the-question" id="toc-the-question" class="nav-link" data-scroll-target="#the-question">The question</a></li>
-  <li><a href="#how-it-is-built" id="toc-how-it-is-built" class="nav-link" data-scroll-target="#how-it-is-built">How it is built</a></li>
-  <li><a href="#why-it-works-at-every-size" id="toc-why-it-works-at-every-size" class="nav-link" data-scroll-target="#why-it-works-at-every-size">Why it works at every size</a></li>
-  <li><a href="#not-just-non-repeating-it-cant-repeat" id="toc-not-just-non-repeating-it-cant-repeat" class="nav-link" data-scroll-target="#not-just-non-repeating-it-cant-repeat">Not just non-repeating: it can’t repeat</a></li>
-  <li><a href="#how-good-is-the-line" id="toc-how-good-is-the-line" class="nav-link" data-scroll-target="#how-good-is-the-line">How good is the line?</a></li>
-  <li><a href="#can-the-tile-draw-it-by-itself" id="toc-can-the-tile-draw-it-by-itself" class="nav-link" data-scroll-target="#can-the-tile-draw-it-by-itself">Can the tile draw it by itself?</a></li>
-  <li><a href="#a-simpler-form-that-didnt-make-it" id="toc-a-simpler-form-that-didnt-make-it" class="nav-link" data-scroll-target="#a-simpler-form-that-didnt-make-it">A simpler form that didn’t make it</a></li>
-  <li><a href="#so-what" id="toc-so-what" class="nav-link" data-scroll-target="#so-what">So what?</a></li>
-  <li><a href="#where-it-stands" id="toc-where-it-stands" class="nav-link" data-scroll-target="#where-it-stands">Where it stands</a></li>
-  <li><a href="#how-this-was-figured-out" id="toc-how-this-was-figured-out" class="nav-link" data-scroll-target="#how-this-was-figured-out">How this was figured out</a></li>
+  <li><a href="#how-its-built" id="toc-how-its-built" class="nav-link active" data-scroll-target="#how-its-built">How it’s built</a></li>
+  <li><a href="#why-it-never-breaks" id="toc-why-it-never-breaks" class="nav-link" data-scroll-target="#why-it-never-breaks">Why it never breaks</a></li>
+  <li><a href="#how-good-is-it" id="toc-how-good-is-it" class="nav-link" data-scroll-target="#how-good-is-it">How good is it?</a></li>
+  <li><a href="#why-its-interesting" id="toc-why-its-interesting" class="nav-link" data-scroll-target="#why-its-interesting">Why it’s interesting</a></li>
+  <li><a href="#can-one-tile-draw-it-by-itself" id="toc-can-one-tile-draw-it-by-itself" class="nav-link" data-scroll-target="#can-one-tile-draw-it-by-itself">Can one tile draw it by itself?</a></li>
+  <li><a href="#whats-known" id="toc-whats-known" class="nav-link" data-scroll-target="#whats-known">What’s known</a></li>
   </ul>
 </nav>
 </nav>
@@ -359,13 +354,13 @@ gtag('config', 'G-0NQJ1JVYDF', { 'anonymize_ip': true});
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Spectre Thread</h1>
-<p class="subtitle lead">One unbroken line through every tile of a pattern that cannot repeat, from a recipe of thirty routes</p>
+<p class="subtitle lead">Hilbert’s line, drawn through a pattern that never repeats</p>
   <div class="quarto-categories">
     <div class="quarto-category">Mathematics</div>
     <div class="quarto-category">Tilings</div>
@@ -375,7 +370,7 @@ gtag('config', 'G-0NQJ1JVYDF', { 'anonymize_ip': true});
 
 <div>
   <div class="description">
-    Hilbert threaded a square grid with one line. The spectre, found in 2023, tiles the plane only in patterns that never repeat. Here is one line through all of it, the thirty routes that build it, and why a finite check proves it works at every size.
+    Hilbert filled a grid with one line by repeating one move. The spectre covers the plane without ever repeating. Here is one line through every spectre tile, the thirty routes that build it, and why it never breaks.
   </div>
 </div>
 
@@ -390,6 +385,12 @@ gtag('config', 'G-0NQJ1JVYDF', { 'anonymize_ip': true});
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 14, 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -398,284 +399,91 @@ gtag('config', 'G-0NQJ1JVYDF', { 'anonymize_ip': true});
 </header>
 
 
-<p>In 1891 David Hilbert drew a single line that passes through every cell of a square grid. In 2023 four mathematicians found the spectre, a single shape that covers the plane but only in patterns that never repeat. This piece puts the two together: one unbroken line that passes through every tile of a spectre tiling, visiting each tile once, generated by a small recursive recipe and proven to work at every scale.</p>
-
-<div class="no-row-height column-margin column-container"><div class="spectre-status">
-<p><strong>How sure is this?</strong> The main claim is computer-assisted. Two checkers that share no code accept the certificate, but both were written in the same session and nobody else has reviewed them. A short literature search found general theory and no construction for the spectre, so whether this is new is a question for an expert. Each claim’s status is in <a href="#where-it-stands">Where it stands</a>.</p>
-</div></div><figure class="spectre-fig figure" data-spectre="thread" aria-labelledby="thread-caption">
+<p>Draw a grid of squares, and try to draw one line through every square. Visit each square once, never lift your pen, and never leave a block of squares until you’ve filled it. In 1891 David Hilbert found the trick. Solve it for four squares. Then treat each block of four as a single square and solve it again. Repeat, and the line fills the plane.</p>
+<figure class="hilbert-fig figure">
+  <svg viewbox="-4 -4 688 208" role="img" aria-label="Hilbert's curve on grids of 4, 16 and 64 squares: each version is four copies of the one before, joined end to end."><g class="h-grid"><rect x="0.00" y="0.00" width="100.00" height="100.00"></rect><rect x="0.00" y="100.00" width="100.00" height="100.00"></rect><rect x="100.00" y="0.00" width="100.00" height="100.00"></rect><rect x="100.00" y="100.00" width="100.00" height="100.00"></rect></g><polyline class="h-line" points="50.00,150.00 50.00,50.00 150.00,50.00 150.00,150.00"></polyline><g class="h-grid"><rect x="240.00" y="0.00" width="50.00" height="50.00"></rect><rect x="240.00" y="50.00" width="50.00" height="50.00"></rect><rect x="240.00" y="100.00" width="50.00" height="50.00"></rect><rect x="240.00" y="150.00" width="50.00" height="50.00"></rect><rect x="290.00" y="0.00" width="50.00" height="50.00"></rect><rect x="290.00" y="50.00" width="50.00" height="50.00"></rect><rect x="290.00" y="100.00" width="50.00" height="50.00"></rect><rect x="290.00" y="150.00" width="50.00" height="50.00"></rect><rect x="340.00" y="0.00" width="50.00" height="50.00"></rect><rect x="340.00" y="50.00" width="50.00" height="50.00"></rect><rect x="340.00" y="100.00" width="50.00" height="50.00"></rect><rect x="340.00" y="150.00" width="50.00" height="50.00"></rect><rect x="390.00" y="0.00" width="50.00" height="50.00"></rect><rect x="390.00" y="50.00" width="50.00" height="50.00"></rect><rect x="390.00" y="100.00" width="50.00" height="50.00"></rect><rect x="390.00" y="150.00" width="50.00" height="50.00"></rect></g><polyline class="h-line" points="265.00,175.00 315.00,175.00 315.00,125.00 265.00,125.00 265.00,75.00 265.00,25.00 315.00,25.00 315.00,75.00 365.00,75.00 365.00,25.00 415.00,25.00 415.00,75.00 415.00,125.00 365.00,125.00 365.00,175.00 415.00,175.00"></polyline><g class="h-grid"><rect x="480.00" y="0.00" width="25.00" height="25.00"></rect><rect x="480.00" y="25.00" width="25.00" height="25.00"></rect><rect x="480.00" y="50.00" width="25.00" height="25.00"></rect><rect x="480.00" y="75.00" width="25.00" height="25.00"></rect><rect x="480.00" y="100.00" width="25.00" height="25.00"></rect><rect x="480.00" y="125.00" width="25.00" height="25.00"></rect><rect x="480.00" y="150.00" width="25.00" height="25.00"></rect><rect x="480.00" y="175.00" width="25.00" height="25.00"></rect><rect x="505.00" y="0.00" width="25.00" height="25.00"></rect><rect x="505.00" y="25.00" width="25.00" height="25.00"></rect><rect x="505.00" y="50.00" width="25.00" height="25.00"></rect><rect x="505.00" y="75.00" width="25.00" height="25.00"></rect><rect x="505.00" y="100.00" width="25.00" height="25.00"></rect><rect x="505.00" y="125.00" width="25.00" height="25.00"></rect><rect x="505.00" y="150.00" width="25.00" height="25.00"></rect><rect x="505.00" y="175.00" width="25.00" height="25.00"></rect><rect x="530.00" y="0.00" width="25.00" height="25.00"></rect><rect x="530.00" y="25.00" width="25.00" height="25.00"></rect><rect x="530.00" y="50.00" width="25.00" height="25.00"></rect><rect x="530.00" y="75.00" width="25.00" height="25.00"></rect><rect x="530.00" y="100.00" width="25.00" height="25.00"></rect><rect x="530.00" y="125.00" width="25.00" height="25.00"></rect><rect x="530.00" y="150.00" width="25.00" height="25.00"></rect><rect x="530.00" y="175.00" width="25.00" height="25.00"></rect><rect x="555.00" y="0.00" width="25.00" height="25.00"></rect><rect x="555.00" y="25.00" width="25.00" height="25.00"></rect><rect x="555.00" y="50.00" width="25.00" height="25.00"></rect><rect x="555.00" y="75.00" width="25.00" height="25.00"></rect><rect x="555.00" y="100.00" width="25.00" height="25.00"></rect><rect x="555.00" y="125.00" width="25.00" height="25.00"></rect><rect x="555.00" y="150.00" width="25.00" height="25.00"></rect><rect x="555.00" y="175.00" width="25.00" height="25.00"></rect><rect x="580.00" y="0.00" width="25.00" height="25.00"></rect><rect x="580.00" y="25.00" width="25.00" height="25.00"></rect><rect x="580.00" y="50.00" width="25.00" height="25.00"></rect><rect x="580.00" y="75.00" width="25.00" height="25.00"></rect><rect x="580.00" y="100.00" width="25.00" height="25.00"></rect><rect x="580.00" y="125.00" width="25.00" height="25.00"></rect><rect x="580.00" y="150.00" width="25.00" height="25.00"></rect><rect x="580.00" y="175.00" width="25.00" height="25.00"></rect><rect x="605.00" y="0.00" width="25.00" height="25.00"></rect><rect x="605.00" y="25.00" width="25.00" height="25.00"></rect><rect x="605.00" y="50.00" width="25.00" height="25.00"></rect><rect x="605.00" y="75.00" width="25.00" height="25.00"></rect><rect x="605.00" y="100.00" width="25.00" height="25.00"></rect><rect x="605.00" y="125.00" width="25.00" height="25.00"></rect><rect x="605.00" y="150.00" width="25.00" height="25.00"></rect><rect x="605.00" y="175.00" width="25.00" height="25.00"></rect><rect x="630.00" y="0.00" width="25.00" height="25.00"></rect><rect x="630.00" y="25.00" width="25.00" height="25.00"></rect><rect x="630.00" y="50.00" width="25.00" height="25.00"></rect><rect x="630.00" y="75.00" width="25.00" height="25.00"></rect><rect x="630.00" y="100.00" width="25.00" height="25.00"></rect><rect x="630.00" y="125.00" width="25.00" height="25.00"></rect><rect x="630.00" y="150.00" width="25.00" height="25.00"></rect><rect x="630.00" y="175.00" width="25.00" height="25.00"></rect><rect x="655.00" y="0.00" width="25.00" height="25.00"></rect><rect x="655.00" y="25.00" width="25.00" height="25.00"></rect><rect x="655.00" y="50.00" width="25.00" height="25.00"></rect><rect x="655.00" y="75.00" width="25.00" height="25.00"></rect><rect x="655.00" y="100.00" width="25.00" height="25.00"></rect><rect x="655.00" y="125.00" width="25.00" height="25.00"></rect><rect x="655.00" y="150.00" width="25.00" height="25.00"></rect><rect x="655.00" y="175.00" width="25.00" height="25.00"></rect></g><polyline class="h-line" points="492.50,187.50 492.50,162.50 517.50,162.50 517.50,187.50 542.50,187.50 567.50,187.50 567.50,162.50 542.50,162.50 542.50,137.50 567.50,137.50 567.50,112.50 542.50,112.50 517.50,112.50 517.50,137.50 492.50,137.50 492.50,112.50 492.50,87.50 517.50,87.50 517.50,62.50 492.50,62.50 492.50,37.50 492.50,12.50 517.50,12.50 517.50,37.50 542.50,37.50 542.50,12.50 567.50,12.50 567.50,37.50 567.50,62.50 542.50,62.50 542.50,87.50 567.50,87.50 592.50,87.50 617.50,87.50 617.50,62.50 592.50,62.50 592.50,37.50 592.50,12.50 617.50,12.50 617.50,37.50 642.50,37.50 642.50,12.50 667.50,12.50 667.50,37.50 667.50,62.50 642.50,62.50 642.50,87.50 667.50,87.50 667.50,112.50 667.50,137.50 642.50,137.50 642.50,112.50 617.50,112.50 592.50,112.50 592.50,137.50 617.50,137.50 617.50,162.50 592.50,162.50 592.50,187.50 617.50,187.50 642.50,187.50 642.50,162.50 667.50,162.50 667.50,187.50"></polyline></svg>
+  <figcaption>Hilbert's line on 4, 16 and 64 squares. Each version is four copies of the one before, turned to fit and joined end to end.</figcaption>
+</figure>
+<p>The trick leans on the square. Every block looks like every other block, so one move, turned four ways, works everywhere.</p>
+<p>In 2023 David Smith, an amateur, and three mathematicians found a shape that takes that away.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The spectre covers the plane, but no arrangement of it ever repeats. No block of spectres looks quite like any other. So does Hilbert’s trick survive without the symmetry it leans on?</p>
+<p>It does, but it costs more. Where Hilbert needs one move, the spectre needs thirty.</p>
+<figure class="spectre-fig figure" data-spectre="thread" aria-labelledby="thread-caption">
   <p class="st-cap st-live" data-role="cap" aria-live="polite"></p>
-  <div class="st-plate st-live"><canvas data-role="canvas" role="img" aria-label="A patch of spectre tiles with one continuous thread that visits each tile once"></canvas></div>
-  <img class="st-still figure-img" src="../../static/spectre/thread-559-1360.webp" srcset="/static/spectre/thread-559-720.webp 720w, /static/spectre/thread-559-1360.webp 1360w" sizes="(max-width: 760px) calc(100vw - 32px), 720px" width="1360" height="1726" alt="559 spectre tiles shaded from deep blue to orange along one white thread that winds through every tile." loading="eager">
+  <div class="st-plate st-live"><canvas data-role="canvas" role="img" aria-label="559 spectre tiles with one continuous thread that visits each tile once"></canvas></div>
+  <img class="st-still figure-img" src="../../static/spectre/thread-559-1360.webp" srcset="/static/spectre/thread-559-720.webp 720w, /static/spectre/thread-559-1360.webp 1360w" sizes="(max-width: 760px) calc(100vw - 32px), 720px" width="1360" height="1726" alt="559 spectre tiles shaded from deep blue to pink along one white thread that winds through every tile." loading="eager">
   <div class="st-bar st-live">
-    <button data-role="build" type="button">Build it up</button>
     <button data-role="play" type="button">Draw it</button>
-    <input data-role="pos" type="range" min="0" max="1" step="1" value="1" aria-label="Position in the animation">
+    <input data-role="pos" type="range" min="0" max="1" step="1" value="1" aria-label="Position along the thread">
     <span data-role="read"></span>
     <div class="st-seg" role="group" aria-label="Patch size">
       <button type="button" data-level="3" aria-pressed="false">559 tiles</button>
       <button type="button" data-level="4" aria-pressed="false">4,401 tiles</button>
     </div>
-    <div class="st-chips" role="group" aria-label="Colours">
-      <button type="button" data-pal="dusk" aria-pressed="true" aria-label="Dusk colours"></button>
-      <button type="button" data-pal="kelp" aria-pressed="false" aria-label="Kelp colours"></button>
-      <button type="button" data-pal="ember" aria-pressed="false" aria-label="Ember colours"></button>
-    </div>
-    <label class="st-tog"><input data-role="thread" type="checkbox" checked=""> Thread</label>
   </div>
-  <figcaption id="thread-caption">Every piece is the same 14-sided tile. Colour runs from the start of the thread to its end. <em>Build it up</em> replays the construction from one tile; <em>Draw it</em> traces the line in order.</figcaption>
+  <figcaption id="thread-caption">One line through 559 spectres, coloured from its start to its end.</figcaption>
 </figure>
-<section id="the-two-ingredients" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-two-ingredients">The two ingredients</h2>
-<p><strong>The spectre</strong> is a single shape, found in 2023 by David Smith, Joseph Samuel Myers, Craig Kaplan and Chaim Goodman-Strauss, that covers the infinite plane with no gaps but only in patterns that never repeat.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Mathematicians looked for such a shape for about sixty years.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Smith, Myers, Kaplan and Goodman-Strauss, <a href="https://arxiv.org/abs/2305.17743">“A chiral aperiodic monotile”</a> (2023). Everything here rests on their substitution and on their theorem that every spectre tiling carries the hierarchy described below.</p></div></div><p><strong>A space-filling curve</strong>, like Hilbert’s, threads through every cell of a square grid while keeping cells that are close on the line close in the plane. Databases and image formats use this to flatten two-dimensional data into one dimension without scattering neighbours.</p>
+<p>This is the line. It starts in dark blue and ends in deep pink. On the way it passes through every tile exactly once. Each step crosses an edge into a neighbouring tile. And like Hilbert’s line, it never leaves a region until it has filled it.</p>
+<section id="how-its-built" class="level2">
+<h2 class="anchored" data-anchor-id="how-its-built">How it’s built</h2>
+<p>Spectres gather naturally into clusters of eight pieces. One kind of cluster has seven, and one of its pieces is a pair of tiles. Clusters gather into bigger clusters of eight, and those into bigger ones, forever. That nesting is how the spectre was proven to cover the plane, and it is what the line is built on.</p>
+<p>The building step is Hilbert’s. Draw a route through one cluster: enter at this tile, visit the eight pieces in this order, leave at that tile. Then zoom out, treat the whole cluster as one piece, and draw a route through eight of them. Inside each piece, use the route you already have. Press Build it up to watch it go from one tile to 9, 71, 559 and 4,401.</p>
+<figure class="spectre-fig figure" data-spectre="build" aria-labelledby="build-caption">
+  <p class="st-cap st-live" data-role="cap" aria-live="polite"></p>
+  <div class="st-plate st-live"><canvas data-role="canvas" role="img" aria-label="The line being built up from one tile to 4,401 tiles, eight pieces at a time"></canvas></div>
+  <div class="st-bar st-live">
+    <button data-role="build" type="button">Build it up</button>
+    <input data-role="pos" type="range" min="0" max="1000" step="1" value="0" aria-label="Position in the build-up">
+    <span data-role="read"></span>
+  </div>
+  <figcaption id="build-caption">Each round treats the last cluster as one piece and joins eight. The dots mark where the line crosses from one piece to the next.</figcaption>
+</figure>
+<p>The catch is at the joins. When the line leaves one piece and enters the next, the tile where it leaves must touch the tile where it enters. In Hilbert’s grid this takes care of itself, because every block is the same. In the spectre it doesn’t. Clusters come in two shapes, neither is symmetric, and the place where a route needs to exit depends on where the next cluster happens to sit.</p>
+<p>So one route isn’t enough. Each route has to say which route to use inside each of its eight pieces, and those routes have to say the same about theirs. A computer search found a set of thirty routes that closes up: every route is built only from routes in the set. No smaller set of this kind exists.</p>
 </section>
-<section id="the-question" class="level2">
-<h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>The spectre answers: is there one shape that tiles the plane, but only without repeating? This line answers the next question:</p>
-<blockquote class="blockquote">
-<p>Can you walk through the whole tiling one tile at a time, always stepping to a tile that touches the one you are on, visiting every tile exactly once, and never returning to a region after you have left it?</p>
-</blockquote>
-<p>Yes, and a fixed recipe of thirty routes produces the walk at any size.</p>
-<p>Said another way: Hilbert threaded a square grid with one line. Does that depend on the grid being regular? Here it still works on a pattern with no repetition at all.</p>
-<p>“Never returning to a region” is the part that matters. Without it you are asking for some path through every tile. With it you are asking for a path that respects the nested structure of the tiling at every scale, which is the property that makes Hilbert’s curve useful: tiles near each other along the line are near each other in the plane, at every scale.</p>
+<section id="why-it-never-breaks" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-never-breaks">Why it never breaks</h2>
+<p>Thirty routes produce a line at every size you try. But there are infinitely many sizes, and trying them doesn’t prove anything about the ones you haven’t tried.</p>
+<p>The proof rests on a property of the joins. Each join is a claim of the form “the last tile of this cluster touches the first tile of that one.” Zoom into those two clusters, and the claim becomes the same kind of claim about two smaller clusters inside them. Follow it down again and you get another. A route’s own tiles are named by a repeating pattern, so this chain can’t go on producing new claims forever. It loops.</p>
+<p>For the thirty routes, all 200 joins lead into just 32 claims that loop back on themselves. Check those 32 once, on a patch of 71 tiles, and they hold at every larger size: each one is true at a size because it was true one size down. That check uses exact whole-number arithmetic, with no rounding anywhere. The checker takes about ten seconds on a laptop.</p>
+<p>One of the thirty routes contains a copy of itself, well away from its edges, so the line can be grown outward forever in both directions. It then passes through every tile of an infinite spectre tiling.</p>
 </section>
-<section id="how-it-is-built" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-is-built">How it is built</h2>
-<p>It is the same move as the Hilbert animation people have seen: draw a small route, make copies, join them, repeat. Press <em>Build it up</em> in the figure above to watch it.</p>
-<ul>
-<li><strong>The tiling groups itself.</strong> Spectre tiles cluster in groups of 8 (occasionally 7, where one piece is a pair of tiles). Those groups cluster into bigger groups of 8, and so on forever. Each bigger group is a rougher, larger cousin of the smaller one, not an exact copy.</li>
-<li><strong>The motif is a route through one group.</strong> “Enter here, visit the 8 pieces in this order, leave there.” To grow the curve, replace each piece with its own route. The ends line up, so they join into one line.</li>
-<li><strong>One tile, then 9, 71, 559, 4,401.</strong> The route used in the figure starts with a copy of itself, so the curve on 4,401 tiles begins with the curve on 559, which begins with the curve on 71, then 9, then 1. The build-up is one line revealed in nested prefixes.</li>
-</ul>
-<section id="why-thirty-routes" class="level3">
-<h3 class="anchored" data-anchor-id="why-thirty-routes">Why thirty routes</h3>
-<p>Hilbert needs one route, turned four ways. The spectre’s groups have no symmetry, and the ends of a route have to meet the next group’s start in awkward places, so it takes thirty. Each route says which of the thirty to use inside each of its 8 pieces.</p>
-<p>A route is written as a shape and two addresses: where the line enters and where it leaves. An address is a word of child numbers read from the top down, and it repeats, so the same word names a tile at every size. <code>0(5)</code> means child 0, then child 5 forever. The route in the figure is <code>D|(5)|0(5)</code>: it enters at the tile reached by always taking child 5, and leaves at the tile reached by taking child 0 once and then child 5 forever. Its production visits the children in the order 5, 6, 7, 4, 3, 2, 1, 0, and the first two of those use the same route again.</p>
-<p>Thirty is the fewest possible among addresses of that simple form (one letter, then one repeating letter); an exact optimiser proves it. With longer addresses the floor might be lower: in the next family up, the best known bound is 28 to 30.</p>
+<section id="how-good-is-it" class="level2">
+<h2 class="anchored" data-anchor-id="how-good-is-it">How good is it?</h2>
+<p>Hilbert’s line is useful because it keeps neighbours together. Two cells that are close along the line are close on the page. Computers use that to store pictures and maps so that nearby things are stored near each other.</p>
+<p>The spectre line keeps that property, a little more loosely. Two tiles a hundred steps apart along it are never more than about thirty tile-widths apart. For Hilbert’s line the figure is about twenty-five.</p>
 </section>
+<section id="why-its-interesting" class="level2">
+<h2 class="anchored" data-anchor-id="why-its-interesting">Why it’s interesting</h2>
+<p>Hilbert’s line never repeats either. But that’s a choice: you could thread the same grid with a plain back-and-forth zigzag that repeats every row. The spectre line can’t repeat, however it’s routed, because the tiles underneath it can’t. It has no symmetry of any kind, yet it is completely determined by thirty rules. Any stretch of it turns up again elsewhere, never far away, and never on a regular grid. That combination of order without symmetry is what made aperiodic tilings surprising in the first place. Here it runs through a single line.</p>
+<p>It is also something you can make. A pen plotter, an embroidery machine or a laser cutter can draw it in one stroke, as far as you like, and never repeat itself.</p>
 </section>
-<section id="why-it-works-at-every-size" class="level2">
-<h2 class="anchored" data-anchor-id="why-it-works-at-every-size">Why it works at every size</h2>
-<p>The recipe produces a line at every size you try. The question is whether it ever fails at some size nobody tried. The proof reduces infinitely many sizes to a few dozen checks.</p>
-<ol type="1">
-<li><strong>Start small.</strong> At the level of 71 tiles (62 for the seven-piece shape), an exhaustive search finds a valid line for each of the thirty routes.</li>
-<li><strong>What growing needs.</strong> A big route is its children’s routes laid end to end. That works if, every time one child’s route ends, the tile it ends on shares an edge with the tile where the next child’s route begins. Call that a junction. The recipe has 200 of them, and each must hold at every size.</li>
-<li><strong>Junctions point to smaller junctions.</strong> Because addresses are words read from the top down, dropping the first letter of each address turns a junction between two groups into the same claim about two of their children, one level down. So each junction points to another junction.</li>
-<li><strong>Positions are exact and finite.</strong> Every corner of every tile can be written with four integers, and the key points of a group at one level are a fixed integer formula of those at the level below. Two relative positions that agree at 16 consecutive levels agree forever, so each one has a fingerprint, and only 24 occur.</li>
-<li><strong>The chain closes.</strong> Following the 200 junctions downward reaches 32 distinct cases and then cycles. Each of the 32 is checked directly at the 71-tile level in exact arithmetic. If every case holds at one level, it holds at the next one up, and so by induction it holds at every level.</li>
-</ol>
-<p>That argument needs no floating point. It rests on one fact from linear algebra: a linear function that vanishes on 16 consecutive iterates of a 16-dimensional linear recurrence vanishes on all later ones. Here the iterates span only 6 dimensions.</p>
-<p>The certificate is small enough to check yourself. The second checker uses only Python’s standard library and shares no code with the first; on a laptop it finishes in under ten seconds:</p>
-<pre class="text"><code>python3 independent_check.py results/rule_min30.json
-...: 30 states; base paths found by plain search; 200 junctions certified
-     through 32 closed triples over 24 relative positions
-INDEPENDENT CHECK OK</code></pre>
-<section id="from-a-patch-to-the-whole-plane" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-patch-to-the-whole-plane">From a patch to the whole plane</h3>
-<p>A group’s route fixes the route of the group below it, so a line through one patch extends outward through ever-larger patches. The route in the figure helps here too: besides starting with a copy of itself, it contains a second copy at step 2 of 8, with tiles piling up on both sides. That copy, two levels down, sits strictly inside: 2, 4 and 10 tiles from the edge at successive sizes. Each step outward therefore adds at least a full ring of tiles, and the nested patches exhaust the plane. The result is one line, running off to infinity in both directions, through every tile of that tiling. This “strictly inside” claim is certified at every level by a second closure argument of the same kind, which reaches 17 cases.</p>
-<p>Some spectre tilings split into several regions that no finite patch crosses. There the argument gives one line per region, and joining them is not addressed.</p>
-</section>
-</section>
-<section id="not-just-non-repeating-it-cant-repeat" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="not-just-non-repeating-it-cant-repeat">Not just non-repeating: it can’t repeat</h2>
-<p>A space-filling curve that never repeats is old news. Hilbert’s own curve never repeats: the grid under it does, the line does not. But that is a choice. The same grid can be threaded by a plain back-and-forth snake that repeats.</p>
-<p>Two words keep these apart:</p>
-<ul>
-<li><strong>Non-periodic:</strong> it happens not to repeat.</li>
-<li><strong>Aperiodic:</strong> it cannot repeat, because the pieces rule it out.</li>
-</ul>
-<p>Every piece of this thread sits in the same cell shape, and that shape cannot be arranged periodically. No thread through these cells could repeat, however it was routed. The spectre turns “doesn’t repeat” into “can’t repeat”.</p>
-<p>A ladder of versions of the question:</p>
-<ol type="1">
-<li>A curve that happens not to repeat. Known since Hilbert.</li>
-<li>A curve on a tiling forced not to repeat, with two tile shapes. Done in 2014 on the Ammann A5 tiles.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
-<li>A curve on a tiling forced not to repeat, with one tile shape, with a proof. This piece. Novelty unconfirmed.</li>
-<li>One tile with a mark on it, such that fitting copies together forces one unbroken line. Ruled out on the spectre in its direct forms; see <a href="#can-the-tile-draw-it-by-itself">below</a>.</li>
-</ol>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Hassell, <a href="https://archive.bridgesmathart.org/2014/bridges2014-389.pdf">“A Plane-Filling Curve Using Ammann A5 Tiles”</a>, Bridges 2014.</p></div></div><section id="order-without-symmetry" class="level3">
-<h3 class="anchored" data-anchor-id="order-without-symmetry">Order without symmetry</h3>
-<ul>
-<li>A <strong>spiral</strong> covers a page with one uncrossed line too, but it is completely regular: one formula, and far from the centre it looks like evenly spaced parallel lines.</li>
-<li>A <strong>random scribble</strong> has no symmetry and no rule.</li>
-<li><strong>This thread</strong> has no translation symmetry and no mirror symmetry, yet it is fully determined by thirty route patterns. Any stretch of it shows up again and again elsewhere, never far away, and the copies never fall into a grid.</li>
-</ul>
-<p>Order without symmetry is what made aperiodic tilings and quasicrystals surprising. This is a line that carries that property through a two-dimensional pattern, while staying local the way Hilbert’s curve does.</p>
-</section>
-<section id="is-it-a-fractal" class="level3">
-<h3 class="anchored" data-anchor-id="is-it-a-fractal">Is it a fractal?</h3>
-<p>In structure, yes. It is built by one rule applied at every scale. At any finite size it is an ordinary line; in the limit it comes arbitrarily close to every point of the region. The outlines of the clusters are ragged at every scale: boundary tiles grow about 4.25 times per round while width grows about 2.8 times, which gives an outline dimension of roughly 1.4. That is an estimate from counts, not a proof.</p>
-<p>It is never an exact copy of itself. Each larger cluster is a rougher cousin of the smaller one. The technical name for this kind of object is a graph-directed fractal: several shapes, each built from smaller versions of one another.</p>
-</section>
-</section>
-<section id="how-good-is-the-line" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="how-good-is-the-line">How good is the line?</h2>
-<p>Locality measures how far apart two tiles can be in the plane compared with how far apart they are along the line: the largest squared distance, divided by tile area times the number of steps between them. Lower is better. Hilbert’s curve scores 6.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Worst-case locality of the thirty-route line, the exact maximum over all pairs at each size">
-<table class="caption-top table">
-<caption>Worst-case locality of the thirty-route line, the exact maximum over all pairs at each size</caption>
-<thead>
-<tr class="header">
-<th>Tiles</th>
-<th>Worst stretch</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>4,401</td>
-<td>8.07</td>
-</tr>
-<tr class="even">
-<td>34,649</td>
-<td>8.48</td>
-</tr>
-<tr class="odd">
-<td>272,791</td>
-<td>8.69</td>
-</tr>
-<tr class="even">
-<td>2,147,679</td>
-<td>8.87</td>
-</tr>
-<tr class="odd">
-<td>16,908,641</td>
-<td>8.94</td>
-</tr>
-<tr class="even">
-<td>every size</td>
-<td>8.97984</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>From 272,791 tiles up, the worst pair is always the same self-similar pair of tiles, and following it to forty levels in exact arithmetic gives 8.97984. A second search shows that no pair at any size does worse than 8.979841, so the constant is pinned between 8.979840 and 8.979841.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Searching over recipes found better ones, 8.766 with 122 routes and 8.745 with 181, both accepted by both checkers. How low it can go is open.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;The upper bound runs in double-precision floating point, treats the geometry as settled beyond level 45 (it changes by less than 4×10⁻¹⁵ there) and has one implementation. Strong evidence with tight controls, short of a formal proof.</p></div></div></section>
-<section id="can-the-tile-draw-it-by-itself" class="level2">
-<h2 class="anchored" data-anchor-id="can-the-tile-draw-it-by-itself">Can the tile draw it by itself?</h2>
-<p>The dream version of this object is a single marked tile: draw a stroke on the spectre, lay copies edge to edge, and the strokes join into one line on their own. On the spectre the direct forms fail.</p>
-<ul>
-<li><strong>One stroke per tile</strong> (in by one edge, out by another) cannot be consistent: each edge of a spectre meets three to five different edges of its neighbours.</li>
-<li><strong>Seven arcs per tile</strong>, pairing up all 14 edges without crossings: there are 429 ways, and every one produces closed loops on a 559-tile patch that occurs in every spectre tiling, so none gives a single line.</li>
-</ul>
-<p>What does work is a small palette. Record, for each tile, the edge where the line enters and the edge where it leaves. Drawn the natural way, through each tile’s centre and across the middle of each shared border, the thread uses the strokes below. Pick one to see where it is used.</p>
+<section id="can-one-tile-draw-it-by-itself" class="level2">
+<h2 class="anchored" data-anchor-id="can-one-tile-draw-it-by-itself">Can one tile draw it by itself?</h2>
+<p>The dream version would be a single spectre with a stroke drawn on it, laid edge to edge so that the strokes join into one line on their own. That doesn’t work. Every edge of a spectre can meet several different edges of its neighbours, so no single stroke lines up everywhere. The best you can do is a small kit of the same tile with different strokes. Drawn the natural way, the line uses 32. Chosen carefully, it can be done with 20.</p>
 <figure class="spectre-fig figure" data-spectre="marks" aria-labelledby="marks-caption">
   <p class="st-cap st-live" data-role="cap" aria-live="polite"></p>
   <div class="st-plate st-live"><canvas data-role="canvas" role="img" aria-label="The 4,401-tile patch, with the tiles that carry the selected stroke left in colour"></canvas></div>
   <div class="st-grid st-live" data-role="grid" role="group" aria-label="Marked tiles"></div>
-  <figcaption id="marks-caption">The <span data-role="npal">32</span> marked tiles of the thread on 4,401 tiles. Each is the same shape carrying one stroke, from one edge, through the centre, to another. The number under each is its share of all the tiles.</figcaption>
+  <figcaption id="marks-caption">The <span data-role="npal">32</span> strokes the line uses on 4,401 tiles. Pick one to see where it is used. The number under each is its share of all the tiles.</figcaption>
 </figure>
-<p>That is 32 strokes. Choosing the crossing edges to make the kit as small as possible, rather than to draw the line nicely, brings it to 20, and an exact solver proves 20 is the minimum for this line on 4,401 tiles; the same 20 suffice on 34,649. Another line might need fewer. Whether the marked tiles <em>force</em> the line, so that no other arrangement of them is possible, is untested.</p>
 </section>
-<section id="a-simpler-form-that-didnt-make-it" class="level2">
-<h2 class="anchored" data-anchor-id="a-simpler-form-that-didnt-make-it">A simpler form that didn’t make it</h2>
-<p>The thirty routes exist because a path has two ends that must land in the right places. A tree has no ends, and the tiling supplies one. The 8 pieces of every cluster sit in a ring, and each piece touches the next at one shared corner, where one tile from each piece meets the other along an edge. Open every one of those doors but one, at every size, and you grow a tree through all the tiles. Walk around the tree with a hand on it and you trace one closed loop that never crosses itself.</p>
-<figure class="spectre-wide figure">
-  <img src="../../static/spectre/spectre-tree-1600.webp" width="1600" height="555" alt="Three panels: eight spectre pieces in a ring joined at shared corners, then each piece replaced by a cluster joined the same way, then 559 tiles with one closed loop running around a branching tree." loading="lazy" class="figure-img">
-  <figcaption>The spectre tree. Left: 8 pieces in a ring, joined at the corners they share (red dots; the hollow one is left open). Middle: each piece replaced by a cluster, joined at the same corners. Right: 559 tiles; the dark outline around the tree is one closed loop.</figcaption>
-</figure>
-<p>The whole recipe is one sentence. The price is that the loop passes some tiles two or three times, covers a cluster in up to three separate visits, and is about half as tidy by the locality measure (20.1 against 8.07 on 4,401 tiles). It gives up exactly what makes Hilbert’s curve Hilbert’s, so the thread stays the object, and the tree stays a side result.</p>
-<p>That trade looks like a real feature of the spectre, not of this search. Hilbert can reuse one motif because the square has symmetry; a shape with no symmetry needs each variant written out. On the spectre, the simplest recipe and the Hilbert properties pull against each other.</p>
-</section>
-<section id="so-what" class="level2">
-<h2 class="anchored" data-anchor-id="so-what">So what?</h2>
-<p>Nothing in daily life changes. The fair answers:</p>
-<ol type="1">
-<li>It answers a natural question about a famous new shape.</li>
-<li>You can make things with it: a plotter, embroidery machine, laser cutter or 3D printer can draw an endless non-repeating design in one stroke.</li>
-<li>It may help people who simulate quasicrystals, who often thread a two-dimensional material into a one-dimensional chain. Untried.</li>
-<li>The proof method, reducing infinitely many sizes to a few dozen checkable cases, should carry to other tilings.</li>
-<li>It went from a vague idea to a machine-checked result in a few days of conversation with an AI.</li>
-</ol>
-</section>
-<section id="where-it-stands" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="where-it-stands">Where it stands</h2>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Status of each claim, November 2026">
-<table class="caption-top table">
-<caption>Status of each claim, November 2026</caption>
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Claim</th>
-<th>How it is known</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>The thirty routes give a valid line at every size</td>
-<td>Exact computation; two checkers that share no code</td>
-</tr>
-<tr class="even">
-<td>One line through every tile of a whole tiling</td>
-<td>Exact computation; one implementation</td>
-</tr>
-<tr class="odd">
-<td>Thirty is the fewest, for the simplest kind of address</td>
-<td>Exact optimiser; one implementation</td>
-</tr>
-<tr class="even">
-<td>Locality between 8.979840 and 8.979841</td>
-<td>Floating point, one stated assumption; one implementation</td>
-</tr>
-<tr class="odd">
-<td>20 marked tiles are the minimum for this line</td>
-<td>Exact solver on 4,401 tiles; one implementation</td>
-</tr>
-<tr class="even">
-<td>No single marked tile draws it</td>
-<td>Exhaustive on the direct forms; one implementation</td>
-</tr>
-<tr class="odd">
-<td>It is new</td>
-<td>Unknown</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Both checkers were written by the same author in one session, and both read the substitution from the same published algorithm and rely on the same 16-level fact. An error in either would pass both. The general method is known: Rao and Zhang’s work on space-filling curves of self-similar sets describes exactly this kind of ordered structure, but the spectre’s substitution is not self-similar in their sense, so their theorem does not apply as stated.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Ozkaraca’s thesis builds such orders for other tiling substitutions.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> About ten searches turned up no curve through the tiles of the spectre or the hat. That is weak evidence of absence, and the next step is to ask someone who knows this literature.</p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Rao and Zhang, <a href="https://arxiv.org/abs/1509.06276">“Space-filling curves of self-similar sets (I): iterated function systems with order structures”</a>.</p></div><div id="fn5"><p><sup>5</sup>&nbsp;Ozkaraca, <a href="https://theses.gla.ac.uk/81993/">PhD thesis</a>, University of Glasgow, 2021.</p></div></div><p>What is open:</p>
-<ul>
-<li><strong>Better locality.</strong> How low can the constant go, and can a small recipe beat 8.98? The only lower bound is 2.84, from the diameter of a cluster.</li>
-<li><strong>A smaller recipe.</strong> Thirty is minimal for the simplest addresses; longer addresses are unexplored.</li>
-<li><strong>Fewer strokes.</strong> This line needs 20. Another might need fewer; a guess, labelled as one, is the low teens.</li>
-<li><strong>The hat</strong>, the spectre’s sibling with tiles in two orientations, by the same method.</li>
-<li><strong>Vertex cycles.</strong> A line through every <em>corner</em> of the spectre tiling, the analogue of a known result for Ammann–Beenker tilings.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></li>
-</ul>
-<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;Singh, Lloyd and Flicker, <a href="https://arxiv.org/abs/2302.01940">“Hamiltonian cycles on Ammann-Beenker tilings”</a>, Physical Review X, 2024.</p></div></div></section>
-<section id="how-this-was-figured-out" class="level2">
-<h2 class="anchored" data-anchor-id="how-this-was-figured-out">How this was figured out</h2>
-<p>This came from three days of conversation with Claude, 10 to 12 November 2026. Claude wrote the tiling code, the searches, both checkers and the drawings, and ran them; I set the questions, pushed on what the object should be and made the calls. Everything is kept as numbered scripts with logs from a from-scratch rerun, so each figure in this piece can be regenerated.</p>
-<p>The methods were plain ones:</p>
-<ul>
-<li><strong>Exhaustive search</strong> for every possible route through clusters of up to 34,649 tiles, which showed that from 71 tiles up the same handful of visiting orders keep working, and suggested that a finite recipe exists.</li>
-<li><strong>Exact arithmetic</strong>, with every corner written as four integers, for every geometric fact the proof uses.</li>
-<li><strong>An exact optimiser</strong> to find the smallest recipe and the smallest set of strokes.</li>
-<li><strong>Branch and bound</strong> to find the worst pair of tiles among 16.9 million without comparing every pair.</li>
-</ul>
-<section id="being-wrong-carefully" class="level3">
-<h3 class="anchored" data-anchor-id="being-wrong-carefully">Being wrong carefully</h3>
-<p>The wrong turns stay on the record:</p>
-<ul>
-<li><strong>The tile was typed from memory, wrong.</strong> Three of its corners had the wrong height. The tile counts came out right (9, 71, 559), but no two tiles shared an edge. Plotting one cluster against a reference implementation found it.</li>
-<li><strong>A fake violation of 56.</strong> The first locality bound carried positions in floating point down the hierarchy. The error grows 2.8 times per level, and at depth 34 it reported a stretch of 56, which is nonsense. Carrying exact integers and refreshing the floats from them fixed it.</li>
-<li><strong>“29 strokes” was wrong, and was reported anyway.</strong> Neighbouring spectres usually share two or more edges, and the first count chose the crossing edge separately for each tile, so the two tiles at a join could disagree about where the line crossed. A second attempt had the same flaw. The correct count, with both tiles agreeing at every join, is 20.</li>
-<li><strong>“The arcs cut across neighbouring tiles.”</strong> Claude told me this about an earlier way of drawing the line. Measured, they did not.</li>
-<li><strong>Low-level rankings mislead.</strong> Recipes that scored best on 4,401 and 34,649 tiles turned out worse in the limit. Only the bound valid at every size could rank them.</li>
-</ul>
-<p>The rule that came out of these: keep what is proven exactly, what is computed in floating point, and what is only observed at the sizes tried in separate columns, and say which is which.</p>
-<div class="archive-note">
-<p>The spectre and its substitution are by David Smith, Joseph Samuel Myers, Craig Kaplan and Chaim Goodman-Strauss; the code here follows Kaplan’s construction as ported in <a href="https://github.com/shrx/spectre">shrx/spectre</a>. Related work: Rao and Zhang on space-filling curves of self-similar sets, Ozkaraca on order structures for tiling substitutions, Hassell’s Ammann A5 curve, and Singh, Lloyd and Flicker on Hamiltonian cycles on Ammann–Beenker tilings and dimers on the spectre. The research package, with the checkers, the logs and a plain-language explainer, is in this site’s repository under <a href="https://github.com/arjunbazinga/arjunbazinga.github.io/tree/master/scripts/spectre"><code>scripts/spectre/</code></a>.</p>
-</div>
+<section id="whats-known" class="level2">
+<h2 class="anchored" data-anchor-id="whats-known">What’s known</h2>
+<p>The line, the thirty routes and the proof were found and checked by computer, working with Claude over three days in November 2026. Two checkers written separately agree. No mathematician has reviewed the work yet, and I don’t know whether someone has done this before. I found general theory for curves like this, but nothing on the spectre. If you know, I’d like to hear from you. The code, the checker and the full write-up are <a href="https://github.com/arjunbazinga/arjunbazinga.github.io/tree/master/scripts/spectre">here</a>.</p>
+<p>Hilbert showed that a line can fill a grid. This one fills a pattern that never repeats.</p>
 <script src="../../static/spectre/thread.js" defer=""></script>
 
 
 <nav class="essay-next" aria-label="Continue reading"><p class="next-label">Read next</p><p class="next-title"><a href="../../posts/tiny-camera-better-taste/">Better Taste for a Tiny Camera</a></p><p class="reading-links"><a href="../../posts/">All writing</a><a href="https://arjunsriva.substack.com/">Subscribe on Substack</a></p></nav>
 </section>
-</section>
 
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>David Smith, Joseph Samuel Myers, Craig Kaplan and Chaim Goodman-Strauss, <a href="https://arxiv.org/abs/2305.17743">“A chiral aperiodic monotile”</a>, 2023.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
